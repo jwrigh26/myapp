@@ -16,7 +16,7 @@
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "^6.1.9",
     "@react-router/node": "^7.0.1",
-    "@reduxjs/toolkit": "^2.3.0",
+    "@tanstack/react-query": "^5.62.7",
     "date-fns": "^4.1.0",
     "isbot": "^5",
     "mdi-material-ui": "^7.9.2",
