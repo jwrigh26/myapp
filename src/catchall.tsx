@@ -3,6 +3,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./root.css";
 import viteLogo from "/vite.svg";
+import { FooProvider } from "./context/FooContext";
 
 import Coffee from 'mdi-material-ui/Coffee';
 

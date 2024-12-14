@@ -1,6 +1,7 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { ComponentStateProvider } from "./context/ComponentStateContext";
+import { SnackbarProvider } from "./context/SnackbarContext";
 import ThemeProvider from "./ThemeProvider";
 import { queryClient } from "./utils/queryClient";
 
@@ -39,7 +40,9 @@ export default function Root() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <ComponentStateProvider>
-          <Outlet />
+          <SnackbarProvider>
+            <Outlet />
+          </SnackbarProvider>
         </ComponentStateProvider>
       </ThemeProvider>
     </QueryClientProvider>
