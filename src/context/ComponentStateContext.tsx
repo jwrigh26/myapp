@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useMemo, useReducer } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useMemo,
+  useReducer,
+} from "react";
 
 export interface ComponentState {
   open: Record<string, boolean>;
@@ -27,7 +33,6 @@ export type Action =
   | { type: "ADD_TO_BAG"; payload: { id: string; bag: any } };
 
 export interface ComponentStateContextProps {
-  state: ComponentState;
   reset: () => void;
   setClose: (id: string) => () => void;
   setOpen: (id: string) => () => void;
@@ -41,22 +46,32 @@ export interface ComponentStateContextProps {
   setTemp: (id: string) => (temp: any) => void;
   addToBag: (id: string) => (bag: any) => void;
   setBag: (id: string) => (bag: any) => void;
+  open: Record<string, boolean>;
+  loading: Record<string, boolean>;
+  disabled: Record<string, boolean>;
+  focused: Record<string, boolean>;
+  transitioning: boolean;
+  zIndex: number;
+  temp: Record<string, any>;
+  bag: Record<string, any>;
 }
 
-export const ComponentStateContext = createContext<ComponentStateContextProps | undefined>(undefined);
+export const ComponentStateContext = createContext<
+  ComponentStateContextProps | undefined
+>(undefined);
 
 export function useComponentStateContext() {
   return useContext(ComponentStateContext);
 }
 
 const initialState: ComponentState = {
-  open: {}, 
+  open: {},
   loading: {},
   disabled: {},
   focused: {},
   transitioning: false,
   zIndex: 1003,
-  temp: {}, 
+  temp: {},
   bag: {},
 };
 
@@ -185,7 +200,9 @@ export interface ComponentStateProviderProps {
   children: ReactNode;
 }
 
-export function ComponentStateProvider({ children }: ComponentStateProviderProps) {
+export function ComponentStateProvider({
+  children,
+}: ComponentStateProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const reset = () => {
@@ -231,7 +248,7 @@ export function ComponentStateProvider({ children }: ComponentStateProviderProps
   const setBag = (id: string) => (bag: Record<string, any>) => {
     dispatch({ type: "SET_BAG", payload: { id, bag } });
   };
-  
+
   const addToBag = (id: string) => (bag: Record<string, any>) => {
     dispatch({ type: "ADD_TO_BAG", payload: { id, bag } });
   };
@@ -241,7 +258,6 @@ export function ComponentStateProvider({ children }: ComponentStateProviderProps
 
   const value = useMemo(
     () => ({
-      state,
       reset,
       setClose,
       setOpen,
@@ -255,6 +271,7 @@ export function ComponentStateProvider({ children }: ComponentStateProviderProps
       setTemp,
       addToBag,
       setBag,
+      ...state,
     }),
     [state]
   );
@@ -265,4 +282,3 @@ export function ComponentStateProvider({ children }: ComponentStateProviderProps
     </ComponentStateContext.Provider>
   );
 }
-
