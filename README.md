@@ -64,5 +64,3 @@ gnome-extensions enable pop-shell@system76.com
 "typeRoots": ["./node_modules/@types", "./src/types"]
 }
 }
-
-27eadd43cd32f0d61e0404b9a144094d1ebd63a5

@@ -1,4 +1,12 @@
-CS 101 How to pass the interview 
+Pages:
+
+- overview of concepts
+- practicie problems
+- real-world applications
+- cheat sheets
+- whiteboard challenges
+
+CS 101 How to pass the interview
 
 algorithm and data structures
 
@@ -20,3 +28,4 @@ I am thinking 3 levels, main level would be like alogrithyms or data structures 
 
 Hoping you could provide some insight on what to remove, include, and how to organize so I can start to tackle the mountian of knowledge i need to start mastering for whiteboarding and computer science interview questions.
 
+Concurrency vs parallelism vs multi-threading vs synchronization vs coordination
