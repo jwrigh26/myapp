@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import BottomNavigation from "components/BottomNavigation";
 
 import { ReactNode } from "react";
 
@@ -9,14 +11,19 @@ interface IndexLayoutProps {
 }
 
 export default function IndexLayout({ children }: IndexLayoutProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
-    <LayoutGrid>
-      <Header>
-        <ToolbarSpacer />
-      </Header>
-      <Main>{children}</Main>
-      <Footer />
-    </LayoutGrid>
+    <>
+      <LayoutGrid>
+        <Header id="header">
+          <ToolbarSpacer />
+        </Header>
+        <Main id="main">{children}</Main>
+        <Footer id="footer" />
+      </LayoutGrid>
+      {isMobile && <BottomNavigation />}
+    </>
   );
 }
 
@@ -40,6 +47,8 @@ const Header = styled(Box)(({ theme }) => ({
   gridArea: "header",
   padding: 0,
   margin: 0,
+  backgroundColor: theme.palette.primary.main,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 75%)`,
 }));
 
 const Footer = styled(Box)(({ theme }) => ({
@@ -47,15 +56,20 @@ const Footer = styled(Box)(({ theme }) => ({
   padding: 0,
   margin: 0,
   zIndex: theme.zIndex.drawer + 1,
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.secondary.dark,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 75%)`,
   height: 48,
+  [theme.breakpoints.down("sm")]: {
+    height: 56,
+    display: "hidden",
+  },
 }));
 
 const Main = styled(Box)(({ theme }) => ({
   gridArea: "main",
   padding: 0,
   margin: 0,
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.background.paper,
 }));
 
 const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
