@@ -48,7 +48,7 @@ const Header = styled(Box)(({ theme }) => ({
   padding: 0,
   margin: 0,
   backgroundColor: theme.palette.primary.main,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 75%)`,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
 }));
 
 const Footer = styled(Box)(({ theme }) => ({
@@ -57,7 +57,7 @@ const Footer = styled(Box)(({ theme }) => ({
   margin: 0,
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.secondary.dark,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 75%)`,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
   height: 48,
   [theme.breakpoints.down("sm")]: {
     height: 56,

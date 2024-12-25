@@ -38,37 +38,37 @@ declare module "@mui/material/styles/createPalette" {
 
 // Custom Colors
 const primaryColors = {
-  main: "#666B64",
-  light: "#C1D1CF",
-  dark: "#636467",
-  veryLight: "#748B91",
-  superLight: "#EFF3F3",
+  main: "#666B64", // granite green
+  light: "#C1D1CF", // jet stream
+  dark: "#636467", // granite gray
+  veryLight: "#748B91", // slate gray
+  superLight: "#EFF3F3", // anti-flash white
 };
 
 const primaryDarkColors = {
-  main: "#171F22",
-  light: "#2A3338",
-  dark: "#0F1416",
-  veryLight: "#475A5E",
-  superLight: "#8DA2A5",
+  main: "#171F22", // dark jungle green
+  light: "#2A3338", // charcoal
+  dark: "#0F1416", // eerie black
+  veryLight: "#475A5E", // independence
+  superLight: "#8DA2A5", // cadet blue
 };
 
 const secondaryColors = {
-  main: "#748B91",
-  light: "#C1D1CF",
-  dark: "#475A5E",
-  veryLight: "#EFF3F3",
-  superLight: "#F5FAFA",
-  contrastText: "#ffffff", // Ensure text is readable on secondary backgrounds
+  main: "#748B91", // slate gray
+  light: "#C1D1CF", // jet stream
+  dark: "#475A5E", // independence
+  veryLight: "#EFF3F3", // anti-flash white
+  superLight: "#F5FAFA", // mint cream
+  contrastText: "#ffffff", // white
 };
 
 const secondaryDarkColors = {
-  main: "#C1D1CF", // A muted light teal that contrasts well with dark backgrounds
-  light: "#EFF3F3", // A near-white version for highlights
-  dark: "#8DA2A5", // A darker teal with a rich tone
-  veryLight: "#D7E0DF", // Softer than `light` for gentle backgrounds
-  superLight: "#F5FAFA", // Subtle, almost white for additional contrast
-  contrastText: "#171F22", // Dark text for readability on lighter backgrounds
+  main: "#C1D1CF", // jet stream
+  light: "#EFF3F3", // anti-flash white
+  dark: "#8DA2A5", // cadet blue
+  veryLight: "#D7E0DF", // gainsboro
+  superLight: "#F5FAFA", // mint cream
+  contrastText: "#171F22", // dark jungle green
 };
 
 // Mixins
