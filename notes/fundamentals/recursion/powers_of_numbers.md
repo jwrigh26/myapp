@@ -195,3 +195,105 @@ print(power(4, 0.5)) # 2 (Fractional Exponent)
 2. Write a recursive function to compute \( x^n \) when \( n \) is fractional.
 
 Let me know if you'd like to work through these or need more examples!
+
+Great question! The key to understanding why the recursion eventually stops is to focus on the transformation of the exponent in each recursive step. Let’s break it down.
+
+---
+
+### **Why the Recursion Stops for Negative \( n \)**
+
+When \( n < 0 \), the recursion changes the negative exponent into a **positive one** by flipping the sign:
+```python
+if n < 0:
+    return 1 / power(x, -n)
+```
+
+Here’s what happens step-by-step:
+
+1. If \( n \) is negative, we take its absolute value (\(-n\)) and call the function again:
+   - This effectively converts the problem of \( x^{-n} \) into \( 1 / x^n \), where \( n \) is now positive.
+
+2. Once \( n \) is positive, the recursion follows the logic for positive \( n \):
+   - If \( n \) becomes 0 (base case), it returns \( 1 \).
+   - If \( n > 0 \), it reduces \( n \) (e.g., by halving it for even \( n \) or subtracting 1 for odd \( n \)).
+
+---
+
+### **Worked Example: \( power(2, -3) \)**
+
+Here’s how the recursion plays out:
+
+#### Initial Call
+```python
+power(2, -3)
+# n < 0, so:
+1 / power(2, 3)
+```
+
+#### Second Call
+```python
+power(2, 3)
+# n > 0, and n is odd, so:
+2 * power(2, 2)
+```
+
+#### Third Call
+```python
+power(2, 2)
+# n > 0, and n is even, so:
+half_power = power(2, 1)
+half_power * half_power
+```
+
+#### Fourth Call
+```python
+power(2, 1)
+# n > 0, and n is odd, so:
+2 * power(2, 0)
+```
+
+#### Fifth Call (Base Case)
+```python
+power(2, 0)
+# Base case: n == 0, return 1
+1
+```
+
+---
+
+### **Recursion Returns**
+Now that the base case is reached, the function starts returning results:
+
+1. \( power(2, 0) = 1 \)
+2. \( power(2, 1) = 2 \cdot 1 = 2 \)
+3. \( power(2, 2) = 2 \cdot 2 = 4 \)
+4. \( power(2, 3) = 2 \cdot 4 = 8 \)
+5. \( power(2, -3) = 1 / 8 = 0.125 \)
+
+---
+
+### **Why the Infinite Loop Doesn't Happen**
+
+The critical point is that the **negative exponent is converted to a positive exponent** with the first recursive step:
+```python
+power(x, -n)
+```
+After this, \( -n \) is positive, so subsequent calls follow the regular positive exponent rules and reduce \( n \) until the base case \( n = 0 \) is reached.
+
+If you didn’t convert \( -n \) to a positive number in the recursion, it **would** cause an infinite loop because the negative value would keep getting passed down without reaching the base case.
+
+---
+
+### **Visualizing the Flow**
+
+For \( power(2, -3) \):
+
+1. \( n = -3 \): Convert to \( n = 3 \), then handle as a positive exponent.
+2. \( n = 3 \): Reduce by subtracting 1.
+3. \( n = 2 \): Halve the exponent.
+4. \( n = 1 \): Subtract 1.
+5. \( n = 0 \): Base case, return \( 1 \).
+
+---
+
+Does this clarify how the recursion avoids an infinite loop? Let me know if you'd like to walk through another example!
