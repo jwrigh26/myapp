@@ -1,5 +1,4 @@
 import React, { ReactNode, createContext, useContext } from "react";
-import CloseIcon from 'mdi-material-ui/Close';
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import IconButton from "@mui/material/IconButton";
@@ -18,7 +17,6 @@ export function FooProvider({ children }: FooProviderProps): JSX.Element {
   return (
     <FooContext.Provider value={null}>
       <Typography>Hey THere</Typography>
-      <CloseIcon />
       {children}
     </FooContext.Provider>
   );

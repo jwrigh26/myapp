@@ -1,15 +1,15 @@
+import { mdiAbTesting } from "@mdi/js";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Icon from "components/Icon";
 import IndexLayout from "layouts/IndexLayout";
 import PageLayout from "layouts/PageLayout";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./catchall.css";
 import viteLogo from "/vite.svg";
-
-import Coffee from "mdi-material-ui/Coffee";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,7 +26,6 @@ function App() {
               <img src={reactLogo} className="logo react" alt="React logo" />
             </a>
           </div>
-          <Coffee fontSize="large" color="primary" />
           <Typography variant="h1">Vite + React</Typography>
           <div className="card">
             <button onClick={() => setCount((count) => count + 1)}>
@@ -36,6 +35,8 @@ function App() {
               Edit <code>src/App.tsx</code> and save to test HMR
             </p>
           </div>
+          <p>Icon</p>
+          <Icon color="primary" path={mdiAbTesting} fontSize="large" />
           <p className="read-the-docs">
             Click on the Vite and React logos to learn more
           </p>

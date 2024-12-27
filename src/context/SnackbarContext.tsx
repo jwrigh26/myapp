@@ -1,4 +1,3 @@
-import CloseIcon from 'mdi-material-ui/Close';
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import IconButton from "@mui/material/IconButton";
@@ -10,13 +9,13 @@ import {
   useCallback,
   useContext,
   useMemo,
-  useReducer
+  useReducer,
 } from "react";
 import { hasValue, isEmpty, isFunction, isNil } from "utils/safety";
 
-const SnackbarContext = createContext<((snackbar: Snackbar) => void) | undefined>(
-  undefined
-);
+const SnackbarContext = createContext<
+  ((snackbar: Snackbar) => void) | undefined
+>(undefined);
 
 const PrivateSnackbarContext = createContext<SnackbarContextValue | undefined>(
   undefined
@@ -31,7 +30,6 @@ function usePrivateSnackbarContext(): SnackbarContextValue {
   }
   return context;
 }
-
 
 // // I see Snackbar deinfed here and currentSnackbar is defined as Snackbar | null
 // // So why was currentSnackbar on line 172 needed to be declared again as such?
@@ -55,15 +53,15 @@ export interface SnackbarContextValue {
   currentSnackbar: Snackbar | null | undefined;
 }
 
-
 export function useSetSnackbarContext(): (snackbar: Snackbar) => void {
   const context = useContext(SnackbarContext);
   if (!context) {
-    throw new Error("useSetSnackbarContext must be used within SnackbarProvider");
+    throw new Error(
+      "useSetSnackbarContext must be used within SnackbarProvider"
+    );
   }
   return context;
 }
-
 
 export const initialState: SnackbarState = {
   snackbars: [],
@@ -72,7 +70,9 @@ export const initialState: SnackbarState = {
 function reducer(state: SnackbarState, action: any): SnackbarState {
   switch (action.type) {
     case "SET_SNACKBAR":
-      if (state.snackbars.find((snackbar) => snackbar.id === action.payload.id)) {
+      if (
+        state.snackbars.find((snackbar) => snackbar.id === action.payload.id)
+      ) {
         return state;
       }
       return {
@@ -100,7 +100,6 @@ export interface SnackbarProviderProps {
   children: ReactNode;
 }
 
-
 export function SnackbarProvider({ children }: SnackbarProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -114,7 +113,7 @@ export function SnackbarProvider({ children }: SnackbarProviderProps) {
   }, []);
 
   const removeSnackbar = useCallback(
-    (id: string ) => () => {
+    (id: string) => () => {
       const currentSnackbar = state.snackbars.find((s) => s.id === id);
       if (isFunction(currentSnackbar?.onRemove)) {
         currentSnackbar.onRemove();
@@ -136,8 +135,8 @@ export function SnackbarProvider({ children }: SnackbarProviderProps) {
   return (
     <SnackbarContext.Provider value={setSnackbar}>
       {/* <PrivateSnackbarContext.Provider value={privateValue}> */}
-        {children}
-        {/* <SnackbarNode /> */}
+      {children}
+      {/* <SnackbarNode /> */}
       {/* </PrivateSnackbarContext.Provider> */}
     </SnackbarContext.Provider>
   );
@@ -198,7 +197,7 @@ export function SnackbarNode() {
             size="small"
             onClick={removeSnackbar(id)}
           >
-            <CloseIcon />
+            {/* <CloseIcon /> */}
           </IconButton>
         }
       >

@@ -1,8 +1,14 @@
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Slide from "@mui/material/Slide";
 import { styled, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import BottomNavigation from "components/BottomNavigation";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import MobileNavigation from "components/MobileNavigation";
+import { ReactElement } from "react";
 
 import { ReactNode } from "react";
 
@@ -17,13 +23,57 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
     <>
       <LayoutGrid>
         <Header id="header">
+          {/* Desktop Appbar */}
+          {/* Mobile Appbar */}
+          {isMobile && <MobileAppToolbar />}
           <ToolbarSpacer />
         </Header>
         <Main id="main">{children}</Main>
+        {/* Desktop Footer -- Hidden on mobile */}
         <Footer id="footer" />
       </LayoutGrid>
-      {isMobile && <BottomNavigation />}
+      {/* Only shown on mobile for navigation */}
+      {isMobile && <MobileNavigation />}
     </>
+  );
+}
+
+// ################################################
+// ### AppBars
+// ################################################
+
+function MobileAppToolbar() {
+  return (
+    <HideOnScroll>
+      <StyledAppBar id="AppBar" elevation={1}>
+        <Toolbar id="AppBarToolbar">
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            {/* <Menu /> */}
+          </IconButton>
+          <Typography variant="h6">JW</Typography>
+        </Toolbar>
+      </StyledAppBar>
+    </HideOnScroll>
+  );
+}
+
+// ################################################
+// Hide Appbar on scroll
+// ################################################
+
+interface HideOnScrollProps {
+  children: ReactElement<unknown>;
+}
+
+function HideOnScroll(props: HideOnScrollProps) {
+  const { children } = props;
+
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children ?? <div />}
+    </Slide>
   );
 }
 
@@ -47,8 +97,8 @@ const Header = styled(Box)(({ theme }) => ({
   gridArea: "header",
   padding: 0,
   margin: 0,
-  backgroundColor: theme.palette.primary.main,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  // backgroundColor: theme.palette.primary.main,
+  // backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
 }));
 
 const Footer = styled(Box)(({ theme }) => ({
@@ -77,3 +127,23 @@ const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
     marginTop: 0,
   })
 );
+
+// const StyledAppBar = styled(AppBar, {
+//   shouldForwardProp: (prop) => prop !== "elevation",
+// })(({ theme }) => ({
+//   backgroundColor: theme.palette.primary.main,
+//   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+//   color: theme.palette.primary.contrastText,
+//   [theme.breakpoints.up("md")]: {
+//     zIndex: theme.zIndex.drawer + 1,
+//   },
+// }));
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  color: theme.palette.primary.contrastText,
+  [theme.breakpoints.up("md")]: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+}));

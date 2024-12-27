@@ -1,10 +1,10 @@
-import MUIBottomNavigation from "@mui/material/BottomNavigation";
-import MUIBottomNavigationAction from "@mui/material/BottomNavigationAction";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 
-export default function BottomNavigation() {
+export default function MobileNavigation() {
   const navigate = useNavigate();
   const paths = ["/", "/about", "/contact"];
 
@@ -32,12 +32,12 @@ const StyledWrapper = styled(Box)(({ theme }) => ({
   // boxShadow: `0px 4px 8px red`, // Update this line
 }));
 
-const StyledBottomNavigation = styled(MUIBottomNavigation)(({ theme }) => ({
+const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   boxShadow: `0px -4px 6px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.08), 0px -1px 10px rgba(0, 0, 0, 0.06)`, // Lighten the shadow by reducing opacity
   backgroundColor: theme.palette.secondary.dark,
 }));
 
-const StyledBottomNavigationAction = styled(MUIBottomNavigationAction)(
+const StyledBottomNavigationAction = styled(BottomNavigationAction)(
   ({ theme }) => ({
     color: theme.palette.secondary.contrastText,
     position: "relative",
