@@ -1,5 +1,7 @@
+import { mdiMenu } from "@mdi/js";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
 import IconButton from "@mui/material/IconButton";
 import Slide from "@mui/material/Slide";
 import { styled, useTheme } from "@mui/material/styles";
@@ -7,6 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
 import { ReactElement } from "react";
 
@@ -47,10 +50,17 @@ function MobileAppToolbar() {
     <HideOnScroll>
       <StyledAppBar id="AppBar" elevation={1}>
         <Toolbar id="AppBarToolbar">
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            {/* <Menu /> */}
+          <IconButton
+            sx={{ mr: 1 }}
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          >
+            <Icon path={mdiMenu} />
           </IconButton>
-          <Typography variant="h6">JW</Typography>
+          <ButtonBase>
+            <Typography variant="h6">JW</Typography>
+          </ButtonBase>
         </Toolbar>
       </StyledAppBar>
     </HideOnScroll>
