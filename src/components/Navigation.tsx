@@ -1,19 +1,68 @@
-import Box from "@mui/material/Box";
+import Button, { ButtonProps } from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Stack, { StackProps } from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import { forwardRef } from "react";
+import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
 
 export default function Navigation() {
-  return <StyledWrapper>{/* Desktop Navigation */}</StyledWrapper>;
+  return (
+    <NavStack direction="row" component="nav">
+      <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+      <NavButton to="/">Home</NavButton>
+      <NavButton to="/about">About</NavButton>
+      <NavDivider orientation="vertical" flexItem />
+      <NavButton to="/foundations">Foundations</NavButton>
+      <NavButton to="/fullstack">Full Stack</NavButton>
+      <NavButton to="/practice">Practice</NavButton>
+      <NavButton to="/resources">Resources</NavButton>
+      <NavDivider orientation="vertical" flexItem />
+      <NavButton to="/contact">Contact</NavButton>
+    </NavStack>
+  );
 }
 
 // ################################################
 // ### Styled Components
 // ################################################
 
-const StyledWrapper = styled(Box)(({ theme }) => ({
+type NavigationButtonProps = Omit<ButtonProps, "href"> & NavLinkProps;
+
+// Base component forwards ref and props!
+const BaseNavigationButton = forwardRef<
+  HTMLAnchorElement,
+  NavigationButtonProps
+>(({ to, ...props }, ref) => (
+  <Button {...props} component={NavLink} to={to} ref={ref} />
+));
+
+// NavigationButton component styles the base component
+const NavButton = styled(BaseNavigationButton)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  fontWeight: theme.typography.fontWeightMedium,
+  textDecoration: "none",
+  padding: theme.spacing(0, 1),
+  opacity: 0.8,
+  "&:hover": {
+    opacity: 0.6,
+  },
+  "&.active": {
+    opacity: 1.0,
+    fontWeight: theme.typography.fontWeightSemiBold,
+  },
+}));
+
+const NavStack = styled(Stack)<StackProps>(({ theme }) => ({
   width: "100%",
-  position: "fixed",
-  top: 0,
-  left: 0,
-  zIndex: theme.zIndex.drawer + 2,
-  boxShadow: `0px 4px 8px rgba(0, 0, 0, 0.1)`,
+  padding: 0,
+  margin: 0,
+}));
+
+const NavDivider = styled(Divider)(({ theme }) => ({
+  backgroundColor: theme.mixins.decomposeColor(
+    theme.palette.primary.contrastText,
+    0.5
+  ),
+  // margin: theme.spacing(2, 2),
+  margin: theme.spacing(0, 1),
 }));

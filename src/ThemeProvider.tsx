@@ -36,6 +36,15 @@ declare module "@mui/material/styles/createPalette" {
   }
 }
 
+declare module "@mui/material/styles/createTypography" {
+  interface TypographyOptions {
+    fontWeightSemiBold: number;
+  }
+  interface Typography {
+    fontWeightSemiBold: number;
+  }
+}
+
 // Custom Colors
 const primaryColors = {
   main: "#666B64", // granite green
@@ -99,7 +108,12 @@ const generateTheme = (mode: PaletteMode): ThemeOptions => ({
     },
   },
   typography: {
-    fontFamily: "'Inter', sans-serif",
+    fontFamily: "Inter, Arial, sans-serif",
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightSemiBold: 600,
+    fontWeightBold: 700,
 
     // Headlines
     h1: {
@@ -222,6 +236,22 @@ const generateTheme = (mode: PaletteMode): ThemeOptions => ({
         disableRipple: true,
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            "& svg": {
+              opacity: 0.8,
+            },
+          },
+          "&:active": {
+            "& svg": {
+              opacity: 0.6,
+            },
+          },
+        },
+      },
+    },
     MuiButton: {
       defaultProps: {
         disableRipple: true,
@@ -292,7 +322,7 @@ export default function ThemeProvider({
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
-  // console.log(theme);
+  console.log(theme);
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>
