@@ -42,6 +42,7 @@ const NavButton = styled(BaseNavigationButton)(({ theme }) => ({
   textDecoration: "none",
   padding: theme.spacing(0.5, 1),
   opacity: 0.8,
+  borderRadius: 2,
   "&:hover": {
     opacity: 0.6,
   },

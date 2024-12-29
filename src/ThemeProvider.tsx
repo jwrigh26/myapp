@@ -227,7 +227,7 @@ const generateTheme = (mode: PaletteMode): ThemeOptions => ({
   },
 
   shape: {
-    borderRadius: 4,
+    borderRadius: 2,
   },
   mixins,
   components: {
@@ -257,6 +257,9 @@ const generateTheme = (mode: PaletteMode): ThemeOptions => ({
         disableRipple: true,
       },
       styleOverrides: {
+        root: {
+          borderRadius: 2,
+        },
         contained: {
           // Target only contained variant
           boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)",

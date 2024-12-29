@@ -69,6 +69,7 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(
         0.8
       ),
       transform: "scaleX(0.95) scaleY(0.85)", // separate x and y scaling
+      borderRadius: theme.shape.borderRadius,
     },
     "& > *": {
       position: "relative",
