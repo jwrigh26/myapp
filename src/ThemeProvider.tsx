@@ -322,7 +322,7 @@ export default function ThemeProvider({
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
-  console.log(theme);
+  // console.log(theme);
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>

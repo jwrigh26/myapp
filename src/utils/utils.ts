@@ -27,20 +27,23 @@ export const _padStart = (
   return `${Array(length + 1 - s.length).join(pad)}${s}`;
 };
 
-export const _sortBy = <T>(collection: T[], iteratees: Array<(item: T) => any>): T[] => {
-    const result = [...collection];
-    result.sort((a, b) => {
-      for (const iteratee of iteratees) {
-        const aValue = iteratee(a);
-        const bValue = iteratee(b);
-  
-        if (aValue < bValue) return -1;
-        if (aValue > bValue) return 1;
-      }
-      return 0;
-    });
-    return result;
-  };
+export const _sortBy = <T>(
+  collection: T[],
+  iteratees: Array<(item: T) => any>
+): T[] => {
+  const result = [...collection];
+  result.sort((a, b) => {
+    for (const iteratee of iteratees) {
+      const aValue = iteratee(a);
+      const bValue = iteratee(b);
+
+      if (aValue < bValue) return -1;
+      if (aValue > bValue) return 1;
+    }
+    return 0;
+  });
+  return result;
+};
 
 export const _isRegExp = (value: unknown): value is RegExp => {
   return Object.prototype.toString.call(value) === "[object RegExp]";
@@ -49,3 +52,6 @@ export const _isRegExp = (value: unknown): value is RegExp => {
 export function capitalizeFirstLetter(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export const sleep = (ms: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms));

@@ -1,7 +1,9 @@
+import { mdiDotsHorizontal } from "@mdi/js";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import Icon from "components/Icon";
 import { useNavigate } from "react-router";
 
 export default function MobileNavigation() {
@@ -16,8 +18,15 @@ export default function MobileNavigation() {
         onChange={(_, newValue) => navigate(newValue)}
       >
         <StyledBottomNavigationAction label="Home" value="/" />
-        <StyledBottomNavigationAction label="About" value="/about" />
-        <StyledBottomNavigationAction label="Contact" value="/contact" />
+        <StyledBottomNavigationAction
+          label="Foundations"
+          value="/foundations"
+        />
+        <StyledBottomNavigationAction label="Fullstack" value="/fullstack" />
+        <StyledBottomNavigationAction
+          icon={<Icon path={mdiDotsHorizontal} />}
+          value="/more"
+        />
       </StyledBottomNavigation>
     </StyledWrapper>
   );

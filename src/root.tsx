@@ -48,3 +48,8 @@ export default function Root() {
     </QueryClientProvider>
   );
 }
+
+// SPA Fallback
+export function HydrateFallback() {
+  return <p>Loading...</p>;
+}

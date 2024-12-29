@@ -10,13 +10,12 @@ export default function Navigation() {
     <NavStack direction="row" component="nav">
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
       <NavButton to="/">Home</NavButton>
-      <NavButton to="/about">About</NavButton>
-      <NavDivider orientation="vertical" flexItem />
       <NavButton to="/foundations">Foundations</NavButton>
       <NavButton to="/fullstack">Full Stack</NavButton>
       <NavButton to="/practice">Practice</NavButton>
       <NavButton to="/resources">Resources</NavButton>
       <NavDivider orientation="vertical" flexItem />
+      <NavButton to="/about">About</NavButton>
       <NavButton to="/contact">Contact</NavButton>
     </NavStack>
   );
@@ -41,14 +40,18 @@ const NavButton = styled(BaseNavigationButton)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontWeight: theme.typography.fontWeightMedium,
   textDecoration: "none",
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0.5, 1),
   opacity: 0.8,
   "&:hover": {
     opacity: 0.6,
   },
   "&.active": {
     opacity: 1.0,
-    fontWeight: theme.typography.fontWeightSemiBold,
+    backgroundColor: theme.mixins.decomposeColor(
+      theme.palette.primary.light,
+      0.5
+    ),
+    color: theme.palette.text.primary,
   },
 }));
 

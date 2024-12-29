@@ -14,14 +14,9 @@ import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
 import Navigation from "components/Navigation";
 import { ReactElement } from "react";
+import { Outlet } from "react-router";
 
-import { ReactNode } from "react";
-
-interface IndexLayoutProps {
-  children: ReactNode;
-}
-
-export default function IndexLayout({ children }: IndexLayoutProps) {
+export default function IndexLayout() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isDesktop = !isMobile; // Just for readability
@@ -36,7 +31,9 @@ export default function IndexLayout({ children }: IndexLayoutProps) {
           {isMobile && <MobileAppToolbar />}
           <ToolbarSpacer />
         </Header>
-        <Main id="main">{children}</Main>
+        <Main id="main">
+          <Outlet />
+        </Main>
         {/* Desktop Footer -- Hidden on mobile */}
         <Footer id="footer" />
       </LayoutGrid>

@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => {
       reactRouter(),
       tsconfigPaths(),
     ],
+    optimizeDeps: {
+      // exclude: ["@mui/material", "@mdi/js"],
+    },
     // esbuild: false, // Using SWC for transpilation
     // swc: {
     //   jsxFactory: "React.createElement",

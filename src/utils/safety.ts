@@ -1,8 +1,5 @@
 // TypeScript version of the file with improvements and type annotations
 
-export const sleep = (ms: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, ms));
-
 export function hasValue(value: unknown): boolean {
   if (value === window) {
     return !isNil(value);
