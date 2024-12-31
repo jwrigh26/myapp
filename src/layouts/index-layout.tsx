@@ -2,7 +2,6 @@ import { mdiMenu } from "@mdi/js";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Slide from "@mui/material/Slide";
 import { styled, useTheme } from "@mui/material/styles";
@@ -136,8 +135,6 @@ const Header = styled(Box)(({ theme }) => ({
   gridArea: "header",
   padding: 0,
   margin: 0,
-  // backgroundColor: theme.palette.primary.main,
-  // backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
 }));
 
 const Footer = styled(Box)(({ theme }) => ({
@@ -183,12 +180,4 @@ const StyledButtonBase = styled(ButtonBase)(({ theme }) => ({
   "&:active": {
     opacity: 0.6,
   },
-}));
-
-const LogoDivider = styled(Divider)(({ theme }) => ({
-  backgroundColor: theme.mixins.decomposeColor(
-    theme.palette.primary.contrastText,
-    0.5
-  ),
-  margin: theme.spacing(2, 2),
 }));

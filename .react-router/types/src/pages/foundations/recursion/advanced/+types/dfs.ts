@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/About.tsx
+// pages/foundations/recursion/advanced/dfs.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "../../+types/root"
-import type { Info as Parent1 } from "../../layouts/+types/IndexLayout"
+import type { Info as Parent0 } from "../../../../../+types/root"
+import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../About")
+type Module = typeof import("../dfs")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/About"
-  file: "pages/About.tsx"
-  path: "about"
+  id: "pages/foundations/recursion/advanced/dfs"
+  file: "pages/foundations/recursion/advanced/dfs.tsx"
+  path: "foundations/recursion/advanced/dfs"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

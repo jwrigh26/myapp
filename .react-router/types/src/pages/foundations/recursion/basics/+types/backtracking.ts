@@ -1,17 +1,18 @@
 // React Router generated types for route:
-// layouts/IndexLayout.tsx
+// pages/foundations/recursion/basics/backtracking.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "../../+types/root"
+import type { Info as Parent0 } from "../../../../../+types/root"
+import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../IndexLayout")
+type Module = typeof import("../backtracking")
 
 export type Info = {
-  parents: [Parent0],
-  id: "layouts/IndexLayout"
-  file: "layouts/IndexLayout.tsx"
-  path: "undefined"
+  parents: [Parent0, Parent1],
+  id: "pages/foundations/recursion/basics/backtracking"
+  file: "pages/foundations/recursion/basics/backtracking.tsx"
+  path: "foundations/recursion/basics/backtracking"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

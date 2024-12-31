@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/Home.tsx
+// pages/foundations/recursion/advanced/recursion-vs-iteration.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "../../+types/root"
-import type { Info as Parent1 } from "../../layouts/+types/IndexLayout"
+import type { Info as Parent0 } from "../../../../../+types/root"
+import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../Home")
+type Module = typeof import("../recursion-vs-iteration")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/Home"
-  file: "pages/Home.tsx"
-  path: "undefined"
+  id: "pages/foundations/recursion/advanced/recursion-vs-iteration"
+  file: "pages/foundations/recursion/advanced/recursion-vs-iteration.tsx"
+  path: "foundations/recursion/advanced/recursion-vs-iteration"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

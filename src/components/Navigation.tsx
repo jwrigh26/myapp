@@ -7,7 +7,7 @@ import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-r
 
 export default function Navigation() {
   return (
-    <NavStack direction="row" component="nav">
+    <NavStack direction="row" component="nav" gap={1}>
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
       <NavButton to="/">Home</NavButton>
       <NavButton to="/foundations">Foundations</NavButton>
@@ -38,7 +38,7 @@ const BaseNavigationButton = forwardRef<
 // NavigationButton component styles the base component
 const NavButton = styled(BaseNavigationButton)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
-  fontWeight: theme.typography.fontWeightMedium,
+  fontWeight: theme.typography.fontWeightRegular,
   textDecoration: "none",
   padding: theme.spacing(0.5, 1),
   opacity: 0.8,

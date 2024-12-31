@@ -1,8 +1,7 @@
-import { CssBaseline, PaletteMode } from "@mui/material";
+import { CssBaseline, PaletteMode, Theme, ThemeOptions } from "@mui/material";
 import {
   ThemeProvider as MUIThemeProvider,
   PaletteColor,
-  ThemeOptions,
   createTheme,
   decomposeColor,
   responsiveFontSizes,
@@ -26,6 +25,7 @@ declare module "@mui/material/styles" {
   interface Mixins {
     elevation: (level: number) => string;
     decomposeColor: (color: string, opacity: number) => string;
+    drawerWidth: number;
   }
 }
 
@@ -90,217 +90,208 @@ const mixins = {
     } = decomposeColor(color);
     return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
   },
+  drawwerWidth: 240,
 };
 
 // Generate light and dark themes
-const generateTheme = (mode: PaletteMode): ThemeOptions => ({
-  palette: {
-    mode,
-    primary: mode === "light" ? primaryColors : primaryDarkColors,
-    secondary: mode === "light" ? secondaryColors : secondaryDarkColors,
-    background: {
-      default: mode === "light" ? "#FFFFFF" : "#171F22",
-      paper: mode === "light" ? "#EFF3F3" : "#2A3338",
-    },
-    text: {
-      primary: mode === "light" ? "#171F22" : "#EFF3F3",
-      secondary: mode === "light" ? "#C1D1CF" : "#8DA2A5",
-    },
-  },
-  typography: {
-    fontFamily: "Inter, Arial, sans-serif",
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    fontWeightSemiBold: 600,
-    fontWeightBold: 700,
 
-    // Headlines
-    h1: {
-      fontWeight: 700,
-      fontSize: "3rem", // 48px
-      lineHeight: 1.2, // 115%
-      letterSpacing: "-0.01562em",
-      "@media (max-width:600px)": {
-        fontSize: "2.25rem", // 36px
+const generateTheme = (mode: PaletteMode): Theme => {
+  // Define options with explicit typing
+  const options: ThemeOptions = {
+    mixins,
+    shape: {
+      borderRadius: 2,
+    },
+    palette: {
+      mode,
+      primary: mode === "light" ? primaryColors : primaryDarkColors,
+      secondary: mode === "light" ? secondaryColors : secondaryDarkColors,
+      background: {
+        default: mode === "light" ? "#FFFFFF" : "#171F22",
+        paper: mode === "light" ? "#EFF3F3" : "#2A3338",
+      },
+      text: {
+        primary: mode === "light" ? "#171F22" : "#EFF3F3",
+        secondary: mode === "light" ? "#C1D1CF" : "#8DA2A5",
       },
     },
-    h2: {
-      fontWeight: 600,
-      fontSize: "2.5rem", // 40px
-      lineHeight: 1.3, // 130%
-      letterSpacing: "-0.00833em",
-      "@media (max-width:600px)": {
-        fontSize: "2rem", // 32px
+    components: {
+      MuiButtonBase: {
+        defaultProps: {
+          disableRipple: true,
+        },
       },
-    },
-    h3: {
-      fontWeight: 600,
-      fontSize: "2rem", // 32px
-      lineHeight: 1.4, // 140%
-      letterSpacing: "0em",
-      "@media (max-width:600px)": {
-        fontSize: "1.75rem", // 28px
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              "& svg": {
+                opacity: 0.8,
+              },
+            },
+            "&:active": {
+              "& svg": {
+                opacity: 0.6,
+              },
+            },
+          },
+        },
       },
-    },
-    h4: {
-      fontWeight: 600,
-      fontSize: "1.75rem", // 28px
-      lineHeight: 1.5, // 150%
-      letterSpacing: "0.00735em",
-      "@media (max-width:600px)": {
-        fontSize: "1.5rem", // 24px
-      },
-    },
-    h5: {
-      fontWeight: 500,
-      fontSize: "1.5rem", // 24px
-      lineHeight: 1.6, // 160%
-      letterSpacing: "0em",
-      "@media (max-width:600px)": {
-        fontSize: "1.25rem", // 20px
-      },
-    },
-    h6: {
-      fontWeight: 500,
-      fontSize: "1.25rem", // 20px
-      lineHeight: 1.6, // 160%
-      letterSpacing: "0.0075em",
-      "@media (max-width:600px)": {
-        fontSize: "1.125rem", // 18px
-      },
-    },
-
-    // Subtitles
-    subtitle1: {
-      fontWeight: 500,
-      fontSize: "1.125rem", // 18px
-      lineHeight: 1.75, // 175%
-      letterSpacing: "0.00938em",
-    },
-    subtitle2: {
-      fontWeight: 500,
-      fontSize: "1rem", // 16px
-      lineHeight: 1.57, // 157%
-      letterSpacing: "0.00714em",
-    },
-
-    // Body text
-    body1: {
-      fontWeight: 400,
-      fontSize: "1rem", // 16px
-      lineHeight: 1.5, // 150%
-      letterSpacing: "0.00938em",
-    },
-    body2: {
-      fontWeight: 400,
-      fontSize: "0.875rem", // 14px
-      lineHeight: 1.43, // 143%
-      letterSpacing: "0.01071em",
-    },
-
-    // Buttons
-    button: {
-      fontWeight: 600,
-      fontSize: "0.875rem", // 14px
-      lineHeight: 1.75, // 175%
-      letterSpacing: "0.02857em",
-      textTransform: "none", // Keep button text sentence case
-    },
-
-    // Captions
-    caption: {
-      fontWeight: 400,
-      fontSize: "0.75rem", // 12px
-      lineHeight: 1.66, // 166%
-      letterSpacing: "0.03333em",
-    },
-
-    // Overlines
-    overline: {
-      fontWeight: 600,
-      fontSize: "0.75rem", // 12px
-      lineHeight: 2.66, // 266%
-      letterSpacing: "0.08333em",
-      textTransform: "uppercase", // Traditional styling for overlines
-    },
-  },
-
-  shape: {
-    borderRadius: 2,
-  },
-  mixins,
-  components: {
-    MuiButtonBase: {
-      defaultProps: {
-        disableRipple: true,
-      },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          "&:hover": {
-            "& svg": {
+      MuiButton: {
+        defaultProps: {
+          disableRipple: true,
+        },
+        styleOverrides: {
+          root: {
+            borderRadius: 2,
+          },
+          contained: {
+            boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)",
+            "&:hover": {
+              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.15)",
+            },
+            "&:active": {
+              opacity: 0.9,
+            },
+          },
+          outlined: {
+            "&:active": {
               opacity: 0.8,
             },
           },
-          "&:active": {
-            "& svg": {
-              opacity: 0.6,
+          text: {
+            "&:active": {
+              opacity: 0.8,
             },
           },
         },
       },
-    },
-    MuiButton: {
-      defaultProps: {
-        disableRipple: true,
+      MuiDialog: {
+        styleOverrides: {
+          paper: {
+            borderRadius: 8,
+          },
+        },
       },
-      styleOverrides: {
-        root: {
-          borderRadius: 2,
-        },
-        contained: {
-          // Target only contained variant
-          boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)",
-          "&:hover": {
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.15)",
-          },
-          "&:active": {
-            opacity: 0.9, // Subtle opacity change for active state
-            // color: mode === "light" ? "#8DA2A5" : "#171F22",
-          },
-        },
-        outlined: {
-          // Target only outlined variant
-          "&:active": {
-            opacity: 0.8, // Subtle opacity change for active state
-          },
-        },
-        text: {
-          // Target only text variant
-          "&:active": {
-            opacity: 0.8, // Subtle opacity change for active state
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            borderRadius: 4,
           },
         },
       },
     },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          borderRadius: 8,
+    typography: {
+      fontFamily: "Inter, Arial, sans-serif",
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 500,
+      fontWeightSemiBold: 600,
+      fontWeightBold: 700,
+      h1: {
+        fontWeight: 700,
+        fontSize: "3rem",
+        lineHeight: 1.2,
+        letterSpacing: "-0.01562em",
+        "@media (max-width:600px)": {
+          fontSize: "2.25rem",
         },
       },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          borderRadius: 4,
+      h2: {
+        fontWeight: 600,
+        fontSize: "2.5rem",
+        lineHeight: 1.3,
+        letterSpacing: "-0.00833em",
+        "@media (max-width:600px)": {
+          fontSize: "2rem",
         },
       },
+      h3: {
+        fontWeight: 600,
+        fontSize: "2rem",
+        lineHeight: 1.4,
+        letterSpacing: "0em",
+        "@media (max-width:600px)": {
+          fontSize: "1.75rem",
+        },
+      },
+      h4: {
+        fontWeight: 600,
+        fontSize: "1.75rem",
+        lineHeight: 1.5,
+        letterSpacing: "0.00735em",
+        "@media (max-width:600px)": {
+          fontSize: "1.5rem",
+        },
+      },
+      h5: {
+        fontWeight: 500,
+        fontSize: "1.5rem",
+        lineHeight: 1.6,
+        letterSpacing: "0em",
+        "@media (max-width:600px)": {
+          fontSize: "1.25rem",
+        },
+      },
+      h6: {
+        fontWeight: 500,
+        fontSize: "1.25rem",
+        lineHeight: 1.6,
+        letterSpacing: "0.0075em",
+        "@media (max-width:600px)": {
+          fontSize: "1.125rem",
+        },
+      },
+      subtitle1: {
+        fontWeight: 500,
+        fontSize: "1.125rem",
+        lineHeight: 1.75,
+        letterSpacing: "0.00938em",
+      },
+      subtitle2: {
+        fontWeight: 500,
+        fontSize: "1rem",
+        lineHeight: 1.57,
+        letterSpacing: "0.00714em",
+      },
+      body1: {
+        fontWeight: 400,
+        fontSize: "1rem",
+        lineHeight: 1.5,
+        letterSpacing: "0.00938em",
+      },
+      body2: {
+        fontWeight: 400,
+        fontSize: "0.875rem",
+        lineHeight: 1.43,
+        letterSpacing: "0.01071em",
+      },
+      button: {
+        fontWeight: 600,
+        fontSize: "0.875rem",
+        lineHeight: 1.75,
+        letterSpacing: "0.02857em",
+        textTransform: "none",
+      },
+      caption: {
+        fontWeight: 400,
+        fontSize: "0.75rem",
+        lineHeight: 1.66,
+        letterSpacing: "0.03333em",
+      },
+      overline: {
+        fontWeight: 600,
+        fontSize: "0.75rem",
+        lineHeight: 2.66,
+        letterSpacing: "0.08333em",
+        textTransform: "uppercase",
+      },
     },
-  },
-});
+  };
+
+  // Create and return the theme
+  return createTheme(options);
+};
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -320,7 +311,7 @@ export default function ThemeProvider({
 
   const theme = useMemo(() => {
     const mode = isDarkMode ? "dark" : "light";
-    return responsiveFontSizes(createTheme(generateTheme(mode)));
+    return responsiveFontSizes(generateTheme(mode));
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);

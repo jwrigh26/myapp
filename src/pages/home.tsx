@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+import PageLayout from "layouts/PageLayout";
 // import { type Route } from "./+types/Home";
 
 // export async function loader({ request, params }: Route.LoaderArgs) {
@@ -16,9 +18,8 @@ export default function Home() {
   // export default function Home({ loaderData }: Route.ComponentProps) {
   // console.log("Home loaderData:", loaderData);
   return (
-    // <PageLayout>
-    //   <Typography variant="h1">Home</Typography>
-    // </PageLayout>
-    <div>Home</div>
+    <PageLayout>
+      <Typography variant="h1">Home</Typography>
+    </PageLayout>
   );
 }
