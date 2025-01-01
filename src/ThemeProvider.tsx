@@ -90,7 +90,7 @@ const mixins = {
     } = decomposeColor(color);
     return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
   },
-  drawwerWidth: 240,
+  drawerWidth: 240,
 };
 
 // Generate light and dark themes

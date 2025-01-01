@@ -1,0 +1,11 @@
+a.foo.active {
+  color: red;
+}
+
+a.foo.pending {
+  animation: pulse 1s infinite;
+}
+
+a.foo.transitioning {
+  animation: fade 1s;
+}

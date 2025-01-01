@@ -12,6 +12,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
 import Navigation from "components/Navigation";
+import { Drawer } from "features/foundations";
 import { ReactElement } from "react";
 import { Outlet } from "react-router";
 
@@ -35,7 +36,10 @@ export default function FoundationsLayout() {
           <ToolbarSpacer />
         </Header>
         <Main id="main">
-          <Outlet />
+          <Drawer />
+          <Content>
+            <Outlet />
+          </Content>
         </Main>
         {/* Desktop Footer -- Hidden on mobile */}
         <Footer id="footer" />
@@ -162,6 +166,13 @@ const Main = styled(Box)(({ theme }) => ({
   padding: 0,
   margin: 0,
   backgroundColor: theme.palette.background.paper,
+}));
+
+const Content = styled(Box)(({ theme }) => ({
+  display: "block",
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(100% - ${theme.mixins.drawerWidth}px)`,
+  },
 }));
 
 const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(

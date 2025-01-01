@@ -14,16 +14,18 @@ const Content = styled(Box)(({ theme }) => ({
 
 export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
+  width: theme.mixins.drawerWidth,
   display: "none",
   ["& .MuiDrawer-paper"]: {
     overflow: "hidden",
     height: "100%",
-    width: theme.mixins.drawerWidth,
+    width: "inherit",
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
+    backgroundColor: "yellow",
   },
-  [theme.breakpoints.up("md")]: {
+  [theme.breakpoints.up("sm")]: {
     display: "block",
   },
 }));

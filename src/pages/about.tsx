@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import PageLayout from "layouts/PageLayout";
 import { Suspense } from "react";
 import { Await } from "react-router";
-import { type Route } from "./+types/About";
+import { type Route } from "./+types/about";
 
 export async function clientLoader({ request, params }: Route.LoaderArgs) {
   const foo = new Promise((res) => {
