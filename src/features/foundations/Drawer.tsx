@@ -4,46 +4,84 @@ import ListItemButton, {
 } from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { styled } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
 import { PermanentDrawer } from "components/Drawer";
 import Icon from "components/Icon";
 import { forwardRef } from "react";
 import { NavLink, NavLinkProps } from "react-router";
 import "./index.css";
 // import Collapse from '@mui/material/Collapse';
-// import Toolbar from '@mui/material/Toolbar';
 
 export function Drawer() {
   return (
     <PermanentDrawer>
-      <List>
-        <ListItemButton component={NavLink} to="/foundations" end>
-          <ListItemText primary="Foundations" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/components" end>
-          <ListItemText primary="Components" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/layouts" end>
-          <ListItemText primary="Layouts" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/pages" end>
-          <ListItemText primary="Pages" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/utils" end>
-          <ListItemText primary="Utils" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/themes" end>
-          <ListItemText primary="Themes" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/templates" end>
-          <ListItemText primary="Templates" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/playground" end>
-          <ListItemText primary="Playground" />
-        </ListItemButton>
-        <ListItemButton component={NavLink} to="/docs" end>
-          <ListItemText primary="Docs" />
-        </ListItemButton>
-      </List>
+      <ToolbarSpacer />
+      <StyledList>
+        <NavButton
+          to="/foundations"
+          level={0}
+          isParent={true}
+          isSubheader={false}
+        >
+          <ListItemText primary="lvl1 parent" />
+        </NavButton>
+        <NavButton
+          to="/components"
+          level={1}
+          isParent={false}
+          isSubheader={true}
+        >
+          <ListItemText primary="lvl2 subheader" />
+        </NavButton>
+        <NavButton to="/layouts" level={2} isParent={false} isSubheader={false}>
+          <ListItemText primary="lvl1 child" />
+        </NavButton>
+        <NavButton to="/pages" level={3} isParent={true} isSubheader={false}>
+          <ListItemText primary="lvl2 parent" />
+        </NavButton>
+        <NavButton to="/utils" level={1} isParent={false} isSubheader={true}>
+          <ListItemText primary="lvl3 subheader" />
+        </NavButton>
+        <NavButton to="/themes" level={2} isParent={false} isSubheader={false}>
+          <ListItemText primary="lvl1 child" />
+        </NavButton>
+        <NavButton
+          to="/templates"
+          level={3}
+          isParent={true}
+          isSubheader={false}
+        >
+          <ListItemText primary="lvl2 parent" />
+        </NavButton>
+        <NavButton
+          to="/components"
+          level={1}
+          isParent={false}
+          isSubheader={true}
+        >
+          <ListItemText primary="lvl2 subheader" />
+        </NavButton>
+        <NavButton to="/layouts" level={2} isParent={false} isSubheader={false}>
+          <ListItemText primary="lvl1 child" />
+        </NavButton>
+        <NavButton to="/pages" level={3} isParent={true} isSubheader={false}>
+          <ListItemText primary="lvl2 parent" />
+        </NavButton>
+        <NavButton to="/utils" level={1} isParent={false} isSubheader={true}>
+          <ListItemText primary="lvl3 subheader" />
+        </NavButton>
+        <NavButton to="/themes" level={2} isParent={false} isSubheader={false}>
+          <ListItemText primary="lvl1 child" />
+        </NavButton>
+        <NavButton
+          to="/templates"
+          level={3}
+          isParent={true}
+          isSubheader={false}
+        >
+          <ListItemText primary="lvl2 parent" />
+        </NavButton>
+      </StyledList>
     </PermanentDrawer>
   );
 }
@@ -56,6 +94,7 @@ const StyledList = styled(List)(({ theme }) => ({
   width: "100%",
   backgroundColor: theme.palette.background.paper,
   paddingTop: 0,
+  paddingBottom: theme.spacing(2),
 }));
 
 type NavButtonProps = Omit<ListItemButtonProps, "href" | "className"> &
@@ -65,27 +104,33 @@ type NavButtonProps = Omit<ListItemButtonProps, "href" | "className"> &
     isSubheader?: boolean;
   };
 
-// const BaseNavButton = forwardRef<HTMLAnchorElement, NavButtonProps>(
-//   ({ to, ...props }, ref) => (
-const BaseNavButton = forwardRef<HTMLAnchorElement, NavButtonProps>(
-  ({ to, level = 0, isParent = false, isSubheader = false, ...props }, ref) => {
-    return (
+const NavButton = styled(
+  forwardRef<HTMLAnchorElement, NavButtonProps>(
+    (
+      {
+        to,
+        level = 0,
+        isParent = false,
+        isSubheader = false,
+        className,
+        ...props
+      },
+      ref
+    ) => (
       <ListItemButton
         {...props}
-        className="foo"
+        className={`foo ${className || ""}`}
         component={NavLink}
         to={to}
         ref={ref}
       />
-    );
+    )
+  ),
+  {
+    shouldForwardProp: (prop: PropertyKey) =>
+      prop !== "level" && prop !== "isParent" && prop !== "isSubheader",
   }
-);
-
-// Styled component
-const StyledListItemButton = styled(BaseNavButton, {
-  shouldForwardProp: (prop) =>
-    prop !== "level" && prop !== "isParent" && prop !== "isSubheader",
-})<NavButtonProps>(({ theme, level = 0, isParent, isSubheader }) => ({
+)<NavButtonProps>(({ theme, level = 0, isParent, isSubheader }) => ({
   paddingRight: theme.spacing(1),
   paddingLeft: theme.spacing(2 + level),
   width: "100%",
@@ -94,6 +139,7 @@ const StyledListItemButton = styled(BaseNavButton, {
   },
   // # !isParent
   ...(!isParent && {
+    backgroundColor: "lightblue",
     "&.active": {
       cursor: "default",
       pointerEvents: "none",
@@ -105,6 +151,9 @@ const StyledListItemButton = styled(BaseNavButton, {
         backgroundColor: theme.palette.primary.light,
       },
     },
+    "&:hover": {
+      backgroundColor: "lightblue",
+    },
   }),
   // # isParent
   ...(isParent && {
@@ -115,7 +164,7 @@ const StyledListItemButton = styled(BaseNavButton, {
       color: theme.palette.text.primary,
     },
     "&:hover": {
-      backgroundColor: "grey",
+      backgroundColor: theme.palette.action.hover, // Restored hover behavior
     },
   }),
   // # isSubheader
@@ -141,6 +190,12 @@ const RotateIcon = styled(Icon, {
     duration: theme.transitions.duration.shortest,
   }),
 }));
+
+const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
+  ({ theme }) => ({
+    marginTop: 0,
+  })
+);
 
 // const StyledListItemButton = styled((props) => (
 //   <ListItemButton

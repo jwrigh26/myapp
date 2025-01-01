@@ -17,7 +17,7 @@ export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
   width: theme.mixins.drawerWidth,
   display: "none",
   ["& .MuiDrawer-paper"]: {
-    overflow: "hidden",
+    overFlowX: "hidden",
     height: "100%",
     width: "inherit",
     boxSizing: "border-box",
@@ -46,7 +46,7 @@ export const StyledTemporaryDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
   boxSizing: "border-box",
   ["& .MuiDrawer-paper"]: {
-    overflow: "hidden",
+    overFlowX: "hidden",
     height: "100%",
     width: "100%",
     display: "flex",

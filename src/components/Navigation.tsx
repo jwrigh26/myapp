@@ -27,16 +27,13 @@ export default function Navigation() {
 
 type NavigationButtonProps = Omit<ButtonProps, "href"> & NavLinkProps;
 
-// Base component forwards ref and props!
-const BaseNavigationButton = forwardRef<
-  HTMLAnchorElement,
-  NavigationButtonProps
->(({ to, ...props }, ref) => (
-  <Button {...props} component={NavLink} to={to} ref={ref} />
-));
-
-// NavigationButton component styles the base component
-const NavButton = styled(BaseNavigationButton)(({ theme }) => ({
+const NavButton = styled(
+  forwardRef<HTMLAnchorElement, NavigationButtonProps>(
+    ({ to, ...props }, ref) => (
+      <Button {...props} component={NavLink} to={to} ref={ref} />
+    )
+  )
+)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontWeight: theme.typography.fontWeightRegular,
   textDecoration: "none",

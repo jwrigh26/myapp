@@ -12,7 +12,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
 import Navigation from "components/Navigation";
-import { Drawer } from "features/foundations";
+import { Drawer as DesktopDrawer } from "features/foundations";
 import { ReactElement } from "react";
 import { Outlet } from "react-router";
 
@@ -36,13 +36,13 @@ export default function FoundationsLayout() {
           <ToolbarSpacer />
         </Header>
         <Main id="main">
-          <Drawer />
-          <Content>
-            <Outlet />
-          </Content>
+          <Outlet />
         </Main>
         {/* Desktop Footer -- Hidden on mobile */}
         <Footer id="footer" />
+        <Drawer id="drawer">
+          <DesktopDrawer />
+        </Drawer>
       </LayoutGrid>
       {/* Only shown on mobile for navigation */}
       {isMobile && <MobileNavigation />}
@@ -130,11 +130,11 @@ function HideOnScroll(props: HideOnScrollProps) {
 const LayoutGrid = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateRows: "auto 1fr auto",
-  gridTemplateColumns: "1fr",
+  gridTemplateColumns: `${theme.mixins.drawerWidth || 240}px 1fr`,
   gridTemplateAreas: `
-    "header"
-    "main"
-    "footer"
+    "header header"
+    "drawer main"
+    "drawer footer"
   `,
   minHeight: "100svh",
 }));
@@ -158,21 +158,22 @@ const Footer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     height: 56,
     display: "hidden",
+    marginLeft: 0,
   },
 }));
+
+const Drawer = styled("div")({
+  gridArea: "drawer",
+});
 
 const Main = styled(Box)(({ theme }) => ({
   gridArea: "main",
   padding: 0,
   margin: 0,
   backgroundColor: theme.palette.background.paper,
-}));
-
-const Content = styled(Box)(({ theme }) => ({
-  display: "block",
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(100% - ${theme.mixins.drawerWidth}px)`,
-  },
+  // Old way of setting width
+  // marginLeft: theme.mixins.drawerWidth,
+  // width: `calc(100% - ${theme.mixins.drawerWidth}px)`,
 }));
 
 const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
