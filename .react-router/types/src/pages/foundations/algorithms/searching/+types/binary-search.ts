@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/algorithms/basics/insertion-sort.tsx
+// pages/foundations/algorithms/searching/binary-search.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../insertion-sort")
+type Module = typeof import("../binary-search")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/algorithms/basics/insertion-sort"
-  file: "pages/foundations/algorithms/basics/insertion-sort.tsx"
-  path: "foundations/algorithms/sorting/insertion-sort"
+  id: "pages/foundations/algorithms/searching/binary-search"
+  file: "pages/foundations/algorithms/searching/binary-search.tsx"
+  path: "foundations/algorithms/searching/binary-search"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

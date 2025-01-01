@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/heaps.tsx
+// pages/foundations/algorithms/searching/exponential-search.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../heaps")
+type Module = typeof import("../exponential-search")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/heaps"
-  file: "pages/foundations/datastructures/non-linear/heaps.tsx"
-  path: "foundations/datastructures/non-linear/heaps"
+  id: "pages/foundations/algorithms/searching/exponential-search"
+  file: "pages/foundations/algorithms/searching/exponential-search.tsx"
+  path: "foundations/algorithms/searching/exponential-search"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

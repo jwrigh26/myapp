@@ -113,26 +113,26 @@ export default [
           // Binary Trees, AVL Trees, Red-Black Trees, B-Trees, Tries ( Prefix Trees )
           route(
             "trees",
-            "pages/foundations/datastructures/non-linear/trees.tsx"
+            "pages/foundations/datastructures/nonlinear/trees.tsx"
           ),
           route(
             "heaps",
-            "pages/foundations/datastructures/non-linear/heaps.tsx"
+            "pages/foundations/datastructures/nonlinear/heaps.tsx"
           ),
           route(
             "graphs",
-            "pages/foundations/datastructures/non-linear/graphs.tsx"
+            "pages/foundations/datastructures/nonlinear/graphs.tsx"
           ),
           // Adjacency List, Adjacency Matrix, Incidence Matrix, Edge List
           route(
             "matrix",
-            "pages/foundations/datastructures/non-linear/matrix.tsx"
+            "pages/foundations/datastructures/nonlinear/matrix.tsx"
           ),
-          route("bfs", "pages/foundations/datastructures/non-linear/bfs.tsx"),
-          route("dfs", "pages/foundations/datastructures/non-linear/dfs.tsx"),
+          route("bfs", "pages/foundations/datastructures/nonlinear/bfs.tsx"),
+          route("dfs", "pages/foundations/datastructures/nonlinear/dfs.tsx"),
           route(
             "shortest-path",
-            "pages/foundations/datastructures/non-linear/shortest-path.tsx"
+            "pages/foundations/datastructures/nonlinear/shortest-path.tsx"
           ),
         ]),
       ]),
@@ -143,50 +143,50 @@ export default [
         ...prefix("searching", [
           route(
             "binary-search",
-            "pages/foundations/algorithms/basics/binary-search.tsx"
+            "pages/foundations/algorithms/searching/binary-search.tsx"
           ),
           route(
             "linear-search",
-            "pages/foundations/algorithms/basics/linear-search.tsx"
+            "pages/foundations/algorithms/searching/linear-search.tsx"
           ),
           route(
             "exponential-search",
-            "pages/foundations/algorithms/basics/exponential-search.tsx"
+            "pages/foundations/algorithms/searching/exponential-search.tsx"
           ),
         ]),
         // ### Sorting
         ...prefix("sorting", [
           route(
             "bubble-sort",
-            "pages/foundations/algorithms/basics/bubble-sort.tsx"
+            "pages/foundations/algorithms/sorting/bubble-sort.tsx"
           ),
           route(
             "selection-sort",
-            "pages/foundations/algorithms/basics/selection-sort.tsx"
+            "pages/foundations/algorithms/sorting/selection-sort.tsx"
           ),
           route(
             "insertion-sort",
-            "pages/foundations/algorithms/basics/insertion-sort.tsx"
+            "pages/foundations/algorithms/sorting/insertion-sort.tsx"
           ),
           route(
             "merge-sort",
-            "pages/foundations/algorithms/basics/merge-sort.tsx"
+            "pages/foundations/algorithms/sorting/merge-sort.tsx"
           ),
           route(
             "quick-sort",
-            "pages/foundations/algorithms/basics/quick-sort.tsx"
+            "pages/foundations/algorithms/sorting/quick-sort.tsx"
           ),
           route(
             "heap-sort",
-            "pages/foundations/algorithms/basics/heap-sort.tsx"
+            "pages/foundations/algorithms/sorting/heap-sort.tsx"
           ),
           route(
             "counting-sort",
-            "pages/foundations/algorithms/basics/counting-sort.tsx"
+            "pages/foundations/algorithms/sorting/counting-sort.tsx"
           ),
           route(
             "radix-sort",
-            "pages/foundations/algorithms/basics/radix-sort.tsx"
+            "pages/foundations/algorithms/sorting/radix-sort.tsx"
           ),
         ]),
         // ### sliding-window
@@ -223,7 +223,7 @@ export default [
           ),
           route(
             "longest-increasing-subsequence",
-            "pages/foundations/algorithms/dynamicprogramming/longest-increasing-subsequence.tsx"
+            "pages/foundations/algorithms/dynamicprogramming/lis.tsx"
           ),
         ]),
       ]),
@@ -258,7 +258,7 @@ export default [
             "pages/foundations/strings/advanced/string-matching.tsx"
           ),
           // Longest Common Subsequence
-          route("LCS", "pages/foundations/strings/advanced/LCS.tsx"),
+          route("LCS", "pages/foundations/strings/advanced/lcs.tsx"),
         ]),
       ]),
     ]),

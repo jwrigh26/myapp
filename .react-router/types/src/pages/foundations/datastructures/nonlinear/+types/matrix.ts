@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/algorithms/basics/binary-search.tsx
+// pages/foundations/datastructures/nonlinear/matrix.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../binary-search")
+type Module = typeof import("../matrix")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/algorithms/basics/binary-search"
-  file: "pages/foundations/algorithms/basics/binary-search.tsx"
-  path: "foundations/algorithms/searching/binary-search"
+  id: "pages/foundations/datastructures/nonlinear/matrix"
+  file: "pages/foundations/datastructures/nonlinear/matrix.tsx"
+  path: "foundations/datastructures/non-linear/matrix"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

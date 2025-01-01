@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/trees.tsx
+// pages/foundations/algorithms/dynamicprogramming/lis.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../trees")
+type Module = typeof import("../lis")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/trees"
-  file: "pages/foundations/datastructures/non-linear/trees.tsx"
-  path: "foundations/datastructures/non-linear/trees"
+  id: "pages/foundations/algorithms/dynamicprogramming/lis"
+  file: "pages/foundations/algorithms/dynamicprogramming/lis.tsx"
+  path: "foundations/algorithms/dynamic-programming/longest-increasing-subsequence"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

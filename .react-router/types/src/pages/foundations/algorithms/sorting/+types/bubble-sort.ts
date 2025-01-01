@@ -1,5 +1,5 @@
 // React Router generated types for route:
-// pages/foundations/algorithms/basics/bubble-sort.tsx
+// pages/foundations/algorithms/sorting/bubble-sort.tsx
 
 import type * as T from "react-router/route-module"
 
@@ -10,8 +10,8 @@ type Module = typeof import("../bubble-sort")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/algorithms/basics/bubble-sort"
-  file: "pages/foundations/algorithms/basics/bubble-sort.tsx"
+  id: "pages/foundations/algorithms/sorting/bubble-sort"
+  file: "pages/foundations/algorithms/sorting/bubble-sort.tsx"
   path: "foundations/algorithms/sorting/bubble-sort"
   params: {}
   module: Module

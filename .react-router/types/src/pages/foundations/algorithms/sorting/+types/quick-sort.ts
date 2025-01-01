@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/algorithms/basics/merge-sort.tsx
+// pages/foundations/algorithms/sorting/quick-sort.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../merge-sort")
+type Module = typeof import("../quick-sort")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/algorithms/basics/merge-sort"
-  file: "pages/foundations/algorithms/basics/merge-sort.tsx"
-  path: "foundations/algorithms/sorting/merge-sort"
+  id: "pages/foundations/algorithms/sorting/quick-sort"
+  file: "pages/foundations/algorithms/sorting/quick-sort.tsx"
+  path: "foundations/algorithms/sorting/quick-sort"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

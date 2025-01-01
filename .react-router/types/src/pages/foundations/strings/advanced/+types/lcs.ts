@@ -1,17 +1,17 @@
 // React Router generated types for route:
-// pages/foundations/strings/advanced/LCS.tsx
+// pages/foundations/strings/advanced/lcs.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../LCS")
+type Module = typeof import("../lcs")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/strings/advanced/LCS"
-  file: "pages/foundations/strings/advanced/LCS.tsx"
+  id: "pages/foundations/strings/advanced/lcs"
+  file: "pages/foundations/strings/advanced/lcs.tsx"
   path: "foundations/strings/advanced/LCS"
   params: {}
   module: Module

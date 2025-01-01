@@ -1,5 +1,5 @@
 // React Router generated types for route:
-// pages/foundations/algorithms/basics/selection-sort.tsx
+// pages/foundations/algorithms/sorting/selection-sort.tsx
 
 import type * as T from "react-router/route-module"
 
@@ -10,8 +10,8 @@ type Module = typeof import("../selection-sort")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/algorithms/basics/selection-sort"
-  file: "pages/foundations/algorithms/basics/selection-sort.tsx"
+  id: "pages/foundations/algorithms/sorting/selection-sort"
+  file: "pages/foundations/algorithms/sorting/selection-sort.tsx"
   path: "foundations/algorithms/sorting/selection-sort"
   params: {}
   module: Module

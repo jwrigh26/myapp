@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/dfs.tsx
+// pages/foundations/datastructures/nonlinear/heaps.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../dfs")
+type Module = typeof import("../heaps")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/dfs"
-  file: "pages/foundations/datastructures/non-linear/dfs.tsx"
-  path: "foundations/datastructures/non-linear/dfs"
+  id: "pages/foundations/datastructures/nonlinear/heaps"
+  file: "pages/foundations/datastructures/nonlinear/heaps.tsx"
+  path: "foundations/datastructures/non-linear/heaps"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

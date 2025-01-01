@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/shortest-path.tsx
+// pages/foundations/algorithms/searching/linear-search.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../shortest-path")
+type Module = typeof import("../linear-search")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/shortest-path"
-  file: "pages/foundations/datastructures/non-linear/shortest-path.tsx"
-  path: "foundations/datastructures/non-linear/shortest-path"
+  id: "pages/foundations/algorithms/searching/linear-search"
+  file: "pages/foundations/algorithms/searching/linear-search.tsx"
+  path: "foundations/algorithms/searching/linear-search"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

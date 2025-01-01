@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/matrix.tsx
+// pages/foundations/algorithms/sorting/heap-sort.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../matrix")
+type Module = typeof import("../heap-sort")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/matrix"
-  file: "pages/foundations/datastructures/non-linear/matrix.tsx"
-  path: "foundations/datastructures/non-linear/matrix"
+  id: "pages/foundations/algorithms/sorting/heap-sort"
+  file: "pages/foundations/algorithms/sorting/heap-sort.tsx"
+  path: "foundations/algorithms/sorting/heap-sort"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

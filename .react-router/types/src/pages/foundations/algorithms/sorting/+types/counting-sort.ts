@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/datastructures/non-linear/bfs.tsx
+// pages/foundations/algorithms/sorting/counting-sort.tsx
 
 import type * as T from "react-router/route-module"
 
 import type { Info as Parent0 } from "../../../../../+types/root"
 import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../bfs")
+type Module = typeof import("../counting-sort")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/datastructures/non-linear/bfs"
-  file: "pages/foundations/datastructures/non-linear/bfs.tsx"
-  path: "foundations/datastructures/non-linear/bfs"
+  id: "pages/foundations/algorithms/sorting/counting-sort"
+  file: "pages/foundations/algorithms/sorting/counting-sort.tsx"
+  path: "foundations/algorithms/sorting/counting-sort"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>
