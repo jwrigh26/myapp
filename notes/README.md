@@ -32,6 +32,17 @@ Concurrency vs parallelism vs multi-threading vs synchronization vs coordination
 
 Here’s a polished version of your "Foundations" page navigation structure. I've refined headers, added relevant subheaders, and expanded placeholder pages with real-world inspiration to make the sections cohesive and comprehensive for your content.
 
+import Typography from "@mui/material/Typography";
+import PageLayout from "layouts/PageLayout";
+
+export default function Foo() {
+return (
+<PageLayout>
+<Typography variant="h1">Foo Getting Started</Typography>
+</PageLayout>
+);
+}
+
 ---
 
 ### Foundations Page Drawer Navigation

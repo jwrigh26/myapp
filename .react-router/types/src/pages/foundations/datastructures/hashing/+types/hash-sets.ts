@@ -1,18 +1,18 @@
 // React Router generated types for route:
-// pages/foundations/math/index.tsx
+// pages/foundations/datastructures/hashing/hash-sets.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "../../../../+types/root"
-import type { Info as Parent1 } from "../../../../layouts/+types/foundations-layout"
+import type { Info as Parent0 } from "../../../../../+types/root"
+import type { Info as Parent1 } from "../../../../../layouts/+types/foundations-layout"
 
-type Module = typeof import("../index")
+type Module = typeof import("../hash-sets")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "pages/foundations/math/index"
-  file: "pages/foundations/math/index.tsx"
-  path: "foundations/math"
+  id: "pages/foundations/datastructures/hashing/hash-sets"
+  file: "pages/foundations/datastructures/hashing/hash-sets.tsx"
+  path: "foundations/datastructures/hashing/hash-sets"
   params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>

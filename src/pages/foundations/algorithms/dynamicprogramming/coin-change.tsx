@@ -1,10 +1,10 @@
 import Typography from "@mui/material/Typography";
 import PageLayout from "layouts/PageLayout";
 
-export default function Math() {
+export default function Foo() {
   return (
     <PageLayout>
-      <Typography variant="h1">Math Getting Started</Typography>
+      <Typography variant="h1">Foo Getting Started</Typography>
     </PageLayout>
   );
 }
