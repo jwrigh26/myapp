@@ -14,6 +14,9 @@ export function hasValue(value: unknown): boolean {
   }
 
   if (isString(value)) {
+    if (typeof value !== "string") {
+      return false;
+    }
     const isEmptyString = !value || value.trim().length === 0;
     const isUndefinedString = value === "undefined" || value === "null";
     return !isEmptyString && !isUndefinedString;

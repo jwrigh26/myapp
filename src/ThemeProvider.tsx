@@ -112,7 +112,7 @@ const generateTheme = (mode: PaletteMode): Theme => {
       },
       text: {
         primary: mode === "light" ? "#171F22" : "#EFF3F3",
-        secondary: mode === "light" ? "#C1D1CF" : "#8DA2A5",
+        secondary: mode === "light" ? "#2A3338" : "#8DA2A5",
       },
     },
     components: {
@@ -188,102 +188,114 @@ const generateTheme = (mode: PaletteMode): Theme => {
       fontWeightMedium: 500,
       fontWeightSemiBold: 600,
       fontWeightBold: 700,
+
+      // Headlines
       h1: {
         fontWeight: 700,
-        fontSize: "3rem",
+        fontSize: "2.75rem", // Slightly smaller than before (44px)
         lineHeight: 1.2,
-        letterSpacing: "-0.01562em",
+        letterSpacing: "-0.02em",
         "@media (max-width:600px)": {
-          fontSize: "2.25rem",
+          fontSize: "2rem", // Adjust for mobile (32px)
         },
       },
       h2: {
         fontWeight: 600,
-        fontSize: "2.5rem",
+        fontSize: "2.25rem", // Slightly smaller (36px)
         lineHeight: 1.3,
-        letterSpacing: "-0.00833em",
+        letterSpacing: "-0.015em",
         "@media (max-width:600px)": {
-          fontSize: "2rem",
+          fontSize: "1.75rem", // Adjust for mobile (28px)
         },
       },
       h3: {
         fontWeight: 600,
-        fontSize: "2rem",
+        fontSize: "2rem", // No change (32px)
         lineHeight: 1.4,
-        letterSpacing: "0em",
+        letterSpacing: "-0.01em",
         "@media (max-width:600px)": {
-          fontSize: "1.75rem",
+          fontSize: "1.5rem", // Adjust for mobile (24px)
         },
       },
       h4: {
         fontWeight: 600,
-        fontSize: "1.75rem",
+        fontSize: "1.5rem", // Smaller (24px)
         lineHeight: 1.5,
-        letterSpacing: "0.00735em",
+        letterSpacing: "0em",
         "@media (max-width:600px)": {
-          fontSize: "1.5rem",
+          fontSize: "1.25rem", // Adjust for mobile (20px)
         },
       },
       h5: {
         fontWeight: 500,
-        fontSize: "1.5rem",
+        fontSize: "1.25rem", // Smaller (20px)
         lineHeight: 1.6,
-        letterSpacing: "0em",
+        letterSpacing: "0.01em",
         "@media (max-width:600px)": {
-          fontSize: "1.25rem",
+          fontSize: "1rem", // Adjust for mobile (16px)
         },
       },
       h6: {
         fontWeight: 500,
-        fontSize: "1.25rem",
+        fontSize: "1rem", // Smaller (16px)
         lineHeight: 1.6,
-        letterSpacing: "0.0075em",
+        letterSpacing: "0.015em",
         "@media (max-width:600px)": {
-          fontSize: "1.125rem",
+          fontSize: "0.875rem", // Adjust for mobile (14px)
         },
       },
+
+      // Subtitles
       subtitle1: {
         fontWeight: 500,
-        fontSize: "1.125rem",
-        lineHeight: 1.75,
-        letterSpacing: "0.00938em",
+        fontSize: "1rem", // Reduced (16px)
+        lineHeight: 1.6, // Improved spacing
+        letterSpacing: "0.01em",
       },
       subtitle2: {
         fontWeight: 500,
-        fontSize: "1rem",
-        lineHeight: 1.57,
-        letterSpacing: "0.00714em",
+        fontSize: "0.875rem", // Reduced (14px)
+        lineHeight: 1.5,
+        letterSpacing: "0.01em",
       },
+
+      // Body text
       body1: {
         fontWeight: 400,
-        fontSize: "1rem",
+        fontSize: "0.9375rem", // Slightly smaller (15px)
         lineHeight: 1.5,
-        letterSpacing: "0.00938em",
+        letterSpacing: "0.01em",
       },
       body2: {
         fontWeight: 400,
-        fontSize: "0.875rem",
-        lineHeight: 1.43,
-        letterSpacing: "0.01071em",
+        fontSize: "0.8125rem", // Slightly smaller (13px)
+        lineHeight: 1.5,
+        letterSpacing: "0.01em",
       },
+
+      // Buttons
       button: {
         fontWeight: 600,
-        fontSize: "0.875rem",
-        lineHeight: 1.75,
-        letterSpacing: "0.02857em",
+        fontSize: "0.875rem", // No change (14px)
+        lineHeight: 1.5,
+        letterSpacing: "0.02em", // Slightly increased for better readability
         textTransform: "none",
       },
+
+      // Captions
       caption: {
         fontWeight: 400,
-        fontSize: "0.75rem",
-        lineHeight: 1.66,
-        letterSpacing: "0.03333em",
+        fontSize: "0.75rem", // No change (12px)
+        lineHeight: 1.4, // Reduced spacing for better balance
+        letterSpacing: "0.02em",
       },
+
+      // Overlines
       overline: {
         fontWeight: 600,
-        fontSize: "0.75rem",
-        lineHeight: 2.66,
-        letterSpacing: "0.08333em",
+        fontSize: "0.6875rem", // Slightly smaller (11px)
+        lineHeight: 2, // Reduced spacing
+        letterSpacing: "0.08em",
         textTransform: "uppercase",
       },
     },
@@ -311,12 +323,12 @@ export default function ThemeProvider({
 
   const theme = useMemo(() => {
     const mode = isDarkMode ? "dark" : "light";
-    return responsiveFontSizes(generateTheme(mode));
+    const m = responsiveFontSizes(generateTheme(mode));
+    console.log(m);
+    return m;
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
-
-  console.log(theme);
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>
