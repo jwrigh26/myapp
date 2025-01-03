@@ -23,7 +23,7 @@ export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "yellow",
+    backgroundColor: theme.palette.background.paper,
   },
   [theme.breakpoints.up("sm")]: {
     display: "block",

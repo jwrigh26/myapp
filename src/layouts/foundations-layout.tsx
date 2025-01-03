@@ -40,6 +40,7 @@ export default function FoundationsLayout() {
         </Main>
         {/* Desktop Footer -- Hidden on mobile */}
         <Footer id="footer" />
+        {/* Desktop Drawer */}
         <Drawer id="drawer">
           <DesktopDrawer />
         </Drawer>
@@ -129,14 +130,22 @@ function HideOnScroll(props: HideOnScrollProps) {
 
 const LayoutGrid = styled(Box)(({ theme }) => ({
   display: "grid",
+  minHeight: "100svh",
   gridTemplateRows: "auto 1fr auto",
-  gridTemplateColumns: `${theme.mixins.drawerWidth || 240}px 1fr`,
+  gridTemplateColumns: "1fr",
   gridTemplateAreas: `
+    "header"
+    "main"
+    "footer"
+  `,
+  [theme.breakpoints.up("sm")]: {
+    gridTemplateColumns: `${theme.mixins.drawerWidth || 240}px 1fr`,
+    gridTemplateAreas: `
     "header header"
     "drawer main"
     "drawer footer"
   `,
-  minHeight: "100svh",
+  },
 }));
 
 const Header = styled(Box)(({ theme }) => ({
@@ -153,7 +162,7 @@ const Footer = styled(Box)(({ theme }) => ({
   margin: 0,
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.secondary.dark,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary.dark} 100%)`,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   height: 48,
   [theme.breakpoints.down("sm")]: {
     height: 56,
@@ -162,9 +171,13 @@ const Footer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Drawer = styled("div")({
+const Drawer = styled(Box)(({ theme }) => ({
   gridArea: "drawer",
-});
+  display: "none",
+  [theme.breakpoints.up("sm")]: {
+    display: "block",
+  },
+}));
 
 const Main = styled(Box)(({ theme }) => ({
   gridArea: "main",

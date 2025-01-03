@@ -43,12 +43,12 @@ const StyledWrapper = styled(Box)(({ theme }) => ({
 
 const StyledBottomNavigation = styled(BottomNavigation)(({ theme }) => ({
   boxShadow: `0px -4px 6px rgba(0, 0, 0, 0.1), 0px -4px 4px rgba(0, 0, 0, 0.08), 0px -1px 10px rgba(0, 0, 0, 0.06)`, // Lighten the shadow by reducing opacity
-  backgroundColor: theme.palette.secondary.dark,
+  backgroundColor: theme.palette.primary.dark,
 }));
 
 const StyledBottomNavigationAction = styled(BottomNavigationAction)(
   ({ theme }) => ({
-    color: theme.palette.secondary.contrastText,
+    color: theme.palette.primary.veryLight,
     position: "relative",
     overflow: "hidden",
     "&::before": {
@@ -76,10 +76,10 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(
       zIndex: 1,
     },
     "&.Mui-selected": {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
     ":hover::before": {
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.primary.main,
     },
   })
 );

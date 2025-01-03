@@ -41,15 +41,16 @@ const NavButton = styled(
   opacity: 0.8,
   borderRadius: 2,
   "&:hover": {
-    opacity: 0.6,
-  },
-  "&.active": {
-    opacity: 1.0,
+    // opacity: 0.6,
     backgroundColor: theme.mixins.decomposeColor(
       theme.palette.primary.light,
       0.5
     ),
-    color: theme.palette.text.primary,
+  },
+  "&.active": {
+    opacity: 1.0,
+    backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 60%, ${theme.palette.secondary.dark} 100%)`,
+    color: theme.palette.primary.dark,
   },
 }));
 

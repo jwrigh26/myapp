@@ -47,37 +47,37 @@ declare module "@mui/material/styles/createTypography" {
 
 // Custom Colors
 const primaryColors = {
-  main: "#666B64", // granite green
-  light: "#C1D1CF", // jet stream
-  dark: "#636467", // granite gray
-  veryLight: "#748B91", // slate gray
-  superLight: "#EFF3F3", // anti-flash white
+  main: "#3F51B5", // indigo for primary actions
+  light: "#757DE8", // lighter indigo for hover states
+  dark: "#002984", // deeper indigo for emphasis
+  veryLight: "#C5CAE9", // very light indigo for backgrounds
+  superLight: "#E8EAF6", // super light indigo for subtle highlights
 };
 
 const primaryDarkColors = {
-  main: "#171F22", // dark jungle green
-  light: "#2A3338", // charcoal
-  dark: "#0F1416", // eerie black
-  veryLight: "#475A5E", // independence
-  superLight: "#8DA2A5", // cadet blue
+  main: "#7986CB", // indigo for dark mode
+  light: "#9FA8DA", // lighter indigo for dark mode hover states
+  dark: "#303F9F", // slightly darker indigo for emphasis
+  veryLight: "#3F51B5", // visible but not harsh in dark mode
+  superLight: "#7986CB", // subtle highlight for dark mode
 };
 
 const secondaryColors = {
-  main: "#748B91", // slate gray
-  light: "#C1D1CF", // jet stream
-  dark: "#475A5E", // independence
-  veryLight: "#EFF3F3", // anti-flash white
-  superLight: "#F5FAFA", // mint cream
-  contrastText: "#ffffff", // white
+  main: "#FF9800", // orange for accents
+  light: "#FFB74D", // lighter orange for hover states
+  dark: "#F57C00", // deeper orange for emphasis
+  veryLight: "#FFE0B2", // very light orange for backgrounds
+  superLight: "#FFD54F", // super light orange for subtle highlights
+  contrastText: "#000000",
 };
 
 const secondaryDarkColors = {
-  main: "#C1D1CF", // jet stream
-  light: "#EFF3F3", // anti-flash white
-  dark: "#8DA2A5", // cadet blue
-  veryLight: "#D7E0DF", // gainsboro
-  superLight: "#F5FAFA", // mint cream
-  contrastText: "#171F22", // dark jungle green
+  main: "#FF9800", // orange for dark mode
+  light: "#FFB74D", // lighter orange for dark mode hover
+  dark: "#F57C00", // slightly darker orange for emphasis
+  veryLight: "#FF9800", // visible but not harsh in dark mode
+  superLight: "#FFB74D", // subtle highlight for dark mode
+  contrastText: "#FFFFFF",
 };
 
 // Mixins
@@ -111,8 +111,8 @@ const generateTheme = (mode: PaletteMode): Theme => {
         paper: mode === "light" ? "#EFF3F3" : "#2A3338",
       },
       text: {
-        primary: mode === "light" ? "#171F22" : "#EFF3F3",
-        secondary: mode === "light" ? "#2A3338" : "#8DA2A5",
+        primary: mode === "light" ? "#333333" : "#CCCCCC",
+        secondary: mode === "light" ? "#666666" : "#999999",
       },
     },
     components: {

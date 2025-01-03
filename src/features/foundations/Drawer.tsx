@@ -1,3 +1,5 @@
+import { mdiChevronRight } from "@mdi/js";
+import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import ListItemButton, {
   ListItemButtonProps,
@@ -7,62 +9,77 @@ import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import { PermanentDrawer } from "components/Drawer";
 import Icon from "components/Icon";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { NavLink, NavLinkProps } from "react-router";
 import { isString } from "utils/safety";
 import "./index.css";
-// import Collapse from '@mui/material/Collapse';
 
 export function Drawer() {
+  const [open, setOpen] = useState(true);
+  const handleToggle = () => setOpen((prev) => !prev);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleToggle();
+  };
+
+  // So for looping we need a
+
   return (
     <PermanentDrawer>
       <ToolbarSpacer />
       <StyledList>
-        <NavButton to="/foundations" level={0} isIndex={true}>
-          <ListItemText primary="Getting Started" />
-        </NavButton>
-        <NavButton to="/foundataions/math" level={1} isIndex={true}>
+        {/* If index */}
+        <ToggleButton onClick={handleClick} level={0}>
           <ListItemText primary="Math" />
-        </NavButton>
-        <NavButton
-          to="/foundations/math/asymptotic-notation"
-          level={2}
-          isRoute={true}
-        >
-          <ListItemText primary="asymptotic-notation" />
-        </NavButton>
-        <NavButton
-          to="/foundations/math/modular-arithmetic"
-          level={2}
-          isRoute={true}
-        >
-          <ListItemText primary="modular-arithmetic" />
-        </NavButton>
-        <NavButton
-          to="/foundations/math/complexity-analysis"
-          level={2}
-          isRoute={true}
-        >
-          <ListItemText primary="complexity-analysis" />
-        </NavButton>
+          <RotateIcon
+            rotate={open ? 1 : 0}
+            path={mdiChevronRight}
+            color="primary"
+          />
+        </ToggleButton>
+        <Collapse in={open} timeout="auto">
+          <NavButton
+            to="/foundations/math/asymptotic-notation"
+            level={1}
+            isRoute
+          >
+            <ListItemText primary="asymptotic-notation" />
+          </NavButton>
+          <NavButton
+            to="/foundations/math/modular-arithmetic"
+            level={1}
+            isRoute
+          >
+            <ListItemText primary="modular-arithmetic" />
+          </NavButton>
+          <NavButton
+            to="/foundations/math/complexity-analysis"
+            level={1}
+            isRoute
+          >
+            <ListItemText primary="complexity-analysis" />
+          </NavButton>
+        </Collapse>
         {/* Recursion */}
         <NavButton to="/foundations/recursion" level={0} isIndex={true}>
           <ListItemText primary="Recursion" />
         </NavButton>
         {/* Basics */}
-        <NavButton to="/foundations/recursion/basics" level={1} isPrefix={true}>
+        <NavButton to="/foundations/recursion/basics" level={0} isPrefix={true}>
           <ListItemText primary="Basics" />
         </NavButton>
         <NavButton
           to="/foundations/recursion/basics/backtracking"
-          level={2}
+          level={1}
           isRoute={true}
         >
           <ListItemText primary="backtracking" />
         </NavButton>
         <NavButton
           to="/foundations/recursion/basics/divide-and-conquer"
-          level={2}
+          level={1}
           isRoute={true}
         >
           <ListItemText primary="divide-and-conquer" />
@@ -91,10 +108,26 @@ type NavButtonProps = Omit<ListItemButtonProps, "href" | "className"> &
     isRoute?: boolean;
   };
 
+const ToggleButton = styled(ListItemButton)<{ level: number }>(
+  ({ theme, level }) => ({
+    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(2 + level),
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    "&:hover": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    "& .MuiListItemText-root > span": {
+      fontWeight: theme.typography.fontWeightMedium,
+      color: theme.palette.text.secondary,
+    },
+  })
+);
+
 const NavButton = styled(
   forwardRef<HTMLAnchorElement, NavButtonProps>(
     (
-      { to, level = 0, isIndex = false, isPrefix = false, className, ...props },
+      { to, level = 0, isPrefix = false, isRoute = true, className, ...props },
       ref
     ) => (
       <ListItemButton
@@ -108,29 +141,16 @@ const NavButton = styled(
   ),
   {
     shouldForwardProp: (prop: PropertyKey) =>
-      prop !== "level" &&
-      prop !== "isRoute" &&
-      prop !== "isPrefix" &&
-      prop !== "isIndex",
+      prop !== "level" && prop !== "isRoute" && prop !== "isPrefix",
   }
-)<NavButtonProps>(({ theme, level = 0, isIndex, isPrefix, isRoute }) => ({
-  ...theme.typography.body1,
+)<NavButtonProps>(({ theme, level = 0, isPrefix, isRoute }) => ({
   paddingRight: theme.spacing(1),
   paddingLeft: theme.spacing(2 + level),
   width: "100%",
+  backgroundColor: theme.palette.background.paper,
   "&:hover": {
     backgroundColor: theme.palette.action.hover,
   },
-  // # isIndex
-  ...(isIndex && {
-    backgroundColor: theme.palette.background.paper,
-    cursor: "default",
-    "& .MuiListItemText-root > span": {
-      // ...theme.typography.body2,
-      fontWeight: theme.typography.fontWeightMedium,
-      color: theme.palette.text.primary,
-    },
-  }),
   // # isPrefix
   ...(isPrefix && {
     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -145,20 +165,25 @@ const NavButton = styled(
   }),
   // # isRoute
   ...(isRoute && {
-    backgroundColor: "inherit",
-    fontWeight: theme.typography.fontWeightRegular,
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
+    //
+    "& .MuiListItemText-root > span": {
+      ...theme.typography.body2,
+      fontWeight: theme.typography.fontWeightRegular,
+      color: theme.palette.text.primary,
+    },
     "&.active": {
-      color: "red",
+      color: theme.palette.secondary.main,
       cursor: "default",
       pointerEvents: "none",
-      "& span": {},
-      "&:hover": {
-        backgroundColor: theme.palette.action.hover,
+      // "& span": {},
+      "& .MuiListItemText-root > span": {
+        color: theme.palette.primary.main,
+        fontWeight: theme.typography.fontWeightMedium,
+        textDecoration: "underline",
+        textDecorationThickness: "2px",
+        textUnderlineOffset: "4px", // Increase this value to increase the padding between the underline and text
       },
-    },
-    "&:hover": {
-      backgroundColor: theme.palette.action.hover,
     },
   }),
 }));
@@ -166,9 +191,8 @@ const NavButton = styled(
 const RotateIcon = styled(Icon, {
   shouldForwardProp: (prop) => prop !== "rotate",
 })<{ rotate: number }>(({ theme, rotate }) => ({
-  color: theme.palette.text.secondary,
-  transform: rotate ? "rotate(90deg)" : "rotate(180deg)",
-  trnasition: theme.transitions.create("transform", {
+  transform: rotate ? "rotate(90deg)" : "rotate(0deg)",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
