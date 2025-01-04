@@ -152,3 +152,58 @@ return (
 ---
 
 This keeps all entries within two levels while still capturing the breadth of topics you want to cover. Let me know if you'd like further adjustments!
+
+{/_ If index _/}
+<ToggleButton onClick={handleClick} level={0}>
+<ListItemText primary="Math" />
+<RotateIcon
+rotate={open ? 1 : 0}
+path={mdiChevronRight}
+color="primary"
+/>
+</ToggleButton>
+<Collapse in={open} timeout="auto">
+<NavButton
+            to="/foundations/math/asymptotic-notation"
+            level={1}
+            isRoute
+          >
+<ListItemText primary="asymptotic-notation" />
+</NavButton>
+<NavButton
+            to="/foundations/math/modular-arithmetic"
+            level={1}
+            isRoute
+          >
+<ListItemText primary="modular-arithmetic" />
+</NavButton>
+<NavButton
+            to="/foundations/math/complexity-analysis"
+            level={1}
+            isRoute
+          >
+<ListItemText primary="complexity-analysis" />
+</NavButton>
+</Collapse>
+{/_ Recursion _/}
+<NavButton to="/foundations/recursion" level={0} isIndex={true}>
+<ListItemText primary="Recursion" />
+</NavButton>
+{/_ Basics _/}
+<NavButton to="/foundations/recursion/basics" level={0} isPrefix={true}>
+<ListItemText primary="Basics" />
+</NavButton>
+<NavButton
+          to="/foundations/recursion/basics/backtracking"
+          level={1}
+          isRoute={true}
+        >
+<ListItemText primary="backtracking" />
+</NavButton>
+<NavButton
+          to="/foundations/recursion/basics/divide-and-conquer"
+          level={1}
+          isRoute={true}
+        >
+<ListItemText primary="divide-and-conquer" />
+</NavButton>

@@ -16,7 +16,9 @@ export default [
   // # Foundations
   ...prefix("foundations", [
     layout("layouts/foundations-layout.tsx", [
-      index("pages/foundations/index.tsx"), // Here we can outline what foundations is about
+      index("pages/foundations/index.tsx"),
+      // end of the line
+      route("getting-started", "pages/foundations/getting-started.tsx"),
       // ## Foundational Math
       ...prefix("math", [
         route(
@@ -109,7 +111,7 @@ export default [
           route("queues", "pages/foundations/datastructures/linear/queues.tsx"),
         ]),
         // ### Non-Linear
-        ...prefix("non-linear", [
+        ...prefix("nonlinear", [
           // Binary Trees, AVL Trees, Red-Black Trees, B-Trees, Tries ( Prefix Trees )
           route(
             "trees",
@@ -190,7 +192,7 @@ export default [
           ),
         ]),
         // ### sliding-window
-        ...prefix("sliding-window", [
+        ...prefix("slidingwindow", [
           // Maximum Sum Subarray (Kadane's Algorithm)
           route(
             "max-sum",
@@ -208,7 +210,7 @@ export default [
           ),
         ]),
         // ### Dynamic Programming
-        ...prefix("dynamic-programming", [
+        ...prefix("dynamicprogramming", [
           route(
             "fibonacci",
             "pages/foundations/algorithms/dynamicprogramming/fibonacci.tsx"
@@ -222,7 +224,7 @@ export default [
             "pages/foundations/algorithms/dynamicprogramming/knapsack.tsx"
           ),
           route(
-            "longest-increasing-subsequence",
+            "lis",
             "pages/foundations/algorithms/dynamicprogramming/lis.tsx"
           ),
         ]),
@@ -279,6 +281,6 @@ export interface RouteItem {
   path: string;
   text: string;
   children?: RouteItem[];
-  level?: number;
+  level: number;
   type?: RouteType;
 }

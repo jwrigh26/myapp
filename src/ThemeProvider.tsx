@@ -268,7 +268,9 @@ const generateTheme = (mode: PaletteMode): Theme => {
       },
       body2: {
         fontWeight: 400,
-        fontSize: "0.8125rem", // Slightly smaller (13px)
+        fontSize: "0.84375rem", // Intermediate size (13.5px)
+        // fontSize: "0.8125rem", // Slightly smaller (13px),
+        // fontSize: "0.828125rem",
         lineHeight: 1.5,
         letterSpacing: "0.01em",
       },
