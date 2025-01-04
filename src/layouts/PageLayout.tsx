@@ -15,7 +15,7 @@ const StyledGrid = styled(Box, {
   gridTemplateRows: "auto 1fr auto",
   gap: theme.spacing(gap),
   padding: theme.spacing(padding),
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.background.paper,
   maxWidth: "1536px",
 }));
 

@@ -52,9 +52,9 @@ export function Drawer() {
 function IndexListItem({ route }: { route: RouteItem }) {
   const { text, children } = route;
 
-  const defaultOpen = route.path === "/foundations";
+  // const defaultOpen = route.path === "/foundations";
 
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(true);
   const handleToggle = () => setOpen((prev) => !prev);
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
