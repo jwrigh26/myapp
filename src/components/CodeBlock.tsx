@@ -9,6 +9,8 @@ interface CodeBlockProps {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
   const theme = useTheme();
+  const isDarkMode = theme.palette.mode === "dark";
+  const prismTheme = isDarkMode ? themes.vsDark : themes.vsLight;
   const overrideStyles: React.CSSProperties = {
     margin: 0,
     padding: theme.spacing(0, 2),
@@ -17,7 +19,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
   };
 
   return (
-    <Highlight theme={themes.vsLight} code={code} language={language}>
+    <Highlight theme={prismTheme} code={code} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={className} style={{ ...style, ...overrideStyles }}>
           {tokens.map((line, index) => {

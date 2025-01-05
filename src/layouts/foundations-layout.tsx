@@ -199,9 +199,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   color: theme.palette.primary.contrastText,
-  [theme.breakpoints.up("md")]: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
+  zIndex: theme.zIndex.drawer + 1,
 }));
 
 const StyledButtonBase = styled(ButtonBase)(({ theme }) => ({

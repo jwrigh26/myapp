@@ -97,6 +97,7 @@ const mixins = {
 
 const generateTheme = (mode: PaletteMode): Theme => {
   // Define options with explicit typing
+  console.log('mode', mode);
   const options: ThemeOptions = {
     mixins,
     shape: {
@@ -321,7 +322,7 @@ export const useThemeMode = () => useContext(ThemeContext);
 export default function ThemeProvider({
   children,
 }: ThemeProviderProps): JSX.Element {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const theme = useMemo(() => {
     const mode = isDarkMode ? "dark" : "light";

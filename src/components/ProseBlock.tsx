@@ -46,6 +46,7 @@ function ProseBlock({
         <Typography
           variant={titleVariant}
           component={titleComponent}
+          color="textPrimary"
           gutterBottom
         >
           {title}
@@ -61,7 +62,7 @@ function ProseBlock({
           {subtitle}
         </Typography>
       )}
-      <Typography variant={textVariant} component={textComponent}>
+      <Typography variant={textVariant} component={textComponent} color="textPrimary">
         {children}
       </Typography>
     </StyledBlock>

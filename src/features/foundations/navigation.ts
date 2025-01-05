@@ -327,69 +327,69 @@ export const foundationRoutes: RouteItem[] = [
   //     },
   //   ],
   // },
-  // {
-  //   path: "/foundations/strings",
-  //   text: "Strings",
-  //   type: RouteType.Index,
-  //   level: 0,
-  //   children: [
-  //     {
-  //       path: "/foundations/strings/basics",
-  //       text: "Basics",
-  //       type: RouteType.Prefix,
-  //       level: 0,
-  //     },
-  //     {
-  //       path: "/foundations/strings/basics/anagrams",
-  //       text: "Anagrams",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/basics/palindromes",
-  //       text: "Palindromes",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/basics/permutations",
-  //       text: "Permutations",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/basics/reversal",
-  //       text: "Reversal",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/basics/sliding-window",
-  //       text: "Sliding Window",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/advanced",
-  //       text: "Advanced",
-  //       type: RouteType.Prefix,
-  //       level: 0,
-  //     },
-  //     {
-  //       path: "/foundations/strings/advanced/regex",
-  //       text: "Regex",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/advanced/substring-search",
-  //       text: "Substring Search",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/advanced/string-matching",
-  //       text: "String Matching",
-  //       level: 1,
-  //     },
-  //     {
-  //       path: "/foundations/strings/advanced/lcs",
-  //       text: "LCS",
-  //       level: 1,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/foundations/strings",
+    text: "Strings",
+    type: RouteType.Index,
+    level: 0,
+    children: [
+      {
+        path: "/foundations/strings/basics",
+        text: "Basics",
+        type: RouteType.Prefix,
+        level: 0,
+      },
+      {
+        path: "/foundations/strings/basics/anagrams",
+        text: "Anagrams",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/basics/palindromes",
+        text: "Palindromes",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/basics/permutations",
+        text: "Permutations",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/basics/reversal",
+        text: "Reversal",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/basics/sliding-window",
+        text: "Sliding Window",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/advanced",
+        text: "Advanced",
+        type: RouteType.Prefix,
+        level: 0,
+      },
+      {
+        path: "/foundations/strings/advanced/regex",
+        text: "Regex",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/advanced/substring-search",
+        text: "Substring Search",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/advanced/string-matching",
+        text: "String Matching",
+        level: 1,
+      },
+      {
+        path: "/foundations/strings/advanced/lcs",
+        text: "LCS",
+        level: 1,
+      },
+    ],
+  },
 ];
