@@ -1,4 +1,4 @@
-export function isPalindrome(str) {
+export function isPalindromeBeginner(str) {
   if (typeof str !== 'string') {
     throw new TypeError('Input must be a string');
   }
@@ -14,7 +14,7 @@ export function isPalindrome(str) {
   }
 
   // Recursive case: Check the substring without the first and last characters
-  return isPalindrome(str.slice(1, -1));
+  return isPalindromeBeginner(str.slice(1, -1));
 }
 
 export function isPalindromeIterative(str) {
@@ -38,7 +38,11 @@ export function isPalindromeIterative(str) {
 
 
 // ### With Pointers
-export function isPalindromeHelper(str, left, right) {
+export function isPalidrome(str, left = 0, right = str.length - 1) {
+  if (typeof str !== 'string') {
+    throw new TypeError('Input must be a string');
+  }
+
   // Base case: If pointers have crossed, it's a palindrome
   if (left >= right) {
     return true;
@@ -50,15 +54,7 @@ export function isPalindromeHelper(str, left, right) {
   }
 
   // Recurse with the pointers moved inward
-  return isPalindromeHelper(str, left + 1, right - 1);
-}
-
-export function isPalindromePlus(str) {
-  if (typeof str !== 'string') {
-    throw new TypeError('Input must be a string');
-  }
-
-  return isPalindromeHelper(str, 0, str.length - 1);
+  return isPalidrome(str, left + 1, right - 1);
 }
 
 // ### With Pointers Iterative

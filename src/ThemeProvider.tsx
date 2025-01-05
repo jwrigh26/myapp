@@ -55,12 +55,13 @@ const primaryColors = {
 };
 
 const primaryDarkColors = {
-  main: "#7986CB", // indigo for dark mode
-  light: "#9FA8DA", // lighter indigo for dark mode hover states
-  dark: "#303F9F", // slightly darker indigo for emphasis
-  veryLight: "#3F51B5", // visible but not harsh in dark mode
-  superLight: "#7986CB", // subtle highlight for dark mode
+  main: "#5C6BC0", // Slightly deeper indigo, vibrant but not washed out
+  light: "#7986CB", // More visible and balanced for hover states
+  dark: "#3949AB", // Deeper indigo for strong emphasis
+  veryLight: "#283593", // Subtle but visible for dark backgrounds
+  superLight: "#1A237E", // Very subtle for accents or background highlights
 };
+
 
 const secondaryColors = {
   main: "#FF9800", // orange for accents

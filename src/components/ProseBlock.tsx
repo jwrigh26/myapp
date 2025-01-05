@@ -1,6 +1,7 @@
 import Box, { BoxProps } from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import React from "react";
 
 interface ProseBlockProps {
   title?: string;
@@ -8,7 +9,7 @@ interface ProseBlockProps {
   /**
    * Children should generally be text, inline elements, or other elements suitable for wrapping in Typography.
    */
-  children: string | number | React.ReactElement;
+  children: React.ReactNode;
   dense?: boolean;
   spacingBottom?: boolean;
   options?: {
@@ -103,5 +104,13 @@ const StyledBlock = styled(Box, {
     ...paddingStyles,
     ...spacingBottomStyles,
     ...gutterBottomStyles,
+    '& ul, & ol': { // This will target both unordered and ordered lists
+      margin: 0,
+      paddingLeft: theme.spacing(4),
+      '& li': { // This will target list items
+        color: theme.palette.text.primary,
+        marginBottom: theme.spacing(1),
+      }
+    },
   };
 });

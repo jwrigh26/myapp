@@ -1,8 +1,14 @@
-import Typography from "@mui/material/Typography";
 import PageLayout from "layouts/PageLayout";
 import ProseBlock from "components/ProseBlock";
 import TitleBlock from "components/TitleBlock";
 import CodeBlock from "components/CodeBlock";
+import Box from "@mui/material/Box";
+
+// # introduction
+// # explanation
+// # Types of LeetCode Problems associated with Palindromes
+
+// # examples
 
 export default function Foo() {
   return (
@@ -10,10 +16,45 @@ export default function Foo() {
       <TitleBlock subtitle="A word, phrase, or sequence that reads the same backward as forward">
         Palindromes
       </TitleBlock>
-      <ProseBlock title="Some" subtitle="placeholder">
-        Some placeholder
+      {/* Introduction */}
+      <Box>
+        <ProseBlock
+          title="Tacocat"
+          subtitle="A Fun Example of a palindrome by the creator of The Oatmeal"
+        >
+          Sure, words like <b>racecar</b> or <b>madam</b> also count, but they
+          are not as fun to say as <b>Tacocat</b>.
+        </ProseBlock>
+        <ProseBlock dense>
+          Palidromes are a popular subject in alogrithmic learning because they
+          can be used in a varity of fundamental programming concepts like
+          string manipulation, recursion, and the two-pointer technique.
+        </ProseBlock>
+        <ProseBlock dense subtitle="Types of Palindrome Problems">
+          <ul>
+            <li>Valid Palindrome</li>
+            <li>Palindrome Number</li>
+            <li>Shortest Palindrome</li>
+            <li>Palidromic Substrings</li>
+            <li>Longest Palidromic Substring</li>
+            <li>Palindrome Partitioning</li>
+          </ul>
+        </ProseBlock>
+      </Box>
+      <ProseBlock title="Recursive Approach">
+        <ul>
+          <li>Pros: elegant, intutitive for small strings</li>
+          <li>Cons: potential stack overflow for large strings</li>
+        </ul>
+        <CodeBlock code={codeIsPalindromeRecursive} language="javascript" />
       </ProseBlock>
-      <CodeBlock code={codeIsPalindrome} language="javascript" />
+      <ProseBlock title="Iterative Approach">
+        <ul>
+          <li>Pros: efficient, no extra memory</li>
+          <li>Cons: less intuitive, more code</li>
+        </ul>
+        <CodeBlock code={codeIsPalindromeIterative} language="javascript" />
+      </ProseBlock>
     </PageLayout>
   );
 }
@@ -22,23 +63,44 @@ export default function Foo() {
 // ### Code Blocks ###
 // ####################
 
-const codeIsPalindrome = `
-function isPalindrome(str) {
+const codeIsPalindromeRecursive = `
+function isPalidrome(str, left = 0, right = str.length - 1) {
   if (typeof str !== 'string') {
     throw new TypeError('Input must be a string');
   }
 
-  // Base case: a string of length 0 or 1 is a palindrome
-  if (str.length <= 1) {
+  // Base case: If pointers have crossed, it's a palindrome
+  if (left >= right) {
     return true;
   }
 
-  // Check if the first and last characters are the same
-  if (str[0] !== str[str.length - 1]) {
+  // Check if characters at the pointers are the same
+  if (str[left] !== str[right]) {
     return false;
   }
 
-  // Recursive case: Check the substring without the first and last characters
-  return isPalindrome(str.slice(1, -1));
+  // Recurse with the pointers moved inward
+  return isPalidrome(str, left + 1, right - 1);
+}
+`;
+
+const codeIsPalindromeIterative = `
+function isPalindromeIterative(str) {
+  if (typeof str !== 'string') {
+    throw new TypeError('Input must be a string');
+  }
+
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+
+  return true;
 }
 `;

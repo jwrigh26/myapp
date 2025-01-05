@@ -143,7 +143,7 @@ const LayoutGrid = styled(Box)(({ theme }) => ({
     gridTemplateAreas: `
     "header header"
     "drawer main"
-    "footer footer"
+    "drawer footer"
   `,
   },
 }));

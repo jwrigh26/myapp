@@ -1,38 +1,38 @@
 import { expect, test } from "vitest";
 import {
-  isPalindrome,
+  isPalindromeBeginner,
   isPalindromeIterative,
-  isPalindromePlus,
+  isPalidrome,
   isPalindromeIterativePlus,
 } from "./palindromes";
 
 test("isPalindromePlus function", () => {
   // Test palindrome strings
-  expect(isPalindromePlus("racecar")).toBe(true);
-  expect(isPalindromePlus("madam")).toBe(true);
-  expect(isPalindromePlus("a")).toBe(true);
-  expect(isPalindromePlus("")).toBe(true);
-  expect(isPalindromePlus("11211")).toBe(true);
+  expect(isPalidrome("racecar")).toBe(true);
+  expect(isPalidrome("madam")).toBe(true);
+  expect(isPalidrome("a")).toBe(true);
+  expect(isPalidrome("")).toBe(true);
+  expect(isPalidrome("11211")).toBe(true);
 
   // Test non-palindrome strings
-  expect(isPalindromePlus("hello")).toBe(false);
-  expect(isPalindromePlus("world")).toBe(false);
-  expect(isPalindromePlus("palindrome")).toBe(false);
+  expect(isPalidrome("hello")).toBe(false);
+  expect(isPalidrome("world")).toBe(false);
+  expect(isPalidrome("palindrome")).toBe(false);
 
   // Test even-length palindromes
-  expect(isPalindromePlus("abba")).toBe(true);
-  expect(isPalindromePlus("1221")).toBe(true);
+  expect(isPalidrome("abba")).toBe(true);
+  expect(isPalidrome("1221")).toBe(true);
 
   // Test longer palindromes
-  expect(isPalindromePlus("amanaplanacanalpanama")).toBe(true);
-  expect(isPalindromePlus("abcdefggfedcba")).toBe(true);
+  expect(isPalidrome("amanaplanacanalpanama")).toBe(true);
+  expect(isPalidrome("abcdefggfedcba")).toBe(true);
 
   // Test non-string inputs
-  expect(() => isPalindromePlus(12321)).toThrow(TypeError);
-  expect(() => isPalindromePlus(null)).toThrow(TypeError);
-  expect(() => isPalindromePlus(undefined)).toThrow(TypeError);
-  expect(() => isPalindromePlus({})).toThrow(TypeError);
-  expect(() => isPalindromePlus([])).toThrow(TypeError);
+  expect(() => isPalidrome(12321)).toThrow(TypeError);
+  expect(() => isPalidrome(null)).toThrow(TypeError);
+  expect(() => isPalidrome(undefined)).toThrow(TypeError);
+  expect(() => isPalidrome({})).toThrow(TypeError);
+  expect(() => isPalidrome([])).toThrow(TypeError);
 });
 
 test("isPalindromeIterativePlus function", () => {
@@ -66,27 +66,27 @@ test("isPalindromeIterativePlus function", () => {
 
 test("isPalindrome function", () => {
   // Test palindrome strings
-  expect(isPalindrome("racecar")).toBe(true);
-  expect(isPalindrome("madam")).toBe(true);
-  expect(isPalindrome("a")).toBe(true);
-  expect(isPalindrome("")).toBe(true);
-  expect(isPalindrome("11211")).toBe(true);
+  expect(isPalindromeBeginner("racecar")).toBe(true);
+  expect(isPalindromeBeginner("madam")).toBe(true);
+  expect(isPalindromeBeginner("a")).toBe(true);
+  expect(isPalindromeBeginner("")).toBe(true);
+  expect(isPalindromeBeginner("11211")).toBe(true);
 
   // Test non-palindrome strings
-  expect(isPalindrome("hello")).toBe(false);
-  expect(isPalindrome("world")).toBe(false);
-  expect(isPalindrome("palindrome")).toBe(false);
+  expect(isPalindromeBeginner("hello")).toBe(false);
+  expect(isPalindromeBeginner("world")).toBe(false);
+  expect(isPalindromeBeginner("palindrome")).toBe(false);
 
   // Test even-length palindromes
-  expect(isPalindrome("abba")).toBe(true);
-  expect(isPalindrome("1221")).toBe(true);
+  expect(isPalindromeBeginner("abba")).toBe(true);
+  expect(isPalindromeBeginner("1221")).toBe(true);
 
   // Test non-string inputs
-  expect(() => isPalindrome(12321)).toThrow(TypeError);
-  expect(() => isPalindrome(null)).toThrow(TypeError);
-  expect(() => isPalindrome(undefined)).toThrow(TypeError);
-  expect(() => isPalindrome({})).toThrow(TypeError);
-  expect(() => isPalindrome([])).toThrow(TypeError);
+  expect(() => isPalindromeBeginner(12321)).toThrow(TypeError);
+  expect(() => isPalindromeBeginner(null)).toThrow(TypeError);
+  expect(() => isPalindromeBeginner(undefined)).toThrow(TypeError);
+  expect(() => isPalindromeBeginner({})).toThrow(TypeError);
+  expect(() => isPalindromeBeginner([])).toThrow(TypeError);
 });
 
 test("isPalindromeIterative function", () => {
