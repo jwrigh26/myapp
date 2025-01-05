@@ -131,7 +131,7 @@ const ToggleButton = styled(ListItemButton)<{ level: number }>(
     "& .MuiListItemText-root > span": {
       ...theme.typography.subtitle1,
       fontWeight: theme.typography.fontWeightMedium,
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.primary,
     },
   })
 );
@@ -171,8 +171,8 @@ const NavButton = styled(
     backgroundColor: "inherit",
     "& .MuiListItemText-root > span": {
       ...theme.typography.subtitle2,
-      color: theme.palette.text.secondary,
-      fontWeight: theme.typography.fontWeightRegular,
+      color: theme.palette.text.primary,
+      fontWeight: theme.typography.fontWeightMedium,
     },
   }),
   // # isRoute
@@ -180,7 +180,7 @@ const NavButton = styled(
     "& .MuiListItemText-root > span": {
       ...theme.typography.body2,
       fontWeight: theme.typography.fontWeightRegular,
-      color: theme.palette.text.primary,
+      color: theme.palette.text.secondary,
     },
     "&.active": {
       cursor: "default",
