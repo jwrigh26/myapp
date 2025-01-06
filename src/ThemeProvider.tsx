@@ -58,8 +58,8 @@ const primaryDarkColors = {
   main: "#5C6BC0", // Slightly deeper indigo, vibrant but not washed out
   light: "#7986CB", // More visible and balanced for hover states
   dark: "#3949AB", // Deeper indigo for strong emphasis
-  veryLight: "#283593", // Subtle but visible for dark backgrounds
-  superLight: "#1A237E", // Very subtle for accents or background highlights
+  veryLight: "#9FA8DA", // Lighter indigo for dark mode backgrounds
+  superLight: "#C5CAE9", // Very light indigo for dark mode accents
 };
 
 

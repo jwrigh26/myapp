@@ -38,7 +38,7 @@ function ProseBlock({
     // Component defaults
     titleComponent = "h2",
     subtitleComponent = "p",
-    textComponent = "p",
+    textComponent = "div",
   } = options;
 
   return (
@@ -97,6 +97,9 @@ const StyledBlock = styled(Box, {
   const gutterBottomStyles = gutterBottom
     ? { marginBottom: theme.spacing(1) }
     : {};
+
+  const liColor = theme.palette.mode === "dark" ? theme.palette.primary.superLight : theme.palette.primary.dark;
+  
   return {
     marginBottom: theme.spacing(0), // Add spacing between blocks
     backgroundColor: theme.palette.background.default, // Optional: Add a background
@@ -108,6 +111,7 @@ const StyledBlock = styled(Box, {
       margin: 0,
       paddingLeft: theme.spacing(4),
       '& li': { // This will target list items
+        // color: liColor,
         color: theme.palette.text.primary,
         marginBottom: theme.spacing(1),
       }

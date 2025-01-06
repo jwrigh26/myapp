@@ -16,6 +16,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
     padding: theme.spacing(0, 2),
     borderRadius: theme.shape.borderRadius,
     overflowX: "auto", // Optional: Prevent horizontal overflow
+    fontSize: theme.typography.body2.fontSize,
   };
 
   return (
