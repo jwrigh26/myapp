@@ -47,34 +47,33 @@ declare module "@mui/material/styles/createTypography" {
 
 // Light Mode
 const primaryColorsLight = {
-  main: "#5E81AC",  // Nord blue
-  light: "#81A1C1",
-  dark: "#4C566A",
-  contrastText: "#ECEFF4",
+  main: "#6A5B9A", // Dusty purple
+  light: "#8B7BB8", // Lighter dusty purple
+  dark: "#4F3F71", // Deeper purple
+  contrastText: "#FFFFFF",
 };
 
 const secondaryColorsLight = {
-  main: "#88C0D0",  // Frosty aqua
-  light: "#8FBCBB",
-  dark: "#2E3440",
-  contrastText: "#ECEFF4",
+  main: "#A37BAF", // Soft violet-lilac
+  light: "#C895D7", // Lighter pastel violet
+  dark: "#7F4F87", // Deeper accent
+  contrastText: "#FFFFFF",
 };
 
 // Dark Mode
 const primaryColorsDark = {
-  main: "#4C566A",
-  light: "#5E81AC",
-  dark: "#2E3440",
-  contrastText: "#ECEFF4",
+  main: "#8B7BB8", // Brightened for dark backgrounds
+  light: "#B2A7D2", // Even lighter dusty purple
+  dark: "#6A5B9A", // Slightly deeper
+  contrastText: "#FFFFFF",
 };
 
 const secondaryColorsDark = {
-  main: "#8FBCBB",
-  light: "#88C0D0",
-  dark: "#2E3440",
-  contrastText: "#ECEFF4",
+  main: "#C895D7", // Lighter for dark mode
+  light: "#E3C1EC", // Very pale dusty violet
+  dark: "#A37BAF", // Slightly deeper accent
+  contrastText: "#FFFFFF",
 };
-
 
 // Mixins
 const mixins = {
@@ -312,6 +311,8 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
+
+  console.log(theme);
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>

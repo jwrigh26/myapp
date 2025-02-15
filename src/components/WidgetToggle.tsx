@@ -1,8 +1,9 @@
-import ToggleButton from "@mui/material/ToggleButton";
 import { mdiWidgetsOutline } from "@mdi/js";
-import Icon from "components/Icon";
 import { useTheme } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import Icon from "components/Icon";
 import { useComponentStateContext } from "context/ComponentStateContext";
+import { useThemeMode } from "src/ThemeProvider";
 
 export default function WidgetToggle() {
   const context = useComponentStateContext();
@@ -12,17 +13,19 @@ export default function WidgetToggle() {
     );
   }
   const { open, toggleOpen } = context;
+
+  const { isDarkMode, toggleTheme } = useThemeMode();
   const theme = useTheme();
 
-  // const color = theme.palette.primary.light;
-  // const backgroundColor = theme.palette.primary.dark;
+  const color = theme.palette.primary.light;
+
   const drawerId = "widgetDrawer";
 
-  if (open[drawerId]) {
-    console.log("Widget drawer is open");
-  }else{
-    console.log("Widget drawer is closed");
-  }
+  // if (open[drawerId]) {
+  //   console.log("Widget drawer is open");
+  // }else{
+  //   console.log("Widget drawer is closed");
+  // }
 
   return (
     <ToggleButton
@@ -30,8 +33,8 @@ export default function WidgetToggle() {
       selected={open[drawerId] || false}
       onChange={toggleOpen(drawerId)}
       size="small"
-      // sx={{ borderColor: color, backgroundColor }}
-      // htmlColor={color} 
+      sx={{ color }}
+      // htmlColor={color}
     >
       <Icon path={mdiWidgetsOutline} fontSize="small" />
     </ToggleButton>

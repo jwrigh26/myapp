@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import ToggleButton from "@mui/material/ToggleButton";
 import { mdiThemeLightDark } from "@mdi/js";
-import Icon from "components/Icon";
 import { useTheme } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import Icon from "components/Icon";
+import { useEffect } from "react";
 import { useThemeMode } from "src/ThemeProvider";
 
 export default function DarkLightToggle() {
   const { isDarkMode, toggleTheme } = useThemeMode();
+  console.log("isDarkMode", isDarkMode);
   const theme = useTheme();
 
-  const color = isDarkMode ? theme.palette.primary.light: theme.palette.primary.light;
-  const backgroundColor = isDarkMode ? theme.palette.secondary.dark : theme.palette.primary.dark;
+  const color = theme.palette.primary.light;
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("themeMode");
@@ -32,7 +32,7 @@ export default function DarkLightToggle() {
       selected={isDarkMode}
       onChange={handleToggle}
       size="small"
-      // sx={{ borderColor: color }}
+      sx={{ color: color }}
     >
       <Icon path={mdiThemeLightDark} fontSize="small" />
     </ToggleButton>

@@ -1,5 +1,5 @@
-import Button, { ButtonProps } from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import Button, { ButtonProps } from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -23,7 +23,7 @@ export default function Navigation() {
       {/* <NavButton to="/contact">Contact</NavButton> */}
       <Box sx={{ flexGrow: 1 }} />
       <WidgetToggle />
-      <DarkLightToggle /> 
+      <DarkLightToggle />
     </NavStack>
   );
 }
@@ -56,8 +56,11 @@ const NavButton = styled(
   },
   "&.active": {
     opacity: 1.0,
-    backgroundImage: `linear-gradient(45deg, ${theme.palette.secondary.main} 60%, ${theme.palette.secondary.dark} 100%)`,
-    color: theme.palette.primary.dark,
+    backgroundImage:
+      theme.palette.mode === "light"
+        ? `linear-gradient(45deg, ${theme.palette.secondary.light} 60%, ${theme.palette.secondary.main} 100%)`
+        : `linear-gradient(45deg, ${theme.palette.secondary.dark} 60%, ${theme.palette.secondary.main} 100%)`,
+    color: theme.palette.text.primary,
   },
 }));
 

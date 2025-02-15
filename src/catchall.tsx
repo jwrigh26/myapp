@@ -42,10 +42,31 @@ function App() {
           <Button variant="text">Text</Button>
           <Button variant="outlined">Outlined</Button>
           <Button variant="contained">Contained</Button>
+          <Button variant="text" disabled>
+            Disabled
+          </Button>
+          <Box sx={{ backgroundColor: "secondary.light", p: 2 }}>
+            <Typography variant="subtitle1">Secondary Light</Typography>
+          </Box>
+          <Box sx={{ backgroundColor: "secondary.main", p: 2 }}>
+            <Typography variant="subtitle1">Secondary main</Typography>
+          </Box>
+          <Box sx={{ backgroundColor: "secondary.dark", p: 2 }}>
+            <Typography variant="subtitle1">Secondary dark</Typography>
+          </Box>
+          <Box sx={{ backgroundColor: "primary.light", p: 2 }}>
+            <Typography variant="subtitle1">Primary Light</Typography>
+          </Box>
+          <Box sx={{ backgroundColor: "primary.main", p: 2 }}>
+            <Typography variant="subtitle1">Primary main</Typography>
+          </Box>
+          <Box sx={{ backgroundColor: "primary.dark", p: 2 }}>
+            <Typography variant="subtitle1">Primary dark</Typography>
+          </Box>
         </Stack>
 
         {Array.from({ length: 10 }).map((_, i) => (
-          <p key={i}>
+          <Typography component="p" variant="body1" key={i} color="textPrimary">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
             odio. Praesent libero. Sed cursus ante dapibus diam. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Integer nec odio.
@@ -54,7 +75,7 @@ function App() {
             libero. Sed cursus ante dapibus diam. Lorem ipsum dolor sit amet,
             consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed
             cursus ante dapibus diam.
-          </p>
+          </Typography>
         ))}
       </Box>
     </PageLayout>
