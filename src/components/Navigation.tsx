@@ -1,22 +1,29 @@
 import Button, { ButtonProps } from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { forwardRef } from "react";
 import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
+import DarkLightToggle from "./DarkLightToggle";
+import WidgetToggle from "./WidgetToggle";
 
 export default function Navigation() {
   return (
     <NavStack direction="row" component="nav" gap={1}>
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
       <NavButton to="/">Home</NavButton>
-      <NavButton to="/foundations">Foundations</NavButton>
-      <NavButton to="/fullstack">Full Stack</NavButton>
-      <NavButton to="/practice">Practice</NavButton>
-      <NavButton to="/resources">Resources</NavButton>
-      <NavDivider orientation="vertical" flexItem />
-      <NavButton to="/about">About</NavButton>
-      <NavButton to="/contact">Contact</NavButton>
+      {/* <NavButton to="/foundations">Foundations</NavButton> */}
+      {/* <NavButton to="/fullstack">Full Stack</NavButton> */}
+      {/* <NavButton to="/practice">Practice</NavButton> */}
+      {/* <NavButton to="/resources">Resources</NavButton> */}
+      {/* <NavDivider orientation="vertical" flexItem /> */}
+      <NavButton to="/dashboard">Dashboard</NavButton>
+      {/* <NavButton to="/about">About</NavButton> */}
+      {/* <NavButton to="/contact">Contact</NavButton> */}
+      <Box sx={{ flexGrow: 1 }} />
+      <WidgetToggle />
+      <DarkLightToggle /> 
     </NavStack>
   );
 }

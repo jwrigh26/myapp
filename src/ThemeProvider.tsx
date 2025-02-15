@@ -45,41 +45,36 @@ declare module "@mui/material/styles/createTypography" {
   }
 }
 
-// Custom Colors
-const primaryColors = {
-  main: "#3F51B5", // indigo for primary actions
-  light: "#757DE8", // lighter indigo for hover states
-  dark: "#002984", // deeper indigo for emphasis
-  veryLight: "#C5CAE9", // very light indigo for backgrounds
-  superLight: "#E8EAF6", // super light indigo for subtle highlights
+// Light Mode
+const primaryColorsLight = {
+  main: "#5E81AC",  // Nord blue
+  light: "#81A1C1",
+  dark: "#4C566A",
+  contrastText: "#ECEFF4",
 };
 
-const primaryDarkColors = {
-  main: "#5C6BC0", // Slightly deeper indigo, vibrant but not washed out
-  light: "#7986CB", // More visible and balanced for hover states
-  dark: "#3949AB", // Deeper indigo for strong emphasis
-  veryLight: "#9FA8DA", // Lighter indigo for dark mode backgrounds
-  superLight: "#C5CAE9", // Very light indigo for dark mode accents
+const secondaryColorsLight = {
+  main: "#88C0D0",  // Frosty aqua
+  light: "#8FBCBB",
+  dark: "#2E3440",
+  contrastText: "#ECEFF4",
 };
 
-
-const secondaryColors = {
-  main: "#FF9800", // orange for accents
-  light: "#FFB74D", // lighter orange for hover states
-  dark: "#F57C00", // deeper orange for emphasis
-  veryLight: "#FFE0B2", // very light orange for backgrounds
-  superLight: "#FFD54F", // super light orange for subtle highlights
-  contrastText: "#000000",
+// Dark Mode
+const primaryColorsDark = {
+  main: "#4C566A",
+  light: "#5E81AC",
+  dark: "#2E3440",
+  contrastText: "#ECEFF4",
 };
 
-const secondaryDarkColors = {
-  main: "#FF9800", // orange for dark mode
-  light: "#FFB74D", // lighter orange for dark mode hover
-  dark: "#F57C00", // slightly darker orange for emphasis
-  veryLight: "#FF9800", // visible but not harsh in dark mode
-  superLight: "#FFB74D", // subtle highlight for dark mode
-  contrastText: "#FFFFFF",
+const secondaryColorsDark = {
+  main: "#8FBCBB",
+  light: "#88C0D0",
+  dark: "#2E3440",
+  contrastText: "#ECEFF4",
 };
+
 
 // Mixins
 const mixins = {
@@ -94,34 +89,27 @@ const mixins = {
   drawerWidth: 240,
 };
 
-// Generate light and dark themes
-
+// Generate the theme
 const generateTheme = (mode: PaletteMode): Theme => {
-  // Define options with explicit typing
-  console.log('mode', mode);
   const options: ThemeOptions = {
     mixins,
-    shape: {
-      borderRadius: 2,
-    },
+    shape: { borderRadius: 2 },
     palette: {
       mode,
-      primary: mode === "light" ? primaryColors : primaryDarkColors,
-      secondary: mode === "light" ? secondaryColors : secondaryDarkColors,
+      primary: mode === "light" ? primaryColorsLight : primaryColorsDark,
+      secondary: mode === "light" ? secondaryColorsLight : secondaryColorsDark,
       background: {
-        default: mode === "light" ? "#FFFFFF" : "#171F22",
-        paper: mode === "light" ? "#EFF3F3" : "#2A3338",
+        default: mode === "light" ? "#F5F5F5" : "#121212",
+        paper: mode === "light" ? "#FFFFFF" : "#1E1E1E",
       },
       text: {
-        primary: mode === "light" ? "#333333" : "#CCCCCC",
-        secondary: mode === "light" ? "#666666" : "#999999",
+        primary: mode === "light" ? "#212121" : "#E0E0E0",
+        secondary: mode === "light" ? "#424242" : "#B0B0B0",
       },
     },
     components: {
       MuiButtonBase: {
-        defaultProps: {
-          disableRipple: true,
-        },
+        defaultProps: { disableRipple: true },
       },
       MuiIconButton: {
         styleOverrides: {
@@ -140,13 +128,9 @@ const generateTheme = (mode: PaletteMode): Theme => {
         },
       },
       MuiButton: {
-        defaultProps: {
-          disableRipple: true,
-        },
+        defaultProps: { disableRipple: true },
         styleOverrides: {
-          root: {
-            borderRadius: 2,
-          },
+          root: { borderRadius: 2 },
           contained: {
             boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)",
             "&:hover": {
@@ -194,69 +178,69 @@ const generateTheme = (mode: PaletteMode): Theme => {
       // Headlines
       h1: {
         fontWeight: 700,
-        fontSize: "2.75rem", // Slightly smaller than before (44px)
+        fontSize: "2.75rem",
         lineHeight: 1.2,
         letterSpacing: "-0.02em",
         "@media (max-width:600px)": {
-          fontSize: "2rem", // Adjust for mobile (32px)
+          fontSize: "2rem",
         },
       },
       h2: {
         fontWeight: 600,
-        fontSize: "2.25rem", // Slightly smaller (36px)
+        fontSize: "2.25rem",
         lineHeight: 1.3,
         letterSpacing: "-0.015em",
         "@media (max-width:600px)": {
-          fontSize: "1.75rem", // Adjust for mobile (28px)
+          fontSize: "1.75rem",
         },
       },
       h3: {
         fontWeight: 600,
-        fontSize: "2rem", // No change (32px)
+        fontSize: "2rem",
         lineHeight: 1.4,
         letterSpacing: "-0.01em",
         "@media (max-width:600px)": {
-          fontSize: "1.5rem", // Adjust for mobile (24px)
+          fontSize: "1.5rem",
         },
       },
       h4: {
         fontWeight: 600,
-        fontSize: "1.5rem", // Smaller (24px)
+        fontSize: "1.5rem",
         lineHeight: 1.5,
         letterSpacing: "0em",
         "@media (max-width:600px)": {
-          fontSize: "1.25rem", // Adjust for mobile (20px)
+          fontSize: "1.25rem",
         },
       },
       h5: {
         fontWeight: 500,
-        fontSize: "1.25rem", // Smaller (20px)
+        fontSize: "1.25rem",
         lineHeight: 1.6,
         letterSpacing: "0.01em",
         "@media (max-width:600px)": {
-          fontSize: "1rem", // Adjust for mobile (16px)
+          fontSize: "1rem",
         },
       },
       h6: {
         fontWeight: 500,
-        fontSize: "1rem", // Smaller (16px)
+        fontSize: "1rem",
         lineHeight: 1.6,
         letterSpacing: "0.015em",
         "@media (max-width:600px)": {
-          fontSize: "0.875rem", // Adjust for mobile (14px)
+          fontSize: "0.875rem",
         },
       },
 
       // Subtitles
       subtitle1: {
         fontWeight: 500,
-        fontSize: "1rem", // Reduced (16px)
-        lineHeight: 1.6, // Improved spacing
+        fontSize: "1rem",
+        lineHeight: 1.6,
         letterSpacing: "0.01em",
       },
       subtitle2: {
         fontWeight: 500,
-        fontSize: "0.875rem", // Reduced (14px)
+        fontSize: "0.875rem",
         lineHeight: 1.5,
         letterSpacing: "0.01em",
       },
@@ -264,15 +248,13 @@ const generateTheme = (mode: PaletteMode): Theme => {
       // Body text
       body1: {
         fontWeight: 400,
-        fontSize: "0.9375rem", // Slightly smaller (15px)
+        fontSize: "0.9375rem",
         lineHeight: 1.5,
         letterSpacing: "0.01em",
       },
       body2: {
         fontWeight: 400,
-        fontSize: "0.84375rem", // Intermediate size (13.5px)
-        // fontSize: "0.8125rem", // Slightly smaller (13px),
-        // fontSize: "0.828125rem",
+        fontSize: "0.84375rem",
         lineHeight: 1.5,
         letterSpacing: "0.01em",
       },
@@ -280,32 +262,31 @@ const generateTheme = (mode: PaletteMode): Theme => {
       // Buttons
       button: {
         fontWeight: 600,
-        fontSize: "0.875rem", // No change (14px)
+        fontSize: "0.875rem",
         lineHeight: 1.5,
-        letterSpacing: "0.02em", // Slightly increased for better readability
+        letterSpacing: "0.02em",
         textTransform: "none",
       },
 
       // Captions
       caption: {
         fontWeight: 400,
-        fontSize: "0.75rem", // No change (12px)
-        lineHeight: 1.4, // Reduced spacing for better balance
+        fontSize: "0.75rem",
+        lineHeight: 1.4,
         letterSpacing: "0.02em",
       },
 
       // Overlines
       overline: {
         fontWeight: 600,
-        fontSize: "0.6875rem", // Slightly smaller (11px)
-        lineHeight: 2, // Reduced spacing
+        fontSize: "0.6875rem",
+        lineHeight: 2,
         letterSpacing: "0.08em",
         textTransform: "uppercase",
       },
     },
   };
 
-  // Create and return the theme
   return createTheme(options);
 };
 
@@ -320,16 +301,14 @@ const ThemeContext = createContext({
 
 export const useThemeMode = () => useContext(ThemeContext);
 
-export default function ThemeProvider({
-  children,
-}: ThemeProviderProps): JSX.Element {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+export default function ThemeProvider({ children }: ThemeProviderProps) {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem("themeMode") === "dark";
+  });
 
   const theme = useMemo(() => {
     const mode = isDarkMode ? "dark" : "light";
-    const m = responsiveFontSizes(generateTheme(mode));
-    console.log(m);
-    return m;
+    return responsiveFontSizes(generateTheme(mode));
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);

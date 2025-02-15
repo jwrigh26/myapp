@@ -1,5 +1,6 @@
 # Iterative Insertion Sort
 
+```javascript
 function insertionSortIterative(arr) {
   for (let i = 1; i < arr.length; i++) {
     let key = arr[i];
@@ -20,10 +21,11 @@ function insertionSortIterative(arr) {
 
 // Example usage
 console.log(insertionSortIterative([5, 3, 8, 4, 2])); // Output: [2, 3, 4, 5, 8]
-
+```
 
 # Recursive Insertion Sort
 
+```javascript
 function insertionSortRecursive(arr, n = arr.length) {
   // Base case: An array of size 0 or 1 is already sorted
   if (n <= 1) {
@@ -49,24 +51,24 @@ function insertionSortRecursive(arr, n = arr.length) {
 const arr = [5, 3, 8, 4, 2];
 insertionSortRecursive(arr);
 console.log(arr); // Output: [2, 3, 4, 5, 8]
+```
 
-# Key Differences
+## Key Differences
 
-Iterative Approach: Uses a for loop and a while loop for comparisons. Easier to understand and implement.
+- **Iterative Approach**: Uses a for loop and a while loop for comparisons. Easier to understand and implement.
+- **Recursive Approach**: Sorts smaller subarrays first and builds up to sorting the full array. Requires managing recursion depth but is an interesting functional approach.
 
-Recursive Approach: Sorts smaller subarrays first and builds up to sorting the full array. Requires managing recursion depth but is an interesting functional approach.
+# CORMEN'S INSERTION SORT
 
+1. For `i = 2` to `n`:
+   - Set `key` to `A[i]`, and set `j` to `i-1`
+   - While `j > 0` and `A[j] > key`, do the following:
+     1. Set `A[j+1]` to `A[j]`
+     2. Decrement `j` (i.e., set `j` to `j-1`)
+   - Set `A[j+1]` to `key`
 
-# CORMENS INSERTION SORT
-
-1. For i = 2 to n:
-  A. Set key to A[i], and set j to i-1.
-  B. While j > 0 and A[j] > key, do the following:
-    i.  Set A[j+1] to A[j].
-    ii. Decrement j (i.e., set j to j-1).
-  C. Set A[j+1] to key.
-
-# JS Version
+## JS Version
+```javascript
 function insertionSort(arr) {
   // Start from the second element (index 1) since the first element is trivially sorted
   for (let i = 1; i < arr.length; i++) {
@@ -90,19 +92,20 @@ function insertionSort(arr) {
 // Example usage
 const input = [5, 3, 8, 4, 2];
 console.log(insertionSort(input)); // Output: [2, 3, 4, 5, 8]
+```
 
-# Key Points to Explain in an Interview
-Outer Loop:
+## Key Points to Explain in an Interview
 
-Starts from i = 1 because the subarray [0...0] (first element) is already sorted.
-Key Variable:
+### Outer Loop:
+- Starts from `i = 1` because the subarray `[0...0]` (first element) is already sorted.
 
-Temporarily stores the value of the element being inserted into the sorted portion.
-Inner While Loop:
+### Key Variable:
+- Temporarily stores the value of the element being inserted into the sorted portion.
 
-Shifts elements greater than key one position to the right until the correct position for key is found.
-Final Assignment:
+### Inner While Loop:
+- Shifts elements greater than `key` one position to the right until the correct position for `key` is found.
 
-Places key in its correct position after the while loop ends.
+### Final Assignment:
+- Places `key` in its correct position after the while loop ends.
 
-Bonus Interview Tip: Mention that insertion sort performs well on nearly sorted arrays and can be modified to be more efficient with binary search or other enhancements.
+> **Bonus Interview Tip**: Mention that insertion sort performs well on nearly sorted arrays and can be modified to be more efficient with binary search or other enhancements.

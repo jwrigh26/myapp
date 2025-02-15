@@ -3,45 +3,7 @@
 
 
 
-
-
-
-### **3. Recursive Approach**
-   - **Explanation**:
-     - Why recursion works for this problem.
-     - How the base case and recursive case handle the logic.
-   - **Code**:
-     - Present your `isPalindrome` function.
-   - **Trade-offs**:
-     - Pros (elegant, intuitive for small strings).
-     - Cons (memory-intensive due to substring creation).
-
----
-
-### **4. Iterative Approach**
-   - **Explanation**:
-     - How this approach works using a `while` loop with two pointers.
-     - Why it’s more memory-efficient than recursion.
-   - **Code**:
-     - Present your `isPalindromeIterative` function.
-   - **Trade-offs**:
-     - Pros (memory-efficient, handles large strings better).
-     - Cons (slightly more verbose).
-
----
-
-### **5. Optimizing with Pointers**
-   - **Why Pointers?**:
-     - Discuss how pointers avoid creating new substrings.
-     - Emphasize performance benefits for larger inputs.
-   - **Code**:
-     - Present `isPalindromeHelper` and `isPalindromePlus` (recursive with pointers).
-     - Present `isPalindromeIterativePlus` (iterative with pointers).
-   - **Trade-offs**:
-     - Pros (efficient memory usage, scales better for long strings).
-     - Cons (requires more manual index management).
-
----
+ 
 
 ### **6. Comparing the Approaches**
    - **Time Complexity**:
