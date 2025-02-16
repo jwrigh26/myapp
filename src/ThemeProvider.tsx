@@ -85,7 +85,7 @@ const mixins = {
     } = decomposeColor(color);
     return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
   },
-  drawerWidth: 240,
+  drawerWidth: 340,
 };
 
 // Generate the theme
@@ -331,6 +331,8 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     }),
     [isDarkMode]
   );
+
+  console.log("ThemeProvider", theme.palette.mode);
 
   return (
     <ThemeContext.Provider value={themeMode}>

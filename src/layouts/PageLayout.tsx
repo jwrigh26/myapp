@@ -22,11 +22,17 @@ const StyledGrid = styled(Box, {
 interface PageLayoutProps extends PropsWithChildren<{}> {
   gap?: number;
   padding?: number;
+  id?: string;
 }
 
-const PageLayout = ({ children, gap = 2, padding = 2 }: PageLayoutProps) => {
+const PageLayout = ({
+  children,
+  gap = 2,
+  padding = 2,
+  id,
+}: PageLayoutProps) => {
   return (
-    <StyledGrid gap={gap} padding={padding}>
+    <StyledGrid gap={gap} padding={padding} id={id}>
       {children}
     </StyledGrid>
   );

@@ -1,21 +1,17 @@
+import { mdiCog } from "@mdi/js";
 import Box from "@mui/material/Box";
 import Button, { ButtonProps } from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { forwardRef, useEffect } from "react";
-import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
 import ToggleButton from "components/ToggleButton";
 import { useDrawer } from "hooks/useContext";
-import { mdiCog } from "@mdi/js";
+import { forwardRef } from "react";
+import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
 import Actions from "./Actions";
 
 export default function Navigation() {
   const { isOpen, openDrawer } = useDrawer("settings-drawer");
-
-  useEffect(() => {
-    console.log("Navigation Drawer is open", isOpen);
-  }, [isOpen]);
 
   return (
     <NavStack direction="row" component="nav" gap={1}>

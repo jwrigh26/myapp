@@ -1,9 +1,10 @@
 import Box from "@mui/material/Box";
-import { useIntersect } from "hooks/useIntersect";
-import PageLayout from "layouts/PageLayout";
-import { lazy, Suspense, useEffect, useState } from "react";
 import CallToAction from "components/CallToAction";
 import { WidgetsDrawer } from "features/dashboard";
+import PageLayout from "layouts/PageLayout";
+import { lazy, Suspense } from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // This creates a map of file paths -> async import functions
 const cardModules = import.meta.glob("./cards/*.tsx");
@@ -24,7 +25,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
       <PageLayout>
         <CallToAction title="Dashboard" />
         {cardDefs.map((def, idx) => (
@@ -36,30 +37,15 @@ export default function Dashboard() {
         ))}
       </PageLayout>
       <WidgetsDrawer />
-    </>
+    </DndProvider>
   );
 }
 
 export function LazyCardLoader({ cardId, componentName }: LazyCardProps) {
-  const [setRef, isNearViewport] = useIntersect({
-    threshold: 0.01,
-    rootMargin: "0px",
-  });
-
-  const [shouldLoadComponent, setShouldLoadComponent] = useState(false);
-
-  useEffect(() => {
-    if (isNearViewport && !shouldLoadComponent) {
-      // TODO: pre-fetch data so it's ready
-      // console.log("Pre-fetch data for card", cardId);
-      setShouldLoadComponent(true);
-    }
-  }, [isNearViewport, shouldLoadComponent, cardId]);
-
-  const CardLazy = shouldLoadComponent ? getLazyCard(componentName) : null;
+  const CardLazy = getLazyCard(componentName);
 
   return (
-    <Box ref={setRef} sx={{ m: 1 }}>
+    <Box sx={{ m: 1 }}>
       {CardLazy ? (
         <Suspense fallback={<div>Loading card code…</div>}>
           <CardLazy cardId={cardId} />

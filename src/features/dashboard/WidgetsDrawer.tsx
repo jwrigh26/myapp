@@ -1,10 +1,9 @@
+import { mdiWidgetsOutline } from "@mdi/js";
 import { DrawerHeader, Sheet, TemporaryDrawer } from "components/Drawer";
 import { useDrawer } from "hooks/useContext";
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import DarkLightToggle from "components/DarkLightToggle";
-import Stack from "@mui/material/Stack";
-import { mdiWidgetsOutline } from "@mdi/js";
+import { lazy, Suspense } from "react";
+
+const WidgetList = lazy(() => import("./WidgetList"));
 
 // ################################################
 // ### SettingsDrawer
@@ -15,14 +14,15 @@ export default function WidgetsDrawer() {
 
   return (
     <TemporaryDrawer anchor="right" open={isOpen} onClose={closeDrawer}>
-      <DrawerHeader icon={mdiWidgetsOutline} title="Widgets" onClose={closeDrawer} />
+      <DrawerHeader
+        icon={mdiWidgetsOutline}
+        title="Widgets"
+        onClose={closeDrawer}
+      />
       <Sheet>
-        <List>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Typography variant="body1">Widget Mode:</Typography>
-            <DarkLightToggle />
-          </Stack>
-        </List>
+        <Suspense fallback={<div>Loading widgets…</div>}>
+          <WidgetList />
+        </Suspense>
       </Sheet>
     </TemporaryDrawer>
   );
