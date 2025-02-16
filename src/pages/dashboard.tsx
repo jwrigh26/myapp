@@ -3,6 +3,7 @@ import { useIntersect } from "hooks/useIntersect";
 import PageLayout from "layouts/PageLayout";
 import { lazy, Suspense, useEffect, useState } from "react";
 import CallToAction from "components/CallToAction";
+import { WidgetsDrawer } from "features/dashboard";
 
 // This creates a map of file paths -> async import functions
 const cardModules = import.meta.glob("./cards/*.tsx");
@@ -23,16 +24,19 @@ export default function Dashboard() {
   ];
 
   return (
-    <PageLayout>
-      <CallToAction title="Dashboard" />
-      {cardDefs.map((def, idx) => (
-        <LazyCardLoader
-          key={idx}
-          componentName={def.componentName}
-          cardId={def.cardId}
-        />
-      ))}
-    </PageLayout>
+    <>
+      <PageLayout>
+        <CallToAction title="Dashboard" />
+        {cardDefs.map((def, idx) => (
+          <LazyCardLoader
+            key={idx}
+            componentName={def.componentName}
+            cardId={def.cardId}
+          />
+        ))}
+      </PageLayout>
+      <WidgetsDrawer />
+    </>
   );
 }
 
@@ -47,7 +51,7 @@ export function LazyCardLoader({ cardId, componentName }: LazyCardProps) {
   useEffect(() => {
     if (isNearViewport && !shouldLoadComponent) {
       // TODO: pre-fetch data so it's ready
-      console.log("Pre-fetch data for card", cardId);
+      // console.log("Pre-fetch data for card", cardId);
       setShouldLoadComponent(true);
     }
   }, [isNearViewport, shouldLoadComponent, cardId]);

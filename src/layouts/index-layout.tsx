@@ -11,9 +11,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
-import Navigation from "components/Navigation";
+import { Navigation } from "features/navigation";
 import { ReactElement } from "react";
 import { Outlet } from "react-router";
+import { SettingsDrawer } from "features/settings";
 
 export default function IndexLayout() {
   const theme = useTheme();
@@ -38,6 +39,7 @@ export default function IndexLayout() {
       </LayoutGrid>
       {/* Only shown on mobile for navigation */}
       {isMobile && <MobileNavigation />}
+      <SettingsDrawer />
     </>
   );
 }

@@ -3,11 +3,20 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Stack, { StackProps } from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
-import DarkLightToggle from "./DarkLightToggle";
+import ToggleButton from "components/ToggleButton";
+import { useDrawer } from "hooks/useContext";
+import { mdiCog } from "@mdi/js";
+import Actions from "./Actions";
 
 export default function Navigation() {
+  const { isOpen, openDrawer } = useDrawer("settings-drawer");
+
+  useEffect(() => {
+    console.log("Navigation Drawer is open", isOpen);
+  }, [isOpen]);
+
   return (
     <NavStack direction="row" component="nav" gap={1}>
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
@@ -21,7 +30,14 @@ export default function Navigation() {
       {/* <NavButton to="/about">About</NavButton> */}
       {/* <NavButton to="/contact">Contact</NavButton> */}
       <Box sx={{ flexGrow: 1 }} />
-      <DarkLightToggle />
+      <Actions />
+      {/* Settings */}
+      <ToggleButton
+        icon={mdiCog}
+        onChange={openDrawer}
+        selected={isOpen}
+        value="settings"
+      />
     </NavStack>
   );
 }

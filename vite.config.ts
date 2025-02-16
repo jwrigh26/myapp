@@ -25,6 +25,9 @@ export default defineConfig(({ mode }) => {
     //   jsxFragment: "React.Fragment",
     // },
     define: getDefineObject(env),
+    server: {
+      hmr: false, // Disable hot module replacement
+    },
     // server: {
     //   hmr: true,
     //   historyApiFallback: true,
