@@ -1,6 +1,7 @@
 import { mdiAbTesting } from "@mdi/js";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Icon from "components/Icon";
@@ -17,27 +18,29 @@ function App() {
     <PageLayout>
       <Box>
         <div>
-          <a href="https://vite.dev" target="_blank">
+          <Link href="https://vite.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
+          </Link>
+          <Link href="https://react.dev" target="_blank">
             <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+          </Link>
         </div>
         <Typography variant="h1">Vite + React</Typography>
         <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
+          <Button onClick={() => setCount((count) => count + 1)}>
             count is {count}
-          </button>
-          <p>
+          </Button>
+          <Typography component="p" variant="body1">
             Edit <code>src/App.tsx</code> and save to test HMR
-          </p>
+          </Typography>
         </div>
-        <p>Icon</p>
+        <Typography component="p" variant="body1">
+          Icon
+        </Typography>
         <Icon color="primary" path={mdiAbTesting} fontSize="large" />
-        <p className="read-the-docs">
+        <Typography component="p" variant="body1" className="read-the-docs">
           Click on the Vite and React logos to learn more
-        </p>
+        </Typography>
         <Stack gap={2}>
           <Button variant="text">Text</Button>
           <Button variant="outlined">Outlined</Button>
@@ -66,7 +69,7 @@ function App() {
         </Stack>
 
         {Array.from({ length: 10 }).map((_, i) => (
-          <Typography component="p" variant="body1" key={i} color="textPrimary">
+          <Typography component="p" variant="body1" key={i}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
             odio. Praesent libero. Sed cursus ante dapibus diam. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Integer nec odio.

@@ -6,9 +6,10 @@ import { useEffect } from "react";
 import { useThemeMode } from "src/ThemeProvider";
 
 export default function DarkLightToggle() {
-  const { isDarkMode, toggleTheme } = useThemeMode();
-  console.log("isDarkMode", isDarkMode);
+  const { toggleTheme } = useThemeMode();
   const theme = useTheme();
+
+  console.log("DarkLightToggle");
 
   const color = theme.palette.primary.light;
 
@@ -20,7 +21,7 @@ export default function DarkLightToggle() {
   }, []);
 
   const handleToggle = () => {
-    const newMode = isDarkMode ? "light" : "dark";
+    const newMode = theme.palette.mode ? "light" : "dark";
     localStorage.setItem("themeMode", newMode);
     document.documentElement.setAttribute("data-theme", newMode);
     toggleTheme();
@@ -29,7 +30,7 @@ export default function DarkLightToggle() {
   return (
     <ToggleButton
       value="theme"
-      selected={isDarkMode}
+      selected={theme.palette.mode === "dark"}
       onChange={handleToggle}
       size="small"
       sx={{ color: color }}

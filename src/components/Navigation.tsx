@@ -6,7 +6,6 @@ import { styled } from "@mui/material/styles";
 import { forwardRef } from "react";
 import { NavLink, NavLinkProps } from "react-router"; // Ensure you use `react-router-dom`
 import DarkLightToggle from "./DarkLightToggle";
-import WidgetToggle from "./WidgetToggle";
 
 export default function Navigation() {
   return (
@@ -22,7 +21,6 @@ export default function Navigation() {
       {/* <NavButton to="/about">About</NavButton> */}
       {/* <NavButton to="/contact">Contact</NavButton> */}
       <Box sx={{ flexGrow: 1 }} />
-      <WidgetToggle />
       <DarkLightToggle />
     </NavStack>
   );

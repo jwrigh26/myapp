@@ -13,24 +13,6 @@ import {
 } from "react";
 import { hasValue, isEmpty, isFunction, isNil } from "utils/safety";
 
-const SnackbarContext = createContext<
-  ((snackbar: Snackbar) => void) | undefined
->(undefined);
-
-const PrivateSnackbarContext = createContext<SnackbarContextValue | undefined>(
-  undefined
-);
-
-function usePrivateSnackbarContext(): SnackbarContextValue {
-  const context = useContext(PrivateSnackbarContext);
-  if (!context) {
-    throw new Error(
-      "usePrivateSnackbarContext must be used within SnackbarProvider"
-    );
-  }
-  return context;
-}
-
 // // I see Snackbar deinfed here and currentSnackbar is defined as Snackbar | null
 // // So why was currentSnackbar on line 172 needed to be declared again as such?
 export interface Snackbar {
@@ -48,9 +30,27 @@ export interface SnackbarState {
   snackbars: Snackbar[];
 }
 
-export interface SnackbarContextValue {
+export interface SnackbarContextType {
   removeSnackbar: (id: string) => () => void;
   currentSnackbar: Snackbar | null | undefined;
+}
+
+const SnackbarContext = createContext<
+  ((snackbar: Snackbar) => void) | undefined
+>(undefined);
+
+const PrivateSnackbarContext = createContext<SnackbarContextType | undefined>(
+  undefined
+);
+
+function usePrivateSnackbarContext(): SnackbarContextType {
+  const context = useContext(PrivateSnackbarContext);
+  if (!context) {
+    throw new Error(
+      "usePrivateSnackbarContext must be used within SnackbarProvider"
+    );
+  }
+  return context;
 }
 
 export function useSetSnackbarContext(): (snackbar: Snackbar) => void {

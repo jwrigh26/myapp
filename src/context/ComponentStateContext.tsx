@@ -32,7 +32,7 @@ export type Action =
   | { type: "SET_BAG"; payload: { id: string; bag: any } }
   | { type: "ADD_TO_BAG"; payload: { id: string; bag: any } };
 
-export interface ComponentStateContextProps {
+export interface ComponentStateContextType {
   reset: () => void;
   setClose: (id: string) => () => void;
   setOpen: (id: string) => () => void;
@@ -57,7 +57,7 @@ export interface ComponentStateContextProps {
 }
 
 export const ComponentStateContext = createContext<
-  ComponentStateContextProps | undefined
+  ComponentStateContextType | undefined
 >(undefined);
 
 export function useComponentStateContext() {

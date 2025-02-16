@@ -1,11 +1,16 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { isFunction } from "utils/safety";
 
 const CallToActionContainer = styled(Box)(({ theme }) => ({
   display: "block",
-  padding: theme.spacing(6),
+  padding: theme.spacing(2),
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(6),
+  },
   backgroundColor: theme.palette.primary.main,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   borderRadius: theme.shape.borderRadius,
@@ -27,9 +32,9 @@ const CTAButton = styled(Button)(({ theme }) => ({
 }));
 
 interface CallToActionProps {
-  title: string;
-  buttonText: string;
-  onClick: () => void;
+  title?: string;
+  buttonText?: string;
+  onClick?: () => void;
 }
 
 export default function CallToAction({
@@ -37,14 +42,18 @@ export default function CallToAction({
   buttonText,
   onClick,
 }: CallToActionProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <CallToActionContainer>
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h1" color="common.white" gutterBottom={!isMobile}>
         {title}
       </Typography>
-      <CTAButton variant="contained" onClick={onClick}>
-        {buttonText}
-      </CTAButton>
+      {isFunction(onClick) && (
+        <CTAButton variant="contained" onClick={onClick}>
+          {buttonText}
+        </CTAButton>
+      )}
     </CallToActionContainer>
   );
 }

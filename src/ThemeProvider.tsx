@@ -165,6 +165,13 @@ const generateTheme = (mode: PaletteMode): Theme => {
           },
         },
       },
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            color: mode === "light" ? "#212121" : "#E0E0E0",
+          },
+        },
+      },
     },
     typography: {
       fontFamily: "Inter, Arial, sans-serif",
@@ -293,7 +300,12 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const ThemeContext = createContext({
+interface ThemeContextType {
+  toggleTheme: () => void;
+  isDarkMode: boolean;
+}
+
+const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
   isDarkMode: false,
 });
@@ -305,17 +317,23 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     return localStorage.getItem("themeMode") === "dark";
   });
 
+  const toggleTheme = () => setIsDarkMode((prev) => !prev);
+
   const theme = useMemo(() => {
     const mode = isDarkMode ? "dark" : "light";
     return responsiveFontSizes(generateTheme(mode));
   }, [isDarkMode]);
 
-  const toggleTheme = () => setIsDarkMode((prev) => !prev);
-
-  console.log(theme);
+  const themeMode = useMemo(
+    () => ({
+      toggleTheme,
+      isDarkMode,
+    }),
+    [isDarkMode]
+  );
 
   return (
-    <ThemeContext.Provider value={{ toggleTheme, isDarkMode }}>
+    <ThemeContext.Provider value={themeMode}>
       <CssBaseline />
       <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
     </ThemeContext.Provider>
