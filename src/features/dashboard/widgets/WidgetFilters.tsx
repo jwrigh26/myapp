@@ -2,17 +2,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import { WidgetFiltersProps } from "src/types";
 import { mdiCheck } from "@mdi/js";
 import Icon from "components/Icon";
 
-export interface WidgetFiltersProps {
-  anchorEl: HTMLElement | null;
-  open: boolean;
-  selectedIndex: number;
-  options: string[];
-  onClose: () => void;
-  onSelect: (index: number) => void;
-}
 
 export default function WidgetFilters({
   anchorEl,

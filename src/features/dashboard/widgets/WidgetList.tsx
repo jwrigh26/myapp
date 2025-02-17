@@ -4,14 +4,8 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import SortableWidget from "./SortableWidget";
+import { WidgetItem } from "src/types";
 import "./widgetlist.css";
-
-interface WidgetItem {
-  id: string;
-  text: string;
-  nodeRef: RefObject<HTMLDivElement>; // ✅ Explicitly type as HTMLDivElement
-  disabled?: boolean;
-}
 
 export default function WidgetList() {
   const [widgets, setWidgets] = useState<WidgetItem[]>([

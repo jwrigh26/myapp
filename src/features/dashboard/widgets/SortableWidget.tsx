@@ -8,16 +8,9 @@ import type { XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
+import { WidgetProps, WidgetCardProps } from 'src/types';
 import Checkbox from '@mui/material/Checkbox';
 
-interface WidgetProps {
-  id: string;
-  index: number;
-  text: string;
-  moveWidget: (dragIndex: number, hoverIndex: number) => void;
-  removeWidget: (id: string) => void;
-  isDraggable?: boolean;
-}
 
 export default function SortableWidget({
   id,
@@ -104,12 +97,6 @@ export default function SortableWidget({
 // #################################################
 // ### Widget Subcomponents
 // #################################################
-
-interface WidgetCardProps {
-  title: string;
-  color?: string;
-  isDraggable?: boolean;
-}
 
 function WidgetCard({ title, color, isDraggable }: WidgetCardProps) {
   const initial = title.charAt(0).toUpperCase();

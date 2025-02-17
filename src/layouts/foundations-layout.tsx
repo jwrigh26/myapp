@@ -11,7 +11,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
-import Navigation from "components/Navigation";
+import { Navigation } from "features/navigation"; 
 import { Drawer as DesktopDrawer } from "features/foundations";
 import { ReactElement } from "react";
 import { Outlet } from "react-router";

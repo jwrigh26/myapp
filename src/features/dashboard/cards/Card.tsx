@@ -9,11 +9,10 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Icon from "components/Icon";
+import { BaseCardData } from "src/types";
 
-interface CardProps {
-  title: string;
-  color: string;
-  height: number;
+interface CardProps extends BaseCardData {
+  initial: string;
   loading: boolean;
 }
 
@@ -22,13 +21,12 @@ interface LoadingCardProps {
 }
 
 export default function Card({
-  title,
+  initial,
   color,
   height,
   loading: isLoading,
 }: CardProps) {
   if (isLoading) return <LoadingCard height={height} />;
-  const initial = title.charAt(0).toUpperCase();
   return (
     <StyledCard>
       <CardContent>

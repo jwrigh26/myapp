@@ -15,13 +15,9 @@ export function useDrawer(key: string) {
 
   const { open, setOpen, setClose } = context;
 
-  const openDrawer = () => {
-    setOpen(key)();
-  };
-  const closeDrawer = () => setClose(key)();
   const isOpen = !!open[key];
 
-  return { isOpen, openDrawer, closeDrawer };
+  return { isOpen, openDrawer: setOpen(key), closeDrawer: setClose(key) };
 }
 
 /**

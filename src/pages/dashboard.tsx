@@ -5,17 +5,12 @@ import PageLayout from "layouts/PageLayout";
 import { lazy, Suspense } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { LoadingCard } from "features/dashboard";
+import { LoadingCard, useDashboard } from "features/dashboard";
+import { CardData } from "src/types";
+
 
 // This creates a map of file paths -> async import functions
 const cardModules = import.meta.glob("./cards/*.tsx");
-
-interface CardData {
-  componentName: string;
-  cardId: string;
-  color?: string;
-  height?: number;
-}
 
 interface LazyCardProps {
   data: CardData;
@@ -26,41 +21,49 @@ interface LazyCardProps {
       cardId: "Ax000",
       color: "primary.light",
       height: 128,
+      order: 1,
     },
     {
       componentName: "ColorCard",
       cardId: "Bx000",
       color: "primary.main",
       height: 256,
+      order: 2,
     },
     {
       componentName: "ColorCard",
       cardId: "Cx000",
       color: "primary.dark",
       height: 320,
+      order: 3,
     },
     {
       componentName: "ColorCard",
       cardId: "Dx000",
       color: "secondary.light",
       height: 256,
+      order: 4,
     },
     {
       componentName: "ColorCard",
       cardId: "Ex000",
       color: "secondary.main",
       height: 277,
+      order: 5,
     },
     {
       componentName: "ColorCard",
       cardId: "Fx000",
       color: "secondary.dark",
       height: 377,
+      order: 6,
     },
     // etc.
   ];
 
 export default function Dashboard() {
+
+  useDashboard(cardDefs);
 
   return (
     <DndProvider backend={HTML5Backend}>

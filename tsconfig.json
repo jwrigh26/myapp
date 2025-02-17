@@ -24,7 +24,8 @@
       "services/*": ["src/services/*"],
       "src/*": ["src/*"],
       "styles/*": ["src/styles/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "typees/*": ["src/types/*"],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
