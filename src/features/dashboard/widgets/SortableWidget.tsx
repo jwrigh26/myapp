@@ -1,7 +1,9 @@
-import { mdiDelete } from "@mdi/js";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Icon from "components/Icon";
+import MUICard from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Stack from "@mui/material/Stack";
+import { styled, useTheme } from "@mui/material/styles";
 import type { XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
@@ -25,9 +27,18 @@ export default function SortableWidget({
   isDraggable = true,
 }: WidgetProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
 
-  const [, drop] = useDrop({
+  const [{ isOver, canDrop }, drop] = useDrop<
+    { index: number },
+    void,
+    { isOver: boolean; canDrop: boolean }
+  >({
     accept: ItemTypes.WIDGET,
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
     hover(item: { index: number }, monitor) {
       if (!ref.current) return;
       const dragIndex = item.index;
@@ -62,6 +73,10 @@ export default function SortableWidget({
   }
   drop(ref);
 
+  if (isOver && canDrop) {
+    console.log(index, "isOver", isOver, "canDrop", canDrop);
+  }
+
   return (
     <Box
       ref={ref}
@@ -69,20 +84,75 @@ export default function SortableWidget({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: 2,
-        marginBottom: 1,
-        backgroundColor: "secondary.light",
-        border: "1px solid #ccc",
-        cursor: "grab",
+        border:
+          isDragging && isOver && canDrop
+            ? `2px dashed ${theme.palette.primary.dark}`
+            : "1px solid #ccc",
+        cursor: isDraggable ? "grab" : "default",
         opacity: isDragging ? 0.5 : 1,
-        transform: isDragging ? "scale(1.05)" : "scale(1)", // Slight scale effect
-        transition: "transform 200ms ease-out", // 👈 Smooth movement transition
+        transform: isDragging ? "scale(1.02)" : "scale(1)",
+        transition: "transform 200ms ease-out",
+        mb: 1,
       }}
     >
-      {text}
-      <IconButton onClick={() => removeWidget(id)}>
-        <Icon path={mdiDelete} />
-      </IconButton>
+      <WidgetCard title={text} isDraggable={isDraggable} />
     </Box>
   );
 }
+
+// #################################################
+// ### Widget Subcomponents
+// #################################################
+
+interface WidgetCardProps {
+  title: string;
+  color?: string;
+  isDraggable?: boolean;
+}
+
+function WidgetCard({ title, color, isDraggable }: WidgetCardProps) {
+  const initial = title.charAt(0).toUpperCase();
+  return (
+    <Card raised={false}>
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: isDraggable ? color || "primary.main" : "grey.300",
+            color: "primary.contrastText",
+            opacity: isDraggable ? 1 : 0.5,
+            height: 128,
+            p: 2,
+          }}
+        >
+          <LetterAvatar>{initial}</LetterAvatar>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+}
+
+function LetterAvatar({ children }: { children: string }) {
+  return (
+    <Stack direction="row" spacing={2}>
+      <Avatar sx={{ bgcolor: "background.paper", color: "text.primary" }}>
+        {children}
+      </Avatar>
+    </Stack>
+  );
+}
+
+// #################################################
+// ### Styles
+// #################################################
+
+const Card = styled(MUICard)(({ theme }) => ({
+  padding: 0,
+  width: "100%",
+  " & .MuiCardContent-root": {
+    padding: 0,
+    paddingBottom: 0,
+  },
+}));

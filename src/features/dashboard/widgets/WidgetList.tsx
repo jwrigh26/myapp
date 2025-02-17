@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { RefObject, createRef, useCallback, useEffect, useState } from "react";
+import { RefObject, createRef, useCallback, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -16,7 +15,12 @@ interface WidgetItem {
 
 export default function WidgetList() {
   const [widgets, setWidgets] = useState<WidgetItem[]>([
-    { id: "w1", text: "Widget 1", nodeRef: createRef<HTMLDivElement>(), disabled: true },
+    {
+      id: "w1",
+      text: "Widget 1",
+      nodeRef: createRef<HTMLDivElement>(),
+      disabled: true,
+    },
     { id: "w2", text: "Widget 2", nodeRef: createRef<HTMLDivElement>() },
     { id: "w3", text: "Widget 3", nodeRef: createRef<HTMLDivElement>() },
     { id: "w4", text: "Widget 4", nodeRef: createRef<HTMLDivElement>() },
@@ -55,7 +59,8 @@ export default function WidgetList() {
         sx={{
           overflowY: "auto",
           border: "1px solid gray",
-          padding: 2,
+          padding: 1,
+          marginTop: 2,
         }}
       >
         <TransitionGroup className="widget-list">
@@ -82,9 +87,9 @@ export default function WidgetList() {
           ))}
         </TransitionGroup>
       </Box>
-      <Button onClick={addWidget} sx={{ mt: 2 }} variant="contained">
+      {/* <Button onClick={addWidget} sx={{ mt: 2 }} variant="contained">
         Add Widget
-      </Button>
+      </Button> */}
     </DndProvider>
   );
 }

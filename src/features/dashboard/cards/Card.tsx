@@ -1,13 +1,14 @@
-import Skeleton from "@mui/material/Skeleton";
+import { mdiRefresh } from "@mdi/js";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import MUICard from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Icon from "components/Icon";
 import IconButton from "@mui/material/IconButton";
-import { mdiRefresh } from "@mdi/js";
-import Avatar from "@mui/material/Avatar";
+import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import Icon from "components/Icon";
 
 interface CardProps {
   title: string;
@@ -29,7 +30,7 @@ export default function Card({
   if (isLoading) return <LoadingCard height={height} />;
   const initial = title.charAt(0).toUpperCase();
   return (
-    <MUICard>
+    <StyledCard>
       <CardContent>
         <Box
           sx={{
@@ -50,17 +51,26 @@ export default function Card({
           <Icon path={mdiRefresh} />
         </IconButton>
       </CardActions>
-    </MUICard>
+    </StyledCard>
   );
 }
 
-export function LoadingCard({ height=256 }: LoadingCardProps) {
+export function LoadingCard({ height = 256 }: LoadingCardProps) {
   return (
-    <MUICard>
+    <StyledCard>
       <CardContent>
         <Skeleton variant="rounded" width={"100%"} height={height || 256} />
       </CardContent>
-    </MUICard>
+      <CardActions>
+        <Skeleton
+          variant="rectangular"
+          width={40}
+          height={40}
+          sx={{ ml: "auto" }}
+        />
+        <Skeleton variant="rectangular" width={40} height={40} />
+      </CardActions>
+    </StyledCard>
   );
 }
 
@@ -73,3 +83,15 @@ function LetterAvatar({ children }: { children: string }) {
     </Stack>
   );
 }
+
+// #################################################
+// ### Styles
+// #################################################
+
+const StyledCard = styled(MUICard)(({ theme }) => ({
+  padding: 0,
+  width: "100%",
+  " & .MuiCardContent-root": {
+    padding: 0,
+  },
+}));
