@@ -5,35 +5,67 @@ import PageLayout from "layouts/PageLayout";
 import { lazy, Suspense } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { LoadingCard } from "features/dashboard";
 
 // This creates a map of file paths -> async import functions
 const cardModules = import.meta.glob("./cards/*.tsx");
 
 interface LazyCardProps {
-  componentName: string;
-  cardId: string;
+  data: {
+    componentName: string;
+    cardId: string;
+    color?: string;
+    height?: number;
+  };
 }
-
-export default function Dashboard() {
   const cardDefs = [
-    { componentName: "CardA", cardId: "Ax000", otherMeta: "Foo" },
-    { componentName: "CardB", cardId: "Bx001", otherMeta: "Bar" },
-    { componentName: "CardC", cardId: "Cx002", otherMeta: "XYZ" },
-    { componentName: "CardD", cardId: "Dx001", otherMeta: "HEP" },
-    { componentName: "CardE", cardId: "Ex002", otherMeta: "PEP" },
+    {
+      componentName: "ColorCard",
+      cardId: "Ax000",
+      color: "primary.light",
+      height: 128,
+    },
+    {
+      componentName: "ColorCard",
+      cardId: "Bx000",
+      color: "primary.main",
+      height: 256,
+    },
+    {
+      componentName: "ColorCard",
+      cardId: "Cx000",
+      color: "primary.dark",
+      height: 320,
+    },
+    {
+      componentName: "ColorCard",
+      cardId: "Dx000",
+      color: "secondary.light",
+      height: 256,
+    },
+    {
+      componentName: "ColorCard",
+      cardId: "Ex000",
+      color: "secondary.main",
+      height: 277,
+    },
+    {
+      componentName: "ColorCard",
+      cardId: "Fx000",
+      color: "secondary.dark",
+      height: 377,
+    },
     // etc.
   ];
+
+export default function Dashboard() {
 
   return (
     <DndProvider backend={HTML5Backend}>
       <PageLayout>
         <CallToAction title="Dashboard" />
         {cardDefs.map((def, idx) => (
-          <LazyCardLoader
-            key={idx}
-            componentName={def.componentName}
-            cardId={def.cardId}
-          />
+          <LazyCardLoader key={idx} data={def} />
         ))}
       </PageLayout>
       <WidgetsDrawer />
@@ -41,19 +73,21 @@ export default function Dashboard() {
   );
 }
 
-export function LazyCardLoader({ cardId, componentName }: LazyCardProps) {
-  const CardLazy = getLazyCard(componentName);
+export function LazyCardLoader({ data }: LazyCardProps) {
+  const CardLazy = getLazyCard(data.componentName);
 
   return (
     <Box sx={{ m: 1 }}>
       {CardLazy ? (
-        <Suspense fallback={<div>Loading card code…</div>}>
-          <CardLazy cardId={cardId} />
+        <Suspense fallback={<LoadingCard height={data.height} />}>
+          <CardLazy
+            cardId={data.cardId}
+            color={data.color}
+            height={data.height}
+          />
         </Suspense>
       ) : (
-        <div style={{ height: 320, background: "#EEE" }}>
-          <p>Loading soon: {componentName}</p>
-        </div>
+        <LoadingCard height={data.height} />
       )}
     </Box>
   );
