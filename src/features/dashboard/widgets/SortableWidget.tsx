@@ -8,6 +8,7 @@ import type { XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
+import Checkbox from '@mui/material/Checkbox';
 
 interface WidgetProps {
   id: string;
@@ -112,6 +113,7 @@ interface WidgetCardProps {
 
 function WidgetCard({ title, color, isDraggable }: WidgetCardProps) {
   const initial = title.charAt(0).toUpperCase();
+  const label = { inputProps: { 'aria-label': 'Active Checkbox' } };
   return (
     <Card raised={false}>
       <CardContent>
@@ -123,10 +125,12 @@ function WidgetCard({ title, color, isDraggable }: WidgetCardProps) {
             backgroundColor: isDraggable ? color || "primary.main" : "grey.300",
             color: "primary.contrastText",
             opacity: isDraggable ? 1 : 0.5,
-            height: 128,
+            height: 112,
             p: 2,
+            position: "relative",
           }}
         >
+          <ActiveCheckbox {...label} isDraggable={isDraggable} />
           <LetterAvatar>{initial}</LetterAvatar>
         </Box>
       </CardContent>
@@ -154,5 +158,17 @@ const Card = styled(MUICard)(({ theme }) => ({
   " & .MuiCardContent-root": {
     padding: 0,
     paddingBottom: 0,
+  },
+}));
+
+const ActiveCheckbox = styled(Checkbox, {
+  shouldForwardProp: (prop) => prop !== 'isDraggable',
+})<{ isDraggable?: boolean }>(({ theme, isDraggable = true }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  color: isDraggable ? theme.palette.primary.contrastText : theme.palette.text.primary,
+  '&.Mui-checked': {
+    color: isDraggable ? theme.palette.primary.contrastText : theme.palette.text.primary,
   },
 }));
