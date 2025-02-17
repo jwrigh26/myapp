@@ -67,7 +67,7 @@ export function LoadingCard({ height=256 }: LoadingCardProps) {
 function LetterAvatar({ children }: { children: string }) {
   return (
     <Stack direction="row" spacing={2}>
-      <Avatar sx={{ bgcolor: "common.white", color: "text.primary" }}>
+      <Avatar sx={{ bgcolor: "background.paper", color: "text.primary" }}>
         {children}
       </Avatar>
     </Stack>

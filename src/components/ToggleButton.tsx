@@ -7,12 +7,19 @@ import Icon from "components/Icon";
 
 interface ToggleButtonProps {
   icon: string;
-  onChange: () => void;
+  onChange: (event?: React.MouseEvent<HTMLElement>) => void;
   selected: boolean;
   value: string;
+  color?: "primary" | "secondary";
 }
 
-export default function ToggleButton({ icon, onChange: handleChange, selected: isSeleted, value="defaultValue" }: ToggleButtonProps) {
+export default function ToggleButton({
+  icon,
+  onChange: handleChange,
+  selected: isSeleted,
+  value = "defaultValue",
+  color = "primary",
+}: ToggleButtonProps) {
   // const context = useComponentStateContext();
   // if (!context) {
   //   throw new Error(
@@ -23,7 +30,6 @@ export default function ToggleButton({ icon, onChange: handleChange, selected: i
 
   // const { isDarkMode, toggleTheme } = useThemeMode();
   // const theme = useTheme();
-
 
   // const drawerId = "widgetDrawer";
 
@@ -36,7 +42,7 @@ export default function ToggleButton({ icon, onChange: handleChange, selected: i
   return (
     <StyledToggleButton
       value={value}
-      color="primary"
+      color={color}
       onChange={handleChange}
       selected={isSeleted}
       // selected={open[drawerId] || false}
@@ -50,7 +56,7 @@ export default function ToggleButton({ icon, onChange: handleChange, selected: i
 const StyledToggleButton = styled(MUIToggleButton)(({ theme }) => ({
   color: theme.palette.secondary.main,
   borderColor: theme.palette.secondary.main,
-  '&:hover': {
+  "&:hover": {
     borderColor: theme.palette.secondary.dark,
     color: theme.palette.secondary.dark,
   },

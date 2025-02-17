@@ -13,6 +13,7 @@ interface WidgetProps {
   text: string;
   moveWidget: (dragIndex: number, hoverIndex: number) => void;
   removeWidget: (id: string) => void;
+  isDraggable?: boolean;
 }
 
 export default function SortableWidget({
@@ -21,6 +22,7 @@ export default function SortableWidget({
   text,
   moveWidget,
   removeWidget,
+  isDraggable = true,
 }: WidgetProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -52,9 +54,13 @@ export default function SortableWidget({
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
+    canDrag: isDraggable,
   });
 
-  drag(drop(ref));
+  if (isDraggable) {
+    drag(drop(ref));
+  }
+  drop(ref);
 
   return (
     <Box
@@ -65,12 +71,10 @@ export default function SortableWidget({
         alignItems: "center",
         padding: 2,
         marginBottom: 1,
-        backgroundColor: "white",
+        backgroundColor: "secondary.light",
         border: "1px solid #ccc",
         cursor: "grab",
         opacity: isDragging ? 0.5 : 1,
-        // transition: "opacity 0.2s ease-in-out",
-        // transition: 'transform 150ms ease-out',
         transform: isDragging ? "scale(1.05)" : "scale(1)", // Slight scale effect
         transition: "transform 200ms ease-out", // 👈 Smooth movement transition
       }}

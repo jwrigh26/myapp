@@ -11,11 +11,12 @@ interface WidgetItem {
   id: string;
   text: string;
   nodeRef: RefObject<HTMLDivElement>; // ✅ Explicitly type as HTMLDivElement
+  disabled?: boolean;
 }
 
 export default function WidgetList() {
   const [widgets, setWidgets] = useState<WidgetItem[]>([
-    { id: "w1", text: "Widget 1", nodeRef: createRef<HTMLDivElement>() },
+    { id: "w1", text: "Widget 1", nodeRef: createRef<HTMLDivElement>(), disabled: true },
     { id: "w2", text: "Widget 2", nodeRef: createRef<HTMLDivElement>() },
     { id: "w3", text: "Widget 3", nodeRef: createRef<HTMLDivElement>() },
     { id: "w4", text: "Widget 4", nodeRef: createRef<HTMLDivElement>() },
@@ -74,6 +75,7 @@ export default function WidgetList() {
                   text={widget.text}
                   moveWidget={moveWidget}
                   removeWidget={removeWidget}
+                  isDraggable={!widget.disabled}
                 />
               </div>
             </CSSTransition>

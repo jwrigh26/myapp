@@ -10,13 +10,15 @@ import { LoadingCard } from "features/dashboard";
 // This creates a map of file paths -> async import functions
 const cardModules = import.meta.glob("./cards/*.tsx");
 
+interface WidgetData {
+  componentName: string;
+  cardId: string;
+  color?: string;
+  height?: number;
+}
+
 interface LazyCardProps {
-  data: {
-    componentName: string;
-    cardId: string;
-    color?: string;
-    height?: number;
-  };
+  data: WidgetData;
 }
   const cardDefs = [
     {
