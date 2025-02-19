@@ -9,11 +9,12 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import ToggleButton from "components/ToggleButton";
 import WidgetFilters from "./WidgetFilters";
+import { useDashboardStatus } from "../hooks/useDashboard";
 
 const WidgetList = lazy(() => import("./WidgetList"));
 
 // Options for the filter menu
-const filterOptions = ["All", "Active", "Inactive"];
+const filterOptions = ["All", "Active", "Inactive"] as const;
 
 // ################################################
 // ### SettingsDrawer
@@ -22,8 +23,7 @@ const filterOptions = ["All", "Active", "Inactive"];
 export default function WidgetsDrawer() {
   const { isOpen, closeDrawer } = useDrawer("widgets-drawer");
 
-  const [editing, setEditing] = useState(false);
-
+  const { editing, setEditing } = useDashboardStatus();
   const {
     anchorEl: filterAnchorEl,
     open: filterOpen,
@@ -75,7 +75,7 @@ export default function WidgetsDrawer() {
         open={filterOpen}
         onClose={closeFilterMenu}
         selectedIndex={filterSelectedIndex}
-        options={filterOptions}
+        options={[...filterOptions]}
         onSelect={handleFilterSelect}
       />
       <Sheet>

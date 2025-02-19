@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import CallToAction from "components/CallToAction";
 import { WidgetsDrawer } from "features/dashboard";
 import PageLayout from "layouts/PageLayout";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, memo, useMemo } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { LoadingCard, useDashboard } from "features/dashboard";
@@ -63,7 +63,7 @@ interface LazyCardProps {
 
 export default function Dashboard() {
 
-  useDashboard(cardDefs);
+  const { cards } = useDashboard(cardDefs);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -78,8 +78,8 @@ export default function Dashboard() {
   );
 }
 
-export function LazyCardLoader({ data }: LazyCardProps) {
-  const CardLazy = getLazyCard(data.componentName);
+export const LazyCardLoader = memo(({ data }: LazyCardProps) => {
+  const CardLazy = useMemo(() => getLazyCard(data.componentName), [data.componentName]);
 
   return (
     <Box sx={{ m: 1 }}>
@@ -96,7 +96,7 @@ export function LazyCardLoader({ data }: LazyCardProps) {
       )}
     </Box>
   );
-}
+});
 
 // Helper function that returns a lazy component
 export function getLazyCard(componentName: string) {

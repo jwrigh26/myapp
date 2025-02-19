@@ -8,23 +8,25 @@ import type { XYCoord } from "dnd-core";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { WidgetProps, WidgetCardProps } from 'src/types';
-import Checkbox from '@mui/material/Checkbox';
-
+import { WidgetProps, WidgetCardProps } from "src/types";
+import Checkbox from "@mui/material/Checkbox";
+import { useDashboardStatus, useWidgets } from "../hooks/useDashboard";
 
 export default function SortableWidget({
   id,
   index,
-  text,
+  card,
+  disabled = false,
   moveWidget,
-  removeWidget,
-  isDraggable = true,
 }: WidgetProps) {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useTheme();
+  const { editing: isEditing } = useDashboardStatus();
+
+  const isDraggable = !disabled && isEditing;
 
   const [{ isOver, canDrop }, drop] = useDrop<
-    { index: number },
+    { index: number; id: string },
     void,
     { isOver: boolean; canDrop: boolean }
   >({
@@ -33,7 +35,7 @@ export default function SortableWidget({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
-    hover(item: { index: number }, monitor) {
+    hover(item: { id: string; index: number }, monitor) {
       if (!ref.current) return;
       const dragIndex = item.index;
       const hoverIndex = index;
@@ -48,8 +50,11 @@ export default function SortableWidget({
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
 
-      moveWidget(dragIndex, hoverIndex);
-      item.index = hoverIndex;
+      if (moveWidget && item.id !== id) {
+        console.log("moveWidget", item.id, id);
+        moveWidget(dragIndex, index);
+        item.index = hoverIndex;
+      }
     },
   });
 
@@ -67,10 +72,6 @@ export default function SortableWidget({
   }
   drop(ref);
 
-  if (isOver && canDrop) {
-    console.log(index, "isOver", isOver, "canDrop", canDrop);
-  }
-
   return (
     <Box
       ref={ref}
@@ -83,13 +84,18 @@ export default function SortableWidget({
             ? `2px dashed ${theme.palette.primary.dark}`
             : "1px solid #ccc",
         cursor: isDraggable ? "grab" : "default",
-        opacity: isDragging ? 0.5 : 1,
-        transform: isDragging ? "scale(1.02)" : "scale(1)",
+        opacity: isDragging ? 0.2 : 1,
+        transform: isDragging ? "scale(1.04)" : "scale(1)",
         transition: "transform 200ms ease-out",
         mb: 1,
       }}
     >
-      <WidgetCard title={text} isDraggable={isDraggable} />
+      <WidgetCard
+        id={id}
+        card={card}
+        disabled={disabled}
+        isDraggable={isDraggable}
+      />
     </Box>
   );
 }
@@ -98,26 +104,29 @@ export default function SortableWidget({
 // ### Widget Subcomponents
 // #################################################
 
-function WidgetCard({ title, color, isDraggable }: WidgetCardProps) {
-  const initial = title.charAt(0).toUpperCase();
-  const label = { inputProps: { 'aria-label': 'Active Checkbox' } };
+function WidgetCard({ card, disabled, isDraggable, id }: WidgetCardProps) {
+  const { cardId, color } = card;
+  const initial = cardId.charAt(0).toUpperCase();
+  const label = { inputProps: { "aria-label": "Active Checkbox" } };
+  const { editing: isEditing } = useDashboardStatus();
+
   return (
-    <Card raised={false}>
+    <Card raised={false} id={`${id}-widget-card`}>
       <CardContent>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: isDraggable ? color || "primary.main" : "grey.300",
+            backgroundColor: !disabled ? color || "primary.main" : "grey.300",
             color: "primary.contrastText",
-            opacity: isDraggable ? 1 : 0.5,
+            opacity: !disabled ? 1 : 0.5,
             height: 112,
             p: 2,
             position: "relative",
           }}
         >
-          <ActiveCheckbox {...label} isDraggable={isDraggable} />
+          {isEditing && <ActiveCheckbox {...label} isDraggable={isDraggable} />}
           <LetterAvatar>{initial}</LetterAvatar>
         </Box>
       </CardContent>
@@ -149,13 +158,17 @@ const Card = styled(MUICard)(({ theme }) => ({
 }));
 
 const ActiveCheckbox = styled(Checkbox, {
-  shouldForwardProp: (prop) => prop !== 'isDraggable',
+  shouldForwardProp: (prop) => prop !== "isDraggable",
 })<{ isDraggable?: boolean }>(({ theme, isDraggable = true }) => ({
-  position: 'absolute',
+  position: "absolute",
   top: 0,
   left: 0,
-  color: isDraggable ? theme.palette.primary.contrastText : theme.palette.text.primary,
-  '&.Mui-checked': {
-    color: isDraggable ? theme.palette.primary.contrastText : theme.palette.text.primary,
+  color: isDraggable
+    ? theme.palette.primary.contrastText
+    : theme.palette.text.primary,
+  "&.Mui-checked": {
+    color: isDraggable
+      ? theme.palette.primary.contrastText
+      : theme.palette.text.primary,
   },
 }));
