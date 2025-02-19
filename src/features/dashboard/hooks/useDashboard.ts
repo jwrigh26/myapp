@@ -1,8 +1,6 @@
+import { createRef, useCallback, useEffect } from "react";
 import { useTemp } from "src/hooks/useContext";
-import { createRef, useCallback } from "react";
-import { useState, useEffect } from "react";
 import { CardData, WidgetProps } from "src/types";
-import { W } from "vitest/dist/chunks/reporters.D7Jzd9GS.js";
 
 // CardData is given
 
@@ -18,16 +16,33 @@ import { W } from "vitest/dist/chunks/reporters.D7Jzd9GS.js";
 
 export function useWidgets() {
   const { temp: widgets, setTemp: setWidgets } = useTemp("dashboard-widgets");
+  const { setTemp: setCards } = useTemp("dashboard-cards");
 
-  const moveWidget = useCallback((dragId: string, hoverId: string) => {
-    setWidgets((prevWidgets: Record<string, WidgetProps>) =>
-      reorderWidgets(prevWidgets, dragId, hoverId)
-    );
+  const saveWidgets = useCallback((newWidgets: WidgetProps[]) => {
+    setWidgets({ widgets: newWidgets });
+  }, []);
+
+  const saveCardsFromWidgets = useCallback((widgets: WidgetProps[]) => {
+    const newCards = widgets
+      .map((widget) => {
+        return {
+          ...widget.card,
+          order: widget.order,
+        };
+      })
+      .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
+
+    console.log("saveCardsFromWidgets", newCards);
+
+    setCards({
+      cards: newCards,
+    });
   }, []);
 
   return {
-    widgets,
-    moveWidget,
+    widgets: widgets?.widgets,
+    saveWidgets,
+    saveCardsFromWidgets,
   };
 }
 
@@ -36,75 +51,28 @@ export function useDashboard(data: CardData[]) {
   const { temp: widgets, setTemp: setWidgets } = useTemp("dashboard-widgets");
   const { setTemp: setStatus } = useTemp("dashboard-status");
 
-  const [localCards, setLocalCards] = useState<CardData[]>(data);
-
   useEffect(() => {
-    // Initialize Cards
-    if (Object.keys(cards).length === 0) {
-      setCards(
-        data.reduce<Record<string, CardData>>((acc, card) => {
-          acc[card.cardId] = card;
-          return acc;
-        }, {} as Record<string, CardData>)
-      );
+    if (!cards.length) {
+      // Store pre-sorted array directly
+      setCards({
+        cards: data.sort(
+          (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
+        ),
+      });
 
-      // Initialize Widgets
-      setWidgets(
-        data.reduce<Record<string, WidgetProps>>((acc, card) => {
-          const widget = makeWidget(card, data.indexOf(card));
-          acc[widget.id] = widget;
-          return acc;
-        }, {} as Record<string, WidgetProps>)
-      );
+      // Initialize widgets as array
+      setWidgets({
+        widgets: data
+          .map((card, index) => makeWidget(card, index))
+          .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)),
+      });
     }
 
     setStatus({ editing: false, filter: "Active" });
   }, []);
 
-
-  const updateCard = (cardId: string, updates: Partial<CardData>) => {
-    setCards((prev: Record<string, CardData>) => ({
-      ...prev,
-      [cardId]: { ...prev[cardId], ...updates },
-    }));
-    setLocalCards((current) =>
-      current.map((card) =>
-        card.cardId === cardId ? { ...card, ...updates } : card
-      )
-    );
-  };
-
-  const updateCards = (updates: Partial<CardData>[]) => {
-    // Create updates map once
-    const updatesMap = updates.reduce((acc, update) => {
-      if (update.cardId) {
-        acc[update.cardId] = update;
-      }
-      return acc;
-    }, {} as Record<string, Partial<CardData>>);
-
-    setCards((prev: Record<string, CardData>) => {
-      const newTemp = { ...prev };
-      Object.entries(updatesMap).forEach(([cardId, update]) => {
-        newTemp[cardId] = { ...prev[cardId], ...update };
-      });
-      return newTemp;
-    });
-
-    setLocalCards((current) =>
-      current.map((card) => {
-        const update = updatesMap[card.cardId];
-        return update ? { ...card, ...update } : card;
-      })
-    );
-  };
-
   return {
-    cards: localCards.sort(
-      (a, b) => (a.order ?? Infinity) - (b.order ?? Infinity)
-    ),
-    updateCard,
-    updateCards,
+    cards: cards?.cards,
   };
 }
 
@@ -150,6 +118,12 @@ const makeWidget = (card: CardData, index: number): WidgetProps => {
 // const moveWidget = (dragIndex: number, hoverIndex: number) => {
 //   setWidgets((prevWidgets) => reorderWidgets(prevWidgets, dragIndex, hoverIndex));
 // };
+
+// const moveWidget = useCallback((dragId: string, hoverId: string) => {
+//     setWidgets((prevWidgets: Record<string, WidgetProps>) =>
+//       reorderWidgets(prevWidgets, dragId, hoverId)
+//     );
+//   }, []);
 
 const reorderWidgets = (
   widgets: Record<string, WidgetProps>,

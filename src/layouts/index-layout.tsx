@@ -12,9 +12,9 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Icon from "components/Icon";
 import MobileNavigation from "components/MobileNavigation";
 import { Navigation } from "features/navigation";
+import { SettingsDrawer } from "features/settings";
 import { ReactElement } from "react";
 import { Outlet } from "react-router";
-import { SettingsDrawer } from "features/settings";
 
 export default function IndexLayout() {
   const theme = useTheme();
@@ -143,7 +143,7 @@ const Footer = styled(Box)(({ theme }) => ({
   gridArea: "footer",
   padding: 0,
   margin: 0,
-  zIndex: theme.zIndex.drawer + 1,
+  // zIndex: theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.secondary.dark,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   height: 48,
@@ -171,7 +171,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   color: theme.palette.primary.contrastText,
   [theme.breakpoints.up("md")]: {
-    zIndex: theme.zIndex.drawer + 1,
+    // zIndex: theme.zIndex.drawer + 1,
   },
 }));
 
