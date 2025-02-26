@@ -47,32 +47,52 @@ declare module '@mui/material/styles/createTypography' {
 
 // Light Mode
 const primaryColorsLight = {
-  main: '#6A5B9A', // Dusty purple
-  light: '#8B7BB8', // Lighter dusty purple
-  dark: '#4F3F71', // Deeper purple
+  main: '#5567C8',
+  light: '#7F8DF1',
+  dark: '#3A4490',
   contrastText: '#FFFFFF',
 };
 
 const secondaryColorsLight = {
-  main: '#A37BAF', // Soft violet-lilac
-  light: '#C895D7', // Lighter pastel violet
-  dark: '#7F4F87', // Deeper accent
+  main: '#F08A5D',
+  light: '#F6B89C',
+  dark: '#C56F47',
   contrastText: '#FFFFFF',
+};
+
+const backgroundLight = {
+  default: '#F9F9F9',
+  paper: '#FFFFFF',
+};
+
+const textLight = {
+  primary: '#333333',
+  secondary: '#666666',
 };
 
 // Dark Mode
 const primaryColorsDark = {
-  main: '#8B7BB8', // Brightened for dark backgrounds
-  light: '#B2A7D2', // Even lighter dusty purple
-  dark: '#6A5B9A', // Slightly deeper
+  main: '#7B92DB',
+  light: '#A0B3F0',
+  dark: '#5360A4',
   contrastText: '#FFFFFF',
 };
 
 const secondaryColorsDark = {
-  main: '#C895D7', // Lighter for dark mode
-  light: '#E3C1EC', // Very pale dusty violet
-  dark: '#A37BAF', // Slightly deeper accent
+  main: '#F2A585',
+  light: '#F7CBB6',
+  dark: '#C98568',
   contrastText: '#FFFFFF',
+};
+
+const backgroundDark = {
+  default: '#141414',
+  paper: '#1E1E1E',
+};
+
+const textDark = {
+  primary: '#E0E0E0',
+  secondary: '#B0B0B0',
 };
 
 // Mixins
@@ -98,12 +118,13 @@ const generateTheme = (mode: PaletteMode): Theme => {
       primary: mode === 'light' ? primaryColorsLight : primaryColorsDark,
       secondary: mode === 'light' ? secondaryColorsLight : secondaryColorsDark,
       background: {
-        default: mode === 'light' ? '#F5F5F5' : '#121212',
-        paper: mode === 'light' ? '#FFFFFF' : '#1E1E1E',
+        default:
+          mode === 'light' ? backgroundLight.default : backgroundDark.default,
+        paper: mode === 'light' ? backgroundLight.paper : backgroundDark.paper,
       },
       text: {
-        primary: mode === 'light' ? '#212121' : '#E0E0E0',
-        secondary: mode === 'light' ? '#424242' : '#B0B0B0',
+        primary: mode === 'light' ? textLight.primary : textDark.primary,
+        secondary: mode === 'light' ? textLight.secondary : textDark.secondary,
       },
     },
     components: {
@@ -314,7 +335,8 @@ export const useThemeMode = () => useContext(ThemeContext);
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('themeMode') === 'dark';
+    // return localStorage.getItem('themeMode') === 'dark';
+    return true;
   });
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);

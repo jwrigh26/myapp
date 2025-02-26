@@ -1,3 +1,5 @@
+import { ComponentStateProvider } from '@/context/ComponentStateContext';
+import { SnackbarProvider } from '@/context/SnackbarContext';
 import ThemeProvider from '@/ThemeProvider';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
@@ -25,7 +27,11 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <SnackbarProvider>
+          <ComponentStateProvider>
+            <RouterProvider router={router} />
+          </ComponentStateProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

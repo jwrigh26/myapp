@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       // exclude: ["@mui/material", "@mdi/js"],
     },
+    server: {
+      hmr: true,
+    },
     define: getDefineObject(env),
     resolve: {
       alias: {
