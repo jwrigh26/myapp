@@ -1,14 +1,16 @@
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router';
+import { IndexLayout } from '@/layout';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: NotFoundComponent,
 });
 
 function RootComponent() {
   return (
-    <>
-      <div className="p-2 flex gap-2 text-lg">
+    <IndexLayout>
+      {/* <Box>
         <Link
           to="/"
           activeProps={{
@@ -26,10 +28,14 @@ function RootComponent() {
         >
           About
         </Link>
-      </div>
-      <hr />
+      </Box>
+      <Divider /> */}
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
-    </>
+    </IndexLayout>
   );
+}
+
+function NotFoundComponent() {
+  return <div>404: Not Found</div>;
 }
