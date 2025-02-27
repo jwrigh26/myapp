@@ -79,9 +79,12 @@ const primaryColorsDark = {
 };
 
 const secondaryColorsDark = {
-  main: '#F2A585',
-  light: '#F7CBB6',
-  dark: '#C98568',
+  // main: '#F2A585',
+  // light: '#F7CBB6',
+  // dark: '#C98568',
+  main: '#F2A585', // Warm peach tone
+  light: '#F7CBB6', // Soft pastel peach
+  dark: '#D77350', // Richer, more saturated warm coral
   contrastText: '#FFFFFF',
 };
 
@@ -335,8 +338,7 @@ export const useThemeMode = () => useContext(ThemeContext);
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // return localStorage.getItem('themeMode') === 'dark';
-    return true;
+    return localStorage.getItem('themeMode') === 'dark';
   });
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
@@ -353,8 +355,6 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     }),
     [isDarkMode]
   );
-
-  console.log('ThemeProvider', theme.palette.mode);
 
   return (
     <ThemeContext.Provider value={themeMode}>

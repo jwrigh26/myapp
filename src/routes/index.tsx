@@ -1,5 +1,6 @@
 import CallToAction from '@/components/CallToAction';
 import CodeBlock from '@/components/CodeBlock';
+import DarkModeToggle from '@/components/DarkModeToggle';
 import Tagline from '@/components/Tagline';
 import TitleBlock from '@/components/TitleBlock';
 import { PageLayout } from '@/layout';
@@ -32,7 +33,7 @@ function HomeComponent() {
       <CallToAction title="Getting Started" />
       <TitleBlock subtitle="The Home Page">Home</TitleBlock>
       <Tagline>Tagline: Welcome to the home page!</Tagline>
-
+      <DarkModeToggle />
       <CodeBlock code={codeBlock} language="python" />
     </PageLayout>
   );

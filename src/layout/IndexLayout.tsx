@@ -1,4 +1,5 @@
 import Icon from '@/components/Icon';
+import Navigation from '@/components/Navigation';
 import { mdiMenu } from '@mdi/js';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -55,6 +56,7 @@ function AppBarToolbar() {
             JW
           </Typography>
         </StyledButtonBase>
+        <Navigation />
       </Toolbar>
     </StyledAppBar>
   );
