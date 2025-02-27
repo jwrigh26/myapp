@@ -5,6 +5,17 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
+  head: () => ({
+    meta: [
+      {
+        name: 'My personal site',
+        content: 'A personal site built with development in mind',
+      },
+      {
+        title: 'My App',
+      },
+    ],
+  }),
 });
 
 function RootComponent() {

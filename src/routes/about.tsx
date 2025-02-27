@@ -1,12 +1,16 @@
 import CallToAction from '@/components/CallToAction';
 import CodeBlock from '@/components/CodeBlock';
+import DarkModeToggle from '@/components/DarkModeToggle';
+import NeutralToggleButton from '@/components/NeutralToggleButton';
 import ProseBlock from '@/components/ProseBlock';
 import Tagline from '@/components/Tagline';
 import TitleBlock from '@/components/TitleBlock';
 import { PageLayout } from '@/layout';
+import { mdiRocketLaunch } from '@mdi/js';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { createFileRoute } from '@tanstack/react-router';
+import { useState } from 'react';
 
 export const Route = createFileRoute('/about')({
   component: AboutComponent,
@@ -30,6 +34,7 @@ def binary_search(arr, target):
 `;
 
 function AboutComponent() {
+  const [selected, setSelected] = useState<boolean>(false);
   return (
     <PageLayout>
       <CallToAction title="Getting Started" />
@@ -45,6 +50,14 @@ function AboutComponent() {
       >
         This is the body text.
       </ProseBlock>
+      <DarkModeToggle />
+      <NeutralToggleButton
+        icon={mdiRocketLaunch} // 🚀 MDI icon for fun
+        selected={selected}
+        onChange={() => setSelected((prev) => !prev)}
+        value="rocket"
+        sx={{ maxWidth: 40 }}
+      />
       <Stack direction="row" spacing={2}>
         <CodeBlock code={codeBlock} language="python" />
         <ButtonStack />
@@ -60,6 +73,9 @@ function ButtonStack() {
       <Button variant="outlined">Outlined</Button>
       <Button variant="text">Text</Button>
       <Button variant="contained" color="secondary">
+        Secondary
+      </Button>
+      <Button variant="contained" sx={{ backgroundColor: 'secondary.dark' }}>
         Secondary
       </Button>
       <Button variant="outlined" color="secondary">
