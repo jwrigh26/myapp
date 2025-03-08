@@ -6,6 +6,7 @@ import MobileStepper from '@mui/material/MobileStepper';
 import Box from '@mui/material/Box';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import Icon from '@/components/Icon';
+import { useDebounce } from '@/hooks/useDebounce';
 
 interface CarouselProps {
   items: React.ReactNode[];
@@ -16,14 +17,14 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleScroll = () => {
+  const handleScroll = useDebounce(() => {
     if (containerRef.current) {
       const scrollPosition = containerRef.current.scrollLeft;
       const itemWidth = containerRef.current.clientWidth;
       const newStep = Math.round(scrollPosition / itemWidth);
       setActiveStep(newStep);
     }
-  };
+  }, 50);
 
   // Scrolls the carousel by one viewport width
   const scrollByWidth = (direction: 'left' | 'right') => {
@@ -48,12 +49,17 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
       </ScrollButton>
 
       <StyledMobileStepper
-        variant="dots"
+        variant="text"
         steps={items.length}
         position="static"
         activeStep={activeStep}
         nextButton={null}
         backButton={null}
+        sx={{
+          '& .MuiMobileStepper-positionStatic': {
+            width: 'auto',
+          },
+        }}
       />
 
       <ScrollContainer ref={containerRef} onScroll={handleScroll}>
@@ -93,12 +99,19 @@ const ScrollButton = styled(IconButton)(({ theme }) => ({
 
 const StyledMobileStepper = styled(MobileStepper)({
   position: 'absolute',
-  top: -24,
-  width: '100svw',
+  top: -34,
+  right: 8,
   justifyContent: 'center',
+  transition: 'all 0.2s ease-in-out',
+  minWidth: 80,
   backgroundColor: 'transparent',
+  '& .MuiTypography-root': {
+    transition: 'all 0.2s ease-in-out',
+    fontSize: '0.875rem',
+    fontWeight: 500,
+  },
   '& .MuiMobileStepper-dots': {
-    justifyContent: 'center',
+    display: 'none',
   },
 });
 
