@@ -49,7 +49,6 @@ const ColorBox = styled(Box, {
     color: theme.palette.primary.superLight,
     padding: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
-    margin: theme.spacing(2),
     textAlign: 'center',
     width: '100%',
     height: '100%',
@@ -57,3 +56,12 @@ const ColorBox = styled(Box, {
     justifyContent: 'center',
     alignItems: 'center',
 }))
+
+
+// TODO: Need a drop zone when wanting to discard a piece but no place in the carousel to return it.
+// Reshuffle the carouse button
+// No timer for the game
+// Add a check or submit button to see if the pieces are in the correct order
+// Add a reset button to reset the pieces to their original order
+// Add a hint button to show the correct order of the pieces -- maybe
+// Add a button to show the correct order of the pieces
