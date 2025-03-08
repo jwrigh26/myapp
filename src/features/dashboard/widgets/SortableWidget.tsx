@@ -52,7 +52,6 @@ export default function SortableWidget({
 
       // From WidgetList.tsx
       if (moveWidget && item.id !== id) {
-        console.log("moveWidget", item.id, id);
         moveWidget(dragIndex, index);
         item.index = hoverIndex;
       }

@@ -32,7 +32,6 @@ export function useWidgets() {
       })
       .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity));
 
-    console.log("saveCardsFromWidgets", newCards);
 
     setCards({
       cards: newCards,
