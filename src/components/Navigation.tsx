@@ -14,6 +14,7 @@ export default function Navigation() {
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
       <NavButton to="/Home">Home</NavButton>
       <NavButton to="/About">About</NavButton>
+      <NavButton to="/Game">Game</NavButton>
       <ToggleButton
         icon={mdiCog}
         onChange={openDrawer}

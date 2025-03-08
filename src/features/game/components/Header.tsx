@@ -7,9 +7,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const CallToActionContainer = styled(Box)(({ theme }) => ({
   display: 'block',
-  padding: theme.spacing(2),
+  padding: theme.spacing(1, 2),
   [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
   backgroundColor: theme.palette.primary.main,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
@@ -37,7 +37,7 @@ interface CallToActionProps {
   onClick?: () => void;
 }
 
-export default function CallToAction({
+export function Header({
   title,
   buttonText,
   onClick,
@@ -46,7 +46,7 @@ export default function CallToAction({
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <CallToActionContainer>
-      <Typography variant="h1" color="common.white" gutterBottom={!isMobile}>
+      <Typography variant="h3" component="h1" color="common.white" gutterBottom={!isMobile}>
         {title}
       </Typography>
       {isFunction(onClick) && (
