@@ -56,6 +56,8 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
         nextButton={null}
         backButton={null}
         sx={{
+          fontSize: '0.75rem',
+          fontWeight: 500,
           '& .MuiMobileStepper-positionStatic': {
             width: 'auto',
           },
