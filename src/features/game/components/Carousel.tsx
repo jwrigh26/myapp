@@ -1,21 +1,23 @@
-import React, { useRef, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import { useTheme } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import MobileStepper from '@mui/material/MobileStepper';
-import Box from '@mui/material/Box';
-import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import Icon from '@/components/Icon';
 import { useDebounce } from '@/hooks/useDebounce';
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+import { useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import MobileStepper from '@mui/material/MobileStepper';
+import { styled } from '@mui/material/styles';
+import { useRef, useState } from 'react';
+import { BlockItem } from '../types';
 
 interface CarouselProps {
-  items: React.ReactNode[];
+  items: BlockItem[];
 }
 
-export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
+export const BottomCarousel = ({ items }: CarouselProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
+  // TODO: setActiveStep when shuffling items
 
   const handleScroll = useDebounce(() => {
     if (containerRef.current) {
@@ -39,6 +41,7 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
       });
     }
   };
+
   return (
     <CarouselContainer>
       <ScrollButton
@@ -66,7 +69,9 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
 
       <ScrollContainer ref={containerRef} onScroll={handleScroll}>
         {items.map((item, index) => (
-          <CarouselItem key={index}>{item}</CarouselItem>
+          <CarouselItemContainer key={item.id || index}>
+            {item.content}
+          </CarouselItemContainer>
         ))}
       </ScrollContainer>
 
@@ -126,7 +131,7 @@ const ScrollContainer = styled(Box)({
   '&::-webkit-scrollbar': { display: 'none' }, // Chrome, Safari, Opera
 });
 
-const CarouselItem = styled(Box)(({ theme }) => ({
+const CarouselItemContainer = styled(Box)(({ theme }) => ({
   minWidth: 'calc(100svw - 80px)', // Subtract space for buttons
   height: 112,
   scrollSnapAlign: 'start',
