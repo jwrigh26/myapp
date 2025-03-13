@@ -1,11 +1,8 @@
-import { useState, useCallback } from 'react';
+import { isEmpty } from '@/utils/safety';
+import { useCallback, useState } from 'react';
 import { ItemTypes } from '../constants';
-
-interface Block {
-  id: string;
-  type: string;
-  content: string;
-}
+import { BlockItem } from '../types';
+import { useCarousel } from './useCarousel';
 
 enum ContainerType {
   CAROUSEL = 'carousel',
@@ -13,60 +10,63 @@ enum ContainerType {
 }
 
 export function useCodeBlock() {
-  // Track blocks in both the carousel and workspace
-  const [carouselBlocks, setCarouselBlocks] = useState(
-    ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map((block) => ({
+  // Use the carousel hook to manage carousel blocks
+  const initialBlocks = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(
+    (block) => ({
       id: `block-${block}`,
       type: ItemTypes.CODE_BLOCK,
       content: block,
-    }))
+    })
   );
 
+  // We expect the useCarousel to already be initialized with initial items
+  // From the game component
+  const carousel = useCarousel<BlockItem>();
+
+  if (isEmpty(carousel.items)) {
+    console.error('Carousel items are empty');
+  }
+
   // Blocks placed in the workspace/code editor
-  const [workspaceBlocks, setWorkspaceBlocks] = useState<Block[]>([]);
+  const [workspaceBlocks, setWorkspaceBlocks] = useState<BlockItem[]>([]);
 
   // Move block within the same container (carousel or workspace)
   const moveBlock = useCallback(
-    (
-      dragIndex: number,
-      hoverIndex: number,
-      sourceContainer: ContainerType
-    ) => {
+    (dragIndex: number, hoverIndex: number, sourceContainer: ContainerType) => {
       if (sourceContainer === ContainerType.CAROUSEL) {
-        const copiedBlocks = [...carouselBlocks];
-
+        const carouselBlocks = carousel.getItems();
         // Bounds checking
         if (
           hoverIndex < 0 ||
-          hoverIndex >= copiedBlocks.length ||
+          hoverIndex >= carouselBlocks.length ||
           dragIndex < 0 ||
-          dragIndex >= copiedBlocks.length
+          dragIndex >= carouselBlocks.length
         ) {
           console.warn('Invalid carousel index');
           return;
         }
 
         // Swap the blocks
+        const copiedBlocks = [...carouselBlocks];
         const [movedBlock] = copiedBlocks.splice(dragIndex, 1);
         copiedBlocks.splice(hoverIndex, 0, movedBlock);
 
         // Update the state
-        setCarouselBlocks(copiedBlocks);
+        carousel.setItems(copiedBlocks);
       } else if (sourceContainer === ContainerType.WORKSPACE) {
-        const copiedBlocks = [...workspaceBlocks];
-
         // Bounds checking
         if (
           hoverIndex < 0 ||
-          hoverIndex >= copiedBlocks.length ||
+          hoverIndex >= workspaceBlocks.length ||
           dragIndex < 0 ||
-          dragIndex >= copiedBlocks.length
+          dragIndex >= workspaceBlocks.length
         ) {
           console.warn('Invalid workspace index');
           return;
         }
 
         // Swap the blocks
+        const copiedBlocks = [...workspaceBlocks];
         const [movedBlock] = copiedBlocks.splice(dragIndex, 1);
         copiedBlocks.splice(hoverIndex, 0, movedBlock);
 
@@ -74,12 +74,13 @@ export function useCodeBlock() {
         setWorkspaceBlocks(copiedBlocks);
       }
     },
-    [carouselBlocks, workspaceBlocks]
+    [carousel, workspaceBlocks]
   );
 
   // Move block from carousel to workspace
   const moveToWorkspace = useCallback(
     (carouselIndex: number, workspaceIndex: number) => {
+      const carouselBlocks = carousel.getItems();
       if (
         carouselIndex < 0 ||
         carouselIndex >= carouselBlocks.length ||
@@ -93,8 +94,7 @@ export function useCodeBlock() {
       const blockToMove = { ...carouselBlocks[carouselIndex] };
 
       // Remove from carousel
-      const newCarouselBlocks = [...carouselBlocks];
-      newCarouselBlocks.splice(carouselIndex, 1);
+      carousel.removeItem({ items: carouselBlocks, position: carouselIndex });
 
       // Add to workspace at the specified position
       const newWorkspaceBlocks = [...workspaceBlocks];
@@ -105,11 +105,10 @@ export function useCodeBlock() {
         newWorkspaceBlocks.splice(workspaceIndex, 0, blockToMove);
       }
 
-      // Update both states
-      setCarouselBlocks(newCarouselBlocks);
+      // Update workspace state
       setWorkspaceBlocks(newWorkspaceBlocks);
     },
-    [carouselBlocks, workspaceBlocks]
+    [carousel, workspaceBlocks]
   );
 
   // Move block from workspace back to carousel
@@ -130,32 +129,25 @@ export function useCodeBlock() {
       // Remove from workspace
       const newWorkspaceBlocks = [...workspaceBlocks];
       newWorkspaceBlocks.splice(workspaceIndex, 1);
+      setWorkspaceBlocks(newWorkspaceBlocks);
 
       // Add to carousel at the specified position
-      const newCarouselBlocks = [...carouselBlocks];
-      if (carouselIndex >= newCarouselBlocks.length) {
-        // If the index is beyond the end, just append
-        newCarouselBlocks.push(blockToMove);
-      } else {
-        newCarouselBlocks.splice(carouselIndex, 0, blockToMove);
-      }
-
-      // Update both states
-      setWorkspaceBlocks(newWorkspaceBlocks);
-      setCarouselBlocks(newCarouselBlocks);
+      const carouselBlocks = carousel.getItems();
+      carousel.addItem({
+        items: carouselBlocks,
+        item: blockToMove,
+        position: carouselIndex,
+      });
     },
-    [carouselBlocks, workspaceBlocks]
+    [carousel, workspaceBlocks]
   );
 
   // Discard a block (move to a discard pile or delete)
   const discardBlock = useCallback(
-    (blockIndex: number, sourceContainer: 'carousel' | 'workspace') => {
-      if (sourceContainer === 'carousel') {
-        const newBlocks = [...carouselBlocks];
-        if (blockIndex >= 0 && blockIndex < newBlocks.length) {
-          newBlocks.splice(blockIndex, 1);
-          setCarouselBlocks(newBlocks);
-        }
+    (blockIndex: number, sourceContainer: ContainerType) => {
+      if (sourceContainer === ContainerType.CAROUSEL) {
+        const carouselBlocks = carousel.getItems();
+        carousel.removeItem({ items: carouselBlocks, position: blockIndex });
       } else {
         const newBlocks = [...workspaceBlocks];
         if (blockIndex >= 0 && blockIndex < newBlocks.length) {
@@ -164,23 +156,17 @@ export function useCodeBlock() {
         }
       }
     },
-    [carouselBlocks, workspaceBlocks]
+    [carousel, workspaceBlocks]
   );
 
   // Reset all blocks back to initial state
   const resetBlocks = useCallback(() => {
-    setCarouselBlocks(
-      ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map((block) => ({
-        id: `block-${block}`,
-        type: ItemTypes.CODE_BLOCK,
-        content: block,
-      }))
-    );
+    carousel.resetItems();
     setWorkspaceBlocks([]);
-  }, []);
+  }, [carousel]);
 
   return {
-    carouselBlocks,
+    carouselBlocks: carousel.items.map((item) => item.content),
     workspaceBlocks,
     moveBlock,
     moveToWorkspace,
