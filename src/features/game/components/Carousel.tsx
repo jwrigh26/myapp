@@ -9,6 +9,12 @@ import { styled } from '@mui/material/styles';
 import { useRef, useState } from 'react';
 import { BlockItem } from '../types';
 
+// export interface BlockItem {
+//   id: string;
+//   type: string;
+//   content: ReactNode | string;
+// }
+
 interface CarouselProps {
   items: BlockItem[];
 }
@@ -99,7 +105,7 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 
 const ScrollButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  height: '112px',
+  height: '128px',
   borderRadius: '0px',
   width: 40,
 }));

@@ -3,21 +3,18 @@ import { useCallback, useState } from 'react';
 import { ItemTypes } from '../constants';
 import { BlockItem } from '../types';
 import { useCarousel } from './useCarousel';
+import { ContainerType } from '../types';
 
-enum ContainerType {
-  CAROUSEL = 'carousel',
-  WORKSPACE = 'workspace',
-}
+  // // Use the carousel hook to manage carousel blocks
+  // const initialBlocks = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(
+  //   (block) => ({
+  //     id: `block-${block}`,
+  //     type: ItemTypes.CODE_BLOCK,
+  //     content: block,
+  //   })
+  // );
 
-export function useCodeBlock() {
-  // Use the carousel hook to manage carousel blocks
-  const initialBlocks = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(
-    (block) => ({
-      id: `block-${block}`,
-      type: ItemTypes.CODE_BLOCK,
-      content: block,
-    })
-  );
+export function useCodeBlock<T extends BlockItem>(gameSolutionBlocks: T[] = []) {
 
   // We expect the useCarousel to already be initialized with initial items
   // From the game component
@@ -166,7 +163,7 @@ export function useCodeBlock() {
   }, [carousel]);
 
   return {
-    carouselBlocks: carousel.items.map((item) => item.content),
+    carouselBlocks: carousel.items,
     workspaceBlocks,
     moveBlock,
     moveToWorkspace,

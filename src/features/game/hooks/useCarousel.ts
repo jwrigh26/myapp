@@ -2,7 +2,6 @@ import { useTemp } from '@/hooks/useContext';
 import { useCallback, useEffect } from 'react';
 import { BlockItem } from '../types';
 import { isEmpty } from '@/utils/safety';
-import { is } from 'date-fns/locale';
 
 export function useCarousel<T extends BlockItem>(initialItems: T[] = []) {
   const { temp, setTemp } = useTemp('carousel');

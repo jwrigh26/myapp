@@ -5,12 +5,34 @@ import {
   ItemTypes,
   useCarousel,
 } from '@/features/game';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
+import { MultiBackend, TouchTransition } from 'react-dnd-multi-backend';
 import { BlockItem } from '@/features/game/types';
 import { PageLayout } from '@/layout';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { createFileRoute } from '@tanstack/react-router';
+import { useCodeBlock } from '@/features/game';
+import { HTML } from 'react-dnd-html5-backend/dist/NativeTypes';
+
+const HTML5toTouch = {
+  backends: [
+    {
+      id: 'html5',
+      backend: HTML5Backend,
+      transition: TouchTransition,
+    },
+    {
+      id: 'touch',
+      backend: TouchBackend,
+      options: { enableTouchEvents: true },
+      preview: true,
+    },
+  ],
+};
 
 export const Route = createFileRoute('/game')({
   component: GameComponent,
@@ -21,12 +43,12 @@ function GameComponent() {
     {
       id: '1',
       type: ItemTypes.CODE_BLOCK,
-      content: <ColorBox color="#FFC107">1</ColorBox>,
+      content: <Item color="#FFC107">1</Item>,
     },
     {
       id: '2',
       type: ItemTypes.CODE_BLOCK,
-      content: <ColorBox color="#FF5722">2</ColorBox>,
+      content: <Item color="#FF5722">2</Item>,
     },
   ];
 
@@ -34,21 +56,23 @@ function GameComponent() {
     useCarousel<BlockItem>(initialItems);
 
   return (
-    <PageLayout>
-      <Header title="Binary Search" />
-      <BottomCarousel items={items} />
-      <TitleBlock subtitle="The Game Page">Game</TitleBlock>
-      <Box sx={{ padding: 2 }}>
-        <Typography variant="h3" gutterBottom>
-          This is the game page.
-        </Typography>
-        <Typography variant="body1">
-          Welcome to the game page! This is where the game will be played.
-        </Typography>
-      </Box>
-    </PageLayout>
+    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+      <PageLayout>
+        <BottomCarousel items={items} />
+      </PageLayout>
+    </DndProvider>
   );
 }
+
+const Container = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(1),
+  backgroundColor: theme.palette.background.paper,
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
 
 const ColorBox = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'color',
@@ -57,13 +81,27 @@ const ColorBox = styled(Box, {
   color: theme.palette.primary.superLight,
   padding: theme.spacing(2),
   borderRadius: theme.shape.borderRadius,
-  textAlign: 'center',
-  width: '100%',
-  height: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  textAlign: 'center',
+  height: '100%',
+  flex: 1,
 }));
+
+function Item({
+  children,
+  color = '#FFC107',
+}: {
+  children?: React.ReactNode | number | string;
+  color?: string;
+}) {
+  return (
+    <Container>
+      <ColorBox color={color}>{children}</ColorBox>
+    </Container>
+  );
+}
 
 // TODO: Need a drop zone when wanting to discard a piece but no place in the carousel to return it.
 // Reshuffle the carouse button
