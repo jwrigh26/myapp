@@ -5,3 +5,8 @@ export interface BlockItem {
   type: string;
   content: ReactNode | string;
 }
+
+export enum ContainerType {
+  CAROUSEL = 'carousel',
+  WORKSPACE = 'workspace',
+}
