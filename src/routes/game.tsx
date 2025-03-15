@@ -1,20 +1,20 @@
-import TitleBlock from '@/components/TitleBlock';
 import {
   BottomCarousel,
   ItemTypes,
   useCarousel,
+  useGame,
+  useWorkspace,
   Workspace,
 } from '@/features/game';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { TouchBackend } from 'react-dnd-touch-backend';
-import { MultiBackend, TouchTransition } from 'react-dnd-multi-backend';
 import { BlockItem } from '@/features/game/types';
 import { PageLayout } from '@/layout';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
-
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { MultiBackend, TouchTransition } from 'react-dnd-multi-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 const HTML5toTouch = {
   backends: [
@@ -52,16 +52,18 @@ function GameComponent() {
     },
   ];
 
-  const { items, onBlockDropped: handleBlockDropped } =
-    useCarousel<BlockItem>(initialItems);
-
+  const solution = [...initialItems]; // For now assume the solution is the same as the initial items
   const dropZoneCount = initialItems.length;
+
+  const carousel = useCarousel(initialItems);
+  const workspace = useWorkspace(dropZoneCount);
+  const game = useGame(solution, carousel, workspace);
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <PageLayout>
-        <Workspace dropZoneCount={dropZoneCount} onBlockDropped={handleBlockDropped} />
-        <BottomCarousel items={items} />
+        <Workspace dropZoneCount={dropZoneCount} />
+        <BottomCarousel items={carousel.items} />
       </PageLayout>
     </DndProvider>
   );
@@ -96,8 +98,5 @@ function Item({
   children?: React.ReactNode | number | string;
   color?: string;
 }) {
-  return (
-      <ColorBox color={color}>{children}</ColorBox>
-  );
+  return <ColorBox color={color}>{children}</ColorBox>;
 }
-

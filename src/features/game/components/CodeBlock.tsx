@@ -1,11 +1,9 @@
-import React, { ReactNode } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { BlockItem, ContainerType } from '../types';
+import { styled } from '@mui/material/styles';
+import React, { ReactNode } from 'react';
 import { useDragDrop } from '../hooks/useDragDrop';
-import { useCodeBlock } from '../hooks/useCodeBlock';
-
+import { useGameActions } from '../hooks/useGame';
+import { ContainerType } from '../types';
 
 // We are only passing the react node back in useCodeBlock
 // and we are not passing a content anymore but expect codblock to take a child
@@ -15,9 +13,6 @@ interface CodeBlockProps {
   index: number;
   children?: ReactNode | string;
   containerType: ContainerType;
-  moveBlock: (dragIndex: number, hoverIndex: number, sourceContainer: ContainerType) => void;
-  moveToWorkspace: (carouselIndex: number, workspaceIndex: number) => void;
-  moveToCarousel: (workspaceIndex: number, carouselIndex: number) => void;
   disabled?: boolean;
 }
 
@@ -26,18 +21,13 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   index,
   children,
   containerType,
-  moveBlock,
-  moveToWorkspace,
-  moveToCarousel,
   disabled = false,
 }) => {
+  const actions = useGameActions();
   const { ref, isDragging, isOver, canDrop } = useDragDrop({
     id,
     index,
     containerType,
-    moveBlock,
-    moveToWorkspace,
-    moveToCarousel,
     disabled,
   });
 
@@ -62,8 +52,10 @@ interface CodeBlockWrapperProps {
 }
 
 const CodeBlockWrapper = styled(Paper, {
-  shouldForwardProp: (prop) => 
-    !['isDragging', 'isOver', 'containerType', 'disabled'].includes(prop as string)
+  shouldForwardProp: (prop) =>
+    !['isDragging', 'isOver', 'containerType', 'disabled'].includes(
+      prop as string
+    ),
 })<CodeBlockWrapperProps>(
   ({ theme, isDragging, isOver, containerType, disabled }) => ({
     width: '100%',
@@ -71,10 +63,9 @@ const CodeBlockWrapper = styled(Paper, {
     minHeight: 48,
     opacity: isDragging ? 0.4 : 1,
     cursor: disabled ? 'default' : 'grab',
-    backgroundColor: 
-      disabled 
-        ? theme.palette.grey[300]
-        : theme.palette.background.paper,
+    backgroundColor: disabled
+      ? theme.palette.grey[300]
+      : theme.palette.background.paper,
     border: isOver
       ? `2px dashed ${theme.palette.primary.main}`
       : `1px solid ${theme.palette.divider}`,

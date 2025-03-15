@@ -1,11 +1,11 @@
 // Workspace.tsx
-import React from 'react';
+import { ItemTypes } from '@/features/game'; // Ensure this matches your defined item type
+import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import React from 'react';
+import { useDrop } from 'react-dnd';
 import { useWorkspace } from '../hooks/useWorkspace';
 import { BlockItem } from '../types';
-import Box from '@mui/material/Box';
-import { useDrop } from 'react-dnd';
-import { ItemTypes } from '@/features/game'; // Ensure this matches your defined item type
 
 interface WorkspaceProps {
   dropZoneCount: number;
@@ -21,7 +21,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   return (
     <WorkspaceContainer>
       {workspace.map((block, index) => (
-        <DropZoneItem 
+        <DropZoneItem
           key={index}
           index={index}
           block={block}
@@ -50,7 +50,7 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
     accept: ItemTypes.CODE_BLOCK,
     drop: (draggedItem: BlockItem) => {
       // Only allow drop if the slot is empty
-      if (!block) {
+      if (!block && canDrop) {
         placeBlock(draggedItem, index);
         if (onBlockDropped) {
           onBlockDropped();
@@ -82,16 +82,19 @@ const WorkspaceContainer = styled(Box)(({ theme }) => ({
 }));
 
 const DropZoneStyled = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'isOver'
+  shouldForwardProp: (prop) => prop !== 'isOver',
 })<{ isOver: boolean }>(({ theme, isOver }) => ({
-    height: '48px',
-    minHeight: '48px',
-    border: `2px dashed ${theme.palette.grey[400]}`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transform: isOver ? 'scale(1.02)' : 'scale(1)',
-    transition: 'transform 0.2s ease',
+  height: '48px',
+  minHeight: '48px',
+  border: `2px dashed ${theme.palette.grey[400]}`,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transform: isOver ? 'scale(1.02)' : 'scale(1)',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shorter,
+    easing: theme.transitions.easing.easeInOut,
+  }),
 }));
 
 const Placeholder = styled(Box)(({ theme }) => ({

@@ -1,21 +1,29 @@
 // useCarousel.ts
-import { useState, useCallback } from 'react';
-import { BlockItem } from '../types';
+import { useCallback, useState } from 'react';
+import { BlockItem, CarouselState, UseCarouselReturn } from '../types';
 
-export interface UseCarouselReturn<T> {
-  items: T[];
-  removeBlock: (id: string) => void;
-  resetItems: () => void;
-  shuffleItems: () => void;
-  onBlockDropped: () => void;
-}
+/**
+ * useCarousel
+ * @param initialItems An array of items to initialize the carousel.
+ */
+export function useCarousel(initialItems: CarouselState): UseCarouselReturn {
+  const [items, setItems] = useState<CarouselState>(initialItems);
 
-export function useCarousel<T extends { id: string }>(initialItems: T[]): UseCarouselReturn<T> {
-  const [items, setItems] = useState<T[]>(initialItems);
+  // Place a block in a specific Carousel drop zone
+  const placeBlock = useCallback((block: BlockItem, index: number) => {
+    setItems((prev) => {
+      const newWorkspace = [...prev];
+      newWorkspace[index] = block;
+      return newWorkspace;
+    });
+  }, []);
 
-  // Remove a block from the carousel by its ID.
-  const removeBlock = useCallback((id: string) => {
-    setItems(prev => prev.filter(item => item.id !== id));
+  const removeBlock = useCallback((index: number) => {
+    setItems((prev) => {
+      const newItems = [...prev];
+      newItems[index] = null;
+      return newItems;
+    });
   }, []);
 
   // Reset the carousel to the initial items.
@@ -25,7 +33,7 @@ export function useCarousel<T extends { id: string }>(initialItems: T[]): UseCar
 
   // Shuffle the carousel items randomly.
   const shuffleItems = useCallback(() => {
-    setItems(prev => {
+    setItems((prev) => {
       const newItems = [...prev];
       for (let i = newItems.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -40,7 +48,7 @@ export function useCarousel<T extends { id: string }>(initialItems: T[]): UseCar
   // The Carousel component should use this callback to trigger scrolling via its ref.
   const onBlockDropped = useCallback(() => {
     setTimeout(() => {
-      console.log("Block dropped - trigger auto-scroll");
+      console.log('Block dropped - trigger auto-scroll');
       // You can extend this to call a scroll method on your carousel ref.
       // For example: carouselRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }, 300);
@@ -48,9 +56,10 @@ export function useCarousel<T extends { id: string }>(initialItems: T[]): UseCar
 
   return {
     items,
+    placeBlock,
     removeBlock,
-    resetItems,
     shuffleItems,
     onBlockDropped,
+    reset: resetItems,
   };
 }
