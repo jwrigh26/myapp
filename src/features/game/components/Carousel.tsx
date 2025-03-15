@@ -1,4 +1,3 @@
-// Carousel.tsx
 import React, { useRef, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -7,28 +6,14 @@ import Box from '@mui/material/Box';
 import { useDebounce } from '@/hooks/useDebounce';
 import Icon from '@/components/Icon';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-import { BlockItem, ContainerType } from '../types';
+import { CarouselState, BlockItem, ContainerType } from '../types';
 import CodeBlock from './CodeBlock';
 
 interface CarouselProps {
-  items: BlockItem[];
-  onBlockDropped?: () => void;
-  moveToWorkspace: (carouselIndex: number, workspaceIndex: number) => void;
-  moveToCarousel: (workspaceIndex: number, carouselIndex: number) => void;
-  moveBlock: (
-    dragIndex: number,
-    hoverIndex: number,
-    sourceContainer: ContainerType
-  ) => void;
+  items: CarouselState;
 }
 
-export const BottomCarousel: React.FC<CarouselProps> = ({
-  items,
-  onBlockDropped,
-  moveToWorkspace,
-  moveToCarousel,
-  moveBlock,
-}) => {
+export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -58,21 +43,19 @@ export const BottomCarousel: React.FC<CarouselProps> = ({
     <CarouselContainer>
       <ScrollContainer ref={containerRef} onScroll={handleScroll}>
         {items.map((item, index) => (
-          <CarouselItemContainer key={item.id}>
+          <CarouselItemContainer key={item!.id}>
             <CodeBlock
-              id={item.id}
+              id={item!.id}
               index={index}
               containerType={ContainerType.CAROUSEL}
-              moveBlock={moveBlock}
-              moveToWorkspace={moveToWorkspace}
-              moveToCarousel={moveToCarousel}
+              disabled={false}
             >
-              {item.content}
+              {item!.content}
             </CodeBlock>
           </CarouselItemContainer>
         ))}
       </ScrollContainer>
-      
+
       <ButtonContainer>
         <ScrollButton onClick={() => scrollByWidth('left')}>
           <Icon path={mdiChevronLeft} />
@@ -85,7 +68,7 @@ export const BottomCarousel: React.FC<CarouselProps> = ({
   );
 };
 
-const carouselHeight = 64 + 40; 
+const carouselHeight = 64 + 40;
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'fixed',

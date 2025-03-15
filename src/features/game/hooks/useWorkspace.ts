@@ -1,17 +1,11 @@
 // useWorkspace.ts
-import { useState, useCallback } from 'react';
-import { BlockItem } from '../types';
+import { useCallback, useState } from 'react';
+import { BlockItem, UseWorkspaceReturn, WorkspaceState } from '../types';
 
-export type WorkspaceState = Array<BlockItem | null>;
-
-export interface UseWorkspaceReturn {
-  workspace: WorkspaceState;
-  placeBlock: (block: BlockItem, index: number) => void;
-  removeBlock: (index: number) => void;
-  moveBlock: (fromIndex: number, toIndex: number) => void;
-  resetWorkspace: () => void;
-}
-
+/**
+ * useWorkspace
+ * @param dropZoneCount The number of drop zones in the workspace.
+ */
 export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
   // Initialize the workspace with fixed drop zones (all empty initially)
   const [workspace, setWorkspace] = useState<WorkspaceState>(
@@ -20,7 +14,7 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
 
   // Place a block in a specific drop zone
   const placeBlock = useCallback((block: BlockItem, index: number) => {
-    setWorkspace(prev => {
+    setWorkspace((prev) => {
       const newWorkspace = [...prev];
       newWorkspace[index] = block;
       return newWorkspace;
@@ -29,7 +23,7 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
 
   // Remove a block from a specific drop zone (set to empty)
   const removeBlock = useCallback((index: number) => {
-    setWorkspace(prev => {
+    setWorkspace((prev) => {
       const newWorkspace = [...prev];
       newWorkspace[index] = null;
       return newWorkspace;
@@ -37,8 +31,8 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
   }, []);
 
   // Reorder blocks by moving one from a source index to a target index
-  const moveBlock = useCallback((fromIndex: number, toIndex: number) => {
-    setWorkspace(prev => {
+  const reorderBlocks = useCallback((fromIndex: number, toIndex: number) => {
+    setWorkspace((prev) => {
       const newWorkspace = [...prev];
       const [movedBlock] = newWorkspace.splice(fromIndex, 1);
       newWorkspace.splice(toIndex, 0, movedBlock);
@@ -51,5 +45,11 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
     setWorkspace(Array(dropZoneCount).fill(null));
   }, [dropZoneCount]);
 
-  return { workspace, placeBlock, removeBlock, moveBlock, resetWorkspace };
+  return {
+    workspace,
+    placeBlock,
+    removeBlock,
+    reorderBlocks,
+    reset: resetWorkspace,
+  };
 }

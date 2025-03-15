@@ -6,17 +6,18 @@ Alright, here's our refined game plan based on your detailed answers. Let’s br
 
 1. **Data Structures & Types**
 
-   - **BlockItem:**  
-     Each block will have properties like `id`, `type`, `content`, and an optional `order` for game validation.
-   - **State Shape:**  
-     For the workspace, we'll maintain an array of BlockItems representing the current order, along with any minimal metadata (e.g., empty slot placeholders).
+- ✓ **BlockItem:**  
+   Each block will have properties like `id`, `type`, `content`, and an optional `order` for game validation.
+  -✓ **State Shape:**  
+   For the workspace, we'll maintain an array of BlockItems representing the current order, along with any minimal metadata (e.g., empty slot placeholders).
 
 2. **Carousel Enhancements (useCarousel)**
 
-   - **Auto-Scroll Callback:**  
-     Add a `useCallback` in the carousel hook (e.g., `onBlockDropped`) that the workspace can call to trigger auto-scroll after a 300ms delay (using MUI transition timings).
-   - **Block Management:**  
-     When a block is dragged from the carousel to the workspace, it is permanently removed from the carousel (unless explicitly returned).
+   -✓ **Auto-Scroll Callback:**  
+    Add a `useCallback` in the carousel hook (e.g., `onBlockDropped`) that the workspace can call to trigger auto-scroll after a 300ms delay (using MUI transition timings).
+
+   -✓ **Block Management:**  
+    When a block is dragged from the carousel to the workspace, it is permanently removed from the carousel (unless explicitly returned).
 
 3. **Workspace Component & useWorkspace Hook**
 

@@ -14,9 +14,6 @@ interface UseDragDropProps {
   id: string;
   index: number;
   containerType: ContainerType;
-  moveBlock: (dragIndex: number, hoverIndex: number, sourceContainer: ContainerType) => void;
-  moveToWorkspace: (carouselIndex: number, workspaceIndex: number) => void;
-  moveToCarousel: (workspaceIndex: number, carouselIndex: number) => void;
   disabled?: boolean;
 }
 
@@ -24,9 +21,6 @@ export function useDragDrop({
   id,
   index,
   containerType,
-  moveBlock,
-  moveToWorkspace,
-  moveToCarousel,
   disabled = false,
 }: UseDragDropProps) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -52,12 +46,12 @@ export function useDragDrop({
     }),
     hover(item: DragItem, monitor) {
       if (!ref.current) return;
-      
+
       const dragIndex = item.index;
       const hoverIndex = index;
       const sourceContainer = item.containerType;
       const targetContainer = containerType;
-      
+
       // Don't replace items with themselves
       if (dragIndex === hoverIndex && sourceContainer === targetContainer) {
         return;
@@ -65,14 +59,15 @@ export function useDragDrop({
 
       // Get rectangle on screen
       const hoverBoundingRect = ref.current.getBoundingClientRect();
-      
+
       // Get middle of the item
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
       // Get cursor position
       const clientOffset = monitor.getClientOffset();
       if (!clientOffset) return;
-      
+
       // Get pixels to the top
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
@@ -90,10 +85,16 @@ export function useDragDrop({
       if (sourceContainer === targetContainer) {
         // Moving within the same container
         moveBlock(dragIndex, hoverIndex, sourceContainer);
-      } else if (sourceContainer === ContainerType.CAROUSEL && targetContainer === ContainerType.WORKSPACE) {
+      } else if (
+        sourceContainer === ContainerType.CAROUSEL &&
+        targetContainer === ContainerType.WORKSPACE
+      ) {
         // Moving from carousel to workspace
         moveToWorkspace(dragIndex, hoverIndex);
-      } else if (sourceContainer === ContainerType.WORKSPACE && targetContainer === ContainerType.CAROUSEL) {
+      } else if (
+        sourceContainer === ContainerType.WORKSPACE &&
+        targetContainer === ContainerType.CAROUSEL
+      ) {
         // Moving from workspace to carousel
         moveToCarousel(dragIndex, hoverIndex);
       }
