@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StorageKeys } from '../constants';
 import {
   BlockItem,
-  ContainerType,
   GameResult,
   UseCarouselReturn,
   UseGameActions,
@@ -54,10 +53,8 @@ export function useGame(
 
   const actions: UseGameActions = useMemo(
     () => ({
-      moveBlock: (dragIndex, hoverIndex, sourceContainer) => {
-        if (sourceContainer === ContainerType.CAROUSEL) {
-          workspace.reorderBlocks(dragIndex, hoverIndex);
-        }
+      moveBlock: (dragIndex, hoverIndex) => {
+        workspace.reorderBlocks(dragIndex, hoverIndex);
       },
       moveToWorkspace: (block, carouselIndex, workspaceIndex) => {
         carousel.removeBlock(carouselIndex);

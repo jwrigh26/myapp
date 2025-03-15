@@ -55,3 +55,30 @@ Alright, here's our refined game plan based on your detailed answers. Let’s br
      Use local state for isolated UI interactions and rely on your existing ComponentStateContext for shared/global state.
    - **Utility Functions:**  
      We’ll continue using your safety utilities from utils for consistency in truthy/falsey checks.
+
+### My Notes
+
+Do we need useGame
+
+We set carousel and workspace in game - shoudl these be created in their own realm?
+
+Let's find out!
+
+Workspace uses workspace state aka BlockItems for it's --
+"Drop Zones" - Drop Zones apply useDrop
+
+Carousel houses BlockItems as CodeBlocks - Each Code block applies useDrag for CodeBlocks - Each Carousel maybe can house a DropZone too.
+
+How to know what methods to call.
+
+Workspace
+
+- placeBlock
+- removeBlock
+- reorderBlocks
+
+Carousel
+
+- placeBlock
+- removeBlock
+- onBlockDropped

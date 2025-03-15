@@ -7,6 +7,8 @@ export interface BlockItem {
   order?: number;
 }
 
+export type DraggedItem = { id: string; index: number };
+
 export enum ContainerType {
   CAROUSEL = 'carousel',
   WORKSPACE = 'workspace',
@@ -25,25 +27,22 @@ export interface UseCarouselReturn {
   removeBlock: (index: number) => void;
   reset: () => void;
   shuffleItems: () => void;
-  onBlockDropped: () => void;
+  onBlockDropped: (item: DraggedItem) => void;
 }
 
 export type WorkspaceState = Array<BlockItem | null>;
 
 export interface UseWorkspaceReturn {
-  workspace: WorkspaceState;
+  items: WorkspaceState;
   placeBlock: (block: BlockItem, index: number) => void;
   removeBlock: (index: number) => void;
   reorderBlocks: (fromIndex: number, toIndex: number) => void;
   reset: () => void;
 }
 
+// sourceContainer: ContainerType check source container before
 export interface UseGameActions {
-  moveBlock: (
-    dragIndex: number,
-    hoverIndex: number,
-    sourceContainer: ContainerType
-  ) => void;
+  moveBlock: (dragIndex: number, hoverIndex: number) => void;
   moveToWorkspace: (
     block: BlockItem,
     carouselIndex: number,
@@ -54,7 +53,7 @@ export interface UseGameActions {
     workspaceIndex: number,
     carouselIndex: number
   ) => void;
-  onBlockDropped: () => void;
+  onBlockDropped: (item: DraggedItem) => void;
   resetGame: () => void;
 }
 

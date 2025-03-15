@@ -1,7 +1,7 @@
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
-import { useDragDrop } from '../hooks/useDragDrop';
+import { useCodeBlock } from '../hooks/useCodeBlock';
 import { useGameActions } from '../hooks/useGame';
 import { ContainerType } from '../types';
 
@@ -24,12 +24,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   disabled = false,
 }) => {
   const actions = useGameActions();
-  const { ref, isDragging, isOver, canDrop } = useDragDrop({
-    id,
-    index,
-    containerType,
-    disabled,
-  });
+  // const { ref, isDragging, isOver, canDrop } = useDragDrop({
+  //   id,
+  //   index,
+  //   containerType,
+  //   disabled,
+  // });
 
   return (
     <CodeBlockWrapper

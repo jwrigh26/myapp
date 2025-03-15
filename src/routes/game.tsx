@@ -62,7 +62,7 @@ function GameComponent() {
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <PageLayout>
-        <Workspace dropZoneCount={dropZoneCount} />
+        <Workspace items={workspace?.items} />
         <BottomCarousel items={carousel.items} />
       </PageLayout>
     </DndProvider>

@@ -46,7 +46,7 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
   }, [dropZoneCount]);
 
   return {
-    workspace,
+    items: workspace,
     placeBlock,
     removeBlock,
     reorderBlocks,
