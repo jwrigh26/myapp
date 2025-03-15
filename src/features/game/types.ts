@@ -4,6 +4,7 @@ export interface BlockItem {
   id: string;
   type: string;
   content: ReactNode | string;
+  order?: number;
 }
 
 export enum ContainerType {

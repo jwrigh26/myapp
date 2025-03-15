@@ -1,93 +1,56 @@
-import { useTemp } from '@/hooks/useContext';
-import { useCallback, useEffect } from 'react';
+// useCarousel.ts
+import { useState, useCallback } from 'react';
 import { BlockItem } from '../types';
-import { isEmpty } from '@/utils/safety';
 
-export function useCarousel<T extends BlockItem>(initialItems: T[] = []) {
-  const { temp, setTemp } = useTemp('carousel');
-  const { temp: refTemp, setTemp: setRefTemp } = useTemp('carouselRef');
+export interface UseCarouselReturn<T> {
+  items: T[];
+  removeBlock: (id: string) => void;
+  resetItems: () => void;
+  shuffleItems: () => void;
+  onBlockDropped: () => void;
+}
 
-  const items: T[] = temp?.items || initialItems || [];
+export function useCarousel<T extends { id: string }>(initialItems: T[]): UseCarouselReturn<T> {
+  const [items, setItems] = useState<T[]>(initialItems);
 
-  useEffect(() => {
-    if (!refTemp?.ref && !isEmpty(initialItems)) {
-      const ref = {
-        current: initialItems,
-      };
-      setRefTemp({ ref });
-    }
+  // Remove a block from the carousel by its ID.
+  const removeBlock = useCallback((id: string) => {
+    setItems(prev => prev.filter(item => item.id !== id));
   }, []);
 
-  const setItems = useCallback((newItems: T[]) => {
-    setTemp({ items: newItems });
-  }, []);
-
-  const getItems = useCallback(() => temp.items || [], [temp.items]);
-
-  // Add a new item to the carousel
-  const addItem = useCallback(
-    ({ items, item, position }: { items: T[]; item: T; position?: number }) => {
-      if (position !== undefined && position >= 0 && position <= items.length) {
-        const updatedItems = [...items];
-        updatedItems.splice(position, 0, item);
-        setItems(updatedItems);
-        return updatedItems;
-      }
-
-      const updatedItems = [...items, item];
-      setItems(updatedItems);
-      return updatedItems;
-    },
-    []
-  );
-
-  // Remove an item from the carousel by position
-  const removeItem = useCallback(
-    ({ items, position }: { items: T[]; position: number }) => {
-      const removedItem = items[position];
-
-      if (position < 0 || position >= items.length) {
-        return undefined;
-      }
-
-      const newItems = [...items];
-      newItems.splice(position, 1);
-      setItems(newItems);
-
-      // Return the removed item
-      return removedItem;
-    },
-    [items]
-  );
-
-  // Reshuffle the carousel items in random order
-  // Fisher-Yates shuffle algorithm
-  const shuffleItems = useCallback(({ items }: { items: T[] }) => {
-    const newItems = [...items];
-    for (let i = newItems.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newItems[i], newItems[j]] = [newItems[j], newItems[i]];
-    }
-    setItems(newItems);
-    return newItems;
-  }, []);
-
-  // Reset carousel to initial items
+  // Reset the carousel to the initial items.
   const resetItems = useCallback(() => {
-    const itemsRef = refTemp.ref;
-    if (!initialItems || !itemsRef.current) {
-      return;
-    }
-    setItems([...itemsRef.current]);
+    setItems(initialItems);
   }, [initialItems]);
+
+  // Shuffle the carousel items randomly.
+  const shuffleItems = useCallback(() => {
+    setItems(prev => {
+      const newItems = [...prev];
+      for (let i = newItems.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newItems[i], newItems[j]] = [newItems[j], newItems[i]];
+      }
+      return newItems;
+    });
+  }, []);
+
+  // Auto-scroll callback to be called when a block is dropped.
+  // This waits 300ms (based on MUI transition times) before triggering any auto-scroll action.
+  // The Carousel component should use this callback to trigger scrolling via its ref.
+  const onBlockDropped = useCallback(() => {
+    setTimeout(() => {
+      console.log("Block dropped - trigger auto-scroll");
+      // You can extend this to call a scroll method on your carousel ref.
+      // For example: carouselRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }, 300);
+  }, []);
 
   return {
     items,
-    getItems,
-    setItems,
-    addItem,
-    removeItem,
-    shuffleItems,
+    removeBlock,
     resetItems,
+    shuffleItems,
+    onBlockDropped,
   };
 }
