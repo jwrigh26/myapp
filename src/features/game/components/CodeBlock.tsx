@@ -49,7 +49,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       containerType={containerType}
       disabled={disabled}
     >
-      <Box p={2}>{children}</Box>
+      {children}
     </CodeBlockWrapper>
   );
 };
@@ -61,18 +61,20 @@ interface CodeBlockWrapperProps {
   disabled: boolean;
 }
 
-const CodeBlockWrapper = styled(Paper)<CodeBlockWrapperProps>(
+const CodeBlockWrapper = styled(Paper, {
+  shouldForwardProp: (prop) => 
+    !['isDragging', 'isOver', 'containerType', 'disabled'].includes(prop as string)
+})<CodeBlockWrapperProps>(
   ({ theme, isDragging, isOver, containerType, disabled }) => ({
-    margin: theme.spacing(0.5),
-    padding: theme.spacing(1),
+    width: '100%',
+    height: 48,
+    minHeight: 48,
     opacity: isDragging ? 0.4 : 1,
     cursor: disabled ? 'default' : 'grab',
     backgroundColor: 
       disabled 
         ? theme.palette.grey[300]
-        : containerType === ContainerType.WORKSPACE 
-          ? theme.palette.primary.light 
-          : theme.palette.secondary.light,
+        : theme.palette.background.paper,
     border: isOver
       ? `2px dashed ${theme.palette.primary.main}`
       : `1px solid ${theme.palette.divider}`,

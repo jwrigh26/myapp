@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { ReactElement } from 'react';
+import { useRouter } from '@tanstack/react-router';
 
 export default function IndexLayout({
   children,
@@ -21,6 +22,10 @@ export default function IndexLayout({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isDesktop = !isMobile; // Just for readability
+
+  const router = useRouter();
+
+  const isGameRoute = router.state.location.pathname.toLowerCase().includes('game');
 
   return (
     <>
@@ -33,8 +38,8 @@ export default function IndexLayout({
           <ToolbarSpacer />
         </Header>
         <Main id="main">{children}</Main>
-        {/* Desktop Footer -- Hidden on mobile */}
-        <Footer id="footer" />
+        {/* Desktop Footer -- Hidden on mobile and game routes */}
+        {!isGameRoute && isDesktop && <Footer id="footer" />}
       </LayoutGrid>
     </>
   );

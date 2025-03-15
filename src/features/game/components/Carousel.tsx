@@ -1,29 +1,36 @@
-import Icon from '@/components/Icon';
-import { useDebounce } from '@/hooks/useDebounce';
-import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-import { useTheme } from '@mui/material';
-import Box from '@mui/material/Box';
+// Carousel.tsx
+import React, { useRef, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import MobileStepper from '@mui/material/MobileStepper';
-import { styled } from '@mui/material/styles';
-import { useRef, useState } from 'react';
-import { BlockItem } from '../types';
-
-// export interface BlockItem {
-//   id: string;
-//   type: string;
-//   content: ReactNode | string;
-// }
+import Box from '@mui/material/Box';
+import { useDebounce } from '@/hooks/useDebounce';
+import Icon from '@/components/Icon';
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+import { BlockItem, ContainerType } from '../types';
+import CodeBlock from './CodeBlock';
 
 interface CarouselProps {
   items: BlockItem[];
+  onBlockDropped?: () => void;
+  moveToWorkspace: (carouselIndex: number, workspaceIndex: number) => void;
+  moveToCarousel: (workspaceIndex: number, carouselIndex: number) => void;
+  moveBlock: (
+    dragIndex: number,
+    hoverIndex: number,
+    sourceContainer: ContainerType
+  ) => void;
 }
 
-export const BottomCarousel = ({ items }: CarouselProps) => {
+export const BottomCarousel: React.FC<CarouselProps> = ({
+  items,
+  onBlockDropped,
+  moveToWorkspace,
+  moveToCarousel,
+  moveBlock,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  // TODO: setActiveStep when shuffling items
 
   const handleScroll = useDebounce(() => {
     if (containerRef.current) {
@@ -34,7 +41,6 @@ export const BottomCarousel = ({ items }: CarouselProps) => {
     }
   }, 50);
 
-  // Scrolls the carousel by one viewport width
   const scrollByWidth = (direction: 'left' | 'right') => {
     if (containerRef.current) {
       const scrollOffset =
@@ -50,64 +56,68 @@ export const BottomCarousel = ({ items }: CarouselProps) => {
 
   return (
     <CarouselContainer>
-      <ScrollButton
-        onClick={() => scrollByWidth('left')}
-        aria-label="scroll left"
-      >
-        <Icon path={mdiChevronLeft} />
-      </ScrollButton>
-
-      <StyledMobileStepper
-        variant="text"
-        steps={items.length}
-        position="static"
-        activeStep={activeStep}
-        nextButton={null}
-        backButton={null}
-        sx={{
-          fontSize: '0.75rem',
-          fontWeight: 500,
-          '& .MuiMobileStepper-positionStatic': {
-            width: 'auto',
-          },
-        }}
-      />
-
       <ScrollContainer ref={containerRef} onScroll={handleScroll}>
         {items.map((item, index) => (
-          <CarouselItemContainer key={item.id || index}>
-            {item.content}
+          <CarouselItemContainer key={item.id}>
+            <CodeBlock
+              id={item.id}
+              index={index}
+              containerType={ContainerType.CAROUSEL}
+              moveBlock={moveBlock}
+              moveToWorkspace={moveToWorkspace}
+              moveToCarousel={moveToCarousel}
+            >
+              {item.content}
+            </CodeBlock>
           </CarouselItemContainer>
         ))}
       </ScrollContainer>
-
-      <ScrollButton
-        onClick={() => scrollByWidth('right')}
-        aria-label="scroll right"
-      >
-        <Icon path={mdiChevronRight} />
-      </ScrollButton>
+      
+      <ButtonContainer>
+        <ScrollButton onClick={() => scrollByWidth('left')}>
+          <Icon path={mdiChevronLeft} />
+        </ScrollButton>
+        <ScrollButton onClick={() => scrollByWidth('right')}>
+          <Icon path={mdiChevronRight} />
+        </ScrollButton>
+      </ButtonContainer>
     </CarouselContainer>
   );
 };
+
+const carouselHeight = 64 + 40; 
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'fixed',
   bottom: 0,
   left: 0,
-  width: '100svw',
+  width: '100%',
   backgroundColor: theme.palette.background.paper,
   display: 'flex',
-  alignItems: 'center',
+  flexDirection: 'column', // Changed to column
   padding: 0,
   zIndex: 1300,
+  height: carouselHeight,
 }));
 
+const ButtonContainer = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+});
+
 const ScrollButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  height: '128px',
+  backgroundColor: theme.palette.background.paper,
   borderRadius: '0px',
   width: 40,
+  height: 40, // Fixed height for buttons
+  flex: '1 0 40px',
+  '&:hover': {
+    backgroundColor: theme.palette.background.default,
+  },
+  '&:active': {
+    backgroundColor: theme.palette.background.default,
+  },
 }));
 
 const StyledMobileStepper = styled(MobileStepper)({
@@ -135,16 +145,18 @@ const ScrollContainer = styled(Box)({
   scrollbarWidth: 'none', // Firefox
   msOverflowStyle: 'none', // IE 10+
   '&::-webkit-scrollbar': { display: 'none' }, // Chrome, Safari, Opera
+  height: 64, // Fixed height for the scroll container
+  width: '100%',
 });
 
 const CarouselItemContainer = styled(Box)(({ theme }) => ({
-  minWidth: 'calc(100svw - 80px)', // Subtract space for buttons
-  height: 112,
+  minWidth: '100%',
   scrollSnapAlign: 'start',
-  border: `1px solid ${theme.palette.grey[400]}`,
+  borderTop: `1px solid ${theme.palette.grey[800]}`,
+  borderBottom: `1px solid ${theme.palette.grey[800]}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  flexShrink: 0,
-  padding: 0,
+  height: '100%',
+  padding: theme.spacing(0, 1),
 }));
