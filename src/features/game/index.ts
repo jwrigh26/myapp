@@ -5,3 +5,4 @@ export { ItemTypes, StorageKeys } from './constants';
 export { useCarousel } from './hooks/useCarousel';
 export { useGame, useGameActions } from './hooks/useGame';
 export { useWorkspace } from './hooks/useWorkspace';
+export { useCodeBlock } from './hooks/useCodeBlock';

@@ -17,7 +17,7 @@ interface UseDragDropProps {
   disabled?: boolean;
 }
 
-export function useDragDrop({
+export function useCodeBlock({
   id,
   index,
   containerType,

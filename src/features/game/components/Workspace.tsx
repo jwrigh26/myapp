@@ -4,29 +4,30 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import { useWorkspace } from '../hooks/useWorkspace';
-import { BlockItem } from '../types';
+import { useGameActions } from '../hooks/useGame';
+import { BlockItem, DraggedItem, WorkspaceState } from '../types';
+
+// We'ere in container Type workspace here
+// We should onBlockDropped to be called when a block is dropped
+// Make move to workspace if block is null
+// Make move block if block is not null
+
+// Carousel should handle moveToCarousel
 
 interface WorkspaceProps {
-  dropZoneCount: number;
-  onBlockDropped?: () => void;
+  items: WorkspaceState;
 }
 
-export const Workspace: React.FC<WorkspaceProps> = ({
-  dropZoneCount,
-  onBlockDropped,
-}) => {
-  const { workspace, placeBlock } = useWorkspace(dropZoneCount);
+export const Workspace: React.FC<WorkspaceProps> = ({ items }) => {
+  const actions = useGameActions();
 
   return (
     <WorkspaceContainer>
-      {workspace.map((block, index) => (
+      {items?.map((block, index) => (
         <DropZoneItem
           key={index}
-          index={index}
           block={block}
-          placeBlock={placeBlock}
-          onBlockDropped={onBlockDropped}
+          onBlockDropped={actions?.onBlockDropped}
         />
       ))}
     </WorkspaceContainer>
@@ -34,28 +35,25 @@ export const Workspace: React.FC<WorkspaceProps> = ({
 };
 
 interface DropZoneItemProps {
-  index: number;
   block: BlockItem | null;
-  placeBlock: (block: BlockItem, index: number) => void;
-  onBlockDropped?: () => void;
+  onBlockDropped?: (item: DraggedItem) => void;
 }
 
+// Only responsible for make the onBlockDropped call
 const DropZoneItem: React.FC<DropZoneItemProps> = ({
-  index,
   block,
-  placeBlock,
   onBlockDropped,
 }) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.CODE_BLOCK,
-    drop: (draggedItem: BlockItem) => {
-      // Only allow drop if the slot is empty
-      if (!block && canDrop) {
-        placeBlock(draggedItem, index);
-        if (onBlockDropped) {
-          onBlockDropped();
-        }
+    drop: (draggedItem: DraggedItem) => {
+      if (!block && canDrop && onBlockDropped) {
+        onBlockDropped(draggedItem);
+
+        // Move to workspace
       }
+
+      // if block then moveBlock
       return undefined;
     },
     collect: (monitor) => ({
