@@ -12,24 +12,24 @@ import { styled } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { MultiBackend, TouchTransition } from 'react-dnd-multi-backend';
-import { TouchBackend } from 'react-dnd-touch-backend';
+// import { MultiBackend, TouchTransition } from 'react-dnd-multi-backend';
+// import { TouchBackend } from 'react-dnd-touch-backend';
 
-const HTML5toTouch = {
-  backends: [
-    {
-      id: 'html5',
-      backend: HTML5Backend,
-      transition: TouchTransition,
-    },
-    {
-      id: 'touch',
-      backend: TouchBackend,
-      options: { enableTouchEvents: true },
-      preview: true,
-    },
-  ],
-};
+// const HTML5toTouch = {
+//   backends: [
+//     {
+//       id: 'html5',
+//       backend: HTML5Backend,
+//       transition: TouchTransition,
+//     },
+//     {
+//       id: 'touch',
+//       backend: TouchBackend,
+//       options: { enableTouchEvents: true },
+//       preview: true,
+//     },
+//   ],
+// };
 
 export const Route = createFileRoute('/game')({
   component: GameComponent,
@@ -62,7 +62,8 @@ function GameComponent() {
   // pass callbacks for removeWorkspaceBlock -> Carousel
 
   return (
-    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+    // <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+    <DndProvider backend={HTML5Backend}>
       <PageLayout>
         <Workspace workspace={workspace} carousel={carousel} />
         <BottomCarousel carousel={carousel} workspace={workspace} />

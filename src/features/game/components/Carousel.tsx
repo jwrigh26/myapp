@@ -105,8 +105,8 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
       if (item?.containerType === ContainerType.WORKSPACE) {
         // Move block from workspace to carousel
         // Remove block from workspace
-        placeBlock(getItem(item.id), index);
-        removeWorkspaceBlock(item.index);
+        // placeBlock(getItem(item.id), index);
+        // removeWorkspaceBlock(item.index);
       }
 
       return;
@@ -116,19 +116,29 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
   drop(ref);
 
   return (
-    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
-      {block ? (
-        <CodeBlock
-          id={block.id}
-          index={index}
-          containerType={ContainerType.WORKSPACE}
-          code={block.code}
-        />
-      ) : (
-        <Placeholder />
-      )}
-    </DropZoneStyled>
+    <CodeBlock
+      id={block!.id}
+      index={index}
+      containerType={ContainerType.CAROUSEL}
+      code={block!.code}
+    />
   );
+  // return (
+  //   <>
+  //     {block ? (
+  //       <CodeBlock
+  //         id={block.id}
+  //         index={index}
+  //         containerType={ContainerType.CAROUSEL}
+  //         code={block.code}
+  //       />
+  //     ) : (
+  //       <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
+  //         <Placeholder />
+  //       </DropZoneStyled>
+  //     )}
+  //   </>
+  // );
 };
 
 // ######################
@@ -142,7 +152,7 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
   bottom: 0,
   left: 0,
   width: '100%',
-  background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.primary.dark} 50%, ${theme.palette.primary.main})`,
+  background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.primary.dark} 25%, ${theme.palette.primary.dark} 75%, ${theme.palette.primary.main})`,
   display: 'flex',
   flexDirection: 'column',
   padding: 0,

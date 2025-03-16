@@ -108,8 +108,8 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
         // Move to workspace
         // Remove block from carousel
         onBlockDropped(item);
-        placeBlock(getItem(item.id), index);
-        removeCarouselBlock(item.index);
+        // placeBlock(getItem(item.id), index);
+        // removeCarouselBlock(item.index);
       }
 
       return;
