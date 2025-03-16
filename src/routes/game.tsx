@@ -40,13 +40,13 @@ function GameComponent() {
     {
       id: '1',
       type: ItemTypes.CODE_BLOCK,
-      content: <Item color="#FFC107">1</Item>,
+      code: 'var x = 5',
       order: 0,
     },
     {
       id: '2',
       type: ItemTypes.CODE_BLOCK,
-      content: <Item color="#FF5722">2</Item>,
+      code: 'var y = 10',
       order: 1,
     },
   ];

@@ -1,26 +1,19 @@
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { ContainerType } from '../constants';
-
-interface CodeBlockProps {
-  id: string;
-  index: number;
-  children?: ReactNode | string;
-  containerType?: ContainerType;
-  disabled?: boolean;
-}
+import type { CodeBlockProps } from '../types';
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   id,
   index,
-  children,
+  code,
   containerType,
   disabled = false,
 }) => {
   return (
     <CodeBlockWrapper containerType={containerType} disabled={disabled}>
-      {children}
+      {code}
     </CodeBlockWrapper>
   );
 };
@@ -36,10 +29,14 @@ const CodeBlockWrapper = styled(Paper, {
       prop as string
     ),
 })<CodeBlockWrapperProps>(({ theme, disabled }) => ({
-  width: '100%',
-  height: 48,
-  minHeight: 48,
+  position: 'absolute',
+  top: -2,
+  left: -2,
+  bottom: -2,
+  right: -2,
   cursor: disabled ? 'default' : 'grab',
+  border: `2px solid green`,
+  borderRadius: theme.shape.borderRadius,
   backgroundColor: disabled
     ? theme.palette.grey[300]
     : theme.palette.background.paper,
