@@ -1,6 +1,11 @@
 // useCarousel.ts
 import { useCallback, useState } from 'react';
-import type { BlockItem, CarouselState, UseCarouselReturn } from '../types';
+import type {
+  BlockItem,
+  BlockItemState,
+  CarouselState,
+  UseCarouselReturn,
+} from '../types';
 
 // TODO: Fix this to have some things like Workspace
 
@@ -12,10 +17,10 @@ export function useCarousel(initialItems: CarouselState): UseCarouselReturn {
   const [items, setItems] = useState<CarouselState>(initialItems);
 
   // Place a block in a specific Carousel drop zone
-  const placeBlock = useCallback((block: BlockItem, index: number) => {
+  const placeBlock = useCallback((block: BlockItemState, index: number) => {
     setItems((prev) => {
       const newWorkspace = [...prev];
-      newWorkspace[index] = block;
+      newWorkspace[index] = block as BlockItem;
       return newWorkspace;
     });
   }, []);

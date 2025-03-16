@@ -1,11 +1,10 @@
 import { useTemp } from '@/hooks/useContext';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { StorageKeys } from '../constants';
 import type {
   BlockItem,
   GameResult,
   UseCarouselReturn,
-  UseGameActions,
   UseGameReturn,
   UseWorkspaceReturn,
   WorkspaceState,
@@ -51,43 +50,8 @@ export function useGame(
     [solution]
   );
 
-  const actions: UseGameActions = useMemo(
-    () => ({
-      moveBlock: (dragIndex, hoverIndex) => {
-        workspace.reorderBlocks(dragIndex, hoverIndex);
-      },
-      moveToWorkspace: (block, carouselIndex, workspaceIndex) => {
-        carousel.removeBlock(carouselIndex);
-        workspace.placeBlock(block, workspaceIndex);
-      },
-      moveToCarousel: (block, workspaceIndex, carouselIndex) => {
-        workspace.removeBlock(workspaceIndex);
-        carousel.placeBlock(block, carouselIndex);
-      },
-      onBlockDropped: carousel.onBlockDropped,
-      resetGame: () => {
-        carousel.reset();
-        workspace.reset();
-        setResult({ valid: false });
-      },
-    }),
-    []
-  );
-
-  useEffect(() => {
-    if (!setActionsRef.current) {
-      setTemp({ actions });
-      setActionsRef.current = true;
-    }
-  }, []);
-
   return {
     result,
     validateGame,
   };
-}
-
-export function useGameActions(): UseGameActions | undefined {
-  const { temp } = useTemp(StorageKeys.GAME);
-  return temp.actions;
 }

@@ -1,21 +1,26 @@
 import { ReactNode } from 'react';
 
+// ######################
+// ### Types
+// ######################
+
+export type BlockItemState = BlockItem | null | undefined;
+
+export type CarouselState = Array<BlockItem | null>;
+
+export type DraggedItem = { id: string; index: number };
+
+export type WorkspaceState = Array<BlockItem | null>;
+
+// ######################
+// ### Interfaces
+// ######################
+
 export interface BlockItem {
   id: string;
   type: string;
   content: ReactNode | string;
   order?: number;
-}
-
-export type BlockItemState = BlockItem | null | undefined;
-
-export type DraggedItem = { id: string; index: number };
-
-export type CarouselState = Array<BlockItem | null>;
-
-export interface GameResult {
-  valid: boolean;
-  details?: string;
 }
 
 export interface UseCarouselReturn {
@@ -28,8 +33,6 @@ export interface UseCarouselReturn {
   onBlockDropped: (item: DraggedItem) => void;
 }
 
-export type WorkspaceState = Array<BlockItem | null>;
-
 export interface UseWorkspaceReturn {
   items: WorkspaceState;
   getItem: (index: string) => BlockItemState;
@@ -39,27 +42,15 @@ export interface UseWorkspaceReturn {
   reset: () => void;
 }
 
-// sourceContainer: ContainerType check source container before
-export interface UseGameActions {
-  moveBlock: (dragIndex: number, hoverIndex: number) => void;
-  moveToWorkspace: (
-    block: BlockItem,
-    carouselIndex: number,
-    workspaceIndex: number
-  ) => void;
-  moveToCarousel: (
-    block: BlockItem,
-    workspaceIndex: number,
-    carouselIndex: number
-  ) => void;
-  onBlockDropped: (item: DraggedItem) => void;
-  resetGame: () => void;
+export interface GameProps {
+  workspace: UseWorkspaceReturn;
+  carousel: UseCarouselReturn;
 }
 
-interface GameTemp {
-  actions?: UseGameActions;
+export interface GameResult {
+  valid: boolean;
+  details?: string;
 }
-
 export interface UseGameReturn {
   result: GameResult;
   validateGame: (workspace: WorkspaceState) => void;

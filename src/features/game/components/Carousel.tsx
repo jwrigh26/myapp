@@ -6,15 +6,18 @@ import IconButton from '@mui/material/IconButton';
 import MobileStepper from '@mui/material/MobileStepper';
 import { styled } from '@mui/material/styles';
 import React, { useRef, useState } from 'react';
-import { ContainerType } from '../constants';
-import type { CarouselState } from '../types';
+import { useDrop } from 'react-dnd';
+import { ContainerType, ItemTypes } from '../constants';
+import type { BlockItemState, DraggedItem, GameProps } from '../types';
 import CodeBlock from './CodeBlock';
 
-interface CarouselProps {
-  items: CarouselState;
-}
+export const BottomCarousel: React.FC<GameProps> = ({
+  workspace,
+  carousel,
+}) => {
+  const { items, placeBlock } = carousel;
+  const { getItem, removeBlock: removeWorkspaceBlock } = workspace;
 
-export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -43,16 +46,15 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
   return (
     <CarouselContainer>
       <ScrollContainer ref={containerRef} onScroll={handleScroll}>
-        {items.map((item, index) => (
-          <CarouselItemContainer key={item!.id}>
-            <CodeBlock
-              id={item!.id}
+        {items.map((block, index) => (
+          <CarouselItemContainer key={index}>
+            <DropZoneItem
+              block={block}
               index={index}
-              containerType={ContainerType.CAROUSEL}
-              disabled={false}
-            >
-              {item!.content}
-            </CodeBlock>
+              getItem={getItem}
+              placeBlock={placeBlock}
+              removeWorkspaceBlock={removeWorkspaceBlock}
+            />
           </CarouselItemContainer>
         ))}
       </ScrollContainer>
@@ -68,6 +70,58 @@ export const BottomCarousel: React.FC<CarouselProps> = ({ items }) => {
     </CarouselContainer>
   );
 };
+
+// ######################
+// ### DropZoneItem
+// ######################
+
+interface DropZoneItemProps {
+  block: BlockItemState;
+  index: number;
+  getItem: (id: string) => BlockItemState;
+  placeBlock: (block: BlockItemState, index: number) => void;
+  removeWorkspaceBlock: (index: number) => void;
+}
+
+const DropZoneItem: React.FC<DropZoneItemProps> = ({
+  index,
+  block,
+  getItem,
+  placeBlock,
+  removeWorkspaceBlock,
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept: ItemTypes.CODE_BLOCK,
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+    drop: (item: DraggedItem) => {
+      removeWorkspaceBlock(item.index);
+    },
+  });
+
+  return (
+    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
+      {block ? (
+        <CodeBlock
+          id={block.id}
+          index={index}
+          containerType={ContainerType.WORKSPACE}
+        >
+          {block.content}
+        </CodeBlock>
+      ) : (
+        <Placeholder />
+      )}
+    </DropZoneStyled>
+  );
+};
+
+// ######################
+// ### Styled Components
+// ######################
 
 const carouselHeight = 64 + 40;
 
@@ -144,3 +198,41 @@ const CarouselItemContainer = styled(Box)(({ theme }) => ({
   height: '100%',
   padding: theme.spacing(0, 1),
 }));
+{
+  /* <CodeBlock
+              id={item!.id}
+              index={index}
+              containerType={ContainerType.CAROUSEL}
+              disabled={false}
+            >
+              {item!.content}
+            </CodeBlock> */
+}
+
+// DropZoneItem Styles
+
+const DropZoneStyled = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isOver',
+})<{ isOver: boolean }>(({ theme, isOver }) => ({
+  height: '48px',
+  minHeight: '48px',
+  border: `2px dashed ${theme.palette.grey[400]}`,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transform: isOver ? 'scale(1.02)' : 'scale(1)',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shorter,
+    easing: theme.transitions.easing.easeInOut,
+  }),
+}));
+
+const Placeholder = styled(Box)(({ theme }) => ({
+  color: 'grey',
+  fontStyle: 'italic',
+  ...theme.typography.subtitle2,
+}));
+
+const BlockContent = styled(Box)({
+  // Customize your block styling here
+});

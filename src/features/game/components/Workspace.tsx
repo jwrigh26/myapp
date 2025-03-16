@@ -5,12 +5,7 @@ import { styled } from '@mui/material/styles';
 import type { XYCoord } from 'dnd-core';
 import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
-import {
-  BlockItemState,
-  DraggedItem,
-  UseCarouselReturn,
-  UseWorkspaceReturn,
-} from '../types';
+import { BlockItemState, DraggedItem, GameProps } from '../types';
 
 // We'ere in container Type workspace here
 // We should onBlockDropped to be called when a block is dropped
@@ -19,15 +14,7 @@ import {
 
 // Carousel should handle moveToCarousel
 
-interface WorkspaceProps {
-  workspace: UseWorkspaceReturn;
-  carousel: UseCarouselReturn;
-}
-
-export const Workspace: React.FC<WorkspaceProps> = ({
-  workspace,
-  carousel,
-}) => {
+export const Workspace: React.FC<GameProps> = ({ workspace, carousel }) => {
   const { items, placeBlock, reorderBlocks } = workspace;
   const {
     getItem,
@@ -52,6 +39,10 @@ export const Workspace: React.FC<WorkspaceProps> = ({
     </WorkspaceContainer>
   );
 };
+
+// ######################
+// ### DropZoneItem
+// ######################
 
 interface DropZoneItemProps {
   block: BlockItemState;
@@ -126,7 +117,7 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
   drop(ref);
 
   return (
-    <DropZoneStyled ref={ref} isOver={isOver}>
+    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
       {block ? (
         <BlockContent>{block.content}</BlockContent>
       ) : (
@@ -135,6 +126,10 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
     </DropZoneStyled>
   );
 };
+
+// ######################
+// ### Styled Components
+// ######################
 
 const WorkspaceContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
