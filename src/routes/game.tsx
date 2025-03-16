@@ -2,7 +2,6 @@ import {
   BottomCarousel,
   ItemTypes,
   useCarousel,
-  useGame,
   useWorkspace,
   Workspace,
 } from '@/features/game';
@@ -57,13 +56,16 @@ function GameComponent() {
 
   const carousel = useCarousel(initialItems);
   const workspace = useWorkspace(dropZoneCount);
-  const game = useGame(solution, carousel, workspace);
+  // const game = useGame(solution, carousel, workspace);
+
+  // pass callbacks for removeCarouselBlock -> Workspace
+  // pass callbacks for removeWorkspaceBlock -> Carousel
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <PageLayout>
-        <Workspace items={workspace?.items} />
-        <BottomCarousel items={carousel.items} />
+        <Workspace workspace={workspace} carousel={carousel} />
+        <BottomCarousel carousel={carousel} workspace={workspace} />
       </PageLayout>
     </DndProvider>
   );

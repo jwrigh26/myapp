@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import React, { ReactNode } from 'react';
 import { useCodeBlock } from '../hooks/useCodeBlock';
 import { useGameActions } from '../hooks/useGame';
-import { ContainerType } from '../types';
+import { ContainerType } from '../constants';
 
 // We are only passing the react node back in useCodeBlock
 // and we are not passing a content anymore but expect codblock to take a child

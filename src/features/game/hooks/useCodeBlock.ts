@@ -1,8 +1,7 @@
+import type { XYCoord } from 'dnd-core';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import type { XYCoord } from 'dnd-core';
-import { ItemTypes } from '../constants';
-import { BlockItem, ContainerType } from '../types';
+import { ContainerType, ItemTypes } from '../constants';
 
 interface DragItem {
   id: string;

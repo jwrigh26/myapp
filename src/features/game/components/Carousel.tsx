@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { styled } from '@mui/material/styles';
+import Icon from '@/components/Icon';
+import { useDebounce } from '@/hooks/useDebounce';
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import MobileStepper from '@mui/material/MobileStepper';
-import Box from '@mui/material/Box';
-import { useDebounce } from '@/hooks/useDebounce';
-import Icon from '@/components/Icon';
-import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
-import { CarouselState, BlockItem, ContainerType } from '../types';
+import { styled } from '@mui/material/styles';
+import React, { useRef, useState } from 'react';
+import { ContainerType } from '../constants';
+import type { CarouselState } from '../types';
 import CodeBlock from './CodeBlock';
 
 interface CarouselProps {

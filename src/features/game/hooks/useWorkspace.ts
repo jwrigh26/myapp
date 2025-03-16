@@ -1,6 +1,11 @@
 // useWorkspace.ts
 import { useCallback, useState } from 'react';
-import { BlockItem, UseWorkspaceReturn, WorkspaceState } from '../types';
+import type {
+  BlockItem,
+  BlockItemState,
+  UseWorkspaceReturn,
+  WorkspaceState,
+} from '../types';
 
 /**
  * useWorkspace
@@ -8,22 +13,25 @@ import { BlockItem, UseWorkspaceReturn, WorkspaceState } from '../types';
  */
 export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
   // Initialize the workspace with fixed drop zones (all empty initially)
-  const [workspace, setWorkspace] = useState<WorkspaceState>(
+  const [items, setItems] = useState<WorkspaceState>(
     Array(dropZoneCount).fill(null)
   );
 
   // Place a block in a specific drop zone
-  const placeBlock = useCallback((block: BlockItem, index: number) => {
-    setWorkspace((prev) => {
+  const placeBlock = useCallback((block: BlockItemState, index: number) => {
+    if (!block) {
+      return;
+    }
+    setItems((prev) => {
       const newWorkspace = [...prev];
-      newWorkspace[index] = block;
+      newWorkspace[index] = block as BlockItem;
       return newWorkspace;
     });
   }, []);
 
   // Remove a block from a specific drop zone (set to empty)
   const removeBlock = useCallback((index: number) => {
-    setWorkspace((prev) => {
+    setItems((prev) => {
       const newWorkspace = [...prev];
       newWorkspace[index] = null;
       return newWorkspace;
@@ -32,7 +40,7 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
 
   // Reorder blocks by moving one from a source index to a target index
   const reorderBlocks = useCallback((fromIndex: number, toIndex: number) => {
-    setWorkspace((prev) => {
+    setItems((prev) => {
       const newWorkspace = [...prev];
       const [movedBlock] = newWorkspace.splice(fromIndex, 1);
       newWorkspace.splice(toIndex, 0, movedBlock);
@@ -42,11 +50,19 @@ export function useWorkspace(dropZoneCount: number): UseWorkspaceReturn {
 
   // Reset the workspace to all empty drop zones
   const resetWorkspace = useCallback(() => {
-    setWorkspace(Array(dropZoneCount).fill(null));
+    setItems(Array(dropZoneCount).fill(null));
   }, [dropZoneCount]);
 
+  const getItem = useCallback(
+    (id: string) => {
+      return items.find((item) => item?.id === id);
+    },
+    [items]
+  );
+
   return {
-    items: workspace,
+    items,
+    getItem,
     placeBlock,
     removeBlock,
     reorderBlocks,
