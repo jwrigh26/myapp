@@ -1,13 +1,7 @@
-import type { XYCoord } from 'dnd-core';
-import { useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import type { DragSourceOptions } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
-
-interface DragItem {
-  id: string;
-  index: number;
-  containerType: ContainerType;
-}
+import type { DraggedItem } from '../types';
 
 interface UseDragDropProps {
   id: string;
@@ -16,104 +10,63 @@ interface UseDragDropProps {
   disabled?: boolean;
 }
 
+// Define the type for the collected props
+interface CollectedProps {
+  isDragging: boolean;
+}
+
+// Extend DragSourceOptions with additional options
+interface ExtendedDragSourceOptions extends DragSourceOptions {
+  touchStartThreshold?: number;
+  moveThreshold?: number;
+  enableHoverOutsideTarget?: boolean;
+  delayTouchStart?: number;
+}
+
 export function useCodeBlock({
   id,
   index,
   containerType,
   disabled = false,
 }: UseDragDropProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  // const ref = useRef<HTMLDivElement | null>(null);
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag<DraggedItem, unknown, CollectedProps>({
     type: ItemTypes.CODE_BLOCK,
     item: { id, index, containerType },
+    canDrag: true,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    canDrag: !disabled,
-  });
-
-  const [{ isOver, canDrop }, drop] = useDrop<
-    DragItem,
-    void,
-    { isOver: boolean; canDrop: boolean }
-  >({
-    accept: ItemTypes.CODE_BLOCK,
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-    hover(item: DragItem, monitor) {
-      if (!ref.current) return;
-
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      const sourceContainer = item.containerType;
-      const targetContainer = containerType;
-
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex && sourceContainer === targetContainer) {
-        return;
-      }
-
-      // Get rectangle on screen
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-
-      // Get middle of the item
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-      // Get cursor position
-      const clientOffset = monitor.getClientOffset();
-      if (!clientOffset) return;
-
-      // Get pixels to the top
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-
-      // Handle different cases based on source and target containers
-      if (sourceContainer === targetContainer) {
-        // Moving within the same container
-        moveBlock(dragIndex, hoverIndex, sourceContainer);
-      } else if (
-        sourceContainer === ContainerType.CAROUSEL &&
-        targetContainer === ContainerType.WORKSPACE
-      ) {
-        // Moving from carousel to workspace
-        moveToWorkspace(dragIndex, hoverIndex);
-      } else if (
-        sourceContainer === ContainerType.WORKSPACE &&
-        targetContainer === ContainerType.CAROUSEL
-      ) {
-        // Moving from workspace to carousel
-        moveToCarousel(dragIndex, hoverIndex);
-      }
-
-      // Update the index for the dragged item
-      item.index = hoverIndex;
-      item.containerType = targetContainer;
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult();
+      console.log('end item: ', item, 'dropResult: ', dropResult);
+      // if (dropResult) {
+      //   const element = document.getElementById(id);
+      //   element?.classList.add('block-drag-end');
+      //   setTimeout(() => {
+      //     element?.classList.remove('block-drag-end');
+      //   }, 300);
+      // }
     },
+    // options: {
+    //   dropEffect: 'move',
+    //   touchStartThreshold: 5,
+    //   moveThreshold: 5,
+    //   enableHoverOutsideTarget: true,
+    //   delayTouchStart: 100,
+    // } as ExtendedDragSourceOptions,
   });
 
-  // Setup the drag and drop refs
-  const dragDropRef = (node: HTMLDivElement | null) => {
-    ref.current = node;
-    drag(drop(node));
-  };
+  // Setup the drag ref
+  // const dragRef = (node: HTMLDivElement | null) => {
+  //   ref.current = node;
+  //   drag(node);
+  // };
 
   return {
-    ref: dragDropRef,
+    // ref: dragRef,
+    drag,
     isDragging,
-    isOver,
-    canDrop,
   };
 }

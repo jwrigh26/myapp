@@ -1,8 +1,9 @@
 import Paper from '@mui/material/Paper';
 import { styled, useTheme } from '@mui/material/styles';
 import { Highlight, themes } from 'prism-react-renderer';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { ContainerType } from '../constants';
+import { useCodeBlock } from '../hooks/useCodeBlock';
 import type { CodeBlockProps } from '../types';
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -23,8 +24,33 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     padding: theme.spacing(0, 1),
   };
 
+  const { drag, isDragging } = useCodeBlock({
+    id,
+    index,
+    containerType,
+    disabled,
+  });
+
+  React.useEffect(() => {
+    if (isDragging) {
+      console.log('Dragging: ', id);
+    }
+  }, [isDragging, id]);
+
   return (
-    <CodeBlockWrapper containerType={containerType} disabled={disabled}>
+    <CodeBlockWrapper
+      containerType={containerType}
+      disabled={false}
+      ref={drag}
+      // onMouseDown={(e: {
+      //   preventDefault: () => void;
+      //   stopPropagation: () => void;
+      // }) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      // }}
+      // style={{ touchAction: 'none' }}
+    >
       <Highlight theme={prismTheme} code={code} language="python">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, ...overrideStyles }}>
@@ -46,24 +72,31 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   );
 };
 
-interface CodeBlockWrapperProps {
+interface CodeBlockWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   containerType?: ContainerType;
   disabled: boolean;
+  children?: React.ReactNode;
+  isDragging?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
-const CodeBlockWrapper = styled(Paper, {
+// Create the base styled component
+const StyledPaper = styled(Paper, {
   shouldForwardProp: (prop) =>
     !['isDragging', 'isOver', 'containerType', 'disabled'].includes(
       prop as string
     ),
-})<CodeBlockWrapperProps>(({ theme, disabled }) => ({
-  position: 'absolute',
-  top: -2,
-  left: -2,
-  bottom: -2,
-  right: -2,
+})<Omit<CodeBlockWrapperProps, 'ref'>>(({ theme, disabled, isDragging }) => ({
+  position: 'relative',
+  // top: -2,
+  // left: -2,
+  // bottom: -2,
+  // right: -2,
+  width: '100%',
+  // height: '100%',
+  height: '48px',
   cursor: disabled ? 'default' : 'grab',
-  border: `2px solid ${theme.palette.background.default}`,
+  border: `2px solid ${isDragging ? 'green' : theme.palette.background.default}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
@@ -72,5 +105,24 @@ const CodeBlockWrapper = styled(Paper, {
     ? theme.palette.grey[300]
     : theme.palette.background.default,
 }));
+
+// Create the forwardRef component
+const CodeBlockWrapper = forwardRef<
+  HTMLDivElement,
+  Omit<CodeBlockWrapperProps, 'ref'>
+>(({ containerType, disabled, children, ...rest }, ref) => {
+  return (
+    <StyledPaper
+      ref={ref}
+      containerType={containerType}
+      disabled={disabled}
+      {...rest}
+    >
+      {children}
+    </StyledPaper>
+  );
+});
+
+CodeBlockWrapper.displayName = 'CodeBlockWrapper';
 
 export default CodeBlock;

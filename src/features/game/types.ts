@@ -11,7 +11,7 @@ export type CarouselState = Array<BlockItem | null>;
 export type DraggedItem = {
   id: string;
   index: number;
-  containerType?: ContainerType;
+  containerType: ContainerType;
 };
 
 export type WorkspaceState = Array<BlockItem | null>;
