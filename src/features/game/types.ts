@@ -7,12 +7,9 @@ export interface BlockItem {
   order?: number;
 }
 
-export type DraggedItem = { id: string; index: number };
+export type BlockItemState = BlockItem | null | undefined;
 
-export enum ContainerType {
-  CAROUSEL = 'carousel',
-  WORKSPACE = 'workspace',
-}
+export type DraggedItem = { id: string; index: number };
 
 export type CarouselState = Array<BlockItem | null>;
 
@@ -23,7 +20,8 @@ export interface GameResult {
 
 export interface UseCarouselReturn {
   items: CarouselState;
-  placeBlock: (block: BlockItem, index: number) => void;
+  getItem: (index: string) => BlockItemState;
+  placeBlock: (block: BlockItemState, index: number) => void;
   removeBlock: (index: number) => void;
   reset: () => void;
   shuffleItems: () => void;
@@ -34,7 +32,8 @@ export type WorkspaceState = Array<BlockItem | null>;
 
 export interface UseWorkspaceReturn {
   items: WorkspaceState;
-  placeBlock: (block: BlockItem, index: number) => void;
+  getItem: (index: string) => BlockItemState;
+  placeBlock: (block: BlockItemState, index: number) => void;
   removeBlock: (index: number) => void;
   reorderBlocks: (fromIndex: number, toIndex: number) => void;
   reset: () => void;

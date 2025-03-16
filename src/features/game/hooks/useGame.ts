@@ -1,7 +1,7 @@
 import { useTemp } from '@/hooks/useContext';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { StorageKeys } from '../constants';
-import {
+import type {
   BlockItem,
   GameResult,
   UseCarouselReturn,

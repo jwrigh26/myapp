@@ -2,10 +2,15 @@
 import { ItemTypes } from '@/features/game'; // Ensure this matches your defined item type
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import React from 'react';
+import type { XYCoord } from 'dnd-core';
+import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
-import { useGameActions } from '../hooks/useGame';
-import { BlockItem, DraggedItem, WorkspaceState } from '../types';
+import {
+  BlockItemState,
+  DraggedItem,
+  UseCarouselReturn,
+  UseWorkspaceReturn,
+} from '../types';
 
 // We'ere in container Type workspace here
 // We should onBlockDropped to be called when a block is dropped
@@ -15,19 +20,33 @@ import { BlockItem, DraggedItem, WorkspaceState } from '../types';
 // Carousel should handle moveToCarousel
 
 interface WorkspaceProps {
-  items: WorkspaceState;
+  workspace: UseWorkspaceReturn;
+  carousel: UseCarouselReturn;
 }
 
-export const Workspace: React.FC<WorkspaceProps> = ({ items }) => {
-  const actions = useGameActions();
+export const Workspace: React.FC<WorkspaceProps> = ({
+  workspace,
+  carousel,
+}) => {
+  const { items, placeBlock, reorderBlocks } = workspace;
+  const {
+    getItem,
+    onBlockDropped,
+    removeBlock: removeCarouselBlock,
+  } = carousel;
 
   return (
     <WorkspaceContainer>
       {items?.map((block, index) => (
         <DropZoneItem
-          key={index}
           block={block}
-          onBlockDropped={actions?.onBlockDropped}
+          getItem={getItem}
+          index={index}
+          key={index}
+          onBlockDropped={onBlockDropped}
+          placeBlock={placeBlock}
+          removeCarouselBlock={removeCarouselBlock}
+          reorderBlocks={reorderBlocks}
         />
       ))}
     </WorkspaceContainer>
@@ -35,35 +54,79 @@ export const Workspace: React.FC<WorkspaceProps> = ({ items }) => {
 };
 
 interface DropZoneItemProps {
-  block: BlockItem | null;
+  block: BlockItemState;
+  index: number;
+  getItem: (id: string) => BlockItemState;
   onBlockDropped?: (item: DraggedItem) => void;
+  placeBlock: (block: BlockItemState, index: number) => void;
+  removeCarouselBlock: (index: number) => void;
+  reorderBlocks: (fromIndex: number, toIndex: number) => void;
 }
 
 // Only responsible for make the onBlockDropped call
 const DropZoneItem: React.FC<DropZoneItemProps> = ({
+  index,
   block,
+  getItem,
   onBlockDropped,
+  placeBlock,
+  removeCarouselBlock,
+  reorderBlocks,
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.CODE_BLOCK,
-    drop: (draggedItem: DraggedItem) => {
-      if (!block && canDrop && onBlockDropped) {
-        onBlockDropped(draggedItem);
-
-        // Move to workspace
-      }
-
-      // if block then moveBlock
-      return undefined;
-    },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
+    hover: (item: DraggedItem, monitor) => {
+      if (!canDrop || !block || !ref.current) {
+        return;
+      }
+
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddlyY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddlyY) {
+        return;
+      }
+
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddlyY) {
+        return;
+      }
+
+      reorderBlocks(dragIndex, hoverIndex);
+    },
+    drop: (draggedItem: DraggedItem) => {
+      if (!block && canDrop && onBlockDropped) {
+        // Move to workspace: placeBlock
+        // Make carousle scroll to next block: onBlockDropped
+        // Remove block from carousel: removeCarouselBlock
+        placeBlock(getItem(draggedItem.id), index);
+        onBlockDropped(draggedItem);
+        removeCarouselBlock(draggedItem.index);
+      }
+
+      return undefined;
+    },
   });
 
+  // TODO: Implement Dragging
+
+  drop(ref);
+
   return (
-    <DropZoneStyled ref={drop} isOver={isOver}>
+    <DropZoneStyled ref={ref} isOver={isOver}>
       {block ? (
         <BlockContent>{block.content}</BlockContent>
       ) : (

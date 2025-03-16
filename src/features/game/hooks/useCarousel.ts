@@ -1,6 +1,8 @@
 // useCarousel.ts
 import { useCallback, useState } from 'react';
-import { BlockItem, CarouselState, UseCarouselReturn } from '../types';
+import type { BlockItem, CarouselState, UseCarouselReturn } from '../types';
+
+// TODO: Fix this to have some things like Workspace
 
 /**
  * useCarousel
@@ -54,8 +56,16 @@ export function useCarousel(initialItems: CarouselState): UseCarouselReturn {
     }, 300);
   }, []);
 
+  const getItem = useCallback(
+    (id: string) => {
+      return items.find((item) => item?.id === id);
+    },
+    [items]
+  );
+
   return {
     items,
+    getItem,
     placeBlock,
     removeBlock,
     shuffleItems,

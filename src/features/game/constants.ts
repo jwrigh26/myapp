@@ -9,3 +9,8 @@ export const StorageKeys = {
 export const ItemTypes = {
   CODE_BLOCK: 'code-block',
 };
+
+export enum ContainerType {
+  CAROUSEL = 'carousel',
+  WORKSPACE = 'workspace',
+}

@@ -82,3 +82,30 @@ Carousel
 - placeBlock
 - removeBlock
 - onBlockDropped
+
+We can have Carousel behave like Workspace. For each item it's there or null.
+
+That way we can check what action to perform
+
+WorkSpace:
+
+**No block**
+
+- call onBlockDropped
+- call placeBlock
+
+**block**
+
+- call reorderBlocks
+
+- What I don't know is how to removeBlock
+
+Carousel:
+
+**No block**
+
+- call placeBlock
+
+  - to return block back to carousel
+
+- How to call removeBlock
