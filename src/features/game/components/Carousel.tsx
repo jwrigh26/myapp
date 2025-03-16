@@ -98,9 +98,22 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
       canDrop: monitor.canDrop(),
     }),
     drop: (item: DraggedItem) => {
-      removeWorkspaceBlock(item.index);
+      if (!canDrop || !ref.current) {
+        return;
+      }
+
+      if (item?.containerType === ContainerType.WORKSPACE) {
+        // Move block from workspace to carousel
+        // Remove block from workspace
+        placeBlock(getItem(item.id), index);
+        removeWorkspaceBlock(item.index);
+      }
+
+      return;
     },
   });
+
+  drop(ref);
 
   return (
     <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
@@ -109,9 +122,8 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
           id={block.id}
           index={index}
           containerType={ContainerType.WORKSPACE}
-        >
-          {block.content}
-        </CodeBlock>
+          code={block.code}
+        />
       ) : (
         <Placeholder />
       )}
@@ -197,20 +209,10 @@ const CarouselItemContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   height: '100%',
   padding: theme.spacing(0, 1),
+  backgroundColor: 'purple',
 }));
-{
-  /* <CodeBlock
-              id={item!.id}
-              index={index}
-              containerType={ContainerType.CAROUSEL}
-              disabled={false}
-            >
-              {item!.content}
-            </CodeBlock> */
-}
 
 // DropZoneItem Styles
-
 const DropZoneStyled = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isOver',
 })<{ isOver: boolean }>(({ theme, isOver }) => ({
@@ -225,6 +227,9 @@ const DropZoneStyled = styled(Box, {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeInOut,
   }),
+  width: '100%',
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
 }));
 
 const Placeholder = styled(Box)(({ theme }) => ({
@@ -232,7 +237,3 @@ const Placeholder = styled(Box)(({ theme }) => ({
   fontStyle: 'italic',
   ...theme.typography.subtitle2,
 }));
-
-const BlockContent = styled(Box)({
-  // Customize your block styling here
-});

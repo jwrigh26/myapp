@@ -1,11 +1,12 @@
 // Workspace.tsx
-import { ItemTypes } from '@/features/game'; // Ensure this matches your defined item type
+import { ContainerType, ItemTypes } from '@/features/game'; // Ensure this matches your defined item type
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import type { XYCoord } from 'dnd-core';
 import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 import { BlockItemState, DraggedItem, GameProps } from '../types';
+import CodeBlock from './CodeBlock';
 
 // We'ere in container Type workspace here
 // We should onBlockDropped to be called when a block is dropped
@@ -98,17 +99,20 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
 
       reorderBlocks(dragIndex, hoverIndex);
     },
-    drop: (draggedItem: DraggedItem) => {
-      if (!block && canDrop && onBlockDropped) {
-        // Move to workspace: placeBlock
-        // Make carousle scroll to next block: onBlockDropped
-        // Remove block from carousel: removeCarouselBlock
-        placeBlock(getItem(draggedItem.id), index);
-        onBlockDropped(draggedItem);
-        removeCarouselBlock(draggedItem.index);
+    drop: (item: DraggedItem) => {
+      if (!canDrop || !ref.current) {
+        return;
+      }
+      if (item?.containerType === ContainerType.CAROUSEL && onBlockDropped) {
+        // Make carousle scroll to next block
+        // Move to workspace
+        // Remove block from carousel
+        onBlockDropped(item);
+        placeBlock(getItem(item.id), index);
+        removeCarouselBlock(item.index);
       }
 
-      return undefined;
+      return;
     },
   });
 
@@ -119,7 +123,12 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
   return (
     <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
       {block ? (
-        <BlockContent>{block.content}</BlockContent>
+        <CodeBlock
+          id={block.id}
+          index={index}
+          containerType={ContainerType.WORKSPACE}
+          code={block.code}
+        />
       ) : (
         <Placeholder>Drop here</Placeholder>
       )}
@@ -151,6 +160,9 @@ const DropZoneStyled = styled(Box, {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeInOut,
   }),
+  width: '100%',
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
 }));
 
 const Placeholder = styled(Box)(({ theme }) => ({
@@ -158,7 +170,3 @@ const Placeholder = styled(Box)(({ theme }) => ({
   fontStyle: 'italic',
   ...theme.typography.subtitle2,
 }));
-
-const BlockContent = styled(Box)({
-  // Customize your block styling here
-});

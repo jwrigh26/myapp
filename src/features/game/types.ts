@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ContainerType } from './constants';
 
 // ######################
 // ### Types
@@ -8,7 +8,11 @@ export type BlockItemState = BlockItem | null | undefined;
 
 export type CarouselState = Array<BlockItem | null>;
 
-export type DraggedItem = { id: string; index: number };
+export type DraggedItem = {
+  id: string;
+  index: number;
+  containerType?: ContainerType;
+};
 
 export type WorkspaceState = Array<BlockItem | null>;
 
@@ -19,7 +23,7 @@ export type WorkspaceState = Array<BlockItem | null>;
 export interface BlockItem {
   id: string;
   type: string;
-  content: ReactNode | string;
+  code: string;
   order?: number;
 }
 
@@ -40,6 +44,14 @@ export interface UseWorkspaceReturn {
   removeBlock: (index: number) => void;
   reorderBlocks: (fromIndex: number, toIndex: number) => void;
   reset: () => void;
+}
+
+export interface CodeBlockProps {
+  id: string; // Matches with block.id
+  index: number; // index in the workspace or carousel
+  containerType: ContainerType; // let's us know where the block is coming from
+  code: string; // code to display
+  disabled?: boolean; // disable the block
 }
 
 export interface GameProps {
