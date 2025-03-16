@@ -142,9 +142,9 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
   bottom: 0,
   left: 0,
   width: '100%',
-  backgroundColor: theme.palette.background.paper,
+  background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.primary.dark} 50%, ${theme.palette.primary.main})`,
   display: 'flex',
-  flexDirection: 'column', // Changed to column
+  flexDirection: 'column',
   padding: 0,
   zIndex: 1300,
   height: carouselHeight,
@@ -209,7 +209,6 @@ const CarouselItemContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   height: '100%',
   padding: theme.spacing(0, 1),
-  backgroundColor: 'purple',
 }));
 
 // DropZoneItem Styles
