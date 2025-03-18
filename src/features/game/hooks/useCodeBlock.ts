@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { DragSourceOptions } from 'react-dnd';
 import { useDrag } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
@@ -31,7 +32,11 @@ export function useCodeBlock({
 }: UseDragDropProps) {
   // const ref = useRef<HTMLDivElement | null>(null);
 
-  const [{ isDragging }, drag] = useDrag<DraggedItem, unknown, CollectedProps>({
+  const [{ isDragging }, drag, preview] = useDrag<
+    DraggedItem,
+    unknown,
+    CollectedProps
+  >({
     type: ItemTypes.CODE_BLOCK,
     item: { id, index, containerType },
     canDrag: true,
@@ -49,13 +54,13 @@ export function useCodeBlock({
       //   }, 300);
       // }
     },
-    // options: {
-    //   dropEffect: 'move',
-    //   touchStartThreshold: 5,
-    //   moveThreshold: 5,
-    //   enableHoverOutsideTarget: true,
-    //   delayTouchStart: 100,
-    // } as ExtendedDragSourceOptions,
+    options: {
+      dropEffect: 'move',
+      touchStartThreshold: 5,
+      moveThreshold: 5,
+      enableHoverOutsideTarget: true,
+      delayTouchStart: 100,
+    } as ExtendedDragSourceOptions,
   });
 
   // Setup the drag ref
@@ -63,6 +68,13 @@ export function useCodeBlock({
   //   ref.current = node;
   //   drag(node);
   // };
+
+  useEffect(() => {
+    if (preview) {
+      // preview(getEmptyImage(), { captureDraggingState: true });
+      preview(null);
+    }
+  }, [preview]);
 
   return {
     // ref: dragRef,
