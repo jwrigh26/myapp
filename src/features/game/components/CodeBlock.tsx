@@ -42,6 +42,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       containerType={containerType}
       disabled={false}
       ref={drag}
+      isDragging={true}
+      // TODO: Come back here and figure why this causes drag to not work
+      // onTouchCancel={(e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      // }}
       // onMouseDown={(e: {
       //   preventDefault: () => void;
       //   stopPropagation: () => void;
@@ -49,7 +55,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       //   e.preventDefault();
       //   e.stopPropagation();
       // }}
-      // style={{ touchAction: 'none' }}
+      style={{ touchAction: 'none' }}
     >
       <Highlight theme={prismTheme} code={code} language="python">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
