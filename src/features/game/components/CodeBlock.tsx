@@ -5,6 +5,7 @@ import React, { forwardRef } from 'react';
 import { ContainerType } from '../constants';
 import { useCodeBlock } from '../hooks/useCodeBlock';
 import type { CodeBlockProps } from '../types';
+import { CODE_BLOCK_HEIGHT } from './Styles';
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   id,
@@ -41,18 +42,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       disabled={false}
       ref={drag}
       isDragging={isDragging}
-      // TODO: Come back here and figure why this causes drag to not work
-      // onTouchCancel={(e) => {
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      // }}
-      // onMouseDown={(e: {
-      //   preventDefault: () => void;
-      //   stopPropagation: () => void;
-      // }) => {
-      //   e.preventDefault();
-      //   e.stopPropagation();
-      // }}
       style={{ touchAction: 'none' }}
     >
       <Highlight theme={prismTheme} code={code} language="python">
@@ -92,16 +81,11 @@ const StyledPaper = styled(Paper, {
     ),
 })<Omit<CodeBlockWrapperProps, 'ref'>>(({ theme, disabled, isDragging }) => ({
   position: 'relative',
-  // top: -2,
-  // left: -2,
-  // bottom: -2,
-  // right: -2,
   width: '100%',
-  // height: '100%',
-  height: '48px',
+  height: `${CODE_BLOCK_HEIGHT}px`, 
   cursor: disabled ? 'default' : 'grab',
-  border: `2px solid ${isDragging ? 'green' : theme.palette.background.default}`,
-  display: 'flex',
+  // border: `2px solid ${isDragging ? 'green' : theme.palette.background.default}`,
+  display: isDragging ? 'none' : 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
   borderRadius: theme.shape.borderRadius,

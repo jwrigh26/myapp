@@ -7,6 +7,7 @@ import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 import { BlockItemState, DraggedItem, GameProps } from '../types';
 import CodeBlock from './CodeBlock';
+import { CODE_BLOCK_HEIGHT } from './Styles';
 
 // We'ere in container Type workspace here
 // We should onBlockDropped to be called when a block is dropped
@@ -149,8 +150,8 @@ const WorkspaceContainer = styled(Box)(({ theme }) => ({
 const DropZoneStyled = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isOver',
 })<{ isOver: boolean }>(({ theme, isOver }) => ({
-  height: '48px',
-  minHeight: '48px',
+  height: `${CODE_BLOCK_HEIGHT}px`, 
+  minHeight: `${CODE_BLOCK_HEIGHT}px`, 
   border: `2px dashed ${theme.palette.grey[400]}`,
   display: 'flex',
   alignItems: 'center',

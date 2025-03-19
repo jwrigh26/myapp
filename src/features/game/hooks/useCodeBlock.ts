@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { DragSourceOptions, ConnectDragPreview } from 'react-dnd';
+import type { DragSourceMonitor, DragSourceOptions, ConnectDragPreview } from 'react-dnd';
 import { useDrag } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
 import type { DraggedItem } from '../types';
@@ -44,19 +44,12 @@ export function useCodeBlock({
     type: ItemTypes.CODE_BLOCK,
     item: { id, index, containerType, code },
     canDrag: true,
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    end: (item, monitor) => {
+    end: (item, monitor: DragSourceMonitor) => {
       const dropResult = monitor.getDropResult();
       console.log('end item: ', item, 'dropResult: ', dropResult);
-      // if (dropResult) {
-      //   const element = document.getElementById(id);
-      //   element?.classList.add('block-drag-end');
-      //   setTimeout(() => {
-      //     element?.classList.remove('block-drag-end');
-      //   }, 300);
-      // }
     },
     options: {
       dropEffect: 'move',
@@ -84,3 +77,15 @@ export function useCodeBlock({
     isDragging,
   };
 }
+
+      
+
+// Was used in drop to animate but not sure this is the right way
+// move to the drop of workspace or carousel maybe
+      // if (dropResult) {
+      //   const element = document.getElementById(id);
+      //   element?.classList.add('block-drag-end');
+      //   setTimeout(() => {
+      //     element?.classList.remove('block-drag-end');
+      //   }, 300);
+      // }
