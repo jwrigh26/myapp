@@ -153,10 +153,11 @@ const DropZoneStyled = styled(Box, {
   height: `${CODE_BLOCK_HEIGHT}px`, 
   minHeight: `${CODE_BLOCK_HEIGHT}px`, 
   border: `2px dashed ${theme.palette.grey[400]}`,
+  opacity: isOver ? 1 : 0.7,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transform: isOver ? 'scale(1.02, 1.4)' : 'scale(1)',
+  transform: isOver ? 'scale(1.01, 1.2)' : 'scale(1)',
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shorter,
     easing: theme.transitions.easing.easeInOut,
