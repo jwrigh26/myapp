@@ -13,4 +13,5 @@ export const ItemTypes = {
 export enum ContainerType {
   CAROUSEL = 'carousel',
   WORKSPACE = 'workspace',
+  PREVIEW = 'preview',
 }

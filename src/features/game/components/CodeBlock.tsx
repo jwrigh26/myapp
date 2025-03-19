@@ -24,25 +24,23 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     padding: theme.spacing(0, 1),
   };
 
+  // Ensure code is always a string
+  const safeCode = typeof code === 'string' ? code : '';
+
   const { drag, isDragging } = useCodeBlock({
     id,
     index,
     containerType,
+    code: safeCode,
     disabled,
   });
-
-  React.useEffect(() => {
-    if (isDragging) {
-      console.log('Dragging: ', id);
-    }
-  }, [isDragging, id]);
 
   return (
     <CodeBlockWrapper
       containerType={containerType}
       disabled={false}
       ref={drag}
-      isDragging={true}
+      isDragging={isDragging}
       // TODO: Come back here and figure why this causes drag to not work
       // onTouchCancel={(e) => {
       //   e.preventDefault();
