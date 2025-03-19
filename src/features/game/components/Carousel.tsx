@@ -10,6 +10,7 @@ import { useDrop } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
 import type { BlockItemState, DraggedItem, GameProps } from '../types';
 import CodeBlock from './CodeBlock';
+import { CODE_BLOCK_HEIGHT } from './Styles';
 
 export const BottomCarousel: React.FC<GameProps> = ({
   workspace,
@@ -115,30 +116,27 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
 
   drop(ref);
 
-  return (
-    <CodeBlock
-      id={block!.id}
-      index={index}
-      containerType={ContainerType.CAROUSEL}
-      code={block!.code}
-    />
-  );
   // return (
-  //   <>
-  //     {block ? (
-  //       <CodeBlock
-  //         id={block.id}
-  //         index={index}
-  //         containerType={ContainerType.CAROUSEL}
-  //         code={block.code}
-  //       />
-  //     ) : (
-  //       <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
-  //         <Placeholder />
-  //       </DropZoneStyled>
-  //     )}
-  //   </>
+  //   <CodeBlock
+  //     id={block!.id}
+  //     index={index}
+  //     containerType={ContainerType.CAROUSEL}
+  //     code={block!.code}
+  //   />
   // );
+  return (
+    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
+      {block && (
+        <CodeBlock
+          id={block.id}
+          index={index}
+          containerType={ContainerType.CAROUSEL}
+          code={block.code}
+        />
+      )}
+      <Placeholder isOver={isOver && canDrop}>Drop Here</Placeholder>
+    </DropZoneStyled>
+  );
 };
 
 // ######################
@@ -225,24 +223,47 @@ const CarouselItemContainer = styled(Box)(({ theme }) => ({
 const DropZoneStyled = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isOver',
 })<{ isOver: boolean }>(({ theme, isOver }) => ({
-  height: '48px',
-  minHeight: '48px',
-  border: `2px dashed ${theme.palette.grey[400]}`,
+  height: `${CODE_BLOCK_HEIGHT}px`,
+  minHeight: `${CODE_BLOCK_HEIGHT}px`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  transform: isOver ? 'scale(1.02)' : 'scale(1)',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shorter,
-    easing: theme.transitions.easing.easeInOut,
-  }),
   width: '100%',
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    top: theme.spacing(0.5),
+    left: theme.spacing(0.5),
+    right: theme.spacing(0.5),
+    bottom: theme.spacing(0.5),
+    borderRadius: theme.shape.borderRadius,
+    border: `2px dashed ${theme.palette.common.black}`,
+    pointerEvents: 'none',
+    opacity: isOver ? 0.5 : 0.25,
+    transform: isOver ? 'scale(1.02)' : 'scale(1)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shorter,
+      easing: theme.transitions.easing.easeInOut,
+    }),
+    zIndex: -1,
+  },
 }));
 
-const Placeholder = styled(Box)(({ theme }) => ({
-  color: 'grey',
+const Placeholder = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isOver',
+})<{ isOver: boolean }>(({ theme, isOver }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: -1,
+  color: theme.palette.common.black,
+  opacity: isOver ? 0.5 : 0.25,
   fontStyle: 'italic',
   ...theme.typography.subtitle2,
 }));
