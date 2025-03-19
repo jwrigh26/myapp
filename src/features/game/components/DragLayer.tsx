@@ -58,7 +58,7 @@ export function TouchPreview() {
           containerType={ContainerType.PREVIEW}
         /> */}
         <Box sx={{ backgroundColor: 'red' }}>
-          {previewItemData.id} -- Touch Preview
+          {previewItemData.code} -- Touch Preview
         </Box>
       </Box>
     </DragContainer>
@@ -87,8 +87,8 @@ export function DragLayer() {
   }
 
   // FIXED: The condition was inverted - we WANT to show when id is present
-  if (!('id' in item)) {
-    console.log('DragLayer: Missing id in item', item);
+  if (!('id' in item) || !('code' in item)) {
+    console.log('DragLayer: Missing id/code in item', item);
     return null;
   }
 
@@ -96,16 +96,13 @@ export function DragLayer() {
 
   return (
     <DragContainer>
-      <DragPreview transform={transform}>
-        {/* <CodeBlock
-          id={block.id}
+      <DragPreview isDragging={isDragging} transform={transform}>
+        <CodeBlock
+          id={item!.id}
           index={0}
-          code={block.code}
+          code={item!.code}
           containerType={ContainerType.PREVIEW}
-        /> */}
-        <Box sx={{ backgroundColor: 'orange' }}>
-          {item.id} -- Desktop Preview
-        </Box>
+        />
       </DragPreview>
     </DragContainer>
   );
@@ -137,9 +134,23 @@ const DragContainer = styled(Box)(({ theme }) => ({
   height: '100%',
 }));
 
+interface DragPreviewProps {
+  transform: string;
+  isDragging?: boolean;
+}
+
 const DragPreview = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'transform',
-})<{ transform: string }>(({ theme, transform }) => ({
-  transform: `${transform} scale(0.8)`,
+  shouldForwardProp: (prop) => prop !== 'transform' && prop !== 'isDragging',
+})<DragPreviewProps>(({ theme, transform, isDragging = false }) => ({
+  transform: `${transform} scale(0.88, 0.8)`,
   width: '100%',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.background.paper,
+  boxShadow: theme.shadows[5],
+  border: `2px solid ${theme.palette.secondary.main}`,
+  // TODO: Fix transition - desktop is janky but mobile is fine
+  // transition: isDragging ? 'none' : theme.transitions.create('transform', {
+  //   duration: theme.transitions.duration.shorter,
+  //   easing: theme.transitions.easing.easeInOut,
+  // }),
 }));

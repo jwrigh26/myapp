@@ -84,7 +84,6 @@ const StyledPaper = styled(Paper, {
   width: '100%',
   height: `${CODE_BLOCK_HEIGHT}px`, 
   cursor: disabled ? 'default' : 'grab',
-  // border: `2px solid ${isDragging ? 'green' : theme.palette.background.default}`,
   display: isDragging ? 'none' : 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',

@@ -30,11 +30,12 @@ const mouseTransition = createTransition('mouseDown', (event) => {
 
 const HTML5toTouch = {
   backends: [
-    {
-      id: 'html5',
-      backend: HTML5Backend,
-      // transition: mouseTransition,
-    },
+    // Not sure why this doesn't work
+    // {
+    //   id: 'html5',
+    //   backend: HTML5Backend,
+    //   transition: mouseTransition,
+    // },
     {
       id: 'touch',
       backend: TouchBackend,
@@ -74,9 +75,6 @@ function GameComponent() {
   const carousel = useCarousel(initialItems);
   const workspace = useWorkspace(dropZoneCount);
   // const game = useGame(solution, carousel, workspace);
-
-  // pass callbacks for removeCarouselBlock -> Workspace
-  // pass callbacks for removeWorkspaceBlock -> Carousel
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
