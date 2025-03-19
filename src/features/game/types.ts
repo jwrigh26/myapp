@@ -12,6 +12,7 @@ export type DraggedItem = {
   id: string;
   index: number;
   containerType: ContainerType;
+  code: string;
 };
 
 export type WorkspaceState = Array<BlockItem | null>;

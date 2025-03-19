@@ -109,7 +109,7 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
         // removeWorkspaceBlock(item.index);
       }
 
-      return;
+      return item;
     },
   });
 

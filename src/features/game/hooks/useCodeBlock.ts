@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
-import type { DragSourceOptions } from 'react-dnd';
+import type { DragSourceOptions, ConnectDragPreview } from 'react-dnd';
 import { useDrag } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
 import type { DraggedItem } from '../types';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 interface UseDragDropProps {
   id: string;
   index: number;
   containerType: ContainerType;
+  code: string;      
   disabled?: boolean;
+  preview?: ConnectDragPreview;
 }
 
 // Define the type for the collected props
@@ -28,17 +31,18 @@ export function useCodeBlock({
   id,
   index,
   containerType,
+  code,
   disabled = false,
 }: UseDragDropProps) {
   // const ref = useRef<HTMLDivElement | null>(null);
 
-  const [{ isDragging }, drag, preview] = useDrag<
+  const [{ isDragging }, drag, dragPreview] = useDrag<
     DraggedItem,
     unknown,
     CollectedProps
   >({
     type: ItemTypes.CODE_BLOCK,
-    item: { id, index, containerType },
+    item: { id, index, containerType, code },
     canDrag: true,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -56,12 +60,12 @@ export function useCodeBlock({
     },
     options: {
       dropEffect: 'move',
-      touchStartThreshold: 5,
-      moveThreshold: 5,
+      touchStartThreshold: 2,
+      moveThreshold: 2,
       enableHoverOutsideTarget: true,
-      delayTouchStart: 100,
+      delayTouchStart: 50,
     } as ExtendedDragSourceOptions,
-  });
+  }, [id, index, containerType, code]);
 
   // Setup the drag ref
   // const dragRef = (node: HTMLDivElement | null) => {
@@ -70,14 +74,12 @@ export function useCodeBlock({
   // };
 
   useEffect(() => {
-    if (preview) {
-      // preview(getEmptyImage(), { captureDraggingState: true });
-      preview(null);
+    if (dragPreview) {
+      dragPreview(getEmptyImage(), { captureDraggingState: true });
     }
-  }, [preview]);
+  }, []);
 
   return {
-    // ref: dragRef,
     drag,
     isDragging,
   };

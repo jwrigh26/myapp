@@ -6,3 +6,4 @@ export { useCarousel } from './hooks/useCarousel';
 export { useCodeBlock } from './hooks/useCodeBlock';
 export { useGame } from './hooks/useGame';
 export { useWorkspace } from './hooks/useWorkspace';
+export { TouchPreview, DragLayer } from './components/DragLayer';

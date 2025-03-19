@@ -1,9 +1,11 @@
 import {
   BottomCarousel,
+  DragLayer,
   ItemTypes,
   useCarousel,
   useWorkspace,
   Workspace,
+  TouchPreview,
 } from '@/features/game';
 import { BlockItem } from '@/features/game/types';
 import { PageLayout } from '@/layout';
@@ -12,20 +14,35 @@ import { styled } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { TouchTransition } from 'react-dnd-multi-backend';
+import {
+  MultiBackend,
+  createTransition,
+  TouchTransition,
+} from 'react-dnd-multi-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
+
+// Define a custom transition
+// import createTransition from 'react-dnd-multi-backend';
+// mousedown or touchstart
+const mouseTransition = createTransition('mouseDown', (event) => {
+  return (event as TouchEvent).touches != null;
+});
 
 const HTML5toTouch = {
   backends: [
     {
       id: 'html5',
       backend: HTML5Backend,
-      transition: TouchTransition,
+      // transition: mouseTransition,
     },
     {
       id: 'touch',
       backend: TouchBackend,
-      options: { enableTouchEvents: true },
+      options: {
+        enableMouseEvents: true,
+        delayTouchStart: 100,
+      },
+      transition: TouchTransition,
       preview: true,
     },
   ],
@@ -61,13 +78,14 @@ function GameComponent() {
   // pass callbacks for removeCarouselBlock -> Workspace
   // pass callbacks for removeWorkspaceBlock -> Carousel
 
-  // <DndProvider backend={MultiBackend} options={HTML5toTouch}></DndProvider>
   return (
-    <DndProvider backend={TouchBackend}>
+    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <PageLayout>
         <Workspace workspace={workspace} carousel={carousel} />
         <BottomCarousel carousel={carousel} workspace={workspace} />
       </PageLayout>
+      <DragLayer />
+      {/* <TouchPreview /> */}
     </DndProvider>
   );
 }
