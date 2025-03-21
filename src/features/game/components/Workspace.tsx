@@ -101,7 +101,7 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
       reorderBlocks(dragIndex, hoverIndex);
     },
     drop: (item: DraggedItem) => {
-      if (!canDrop || !ref.current) {
+      if (!canDrop) {
         return;
       }
       if (item?.containerType === ContainerType.CAROUSEL && onBlockDropped) {
@@ -119,10 +119,10 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
 
   // TODO: Implement Dragging
 
-  drop(ref);
+  // drop(ref);
 
   return (
-    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
+    <DropZoneStyled ref={drop} isOver={isOver && canDrop}>
       {block ? (
         <CodeBlock
           id={block.id}
@@ -150,8 +150,8 @@ const WorkspaceContainer = styled(Box)(({ theme }) => ({
 const DropZoneStyled = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isOver',
 })<{ isOver: boolean }>(({ theme, isOver }) => ({
-  height: `${CODE_BLOCK_HEIGHT}px`, 
-  minHeight: `${CODE_BLOCK_HEIGHT}px`, 
+  height: `${CODE_BLOCK_HEIGHT}px`,
+  minHeight: `${CODE_BLOCK_HEIGHT}px`,
   border: `2px dashed ${theme.palette.grey[400]}`,
   opacity: isOver ? 1 : 0.7,
   display: 'flex',
@@ -171,4 +171,6 @@ const Placeholder = styled(Box)(({ theme }) => ({
   color: 'grey',
   fontStyle: 'italic',
   ...theme.typography.subtitle2,
+  userSelect: 'none',
+  pointerEvents: 'none',
 }));

@@ -1,0 +1,58 @@
+
+export function TouchPreview() {
+  const preview = usePreview();
+  if (!preview.display) {
+    console.log('No preview to display');
+    return null;
+  }
+
+  const { item, style, ref } = preview;
+  console.log('Touch preview item:', item);
+
+  if (!item || typeof item !== 'object') {
+    return null;
+  }
+
+  let previewItemData: any;
+
+  // For TouchPreview, the item structure depends on the backend
+  // We need to handle both HTML5 and Touch backends
+  let previewData: any = null;
+
+  // Try to find the actual data regardless of nesting
+  if (item && typeof item === 'object') {
+    if ('id' in item && 'type' in item) {
+      previewData = item;
+    } else if ('item' in item && typeof item.item === 'object') {
+      previewData = item.item;
+    }
+  }
+
+  if (!previewData || !previewData.id) {
+    console.log('TouchPreview: Missing required data', item);
+    return null;
+  }
+
+  return (
+    <DragContainer>
+      <Box
+        style={{
+          ...style,
+          transform: `${style.transform} scale(0.8)`,
+          transformOrigin: 'center center',
+        }}
+        ref={ref}
+      >
+        {/* <CodeBlock
+          id={block!.id}
+          index={0}
+          code={block!.code}
+          containerType={ContainerType.PREVIEW}
+        /> */}
+        <Box sx={{ backgroundColor: 'red' }}>
+          {previewItemData.code} -- Touch Preview
+        </Box>
+      </Box>
+    </DragContainer>
+  );
+}

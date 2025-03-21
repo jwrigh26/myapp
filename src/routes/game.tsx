@@ -5,7 +5,6 @@ import {
   useCarousel,
   useWorkspace,
   Workspace,
-  TouchPreview,
 } from '@/features/game';
 import { BlockItem } from '@/features/game/types';
 import { PageLayout } from '@/layout';
@@ -13,10 +12,9 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
-  MultiBackend,
   createTransition,
+  MultiBackend,
   TouchTransition,
 } from 'react-dnd-multi-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
@@ -41,7 +39,7 @@ const HTML5toTouch = {
       backend: TouchBackend,
       options: {
         enableMouseEvents: true,
-        delayTouchStart: 100,
+        delayTouchStart: 50,
       },
       transition: TouchTransition,
       preview: true,
@@ -83,7 +81,6 @@ function GameComponent() {
         <BottomCarousel carousel={carousel} workspace={workspace} />
       </PageLayout>
       <DragLayer />
-      {/* <TouchPreview /> */}
     </DndProvider>
   );
 }

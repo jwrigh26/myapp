@@ -1,3 +1,4 @@
+import type { XYCoord } from 'react-dnd';
 import { ContainerType } from './constants';
 
 // ######################
@@ -64,7 +65,13 @@ export interface GameResult {
   valid: boolean;
   details?: string;
 }
-export interface UseGameReturn {
+export interface UseGameReturnStart {
   result: GameResult;
   validateGame: (workspace: WorkspaceState) => void;
+}
+
+export interface UseGameReturn {
+  dropCanceled: boolean;
+  setDropCanceled: (state: any) => void;
+  data: any;
 }

@@ -91,7 +91,7 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
   placeBlock,
   removeWorkspaceBlock,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  // const ref = useRef<HTMLDivElement>(null);
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: ItemTypes.CODE_BLOCK,
     collect: (monitor) => ({
@@ -99,7 +99,8 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
       canDrop: monitor.canDrop(),
     }),
     drop: (item: DraggedItem) => {
-      if (!canDrop || !ref.current) {
+      console.log('Drop item', item);
+      if (!canDrop) {
         return;
       }
 
@@ -110,30 +111,18 @@ const DropZoneItem: React.FC<DropZoneItemProps> = ({
         // removeWorkspaceBlock(item.index);
       }
 
-      return item;
+      return;
     },
   });
 
-  drop(ref);
-
-  // return (
-  //   <CodeBlock
-  //     id={block!.id}
-  //     index={index}
-  //     containerType={ContainerType.CAROUSEL}
-  //     code={block!.code}
-  //   />
-  // );
   return (
-    <DropZoneStyled ref={ref} isOver={isOver && canDrop}>
-      {block && (
-        <CodeBlock
-          id={block.id}
-          index={index}
-          containerType={ContainerType.CAROUSEL}
-          code={block.code}
-        />
-      )}
+    <DropZoneStyled ref={drop} isOver={isOver && canDrop}>
+      <CodeBlock
+        id={block?.id || 'bad-id'}
+        index={index}
+        containerType={ContainerType.CAROUSEL}
+        code={block?.code || ''}
+      />
       <Placeholder isOver={isOver && canDrop}>Drop Here</Placeholder>
     </DropZoneStyled>
   );
@@ -266,4 +255,6 @@ const Placeholder = styled(Box, {
   opacity: isOver ? 0.5 : 0.25,
   fontStyle: 'italic',
   ...theme.typography.subtitle2,
+  userSelect: 'none',
+  pointerEvents: 'none',
 }));

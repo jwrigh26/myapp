@@ -15,6 +15,7 @@ export interface ComponentState {
   zIndex: number;
   temp: Record<string, any>;
   bag: Record<string, any>;
+  items: Record<string, any>;
 }
 
 export type Action =
@@ -30,7 +31,8 @@ export type Action =
   | { type: 'SET_TEMP'; payload: { id: string; temp: any } }
   | { type: 'ADD_TO_TEMP'; payload: { id: string; temp: any } }
   | { type: 'SET_BAG'; payload: { id: string; bag: any } }
-  | { type: 'ADD_TO_BAG'; payload: { id: string; bag: any } };
+  | { type: 'ADD_TO_BAG'; payload: { id: string; bag: any } }
+  | { type: 'SET_ITEMS'; payload: { id: string; item: any } };
 
 export interface ComponentStateContextType {
   reset: () => void;
@@ -46,6 +48,7 @@ export interface ComponentStateContextType {
   setTemp: (id: string) => (temp: any) => void;
   addToBag: (id: string) => (bag: any) => void;
   setBag: (id: string) => (bag: any) => void;
+  setItem: (id: string) => (item: any) => void;
   open: Record<string, boolean>;
   loading: Record<string, boolean>;
   disabled: Record<string, boolean>;
@@ -54,6 +57,7 @@ export interface ComponentStateContextType {
   zIndex: number;
   temp: Record<string, any>;
   bag: Record<string, any>;
+  items: Record<string, any>;
 }
 
 export const ComponentStateContext = createContext<
@@ -73,6 +77,7 @@ const initialState: ComponentState = {
   zIndex: 1003,
   temp: {},
   bag: {},
+  items: {},
 };
 
 const reducer = (state: ComponentState, action: Action): ComponentState => {
@@ -191,6 +196,14 @@ const reducer = (state: ComponentState, action: Action): ComponentState => {
           },
         },
       };
+    case 'SET_ITEMS':
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [action.payload.id]: action.payload.item,
+        },
+      };
     default:
       return state;
   }
@@ -256,6 +269,10 @@ export function ComponentStateProvider({
     dispatch({ type: 'ADD_TO_TEMP', payload: { id, temp } });
   };
 
+  const setItem = (id: string) => (item: Record<string, any>) => {
+    dispatch({ type: 'SET_ITEMS', payload: { id, item } });
+  };
+
   const value = useMemo(
     () => ({
       reset,
@@ -271,6 +288,7 @@ export function ComponentStateProvider({
       setTemp,
       addToBag,
       setBag,
+      setItem,
       ...state,
     }),
     [state]

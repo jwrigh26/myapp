@@ -150,3 +150,16 @@ export function useFocused(key: string) {
 
   return { isFocused, setFocused: setFocused(key) };
 }
+
+export function useItem(key: string) {
+  const context = useComponentStateContext();
+  if (!context) {
+    throw new Error('useItem must be used within a ComponentStateProvider');
+  }
+
+  const { items, setItem } = context;
+
+  const currentItem = items[key] || {};
+
+  return { item: currentItem, setItem: setItem(key) };
+}
