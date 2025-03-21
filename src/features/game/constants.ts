@@ -2,6 +2,7 @@ export const StorageKeys = {
   LAYOUT: 'layout',
   EDITING: 'editing',
   GAME: 'game',
+  GAME_STARTUP: 'game-startup',
   WORKSPACE: 'workspace',
   CAROUSEL: 'carousel',
 };

@@ -356,6 +356,8 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     [isDarkMode]
   );
 
+  console.log('theme', theme);
+
   return (
     <ThemeContext.Provider value={themeMode}>
       <CssBaseline />

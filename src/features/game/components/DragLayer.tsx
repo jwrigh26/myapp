@@ -1,71 +1,25 @@
+import { isString } from '@/utils/safety';
+import Box from '@mui/material/Box';
+import { styled, useTheme } from '@mui/material/styles';
+import { useCallback, useEffect, useState } from 'react';
 import type { XYCoord } from 'react-dnd';
 import { useDragLayer } from 'react-dnd';
-import { usePreview } from 'react-dnd-preview';
 import { ContainerType, ItemTypes } from '../constants';
-import { BlockItem } from '../types';
-import Box from '@mui/material/Box';
-import CodeBlock from './CodeBlock';
-import { styled } from '@mui/material/styles';
-
-export function TouchPreview() {
-  const preview = usePreview();
-  if (!preview.display) {
-    console.log('No preview to display');
-    return null;
-  }
-
-  const { item, style, ref } = preview;
-  console.log('Touch preview item:', item);
-
-  if (!item || typeof item !== 'object') {
-    return null;
-  }
-
-  let previewItemData: any;
-
-  // For TouchPreview, the item structure depends on the backend
-  // We need to handle both HTML5 and Touch backends
-  let previewData: any = null;
-
-  // Try to find the actual data regardless of nesting
-  if (item && typeof item === 'object') {
-    if ('id' in item && 'type' in item) {
-      previewData = item;
-    } else if ('item' in item && typeof item.item === 'object') {
-      previewData = item.item;
-    }
-  }
-
-  if (!previewData || !previewData.id) {
-    console.log('TouchPreview: Missing required data', item);
-    return null;
-  }
-
-  return (
-    <DragContainer>
-      <Box
-        style={{
-          ...style,
-          transform: `${style.transform} scale(0.8)`,
-          transformOrigin: 'center center',
-        }}
-        ref={ref}
-      >
-        {/* <CodeBlock
-          id={block!.id}
-          index={0}
-          code={block!.code}
-          containerType={ContainerType.PREVIEW}
-        /> */}
-        <Box sx={{ backgroundColor: 'red' }}>
-          {previewItemData.code} -- Touch Preview
-        </Box>
-      </Box>
-    </DragContainer>
-  );
-}
+import { useGame } from '../hooks/useGame';
+import CodeBlockPreview from './CodeBlockPreview';
 
 export function DragLayer() {
+  const { dropCanceled } = useGame();
+
+  const handleTransitionEnd = useCallback(() => {
+    console.log('Transition end');
+    setSnapBack(null);
+  }, []);
+  const [snapBack, setSnapBack] = useState<{
+    from: XYCoord;
+    to: XYCoord;
+  } | null>(null);
+
   const { itemType, isDragging, item, initialOffset, currentOffset } =
     useDragLayer((monitor) => ({
       itemType: monitor.getItemType(),
@@ -76,28 +30,41 @@ export function DragLayer() {
     }));
 
   // Early return if not dragging
-  if (!isDragging) {
+  if (!isDragging && !dropCanceled) {
     return null;
   }
 
-  // Early return if no item or wrong type
-  if (!item || itemType !== ItemTypes.CODE_BLOCK) {
-    console.log('DragLayer: No item or wrong type', { itemType, item });
+  if (dropCanceled && !isDragging) {
+    return <DropCanceled />;
+  }
+
+  if (
+    !item ||
+    itemType !== ItemTypes.CODE_BLOCK ||
+    !('id' in item) ||
+    !('code' in item)
+  ) {
     return null;
   }
 
-  // FIXED: The condition was inverted - we WANT to show when id is present
-  if (!('id' in item) || !('code' in item)) {
-    console.log('DragLayer: Missing id/code in item', item);
-    return null;
-  }
+  // If drag ended but snapBack hasn't been set, set it here.
+  // if (!isDragging && !snapBack && initialOffset && currentOffset) {
+  //   setSnapBack({ from: currentOffset, to: initialOffset });
+  // }
 
-  const transform = getItemStyles(initialOffset, currentOffset);
+  // Choose transform based on snap-back state.
+  // const transform = snapBack
+  //   ? `translate(${snapBack.to.x}px, ${snapBack.to.y}px)`
+  //   : currentOffset
+  //     ? `translate(${currentOffset.x}px, ${currentOffset.y}px)`
+  //     : 'none';
+
+  const transform = getItemStyles(initialOffset, currentOffset, isDragging);
 
   return (
     <DragContainer>
-      <DragPreview isDragging={isDragging} transform={transform}>
-        <CodeBlock
+      <DragPreview transform={transform}>
+        <CodeBlockPreview
           id={item!.id}
           index={0}
           code={item!.code}
@@ -110,9 +77,14 @@ export function DragLayer() {
 
 const getItemStyles = (
   initialOffset: XYCoord | null,
-  currentOffset: XYCoord | null
+  currentOffset: XYCoord | null,
+  isDragging: boolean
 ): string => {
+  if (!isDragging) {
+    console.log('getItemStyles: Not dragging');
+  }
   if (!initialOffset || !currentOffset) {
+    console.log('getItemStyles: No offset');
     return 'none';
   }
 
@@ -121,36 +93,150 @@ const getItemStyles = (
 };
 
 // ##############################
+// # DropCanceled
+// ##############################
+
+function DropCanceled() {
+  const { data, setDropCanceled } = useGame();
+  const [animating, setAnimating] = useState(true);
+  const theme = useTheme();
+
+  const from = data?.from as XYCoord | null;
+  const to = data?.to as XYCoord | null;
+  const safeCode = isString(data?.code) ? data.code : '';
+  useEffect(() => {
+    if (animating) {
+      const timeout = setTimeout(() => {
+        setAnimating(false);
+        // setDropCanceled(null);
+        // console.log('Drop canceled timeout');
+      }, 1);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [animating]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // console.log('TIMEOUT: Drop canceled timeout');
+      setDropCanceled(null);
+    }, theme.transitions.duration.leavingScreen * 3);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  if (!from || !to || !data) {
+    return null;
+  }
+  // `translate(${from.x}px, ${from.y}px)`
+
+  return (
+    <DragContainer id="drop-canceled">
+      <OuterBlock
+        animating={animating}
+        tslate={
+          animating
+            ? `translate(${from.x}px, ${from.y}px) scale(0.88, 0.8)`
+            : `translate(${to.x}px, ${to.y}px) scale(1)`
+        }
+      >
+        {/* <InnerBlock scale={animating ? 'scale(0.88, 0.8)' : 'scale(1)'}> */}
+        <CodeBlockPreview
+          id="snap-back-prevew"
+          index={0}
+          code={safeCode}
+          containerType={ContainerType.PREVIEW}
+        />
+        {/* </InnerBlock> */}
+      </OuterBlock>
+    </DragContainer>
+  );
+}
+
+// ##############################
 // # Styled Components
 // ##############################
 
 const DragContainer = styled(Box)(({ theme }) => ({
   position: 'fixed',
   pointerEvents: 'none',
-  zIndex: theme.zIndex.modal,
+  zIndex: theme.zIndex.modal + 1,
   left: 0,
   top: 0,
   width: '100%',
   height: '100%',
+  // backgroundColor: 'yellow',
 }));
 
 interface DragPreviewProps {
-  transform: string;
-  isDragging?: boolean;
+  transform?: string;
 }
 
 const DragPreview = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'transform' && prop !== 'isDragging',
-})<DragPreviewProps>(({ theme, transform, isDragging = false }) => ({
-  transform: `${transform} scale(0.88, 0.8)`,
+  shouldForwardProp: (prop) => prop !== 'transform',
+})<DragPreviewProps>(({ theme, transform }) => ({
+  transform: transform ? `${transform} scale(0.88, 0.8)` : 'none',
   width: '100%',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[5],
   border: `2px solid ${theme.palette.secondary.main}`,
-  // TODO: Fix transition - desktop is janky but mobile is fine
-  // transition: isDragging ? 'none' : theme.transitions.create('transform', {
-  //   duration: theme.transitions.duration.shorter,
-  //   easing: theme.transitions.easing.easeInOut,
-  // }),
 }));
+
+interface SnapBlockProps {
+  scale?: string;
+  tslate?: string;
+  animating?: boolean;
+}
+
+const OuterBlock = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['translate', 'animating'].includes(prop as string),
+})<SnapBlockProps>(({ theme, tslate, animating }) => ({
+  position: 'absolute',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.background.paper,
+  boxShadow: theme.shadows[5],
+  border: `2px solid ${theme.palette.secondary.main}`,
+  borderStyle: animating ? 'solid' : 'dashed',
+  width: '100%',
+  transform: tslate, // e.g., 'translate(100px, 50px)'
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.leavingScreen * 2,
+    easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+    // easing: theme.transitions.easing.easeOut,
+  }),
+}));
+
+// const InnerBlock = styled(Box, {
+//   shouldForwardProp: (prop) => !['scale'].includes(prop as string),
+// })<SnapBlockProps>(({ theme, scale }) => ({
+//   transform: scale, // e.g., 'scale(1)'
+//   transition: theme.transitions.create('transform', {
+//     duration: theme.transitions.duration.leavingScreen * 3,
+//     delay: theme.transitions.duration.leavingScreen / 4,
+//   }),
+//   animationFillMode: 'forwards',
+//   easing: theme.transitions.easing.easeOut,
+// }));
+
+// ##############################
+// ### Notes
+// ##############################
+
+// const snapKeyframes = keyframes`
+//   0% {
+//     transform: translate(0, 0) scale(0.88, 0.8);
+//   }
+//   100% {
+//     transform: translate(100px, 50px) scale(1);
+//   }
+// `;
+
+// const SnapBackBlock = styled(Box)(({ theme }) => ({
+//   position: 'absolute',
+//   width: '100%',
+//   animation: `${snapKeyframes} ${theme.transitions.duration.leavingScreen}ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`,
+// }));

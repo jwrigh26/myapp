@@ -3,20 +3,14 @@ import { styled, useTheme } from '@mui/material/styles';
 import { Highlight, themes } from 'prism-react-renderer';
 import React, { forwardRef } from 'react';
 import { ContainerType } from '../constants';
-import { useCodeBlock } from '../hooks/useCodeBlock';
-import { useGame } from '../hooks/useGame';
 import type { CodeBlockProps } from '../types';
 import { CODE_BLOCK_HEIGHT } from './Styles';
 
-export const CodeBlock: React.FC<CodeBlockProps> = ({
-  id,
-  index,
+export const CodeBlockPreview: React.FC<CodeBlockProps> = ({
   code,
   containerType,
-  disabled = false,
 }) => {
   const theme = useTheme();
-  const { dropCanceled } = useGame();
   const isDarkMode = theme.palette.mode === 'dark';
   const prismTheme = isDarkMode ? themes.vsDark : themes.vsLight;
 
@@ -31,23 +25,14 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   // Ensure code is always a string
   const safeCode = typeof code === 'string' ? code : '';
 
-  const { drag, isDragging } = useCodeBlock({
-    id,
-    index,
-    containerType,
-    code: safeCode,
-    disabled,
-  });
-
   return (
     <CodeBlockWrapper
       containerType={containerType}
       disabled={false}
-      ref={drag}
-      isDragging={isDragging || dropCanceled}
+      isDragging={false}
       style={{ touchAction: 'none' }}
     >
-      <Highlight theme={prismTheme} code={code} language="python">
+      <Highlight theme={prismTheme} code={safeCode} language="python">
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, ...overrideStyles }}>
             {tokens.map((line, index) => {
@@ -87,8 +72,7 @@ const StyledPaper = styled(Paper, {
   width: '100%',
   height: `${CODE_BLOCK_HEIGHT}px`,
   cursor: disabled ? 'default' : 'grab',
-  display: 'flex',
-  visibility: isDragging ? 'hidden' : 'visible',
+  display: isDragging ? 'none' : 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
   borderRadius: theme.shape.borderRadius,
@@ -116,4 +100,4 @@ const CodeBlockWrapper = forwardRef<
 
 CodeBlockWrapper.displayName = 'CodeBlockWrapper';
 
-export default CodeBlock;
+export default CodeBlockPreview;
