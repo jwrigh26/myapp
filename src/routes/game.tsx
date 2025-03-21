@@ -9,7 +9,7 @@ import {
 import { BlockItem } from '@/features/game/types';
 import { PageLayout } from '@/layout';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import { DndProvider } from 'react-dnd';
 import {
@@ -69,10 +69,12 @@ function GameComponent() {
 
   const solution = [...initialItems]; // For now assume the solution is the same as the initial items
   const dropZoneCount = initialItems.length;
-
+  const theme = useTheme();
   const carousel = useCarousel(initialItems);
   const workspace = useWorkspace(dropZoneCount);
   // const game = useGame(solution, carousel, workspace);
+
+  const bgColor = theme.palette.grey[700];
 
   return (
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>

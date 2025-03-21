@@ -145,6 +145,8 @@ const WorkspaceContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(2),
   flexDirection: 'column',
+  background: `linear-gradient(#2e2e2e, ${theme.palette.background.paper})`,
+  minHeight: 'calc(100svh - 196px)',
 }));
 
 const DropZoneStyled = styled(Box, {

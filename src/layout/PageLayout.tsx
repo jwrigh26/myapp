@@ -5,17 +5,18 @@ import { PropsWithChildren } from "react";
 interface StyledGridProps {
   gap: number;
   padding: number;
+  color?: string;
 }
 
 const StyledGrid = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "gap" && prop !== "padding",
-})<StyledGridProps>(({ theme, gap, padding }) => ({
+  shouldForwardProp: (prop) => prop !== "gap" && prop !== "padding" && prop !== "color",
+})<StyledGridProps>(({ color, theme, gap, padding }) => ({
   display: "grid",
   gridTemplateColumns: "1fr",
   gridTemplateRows: "auto 1fr auto",
   gap: theme.spacing(gap),
   padding: theme.spacing(padding),
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: color || theme.palette.background.paper,
   maxWidth: "1536px",
 }));
 
@@ -23,6 +24,7 @@ interface PageLayoutProps extends PropsWithChildren<{}> {
   gap?: number;
   padding?: number;
   id?: string;
+  color?: string;
 }
 
 const PageLayout = ({
@@ -30,9 +32,10 @@ const PageLayout = ({
   gap = 2,
   padding = 2,
   id,
+  color,
 }: PageLayoutProps) => {
   return (
-    <StyledGrid gap={gap} padding={padding} id={id}>
+    <StyledGrid  color={color} gap={gap} padding={padding} id={id}>
       {children}
     </StyledGrid>
   );
