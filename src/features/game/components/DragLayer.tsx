@@ -1,7 +1,7 @@
 import { isString } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { XYCoord } from 'react-dnd';
 import { useDragLayer } from 'react-dnd';
 import { ContainerType, ItemTypes } from '../constants';
@@ -10,15 +10,6 @@ import CodeBlockPreview from './CodeBlockPreview';
 
 export function DragLayer() {
   const { dropCanceled } = useGame();
-
-  const handleTransitionEnd = useCallback(() => {
-    console.log('Transition end');
-    setSnapBack(null);
-  }, []);
-  const [snapBack, setSnapBack] = useState<{
-    from: XYCoord;
-    to: XYCoord;
-  } | null>(null);
 
   const { itemType, isDragging, item, initialOffset, currentOffset } =
     useDragLayer((monitor) => ({
@@ -47,20 +38,9 @@ export function DragLayer() {
     return null;
   }
 
-  // If drag ended but snapBack hasn't been set, set it here.
-  // if (!isDragging && !snapBack && initialOffset && currentOffset) {
-  //   setSnapBack({ from: currentOffset, to: initialOffset });
-  // }
-
-  // Choose transform based on snap-back state.
-  // const transform = snapBack
-  //   ? `translate(${snapBack.to.x}px, ${snapBack.to.y}px)`
-  //   : currentOffset
-  //     ? `translate(${currentOffset.x}px, ${currentOffset.y}px)`
-  //     : 'none';
-
   const transform = getItemStyles(initialOffset, currentOffset, isDragging);
 
+  console.log('DragLayer: item', item);
   return (
     <DragContainer>
       <DragPreview transform={transform}>
@@ -180,7 +160,7 @@ const DragPreview = styled(Box, {
   transform: transform ? `${transform} scale(0.88, 0.8)` : 'none',
   width: '100%',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.background.default,
   boxShadow: theme.shadows[5],
   border: `2px solid ${theme.palette.secondary.main}`,
 }));
@@ -194,19 +174,17 @@ interface SnapBlockProps {
 const OuterBlock = styled(Box, {
   shouldForwardProp: (prop) =>
     !['translate', 'animating'].includes(prop as string),
-})<SnapBlockProps>(({ theme, tslate, animating }) => ({
+})<SnapBlockProps>(({ theme, tslate }) => ({
   position: 'absolute',
+  backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[5],
-  border: `2px solid ${theme.palette.secondary.main}`,
-  borderStyle: animating ? 'solid' : 'dashed',
+  border: `2px solid ${theme.palette.action.disabled}`,
   width: '100%',
   transform: tslate, // e.g., 'translate(100px, 50px)'
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.leavingScreen * 2,
     easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-    // easing: theme.transitions.easing.easeOut,
   }),
 }));
 

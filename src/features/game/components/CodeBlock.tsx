@@ -92,9 +92,7 @@ const StyledPaper = styled(Paper, {
   alignItems: 'center',
   justifyContent: 'flex-start',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: disabled
-    ? theme.palette.grey[300]
-    : theme.palette.background.default,
+  backgroundColor: theme.palette.background.default,
 }));
 
 // Create the forwardRef component
