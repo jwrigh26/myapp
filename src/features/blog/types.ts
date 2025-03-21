@@ -2,7 +2,7 @@ import type { ListItemButtonProps } from '@mui/material/ListItemButton';
 import { RouteType } from './constants';
 
 export interface RouteItem {
-  path: string;
+  path?: string;
   text: string;
   level?: number;
   type?: RouteType;
@@ -23,4 +23,24 @@ export interface MUILinkProps
   isPrefix?: boolean;
   isRoute?: boolean;
   isActive?: boolean;
+}
+
+export interface BlogRouteMeta {
+  title?: string;
+  description?: string;
+  // Add any other optional properties here
+}
+
+// MyHeadConfig.ts
+export interface MyHeadConfig {
+  getTitle?: () => string;
+  meta?: Array<{
+    name?: string;
+    content?: string;
+    // Add other common meta attributes here if needed
+  }>;
+}
+
+export interface MyRouterContext {
+  title: string;
 }

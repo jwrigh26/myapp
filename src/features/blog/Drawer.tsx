@@ -1,19 +1,25 @@
 import { PermanentDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
-import { mdiChevronRight } from '@mdi/js';
-import Collapse from '@mui/material/Collapse';
+import { mdiPost } from '@mdi/js';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { createLink } from '@tanstack/react-router';
+import { createLink, useRouter } from '@tanstack/react-router';
 import { forwardRef, useState } from 'react';
-import { RouteType } from './constants';
-import type { MUILinkProps, RouteItem } from './types';
+import type { MUILinkProps } from './types';
 
 export function BlogDrawer() {
+  const router = useRouter();
+
+  const blogPostRoutes = Object.values(router.routesByPath).filter((route) =>
+    route.fullPath.startsWith('/blog/posts')
+  );
+
+  console.log('routesByPath', blogPostRoutes);
   const [open, setOpen] = useState(true);
   const handleToggle = () => setOpen((prev) => !prev);
 
@@ -33,13 +39,31 @@ export function BlogDrawer() {
   return (
     <PermanentDrawer>
       <ToolbarSpacer />
-      <Typography variant="h6" component="h2" align="center">
-        Navigation
-      </Typography>
+      <DrawerHeader>
+        <Icon
+          path={mdiPost}
+          fontSize="medium"
+          sx={{ color: 'primary.light' }}
+        />
+        <Typography
+          variant="h5"
+          color="primary.contrastText"
+          sx={{ fontWeight: 'fontWeightRegular' }}
+        >
+          Posts
+        </Typography>
+      </DrawerHeader>
       <StyledList>
-        {/* {foundationRoutes.map((route) => {
-          return <IndexListItem key={route.path} route={route} />;
-        })} */}
+        {blogPostRoutes.map((route) => {
+          const title = route.options.head()?.getTitle?.() || route.id;
+          // const [_, { title }] = route.options.head()?.meta;
+          console.log(title);
+          return (
+            <NavButton key={route.id} to={route.id}>
+              <ListItemText primary={title || route.id} />
+            </NavButton>
+          );
+        })}
       </StyledList>
     </PermanentDrawer>
   );
@@ -49,55 +73,7 @@ export function BlogDrawer() {
 // ### Components
 // ################################################
 
-function IndexListItem({ route }: { route: RouteItem }) {
-  const { text, children } = route;
-
-  // const defaultOpen = route.path === "/foundations";
-
-  const [open, setOpen] = useState(true);
-  const handleToggle = () => setOpen((prev) => !prev);
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleToggle();
-    console.log(children);
-  };
-  return (
-    <>
-      <ToggleButton onClick={handleClick} level={0}>
-        <ListItemText primary={text} />
-        <RotateIcon
-          rotate={open ? 1 : 0}
-          path={mdiChevronRight}
-          color="primary"
-        />
-      </ToggleButton>
-      {children && (
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          {children.map((child) => (
-            <RouteListItem key={child.path} route={child} />
-          ))}
-        </Collapse>
-      )}
-    </>
-  );
-}
-
-function RouteListItem({ route }: { route: RouteItem }) {
-  const { path, text, level, type } = route;
-  const isRoute = type === RouteType.Route || !type;
-
-  return (
-    <NavButton
-      to={path}
-      level={level}
-      isPrefix={type === RouteType.Prefix}
-      isRoute={isRoute}
-    >
-      <ListItemText primary={text} />
-    </NavButton>
-  );
-}
+// New awesome components go here
 
 // ################################################
 // ### Styles
@@ -139,53 +115,28 @@ const excludedProps = ['level', 'isPrefix', 'isRoute', 'to', 'isActive'];
 const StyledLinkListButton = styled(LinkListButton, {
   shouldForwardProp: (prop: PropertyKey) =>
     !excludedProps.includes(prop as any),
-})(({ theme, level = 0, isPrefix, isRoute, isActive }) => ({
+})(({ theme, level = 0, isPrefix, isRoute }) => ({
   paddingRight: theme.spacing(1),
   paddingLeft: theme.spacing(2 + level),
   width: '100%',
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: theme.palette.primary.dark, // Let the drawer's background show through
+  borderRadius: theme.shape.borderRadius, // A little rounding for a softer look
+  transition: 'background-color 0.3s ease', // Smooth transition on hover
   '&:hover': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.primary.light, // Lighter shade on hover
   },
-  // # isPrefix
-  ...(isPrefix && {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    cursor: 'default',
-    pointerEvents: 'none',
-    backgroundColor: 'inherit',
-    '& .MuiListItemText-root > span': {
-      ...theme.typography.subtitle2,
-      color: theme.palette.text.primary,
-      fontWeight: theme.typography.fontWeightMedium,
+  '&.active': {
+    backgroundColor: theme.palette.primary.main, // Active state gets primary main
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main, // Keep it consistent when active
     },
-  }),
-  // # isRoute
-  ...(isRoute && {
-    '& .MuiListItemText-root > span': {
-      ...theme.typography.body2,
-      fontWeight: theme.typography.fontWeightRegular,
-      color: theme.palette.text.secondary,
-    },
-  }),
-  // # isRoute
-  ...(isRoute && {
-    '& .MuiListItemText-root > span': {
-      ...theme.typography.body2,
-      fontWeight: theme.typography.fontWeightRegular,
-      color: theme.palette.text.secondary,
-    },
-    '&.active': {
-      cursor: 'default',
-      pointerEvents: 'none',
-      '& .MuiListItemText-root > span': {
-        color: theme.palette.primary.main,
-        fontWeight: theme.typography.fontWeightMedium,
-        textDecoration: 'underline',
-        textDecorationThickness: '2px',
-        textUnderlineOffset: '4px', // Increase this value to increase the padding between the underline and text
-      },
-    },
-  }),
+  },
+  // For route text styling:
+  '& .MuiListItemText-root > span': {
+    ...theme.typography.body2,
+    fontWeight: theme.typography.fontWeightRegular,
+    color: theme.palette.primary.contrastText,
+  },
 }));
 
 const NavButton = createLink(StyledLinkListButton);
@@ -204,3 +155,14 @@ const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
     marginTop: 0,
   })
 );
+
+const DrawerHeader = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  marginBottom: theme.spacing(1),
+  gap: theme.spacing(1),
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  flexDirection: 'row',
+  borderBottom: `1px solid ${theme.palette.primary.light}`, // subtle divider line
+}));

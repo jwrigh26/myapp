@@ -7,7 +7,7 @@ interface ToggleButtonProps {
   onChange: (event?: React.MouseEvent<HTMLElement>) => void;
   selected: boolean;
   value: string;
-  color?: 'primary' | 'secondary';
+  color?: string;
 }
 
 export default function ToggleButton({
@@ -20,7 +20,6 @@ export default function ToggleButton({
   return (
     <StyledToggleButton
       value={value}
-      color={color}
       onChange={handleChange}
       selected={isSeleted}
       // selected={open[drawerId] || false}

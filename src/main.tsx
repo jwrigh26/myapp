@@ -7,11 +7,18 @@ import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import { queryClient } from './utils/queryClient';
 
+interface MyRouterContext {
+  user?: string;
+}
+
 // Set up a Router instance
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  context: {
+    user: undefined,
+  },
 });
 
 // Register things for typesafety
@@ -23,6 +30,8 @@ declare module '@tanstack/react-router' {
 
 const rootElement = document.getElementById('app')!;
 
+// We can use a hook to pass user down based on things
+
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
@@ -30,7 +39,7 @@ if (!rootElement.innerHTML) {
       <ThemeProvider>
         <SnackbarProvider>
           <ComponentStateProvider>
-            <RouterProvider router={router} />
+            <RouterProvider router={router} context={{ user: 'Me' }} />
           </ComponentStateProvider>
         </SnackbarProvider>
       </ThemeProvider>

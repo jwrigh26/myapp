@@ -14,6 +14,17 @@ import { useState } from 'react';
 
 export const Route = createFileRoute('/about')({
   component: AboutComponent,
+  head: () => ({
+    meta: [
+      {
+        name: 'About',
+        content: 'About Page',
+      },
+      {
+        title: 'About',
+      },
+    ],
+  }),
 });
 
 const codeBlock = `

@@ -16,6 +16,8 @@ import { Route as AboutImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
+import { Route as BlogPostsPage3Import } from './routes/blog/posts/page-3'
+import { Route as BlogPostsPage2Import } from './routes/blog/posts/page-2'
 import { Route as BlogPostsPage1Import } from './routes/blog/posts/page-1'
 
 // Create/Update Routes
@@ -47,6 +49,18 @@ const IndexRoute = IndexImport.update({
 const BlogIndexRoute = BlogIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+
+const BlogPostsPage3Route = BlogPostsPage3Import.update({
+  id: '/posts/page-3',
+  path: '/posts/page-3',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+
+const BlogPostsPage2Route = BlogPostsPage2Import.update({
+  id: '/posts/page-2',
+  path: '/posts/page-2',
   getParentRoute: () => BlogRouteRoute,
 } as any)
 
@@ -102,6 +116,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogPostsPage1Import
       parentRoute: typeof BlogRouteImport
     }
+    '/blog/posts/page-2': {
+      id: '/blog/posts/page-2'
+      path: '/posts/page-2'
+      fullPath: '/blog/posts/page-2'
+      preLoaderRoute: typeof BlogPostsPage2Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/posts/page-3': {
+      id: '/blog/posts/page-3'
+      path: '/posts/page-3'
+      fullPath: '/blog/posts/page-3'
+      preLoaderRoute: typeof BlogPostsPage3Import
+      parentRoute: typeof BlogRouteImport
+    }
   }
 }
 
@@ -110,11 +138,15 @@ declare module '@tanstack/react-router' {
 interface BlogRouteRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   BlogPostsPage1Route: typeof BlogPostsPage1Route
+  BlogPostsPage2Route: typeof BlogPostsPage2Route
+  BlogPostsPage3Route: typeof BlogPostsPage3Route
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   BlogPostsPage1Route: BlogPostsPage1Route,
+  BlogPostsPage2Route: BlogPostsPage2Route,
+  BlogPostsPage3Route: BlogPostsPage3Route,
 }
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
@@ -128,6 +160,8 @@ export interface FileRoutesByFullPath {
   '/game': typeof GameRoute
   '/blog/': typeof BlogIndexRoute
   '/blog/posts/page-1': typeof BlogPostsPage1Route
+  '/blog/posts/page-2': typeof BlogPostsPage2Route
+  '/blog/posts/page-3': typeof BlogPostsPage3Route
 }
 
 export interface FileRoutesByTo {
@@ -136,6 +170,8 @@ export interface FileRoutesByTo {
   '/game': typeof GameRoute
   '/blog': typeof BlogIndexRoute
   '/blog/posts/page-1': typeof BlogPostsPage1Route
+  '/blog/posts/page-2': typeof BlogPostsPage2Route
+  '/blog/posts/page-3': typeof BlogPostsPage3Route
 }
 
 export interface FileRoutesById {
@@ -146,6 +182,8 @@ export interface FileRoutesById {
   '/game': typeof GameRoute
   '/blog/': typeof BlogIndexRoute
   '/blog/posts/page-1': typeof BlogPostsPage1Route
+  '/blog/posts/page-2': typeof BlogPostsPage2Route
+  '/blog/posts/page-3': typeof BlogPostsPage3Route
 }
 
 export interface FileRouteTypes {
@@ -157,8 +195,17 @@ export interface FileRouteTypes {
     | '/game'
     | '/blog/'
     | '/blog/posts/page-1'
+    | '/blog/posts/page-2'
+    | '/blog/posts/page-3'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/game' | '/blog' | '/blog/posts/page-1'
+  to:
+    | '/'
+    | '/about'
+    | '/game'
+    | '/blog'
+    | '/blog/posts/page-1'
+    | '/blog/posts/page-2'
+    | '/blog/posts/page-3'
   id:
     | '__root__'
     | '/'
@@ -167,6 +214,8 @@ export interface FileRouteTypes {
     | '/game'
     | '/blog/'
     | '/blog/posts/page-1'
+    | '/blog/posts/page-2'
+    | '/blog/posts/page-3'
   fileRoutesById: FileRoutesById
 }
 
@@ -207,7 +256,9 @@ export const routeTree = rootRoute
       "filePath": "blog/route.tsx",
       "children": [
         "/blog/",
-        "/blog/posts/page-1"
+        "/blog/posts/page-1",
+        "/blog/posts/page-2",
+        "/blog/posts/page-3"
       ]
     },
     "/about": {
@@ -222,6 +273,14 @@ export const routeTree = rootRoute
     },
     "/blog/posts/page-1": {
       "filePath": "blog/posts/page-1.tsx",
+      "parent": "/blog"
+    },
+    "/blog/posts/page-2": {
+      "filePath": "blog/posts/page-2.tsx",
+      "parent": "/blog"
+    },
+    "/blog/posts/page-3": {
+      "filePath": "blog/posts/page-3.tsx",
       "parent": "/blog"
     }
   }

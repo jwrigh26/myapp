@@ -1,15 +1,18 @@
 import { IndexLayout } from '@/layout';
-import { createRootRoute, HeadContent, Outlet } from '@tanstack/react-router';
+import {
+  createRootRouteWithContext,
+  HeadContent,
+  Outlet,
+  Scripts,
+  useRouterState,
+} from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{ user?: string }>()({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   head: () => ({
     meta: [
-      {
-        name: 'My personal site',
-        content: 'A personal site built with development in mind',
-      },
       {
         title: 'My App',
       },
@@ -18,33 +21,19 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const matches = useRouterState({ select: (s) => s.matches });
+
+  const matchWithUser = [...matches].reverse().find((d) => d.context.user);
+  const user = matchWithUser?.context.user || 'The Vandals';
+
   return (
     <>
       <HeadContent />
       <IndexLayout>
-        {/* <Box>
-        <Link
-          to="/"
-          activeProps={{
-            className: 'font-bold',
-          }}
-          activeOptions={{ exact: true }}
-        >
-          Home
-        </Link>{' '}
-        <Link
-          to="/about"
-          activeProps={{
-            className: 'font-bold',
-          }}
-        >
-          About
-        </Link>
-      </Box>
-      <Divider /> */}
         <Outlet />
-        {/* <TanStackRouterDevtools position="bottom-right" /> */}
+        <TanStackRouterDevtools position="bottom-right" />
       </IndexLayout>
+      <Scripts />
     </>
   );
 }
