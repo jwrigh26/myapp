@@ -68,14 +68,6 @@ export function useGame(): UseGameReturn {
     setDropCanceledState(state);
   }, []);
 
-  useEffect(() => {
-    if (hasValue(dropCanceledState)) {
-      console.log('>>>Drop canceled:', dropCanceledState);
-    } else {
-      console.log('>>>>Drop canceled: null');
-    }
-  }, [hasValue(dropCanceledState)]);
-
   return {
     dropCanceled: hasValue(dropCanceledState),
     setDropCanceled,
@@ -83,8 +75,3 @@ export function useGame(): UseGameReturn {
   };
 }
 
-// This useDragDrop is pointless because useCodeBlock already has these values.
-// So scrap this. animation is crazy cause the DrayLayer removes whe !dragging.
-// The CodeBlock is hidden when dragging and scroll view masks things.
-
-// We need to maybe pass a ref and corrd and have a absolute positioned div that listens and draws and then on a callback reveals teh CodeBlock.

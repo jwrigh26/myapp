@@ -40,7 +40,6 @@ export function DragLayer() {
 
   const transform = getItemStyles(initialOffset, currentOffset, isDragging);
 
-  console.log('DragLayer: item', item);
   return (
     <DragContainer>
       <DragPreview transform={transform}>
@@ -60,11 +59,7 @@ const getItemStyles = (
   currentOffset: XYCoord | null,
   isDragging: boolean
 ): string => {
-  if (!isDragging) {
-    console.log('getItemStyles: Not dragging');
-  }
   if (!initialOffset || !currentOffset) {
-    console.log('getItemStyles: No offset');
     return 'none';
   }
 
@@ -84,12 +79,11 @@ function DropCanceled() {
   const from = data?.from as XYCoord | null;
   const to = data?.to as XYCoord | null;
   const safeCode = isString(data?.code) ? data.code : '';
+
   useEffect(() => {
     if (animating) {
       const timeout = setTimeout(() => {
         setAnimating(false);
-        // setDropCanceled(null);
-        // console.log('Drop canceled timeout');
       }, 1);
       return () => {
         clearTimeout(timeout);
@@ -99,9 +93,8 @@ function DropCanceled() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // console.log('TIMEOUT: Drop canceled timeout');
       setDropCanceled(null);
-    }, theme.transitions.duration.leavingScreen * 3);
+    }, theme.transitions.duration.leavingScreen * 2);
     return () => {
       clearTimeout(timeout);
     };
@@ -110,8 +103,6 @@ function DropCanceled() {
   if (!from || !to || !data) {
     return null;
   }
-  // `translate(${from.x}px, ${from.y}px)`
-
   return (
     <DragContainer id="drop-canceled">
       <OuterBlock
@@ -183,38 +174,7 @@ const OuterBlock = styled(Box, {
   width: '100%',
   transform: tslate, // e.g., 'translate(100px, 50px)'
   transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.leavingScreen * 2,
+    duration: theme.transitions.duration.leavingScreen * 1.5,
     easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   }),
 }));
-
-// const InnerBlock = styled(Box, {
-//   shouldForwardProp: (prop) => !['scale'].includes(prop as string),
-// })<SnapBlockProps>(({ theme, scale }) => ({
-//   transform: scale, // e.g., 'scale(1)'
-//   transition: theme.transitions.create('transform', {
-//     duration: theme.transitions.duration.leavingScreen * 3,
-//     delay: theme.transitions.duration.leavingScreen / 4,
-//   }),
-//   animationFillMode: 'forwards',
-//   easing: theme.transitions.easing.easeOut,
-// }));
-
-// ##############################
-// ### Notes
-// ##############################
-
-// const snapKeyframes = keyframes`
-//   0% {
-//     transform: translate(0, 0) scale(0.88, 0.8);
-//   }
-//   100% {
-//     transform: translate(100px, 50px) scale(1);
-//   }
-// `;
-
-// const SnapBackBlock = styled(Box)(({ theme }) => ({
-//   position: 'absolute',
-//   width: '100%',
-//   animation: `${snapKeyframes} ${theme.transitions.duration.leavingScreen}ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`,
-// }));
