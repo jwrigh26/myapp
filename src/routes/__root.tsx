@@ -1,6 +1,5 @@
 import { IndexLayout } from '@/layout';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { createRootRoute, HeadContent, Outlet } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -20,8 +19,10 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <IndexLayout>
-      {/* <Box>
+    <>
+      <HeadContent />
+      <IndexLayout>
+        {/* <Box>
         <Link
           to="/"
           activeProps={{
@@ -41,9 +42,10 @@ function RootComponent() {
         </Link>
       </Box>
       <Divider /> */}
-      <Outlet />
-      {/* <TanStackRouterDevtools position="bottom-right" /> */}
-    </IndexLayout>
+        <Outlet />
+        {/* <TanStackRouterDevtools position="bottom-right" /> */}
+      </IndexLayout>
+    </>
   );
 }
 

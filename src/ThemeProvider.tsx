@@ -108,7 +108,7 @@ const mixins = {
     } = decomposeColor(color);
     return `rgba(${r}, ${g}, ${b}, ${opacity || 1})`;
   },
-  drawerWidth: 340,
+  drawerWidth: 240,
 };
 
 // Generate the theme

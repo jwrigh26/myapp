@@ -11,8 +11,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { ReactElement } from 'react';
 import { useRouter } from '@tanstack/react-router';
+import { ReactElement } from 'react';
 
 export default function IndexLayout({
   children,
@@ -25,7 +25,9 @@ export default function IndexLayout({
 
   const router = useRouter();
 
-  const isGameRoute = router.state.location.pathname.toLowerCase().includes('game');
+  const isGameRoute = router.state.location.pathname
+    .toLowerCase()
+    .includes('game');
 
   return (
     <>
@@ -150,6 +152,7 @@ const Footer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   height: 48,
+  zIndex: theme.zIndex.drawer + 1,
   [theme.breakpoints.down('sm')]: {
     height: 56,
     display: 'hidden',
@@ -174,7 +177,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   color: theme.palette.primary.contrastText,
   [theme.breakpoints.up('md')]: {
-    // zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 1,
   },
 }));
 

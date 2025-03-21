@@ -12,15 +12,20 @@ export default function Navigation() {
   return (
     <NavStack direction="row" component="nav" gap={1}>
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
-      <NavButton to="/Home">Home</NavButton>
-      <NavButton to="/About">About</NavButton>
-      <NavButton to="/Game">Game</NavButton>
-      <ToggleButton
-        icon={mdiCog}
-        onChange={openDrawer}
-        selected={isOpen}
-        value="settings"
-      />
+      <NavButton to="/home">Home</NavButton>
+      <NavButton to="/about">About</NavButton>
+      <NavButton to="/blog">Blog</NavButton>
+      <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+      <NavButton to="/learn">Learn</NavButton>
+      <NavButton to="/game">Game</NavButton>
+      <Stack direction="row" gap={1} sx={{ ml: 'auto' }}>
+        <ToggleButton
+          icon={mdiCog}
+          onChange={openDrawer}
+          selected={isOpen}
+          value="settings"
+        />
+      </Stack>
     </NavStack>
   );
 }
