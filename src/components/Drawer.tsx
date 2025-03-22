@@ -69,6 +69,7 @@ export function PermanentDrawer({
 export const StyledTemporaryDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
   boxSizing: 'border-box',
+  zIndex: theme.zIndex.drawer + 1,
   ['& .MuiDrawer-paper']: {
     overFlowX: 'hidden',
     height: '100%',

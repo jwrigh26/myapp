@@ -1,9 +1,10 @@
 import Icon from '@/components/Icon';
+import LinkButtonBase from '@/components/LinkButtonBase';
 import Navigation from '@/components/Navigation';
+import { SettingsDrawer } from '@/features/settings';
 import { mdiMenu } from '@mdi/js';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
 import IconButton from '@mui/material/IconButton';
 import Slide from '@mui/material/Slide';
 import { styled, useTheme } from '@mui/material/styles';
@@ -13,7 +14,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useRouter } from '@tanstack/react-router';
 import { ReactElement } from 'react';
-import LinkButtonBase from '@/components/LinkButtonBase';
 
 export default function IndexLayout({
   children,
@@ -43,6 +43,7 @@ export default function IndexLayout({
         <Main id="main">{children}</Main>
         {/* Desktop Footer -- Hidden on mobile and game routes */}
         {!isGameRoute && isDesktop && <Footer id="footer" />}
+        <SettingsDrawer desktop={isDesktop} />
       </LayoutGrid>
     </>
   );
@@ -149,7 +150,6 @@ const Footer = styled(Box)(({ theme }) => ({
   gridArea: 'footer',
   padding: 0,
   margin: 0,
-  // zIndex: theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.secondary.dark,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   height: 48,
