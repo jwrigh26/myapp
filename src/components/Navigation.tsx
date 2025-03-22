@@ -1,10 +1,16 @@
 import LinkButton from '@/components/LinkButton';
 import ToggleButton from '@/components/ToggleButton';
 import { useDrawer } from '@/hooks/useContext';
-import { mdiCog } from '@mdi/js';
+import { mdiCog, mdiLink } from '@mdi/js';
 import Divider from '@mui/material/Divider';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import Icon from '@/components/Icon';
+import IconButton from '@mui/material/IconButton';
+import LinkIconButton from '@/components/LinkIconButton';
+import { mdiLinkedin } from '@mdi/js';
+import { mdiGithub } from '@mdi/js';
+import MuiLink from '@mui/material/Link';
 
 export default function Navigation() {
   const { isOpen, openDrawer } = useDrawer('settings-drawer');
@@ -18,13 +24,25 @@ export default function Navigation() {
       <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
       <NavButton to="/learn">Learn</NavButton>
       <NavButton to="/game">Game</NavButton>
-      <Stack direction="row" gap={1} sx={{ ml: 'auto' }}>
-        <ToggleButton
-          icon={mdiCog}
-          onChange={openDrawer}
-          selected={isOpen}
-          value="settings"
-        />
+      <Stack direction="row" gap={0} sx={{ ml: 'auto' }}>
+        <NavLinkIconButton
+          to="https://github.com/jwrigh26"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon path={mdiGithub} />
+        </NavLinkIconButton>
+        <NavLinkIconButton
+          to="https://www.linkedin.com/in/justin-wright-00147621/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon path={mdiLinkedin} />
+        </NavLinkIconButton>
+        <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+        <NavIconButton edge="end" onClick={openDrawer}>
+          <Icon path={mdiCog} />
+        </NavIconButton>
       </Stack>
     </NavStack>
   );
@@ -72,3 +90,37 @@ const NavDivider = styled(Divider)(({ theme }) => ({
   // margin: theme.spacing(2, 2),
   margin: theme.spacing(0, 1),
 }));
+
+const NavIconButton = styled(IconButton)(({ theme }) => {
+  const isDarkMode = theme.palette.mode === 'dark';
+  const opacity = 0.5;
+  const color = theme.mixins.decomposeColor(
+    theme.palette.common.white,
+    opacity
+  );
+  return {
+    borderRadius: theme.shape.borderRadius,
+    color,
+    '&:hover': {
+      color: theme.palette.common.white,
+      opacity: 1.0,
+    },
+  };
+});
+
+const NavLinkIconButton = styled(LinkIconButton)(({ theme }) => {
+  const isDarkMode = theme.palette.mode === 'dark';
+  const opacity = 0.5;
+  const color = theme.mixins.decomposeColor(
+    theme.palette.common.white,
+    opacity
+  );
+  return {
+    borderRadius: theme.shape.borderRadius,
+    color,
+    '&:hover': {
+      color: theme.palette.common.white,
+      opacity: 1.0,
+    },
+  };
+});

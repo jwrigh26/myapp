@@ -13,6 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useRouter } from '@tanstack/react-router';
 import { ReactElement } from 'react';
+import LinkButtonBase from '@/components/LinkButtonBase';
 
 export default function IndexLayout({
   children,
@@ -93,7 +94,7 @@ function MobileAppToolbar() {
               <Icon path={mdiMenu} />
             </IconButton>
           )}
-          <StyledButtonBase onClick={navigate}>
+          <StyledButtonBase to="/">
             <Typography variant="h6">JW</Typography>
           </StyledButtonBase>
         </Toolbar>
@@ -181,11 +182,11 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   },
 }));
 
-const StyledButtonBase = styled(ButtonBase)(({ theme }) => ({
+const StyledButtonBase = styled(LinkButtonBase)(({ theme }) => ({
   '&:hover': {
-    opacity: 0.8,
+    opacity: 0.5,
   },
   '&:active': {
-    opacity: 0.6,
+    opacity: 0.5,
   },
 }));

@@ -30,29 +30,26 @@ export default function ToggleButton({
   );
 }
 
-const StyledToggleButton = styled(MUIToggleButton)(({ theme }) => ({
-  color:
-    theme.palette.mode === 'dark'
-      ? theme.palette.primary.light
-      : theme.palette.secondary.main,
-  borderColor:
-    theme.palette.mode === 'dark'
-      ? theme.palette.primary.light
-      : theme.palette.secondary.main,
-  '&:hover': {
-    borderColor:
-      theme.palette.mode === 'dark'
-        ? theme.palette.primary.dark
-        : theme.palette.secondary.light,
-    color:
-      theme.palette.mode === 'dark'
-        ? theme.palette.primary.dark
-        : theme.palette.secondary.light,
-  },
-  '&.Mui-selected': {
-    color:
-      theme.palette.mode === 'dark'
-        ? theme.palette.primary.dark
-        : theme.palette.secondary.light,
-  },
-}));
+
+const StyledToggleButton = styled(MUIToggleButton)(({ theme }) => {
+  console.log('Current palette mode:', theme.palette.mode);
+
+  const isDarkMode = theme.palette.mode === 'dark';
+  const opacity = isDarkMode ? 0.7 : 0.6;
+  const color = theme.mixins.decomposeColor(theme.palette.common.white, opacity); 
+
+  return {
+    color,
+    borderColor: color, 
+    '&:hover': {
+      color: theme.palette.common.white,
+      borderColor: theme.palette.common.white,
+      opacity: 1.0,
+    },
+    '&.Mui-selected': {
+      color: theme.palette.common.white,
+      borderColor: theme.palette.common.white,
+      opacity: 1.0,
+    },
+  };
+});
