@@ -16,9 +16,11 @@ import { Route as AboutImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
-import { Route as BlogPostsPage3Import } from './routes/blog/posts/page-3'
-import { Route as BlogPostsPage2Import } from './routes/blog/posts/page-2'
-import { Route as BlogPostsPage1Import } from './routes/blog/posts/page-1'
+import { Route as BlogPostsReactPatternsPage2Import } from './routes/blog/posts/react-patterns/page-2'
+import { Route as BlogPostsReactPatternsPage1Import } from './routes/blog/posts/react-patterns/page-1'
+import { Route as BlogPostsFrontendDesignPage3Import } from './routes/blog/posts/frontend-design/page-3'
+import { Route as BlogPostsFrontendDesignPage2Import } from './routes/blog/posts/frontend-design/page-2'
+import { Route as BlogPostsFrontendDesignPage1Import } from './routes/blog/posts/frontend-design/page-1'
 
 // Create/Update Routes
 
@@ -52,23 +54,40 @@ const BlogIndexRoute = BlogIndexImport.update({
   getParentRoute: () => BlogRouteRoute,
 } as any)
 
-const BlogPostsPage3Route = BlogPostsPage3Import.update({
-  id: '/posts/page-3',
-  path: '/posts/page-3',
-  getParentRoute: () => BlogRouteRoute,
-} as any)
+const BlogPostsReactPatternsPage2Route =
+  BlogPostsReactPatternsPage2Import.update({
+    id: '/posts/react-patterns/page-2',
+    path: '/posts/react-patterns/page-2',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
 
-const BlogPostsPage2Route = BlogPostsPage2Import.update({
-  id: '/posts/page-2',
-  path: '/posts/page-2',
-  getParentRoute: () => BlogRouteRoute,
-} as any)
+const BlogPostsReactPatternsPage1Route =
+  BlogPostsReactPatternsPage1Import.update({
+    id: '/posts/react-patterns/page-1',
+    path: '/posts/react-patterns/page-1',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
 
-const BlogPostsPage1Route = BlogPostsPage1Import.update({
-  id: '/posts/page-1',
-  path: '/posts/page-1',
-  getParentRoute: () => BlogRouteRoute,
-} as any)
+const BlogPostsFrontendDesignPage3Route =
+  BlogPostsFrontendDesignPage3Import.update({
+    id: '/posts/frontend-design/page-3',
+    path: '/posts/frontend-design/page-3',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
+
+const BlogPostsFrontendDesignPage2Route =
+  BlogPostsFrontendDesignPage2Import.update({
+    id: '/posts/frontend-design/page-2',
+    path: '/posts/frontend-design/page-2',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
+
+const BlogPostsFrontendDesignPage1Route =
+  BlogPostsFrontendDesignPage1Import.update({
+    id: '/posts/frontend-design/page-1',
+    path: '/posts/frontend-design/page-1',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -109,25 +128,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexImport
       parentRoute: typeof BlogRouteImport
     }
-    '/blog/posts/page-1': {
-      id: '/blog/posts/page-1'
-      path: '/posts/page-1'
-      fullPath: '/blog/posts/page-1'
-      preLoaderRoute: typeof BlogPostsPage1Import
+    '/blog/posts/frontend-design/page-1': {
+      id: '/blog/posts/frontend-design/page-1'
+      path: '/posts/frontend-design/page-1'
+      fullPath: '/blog/posts/frontend-design/page-1'
+      preLoaderRoute: typeof BlogPostsFrontendDesignPage1Import
       parentRoute: typeof BlogRouteImport
     }
-    '/blog/posts/page-2': {
-      id: '/blog/posts/page-2'
-      path: '/posts/page-2'
-      fullPath: '/blog/posts/page-2'
-      preLoaderRoute: typeof BlogPostsPage2Import
+    '/blog/posts/frontend-design/page-2': {
+      id: '/blog/posts/frontend-design/page-2'
+      path: '/posts/frontend-design/page-2'
+      fullPath: '/blog/posts/frontend-design/page-2'
+      preLoaderRoute: typeof BlogPostsFrontendDesignPage2Import
       parentRoute: typeof BlogRouteImport
     }
-    '/blog/posts/page-3': {
-      id: '/blog/posts/page-3'
-      path: '/posts/page-3'
-      fullPath: '/blog/posts/page-3'
-      preLoaderRoute: typeof BlogPostsPage3Import
+    '/blog/posts/frontend-design/page-3': {
+      id: '/blog/posts/frontend-design/page-3'
+      path: '/posts/frontend-design/page-3'
+      fullPath: '/blog/posts/frontend-design/page-3'
+      preLoaderRoute: typeof BlogPostsFrontendDesignPage3Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/posts/react-patterns/page-1': {
+      id: '/blog/posts/react-patterns/page-1'
+      path: '/posts/react-patterns/page-1'
+      fullPath: '/blog/posts/react-patterns/page-1'
+      preLoaderRoute: typeof BlogPostsReactPatternsPage1Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/posts/react-patterns/page-2': {
+      id: '/blog/posts/react-patterns/page-2'
+      path: '/posts/react-patterns/page-2'
+      fullPath: '/blog/posts/react-patterns/page-2'
+      preLoaderRoute: typeof BlogPostsReactPatternsPage2Import
       parentRoute: typeof BlogRouteImport
     }
   }
@@ -137,16 +170,20 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
-  BlogPostsPage1Route: typeof BlogPostsPage1Route
-  BlogPostsPage2Route: typeof BlogPostsPage2Route
-  BlogPostsPage3Route: typeof BlogPostsPage3Route
+  BlogPostsFrontendDesignPage1Route: typeof BlogPostsFrontendDesignPage1Route
+  BlogPostsFrontendDesignPage2Route: typeof BlogPostsFrontendDesignPage2Route
+  BlogPostsFrontendDesignPage3Route: typeof BlogPostsFrontendDesignPage3Route
+  BlogPostsReactPatternsPage1Route: typeof BlogPostsReactPatternsPage1Route
+  BlogPostsReactPatternsPage2Route: typeof BlogPostsReactPatternsPage2Route
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
-  BlogPostsPage1Route: BlogPostsPage1Route,
-  BlogPostsPage2Route: BlogPostsPage2Route,
-  BlogPostsPage3Route: BlogPostsPage3Route,
+  BlogPostsFrontendDesignPage1Route: BlogPostsFrontendDesignPage1Route,
+  BlogPostsFrontendDesignPage2Route: BlogPostsFrontendDesignPage2Route,
+  BlogPostsFrontendDesignPage3Route: BlogPostsFrontendDesignPage3Route,
+  BlogPostsReactPatternsPage1Route: BlogPostsReactPatternsPage1Route,
+  BlogPostsReactPatternsPage2Route: BlogPostsReactPatternsPage2Route,
 }
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
@@ -159,9 +196,11 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
   '/blog/': typeof BlogIndexRoute
-  '/blog/posts/page-1': typeof BlogPostsPage1Route
-  '/blog/posts/page-2': typeof BlogPostsPage2Route
-  '/blog/posts/page-3': typeof BlogPostsPage3Route
+  '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
+  '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
+  '/blog/posts/frontend-design/page-3': typeof BlogPostsFrontendDesignPage3Route
+  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
+  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
 }
 
 export interface FileRoutesByTo {
@@ -169,9 +208,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
   '/blog': typeof BlogIndexRoute
-  '/blog/posts/page-1': typeof BlogPostsPage1Route
-  '/blog/posts/page-2': typeof BlogPostsPage2Route
-  '/blog/posts/page-3': typeof BlogPostsPage3Route
+  '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
+  '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
+  '/blog/posts/frontend-design/page-3': typeof BlogPostsFrontendDesignPage3Route
+  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
+  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
 }
 
 export interface FileRoutesById {
@@ -181,9 +222,11 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
   '/blog/': typeof BlogIndexRoute
-  '/blog/posts/page-1': typeof BlogPostsPage1Route
-  '/blog/posts/page-2': typeof BlogPostsPage2Route
-  '/blog/posts/page-3': typeof BlogPostsPage3Route
+  '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
+  '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
+  '/blog/posts/frontend-design/page-3': typeof BlogPostsFrontendDesignPage3Route
+  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
+  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
 }
 
 export interface FileRouteTypes {
@@ -194,18 +237,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/game'
     | '/blog/'
-    | '/blog/posts/page-1'
-    | '/blog/posts/page-2'
-    | '/blog/posts/page-3'
+    | '/blog/posts/frontend-design/page-1'
+    | '/blog/posts/frontend-design/page-2'
+    | '/blog/posts/frontend-design/page-3'
+    | '/blog/posts/react-patterns/page-1'
+    | '/blog/posts/react-patterns/page-2'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/game'
     | '/blog'
-    | '/blog/posts/page-1'
-    | '/blog/posts/page-2'
-    | '/blog/posts/page-3'
+    | '/blog/posts/frontend-design/page-1'
+    | '/blog/posts/frontend-design/page-2'
+    | '/blog/posts/frontend-design/page-3'
+    | '/blog/posts/react-patterns/page-1'
+    | '/blog/posts/react-patterns/page-2'
   id:
     | '__root__'
     | '/'
@@ -213,9 +260,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/game'
     | '/blog/'
-    | '/blog/posts/page-1'
-    | '/blog/posts/page-2'
-    | '/blog/posts/page-3'
+    | '/blog/posts/frontend-design/page-1'
+    | '/blog/posts/frontend-design/page-2'
+    | '/blog/posts/frontend-design/page-3'
+    | '/blog/posts/react-patterns/page-1'
+    | '/blog/posts/react-patterns/page-2'
   fileRoutesById: FileRoutesById
 }
 
@@ -256,9 +305,11 @@ export const routeTree = rootRoute
       "filePath": "blog/route.tsx",
       "children": [
         "/blog/",
-        "/blog/posts/page-1",
-        "/blog/posts/page-2",
-        "/blog/posts/page-3"
+        "/blog/posts/frontend-design/page-1",
+        "/blog/posts/frontend-design/page-2",
+        "/blog/posts/frontend-design/page-3",
+        "/blog/posts/react-patterns/page-1",
+        "/blog/posts/react-patterns/page-2"
       ]
     },
     "/about": {
@@ -271,16 +322,24 @@ export const routeTree = rootRoute
       "filePath": "blog/index.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/page-1": {
-      "filePath": "blog/posts/page-1.tsx",
+    "/blog/posts/frontend-design/page-1": {
+      "filePath": "blog/posts/frontend-design/page-1.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/page-2": {
-      "filePath": "blog/posts/page-2.tsx",
+    "/blog/posts/frontend-design/page-2": {
+      "filePath": "blog/posts/frontend-design/page-2.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/page-3": {
-      "filePath": "blog/posts/page-3.tsx",
+    "/blog/posts/frontend-design/page-3": {
+      "filePath": "blog/posts/frontend-design/page-3.tsx",
+      "parent": "/blog"
+    },
+    "/blog/posts/react-patterns/page-1": {
+      "filePath": "blog/posts/react-patterns/page-1.tsx",
+      "parent": "/blog"
+    },
+    "/blog/posts/react-patterns/page-2": {
+      "filePath": "blog/posts/react-patterns/page-2.tsx",
       "parent": "/blog"
     }
   }

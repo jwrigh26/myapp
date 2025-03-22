@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/blog/posts/page-2')({
+export const Route = createFileRoute('/blog/posts/frontend-design/page-2')({
   component: RouteComponent,
   head: () => ({
     getTitle: () => 'Page 2',

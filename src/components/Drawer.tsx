@@ -19,9 +19,11 @@ const Content = styled(Box)(({ theme }) => ({
 // ### Drawer
 // ################################################
 
-export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
+export const StyledPermanentDrawer = styled(Drawer, {
+  shouldForwardProp: (prop: string) => prop !== 'width',
+})<{ width?: number | string }>(({ theme, width }) => ({
   flexShrink: 0,
-  width: theme.mixins.drawerWidth,
+  width: width || theme.mixins.drawerWidth,
   display: 'none',
   ['& .MuiDrawer-paper']: {
     overFlowX: 'hidden',
@@ -32,7 +34,7 @@ export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     border: 'none',
     [theme.breakpoints.up('sm')]: {
-      width: theme.mixins.drawerWidth,
+      width: width || theme.mixins.drawerWidth,
       boxShadow: '4px 0 6px -3px rgba(0, 0, 0, 0.1)',
     },
   },
@@ -42,13 +44,23 @@ export const StyledPermanentDrawer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
+interface PermanentDrawerProps extends DrawerProps {
+  width?: number;
+}
+
 export function PermanentDrawer({
   anchor = 'left',
   children,
+  width,
   ...props
-}: DrawerProps) {
+}: PermanentDrawerProps) {
   return (
-    <StyledPermanentDrawer anchor={anchor} variant="permanent" {...props}>
+    <StyledPermanentDrawer
+      anchor={anchor}
+      variant="permanent"
+      width={width}
+      {...props}
+    >
       <Content>{children}</Content>
     </StyledPermanentDrawer>
   );
