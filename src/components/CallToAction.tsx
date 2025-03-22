@@ -1,6 +1,7 @@
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -33,12 +34,16 @@ const CTAButton = styled(Button)(({ theme }) => ({
 
 interface CallToActionProps {
   title?: string;
+  preSubtitle?: string;
+  subtitle?: string;
   buttonText?: string;
   onClick?: () => void;
 }
 
 export default function CallToAction({
   title,
+  preSubtitle,
+  subtitle,
   buttonText,
   onClick,
 }: CallToActionProps) {
@@ -46,9 +51,31 @@ export default function CallToAction({
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <CallToActionContainer>
-      <Typography variant="h1" color="common.white" gutterBottom={!isMobile}>
-        {title}
-      </Typography>
+      {title && (
+        <Typography variant="h1" color="common.white" gutterBottom={!isMobile}>
+          {title}
+        </Typography>
+      )}
+      <Stack direction={isMobile ? 'column' : 'row'} gap={1}>
+        {preSubtitle && (
+          <Typography
+            variant="subtitle1"
+            color="secondary.main"
+            gutterBottom={!isMobile}
+          >
+            {preSubtitle}
+          </Typography>
+        )}
+        {subtitle && (
+          <Typography
+            variant="subtitle1"
+            color="primary.light"
+            gutterBottom={!isMobile}
+          >
+            {subtitle}
+          </Typography>
+        )}
+      </Stack>
       {isFunction(onClick) && (
         <CTAButton variant="contained" onClick={onClick}>
           {buttonText}

@@ -9,10 +9,9 @@ export const Route = createFileRoute('/blog')({
 
 function AppLayoutComponent() {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginBottom: 2 }}>
       <DrawerComponent />
       <PageLayout>
-        <h1>App Layout</h1>
         <Outlet />
       </PageLayout>
     </Box>

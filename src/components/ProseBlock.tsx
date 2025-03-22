@@ -9,7 +9,7 @@ interface ProseBlockProps {
   /**
    * Children should generally be text, inline elements, or other elements suitable for wrapping in Typography.
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   dense?: boolean;
   spacingBottom?: boolean;
   options?: {
@@ -47,7 +47,7 @@ function ProseBlock({
         <Typography
           variant={titleVariant}
           component={titleComponent}
-          color="textPrimary"
+          color="primary.main"
           gutterBottom
         >
           {title}
@@ -58,7 +58,7 @@ function ProseBlock({
           variant={subtitleVariant}
           component={subtitleComponent}
           gutterBottom
-          color="textSecondary"
+          color="text.secondary"
         >
           {subtitle}
         </Typography>
@@ -66,7 +66,7 @@ function ProseBlock({
       <Typography
         variant={textVariant}
         component={textComponent}
-        color="textPrimary"
+        color="text.primary"
       >
         {children}
       </Typography>
@@ -96,16 +96,11 @@ const StyledBlock = styled(Box, {
 
   const spacingBottomStyles = spacingBottom
     ? { paddingBottom: theme.spacing(2) }
-    : {};
+    : { paddingBottom: theme.spacing(0) };
 
   const gutterBottomStyles = gutterBottom
     ? { marginBottom: theme.spacing(1) }
     : {};
-
-  const liColor =
-    theme.palette.mode === 'dark'
-      ? theme.palette.primary.superLight
-      : theme.palette.primary.dark;
 
   return {
     marginBottom: theme.spacing(0), // Add spacing between blocks
@@ -120,7 +115,6 @@ const StyledBlock = styled(Box, {
       paddingLeft: theme.spacing(4),
       '& li': {
         // This will target list items
-        // color: liColor,
         color: theme.palette.text.primary,
         marginBottom: theme.spacing(1),
       },

@@ -1,6 +1,6 @@
-import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
-import { PropsWithChildren } from "react";
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import { PropsWithChildren } from 'react';
 
 interface StyledGridProps {
   gap: number;
@@ -9,15 +9,17 @@ interface StyledGridProps {
 }
 
 const StyledGrid = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "gap" && prop !== "padding" && prop !== "color",
+  shouldForwardProp: (prop) =>
+    prop !== 'gap' && prop !== 'padding' && prop !== 'color',
 })<StyledGridProps>(({ color, theme, gap, padding }) => ({
-  display: "grid",
-  gridTemplateColumns: "1fr",
-  gridTemplateRows: "auto 1fr auto",
+  display: 'grid',
+  gridTemplateColumns: '1fr',
+  gridTemplateRows: 'auto 1fr auto',
   gap: theme.spacing(gap),
   padding: theme.spacing(padding),
   backgroundColor: color || theme.palette.background.paper,
-  maxWidth: "1536px",
+  maxWidth: '1536px',
+  width: '100%',
 }));
 
 interface PageLayoutProps extends PropsWithChildren<{}> {
@@ -35,7 +37,7 @@ const PageLayout = ({
   color,
 }: PageLayoutProps) => {
   return (
-    <StyledGrid  color={color} gap={gap} padding={padding} id={id}>
+    <StyledGrid color={color} gap={gap} padding={padding} id={id}>
       {children}
     </StyledGrid>
   );
