@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as HomeImport } from './routes/home'
 import { Route as GameImport } from './routes/game'
 import { Route as AboutImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog/route'
@@ -23,6 +24,12 @@ import { Route as BlogPostsFrontendDesignPage2Import } from './routes/blog/posts
 import { Route as BlogPostsFrontendDesignPage1Import } from './routes/blog/posts/frontend-design/page-1'
 
 // Create/Update Routes
+
+const HomeRoute = HomeImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const GameRoute = GameImport.update({
   id: '/game',
@@ -121,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameImport
       parentRoute: typeof rootRoute
     }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/': {
       id: '/blog/'
       path: '/'
@@ -195,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
+  '/home': typeof HomeRoute
   '/blog/': typeof BlogIndexRoute
   '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
   '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
@@ -207,6 +222,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
+  '/home': typeof HomeRoute
   '/blog': typeof BlogIndexRoute
   '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
   '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
@@ -221,6 +237,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/game': typeof GameRoute
+  '/home': typeof HomeRoute
   '/blog/': typeof BlogIndexRoute
   '/blog/posts/frontend-design/page-1': typeof BlogPostsFrontendDesignPage1Route
   '/blog/posts/frontend-design/page-2': typeof BlogPostsFrontendDesignPage2Route
@@ -236,6 +253,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/about'
     | '/game'
+    | '/home'
     | '/blog/'
     | '/blog/posts/frontend-design/page-1'
     | '/blog/posts/frontend-design/page-2'
@@ -247,6 +265,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/game'
+    | '/home'
     | '/blog'
     | '/blog/posts/frontend-design/page-1'
     | '/blog/posts/frontend-design/page-2'
@@ -259,6 +278,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/about'
     | '/game'
+    | '/home'
     | '/blog/'
     | '/blog/posts/frontend-design/page-1'
     | '/blog/posts/frontend-design/page-2'
@@ -273,6 +293,7 @@ export interface RootRouteChildren {
   BlogRouteRoute: typeof BlogRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   GameRoute: typeof GameRoute
+  HomeRoute: typeof HomeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -280,6 +301,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRouteRoute: BlogRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   GameRoute: GameRoute,
+  HomeRoute: HomeRoute,
 }
 
 export const routeTree = rootRoute
@@ -295,7 +317,8 @@ export const routeTree = rootRoute
         "/",
         "/blog",
         "/about",
-        "/game"
+        "/game",
+        "/home"
       ]
     },
     "/": {
@@ -317,6 +340,9 @@ export const routeTree = rootRoute
     },
     "/game": {
       "filePath": "game.tsx"
+    },
+    "/home": {
+      "filePath": "home.tsx"
     },
     "/blog/": {
       "filePath": "blog/index.tsx",
