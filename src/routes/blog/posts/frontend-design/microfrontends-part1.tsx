@@ -62,7 +62,8 @@ function RouteComponent() {
       <ProseList items={bulletPoints2} subTitle="Host Sites:" />
 
       <ProseBlock title="Multiple Host Sites:">
-        Serve as the backbone for displaying various front-end modules.
+        We support a handful of different host sites. They serve as the backbone
+        for displaying various front-end modules.
       </ProseBlock>
 
       <ProseBlock dense>
@@ -105,6 +106,11 @@ function RouteComponent() {
         PostRobot.js, now archived) to streamline interactions between modules.
       </ProseBlock>
 
+      <ProseBlock spacingBottom>
+        While it sounds cool, at its heart our communication library is just a
+        helpful wrapper around the window.postMessage API.
+      </ProseBlock>
+
       <ProseBlock
         title="Module Development & Versioning"
         options={{
@@ -113,6 +119,40 @@ function RouteComponent() {
         }}
       />
       <ProseList items={bulletPoints3} subTitle="Development:" />
+
+      <ProseBlock title="Development:" dense>
+        dsome
+      </ProseBlock>
+
+      <ProseBlock
+        title="Shared Resources:"
+        options={{
+          titleVariant: 'h4',
+          subtitleVariant: 'subtitle1',
+        }}
+      />
+      <ProseList items={bulletPoints5} subTitle="Libraries:" />
+
+      <ProseBlock title="Our Shared Toolkit:" dense>
+        Late in our development process, we realized consistency was crucial, so
+        we began sharing core in-house front-end libraries. Our UI library
+        features shared components like buttons, inputs, and modals, while we
+        also share validation utilities, context providers, theme management,
+        and various utility functions for dates and authentication.
+      </ProseBlock>
+
+      <ProseBlock dense>
+        These shareable resources only evolved once our module development
+        matured. In micro frontend design, "wet code" is expected—each repo
+        handles its own stuff like API and state management. Rather than forcing dryness
+        everywhere, we evaluate common patterns across teams and add them to our
+        shared library when there's enough overlap.
+      </ProseBlock>
+
+      <ProseBlock spacingBottom>
+        By taking this approach, we streamline development and maintain a
+        consistent, efficient workflow.
+      </ProseBlock>
     </>
   );
 }
@@ -139,6 +179,15 @@ const bulletPoints2 = [
 
 // ### Module Development & Versioning
 const bulletPoints3 = [
-  'Developed in separate React repositories',
+  'Developed in separate repositories (Mostly React)',
   'Aimed for uniform versioning, though practical constraints did lead to some drift',
+];
+
+// ### Shared Resources
+const bulletPoints5 = [
+  'UI library with shared components',
+  'Validation utilities',
+  'Context providers',
+  'Theme management',
+  'Utility functions for dates and authentication',
 ];

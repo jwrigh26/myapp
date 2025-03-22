@@ -31,7 +31,7 @@ function RootComponent() {
       <HeadContent />
       <IndexLayout>
         <Outlet />
-        <TanStackRouterDevtools position="bottom-right" />
+        {/* <TanStackRouterDevtools position="bottom-right" /> */}
       </IndexLayout>
       <Scripts />
     </>

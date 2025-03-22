@@ -101,7 +101,7 @@ function DropCanceled() {
     const timeout = setTimeout(() => {
       // console.log('TIMEOUT: Drop canceled timeout');
       setDropCanceled(null);
-    }, theme.transitions.duration.leavingScreen * 3);
+    }, theme.transitions.duration.leavingScreen * 1.5);
     return () => {
       clearTimeout(timeout);
     };
@@ -183,7 +183,7 @@ const OuterBlock = styled(Box, {
   width: '100%',
   transform: tslate, // e.g., 'translate(100px, 50px)'
   transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.leavingScreen * 2,
+    duration: theme.transitions.duration.leavingScreen,
     easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   }),
 }));
