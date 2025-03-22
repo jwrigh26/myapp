@@ -5,6 +5,7 @@
 ### Blog Images
 
 ### Blog dark mode
+
 - Drawer background color
 - Drawer hover colors
 
@@ -13,14 +14,7 @@
 - mobile drawer
 - tablet?
 
-### Settings page
-- hook up settings side drawer
-- add toggle for dark mode
-
-
-
-
 ### Nice To Haves
 
-- Make nav buttons animat hover like block list buttons
+- Make nav buttons animate hover like block list buttons
 - Main page transitions
