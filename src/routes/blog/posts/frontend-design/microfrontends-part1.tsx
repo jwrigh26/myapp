@@ -205,6 +205,35 @@ function RouteComponent() {
         integration and module autonomy keeps our system both flexible and
         efficient.
       </ProseBlock>
+
+      <ProseBlock
+        title="Deployment Flexibility"
+        options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
+      />
+      <ProseList
+        items={bulletPoints7}
+        subTitle="Super easy, barely an inconvenience"
+      />
+
+      <ProseBlock title="Modular Deployment:" dense>
+        Each module is isolated in its own repository and loaded via iframes,
+        allowing for independent deployment cycles. This means we can update or
+        redeploy a single module without impacting the entire system. Our
+        decoupled approach ensures that everything runs smoothly even when
+        different parts are updated at different times.
+      </ProseBlock>
+
+      <ProseBlock
+        title="Agile Build Process & DevOps Excellence:"
+        dense
+        spacingBottom
+      >
+        Our streamlined build process supports consistent release cycles and
+        continuous integration, making updates quick and flexible. With an
+        aggressive QA team and top-notch DevOps, we no longer need to deploy
+        everything at once. Instead, our agile process delivers smooth, reliable
+        updates that keep the entire system running efficiently.
+      </ProseBlock>
     </>
   );
 }
@@ -248,4 +277,11 @@ const bulletPoints5 = [
 const bulletPoints6 = [
   'Consumption: Each module consumes APIs from various .NET backend services.',
   'Standalone Operation: Some modules run as independent applications outside of a host site.',
+];
+
+// ### Deployment Flexibility
+const bulletPoints7 = [
+  'Inndependent Repositories',
+  'Decoupled Updates',
+  'Streamlined Build Process',
 ];
