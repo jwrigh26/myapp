@@ -5,6 +5,15 @@ import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import Image, {
+  FluidContainer,
+  BackgroundImageContainer,
+  ShapeOutsideContainer,
+} from '@/components/Image';
+import image0 from '@/assets/Slide0.jpeg';
+import { mdiBorderRadius } from '@mdi/js';
+import image1 from '@/assets/Slide1.jpeg';
+import Box from '@mui/material/Box';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -27,12 +36,18 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <>
+    <Box>
       <CallToAction
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 1:"
         subtitle="How We Built a Modular Front-End that Scales"
       />
+      <Image
+        defaultSrc={image0}
+        alt="Micro-Frontends Part 1"
+        style={{ borderRadius: '50%', width: 140, height: 140, position: 'absolute', top: -165, right: 16 }}
+      />
+      {/* <BackgroundImageContainer src={image0} height={200} maxWidth={1200} /> */}
       <TitleBlock subtitle="By building a Scalable Front-End that Drives HR Innovation">
         Empowering Small Businesses
       </TitleBlock>
@@ -44,6 +59,9 @@ function RouteComponent() {
         designed for developers looking for practical insights that work no
         matter which front-end framework they use.
       </IntroBlock>
+      <FluidContainer>
+        <Image defaultSrc={image1} alt="Micro-Frontends Part 1" style={{ objectFit: 'contain' }} />
+      </FluidContainer>
       <ProseList items={bulletPoints1} subTitle="The Backstory:" />
       <DisclaimerBlock title="Disclaimer:">
         Our design choices fit our development needs, but they may not be right
@@ -234,7 +252,7 @@ function RouteComponent() {
         everything at once. Instead, our agile process delivers smooth, reliable
         updates that keep the entire system running efficiently.
       </ProseBlock>
-    </>
+    </Box>
   );
 }
 
