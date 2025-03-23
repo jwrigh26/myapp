@@ -106,7 +106,7 @@ function RouteComponent() {
         PostRobot.js, now archived) to streamline interactions between modules.
       </ProseBlock>
 
-      <ProseBlock spacingBottom>
+      <ProseBlock dense spacingBottom>
         While it sounds cool, at its heart our communication library is just a
         helpful wrapper around the window.postMessage API.
       </ProseBlock>
@@ -120,8 +120,37 @@ function RouteComponent() {
       />
       <ProseList items={bulletPoints3} subTitle="Development:" />
 
-      <ProseBlock title="Development:" dense>
-        dsome
+      <ProseBlock
+        title="Modules:"
+        subtitle="Independently Developed UI Components"
+        dense
+      >
+        Each module is built in its own repository—mostly in React, with a
+        couple of legacy Angular modules still around. While having multiple
+        tech stacks can offer flexibility (imagine spinning up a React 19 repo
+        if a business need arises), too much variety can make maintenance
+        tricky. Most of our Angular developers have moved on, so new features
+        are now primarily developed in React, which sometimes creates challenges
+        for our older Angular stacks.
+      </ProseBlock>
+
+      <ProseBlock
+        title="Version Drift:"
+        subtitle="Racing Through Versions"
+        dense
+      >
+        We aim for uniform versioning across projects, but practical constraints
+        sometimes lead to drift. There was a time when we had projects running
+        on React 16, 17, and 18 all at once. Today, nearly all our modules are
+        on React 18.2. Despite this fragmentation, deployments haven't been an
+        issue thanks to our independent deployment process. More on that later.
+      </ProseBlock>
+
+      <ProseBlock dense spacingBottom>
+        For now, we've decided to freeze our dev stack. We're happy with our
+        current development patterns and don't see a strong business need to
+        jump to React 19 anytime soon. While SSR has its place, our dynamic SPAs
+        get the job done perfectly. No need to fix what isn't broken, right?
       </ProseBlock>
 
       <ProseBlock
@@ -144,14 +173,37 @@ function RouteComponent() {
       <ProseBlock dense>
         These shareable resources only evolved once our module development
         matured. In micro frontend design, "wet code" is expected—each repo
-        handles its own stuff like API and state management. Rather than forcing dryness
-        everywhere, we evaluate common patterns across teams and add them to our
-        shared library when there's enough overlap.
+        handles its own stuff like API and state management. Rather than forcing
+        dryness everywhere, we evaluate common patterns across teams and add
+        them to our shared library when there's enough overlap.
       </ProseBlock>
 
       <ProseBlock spacingBottom>
         By taking this approach, we streamline development and maintain a
         consistent, efficient workflow.
+      </ProseBlock>
+
+      <ProseBlock
+        title="Service Integration & Module Autonomy"
+        options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
+      />
+
+      <ProseList items={bulletPoints6} subTitle="Super Mods:" />
+
+      <ProseBlock
+        title="Decoupled Yet Connected"
+        subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
+        dense
+        spacingBottom
+      >
+        Each module consumes APIs from various .NET backend services, and
+        they're built to handle multiple integrations seamlessly. We've
+        carefully designed our APIs to update the application state dynamically,
+        ensuring that components lay out smoothly on the page. Plus, some
+        modules even run as standalone applications outside of a host site,
+        providing true autonomy when needed. This balanced approach to service
+        integration and module autonomy keeps our system both flexible and
+        efficient.
       </ProseBlock>
     </>
   );
@@ -190,4 +242,10 @@ const bulletPoints5 = [
   'Context providers',
   'Theme management',
   'Utility functions for dates and authentication',
+];
+
+// ### Module Autonomy
+const bulletPoints6 = [
+  'Consumption: Each module consumes APIs from various .NET backend services.',
+  'Standalone Operation: Some modules run as independent applications outside of a host site.',
 ];
