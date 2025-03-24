@@ -4,6 +4,7 @@ import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import TitleBlock from '@/components/TitleBlock';
+import { useTheme } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import Image, {
   FluidContainer,
@@ -11,9 +12,9 @@ import Image, {
   ShapeOutsideContainer,
 } from '@/components/Image';
 import image0 from '@/assets/Slide0.jpeg';
-import { mdiBorderRadius } from '@mdi/js';
 import image1 from '@/assets/Slide1.jpeg';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -35,6 +36,7 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
+  const theme = useTheme();
   return (
     <Box>
       <CallToAction
@@ -42,27 +44,42 @@ function RouteComponent() {
         preSubtitle="Micro-Frontends Part 1:"
         subtitle="How We Built a Modular Front-End that Scales"
       />
-      <Image
+      {/* <Image
         defaultSrc={image0}
         alt="Micro-Frontends Part 1"
         style={{ borderRadius: '50%', width: 140, height: 140, position: 'absolute', top: -165, right: 16 }}
-      />
+      /> */}
       {/* <BackgroundImageContainer src={image0} height={200} maxWidth={1200} /> */}
-      <TitleBlock subtitle="By building a Scalable Front-End that Drives HR Innovation">
-        Empowering Small Businesses
-      </TitleBlock>
-      <IntroBlock>
-        In this post, I explore building a scalable modular front-end using
-        iframes—a high-level, realistic alternative to the micro-frontend hype.
-        I cover our approach to inter-module communication, compare our solution
-        to other alternatives, and share lessons learned along the way, all
-        designed for developers looking for practical insights that work no
-        matter which front-end framework they use.
-      </IntroBlock>
-      <FluidContainer>
-        <Image defaultSrc={image1} alt="Micro-Frontends Part 1" style={{ objectFit: 'contain' }} />
-      </FluidContainer>
-      <ProseList items={bulletPoints1} subTitle="The Backstory:" />
+      <Stack direction={{ xs: 'column', md: 'row' }} gap={1}>
+        <Box sx={{ flex: '1, 1, 0' }}>
+          <TitleBlock subtitle="By building a Scalable Front-End that Drives HR Innovation">
+            Empowering Small Businesses
+          </TitleBlock>
+          <IntroBlock>
+            In this post, I explore building a scalable modular front-end using
+            iframes—a high-level, realistic alternative to the micro-frontend
+            hype. I cover our approach to inter-module communication, compare
+            our solution to other alternatives, and share lessons learned along
+            the way, all designed for developers looking for practical insights
+            that work no matter which front-end framework they use.
+          </IntroBlock>
+        </Box>
+        <Image
+          defaultSrc={image0}
+          alt="Micro-Frontends Part 1"
+          style={{ objectFit: 'contain', flex: 0, padding: theme.spacing(2) }}
+        />
+      </Stack>
+      <Stack direction={{ xs: 'column', md: 'row' }} alignItems="center" gap={1}>
+        <Image
+          defaultSrc={image1}
+          alt="Micro-Frontends Part 1"
+          style={{ objectFit: 'contain', flex: 0, padding: theme.spacing(2), width: 300 }}
+        />
+        <Box sx={{ flex: '1, 1, 0' }}>
+          <ProseList items={bulletPoints1} subTitle="The Backstory:" />
+        </Box>
+      </Stack>
       <DisclaimerBlock title="Disclaimer:">
         Our design choices fit our development needs, but they may not be right
         for you—and that's okay. Every application is different, and there’s
