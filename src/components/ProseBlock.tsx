@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-interface ProseBlockProps {
+export interface ProseBlockProps {
   title?: string;
   subtitle?: string;
   /**

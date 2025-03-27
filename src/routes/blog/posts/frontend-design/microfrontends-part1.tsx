@@ -1,6 +1,7 @@
 import CallToAction from '@/components/CallToAction';
 import DisclaimerBlock from '@/components/DisclaimerBlock';
 import IntroBlock from '@/components/IntroBlock';
+import type { ProseBlockProps } from '@/components/ProseBlock';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import TitleBlock from '@/components/TitleBlock';
@@ -33,6 +34,8 @@ function RouteComponent() {
         preSubtitle="Micro-Frontends Part 1:"
         subtitle="How We Built a Modular Front-End that Scales"
       />
+
+      {/* Intro: Empowering Small Businesses */}
       <TitleBlock subtitle="By building a Scalable Front-End that Drives HR Innovation">
         Empowering Small Businesses
       </TitleBlock>
@@ -52,13 +55,15 @@ function RouteComponent() {
         lessons learned, and a few ideas that might help you think about modular
         front-end design in a new way.
       </DisclaimerBlock>
+
+      {/* ### The Environment and Requirements */}
       <ProseBlock title="The Environment and Requirements" />
       <ProseList items={bulletPoints2} subTitle="Host Sites:" />
 
-      <ProseBlock title="Multiple Host Sites:">
+      <SectionStarter title="Multiple Host Sites:">
         We support a handful of different host sites. They serve as the backbone
         for displaying various front-end modules.
-      </ProseBlock>
+      </SectionStarter>
 
       <ProseBlock dense>
         Each host site delivers a unified experience with smooth navigation,
@@ -66,11 +71,11 @@ function RouteComponent() {
         than multiple separate modules.
       </ProseBlock>
 
-      <ProseBlock title="Page Management:">
+      <SectionStarter title="Page Management:">
         Each host site manages multiple pages, typically loading one or more
         modules inside an iframe (we aim for one iframe per page to reduce
         complexity).
-      </ProseBlock>
+      </SectionStarter>
 
       <ProseBlock dense>
         Although our goal is one iframe per page, there have been instances
@@ -85,10 +90,10 @@ function RouteComponent() {
         increases.
       </ProseBlock>
 
-      <ProseBlock title="Core Functions:">
+      <SectionStarter title="Core Functions:">
         Host sites handle authentication, analytics, and inter-module
         communication.
-      </ProseBlock>
+      </SectionStarter>
 
       <ProseBlock dense>
         By centralizing these responsibilities, each module behaves consistently
@@ -105,13 +110,13 @@ function RouteComponent() {
         helpful wrapper around the window.postMessage API.
       </ProseBlock>
 
+      {/* ### Module Development & Versioning */}
       <ProseBlock title="Module Development & Versioning" />
       <ProseList items={bulletPoints3} subTitle="Development:" />
 
-      <ProseBlock
+      <SectionStarter
         title="Modules:"
         subtitle="Independently Developed UI Components"
-        dense
       >
         Each module is built in its own repository—mostly in React, with a
         couple of legacy Angular modules still around. While having multiple
@@ -120,19 +125,15 @@ function RouteComponent() {
         tricky. Most of our Angular developers have moved on, so new features
         are now primarily developed in React, which sometimes creates challenges
         for our older Angular stacks.
-      </ProseBlock>
+      </SectionStarter>
 
-      <ProseBlock
-        title="Version Drift:"
-        subtitle="Racing Through Versions"
-        dense
-      >
+      <SectionStarter title="Version Drift:" subtitle="Racing Through Versions">
         We aim for uniform versioning across projects, but practical constraints
         sometimes lead to drift. There was a time when we had projects running
         on React 16, 17, and 18 all at once. Today, nearly all our modules are
         on React 18.2. Despite this fragmentation, deployments haven't been an
         issue thanks to our independent deployment process. More on that later.
-      </ProseBlock>
+      </SectionStarter>
 
       <ProseBlock dense spacingBottom>
         For now, we've decided to freeze our dev stack. We're happy with our
@@ -141,16 +142,17 @@ function RouteComponent() {
         get the job done perfectly. No need to fix what isn't broken, right?
       </ProseBlock>
 
+      {/* ### Shared Resources */}
       <ProseBlock title="Shared Resources:" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
 
-      <ProseBlock title="Our Shared Toolkit:" dense>
+      <SectionStarter title="Our Shared Toolkit:">
         Late in our development process, we realized consistency was crucial, so
         we began sharing core in-house front-end libraries. Our UI library
         features shared components like buttons, inputs, and modals, while we
         also share validation utilities, context providers, theme management,
         and various utility functions for dates and authentication.
-      </ProseBlock>
+      </SectionStarter>
 
       <ProseBlock dense>
         These shareable resources only evolved once our module development
@@ -165,18 +167,14 @@ function RouteComponent() {
         consistent, efficient workflow.
       </ProseBlock>
 
-      <ProseBlock
-        title="Service Integration & Module Autonomy"
-        options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
-      />
+      {/* Service Integration & Module Autonomy */}
+      <ProseBlock title="Service Integration & Module Autonomy" />
 
       <ProseList items={bulletPoints6} subTitle="Super Mods:" />
 
-      <ProseBlock
+      <SectionStarter
         title="Decoupled Yet Connected"
         subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
-        dense
-        spacingBottom
       >
         Each module consumes APIs from various .NET backend services, and
         they're built to handle multiple integrations seamlessly. We've
@@ -186,8 +184,9 @@ function RouteComponent() {
         providing true autonomy when needed. This balanced approach to service
         integration and module autonomy keeps our system both flexible and
         efficient.
-      </ProseBlock>
+      </SectionStarter>
 
+      {/* ### Deployment Flexibility */}
       <ProseBlock
         title="Deployment Flexibility"
         options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
@@ -197,25 +196,21 @@ function RouteComponent() {
         subTitle="Super easy, barely an inconvenience"
       />
 
-      <ProseBlock title="Modular Deployment:" dense>
+      <SectionStarter title="Modular Deployment:">
         Each module is isolated in its own repository and loaded via iframes,
         allowing for independent deployment cycles. This means we can update or
         redeploy a single module without impacting the entire system. Our
         decoupled approach ensures that everything runs smoothly even when
         different parts are updated at different times.
-      </ProseBlock>
+      </SectionStarter>
 
-      <ProseBlock
-        title="Agile Build Process & DevOps Excellence:"
-        dense
-        spacingBottom
-      >
+      <SectionStarter title="Agile Build Process & DevOps Excellence:">
         Our streamlined build process supports consistent release cycles and
         continuous integration, making updates quick and flexible. With an
         aggressive QA team and top-notch DevOps, we no longer need to deploy
         everything at once. Instead, our agile process delivers smooth, reliable
         updates that keep the entire system running efficiently.
-      </ProseBlock>
+      </SectionStarter>
     </>
   );
 }
@@ -223,6 +218,26 @@ function RouteComponent() {
 // #################################################
 // ### Usuable Components
 // #################################################
+
+function SectionStarter({
+  children,
+  title,
+  subtitle,
+  dense = false,
+  spacingBottom = false,
+}: ProseBlockProps) {
+  return (
+    <ProseBlock
+      title={title}
+      subtitle={subtitle}
+      options={{ titleVariant: 'h5', subtitleVariant: 'subtitle1' }}
+      dense={dense}
+      spacingBottom={spacingBottom}
+    >
+      {children}
+    </ProseBlock>
+  );
+}
 
 // ### How a Scalable Front-End Drives HR Innovation
 const bulletPoints1 = [

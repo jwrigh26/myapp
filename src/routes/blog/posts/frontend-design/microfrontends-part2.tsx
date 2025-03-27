@@ -204,7 +204,7 @@ function RouteComponent() {
         integrate multiple pages into various client web pages. Given our
         business requirements, iframes seemed to be the best choice at the time.
       </ProseBlock>
-      <ProseBlock dense spacingBottom>
+      <ProseBlock dense>
         Our team dynamics also played a role. With a backend-heavy group and
         full-stack developers occasionally handling front-end work, simplicity
         was key. Iframes allowed modules to be updated independently without
