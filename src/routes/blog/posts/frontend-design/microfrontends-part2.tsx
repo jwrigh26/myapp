@@ -35,12 +35,7 @@ function RouteComponent() {
       <TitleBlock subtitle="Comparing Our Approach to Modern Alternatives">
         Decision Making
       </TitleBlock>
-      <ProseBlock
-        title="Before Micro Frontends:"
-        options={{
-          titleVariant: 'h4',
-        }}
-      />
+      <ProseBlock title="Before Micro Frontends:" />
       <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
 
       <ProseBlock>
@@ -65,12 +60,7 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Micro-Frontend Strategies */}
-      <ProseBlock
-        title="Micro-Frontend Strategies:"
-        options={{
-          titleVariant: 'h4',
-        }}
-      />
+      <ProseBlock title="Micro-Frontend Strategies:" />
       <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
 
       <ProseBlock>
@@ -101,12 +91,7 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Modern Micro-Frontend libraries */}
-      <ProseBlock
-        title="Modern Micro-Frontend libraries:"
-        options={{
-          titleVariant: 'h4',
-        }}
-      />
+      <ProseBlock title="Modern Micro-Frontend libraries:" />
       <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
 
       <ProseBlock title="Module Federation:" />
@@ -153,6 +138,80 @@ function RouteComponent() {
         Whichever you choose, the goal remains the same: creating flexible,
         maintainable, and scalable front-end architectures.
       </ProseBlock>
+
+      <ProseBlock title="Iframe-Based Approach:" />
+      <ProseList
+        items={bulletPointsIframe1}
+        subTitle="Simple, Secure, and Scalable:"
+      />
+
+      <ProseBlock dense>
+        Iframes offer built-in isolation, running each module in its own browser
+        context. This means your JavaScript, CSS, and DOM remain separate,
+        naturally avoiding conflicts and helping keep global state tidy. Plus,
+        sandboxing enhances security by limiting what embedded content can
+        access—a big win when integrating third-party or less-trusted sources.
+      </ProseBlock>
+      <ProseBlock dense>
+        Thanks to this isolation, deployments become simpler and more agile.
+        Modules can be updated independently, allowing for efficient caching
+        strategies and quicker rollouts. Even better, if one module encounters
+        an issue, the rest of your app stays safe—errors or heavy processing
+        inside an iframe won’t crash or block your main page.
+      </ProseBlock>
+
+      {/* ### Pros and Cons */}
+      {/* TODO: Come back and style this better */}
+      <ProseBlock title="Pros and Cons:" />
+      <ProseBlock
+        title="Modern Micro-Frontend Frameworks (Webpack Module Federation, Single-SPA):"
+        options={{ titleVariant: 'h5' }}
+        dense
+      />
+      <ProseList items={bulletPointsMFLPros} subTitle="Pros" />
+      <ProseList items={bulletPointsMFLCons} subTitle="Cons" />
+      <ProseBlock
+        title="Our Iframe-Based Approach:"
+        options={{ titleVariant: 'h5' }}
+        dense
+      />
+      <ProseList items={bulletPointsIframePros} subTitle="Pros" />
+      <ProseList items={bulletPointsIframeCons} subTitle="Cons" />
+      <ProseBlock dense>
+        Modern micro-frontend frameworks like Webpack Module Federation and
+        Single-SPA offer powerful dynamic integration and support multiple
+        frameworks. However, they add complexity due to tricky dependency
+        management, larger bundles, and tighter team coordination, all of which
+        can slow things down.
+      </ProseBlock>
+      <ProseBlock dense spacingBottom>
+        Our iframe-based approach prioritizes stability, security, and
+        simplicity. While less dynamic, it gives us reliable fault isolation,
+        easy deployments, and lower maintenance—benefits perfectly suited for
+        our business model.
+      </ProseBlock>
+
+      {/* ### Rationale Behind Our Choice */}
+      <ProseBlock title="Rationale Behind Our Choice:" />
+      <ProseList
+        items={bulletPointsRationale}
+        subTitle="Our Decision Factors"
+      />
+      <ProseBlock dense>
+        When we first designed our system, modern micro-frontend frameworks like
+        Single-SPA and Webpack Module Federation were either unavailable or not
+        mature enough. We needed something immediately that could quickly
+        integrate multiple pages into various client web pages. Given our
+        business requirements, iframes seemed to be the best choice at the time.
+      </ProseBlock>
+      <ProseBlock dense spacingBottom>
+        Our team dynamics also played a role. With a backend-heavy group and
+        full-stack developers occasionally handling front-end work, simplicity
+        was key. Iframes allowed modules to be updated independently without
+        requiring deep front-end expertise across the board. Ultimately, based
+        on timing, business needs, and our team structure, iframes made the most
+        sense.
+      </ProseBlock>
     </>
   );
 }
@@ -189,3 +248,42 @@ const bulletPointsSspa1 = [
   'Complex setup (CSS, global state, etc.)',
 ];
 // - iFrames
+const bulletPointsIframe1 = [
+  'Isolation: Each module runs in its own browser context',
+  'Independent Updates: Modules can be updated separately',
+  'Simplicity: Quick deployments with reduced complexity',
+  'Custom Messaging: In-house iframe messaging (based on PostRobot.js)',
+];
+
+// - Pros and Cons
+const bulletPointsMFLPros = [
+  'Dynamic module sharing and tighter integration (routing, lifecycle)',
+  'Flexibility to work with multiple frameworks',
+];
+
+const bulletPointsMFLCons = [
+  'Complex dependency management',
+  'Increased coordination among teams',
+  'Larger bundles and potential performance issues',
+  'More challenging end-to-end testing',
+];
+
+const bulletPointsIframePros = [
+  'High isolation and security (sandboxing, separate contexts)',
+  'Independent deployment cycles',
+  'Simpler build and maintenance processes',
+  'Reduced risk of global state conflicts',
+];
+
+const bulletPointsIframeCons = [
+  'Less dynamic integration compared to modern frameworks',
+  'Custom messaging requires ongoing support',
+];
+
+// Rational Behind Our Choice
+const bulletPointsRationale = [
+  'Timeing',
+  'Business Needs',
+  'Team Dynamics',
+  'Deployment and Maintenance',
+];

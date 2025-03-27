@@ -32,7 +32,7 @@ function ProseBlock({
 }: ProseBlockProps): JSX.Element {
   const {
     // Variant defaults
-    titleVariant = 'h5',
+    titleVariant = 'h4',
     subtitleVariant = 'subtitle1',
     textVariant = 'body1',
     // Component defaults

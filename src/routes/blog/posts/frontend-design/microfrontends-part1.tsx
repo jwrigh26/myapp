@@ -52,13 +52,7 @@ function RouteComponent() {
         lessons learned, and a few ideas that might help you think about modular
         front-end design in a new way.
       </DisclaimerBlock>
-      <ProseBlock
-        title="The Environment and Requirements"
-        options={{
-          titleVariant: 'h4',
-          subtitleVariant: 'subtitle1',
-        }}
-      />
+      <ProseBlock title="The Environment and Requirements" />
       <ProseList items={bulletPoints2} subTitle="Host Sites:" />
 
       <ProseBlock title="Multiple Host Sites:">
@@ -111,13 +105,7 @@ function RouteComponent() {
         helpful wrapper around the window.postMessage API.
       </ProseBlock>
 
-      <ProseBlock
-        title="Module Development & Versioning"
-        options={{
-          titleVariant: 'h4',
-          subtitleVariant: 'subtitle1',
-        }}
-      />
+      <ProseBlock title="Module Development & Versioning" />
       <ProseList items={bulletPoints3} subTitle="Development:" />
 
       <ProseBlock
@@ -153,13 +141,7 @@ function RouteComponent() {
         get the job done perfectly. No need to fix what isn't broken, right?
       </ProseBlock>
 
-      <ProseBlock
-        title="Shared Resources:"
-        options={{
-          titleVariant: 'h4',
-          subtitleVariant: 'subtitle1',
-        }}
-      />
+      <ProseBlock title="Shared Resources:" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
 
       <ProseBlock title="Our Shared Toolkit:" dense>
