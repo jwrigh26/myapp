@@ -6,235 +6,219 @@ import { styled } from '@mui/material/styles';
 
 // Define the structure for each image source
 interface SourceProps {
-  media: string; // e.g., "(min-width: 768px)"
-  srcSet: string; // e.g., "image-large.jpg 2x, image-large@1x.jpg 1x"
-  sizes?: string; // e.g., "100vw"
-}
-
+    media: string; // e.g., "(min-width: 768px)"
+    srcSet: string; // e.g., "image-large.jpg 2x, image-large@1x.jpg 1x"
+    sizes?: string; // e.g., "100vw"
+  }
+  
+  // Extend the default img props for extra flexibility
+  interface ResponsiveImageProps
+    extends React.ImgHTMLAttributes<HTMLImageElement> {
+    alt: string;
+    defaultSrc: string; // Fallback image source
+    sources?: SourceProps[]; // Array of source objects for the <picture> element
+    width?: number | string;
+    height?: number | string; // This is only for skeleton loading
+    style?: React.CSSProperties;
+    skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
+    isLoading?: boolean; // Optional loading state
+    objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  }
 // Extend the default img props for extra flexibility
 interface ResponsiveImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {
-  alt: string;
-  defaultSrc: string; // Fallback image source
-  sources?: SourceProps[]; // Array of source objects for the <picture> element
-  width?: number | string;
-  height?: number | string;
-  style?: React.CSSProperties;
-  skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
-}
-
-const Image: React.FC<ResponsiveImageProps> = ({
-  alt,
-  defaultSrc,
-  sources = [],
-  width,
-  height,
-  style,
-  skeletonProps,
-  ...rest
-}) => {
-  const [loading, setLoading] = useState(true);
-  const [imgSrc, setImgSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Reset loading state when the src changes
-    setLoading(false);
-    setImgSrc(defaultSrc);
-  }, [defaultSrc]);
-
-  const handleImageLoad = () => {
-    setLoading(false);
-  };
-
-  const handleImageError = () => {
-    setLoading(false);
-    // Optionally handle error state here
-  };
-
-  const combinedStyle: React.CSSProperties = {
-    maxWidth: '100%',
-    height: 'auto',
-    objectFit: 'cover' as const,
-    ...style,
-    display: loading ? 'none' : 'block',
-  };
-
-  return (
-    <Box position="relative">
-      {loading && (
-        <Skeleton
-          variant="rectangular"
-          width={width || '100%'}
-          height={height || 200}
-          animation="wave"
-          {...skeletonProps}
-        />
-      )}
-      <picture>
-        {sources.map((source, index) => (
-          <source
-            key={index}
-            media={source.media}
-            srcSet={source.srcSet}
-            sizes={source.sizes}
-          />
-        ))}
-        <img
-          src={imgSrc || undefined}
-          alt={alt}
-          width={width}
-          height={height}
-          loading="lazy"
-          style={combinedStyle}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          {...rest}
-        />
-      </picture>
-    </Box>
-  );
-};
-
-export default Image;
-
-/**
- *
- <ResponsiveImage
-      defaultSrc={myImage}
-      alt="Description of the image"
-      width={300}
-      height={200}
-  />
-
- <ResponsiveImage
-  alt="City skyline"
-  defaultSrc="city-default.jpg"
-  sources={[
-    {
-      media: "(min-width: 1024px)",
-      srcSet: "city-large.jpg 2x, city-large@1x.jpg 1x",
-      sizes: "100vw",
-    },
-    {
-      media: "(min-width: 600px)",
-      srcSet: "city-medium.jpg 2x, city-medium@1x.jpg 1x",
-      sizes: "100vw",
-    },
-  ]}
-/>
- 
- */
-
-export const FluidContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'maxWidth' && prop !== 'height',
-})<BoxProps & { maxWidth?: string | number; height?: string | number }>(
-  ({ maxWidth = '800px', height = 'auto' }) => ({
-    width: '100%',
-    maxWidth,
-    margin: '0 auto',
+    extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'loading'> {
+    alt: string;
+    defaultSrc: string; // Fallback image source
+    sources?: SourceProps[]; // Array of source objects for the <picture> element
+    width?: number | string;
+    height?: number | string;
+    style?: React.CSSProperties;
+    skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
+    isLoading?: boolean; // Optional manual loading state
+    isLazyLoading?: boolean; // Controls the loading="lazy" attribute
+}  
+  const Image: React.FC<ResponsiveImageProps> = ({
+    alt,
+    defaultSrc,
+    sources = [],
+    width,
     height,
-    overflow: 'hidden',
-  })
-);
+    style,
+    skeletonProps,
+    isLoading = false, // default to not loading
+    isLazyLoading = true, // default to lazy loading
+    objectFit = 'cover',
+    ...rest
+  }) => {
+    const combinedStyle: React.CSSProperties = {
+      maxWidth: width || '100%',
+      height: height || 'auto',
+      objectFit,
+      ...style,
+      display: isLoading ? 'none' : 'block',
+    };
+  
+    return (
+      <Box position="relative">
+        {isLoading && (
+          <Skeleton
+            variant="rectangular"
+            width={width || '100%'}
+            height={height || '100%'}
+            animation={undefined}
+            {...skeletonProps}
+          />
+        )}
+        <picture>
+          {sources.map((source, index) => (
+            <source
+              key={index}
+              media={source.media}
+              srcSet={source.srcSet}
+              sizes={source.sizes}
+            />
+          ))}
+          <img
+            src={defaultSrc}
+            alt={alt}
+            loading="lazy"
+            style={combinedStyle}
+            {...rest}
+          />
+        </picture>
+      </Box>
+    );
+  };
+  
+  export default Image;
 
-// Improved FloatImageContainer with configurable float direction and width
-export const FloatImageContainer = styled(Box, {
-  shouldForwardProp: (prop) =>
-    !['float', 'width', 'clearFloat'].includes(prop as string),
-})<{
-  float?: 'left' | 'right';
-  width?: number | string;
-  clearFloat?: boolean;
-}>(({ theme, float = 'left', width = '320px', clearFloat = false }) => ({
-  float,
-  marginRight: float === 'left' ? theme.spacing(2) : 0,
-  marginLeft: float === 'right' ? theme.spacing(2) : 0,
-  marginBottom: theme.spacing(2),
-  width,
-  // Add clear property if clearFloat is true
-  ...(clearFloat && {
-    clear: 'both',
-  }),
-}));
-
-// Add a utility component to clear floats
-export const ClearFloat = styled(Box)({
+  export const ClearFloat = styled(Box)({
   clear: 'both',
   display: 'block',
   width: '100%',
 });
 
-// Add this to your Image.tsx
 export const ShapeOutsideContainer = styled(Box, {
-    shouldForwardProp: (prop) => 
-      !['float', 'width', 'shape', 'margin'].includes(prop as string),
-  })<{ 
-    float?: 'left' | 'right'; 
-    width?: string | number;
-    shape?: 'circle' | 'ellipse' | 'inset' | null;
-    margin?: string | number;
-  }>(({ 
-    float = 'left', 
-    width = '320px',
-    shape = null,
-    margin = '0 1rem 1rem 0'
-  }) => {
-    const shapeValue = shape === 'circle' 
-      ? 'circle(50%)' 
-      : shape === 'ellipse'
-      ? 'ellipse(50% 50% at 50% 50%)'
-      : shape === 'inset'
-      ? 'inset(10% 10% 10% 10%)'
-      : null;
-      
-    return {
-      float,
-      width,
-      margin: float === 'left' ? margin : '0 0 1rem 1rem',
-      shapeOutside: shapeValue || 'none',
-      ...(shapeValue && { clipPath: shapeValue }),
-    };
-  });
+  shouldForwardProp: (prop) => 
+    !['float', 'width', 'shape', 'margin'].includes(prop as string),
+})<{ 
+  float?: 'left' | 'right'; 
+  width?: string | number;
+  shape?: 'circle' | 'ellipse' | 'inset' | 'polygon' | null;
+  margin?: string | number;
+}>(({ 
+  float = 'left', 
+  width = '320px',
+  shape = null,
+  margin = '0 1rem 1rem 0'
+}) => {
+  const shapeValue = shape === 'circle' 
+    ? 'circle(50%)' 
+    : shape === 'ellipse'
+    ? 'ellipse(50% 50% at 50% 50%)'
+    : shape === 'inset'
+    ? 'inset(10% 10% 10% 10%)'
+    : shape === 'polygon'
+    ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
+    : null;
+    
+  return {
+    float,
+    width,
+    margin: float === 'left' ? margin : '0 0 1rem 1rem',
+    shapeOutside: shapeValue || 'none',
+    WebkitShapeOutside: shapeValue || 'none', // Safari support
+    ...(shapeValue && { 
+      clipPath: shapeValue,
+      WebkitClipPath: shapeValue // Safari support
+    }),
+  };
+});
 
-// // FluidContainer with custom maxWidth
-// <FluidContainer maxWidth="1200px">
-//   <ResponsiveImage
-//     alt="Fluid landscape"
-//     defaultSrc={landscapeImage}
-//   />
-// </FluidContainer>
-
-// // FloatImageContainer with right float and custom width
-// <Box>
-//   <FloatImageContainer float="right" width={300}>
-//     <ResponsiveImage
-//       alt="Portrait image"
-//       defaultSrc={portraitImage}
-//     />
-//   </FloatImageContainer>
-//   <Typography variant="body1" paragraph>
-//     Text content that wraps around the floated image...
-//   </Typography>
-
-//   {/* Clear the float at the end */}
-//   <ClearFloat />
-// </Box>
-
-// Add a new BackgroundImageContainer
 export const BackgroundImageContainer = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['src', 'maxWidth', 'height'].includes(prop as string),
+    !['src', 'maxWidth', 'height', 'bgSize', 'bgPosition', 'borderRadius'].includes(prop as string),
 })<{
   src: string;
   maxWidth?: string | number;
   height?: string | number;
-}>(({ src, maxWidth = '800px', height = '300px' }) => ({
+  bgSize?: 'contain' | 'cover' | string;
+  bgPosition?: string;
+  borderRadius?: string | number;
+}>(({ 
+  src, 
+  maxWidth = '800px', 
+  height = '300px',
+  bgSize = 'contain',
+  bgPosition = 'center',
+  borderRadius = 0
+}) => ({
   width: '100%',
   maxWidth,
   height,
   margin: '0 auto',
   backgroundImage: `url(${src})`,
-  backgroundPosition: 'center',
-  backgroundSize: 'contain', // or 'cover' to fill the container
+  backgroundPosition: bgPosition,
+  backgroundSize: bgSize,
   backgroundRepeat: 'no-repeat',
+  borderRadius,
+  transition: 'background-image 0.3s ease-in-out',
 }));
+
+export const AspectRatioContainer = styled(Box, {
+  shouldForwardProp: (prop) => 
+    !['ratio', 'maxWidth'].includes(prop as string),
+})<{
+  ratio?: number; // width/height (e.g., 16/9 = 1.78)
+  maxWidth?: string | number;
+}>(({ 
+  ratio = 16/9, 
+  maxWidth = '100%' 
+}) => ({
+  position: 'relative',
+  width: '100%',
+  maxWidth,
+  height: 0,
+  paddingBottom: `${(1 / ratio) * 100}%`,
+  overflow: 'hidden',
+  '& > *': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  }
+}));
+
+
+/**
+ * Usage Examples:
+ * 
+ * 1. AspectRatioContainer:
+ * 
+ * <AspectRatioContainer ratio={4/3} maxWidth="600px">
+ *   <Image
+ *     defaultSrc={landscapeImage}
+ *     alt="Landscape with 4:3 aspect ratio"
+ *   />
+ * </AspectRatioContainer>
+ *
+ * 2. Enhanced BackgroundImageContainer:
+ * 
+ * <BackgroundImageContainer 
+ *   src={backgroundImage}
+ *   height="400px"
+ *   bgSize="cover"
+ *   bgPosition="center bottom"
+ *   borderRadius="8px"
+ * >
+ *   <Typography 
+ *     variant="h2" 
+ *     color="white" 
+ *     sx={{ padding: 3, textShadow: '1px 1px 3px rgba(0,0,0,0.7)' }}
+ *   >
+ *     Text overlaid on background image
+ *   </Typography>
+ * </BackgroundImageContainer>
+ */

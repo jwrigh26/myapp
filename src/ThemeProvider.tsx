@@ -70,21 +70,33 @@ const textLight = {
   secondary: '#666666',
 };
 
+// // Dark Mode
+// const primaryColorsDark = {
+//   main: '#7B92DB',
+//   light: '#A0B3F0',
+//   dark: '#5360A4',
+//   contrastText: '#FFFFFF',
+// };
+
+// const secondaryColorsDark = {
+//   main: '#F2A585', // Warm peach tone
+//   light: '#F7CBB6', // Soft pastel peach
+//   dark: '#D77350', // Richer, more saturated warm coral
+//   contrastText: '#FFFFFF',
+// };
+
 // Dark Mode
 const primaryColorsDark = {
-  main: '#7B92DB',
-  light: '#A0B3F0',
-  dark: '#5360A4',
+  main: '#6C8AE4',    // More saturated blue (was #7B92DB)
+  light: '#95B1FF',   // Brighter light blue (was #A0B3F0)
+  dark: '#4558B2',    // Richer dark blue (was #5360A4)
   contrastText: '#FFFFFF',
 };
 
 const secondaryColorsDark = {
-  // main: '#F2A585',
-  // light: '#F7CBB6',
-  // dark: '#C98568',
-  main: '#F2A585', // Warm peach tone
-  light: '#F7CBB6', // Soft pastel peach
-  dark: '#D77350', // Richer, more saturated warm coral
+  main: '#FF9366',    // More vibrant peach (was #F2A585)
+  light: '#FFBDA0',   // Brighter light peach (was #F7CBB6)
+  dark: '#E06B45',    // More saturated dark tone (was #D77350)
   contrastText: '#FFFFFF',
 };
 

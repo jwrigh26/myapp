@@ -7,7 +7,6 @@ import TitleBlock from '@/components/TitleBlock';
 import { useTheme } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';
 import Image, {
-  FluidContainer,
   BackgroundImageContainer,
   ShapeOutsideContainer,
 } from '@/components/Image';
