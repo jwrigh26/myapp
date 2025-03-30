@@ -7,10 +7,16 @@
     "typecheck": "tsc --noEmit",
     "start": "vite --port=3001",
     "build": "vite build",
+    "build:prod": "VITE_REACT_APP_FB_API_URL=AIzaSyBdyMOA9hfHKT1MwmExRgIggfzg8WNbQYE VITE_REACT_APP_FB_AUTH_DOMAIN=justinwright-a5b15.firebaseapp.com VITE_REACT_APP_FB_PROJECT_ID=justinwright-a5b15 VITE_REACT_APP_FB_STORAGE_BUCKET=justinwright-a5b15.firebasestorage.app VITE_REACT_APP_FB_MESSAGING_SENDER_ID=1093179422587 VITE_REACT_APP_FB_APP_ID=1:1093179422587:web:d272cd87b29eba61f46fde VITE_REACT_APP_FB_MEASUREMENT_ID=G-7WENGWESV5 vite build",
     "serve": "vite preview",
     "test": "vitest",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "firebase:emulate": "firebase emulators:start --only hosting",
+    "firebase:emulate:prod": "npm run build:prod && firebase emulators:start --only hosting",
+    "firebase:deploy": "npm run build && firebase deploy --only hosting",
+    "firebase:deploy:prod": "npm run build:prod && firebase deploy --only hosting",
+    "build:test": "vite build && node -e \"console.log('Build output contents:'); require('fs').readFileSync('./dist/assets/index-*.js', 'utf8').match(/FB_API_URL.{0,30}/g).forEach(m => console.log(m))\""
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.111.7",
@@ -37,6 +43,7 @@
     "@tanstack/react-router": "^1.111.7",
     "date-fns": "^4.1.0",
     "dnd-multi-backend": "^9.0.0",
+    "firebase": "^11.5.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",
