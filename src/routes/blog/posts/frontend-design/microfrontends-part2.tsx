@@ -38,37 +38,22 @@ function RouteComponent() {
       <ProseBlock title="Before Micro Frontends:" />
       <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
 
-      <ProseBlock>
-        Before micro-frontends, our development landscape was dominated by
-        monoliths and full-stack apps. Even our UI components—widely used as
-        they were—lived in one big repository. While this approach worked,
-        bundling everything together made scaling and maintenance a challenge.
-      </ProseBlock>
-
       <ProseBlock dense>
-        Micro-frontends changed that by letting us break the UI into smaller,
-        independent pieces. This approach not only supports mixing new projects
-        with legacy systems but also gives each team the freedom to choose its
-        own tech stack, paving the way for a more agile and scalable process.
+        Before micro-frontends, the development landscape was dominated by
+        monoliths and full-stack apps. This eventually gave way to separate
+        frontend and backend applications, which dominated for a time.
       </ProseBlock>
 
       <ProseBlock dense spacingBottom>
-        In short, our evolution went from monolithic full-stack apps to distinct
-        front- and back-end systems, paving the way for microservices and
-        dedicated UI components—and ultimately, to the agile world of micro
-        frontends.
+        I'm not sure exactly when, but microservices came into play along with
+        component-based apps. This architecture is still popular and meets the
+        needs of many applications. However, for large teams and applications,
+        another option exists: micro-frontends.
       </ProseBlock>
 
       {/* ### Micro-Frontend Strategies */}
       <ProseBlock title="Micro-Frontend Strategies:" />
       <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
-
-      <ProseBlock>
-        Before micro-frontends, our development landscape was dominated by
-        monoliths and full-stack apps. Even our UI components—widely used as
-        they were—lived in one big repository. While this approach worked,
-        bundling everything together made scaling and maintenance a challenge.
-      </ProseBlock>
 
       <ProseBlock dense>
         Micro-frontend strategies offer several ways to structure your
@@ -97,18 +82,14 @@ function RouteComponent() {
       <ProseBlock title="Module Federation:" />
       <ProseList items={bulletPointsMf1} subTitle="The Frontend Evolution:" />
       <ProseBlock dense>
-        Webpack Module Federation lets you dynamically share and load modules
-        across independently deployed applications at runtime. Instead of
-        bundling everything upfront, modules are fetched only as needed, helping
-        keep initial load times quick—think of it like ordering just the pizza
-        slices you want.
+        Webpack Module Federation enables dynamic sharing and loading of modules
+        across independently deployed apps at runtime. Modules are fetched only
+        when needed, reducing initial load time.
       </ProseBlock>
 
       <ProseBlock dense spacingBottom>
-        However, this flexibility requires careful management. Keeping
-        dependencies in check to avoid version conflicts and duplication can get
-        complex quickly. It's powerful, but balancing shared dependencies
-        definitely takes some practice.
+        This flexibility adds complexity. Managing shared dependencies and
+        avoiding version conflicts requires careful coordination.
       </ProseBlock>
 
       <ProseBlock title="Single Spa:" />
@@ -117,26 +98,14 @@ function RouteComponent() {
         subTitle="What it Brings to the Game:"
       />
       <ProseBlock dense>
-        Single-SPA takes a slightly different approach by coordinating multiple
-        micro-applications on a single page—even if they're built using
-        different frameworks. It manages routing, mounting, updating, and
-        unmounting smoothly, ensuring each micro-app plays nicely with others on
-        the page.
+        Single-SPA coordinates multiple micro-apps on the same page, even if
+        they use different frameworks. It handles routing, mounting, updating,
+        and unmounting to ensure each app runs smoothly alongside the others.
       </ProseBlock>
 
       <ProseBlock dense>
-        But this flexibility brings its own challenges. Handling CSS scoping,
-        managing global state, and shared assets adds complexity. It's a bit
-        like juggling while riding a unicycle—impressive once mastered, but
-        definitely not without a learning curve.
-      </ProseBlock>
-
-      <ProseBlock dense spacingBottom>
-        Both Module Federation and Single-SPA introduce dynamic module sharing
-        and independent deployments, but also require tighter integration,
-        thoughtful dependency management, and increased build complexity.
-        Whichever you choose, the goal remains the same: creating flexible,
-        maintainable, and scalable front-end architectures.
+        This flexibility comes with trade-offs. CSS scoping, global state, and
+        shared assets can be tricky to manage and add complexity.
       </ProseBlock>
 
       <ProseBlock title="Iframe-Based Approach:" />
@@ -146,18 +115,16 @@ function RouteComponent() {
       />
 
       <ProseBlock dense>
-        Iframes offer built-in isolation, running each module in its own browser
-        context. This means your JavaScript, CSS, and DOM remain separate,
-        naturally avoiding conflicts and helping keep global state tidy. Plus,
-        sandboxing enhances security by limiting what embedded content can
-        access—a big win when integrating third-party or less-trusted sources.
+        Iframes provide built-in isolation. Each module runs in its own browser
+        context, keeping JavaScript, CSS, and the DOM separate. This prevents
+        conflicts and protects global state. Sandboxing also improves security
+        by restricting iframe access.
       </ProseBlock>
-      <ProseBlock dense>
-        Thanks to this isolation, deployments become simpler and more agile.
-        Modules can be updated independently, allowing for efficient caching
-        strategies and quicker rollouts. Even better, if one module encounters
-        an issue, the rest of your app stays safe—errors or heavy processing
-        inside an iframe won’t crash or block your main page.
+
+      <ProseBlock dense spacingBottom>
+        This isolation simplifies deployment. Modules can be updated
+        independently, enabling efficient caching and faster rollouts. If one
+        module fails or runs slowly, the rest of the app remains unaffected.
       </ProseBlock>
 
       {/* ### Pros and Cons */}
@@ -187,8 +154,7 @@ function RouteComponent() {
       <ProseBlock dense spacingBottom>
         Our iframe-based approach prioritizes stability, security, and
         simplicity. While less dynamic, it gives us reliable fault isolation,
-        easy deployments, and lower maintenance—benefits perfectly suited for
-        our business model.
+        easy deployments, and lower maintenance.
       </ProseBlock>
 
       {/* ### Rationale Behind Our Choice */}
@@ -198,19 +164,18 @@ function RouteComponent() {
         subTitle="Our Decision Factors"
       />
       <ProseBlock dense>
-        When we first designed our system, modern micro-frontend frameworks like
-        Single-SPA and Webpack Module Federation were either unavailable or not
-        mature enough. We needed something immediately that could quickly
-        integrate multiple pages into various client web pages. Given our
-        business requirements, iframes seemed to be the best choice at the time.
+        When we first designed the system, tools like Single-SPA and Webpack
+        Module Federation were either unavailable or not mature. We needed a
+        fast way to integrate multiple pages into client sites. Given our
+        requirements, iframes were the most practical option.
       </ProseBlock>
+
       <ProseBlock dense>
-        Our team dynamics also played a role. With a backend-heavy group and
-        full-stack developers occasionally handling front-end work, simplicity
-        was key. Iframes allowed modules to be updated independently without
-        requiring deep front-end expertise across the board. Ultimately, based
-        on timing, business needs, and our team structure, iframes made the most
-        sense.
+        Team structure also influenced the decision. With a backend-heavy team
+        and occasional front-end support from full-stack developers, simplicity
+        was important. Iframes let us update modules independently without deep
+        front-end knowledge. Based on timing, needs, and team stucture, iframes
+        made the most sense.
       </ProseBlock>
     </>
   );

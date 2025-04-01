@@ -40,17 +40,15 @@ function RouteComponent() {
         Empowering Small Businesses
       </TitleBlock>
       <IntroBlock>
-        In this post, I explore building a scalable modular front-end using
-        iframes—a high-level, realistic alternative to the micro-frontend hype.
-        I cover our approach to inter-module communication, compare our solution
-        to other alternatives, and share lessons learned along the way, all
-        designed for developers looking for practical insights that work no
-        matter which front-end framework they use.
+        In this post, we'll explore building a modular front-end using iframes.
+        I'll cover the approach we took to inter-module communication. In
+        addition, we'll compare our solution to other alternatives and share
+        lessons learned along the way.
       </IntroBlock>
       <ProseList items={bulletPoints1} subTitle="The Backstory:" />
       <DisclaimerBlock title="Disclaimer:">
         Our design choices fit our development needs, but they may not be right
-        for you—and that's okay. Every application is different, and there’s
+        for you—and that's okay. Every application is different, and there's
         rarely a one-size-fits-all approach. My goal is to share insights,
         lessons learned, and a few ideas that might help you think about modular
         front-end design in a new way.
@@ -81,13 +79,12 @@ function RouteComponent() {
         Although our goal is one iframe per page, there have been instances
         where several iframes are loaded on a screen. Sometimes, we even
         encounter an "inception" scenario, with an iframe nested within another
-        iframe, and then within yet another.
+        iframe, and then within yet another iframe.
       </ProseBlock>
 
       <ProseBlock dense>
-        However, the goal is to have one iframe per page, with the host site.
-        For every time we introduce more than one iFrame the complexity
-        increases.
+        However, the goal is to have one iframe per page. For every time we
+        introduce more than one iFrame the complexity increases.
       </ProseBlock>
 
       <SectionStarter title="Core Functions:">
