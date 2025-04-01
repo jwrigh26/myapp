@@ -1,11 +1,11 @@
-import { PageLayout } from '@/layout';
-import { styled, useTheme, alpha } from '@mui/system';
-import Box from '@mui/material/Box';
-import { createFileRoute } from '@tanstack/react-router';
 import Image, { AspectRatioContainer } from '@/components/Image';
+import { PageLayout } from '@/layout';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { alpha, styled, useTheme } from '@mui/system';
+import { createFileRoute } from '@tanstack/react-router';
 
 import splashImage from '@/assets/home_page_splash.jpg';
 
@@ -24,9 +24,11 @@ function HomeComponent() {
       <HeroSection id="hero-section">
         <HeroCallOut>
           <MainHeader variant="h1">Justin Wright</MainHeader>
-          {/* <Statement1 variant="h4">Code</Statement1> */}
-          {/* <Statement2 variant="h4">Designing for People</Statement2> */}
-          {/* <Statement3 variant="h4">Building with Purpose</Statement3> */}
+          <StatementBlock>
+            <Statement1 variant="h4">Think</Statement1>
+            <Statement2 variant="h4">Code</Statement2>
+            <Statement3 variant="h4">Run</Statement3>
+          </StatementBlock>
         </HeroCallOut>
 
         <HeroBackground id="hero-background">
@@ -49,19 +51,17 @@ export const HeroSection = styled(Stack)(({ theme }) => {
     boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
     flexDirection: 'column-reverse',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(4),
       marginBottom: theme.spacing(4),
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: 'flex-start',
       flexDirection: 'row',
     },
   };
 });
 
 export const HeroCallOut = styled(Box)(({ theme }) => ({
-  // flex: '0 0 60%',
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
@@ -69,7 +69,7 @@ export const HeroCallOut = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   position: 'relative',
   zIndex: 1,
-  // padding: theme.spacing(2),
+  padding: theme.spacing(2),
 }));
 
 export const HeroBackground = styled(Box)(({ theme }) => ({
@@ -77,7 +77,6 @@ export const HeroBackground = styled(Box)(({ theme }) => ({
   maxWidth: '100%',
   height: 'auto',
   zIndex: 1,
-  // flex: '0 0 40%',
   flex: 2,
   display: 'flex',
   justifyContent: 'center',
@@ -102,88 +101,113 @@ const MainHeader = styled(Typography)(({ theme }) => ({
   fontWeight: 800,
   color: alpha(theme.palette.primary.contrastText, 0.7),
   marginBottom: theme.spacing(2),
-  [theme.breakpoints.down('sm')]: {
-    fontSize: 'clamp(2.8rem, 6vw, 4rem)',
+  // Base size for smallest screens
+  fontSize: 'clamp(1.5rem, 5vw, 2rem)',
+  // Control line height to be tighter
+  lineHeight: 1.1,
+
+  // Small phones (320px+)
+  [theme.breakpoints.up(320)]: {
+    fontSize: 'clamp(1.8rem, 5.5vw, 2.5rem)',
   },
-  [theme.breakpoints.up('sm')]: {
+
+  // Medium phones (400px+)
+  [theme.breakpoints.up(400)]: {
+    fontSize: 'clamp(2.2rem, 6vw, 3rem)',
+  },
+
+  // Large phones (480px+)
+  [theme.breakpoints.up(480)]: {
+    fontSize: 'clamp(2.6rem, 6.5vw, 3.5rem)',
+  },
+
+  // Small tablets (600px+)
+  [theme.breakpoints.up(600)]: {
+    fontSize: 'clamp(3rem, 7vw, 4rem)',
+  },
+
+  // Tablets (768px+)
+  [theme.breakpoints.up('md')]: {
+    // 900px in MUI
     marginBottom: theme.spacing(3),
-    fontSize: 'clamp(4rem, 10vw, 7rem)',
+    fontSize: 'clamp(3.5rem, 7.5vw, 4.5rem)',
+    lineHeight: 1.15, // Slightly looser for larger screens
   },
+
+  // Small desktops (1024px+)
+  [theme.breakpoints.up('lg')]: {
+    // 1200px in MUI
+    fontSize: 'clamp(4rem, 8vw, 5rem)',
+  },
+
+  // Large desktops (1280px+)
+  [theme.breakpoints.up(1280)]: {
+    fontSize: 'clamp(4.5rem, 9vw, 5.5rem)', // Reduced from 7rem to 5.5rem max
+    lineHeight: 1.2, // More comfortable for reading at largest size
+  },
+
+  // Additional control for very large screens
+  [theme.breakpoints.up(1600)]: {
+    fontSize: '5.5rem', // Hard cap at 5.5rem for largest screens
+  },
+
   zIndex: 2,
+}));
+
+const StatementBlock = styled(Stack)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'baseline',
+  gap: theme.spacing(1),
+  [theme.breakpoints.up('md')]: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 0,
+  },
 }));
 
 const SupportingStatement = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   fontSize: 'clamp(1.25rem, 4vw, 2rem)',
-  position: 'absolute',
-  textShadow: '1px 1px 3px rgba(0,0,0,0.2)',
+  textShadow: '1px 1px 3px rgba(0,0,0,0.1)',
+  width: 'max-content',
+  lineHeight: 1.2,
 }));
 
-// Font size variations
-const XSmallStatement = styled(SupportingStatement)(({ theme }) => ({
-  fontSize: 'clamp(0.75rem, 2vw, 1.1rem)',
-  [theme.breakpoints.up('md')]: {
-    fontSize: 'clamp(0.8rem, 1.8vw, 1.2rem)',
-  },
-}));
-
-const SmallStatement = styled(SupportingStatement)(({ theme }) => ({
-  fontSize: 'clamp(0.9rem, 2.5vw, 1.4rem)',
-  [theme.breakpoints.up('md')]: {
-    fontSize: 'clamp(1rem, 2.2vw, 1.5rem)',
-  },
-}));
-
-const MediumStatement = styled(SupportingStatement)(({ theme }) => ({
-  fontSize: 'clamp(1.2rem, 3.2vw, 1.8rem)',
-  [theme.breakpoints.up('md')]: {
-    fontSize: 'clamp(1.3rem, 2.8vw, 2rem)',
-  },
-}));
-
-const LargeStatement = styled(SupportingStatement)(({ theme }) => ({
+// Now refactor your Statement1, Statement2, Statement3 to use these size variants
+const Statement1 = styled(SupportingStatement)(({ theme }) => ({
+  background: `linear-gradient(45deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
   fontSize: 'clamp(1.6rem, 4.5vw, 2.6rem)',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('sm')]: {
     fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
   },
+  [theme.breakpoints.up('md')]: {
+    alignSelf: 'flex-start',
+  },
 }));
 
-const XLargeStatement = styled(SupportingStatement)(({ theme }) => ({
+const Statement2 = styled(SupportingStatement)(({ theme }) => ({
+  background: `linear-gradient(45deg, ${theme.palette.info.main}, ${theme.palette.info.light})`,
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
   fontSize: 'clamp(2.2rem, 6vw, 3.5rem)',
-  [theme.breakpoints.up('md')]: {
+  [theme.breakpoints.up('sm')]: {
     fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
   },
 }));
 
-// Now refactor your Statement1, Statement2, Statement3 to use these size variants
-const Statement1 = styled(LargeStatement)(({ theme }) => ({
-  marginLeft: 0,
-  background: `linear-gradient(45deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  opacity: 0.3,
-  top: 0,
-  right: 24,
-}));
-
-const Statement2 = styled(SmallStatement)(({ theme }) => ({
-  marginLeft: theme.spacing(2),
-  background: `linear-gradient(45deg, ${theme.palette.info.main}, ${theme.palette.info.light})`,
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  opacity: 0.5,
-  top: 0,
-  left: 128,
-  zIndex: 2,
-}));
-
-const Statement3 = styled(MediumStatement)(({ theme }) => ({
-  marginLeft: theme.spacing(4),
+const Statement3 = styled(SupportingStatement)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.common.white})`,
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  opacity: 0.5,
-  bottom: -24,
-  left: 128,
-  zIndex: 2,
+  fontSize: 'clamp(1.6rem, 4.5vw, 2.6rem)',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+  },
+  [theme.breakpoints.up('md')]: {
+    alignSelf: 'flex-end',
+  },
 }));

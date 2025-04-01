@@ -20,6 +20,7 @@ const StyledGrid = styled(Box, {
   backgroundColor: color || theme.palette.background.paper,
   maxWidth: '1536px',
   width: '100%',
+  margin: '0 auto',
 }));
 
 interface PageLayoutProps extends PropsWithChildren<{}> {
