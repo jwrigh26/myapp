@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-interface ProseBlockProps {
+export interface ProseBlockProps {
   title?: string;
   subtitle?: string;
   /**
@@ -32,7 +32,7 @@ function ProseBlock({
 }: ProseBlockProps): JSX.Element {
   const {
     // Variant defaults
-    titleVariant = 'h5',
+    titleVariant = 'h4',
     subtitleVariant = 'subtitle1',
     textVariant = 'body1',
     // Component defaults

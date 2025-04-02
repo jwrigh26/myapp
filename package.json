@@ -7,10 +7,16 @@
     "typecheck": "tsc --noEmit",
     "start": "vite --port=3001",
     "build": "vite build",
+    "build:prod": "vite build --mode production",
     "serve": "vite preview",
     "test": "vitest",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "firebase:emulate": "firebase emulators:start --only hosting",
+    "firebase:emulate:prod": "npm run build:prod && firebase emulators:start --only hosting",
+    "firebase:deploy": "npm run build && firebase deploy --only hosting",
+    "firebase:deploy:prod": "npm run build:prod && firebase deploy --only hosting",
+    "build:test": "vite build --mode production && node -e \"console.log('Build output contents:'); require('fs').readFileSync('./dist/assets/index-*.js', 'utf8').match(/FB_API_URL.{0,30}/g).forEach(m => console.log(m))\""
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.111.7",
@@ -37,6 +43,7 @@
     "@tanstack/react-router": "^1.111.7",
     "date-fns": "^4.1.0",
     "dnd-multi-backend": "^9.0.0",
+    "firebase": "^11.5.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",

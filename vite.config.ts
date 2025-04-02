@@ -7,6 +7,7 @@ import { defineConfig, loadEnv } from 'vite';
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode`
   const env = loadEnv(mode, process.cwd(), '');
+
   return {
     plugins: [
       TanStackRouterVite({
@@ -59,14 +60,21 @@ function getDefineObject(env: EnvObject): Record<string, string> {
     return {};
   }
 
-  const keys = ['API_URL', 'FAKE_API_TOKEN'];
+  const keys = [
+    'FB_API_URL',
+    'FB_AUTH_DOMAIN',
+    'FB_PROJECT_ID',
+    'FB_STORAGE_BUCKET',
+    'FB_MESSAGING_SENDER_ID',
+    'FB_APP_ID',
+    'FB_MEASUREMENT_ID',
+  ];
 
   // Determine the prefix based on the environment
-  const prefix =
-    process.env.NODE_ENV === 'production' ? 'REACT_APP_' : 'VITE_REACT_APP_';
+  const prefix = 'VITE_REACT_APP_';
 
   // Source of environment variables (from .env or `process.env` depending on the environment)
-  const source = process.env.NODE_ENV === 'production' ? process.env : env;
+  const source =  env;
 
   const define: Record<string, string | undefined> = {};
 
@@ -75,14 +83,17 @@ function getDefineObject(env: EnvObject): Record<string, string> {
     define[key] = source[`${prefix}${key}`];
   });
 
-  // Transform the `define` object to match the format Vite expects
   const transformedDefine: Record<string, string> = {};
 
+  // Map the keys to their values and transform to Vite format
   keys.forEach((key) => {
-    transformedDefine[`import.meta.env.${prefix}${key}`] = JSON.stringify(
-      define[key] || ''
+    const fullKey = `${prefix}${key}`;
+    transformedDefine[`import.meta.env.${fullKey}`] = JSON.stringify(
+      source[fullKey] || ''
     );
   });
+
+  console.log('transformedDefine', transformedDefine);
 
   return transformedDefine;
 }
