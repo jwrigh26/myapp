@@ -14,9 +14,11 @@ import Typography from '@mui/material/Typography';
 
 export function SettingsDrawer({ desktop }: { desktop: boolean }) {
   const { isOpen, closeDrawer } = useDrawer('settings-drawer');
+  // const anchorPosition = desktop ? 'right' : 'bottom';
+  const anchorPosition = 'right';
 
   return (
-    <TemporaryDrawer anchor="right" open={isOpen} onClose={closeDrawer}>
+    <TemporaryDrawer anchor={anchorPosition} open={isOpen} onClose={closeDrawer}>
       {/* {desktop && <ToolbarSpacer />} */}
       <DrawerHeader icon={mdiCog} title="Settings" onClose={closeDrawer} />
       <Sheet>

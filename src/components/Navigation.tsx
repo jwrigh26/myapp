@@ -12,18 +12,22 @@ import { mdiLinkedin } from '@mdi/js';
 import { mdiGithub } from '@mdi/js';
 import MuiLink from '@mui/material/Link';
 
-export default function Navigation() {
+export default function Navigation({ isMobile = false }: { isMobile?: boolean }) {
   const { isOpen, openDrawer } = useDrawer('settings-drawer');
 
   return (
     <NavStack direction="row" component="nav" gap={1}>
-      <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
-      <NavButton to="/home">Home</NavButton>
-      <NavButton to="/about">About</NavButton>
-      <NavButton to="/blog">Blog</NavButton>
-      <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
-      <NavButton to="/learn">Learn</NavButton>
-      <NavButton to="/game">Game</NavButton>
+      {!isMobile && (
+        <>
+          <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+          <NavButton to="/home">Home</NavButton>
+          <NavButton to="/about">About</NavButton>
+          <NavButton to="/blog">Blog</NavButton>
+          <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+          <NavButton to="/learn">Learn</NavButton>
+          <NavButton to="/game">Game</NavButton>
+        </>
+      )}
       <Stack direction="row" gap={0} sx={{ ml: 'auto' }}>
         <NavLinkIconButton
           to="https://github.com/jwrigh26"

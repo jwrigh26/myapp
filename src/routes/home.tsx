@@ -15,10 +15,9 @@ export const Route = createFileRoute('/home')({
 
 function HomeComponent() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const padding = isMobile ? 0 : 2;
+  const isSizeXL = useMediaQuery(theme.breakpoints.down('xl'));
+  const padding = isSizeXL ? 0 : 2;
 
-  const linearPrimaryGradient = `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.primary.light} 100%)`;
   return (
     <PageLayout padding={padding}>
       <HeroSection id="hero-section">
@@ -160,10 +159,22 @@ const StatementBlock = styled(Stack)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'baseline',
   gap: theme.spacing(1),
+  borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
+  paddingBottom: theme.spacing(1),
   [theme.breakpoints.up('md')]: {
     flexDirection: 'column',
     alignItems: 'center',
     gap: 0,
+    paddingBottom: theme.spacing(1),
+    '&:after': {
+      content: '""',
+      display: 'block',
+      width: '50%',
+      translate: '50% 0',
+      borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
+      position: 'relative',
+      top: theme.spacing(3),
+    },
   },
 }));
 

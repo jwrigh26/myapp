@@ -60,7 +60,7 @@ function AppBarToolbar() {
   return (
     <StyledAppBar id="AppBar" elevation={0}>
       <Toolbar id="AppBarToolbar">
-        <StyledButtonBase onClick={navigate}>
+        <StyledButtonBase to="/">
           <Typography variant="h6" color="primary.contrastText">
             JW
           </Typography>
@@ -96,8 +96,9 @@ function MobileAppToolbar() {
             </IconButton>
           )}
           <StyledButtonBase to="/">
-            <Typography variant="h6">JW</Typography>
+            <Typography variant="h6" color="primary.contrastText">JW</Typography>
           </StyledButtonBase>
+          <Navigation isMobile />
         </Toolbar>
       </StyledAppBar>
     </HideOnScroll>
