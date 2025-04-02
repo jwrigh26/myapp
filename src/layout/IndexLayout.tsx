@@ -1,10 +1,13 @@
 import Icon from '@/components/Icon';
 import LinkButtonBase from '@/components/LinkButtonBase';
 import Navigation from '@/components/Navigation';
+import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { SettingsDrawer } from '@/features/settings';
-import { mdiMenu } from '@mdi/js';
+import { useToggle } from '@/hooks/useContext';
+import { mdiArrowLeft, mdiMenu } from '@mdi/js';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Slide from '@mui/material/Slide';
 import { styled, useTheme } from '@mui/material/styles';
@@ -12,7 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { useRouter } from '@tanstack/react-router';
+import { Link, useRouter } from '@tanstack/react-router';
 import { ReactElement } from 'react';
 
 export default function IndexLayout({
@@ -44,6 +47,7 @@ export default function IndexLayout({
         {/* Desktop Footer -- Hidden on mobile and game routes */}
         {!isGameRoute && isDesktop && <Footer id="footer" />}
         <SettingsDrawer desktop={isDesktop} />
+        <NavigationDrawer desktop={isDesktop} />
       </LayoutGrid>
     </>
   );
@@ -54,9 +58,6 @@ export default function IndexLayout({
 // ################################################
 
 function AppBarToolbar() {
-  const navigate = () => {
-    console.log('Navigate');
-  };
   return (
     <StyledAppBar id="AppBar" elevation={0}>
       <Toolbar id="AppBarToolbar">
@@ -72,32 +73,77 @@ function AppBarToolbar() {
 }
 
 function MobileAppToolbar() {
-  const navigate = () => {
-    console.log('Navigate');
-  };
-  const openDrawer = () => {
-    console.log('Open Drawer');
+  const { isOpen, toggleOpen } = useToggle('navigation-drawer');
+  const router = useRouter();
+  const pathname = router.state.location.pathname;
+
+  // Get the base path (e.g., "blog" from "/blog/posts/foo1")
+  const pathParts = pathname.split('/').filter(Boolean);
+  const basePath = pathParts.length > 0 ? pathParts[0] : null;
+
+  const routePaths = {
+    blog: '/blog',
+    about: '/about',
+    game: '/game',
+    home: '/home',
   };
 
-  const hasMenu = true;
+  // Format the base path to be capitalized (e.g., "Blog")
+  const formattedBasePath = basePath
+    ? basePath.charAt(0).toUpperCase() + basePath.slice(1)
+    : null;
+
+  // Note on how link below works safely with TS:
+  // typeof routePaths gets the type of the object (its structure)
+  // keyof then extracts all possible key names as a union type
+  // The 'as' keyword performs a type assertion, ensuring basePath
+  // can only be one of the valid keys
+
   return (
     <HideOnScroll>
       <StyledAppBar id="AppBar" elevation={1}>
         <Toolbar id="AppBarToolbar">
-          {hasMenu && (
-            <IconButton
-              sx={{ mr: 1 }}
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={openDrawer}
-            >
-              <Icon path={mdiMenu} />
-            </IconButton>
-          )}
+          <IconButton
+            sx={{ mr: 1 }}
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleOpen}
+          >
+            <Icon path={isOpen ? mdiArrowLeft : mdiMenu} />
+          </IconButton>
           <StyledButtonBase to="/">
-            <Typography variant="h6" color="primary.contrastText">JW</Typography>
+            <Typography variant="h6" color="primary.contrastText">
+              JW
+            </Typography>
           </StyledButtonBase>
+          {formattedBasePath && basePath && (
+            <>
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  mx: 1.5,
+                  height: 24,
+                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                }}
+              />
+
+              <Link
+                to={routePaths[basePath as keyof typeof routePaths]}
+                search={{}}
+                params={{}}
+              >
+                <Typography
+                  variant="subtitle1"
+                  color="primary.contrastText"
+                  sx={{ opacity: 0.9 }}
+                >
+                  {formattedBasePath}
+                </Typography>
+              </Link>
+            </>
+          )}
           <Navigation isMobile />
         </Toolbar>
       </StyledAppBar>

@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Icon from './Icon';
 
@@ -102,6 +103,43 @@ export function TemporaryDrawer({
   );
 }
 
+export const StyledMobileDrawer = styled(Drawer)(({ theme }) => ({
+  flexShrink: 0,
+  boxSizing: 'border-box',
+  zIndex: theme.zIndex.appBar - 1,
+  ['& .MuiDrawer-paper']: {
+    overFlowX: 'hidden',
+    height: '100%',
+    width: '80vw',
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+}));
+
+export function MobileDrawer({
+  anchor = 'left',
+  children,
+  onClose: handleClose,
+  open,
+  ...props
+}: DrawerProps) {
+  return (
+    <StyledMobileDrawer
+      anchor={anchor}
+      variant="temporary"
+      open={open}
+      onClose={handleClose}
+      {...props}
+    >
+      <ToolbarSpacer />
+      <Content>{children}</Content>
+    </StyledMobileDrawer>
+  );
+}
+
 // ################################################
 // ### Drawer Header
 // ################################################
@@ -172,3 +210,9 @@ export function Sheet({ children }: SheetProps) {
     </SheetPaper>
   );
 }
+
+const ToolbarSpacer = styled((props) => <Toolbar disableGutters {...props} />)(
+  ({ theme }) => ({
+    marginTop: 0,
+  })
+);

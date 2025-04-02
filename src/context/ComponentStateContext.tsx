@@ -69,7 +69,7 @@ export function useComponentStateContext() {
 }
 
 const initialState: ComponentState = {
-  open: {},
+  open: {}, // used for useDrawer, useToggle
   loading: {},
   disabled: {},
   focused: {},

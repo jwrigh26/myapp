@@ -1,19 +1,19 @@
+import Icon from '@/components/Icon';
 import LinkButton from '@/components/LinkButton';
-import ToggleButton from '@/components/ToggleButton';
+import LinkIconButton from '@/components/LinkIconButton';
 import { useDrawer } from '@/hooks/useContext';
-import { mdiCog, mdiLink } from '@mdi/js';
+import { mdiCog, mdiGithub, mdiLinkedin } from '@mdi/js';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import Icon from '@/components/Icon';
-import IconButton from '@mui/material/IconButton';
-import LinkIconButton from '@/components/LinkIconButton';
-import { mdiLinkedin } from '@mdi/js';
-import { mdiGithub } from '@mdi/js';
-import MuiLink from '@mui/material/Link';
 
-export default function Navigation({ isMobile = false }: { isMobile?: boolean }) {
-  const { isOpen, openDrawer } = useDrawer('settings-drawer');
+export default function Navigation({
+  isMobile = false,
+}: {
+  isMobile?: boolean;
+}) {
+  const { openDrawer } = useDrawer('settings-drawer');
 
   return (
     <NavStack direction="row" component="nav" gap={1}>
@@ -44,8 +44,8 @@ export default function Navigation({ isMobile = false }: { isMobile?: boolean })
           <Icon path={mdiLinkedin} />
         </NavLinkIconButton>
         <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
-        <NavIconButton edge="end" onClick={openDrawer}>
-          <Icon path={mdiCog} />
+        <NavIconButton size="medium" edge="end" onClick={openDrawer}>
+          <Icon fontSize="inherit" path={mdiCog} />
         </NavIconButton>
       </Stack>
     </NavStack>
