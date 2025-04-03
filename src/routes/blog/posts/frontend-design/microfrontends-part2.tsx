@@ -3,6 +3,7 @@ import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import CallOutImage from '@/assets/Slide8.jpeg';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -29,6 +30,8 @@ function RouteComponent() {
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 2:"
         subtitle="How We Built a Modular Front-End that Scales"
+        imageAlt="Micro-Frontends Part 2"
+        imageSrc={CallOutImage}
       />
 
       {/* ### Before Micro Frontends */}

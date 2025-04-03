@@ -5,6 +5,7 @@ import QuoteBlock from '@/components/QuoteBlock';
 import ReferenceLink from '@/components/ReferenceLink';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import CallOutImage from '@/assets/home_page_splash.jpg';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part3'
@@ -31,6 +32,8 @@ function RouteComponent() {
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 3:"
         subtitle="Lessons Learned"
+        imageAlt="Micro-Frontends Part 3"
+        imageSrc={CallOutImage}
       />
       {/* ### Before Micro Frontends */}
       <TitleBlock subtitle="">

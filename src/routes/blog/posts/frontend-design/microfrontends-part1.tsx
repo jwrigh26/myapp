@@ -4,8 +4,22 @@ import IntroBlock from '@/components/IntroBlock';
 import type { ProseBlockProps } from '@/components/ProseBlock';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
+import Box from '@mui/material/Box';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import CallOutImage from '@/assets/Slide0.jpeg';
+import IntroImage from '@/assets/Slide1.jpeg';
+import EnvImage from '@/assets/Slide2.jpeg';
+import HostSiteImage from '@/assets/Slide3.jpeg';
+import ModuleDevImage from '@/assets/Slide4.jpeg';
+import SharedResImage from '@/assets/Slide6.jpeg';
+import ServiceImage from '@/assets/Slide5.jpeg';
+import DeploymentImage from '@/assets/Slide7.jpeg';
+import Stack from '@mui/material/Stack';
+import Image, {
+  AspectRatioContainer,
+  ResponsiveContentImageGrid,
+} from '@/components/Image';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -33,6 +47,8 @@ function RouteComponent() {
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 1:"
         subtitle="How We Built a Modular Front-End that Scales"
+        imageAlt="A person typing on a laptop"
+        imageSrc={CallOutImage}
       />
 
       {/* Intro: Empowering Small Businesses */}
@@ -45,7 +61,17 @@ function RouteComponent() {
         addition, we'll compare our solution to other alternatives and share
         lessons learned along the way.
       </IntroBlock>
-      <ProseList items={bulletPoints1} subTitle="The Backstory:" />
+      <ResponsiveContentImageGrid
+        imageSrc={IntroImage}
+        imageAlt="Empowering Small Businesses"
+        imageOnRight={false}
+        gap={2}
+        aspectRatio={4 / 3}
+      >
+        <Stack gap={2}>
+          <ProseList items={bulletPoints1} subTitle="The Backstory:" />
+        </Stack>
+      </ResponsiveContentImageGrid>
       <DisclaimerBlock title="Disclaimer:">
         Our design choices fit our development needs, but they may not be right
         for you—and that's okay. Every application is different, and there's
@@ -55,37 +81,55 @@ function RouteComponent() {
       </DisclaimerBlock>
 
       {/* ### The Environment and Requirements */}
-      <ProseBlock title="The Environment and Requirements" />
-      <ProseList items={bulletPoints2} subTitle="Host Sites:" />
+      <ResponsiveContentImageGrid
+        imageSrc={EnvImage}
+        imageAlt="The Environment and Requirements"
+        imageOnRight={true}
+        gap={2}
+        aspectRatio={16 / 9}
+      >
+        <Stack gap={2}>
+          <ProseBlock title="The Environment and Requirements" dense />
+          <ProseList items={bulletPoints2} subTitle="Host Sites:" />
+        </Stack>
+      </ResponsiveContentImageGrid>
 
-      <SectionStarter title="Multiple Host Sites:">
-        We support a handful of different host sites. They serve as the backbone
-        for displaying various front-end modules.
-      </SectionStarter>
+      <ResponsiveContentImageGrid
+        imageSrc={HostSiteImage}
+        imageAlt="The Host Sites"
+        imageOnRight={false}
+        gap={2}
+        aspectRatio={4 / 3}
+      >
+        <SectionStarter title="Multiple Host Sites:" dense>
+          We support a handful of different host sites. They serve as the
+          backbone for displaying various front-end modules.
+        </SectionStarter>
 
-      <ProseBlock dense>
-        Each host site delivers a unified experience with smooth navigation,
-        ensuring users feel like they're visiting one cohesive website rather
-        than multiple separate modules.
-      </ProseBlock>
+        <ProseBlock dense>
+          Each host site delivers a unified experience with smooth navigation,
+          ensuring users feel like they're visiting one cohesive website rather
+          than multiple separate modules.
+        </ProseBlock>
 
-      <SectionStarter title="Page Management:">
-        Each host site manages multiple pages, typically loading one or more
-        modules inside an iframe (we aim for one iframe per page to reduce
-        complexity).
-      </SectionStarter>
+        <SectionStarter title="Page Management:">
+          Each host site manages multiple pages, typically loading one or more
+          modules inside an iframe (we aim for one iframe per page to reduce
+          complexity).
+        </SectionStarter>
 
-      <ProseBlock dense>
-        Although our goal is one iframe per page, there have been instances
-        where several iframes are loaded on a screen. Sometimes, we even
-        encounter an "inception" scenario, with an iframe nested within another
-        iframe, and then within yet another iframe.
-      </ProseBlock>
+        <ProseBlock dense>
+          Although our goal is one iframe per page, there have been instances
+          where several iframes are loaded on a screen. Sometimes, we even
+          encounter an "inception" scenario, with an iframe nested within
+          another iframe, and then within yet another iframe.
+        </ProseBlock>
 
-      <ProseBlock dense>
-        However, the goal is to have one iframe per page. For every time we
-        introduce more than one iFrame the complexity increases.
-      </ProseBlock>
+        <ProseBlock dense>
+          However, the goal is to have one iframe per page. For every time we
+          introduce more than one iFrame the complexity increases.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
 
       <SectionStarter title="Core Functions:">
         Host sites handle authentication, analytics, and inter-module
@@ -108,21 +152,29 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Module Development & Versioning */}
-      <ProseBlock title="Module Development & Versioning" />
-      <ProseList items={bulletPoints3} subTitle="Development:" />
-
-      <SectionStarter
-        title="Modules:"
-        subtitle="Independently Developed UI Components"
+      <ResponsiveContentImageGrid
+        imageSrc={ModuleDevImage}
+        imageAlt="Module Development & Versioning"
+        imageOnRight={true}
+        gap={2}
+        aspectRatio={4 / 3}
       >
-        Each module is built in its own repository—mostly in React, with a
-        couple of legacy Angular modules still around. While having multiple
-        tech stacks can offer flexibility (imagine spinning up a React 19 repo
-        if a business need arises), too much variety can make maintenance
-        tricky. Most of our Angular developers have moved on, so new features
-        are now primarily developed in React, which sometimes creates challenges
-        for our older Angular stacks.
-      </SectionStarter>
+        <ProseBlock title="Module Development & Versioning" dense />
+        <ProseList items={bulletPoints3} subTitle="Development:" />
+
+        <SectionStarter
+          title="Modules:"
+          subtitle="Independently Developed UI Components"
+        >
+          Each module is built in its own repository—mostly in React, with a
+          couple of legacy Angular modules still around. While having multiple
+          tech stacks can offer flexibility (imagine spinning up a React 19 repo
+          if a business need arises), too much variety can make maintenance
+          tricky. Most of our Angular developers have moved on, so new features
+          are now primarily developed in React, which sometimes creates
+          challenges for our older Angular stacks.
+        </SectionStarter>
+      </ResponsiveContentImageGrid>
 
       <SectionStarter title="Version Drift:" subtitle="Racing Through Versions">
         We aim for uniform versioning across projects, but practical constraints
