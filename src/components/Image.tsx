@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
 // Define the structure for each image source
 interface SourceProps {
@@ -198,65 +199,6 @@ export const AspectRatioContainer = styled(Box, {
   },
 }));
 
-export function MobileImage({
-  src,
-  alt,
-  width = '100%',
-  height = 'auto',
-}: Omit<ResponsiveImageProps, 'defaultSrc'>) {
-  const isDesktop = useMediaQuery((theme: any) => theme.breakpoints.up('md'));
-
-  if (!src) {
-    return null;
-  }
-
-  if (isDesktop) {
-    return null;
-  }
-
-  return (
-    <Image
-      defaultSrc={src}
-      alt={alt}
-      width={width}
-      height={height}
-    />
-  );
-}
-
-/**
- * Usage Examples:
- *
- * 1. AspectRatioContainer:
- *
- * <AspectRatioContainer ratio={4/3} maxWidth="600px">
- *   <Image
- *     defaultSrc={landscapeImage}
- *     alt="Landscape with 4:3 aspect ratio"
- *   />
- * </AspectRatioContainer>
- *
- * 2. Enhanced BackgroundImageContainer:
- *
- * <BackgroundImageContainer
- *   src={backgroundImage}
- *   height="400px"
- *   bgSize="cover"
- *   bgPosition="center bottom"
- *   borderRadius="8px"
- * >
- *   <Typography
- *     variant="h2"
- *     color="white"
- *     sx={{ padding: 3, textShadow: '1px 1px 3px rgba(0,0,0,0.7)' }}
- *   >
- *     Text overlaid on background image
- *   </Typography>
- * </BackgroundImageContainer>
- */
-
-
-
 export const ContentImageGrid = styled(Box, {
   shouldForwardProp: (prop) => !['imageOnRight', 'gap'].includes(prop as string),
 })<{
@@ -330,6 +272,7 @@ interface ContentImageGridProps {
   children: React.ReactNode;
   aspectRatio?: number;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  caption?: string;
 }
 
 export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
@@ -338,9 +281,12 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
   imageSrc,
   imageAlt,
   children,
-  aspectRatio = 4/3,
-  objectFit = 'cover'
+  aspectRatio = 4 / 3,
+  objectFit = 'cover',
+  caption, // New caption prop
 }) => {
+  const theme = useTheme(); // Access theme for color selection
+
   return (
     <ContentImageGrid imageOnRight={imageOnRight} gap={gap}>
       <GridContent imageOnRight={imageOnRight}>
@@ -354,6 +300,22 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
             objectFit={objectFit}
           />
         </AspectRatioContainer>
+        {caption && ( // Render caption if provided
+          <Typography
+            variant="caption"
+            sx={{
+              color:
+                theme.palette.mode === 'light'
+                  ? theme.palette.secondary.dark
+                  : theme.palette.secondary.main,
+              display: 'block',
+              textAlign: 'center',
+              marginTop: theme.spacing(1),
+            }}
+          >
+            {caption}
+          </Typography>
+        )}
       </GridImage>
     </ContentImageGrid>
   );

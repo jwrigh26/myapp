@@ -119,5 +119,20 @@ const StyledBlock = styled(Box, {
         marginBottom: theme.spacing(1),
       },
     },
+    '& span.code': {
+      // Updated style for code spans
+      backgroundColor:
+        theme.palette.mode === 'light'
+          ? theme.palette.grey[200]
+          : theme.palette.grey[800],
+      color:
+        theme.palette.mode === 'light'
+          ? theme.palette.text.primary
+          : theme.palette.text.secondary,
+      padding: theme.spacing(0.5, 1),
+      borderRadius: theme.shape.borderRadius,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.caption.fontSize,
+    },
   };
 });

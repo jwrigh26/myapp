@@ -6,6 +6,12 @@ import ReferenceLink from '@/components/ReferenceLink';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import CallOutImage from '@/assets/home_page_splash.jpg';
+import Image, {
+  AspectRatioContainer,
+  ResponsiveContentImageGrid,
+} from '@/components/Image';
+import CoffeeWizard1 from '@/assets/Slide15.jpeg';
+import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part3'
@@ -39,19 +45,67 @@ function RouteComponent() {
       <TitleBlock subtitle="">
         Communication Challenges in a Modular Front-End
       </TitleBlock>
-      <ProseBlock title="Why Communication Matters" />
-      <ProseList items={bulletPoints1} />
-      <QuoteBlock>
-        Example: A coffee brewing wizard where the module controls the
-        step-by-step process.
-      </QuoteBlock>
-      <ProseBlock dense spacingBottom>
-        In a modular system, good communication between modules and host sites
-        is critical. Imagine a coffee-brewing wizard: the host page manages
-        global navigation, while the embedded module handles each brewing step.
-        To users, it feels seamless—but behind the scenes, it requires precise
-        messaging between separate browser contexts.
-      </ProseBlock>
+      <ResponsiveContentImageGrid
+        imageOnRight
+        gap={2}
+        imageSrc={CoffeeWizard1}
+        imageAlt="Coffee Wizard 1"
+        aspectRatio={4 / 3}
+        objectFit="cover"
+        caption="Host site displaying a coffee brewing wizard"
+      >
+        <ProseBlock title="Why Communication Matters" />
+        <ProseList items={bulletPoints1} spacingBottom />
+        <QuoteBlock>
+          Example: The Magic Coffee site is currently showing a coffee brewing
+          wizard. The site is the “host site” and is responsible for main
+          navigation, and the wizard is an iframe that manages its own
+          step-by-step process.
+        </QuoteBlock>
+        <ProseBlock>
+          The host site, without any custom messaging bus required, has the
+          ability to load iframes that display various pages or modules, such as
+          a wizard.
+        </ProseBlock>
+        <ProseBlock>
+          When performing basic routing, the host site is only concerned with
+          converting routes into various iframe URLs.
+        </ProseBlock>
+        <ProseBlock>
+          If a user navigates to a wizard, such as the Magic Coffee site’s Brew
+          wizard, then once the page is loaded, all user actions related to the
+          wizard are managed by the iframe’s module.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
+
+      <ResponsiveContentImageGrid
+        imageOnRight={false}
+        gap={2}
+        imageSrc={CoffeeWizard2}
+        imageAlt="Coffee Wizard 2"
+        aspectRatio={4 / 3}
+        objectFit="cover"
+        caption="Exernal action to buy a V60 is triggered by the wizard"
+      >
+        <ProseBlock>
+          However, what happens if the wizard wants to display an option to buy
+          an item used in its brewing tutorial? If a user clicks the "buy"
+          button, things get a little more complicated.
+        </ProseBlock>
+        <ProseBlock>
+          Iframes aren't very social — they prefer to keep to themselves. To get
+          our wizard's buy button to actually navigate to the shopping page's
+          Hario V60 page, we need to provide a messaging layer that uses the
+          window's <span className="code">postMessage</span> method so the two
+          can talk and play nicely.
+        </ProseBlock>
+        <ProseBlock>
+          You can use the window's <span className="code">postMessage</span>{' '}
+          method directly, but I encourage you to either roll your own wrapper
+          or piggyback off another library out there that provides one. A good
+          wrapper can add some extra utility and safety checks.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
       {/* ### Our Current Approach */}
       <ProseBlock title="Our Current Approach" />
       <ProseList items={bulletPoints2} />
@@ -124,6 +178,7 @@ function RouteComponent() {
 const bulletPoints1 = [
   'Host sites manage global navigation and routing.',
   'Modules handle their own internal flows.',
+  'Modules and host sites require a messaging layer.',
 ];
 
 const bulletPoints2 = [
