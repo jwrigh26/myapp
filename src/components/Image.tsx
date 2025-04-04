@@ -219,47 +219,32 @@ export const ContentImageGrid = styled(Box, {
   },
 }));
 
-export const GridContent = styled(Box)<{ imageOnRight?: boolean }>(
-  ({ theme, imageOnRight = true }) => ({
-    order: 1,
-    
+export const GridContent = styled(Box)<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
+  ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
+    order: mobileImageFirst ? 2 : 1, // Default mobile order
+
     [theme.breakpoints.up('md')]: {
-      order: imageOnRight ? 1 : 2,
+      order: imageOnRight ? 1 : 2, // Desktop order
     },
   })
 );
 
-export const GridImage = styled(Box)<{ imageOnRight?: boolean }>(
-  ({ theme, imageOnRight = true }) => ({
-    order: 2,
-    padding: theme.spacing(0, 2),
-    
+export const GridImage = styled(Box)<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
+  ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
+    order: mobileImageFirst ? 1 : 2, // Default mobile order
+
     '& .aspect-ratio-container': {
-      ...(theme.palette.mode === 'light' 
+      ...(theme.palette.mode === 'light'
         ? {
-            // Light mode styling - keeping the subtle shadow
             boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   boxShadow: '0 12px 24px rgba(0,0,0,0.18), 0 8px 12px rgba(0,0,0,0.12)',
-            //   transform: 'translateY(-2px)',
-            // },
-          } 
-        : {
-            // Dark mode styling - clean border only, no shadow
-            border: `4px solid ${theme.palette.grey[700]}`,
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   borderColor: theme.palette.primary.main,
-            //   transform: 'translateY(-2px)',
-            // },
           }
-      ),
+        : {
+            border: `4px solid ${theme.palette.grey[700]}`,
+          }),
     },
-    
+
     [theme.breakpoints.up('md')]: {
-      order: imageOnRight ? 2 : 1,
-      // padding: theme.spacing(0, 2),
+      order: imageOnRight ? 2 : 1, // Desktop order
     },
   })
 );
@@ -273,6 +258,7 @@ interface ContentImageGridProps {
   aspectRatio?: number;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   caption?: string;
+  mobileImageFirst?: boolean; // New prop for mobile-first image order
 }
 
 export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
@@ -283,16 +269,17 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
   children,
   aspectRatio = 4 / 3,
   objectFit = 'cover',
-  caption, // New caption prop
+  caption,
+  mobileImageFirst = false, // New prop for mobile-first image order
 }) => {
-  const theme = useTheme(); // Access theme for color selection
+  const theme = useTheme();
 
   return (
     <ContentImageGrid imageOnRight={imageOnRight} gap={gap}>
-      <GridContent imageOnRight={imageOnRight}>
+      <GridContent imageOnRight={imageOnRight} mobileImageFirst={mobileImageFirst}>
         {children}
       </GridContent>
-      <GridImage imageOnRight={imageOnRight}>
+      <GridImage imageOnRight={imageOnRight} mobileImageFirst={mobileImageFirst}>
         <AspectRatioContainer ratio={aspectRatio} className="aspect-ratio-container">
           <Image
             defaultSrc={imageSrc}
@@ -300,7 +287,7 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
             objectFit={objectFit}
           />
         </AspectRatioContainer>
-        {caption && ( // Render caption if provided
+        {caption && (
           <Typography
             variant="caption"
             sx={{

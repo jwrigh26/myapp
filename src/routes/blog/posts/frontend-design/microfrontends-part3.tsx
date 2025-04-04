@@ -47,6 +47,7 @@ function RouteComponent() {
       </TitleBlock>
       <ResponsiveContentImageGrid
         imageOnRight
+        mobileImageFirst
         gap={2}
         imageSrc={CoffeeWizard1}
         imageAlt="Coffee Wizard 1"
@@ -80,6 +81,7 @@ function RouteComponent() {
 
       <ResponsiveContentImageGrid
         imageOnRight={false}
+        mobileImageFirst
         gap={2}
         imageSrc={CoffeeWizard2}
         imageAlt="Coffee Wizard 2"
