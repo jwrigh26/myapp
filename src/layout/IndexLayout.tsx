@@ -7,7 +7,6 @@ import { useToggle } from '@/hooks/useContext';
 import { mdiArrowLeft, mdiMenu } from '@mdi/js';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Slide from '@mui/material/Slide';
 import { styled, useTheme } from '@mui/material/styles';
@@ -15,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { Link, useRouter } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 import { ReactElement } from 'react';
 
 export default function IndexLayout({
@@ -107,7 +106,7 @@ function MobileAppToolbar() {
             sx={{ mr: 1 }}
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label={isOpen ? 'close menu' : 'open menu'}
             onClick={toggleOpen}
           >
             <Icon path={isOpen ? mdiArrowLeft : mdiMenu} />
@@ -117,7 +116,7 @@ function MobileAppToolbar() {
               JW
             </Typography>
           </StyledButtonBase>
-          {formattedBasePath && basePath && (
+          {/* {formattedBasePath && basePath && (
             <>
               <Divider
                 orientation="vertical"
@@ -143,7 +142,7 @@ function MobileAppToolbar() {
                 </Typography>
               </Link>
             </>
-          )}
+          )} */}
           <Navigation isMobile />
         </Toolbar>
       </StyledAppBar>

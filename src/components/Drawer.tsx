@@ -191,6 +191,8 @@ export function DrawerHeader({
 
 interface SheetProps {
   children?: React.ReactNode;
+  sx?: object;
+  className?: string;
 }
 const SheetPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
@@ -203,9 +205,9 @@ const SheetContent = styled(Stack)(({ theme }) => ({
   flex: 1,
 }));
 
-export function Sheet({ children }: SheetProps) {
+export function Sheet({ children, sx, className }: SheetProps) {
   return (
-    <SheetPaper>
+    <SheetPaper sx={sx} className={className}>
       <SheetContent gap={2}>{children}</SheetContent>
     </SheetPaper>
   );
