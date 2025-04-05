@@ -215,22 +215,27 @@ export const ContentImageGrid = styled(Box, {
     gridTemplateColumns: '1fr 1fr',
     gridTemplateRows: '1fr',
     alignItems: 'flex-start',
-    padding: theme.spacing(2, 0),
   },
 }));
 
 export const GridContent = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['imageOnRight', 'mobileImageFirst'].includes(prop as string),
-})<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
-  ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
-    order: mobileImageFirst ? 2 : 1, // Default mobile order
+    !['imageOnRight', 'mobileImageFirst', 'gap'].includes(prop as string),
+})<{
+  imageOnRight?: boolean;
+  mobileImageFirst?: boolean;
+  gap?: number | string;
+}>(({ theme, imageOnRight = true, mobileImageFirst = false, gap = 2 }) => ({
+  order: mobileImageFirst ? 2 : 1, // Default mobile order
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(gap),
 
-    [theme.breakpoints.up('md')]: {
-      order: imageOnRight ? 1 : 2, // Desktop order
-    },
-  })
-);
+  [theme.breakpoints.up('md')]: {
+    order: imageOnRight ? 1 : 2, // Desktop order
+    gap: theme.spacing(gap),
+  },
+}));
 
 export const GridImage = styled(Box, {
   shouldForwardProp: (prop) =>
@@ -238,6 +243,8 @@ export const GridImage = styled(Box, {
 })<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
   ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
     order: mobileImageFirst ? 1 : 2, // Default mobile order
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
 
     '& .aspect-ratio-container': {
       ...(theme.palette.mode === 'light'
@@ -253,6 +260,8 @@ export const GridImage = styled(Box, {
 
     [theme.breakpoints.up('md')]: {
       order: imageOnRight ? 2 : 1, // Desktop order
+      paddingBottom: 0,
+      paddingTop: 0,
     },
   })
 );
@@ -287,6 +296,7 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
       <GridContent
         imageOnRight={imageOnRight}
         mobileImageFirst={mobileImageFirst}
+        gap={gap}
       >
         {children}
       </GridContent>
@@ -311,6 +321,7 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
               display: 'block',
               textAlign: 'center',
               marginTop: theme.spacing(1),
+              marginBottom: theme.spacing(2),
             }}
           >
             {caption}

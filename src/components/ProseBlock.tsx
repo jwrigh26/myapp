@@ -83,20 +83,38 @@ export default ProseBlock;
 interface StyledBlockProps extends BoxProps {
   dense: boolean;
   gutterBottom?: boolean;
-  spacingBottom?: boolean;
+  spacingBottom?: boolean; // Ensure this is optional
 }
+
+const getPaddingStyles = (
+  theme: any,
+  dense: boolean,
+  spacingBottom?: boolean
+) => {
+  const paddingStyles = dense
+    ? {
+        padding: theme.spacing(0, 2),
+        // paddingBottom: theme.spacing(2),
+      }
+    : {
+        padding: theme.spacing(0),
+      };
+
+  const spacingBottomStyles = spacingBottom
+    ? { paddingBottom: theme.spacing(2) }
+    : { paddingBottom: theme.spacing(0) };
+
+  return {
+    ...paddingStyles,
+    ...spacingBottomStyles,
+  };
+};
 
 const StyledBlock = styled(Box, {
   shouldForwardProp: (prop) =>
     prop !== 'dense' && prop !== 'gutterBottom' && prop !== 'spacingBottom',
 })<StyledBlockProps>(({ theme, dense, gutterBottom, spacingBottom }) => {
-  const paddingStyles = dense
-    ? { padding: theme.spacing(0, 2), paddingBottom: theme.spacing(2) }
-    : { padding: theme.spacing(2, 2) };
-
-  const spacingBottomStyles = spacingBottom
-    ? { paddingBottom: theme.spacing(2) }
-    : { paddingBottom: theme.spacing(0) };
+  const paddingStyles = getPaddingStyles(theme, dense, spacingBottom);
 
   const gutterBottomStyles = gutterBottom
     ? { marginBottom: theme.spacing(1) }
@@ -107,12 +125,11 @@ const StyledBlock = styled(Box, {
     backgroundColor: theme.palette.background.paper, // Optional: Add a background
     borderRadius: theme.shape.borderRadius,
     ...paddingStyles,
-    ...spacingBottomStyles,
     ...gutterBottomStyles,
     '& ul, & ol': {
       // This will target both unordered and ordered lists
       margin: 0,
-      paddingLeft: theme.spacing(4),
+      paddingLeft: theme.spacing(2),
       '& li': {
         // This will target list items
         color: theme.palette.text.primary,

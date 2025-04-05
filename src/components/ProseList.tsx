@@ -100,15 +100,15 @@ const StyledList = styled(Box, {
   //   ? { padding: theme.spacing(0, 2), paddingBottom: theme.spacing(2) }
   //   : { padding: theme.spacing(2, 2) };
 
-  const spacingBottomStyles = spacingBottom
-    ? { paddingBottom: theme.spacing(2) }
-    : {};
+  // const spacingBottomStyles = spacingBottom
+  //   ? { paddingBottom: theme.spacing(2) }
+  //   : {};
 
   return {
     margin: 0,
-    paddingLeft: theme.spacing(2 + indentLevel * 2),
+    paddingLeft: theme.spacing(1 + indentLevel * 2),
     // ...paddingStyles,
-    ...spacingBottomStyles,
+    // ...spacingBottomStyles,
     listStyleType: ordered ? 'decimal' : 'disc',
     '& li': {
       marginBottom: theme.spacing(1),

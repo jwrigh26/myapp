@@ -20,6 +20,7 @@ import Image, {
   AspectRatioContainer,
   ResponsiveContentImageGrid,
 } from '@/components/Image';
+import { SectionSpacer, Spacer } from '@/components/Spacer';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -81,6 +82,7 @@ function RouteComponent() {
       </DisclaimerBlock>
 
       {/* ### The Environment and Requirements */}
+      <SectionSpacer id="environment-and-requirements" />
       <ResponsiveContentImageGrid
         imageSrc={EnvImage}
         imageAlt="The Environment and Requirements"
@@ -88,10 +90,8 @@ function RouteComponent() {
         gap={2}
         aspectRatio={16 / 9}
       >
-        <Stack gap={2}>
-          <ProseBlock title="The Environment and Requirements" dense />
-          <ProseList items={bulletPoints2} subTitle="Host Sites:" />
-        </Stack>
+        <ProseBlock title="The Environment and Requirements" />
+        <ProseList items={bulletPoints2} subTitle="Host Sites:" />
       </ResponsiveContentImageGrid>
 
       <ResponsiveContentImageGrid
@@ -101,57 +101,58 @@ function RouteComponent() {
         gap={2}
         aspectRatio={4 / 3}
       >
-        <SectionStarter title="Multiple Host Sites:" dense>
+        <SubSectionStarter title="Multiple Host Sites:">
           We support a handful of different host sites. They serve as the
           backbone for displaying various front-end modules.
-        </SectionStarter>
+        </SubSectionStarter>
 
-        <ProseBlock dense>
+        <ProseBlock>
           Each host site delivers a unified experience with smooth navigation,
           ensuring users feel like they're visiting one cohesive website rather
           than multiple separate modules.
         </ProseBlock>
 
-        <SectionStarter title="Page Management:">
+        <SubSectionStarter title="Page Management:">
           Each host site manages multiple pages, typically loading one or more
           modules inside an iframe (we aim for one iframe per page to reduce
           complexity).
-        </SectionStarter>
+        </SubSectionStarter>
 
-        <ProseBlock dense>
+        <ProseBlock>
           Although our goal is one iframe per page, there have been instances
           where several iframes are loaded on a screen. Sometimes, we even
           encounter an "inception" scenario, with an iframe nested within
           another iframe, and then within yet another iframe.
         </ProseBlock>
 
-        <ProseBlock dense>
+        <ProseBlock>
           However, the goal is to have one iframe per page. For every time we
           introduce more than one iFrame the complexity increases.
         </ProseBlock>
       </ResponsiveContentImageGrid>
 
-      <SectionStarter title="Core Functions:">
+      <SubSectionStarter title="Core Functions:">
         Host sites handle authentication, analytics, and inter-module
         communication.
-      </SectionStarter>
+      </SubSectionStarter>
 
-      <ProseBlock dense>
+      <ProseBlock>
         By centralizing these responsibilities, each module behaves consistently
         across the application while avoiding redundancy.
       </ProseBlock>
 
-      <ProseBlock dense>
+      <ProseBlock>
         For communication, we employ a custom iframe messaging library (based on
         PostRobot.js, now archived) to streamline interactions between modules.
       </ProseBlock>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         While it sounds cool, at its heart our communication library is just a
         helpful wrapper around the window.postMessage API.
       </ProseBlock>
 
       {/* ### Module Development & Versioning */}
+      <SectionSpacer id="module-development-and-versioning" />
       <ResponsiveContentImageGrid
         imageSrc={ModuleDevImage}
         imageAlt="Module Development & Versioning"
@@ -159,10 +160,10 @@ function RouteComponent() {
         gap={2}
         aspectRatio={4 / 3}
       >
-        <ProseBlock title="Module Development & Versioning" dense />
+        <ProseBlock title="Module Development & Versioning" />
         <ProseList items={bulletPoints3} subTitle="Development:" />
 
-        <SectionStarter
+        <SubSectionStarter
           title="Modules:"
           subtitle="Independently Developed UI Components"
         >
@@ -173,18 +174,18 @@ function RouteComponent() {
           tricky. Most of our Angular developers have moved on, so new features
           are now primarily developed in React, which sometimes creates
           challenges for our older Angular stacks.
-        </SectionStarter>
+        </SubSectionStarter>
       </ResponsiveContentImageGrid>
 
-      <SectionStarter title="Version Drift:" subtitle="Racing Through Versions">
+      <SubSectionStarter title="Version Drift:" subtitle="Racing Through Versions">
         We aim for uniform versioning across projects, but practical constraints
         sometimes lead to drift. There was a time when we had projects running
         on React 16, 17, and 18 all at once. Today, nearly all our modules are
         on React 18.2. Despite this fragmentation, deployments haven't been an
         issue thanks to our independent deployment process. More on that later.
-      </SectionStarter>
+      </SubSectionStarter>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         For now, we've decided to freeze our dev stack. We're happy with our
         current development patterns and don't see a strong business need to
         jump to React 19 anytime soon. While SSR has its place, our dynamic SPAs
@@ -192,18 +193,18 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Shared Resources */}
+      <SectionSpacer id="shared-resources" /> 
       <ProseBlock title="Shared Resources:" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
-
-      <SectionStarter title="Our Shared Toolkit:">
+      <SubSectionStarter title="Our Shared Toolkit:">
         Late in our development process, we realized consistency was crucial, so
         we began sharing core in-house front-end libraries. Our UI library
         features shared components like buttons, inputs, and modals, while we
         also share validation utilities, context providers, theme management,
         and various utility functions for dates and authentication.
-      </SectionStarter>
+      </SubSectionStarter>
 
-      <ProseBlock dense>
+      <ProseBlock>
         These shareable resources only evolved once our module development
         matured. In micro frontend design, "wet code" is expected—each repo
         handles its own stuff like API and state management. Rather than forcing
@@ -211,17 +212,18 @@ function RouteComponent() {
         them to our shared library when there's enough overlap.
       </ProseBlock>
 
-      <ProseBlock spacingBottom>
+      <ProseBlock>
         By taking this approach, we streamline development and maintain a
         consistent, efficient workflow.
       </ProseBlock>
 
-      {/* Service Integration & Module Autonomy */}
+      {/* ### Service Integration & Module Autonomy */}
+      <SectionSpacer id="service-integration-and-module-autonomy" />
       <ProseBlock title="Service Integration & Module Autonomy" />
 
       <ProseList items={bulletPoints6} subTitle="Super Mods:" />
 
-      <SectionStarter
+      <SubSectionStarter
         title="Decoupled Yet Connected"
         subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
       >
@@ -233,9 +235,10 @@ function RouteComponent() {
         providing true autonomy when needed. This balanced approach to service
         integration and module autonomy keeps our system both flexible and
         efficient.
-      </SectionStarter>
+      </SubSectionStarter>
 
       {/* ### Deployment Flexibility */}
+      <SectionSpacer id="deployment-flexibility" />
       <ProseBlock
         title="Deployment Flexibility"
         options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
@@ -245,21 +248,21 @@ function RouteComponent() {
         subTitle="Super easy, barely an inconvenience"
       />
 
-      <SectionStarter title="Modular Deployment:">
+      <SubSectionStarter title="Modular Deployment:">
         Each module is isolated in its own repository and loaded via iframes,
         allowing for independent deployment cycles. This means we can update or
         redeploy a single module without impacting the entire system. Our
         decoupled approach ensures that everything runs smoothly even when
         different parts are updated at different times.
-      </SectionStarter>
+      </SubSectionStarter>
 
-      <SectionStarter title="Agile Build Process & DevOps Excellence:">
+      <SubSectionStarter title="Agile Build Process & DevOps Excellence:">
         Our streamlined build process supports consistent release cycles and
         continuous integration, making updates quick and flexible. With an
         aggressive QA team and top-notch DevOps, we no longer need to deploy
         everything at once. Instead, our agile process delivers smooth, reliable
         updates that keep the entire system running efficiently.
-      </SectionStarter>
+      </SubSectionStarter>
     </>
   );
 }
@@ -268,7 +271,7 @@ function RouteComponent() {
 // ### Usuable Components
 // #################################################
 
-function SectionStarter({
+function SubSectionStarter({
   children,
   title,
   subtitle,
@@ -279,7 +282,7 @@ function SectionStarter({
     <ProseBlock
       title={title}
       subtitle={subtitle}
-      options={{ titleVariant: 'h5', subtitleVariant: 'subtitle1' }}
+      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
       dense={dense}
       spacingBottom={spacingBottom}
     >

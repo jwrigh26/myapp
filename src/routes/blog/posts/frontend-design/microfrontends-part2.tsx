@@ -41,13 +41,13 @@ function RouteComponent() {
       <ProseBlock title="Before Micro Frontends:" />
       <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
 
-      <ProseBlock dense>
+      <ProseBlock>
         Before micro-frontends, the development landscape was dominated by
         monoliths and full-stack apps. This eventually gave way to separate
         frontend and backend applications, which dominated for a time.
       </ProseBlock>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         I'm not sure exactly when, but microservices came into play along with
         component-based apps. This architecture is still popular and meets the
         needs of many applications. However, for large teams and applications,
@@ -58,7 +58,7 @@ function RouteComponent() {
       <ProseBlock title="Micro-Frontend Strategies:" />
       <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
 
-      <ProseBlock dense>
+      <ProseBlock>
         Micro-frontend strategies offer several ways to structure your
         application. With external app bootstrapping, a main app loads code from
         different servers by fetching CSS, JS, and other assets, then stitches
@@ -67,7 +67,7 @@ function RouteComponent() {
         keeping things cohesive.
       </ProseBlock>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         Other strategies involve dedicated micro-frontend libraries and
         frameworks. For example, Single SPA provides a top-level router and lazy
         loading, allowing legacy and new projects to coexist—though all code
@@ -84,13 +84,13 @@ function RouteComponent() {
 
       <ProseBlock title="Module Federation:" />
       <ProseList items={bulletPointsMf1} subTitle="The Frontend Evolution:" />
-      <ProseBlock dense>
+      <ProseBlock>
         Webpack Module Federation enables dynamic sharing and loading of modules
         across independently deployed apps at runtime. Modules are fetched only
         when needed, reducing initial load time.
       </ProseBlock>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         This flexibility adds complexity. Managing shared dependencies and
         avoiding version conflicts requires careful coordination.
       </ProseBlock>
@@ -100,13 +100,13 @@ function RouteComponent() {
         items={bulletPointsSspa1}
         subTitle="What it Brings to the Game:"
       />
-      <ProseBlock dense>
+      <ProseBlock>
         Single-SPA coordinates multiple micro-apps on the same page, even if
         they use different frameworks. It handles routing, mounting, updating,
         and unmounting to ensure each app runs smoothly alongside the others.
       </ProseBlock>
 
-      <ProseBlock dense>
+      <ProseBlock>
         This flexibility comes with trade-offs. CSS scoping, global state, and
         shared assets can be tricky to manage and add complexity.
       </ProseBlock>
@@ -117,14 +117,14 @@ function RouteComponent() {
         subTitle="Simple, Secure, and Scalable:"
       />
 
-      <ProseBlock dense>
+      <ProseBlock>
         Iframes provide built-in isolation. Each module runs in its own browser
         context, keeping JavaScript, CSS, and the DOM separate. This prevents
         conflicts and protects global state. Sandboxing also improves security
         by restricting iframe access.
       </ProseBlock>
 
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         This isolation simplifies deployment. Modules can be updated
         independently, enabling efficient caching and faster rollouts. If one
         module fails or runs slowly, the rest of the app remains unaffected.
@@ -136,25 +136,23 @@ function RouteComponent() {
       <ProseBlock
         title="Modern Micro-Frontend Frameworks (Webpack Module Federation, Single-SPA):"
         options={{ titleVariant: 'h5' }}
-        dense
       />
       <ProseList items={bulletPointsMFLPros} subTitle="Pros" />
       <ProseList items={bulletPointsMFLCons} subTitle="Cons" />
       <ProseBlock
         title="Our Iframe-Based Approach:"
         options={{ titleVariant: 'h5' }}
-        dense
       />
       <ProseList items={bulletPointsIframePros} subTitle="Pros" />
       <ProseList items={bulletPointsIframeCons} subTitle="Cons" />
-      <ProseBlock dense>
+      <ProseBlock>
         Modern micro-frontend frameworks like Webpack Module Federation and
         Single-SPA offer powerful dynamic integration and support multiple
         frameworks. However, they add complexity due to tricky dependency
         management, larger bundles, and tighter team coordination, all of which
         can slow things down.
       </ProseBlock>
-      <ProseBlock dense spacingBottom>
+      <ProseBlock>
         Our iframe-based approach prioritizes stability, security, and
         simplicity. While less dynamic, it gives us reliable fault isolation,
         easy deployments, and lower maintenance.
@@ -166,14 +164,14 @@ function RouteComponent() {
         items={bulletPointsRationale}
         subTitle="Our Decision Factors"
       />
-      <ProseBlock dense>
+      <ProseBlock>
         When we first designed the system, tools like Single-SPA and Webpack
         Module Federation were either unavailable or not mature. We needed a
         fast way to integrate multiple pages into client sites. Given our
         requirements, iframes were the most practical option.
       </ProseBlock>
 
-      <ProseBlock dense>
+      <ProseBlock>
         Team structure also influenced the decision. With a backend-heavy team
         and occasional front-end support from full-stack developers, simplicity
         was important. Iframes let us update modules independently without deep
