@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import Skeleton from '@mui/material/Skeleton';
+import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
 // Define the structure for each image source
 interface SourceProps {
@@ -200,7 +199,8 @@ export const AspectRatioContainer = styled(Box, {
 }));
 
 export const ContentImageGrid = styled(Box, {
-  shouldForwardProp: (prop) => !['imageOnRight', 'gap'].includes(prop as string),
+  shouldForwardProp: (prop) =>
+    !['imageOnRight', 'gap'].includes(prop as string),
 })<{
   imageOnRight?: boolean;
   gap?: number | string;
@@ -210,16 +210,19 @@ export const ContentImageGrid = styled(Box, {
   gridTemplateRows: 'auto auto',
   gap: theme.spacing(gap),
   width: '100%',
-  
+
   [theme.breakpoints.up('md')]: {
     gridTemplateColumns: '1fr 1fr',
     gridTemplateRows: '1fr',
     alignItems: 'flex-start',
-    padding: theme.spacing(2, 0)
+    padding: theme.spacing(2, 0),
   },
 }));
 
-export const GridContent = styled(Box)<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
+export const GridContent = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['imageOnRight', 'mobileImageFirst'].includes(prop as string),
+})<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
   ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
     order: mobileImageFirst ? 2 : 1, // Default mobile order
 
@@ -229,7 +232,10 @@ export const GridContent = styled(Box)<{ imageOnRight?: boolean; mobileImageFirs
   })
 );
 
-export const GridImage = styled(Box)<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
+export const GridImage = styled(Box, {
+  shouldForwardProp: (prop) =>
+    !['imageOnRight', 'mobileImageFirst'].includes(prop as string),
+})<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
   ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
     order: mobileImageFirst ? 1 : 2, // Default mobile order
 
@@ -237,6 +243,8 @@ export const GridImage = styled(Box)<{ imageOnRight?: boolean; mobileImageFirst?
       ...(theme.palette.mode === 'light'
         ? {
             boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
+            border: `2px solid ${theme.palette.grey[400]}`,
+            // border: `2px solid ${theme.palette.secondary.light}`,
           }
         : {
             border: `4px solid ${theme.palette.grey[700]}`,
@@ -276,16 +284,21 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
 
   return (
     <ContentImageGrid imageOnRight={imageOnRight} gap={gap}>
-      <GridContent imageOnRight={imageOnRight} mobileImageFirst={mobileImageFirst}>
+      <GridContent
+        imageOnRight={imageOnRight}
+        mobileImageFirst={mobileImageFirst}
+      >
         {children}
       </GridContent>
-      <GridImage imageOnRight={imageOnRight} mobileImageFirst={mobileImageFirst}>
-        <AspectRatioContainer ratio={aspectRatio} className="aspect-ratio-container">
-          <Image
-            defaultSrc={imageSrc}
-            alt={imageAlt}
-            objectFit={objectFit}
-          />
+      <GridImage
+        imageOnRight={imageOnRight}
+        mobileImageFirst={mobileImageFirst}
+      >
+        <AspectRatioContainer
+          ratio={aspectRatio}
+          className="aspect-ratio-container"
+        >
+          <Image defaultSrc={imageSrc} alt={imageAlt} objectFit={objectFit} />
         </AspectRatioContainer>
         {caption && (
           <Typography

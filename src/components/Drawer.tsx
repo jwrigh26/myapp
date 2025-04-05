@@ -106,7 +106,7 @@ export function TemporaryDrawer({
 export const StyledMobileDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
   boxSizing: 'border-box',
-  zIndex: theme.zIndex.appBar - 1,
+  zIndex: theme.zIndex.appBar + 1,
   ['& .MuiDrawer-paper']: {
     overFlowX: 'hidden',
     height: '100%',
@@ -134,7 +134,7 @@ export function MobileDrawer({
       onClose={handleClose}
       {...props}
     >
-      <ToolbarSpacer />
+      {/* <ToolbarSpacer /> */}
       <Content>{children}</Content>
     </StyledMobileDrawer>
   );

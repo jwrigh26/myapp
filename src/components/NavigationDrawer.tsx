@@ -5,6 +5,7 @@ import {
   mdiArrowLeft,
   mdiBookOpen,
   mdiChevronRight,
+  mdiCloseBoxOutline,
   mdiGamepadVariant,
   mdiHome,
   mdiInformation,
@@ -57,7 +58,7 @@ interface NavHistoryEntry {
 const mainNavItems: NavItem[] = [
   { id: 'home', title: 'Home', path: '/home', icon: mdiHome },
   { id: 'about', title: 'About', path: '/about', icon: mdiInformation },
-  { id: 'blog', title: 'Blog', icon: mdiBookOpen },
+  { id: 'blog', title: 'Blog', path: '/blog', icon: mdiBookOpen },
   { id: 'game', title: 'Game', path: '/game', icon: mdiGamepadVariant },
 ];
 
@@ -131,11 +132,21 @@ const DrawerNavContainer = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
 }));
 
-const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
+const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
   borderRadius: theme.shape.borderRadius,
   margin: theme.spacing(0.5, 1),
+  backgroundColor: active ? theme.palette.action.selected : 'transparent',
+  touchAction: 'none', // Prevents unwanted touch behaviors
+  WebkitTapHighlightColor: 'transparent', // Removes default mobile tap highlight
   '&:hover': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: active
+      ? theme.palette.action.selected
+      : theme.palette.action.hover,
+  },
+  '&:active': {
+    backgroundColor: theme.palette.action.selected,
   },
 }));
 
@@ -183,6 +194,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   const { isOpen, closeDrawer } = useDrawer('navigation-drawer');
   const router = useRouter();
   const theme = useTheme();
+  const currentPath = router.state.location.pathname;
 
   // State for navigation
   const [currentLevel, setCurrentLevel] = useState<NavLevel>(NavLevel.MAIN);
@@ -277,13 +289,21 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
           previous={previousLevel === NavLevel.MAIN}
           direction={navigationDirection}
         >
-          <DrawerHeader title="Menu" showBack={false} onClose={closeDrawer} />
+          <DrawerHeader
+            title="Menu"
+            showBack={false}
+            onBack={navigateBack}
+            onClose={closeDrawer}
+          />
           <Divider />
           <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
             <List>
               {mainNavItems.map((item) => (
                 <ListItem key={item.id} disablePadding>
                   <StyledListItemButton
+                    active={
+                      item.path ? currentPath.startsWith(item.path) : false
+                    }
                     onClick={() => {
                       if (item.id === 'blog') {
                         navigateForward(NavLevel.BLOG, 'Blog');
@@ -327,6 +347,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
               {blogCategories.map((category) => (
                 <ListItem key={category.id} disablePadding>
                   <StyledListItemButton
+                    active={currentPath.startsWith(category.path || '')}
                     onClick={() => {
                       navigateForward(
                         NavLevel.BLOG_CATEGORY,
@@ -369,6 +390,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                 {categoryPosts[currentContext.data.id].map((post) => (
                   <ListItem key={post.id} disablePadding>
                     <StyledListItemButton
+                      active={currentPath === post.path}
                       onClick={() => {
                         if (post.path) {
                           navigateToRoute(post.path);
@@ -453,7 +475,7 @@ function DrawerHeader({
       }}
     >
       <Stack direction="row" spacing={1} alignItems="center">
-        {showBack && onBack && (
+        {showBack && onBack ? (
           <IconButton
             edge="start"
             onClick={onBack}
@@ -461,6 +483,15 @@ function DrawerHeader({
             sx={{ color: theme.palette.primary.contrastText }}
           >
             <Icon path={mdiArrowLeft} />
+          </IconButton>
+        ) : (
+          <IconButton
+            edge="start"
+            onClick={onClose}
+            size="small"
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            <Icon path={mdiCloseBoxOutline} />
           </IconButton>
         )}
         <Typography variant="h6" color="common.white">

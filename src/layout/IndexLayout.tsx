@@ -4,7 +4,7 @@ import Navigation from '@/components/Navigation';
 import { NavigationDrawer } from '@/components/NavigationDrawer';
 import { SettingsDrawer } from '@/features/settings';
 import { useToggle } from '@/hooks/useContext';
-import { mdiArrowLeft, mdiMenu } from '@mdi/js';
+import { mdiMenu } from '@mdi/js';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
@@ -106,43 +106,16 @@ function MobileAppToolbar() {
             sx={{ mr: 1 }}
             edge="start"
             color="inherit"
-            aria-label={isOpen ? 'close menu' : 'open menu'}
+            aria-label="open menu"
             onClick={toggleOpen}
           >
-            <Icon path={isOpen ? mdiArrowLeft : mdiMenu} />
+            <Icon path={mdiMenu} />
           </IconButton>
           <StyledButtonBase to="/">
             <Typography variant="h6" color="primary.contrastText">
               JW
             </Typography>
           </StyledButtonBase>
-          {/* {formattedBasePath && basePath && (
-            <>
-              <Divider
-                orientation="vertical"
-                flexItem
-                sx={{
-                  mx: 1.5,
-                  height: 24,
-                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                }}
-              />
-
-              <Link
-                to={routePaths[basePath as keyof typeof routePaths]}
-                search={{}}
-                params={{}}
-              >
-                <Typography
-                  variant="subtitle1"
-                  color="primary.contrastText"
-                  sx={{ opacity: 0.9 }}
-                >
-                  {formattedBasePath}
-                </Typography>
-              </Link>
-            </>
-          )} */}
           <Navigation isMobile />
         </Toolbar>
       </StyledAppBar>
