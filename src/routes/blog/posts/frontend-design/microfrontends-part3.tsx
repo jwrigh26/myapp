@@ -13,6 +13,9 @@ import Image, {
 import { BodyBlock } from '@/components/BodyBlock';
 import CoffeeWizard1 from '@/assets/Slide15.jpeg';
 import CoffeeWizard2 from '@/assets/Slide16.jpeg';
+import MemoryLeak from '@/assets/Slide17.a.jpeg';
+import PostRobot from '@/assets/Slide18.jpeg';
+import TechDebt from '@/assets/Slide19.jpeg';
 import { Spacer } from '@/components/Spacer';
 
 export const Route = createFileRoute(
@@ -128,33 +131,54 @@ function RouteComponent() {
           To help you create a work of art, might I suggest avoiding some of the
           same mistakes we made along the way?
         </ProseBlock>
-        <ProseList
-          subTitle="Our Biggest Iframe Messaging Gotchas"
-          items={bulletPoints3}
-        />
+        <ResponsiveContentImageGrid
+          // imageOnRight={false}
+          // mobileImageFirst
+          imageSrc={MemoryLeak}
+          imageAlt="Memory Leak"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="Memory Leaks from Iframe Messaging can flood your app. Be careful!"
+        >
+          <ProseList
+            subTitle="Our Biggest Iframe Messaging Gotchas"
+            items={bulletPoints3}
+          />
+        </ResponsiveContentImageGrid>
         {/* ### Messaging Improvements*/}
         <ProseBlock
           title="Messaging Improvements"
           subtitle="Lessons From Post-Robot"
         />
         <ProseList items={bulletPoints4} />
-        <ProseBlock>
-          We've learned valuable lessons from working with PostRobot, especially
-          around how parent and child iframes communicate. Establishing clear,
-          robust handshake protocols helps prevent miscommunication between
-          modules—saving us from unnecessary debugging. We’ve also seen how
-          built-in error handling, like acknowledging messages and gracefully
-          managing failures, can significantly enhance reliability.
-        </ProseBlock>
-        <ProseBlock>
-          We're currently enhancing our API and documentation to meet the
-          growing needs of our application. Adopting asynchronous messaging,
-          including passing functions directly in messages, will simplify
-          interactions between iframes and streamline navigation events. Clear
-          listener/client patterns and well-defined communication channels will
-          further reduce complexity, making the entire messaging system simpler,
-          safer, and more maintainable.
-        </ProseBlock>
+        <ResponsiveContentImageGrid
+          imageOnRight={false}
+          // mobileImageFirst
+          imageSrc={PostRobot}
+          imageAlt="Post Robot"
+          aspectRatio={1 / 1}
+          objectFit="cover"
+          caption="Post-Robot: reliable messaging between iframes"
+        >
+          <ProseBlock>
+            We've learned valuable lessons from working with PostRobot,
+            especially around how parent and child iframes communicate.
+            Establishing clear, robust handshake protocols helps prevent
+            miscommunication between modules—saving us from unnecessary
+            debugging. We’ve also seen how built-in error handling, like
+            acknowledging messages and gracefully managing failures, can
+            significantly enhance reliability.
+          </ProseBlock>
+          <ProseBlock>
+            We're currently enhancing our API and documentation to meet the
+            growing needs of our application. Adopting asynchronous messaging,
+            including passing functions directly in messages, will simplify
+            interactions between iframes and streamline navigation events. Clear
+            listener/client patterns and well-defined communication channels
+            will further reduce complexity, making the entire messaging system
+            simpler, safer, and more maintainable.
+          </ProseBlock>
+        </ResponsiveContentImageGrid>
 
         <ReferenceLink
           text="For more background on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
@@ -163,15 +187,25 @@ function RouteComponent() {
         />
 
         {/* ### Iframe Messaging Gotchas */}
-        <ProseBlock title="Tech Debt & Early Planning" />
-        <ProseList items={bulletPoints5} />
-        <ProseBlock>
-          If we could do things again, we'd invest much earlier in creating
-          shareable libraries—especially around dates, forms, and UI components.
-          Developing simple wrappers around external libraries from the start
-          would have made future upgrades much easier, reducing technical debt
-          and simplifying maintenance.
-        </ProseBlock>
+        <ResponsiveContentImageGrid
+          // imageOnRight={false}
+          // mobileImageFirst
+          imageSrc={TechDebt}
+          imageAlt="Tech Debt and Early Planning"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="Post-Robot: reliable messaging between iframes"
+        >
+          <ProseBlock title="Tech Debt & Early Planning" />
+          <ProseList items={bulletPoints5} />
+          <ProseBlock>
+            If we could do things again, we'd invest much earlier in creating
+            shareable libraries—especially around dates, forms, and UI
+            components. Developing simple wrappers around external libraries
+            from the start would have made future upgrades much easier, reducing
+            technical debt and simplifying maintenance.
+          </ProseBlock>
+        </ResponsiveContentImageGrid>
         <ProseBlock>
           Additionally, standardizing linting, testing, and build pipelines
           early is critical. A consistent setup helps maintain a cleaner
