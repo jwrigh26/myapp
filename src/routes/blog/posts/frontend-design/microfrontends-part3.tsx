@@ -113,19 +113,25 @@ function RouteComponent() {
         <ProseBlock title="Our Current Approach" />
         <ProseList items={bulletPoints2} />
         <ProseBlock>
-          Our custom iframe messaging system enables flexible module-to-module
-          communication, but it isn't without its challenges. For example, if a
-          module needs to trigger an action outside its iframe (like updating
-          navigation or global state), careful coordination is required. Getting
-          these interactions right is crucial to delivering the smooth, unified
-          experience our users expect.
+          By using custom messaging, deep navigation, and event broadcasting
+          through a message bus, we can handle tricky iframe communication
+          between modules.
         </ProseBlock>
         {/* ### Iframe Messaging Gotchas */}
         <ProseBlock title="Iframe Messaging Gotchas" />
-        <ProseList items={bulletPoints3} />
         <ProseBlock>
-          While our iframe messaging system is powerful, it's not without its
+          While iframe messaging helps glue everything together, it's important
+          to plan ahead. If you don't, you'll end up with a rushed arts and
+          crafts project covered in Elmer’s glue.
         </ProseBlock>
+        <ProseBlock>
+          To help you create a work of art, might I suggest avoiding some of the
+          same mistakes we made along the way?
+        </ProseBlock>
+        <ProseList
+          subTitle="Our Biggest Iframe Messaging Gotchas"
+          items={bulletPoints3}
+        />
         {/* ### Messaging Improvements*/}
         <ProseBlock
           title="Messaging Improvements"
@@ -185,14 +191,14 @@ const bulletPoints1 = [
 ];
 
 const bulletPoints2 = [
-  'Leverage window.postMessage alongside Post-Robot for a custom pub/sub system.',
-  'Deep Navigation: Intercepts links (e.g., a link to a shopping page) to trigger host site navigation.',
-  'Action Broadcasts: User actions (like clicking "open settings") get broadcasted to subscribed modules.',
+  'Leverage window.postMessage with Post-Robot to create a custom message bus.',
+  'Intercept deep navigation links (e.g., a link to a shopping page) and trigger host site navigation.',
+  'Broadcast user events (like clicking "open settings") to subscribed modules.',
 ];
 
 const bulletPoints3 = [
-  'Complexity: Pub/sub can get messy—hello, spaghetti code!',
-  'Memory Leaks: Debugging sessions have been real all-nighters',
+  'Using Post-Robot in a "fire and forget" fashion. We sent messages out but had no idea if the window receiving them was still around. This led to memory leaks.',
+  'Not setting standards or rules for our messaging bus. Our code quickly became spread out and hard to manage. This made debugging and iterating on feature requests much more difficult.',
 ];
 
 const bulletPoints4 = [
