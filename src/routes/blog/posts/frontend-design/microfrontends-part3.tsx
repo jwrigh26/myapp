@@ -6,6 +6,7 @@ import ReferenceLink from '@/components/ReferenceLink';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import CallOutImage from '@/assets/home_page_splash.jpg';
+import type { ProseBlockProps } from '@/components/ProseBlock';
 import Image, {
   AspectRatioContainer,
   ResponsiveContentImageGrid,
@@ -16,7 +17,7 @@ import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
 import TechDebt from '@/assets/Slide19.jpeg';
-import { Spacer } from '@/components/Spacer';
+import { Spacer, SectionSpacer } from '@/components/Spacer';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part3'
@@ -113,6 +114,7 @@ function RouteComponent() {
           </ProseBlock>
         </ResponsiveContentImageGrid>
         {/* ### Our Current Approach */}
+        <SectionSpacer id="our-current-approach" />
         <ProseBlock title="Our Current Approach" />
         <ProseList items={bulletPoints2} />
         <ProseBlock>
@@ -121,6 +123,7 @@ function RouteComponent() {
           between modules.
         </ProseBlock>
         {/* ### Iframe Messaging Gotchas */}
+        <SectionSpacer id="iframe-messaging-gotchas" />
         <ProseBlock title="Iframe Messaging Gotchas" />
         <ProseBlock>
           While iframe messaging helps glue everything together, it's important
@@ -145,7 +148,9 @@ function RouteComponent() {
             items={bulletPoints3}
           />
         </ResponsiveContentImageGrid>
+
         {/* ### Messaging Improvements*/}
+        <SectionSpacer id="messaging-improvements" />
         <ProseBlock
           title="Messaging Improvements"
           subtitle="Lessons From Post-Robot"
@@ -161,60 +166,121 @@ function RouteComponent() {
           caption="Post-Robot: reliable messaging between iframes"
         >
           <ProseBlock>
-            We've learned valuable lessons from working with PostRobot,
-            especially around how parent and child iframes communicate.
-            Establishing clear, robust handshake protocols helps prevent
-            miscommunication between modules—saving us from unnecessary
-            debugging. We’ve also seen how built-in error handling, like
-            acknowledging messages and gracefully managing failures, can
-            significantly enhance reliability.
+            Let's talk more about those memory leaks. When we first started
+            working with Post-Robot to create our messaging app, we didn't
+            account for all the ways things could fail. While Post-Robot
+            provides what I call a “robust handshake protocol,” we used it more
+            like a quick high-five because, in some instances, we assumed it
+            would just work.
           </ProseBlock>
           <ProseBlock>
-            We're currently enhancing our API and documentation to meet the
-            growing needs of our application. Adopting asynchronous messaging,
-            including passing functions directly in messages, will simplify
-            interactions between iframes and streamline navigation events. Clear
-            listener/client patterns and well-defined communication channels
-            will further reduce complexity, making the entire messaging system
-            simpler, safer, and more maintainable.
+            This caused an intense week of bug fixing after a major refactor. We
+            discovered our navigation was loading pages slower and slower
+            because the host site kept trying to send messages to clients that
+            no longer existed.
+          </ProseBlock>
+          <ProseBlock>
+            To fix the problem, we made use of everything Post-Robot offers for
+            error handling. We implemented a way for the sender to recover when
+            it fails to send messages, and for the client to fail gracefully
+            when needed. Since making these changes, our iframe messaging is
+            operating like a brand-new faucet — no more leaks.
           </ProseBlock>
         </ResponsiveContentImageGrid>
 
         <ReferenceLink
-          text="For more background on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
+          text="For more information on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
           url="https://bluepnume.medium.com/introducing-post-robot-smart-cross-domain-messaging-from-paypal-bebf27c8619e"
           linkText="Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
         />
 
         {/* ### Iframe Messaging Gotchas */}
+        <SectionSpacer id="tech-debt" />
         <ResponsiveContentImageGrid
           // imageOnRight={false}
           // mobileImageFirst
           imageSrc={TechDebt}
-          imageAlt="Tech Debt and Early Planning"
+          imageAlt="Hard Lessons in Micro-Frontend Development"
           aspectRatio={4 / 3}
           objectFit="cover"
-          caption="Post-Robot: reliable messaging between iframes"
+          caption="Sometimes it's easy to get lost in the weeds of micro-frontend development."
         >
-          <ProseBlock title="Tech Debt & Early Planning" />
-          <ProseList items={bulletPoints5} />
+          <ProseBlock title="Hard Lessons in Micro-Frontend Development" />
+          <SubSectionStarter title="Standardize Your Navigation Patterns">
+            Another thing I would standardize is how we route when displaying a
+            hierarchy of dropdown navigation lists in a drawer. We have several
+            apps that use this kind of navigation for settings and admin pages.
+            In each app, we approached it differently, and this has made it
+            challenging to standardize how things are done.
+          </SubSectionStarter>
+          <SubSectionStarter title="Beware of Over-Engineering">
+            In addition to navigation and routing, we also overcomplicated parts
+            of our apps by trying to “future-proof” them. This created a lot of
+            unused spaghetti code and unnecessary layers that now make very
+            little sense.
+          </SubSectionStarter>
           <ProseBlock>
-            If we could do things again, we'd invest much earlier in creating
-            shareable libraries—especially around dates, forms, and UI
-            components. Developing simple wrappers around external libraries
-            from the start would have made future upgrades much easier, reducing
-            technical debt and simplifying maintenance.
+            One example: in one app, we set up dynamic routing to handle various
+            payloads and display different navigation drawers. The code is
+            impressive and works well to this day. The only issue is that we
+            only use it for a single list. It’s like designing a warehouse to
+            store amazing Hot Wheels collections — but only using it to park
+            your sedan.
           </ProseBlock>
         </ResponsiveContentImageGrid>
+
+        <SubSectionStarter title="The Fallacy of Staying Current">
+          The final lesson learned is about what I call the fallacy of staying
+          current.
+        </SubSectionStarter>
         <ProseBlock>
-          Additionally, standardizing linting, testing, and build pipelines
-          early is critical. A consistent setup helps maintain a cleaner
-          codebase, reduces stress, and leads to smoother deployments down the
-          road. Proactively handling tech debt isn't just smart—it's essential
-          for long-term success.
+          This is something I had to learn the hard way: you don't always need
+          to use bleeding-edge frameworks. Early in my career, I was
+          hyper-focused on avoiding "static" projects. I pushed myself — and
+          sometimes the companies I worked for — to update packages and
+          libraries constantly.
         </ProseBlock>
+        <ProseBlock>
+          But there's an art to updating. After doing several big refactor
+          projects in our micro-frontend, I've learned that sometimes it's
+          better to freeze a project and create a new repo if business needs
+          drive updating to the latest and greatest JS framework.
+        </ProseBlock>
+        <ProseBlock>
+          It's important to remember that while getting up-to-date libraries
+          feels good, it also comes with a cost. Training developers, especially
+          those who primarily focus on backend tasks, takes time and effort.
+          That's not always ideal for a feature-driven development shop.
+        </ProseBlock>
+        <SubSectionStarter title="Accept That Some Wet Code Is Okay">
+          In the same spirit, when trying to stay current and implement best
+          practices, it’s also important to accept that a little bit of "wet
+          code" is tolerable. In a micro-frontend, some messiness is expected.
+          Each team will do things a little differently, no matter how many
+          guardrails you set up along the path to deployment.
+        </SubSectionStarter>
       </BodyBlock>
     </>
+  );
+}
+
+function SubSectionStarter({
+  children,
+  title,
+  subtitle,
+  dense = false,
+  spacingBottom = false,
+}: ProseBlockProps) {
+  return (
+    <ProseBlock
+      title={title}
+      subtitle={subtitle}
+      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
+      dense={dense}
+      spacingBottom={spacingBottom}
+    >
+      {children}
+    </ProseBlock>
   );
 }
 
@@ -231,16 +297,11 @@ const bulletPoints2 = [
 ];
 
 const bulletPoints3 = [
-  'Using Post-Robot in a "fire and forget" fashion. We sent messages out but had no idea if the window receiving them was still around. This led to memory leaks.',
   'Not setting standards or rules for our messaging bus. Our code quickly became spread out and hard to manage. This made debugging and iterating on feature requests much more difficult.',
+  'Using Post-Robot in a "fire and forget" fashion. We sent messages out but had no idea if the window receiving them was still around. This led to memory leaks.',
 ];
 
-const bulletPoints4 = [
-  'Robust Handshake Protocols',
-  'Enhanced Error Handling',
-  'Simplified API & Documentation',
-  'Leveraging Asynchronous Messaging',
-];
+const bulletPoints4 = ['Robust Handshake Protocols', 'Enhanced Error Handling'];
 
 const bulletPoints5 = [
   'Shareable Libraries',

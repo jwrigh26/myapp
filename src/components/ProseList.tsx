@@ -47,7 +47,7 @@ function ProseList({
           component="h6"
           color="textPrimary"
           gutterBottom={false}
-          sx={{ ml: 2, color: 'primary.main' }}
+          sx={{ ml: 0, color: 'primary.main' }}
         >
           {subTitle}
         </Typography>
