@@ -58,9 +58,9 @@ function RouteComponent() {
       </TitleBlock>
       <IntroBlock>
         In this post, we'll explore building a modular front-end using iframes.
-        I'll cover the approach we took to inter-module communication. In
-        addition, we'll compare our solution to other alternatives and share
-        lessons learned along the way.
+        I'll cover the approach we took to handle inter-module communication.
+        We'll also compare our solution to other alternatives and share lessons
+        learned along the way.
       </IntroBlock>
       <ResponsiveContentImageGrid
         imageSrc={IntroImage}
@@ -107,49 +107,42 @@ function RouteComponent() {
         </SubSectionStarter>
 
         <ProseBlock>
-          Each host site delivers a unified experience with smooth navigation,
-          ensuring users feel like they're visiting one cohesive website rather
-          than multiple separate modules.
+          Each host sitess main role is to handle navigation to ensure users
+          feel like they're visiting one cohesive website rather than multiple
+          separate modules.
         </ProseBlock>
 
         <SubSectionStarter title="Page Management:">
-          Each host site manages multiple pages, typically loading one or more
-          modules inside an iframe (we aim for one iframe per page to reduce
-          complexity).
+          Each host site typically loads one or more modules inside an iframe
+          per page. The goal is to have one iframe per page, but there have been
+          instances where several iframes are loaded on a single screen.
         </SubSectionStarter>
-
         <ProseBlock>
-          Although our goal is one iframe per page, there have been instances
-          where several iframes are loaded on a screen. Sometimes, we even
-          encounter an "inception" scenario, with an iframe nested within
-          another iframe, and then within yet another iframe.
-        </ProseBlock>
-
-        <ProseBlock>
-          However, the goal is to have one iframe per page. For every time we
-          introduce more than one iFrame the complexity increases.
+          Sometimes, we even encounter an “inception” scenario, with an iframe
+          nested within an iframe, and then within yet another iframe. To reduce
+          complexity, we aim for one iframe per page. Every additional iframe
+          increases the complexity.
         </ProseBlock>
       </ResponsiveContentImageGrid>
 
       <SubSectionStarter title="Core Functions:">
-        Host sites handle authentication, analytics, and inter-module
-        communication.
+        In addition to navigation, each host site has a few core
+        responsibilities. These include authentication, analytics, and
+        communication. By centralizing these functions, each module behaves
+        consistently across the application.
       </SubSectionStarter>
 
-      <ProseBlock>
-        By centralizing these responsibilities, each module behaves consistently
-        across the application while avoiding redundancy.
-      </ProseBlock>
-
-      <ProseBlock>
-        For communication, we employ a custom iframe messaging library (based on
-        PostRobot.js, now archived) to streamline interactions between modules.
-      </ProseBlock>
-
-      <ProseBlock>
-        While it sounds cool, at its heart our communication library is just a
-        helpful wrapper around the window.postMessage API.
-      </ProseBlock>
+      <Box sx={{ m: 2, p: 2, border: '1px solid', borderColor: 'divider' }}>
+        <ProseBlock
+          subtitle="Note:"
+          options={{ subtitleVariant: 'subtitle2', textVariant: 'body2' }}
+        >
+          For communication, we employ a custom iframe messaging library (based
+          on PostRobot.js, now archived) to bridge interactions between modules.
+          While it sounds fancy, our library is just a helpful wrapper around
+          the <span className="code">window.postMessage</span> API.
+        </ProseBlock>
+      </Box>
 
       {/* ### Module Development & Versioning */}
       <SectionSpacer id="module-development-and-versioning" />
@@ -177,7 +170,10 @@ function RouteComponent() {
         </SubSectionStarter>
       </ResponsiveContentImageGrid>
 
-      <SubSectionStarter title="Version Drift:" subtitle="Racing Through Versions">
+      <SubSectionStarter
+        title="Version Drift:"
+        subtitle="Racing Through Versions"
+      >
         We aim for uniform versioning across projects, but practical constraints
         sometimes lead to drift. There was a time when we had projects running
         on React 16, 17, and 18 all at once. Today, nearly all our modules are
@@ -193,7 +189,7 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Shared Resources */}
-      <SectionSpacer id="shared-resources" /> 
+      <SectionSpacer id="shared-resources" />
       <ProseBlock title="Shared Resources:" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
       <SubSectionStarter title="Our Shared Toolkit:">
