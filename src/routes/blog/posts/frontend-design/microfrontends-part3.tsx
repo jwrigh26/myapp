@@ -5,7 +5,6 @@ import QuoteBlock from '@/components/QuoteBlock';
 import ReferenceLink from '@/components/ReferenceLink';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
-import CallOutImage from '@/assets/home_page_splash.jpg';
 import type { ProseBlockProps } from '@/components/ProseBlock';
 import Image, {
   AspectRatioContainer,
@@ -17,6 +16,7 @@ import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
 import TechDebt from '@/assets/Slide19.jpeg';
+import HardLessons from '@/assets/Slide21.jpeg';
 import { Spacer, SectionSpacer } from '@/components/Spacer';
 
 export const Route = createFileRoute(
@@ -45,7 +45,7 @@ function RouteComponent() {
         preSubtitle="Micro-Frontends Part 3:"
         subtitle="Lessons Learned"
         imageAlt="Micro-Frontends Part 3"
-        imageSrc={CallOutImage}
+        imageSrc={TechDebt}
       />
       {/* ### Before Micro Frontends */}
       <TitleBlock subtitle="">
@@ -85,6 +85,7 @@ function RouteComponent() {
           wizard are managed by the iframe’s module.
         </ProseBlock>
 
+        <Spacer size={2} />
         <ResponsiveContentImageGrid
           imageOnRight={false}
           mobileImageFirst
@@ -151,11 +152,6 @@ function RouteComponent() {
 
         {/* ### Messaging Improvements*/}
         <SectionSpacer id="messaging-improvements" />
-        <ProseBlock
-          title="Messaging Improvements"
-          subtitle="Lessons From Post-Robot"
-        />
-        <ProseList items={bulletPoints4} />
         <ResponsiveContentImageGrid
           imageOnRight={false}
           // mobileImageFirst
@@ -165,6 +161,11 @@ function RouteComponent() {
           objectFit="cover"
           caption="Post-Robot: reliable messaging between iframes"
         >
+          <ProseBlock
+            title="Messaging Improvements"
+            subtitle="Lessons From Post-Robot"
+          />
+          <ProseList items={bulletPoints4} />
           <ProseBlock>
             Let's talk more about those memory leaks. When we first started
             working with Post-Robot to create our messaging app, we didn't
@@ -195,30 +196,32 @@ function RouteComponent() {
         />
 
         {/* ### Iframe Messaging Gotchas */}
-        <SectionSpacer id="tech-debt" />
+        <SectionSpacer id="hard-lessons" />
         <ResponsiveContentImageGrid
           // imageOnRight={false}
           // mobileImageFirst
-          imageSrc={TechDebt}
+          imageSrc={HardLessons}
           imageAlt="Hard Lessons in Micro-Frontend Development"
           aspectRatio={4 / 3}
           objectFit="cover"
-          caption="Sometimes it's easy to get lost in the weeds of micro-frontend development."
+          caption="Hard Lessons: Are you sure you want to go down this path?"
         >
           <ProseBlock title="Hard Lessons in Micro-Frontend Development" />
           <SubSectionStarter title="Standardize Your Navigation Patterns">
-            Another thing I would standardize is how we route when displaying a
-            hierarchy of dropdown navigation lists in a drawer. We have several
-            apps that use this kind of navigation for settings and admin pages.
-            In each app, we approached it differently, and this has made it
-            challenging to standardize how things are done.
+            One area where we could have been more consistent is how we route
+            dropdown navigation lists in drawers. From settings to admin pages,
+            we use this kind of navigation everywhere. In each app, we
+            approached it differently, and this made it challenging to
+            standardize how things are done.
           </SubSectionStarter>
+
           <SubSectionStarter title="Beware of Over-Engineering">
             In addition to navigation and routing, we also overcomplicated parts
             of our apps by trying to “future-proof” them. This created a lot of
             unused spaghetti code and unnecessary layers that now make very
             little sense.
           </SubSectionStarter>
+
           <ProseBlock>
             One example: in one app, we set up dynamic routing to handle various
             payloads and display different navigation drawers. The code is
@@ -228,6 +231,14 @@ function RouteComponent() {
             your sedan.
           </ProseBlock>
         </ResponsiveContentImageGrid>
+
+        <SubSectionStarter title="Accept That Some Wet Code Is Okay">
+          After over-engineering ourselves into a corner a few times, we learned
+          an important lesson: a little bit of "wet code" is not the end of the
+          world. In a micro-frontend, some messiness is expected. Each team will
+          do things a little differently, no matter how many guardrails you set
+          up along the path to deployment.
+        </SubSectionStarter>
 
         <SubSectionStarter title="The Fallacy of Staying Current">
           The final lesson learned is about what I call the fallacy of staying
@@ -252,13 +263,6 @@ function RouteComponent() {
           those who primarily focus on backend tasks, takes time and effort.
           That's not always ideal for a feature-driven development shop.
         </ProseBlock>
-        <SubSectionStarter title="Accept That Some Wet Code Is Okay">
-          In the same spirit, when trying to stay current and implement best
-          practices, it’s also important to accept that a little bit of "wet
-          code" is tolerable. In a micro-frontend, some messiness is expected.
-          Each team will do things a little differently, no matter how many
-          guardrails you set up along the path to deployment.
-        </SubSectionStarter>
       </BodyBlock>
     </>
   );

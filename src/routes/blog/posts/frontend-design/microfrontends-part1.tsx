@@ -125,14 +125,14 @@ function RouteComponent() {
         </ProseBlock>
       </ResponsiveContentImageGrid>
 
-      <SubSectionStarter title="Core Functions:">
+      <SubSectionStarter title="Core Functions:" spacingBottom>
         In addition to navigation, each host site has a few core
         responsibilities. These include authentication, analytics, and
         communication. By centralizing these functions, each module behaves
         consistently across the application.
       </SubSectionStarter>
 
-      <Box sx={{ m: 2, p: 2, border: '1px solid', borderColor: 'divider' }}>
+      <Box sx={{ p: 2, border: '1px solid', borderColor: 'divider' }}>
         <ProseBlock
           subtitle="Note:"
           options={{ subtitleVariant: 'subtitle2', textVariant: 'body2' }}
