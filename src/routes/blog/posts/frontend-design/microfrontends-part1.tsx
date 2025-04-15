@@ -157,17 +157,37 @@ function RouteComponent() {
         <ProseList items={bulletPoints3} subTitle="Development:" />
 
         <SubSectionStarter
-          title="Modules:"
-          subtitle="Independently Developed UI Components"
+          title="Managing Multiple Dev Stacks"
+          subtitle="Lessons from React, Angular, and Beyond"
         >
-          Each module is built in its own repository—mostly in React, with a
-          couple of legacy Angular modules still around. While having multiple
-          tech stacks can offer flexibility (imagine spinning up a React 19 repo
-          if a business need arises), too much variety can make maintenance
-          tricky. Most of our Angular developers have moved on, so new features
-          are now primarily developed in React, which sometimes creates
-          challenges for our older Angular stacks.
+          We have several large repositories that manage multiple URL entry
+          points. Each entry point represents a page or module that can be
+          loaded into any of our host sites. These repositories primarily use
+          React, but we still maintain a few Angular modules.
         </SubSectionStarter>
+
+        <ProseBlock>
+          The ability to use multiple development stacks is a double-edged
+          sword. On one hand, developers enjoy the freedom to choose their
+          toolsets, which initially feels empowering. On the other hand, this
+          flexibility comes with risks. If developers specializing in a
+          particular stack leave, remaining teams can struggle to maintain the
+          codebase because they may be unfamiliar with that stack.
+        </ProseBlock>
+
+        <ProseBlock>
+          As you can imagine, we've experienced both edges of this sword
+          firsthand. We're primarily a React development shop but do have some
+          Angular projects. However, our legacy Angular projects often don't get
+          the attention they need because most of our Angular developers have
+          moved on from the company.
+        </ProseBlock>
+
+        <ProseBlock>
+          The moral of the story: if you choose to adopt a modular framework
+          that supports multiple development stacks, be prepared to manage both
+          sides of this powerful developer sword.
+        </ProseBlock>
       </ResponsiveContentImageGrid>
 
       <SubSectionStarter
