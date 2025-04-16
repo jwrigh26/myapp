@@ -85,7 +85,7 @@ function RouteComponent() {
           wizard are managed by the iframe’s module.
         </ProseBlock>
 
-        <Spacer size={2} />
+        <Spacer size={2} desktop />
         <ResponsiveContentImageGrid
           imageOnRight={false}
           mobileImageFirst

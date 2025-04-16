@@ -94,24 +94,25 @@ function RouteComponent() {
         <ProseList items={bulletPoints2} subTitle="Host Sites:" />
       </ResponsiveContentImageGrid>
 
+      <SubSectionStarter title="Multiple Host Sites:">
+        We support a handful of different host sites. They serve as the backbone
+        for displaying various front-end modules.
+      </SubSectionStarter>
+
+      <ProseBlock>
+        Each host sitess main role is to handle navigation to ensure users feel
+        like they're visiting one cohesive website rather than multiple separate
+        modules.
+      </ProseBlock>
+
+      <Spacer size={2} desktop />
       <ResponsiveContentImageGrid
         imageSrc={HostSiteImage}
         imageAlt="The Host Sites"
-        imageOnRight={false}
+        imageOnRight={true}
         gap={2}
         aspectRatio={4 / 3}
       >
-        <SubSectionStarter title="Multiple Host Sites:">
-          We support a handful of different host sites. They serve as the
-          backbone for displaying various front-end modules.
-        </SubSectionStarter>
-
-        <ProseBlock>
-          Each host sitess main role is to handle navigation to ensure users
-          feel like they're visiting one cohesive website rather than multiple
-          separate modules.
-        </ProseBlock>
-
         <SubSectionStarter title="Page Management:">
           Each host site typically loads one or more modules inside an iframe
           per page. The goal is to have one iframe per page, but there have been
@@ -123,15 +124,14 @@ function RouteComponent() {
           complexity, we aim for one iframe per page. Every additional iframe
           increases the complexity.
         </ProseBlock>
+
+        <SubSectionStarter title="Core Functions:" spacingBottom>
+          In addition to navigation, each host site has a few core
+          responsibilities. These include authentication, analytics, and
+          communication. By centralizing these functions, each module behaves
+          consistently across the application.
+        </SubSectionStarter>
       </ResponsiveContentImageGrid>
-
-      <SubSectionStarter title="Core Functions:" spacingBottom>
-        In addition to navigation, each host site has a few core
-        responsibilities. These include authentication, analytics, and
-        communication. By centralizing these functions, each module behaves
-        consistently across the application.
-      </SubSectionStarter>
-
       <Box sx={{ p: 2, border: '1px solid', borderColor: 'divider' }}>
         <ProseBlock
           subtitle="Note:"
@@ -146,66 +146,88 @@ function RouteComponent() {
 
       {/* ### Module Development & Versioning */}
       <SectionSpacer id="module-development-and-versioning" />
-      <ResponsiveContentImageGrid
-        imageSrc={ModuleDevImage}
-        imageAlt="Module Development & Versioning"
-        imageOnRight={true}
-        gap={2}
-        aspectRatio={4 / 3}
-      >
-        <ProseBlock title="Module Development & Versioning" />
-        <ProseList items={bulletPoints3} subTitle="Development:" />
-
-        <SubSectionStarter
-          title="Managing Multiple Dev Stacks"
-          subtitle="Lessons from React, Angular, and Beyond"
-        >
-          We have several large repositories that manage multiple URL entry
-          points. Each entry point represents a page or module that can be
-          loaded into any of our host sites. These repositories primarily use
-          React, but we still maintain a few Angular modules.
-        </SubSectionStarter>
-
-        <ProseBlock>
-          The ability to use multiple development stacks is a double-edged
-          sword. On one hand, developers enjoy the freedom to choose their
-          toolsets, which initially feels empowering. On the other hand, this
-          flexibility comes with risks. If developers specializing in a
-          particular stack leave, remaining teams can struggle to maintain the
-          codebase because they may be unfamiliar with that stack.
-        </ProseBlock>
-
-        <ProseBlock>
-          As you can imagine, we've experienced both edges of this sword
-          firsthand. We're primarily a React development shop but do have some
-          Angular projects. However, our legacy Angular projects often don't get
-          the attention they need because most of our Angular developers have
-          moved on from the company.
-        </ProseBlock>
-
-        <ProseBlock>
-          The moral of the story: if you choose to adopt a modular framework
-          that supports multiple development stacks, be prepared to manage both
-          sides of this powerful developer sword.
-        </ProseBlock>
-      </ResponsiveContentImageGrid>
+      <ProseBlock title="Module Development & Versioning" />
+      <ProseList items={bulletPoints3} subTitle="Development:" />
 
       <SubSectionStarter
-        title="Version Drift:"
-        subtitle="Racing Through Versions"
+        title="Managing Multiple Dev Stacks"
+        subtitle="Lessons from React, Angular, and Beyond"
       >
-        We aim for uniform versioning across projects, but practical constraints
-        sometimes lead to drift. There was a time when we had projects running
-        on React 16, 17, and 18 all at once. Today, nearly all our modules are
-        on React 18.2. Despite this fragmentation, deployments haven't been an
-        issue thanks to our independent deployment process. More on that later.
+        We have several large repositories that manage multiple URL entry
+        points. Each entry point represents a page or module that can be loaded
+        into any of our host sites. These repositories primarily use React, but
+        we still maintain a few Angular modules.
       </SubSectionStarter>
 
       <ProseBlock>
-        For now, we've decided to freeze our dev stack. We're happy with our
-        current development patterns and don't see a strong business need to
-        jump to React 19 anytime soon. While SSR has its place, our dynamic SPAs
-        get the job done perfectly. No need to fix what isn't broken, right?
+        The ability to use multiple development stacks is a double-edged sword.
+        On one hand, developers enjoy the freedom to choose their toolsets,
+        which initially feels empowering. On the other hand, this flexibility
+        comes with risks. If developers specializing in a particular stack
+        leave, remaining teams can struggle to maintain the codebase because
+        they may be unfamiliar with that stack.
+      </ProseBlock>
+
+      <ProseBlock>
+        As you can imagine, we've experienced both edges of this sword
+        firsthand. We're primarily a React development shop but do have some
+        Angular projects. However, our legacy Angular projects often don't get
+        the attention they need because most of our Angular developers have
+        moved on from the company.
+      </ProseBlock>
+
+      <ProseBlock>
+        The moral of the story: if you choose to adopt a modular framework that
+        supports multiple development stacks, be prepared to manage both sides
+        of this powerful developer sword.
+      </ProseBlock>
+
+      <Spacer size={2} desktop />
+      <ResponsiveContentImageGrid
+        imageSrc={ModuleDevImage}
+        imageAlt="Module Development & Versioning"
+        imageOnRight={false}
+        gap={2}
+        aspectRatio={4 / 3}
+      >
+        <SubSectionStarter
+          title="Version Drift:"
+          subtitle="Racing Through Versions"
+        >
+          We started building our modular frontend when React was still on
+          version 15. But pretty soon into development, React 16 dropped, and
+          with it came hooks. A lot of our team quickly jumped ship from class
+          components and lifecycle methods to functional components with hooks.
+        </SubSectionStarter>
+
+        <ProseBlock>
+          This was great in many ways. React hooks really made development
+          easier for our developers, but it also spurred a race through React
+          versions. While today we aim for uniform versioning across all
+          projects, that wasn't always the case. At one point, we had projects
+          on React 16, 17, and 18 all running at once. Version drift always
+          happens to some extent, but when the gaps grew too wide, working
+          together got tricky, especially when we tried building shared
+          libraries. That's when library conflicts decided to show their ugly
+          faces and crash our modular frontend party.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
+
+      <ProseBlock>
+        A big reason for this mess was drastic differences in UI libraries. We
+        had to pause shared-library development to sort these conflicts out
+        first. Our initial refactoring estimates were way off, and before we
+        knew it, we were knocking right on refactor hell's door.
+      </ProseBlock>
+
+      <ProseBlock>
+        I'll spare you the drama and just say our team managed to overcome these
+        hurdles. For now, we've decided to freeze our dev stack. We're happy
+        with our current patterns and don't see a strong business need to jump
+        from React 18 to 19 or to switch from dynamic SPAs to SSR. We're totally
+        fine being a little behind the latest and greatest for now. It lets us
+        focus on feature-driven development and keeps our developers trained up
+        on the best practices that matter most for our team.
       </ProseBlock>
 
       {/* ### Shared Resources */}
@@ -325,8 +347,8 @@ const bulletPoints2 = [
 
 // ### Module Development & Versioning
 const bulletPoints3 = [
-  'Developed in separate repositories (Mostly React)',
-  'Aimed for uniform versioning, though practical constraints did lead to some drift',
+  'Separate repos, primarily React (some legacy Angular)',
+  'Rapid React upgrades caused version drift, complicating shared libraries',
 ];
 
 // ### Shared Resources
