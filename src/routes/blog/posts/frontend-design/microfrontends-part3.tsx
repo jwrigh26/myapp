@@ -217,7 +217,7 @@ function RouteComponent() {
 
           <SubSectionStarter title="Beware of Over-Engineering">
             In addition to navigation and routing, we also overcomplicated parts
-            of our apps by trying to “future-proof” them. This created a lot of
+            of our apps by trying to "future-proof" them. This created a lot of
             unused spaghetti code and unnecessary layers that now make very
             little sense.
           </SubSectionStarter>

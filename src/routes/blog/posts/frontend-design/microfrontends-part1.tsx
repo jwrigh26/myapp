@@ -120,7 +120,7 @@ function RouteComponent() {
           instances where several iframes are loaded on a single screen.
         </SubSectionStarter>
         <ProseBlock>
-          Sometimes, we even encounter an “inception” scenario, with an iframe
+          Sometimes, we even encounter an "inception" scenario, with an iframe
           nested within an iframe, and then within yet another iframe. To reduce
           complexity, we aim for one iframe per page. Every additional iframe
           increases the complexity.
@@ -171,15 +171,11 @@ function RouteComponent() {
 
       <ProseBlock>
         As you can imagine, we've experienced both edges of this sword
-        firsthand. We're primarily a React development shop but do have some
-        Angular projects. However, our legacy Angular projects often don't get
-        the attention they need because most of our Angular developers have
-        moved on from the company.
-      </ProseBlock>
-
-      <ProseBlock>
-        The moral of the story: if you choose to adopt a modular framework that
-        supports multiple development stacks, be prepared to manage both sides
+        firsthand. Since we're primarily a React shop, our legacy Angular
+        projects often don't get the attention they need because most of our
+        Angular developers have moved on from the company. So in short, the
+        moreal of the story is that if you adopt a modular frameowkr supporting
+        multiple development stacks, you must be prepared to manage both sides
         of this powerful developer sword.
       </ProseBlock>
 
@@ -348,24 +344,24 @@ function RouteComponent() {
         caption="Deployment Flexibility: Independent repositories and decoupled updates"
         aspectRatio={4 / 3}
       >
-      <SubSectionStarter title="Build Process & DevOps Excellence:">
-        Of course, this modular deployment couldn’t happen without a few other
-        critical actors: our QA team and DevOps engineers. Without their skills
-        and systems in place, our bi‑weekly release cycles, which now take only
-        one to two hours on average, would not be possible. Before we fully
-        integrated into our current module framework, release nights were often
-        postponed due to critical bugs that impacted multiple areas of the
-        application. Those issues and other factors sometimes pushed releases
-        well into the early morning hours.
-      </SubSectionStarter>
+        <SubSectionStarter title="Build Process & DevOps Excellence:">
+          Of course, this modular deployment couldn’t happen without a few other
+          critical actors: our QA team and DevOps engineers. Without their
+          skills and systems in place, our bi‑weekly release cycles, which now
+          take only one to two hours on average, would not be possible. Before
+          we fully integrated into our current module framework, release nights
+          were often postponed due to critical bugs that impacted multiple areas
+          of the application. Those issues and other factors sometimes pushed
+          releases well into the early morning hours.
+        </SubSectionStarter>
 
-      <ProseBlock>
-        The time and investment required to move to our module framework have
-        turned "release night" from a dreaded event into a smooth process. Our
-        build process supports consistent release cycles and quick updates,
-        which means our work-life balance has improved. Module frameworks for
-        the win!
-      </ProseBlock>
+        <ProseBlock>
+          The time and investment required to move to our module framework have
+          turned "release night" from a dreaded event into a smooth process. Our
+          build process supports consistent release cycles and quick updates,
+          which means our work-life balance has improved. Module frameworks for
+          the win!
+        </ProseBlock>
       </ResponsiveContentImageGrid>
     </>
   );
