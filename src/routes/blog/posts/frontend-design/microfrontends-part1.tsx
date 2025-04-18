@@ -12,9 +12,9 @@ import IntroImage from '@/assets/Slide1.jpeg';
 import EnvImage from '@/assets/Slide2.jpeg';
 import HostSiteImage from '@/assets/Slide3.jpeg';
 import ModuleDevImage from '@/assets/Slide4.jpeg';
-import SharedResImage from '@/assets/Slide6.jpeg';
-import ServiceImage from '@/assets/Slide5.jpeg';
-import DeploymentImage from '@/assets/Slide7.jpeg';
+import SharedResImage from '@/assets/Slide-shared-resources.jpeg';
+import SuperModsImage from '@/assets/Slide7.jpeg';
+import DeploymentImage from '@/assets/Slide5.jpeg';
 import Stack from '@mui/material/Stack';
 import Image, {
   AspectRatioContainer,
@@ -112,6 +112,7 @@ function RouteComponent() {
         imageOnRight={true}
         gap={2}
         aspectRatio={4 / 3}
+        caption="Host sites: The backbone of our modular front-end"
       >
         <SubSectionStarter title="Page Management:">
           Each host site typically loads one or more modules inside an iframe
@@ -189,6 +190,7 @@ function RouteComponent() {
         imageOnRight={false}
         gap={2}
         aspectRatio={4 / 3}
+        caption="Module development: Beware of version drift"
       >
         <SubSectionStarter
           title="Version Drift:"
@@ -234,51 +236,92 @@ function RouteComponent() {
       <SectionSpacer id="shared-resources" />
       <ProseBlock title="Shared Resources:" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
-      <SubSectionStarter title="Our Shared Toolkit:">
-        Late in our development process, we realized consistency was crucial, so
-        we began sharing core in-house front-end libraries. Our UI library
-        features shared components like buttons, inputs, and modals, while we
-        also share validation utilities, context providers, theme management,
-        and various utility functions for dates and authentication.
-      </SubSectionStarter>
+
+      <ResponsiveContentImageGrid
+        imageSrc={SharedResImage}
+        imageAlt="Shared Resources"
+        imageOnRight={false}
+        mobileImageFirst={true}
+        gap={2}
+        aspectRatio={4 / 3}
+        caption="Shared resources: UI library, utility methods, and context providers"
+      >
+        <SubSectionStarter title="Our Shared Toolkit:">
+          Once our version drift issues were sorted out, we started building our
+          shared resource library late in the development process. This library
+          focused strictly on things we identified as being valuable. Team
+          buy-in was important too, since we wanted everyone using the shared
+          resources instead of teams going rogue and doing their own thing.
+        </SubSectionStarter>
+
+        <ProseBlock>
+          The library includes a shared UI library for common components,
+          various utility methods, and context providers. This setup helps each
+          team stay consistent in their designs and in how they interact with
+          the host sites.
+        </ProseBlock>
+
+        <ProseBlock>
+          The utility methods are somewhat unique because we only share them in
+          specific areas of development: safety, validation, date handling,
+          messaging, and authentication. This approach simplifies debugging and
+          establishes unified standards around code we deem critical.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
 
       <ProseBlock>
-        These shareable resources only evolved once our module development
-        matured. In micro frontend design, "wet code" is expected—each repo
-        handles its own stuff like API and state management. Rather than forcing
-        dryness everywhere, we evaluate common patterns across teams and add
-        them to our shared library when there's enough overlap.
-      </ProseBlock>
-
-      <ProseBlock>
-        By taking this approach, we streamline development and maintain a
-        consistent, efficient workflow.
+        These shareable resources only emerged after our module development
+        matured. This gave us enough time to spot common patterns across teams
+        and add them to the shared library when there was clear overlap. By
+        taking this approach, we could gradually build out our library and
+        handle small, "bite-size" refactors as part of regular feature
+        development.
       </ProseBlock>
 
       {/* ### Service Integration & Module Autonomy */}
       <SectionSpacer id="service-integration-and-module-autonomy" />
-      <ProseBlock title="Service Integration & Module Autonomy" />
 
-      <ProseList items={bulletPoints6} subTitle="Super Mods:" />
-
-      <SubSectionStarter
-        title="Decoupled Yet Connected"
-        subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
+      <ResponsiveContentImageGrid
+        imageSrc={SuperModsImage}
+        imageAlt="Super Mods: Service Integration & Module Autonomy"
+        imageOnRight={true}
+        gap={2}
+        caption="Super Mods have standalone power"
+        aspectRatio={4 / 3}
       >
-        Each module consumes APIs from various .NET backend services, and
-        they're built to handle multiple integrations seamlessly. We've
-        carefully designed our APIs to update the application state dynamically,
-        ensuring that components lay out smoothly on the page. Plus, some
-        modules even run as standalone applications outside of a host site,
-        providing true autonomy when needed. This balanced approach to service
-        integration and module autonomy keeps our system both flexible and
-        efficient.
-      </SubSectionStarter>
+        <ProseBlock title="Super Mods" />
+
+        <ProseList
+          items={bulletPoints6}
+          subTitle="Service Integration & Module Autonomy"
+        />
+
+        <SubSectionStarter
+          title="Decoupled Yet Connected"
+          subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
+        >
+          We like to think our modules have superpowers. They consume API
+          requests from a host site when it is available, but if it is not, they
+          morph into super modules. These super modules fetch data directly from
+          our .NET backend services on their own. This lets them handle multiple
+          integrations seamlessly, whether as a standalone application or
+          embedded in a third-party platform.
+        </SubSectionStarter>
+      </ResponsiveContentImageGrid>
+      <ProseBlock>
+        But superpowers come at a price. Ensuring our modules run correctly in
+        every environment takes extra work and rigorous testing. You might even
+        say that the freedom to inject modules anywhere is our kryptonite.
+        Sunsetting legacy modules is challenging because we have to track which
+        clients still use each version and plan their migration to newer
+        modules. Still, this balance of service integration and module autonomy
+        keeps our system flexible.
+      </ProseBlock>
 
       {/* ### Deployment Flexibility */}
       <SectionSpacer id="deployment-flexibility" />
       <ProseBlock
-        title="Deployment Flexibility"
+        title="Deployment"
         options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
       />
       <ProseList
@@ -287,20 +330,43 @@ function RouteComponent() {
       />
 
       <SubSectionStarter title="Modular Deployment:">
-        Each module is isolated in its own repository and loaded via iframes,
-        allowing for independent deployment cycles. This means we can update or
-        redeploy a single module without impacting the entire system. Our
-        decoupled approach ensures that everything runs smoothly even when
-        different parts are updated at different times.
+        One of the best things about our modular framework is that each module
+        lives in its own repository. Each module gets its own entry point,
+        loaded via an iframe. This setup enables independent deployment cycles;
+        we can deploy a single module without affecting the rest of the system.
+        This decoupled approach ensures minimal disruption when other modules
+        change. Different parts are updated at different times; everything runs
+        smoothly.
       </SubSectionStarter>
 
-      <SubSectionStarter title="Agile Build Process & DevOps Excellence:">
-        Our streamlined build process supports consistent release cycles and
-        continuous integration, making updates quick and flexible. With an
-        aggressive QA team and top-notch DevOps, we no longer need to deploy
-        everything at once. Instead, our agile process delivers smooth, reliable
-        updates that keep the entire system running efficiently.
+      <Spacer size={2} desktop />
+      <ResponsiveContentImageGrid
+        imageSrc={DeploymentImage}
+        imageAlt="Deployment Flexibility"
+        imageOnRight={true}
+        gap={2}
+        caption="Deployment Flexibility: Independent repositories and decoupled updates"
+        aspectRatio={4 / 3}
+      >
+      <SubSectionStarter title="Build Process & DevOps Excellence:">
+        Of course, this modular deployment couldn’t happen without a few other
+        critical actors: our QA team and DevOps engineers. Without their skills
+        and systems in place, our bi‑weekly release cycles, which now take only
+        one to two hours on average, would not be possible. Before we fully
+        integrated into our current module framework, release nights were often
+        postponed due to critical bugs that impacted multiple areas of the
+        application. Those issues and other factors sometimes pushed releases
+        well into the early morning hours.
       </SubSectionStarter>
+
+      <ProseBlock>
+        The time and investment required to move to our module framework have
+        turned "release night" from a dreaded event into a smooth process. Our
+        build process supports consistent release cycles and quick updates,
+        which means our work-life balance has improved. Module frameworks for
+        the win!
+      </ProseBlock>
+      </ResponsiveContentImageGrid>
     </>
   );
 }
@@ -353,11 +419,9 @@ const bulletPoints3 = [
 
 // ### Shared Resources
 const bulletPoints5 = [
-  'UI library with shared components',
-  'Validation utilities',
-  'Context providers',
-  'Theme management',
-  'Utility functions for dates and authentication',
+  'UI Library with Shared Components',
+  'Utility Methods',
+  'Context Providers',
 ];
 
 // ### Module Autonomy
@@ -368,7 +432,7 @@ const bulletPoints6 = [
 
 // ### Deployment Flexibility
 const bulletPoints7 = [
-  'Inndependent Repositories',
+  'Independent Repositories',
   'Decoupled Updates',
   'Streamlined Build Process',
 ];

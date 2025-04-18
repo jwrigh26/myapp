@@ -40,7 +40,6 @@ export default DisclaimerBlock;
 
 const StyledDisclaimerBlock = styled(Box)<BoxProps>(({ theme }) => ({
   padding: theme.spacing(2),
-  margin: theme.spacing(2),
   backgroundColor: theme.palette.background.default,
   border: `1px solid ${theme.palette.secondary.main}`,
   borderRadius: theme.shape.borderRadius,
