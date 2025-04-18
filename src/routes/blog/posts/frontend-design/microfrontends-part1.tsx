@@ -1,26 +1,23 @@
-import CallToAction from '@/components/CallToAction';
-import DisclaimerBlock from '@/components/DisclaimerBlock';
-import IntroBlock from '@/components/IntroBlock';
-import type { ProseBlockProps } from '@/components/ProseBlock';
-import ProseBlock from '@/components/ProseBlock';
-import ProseList from '@/components/ProseList';
-import Box from '@mui/material/Box';
-import TitleBlock from '@/components/TitleBlock';
-import { createFileRoute } from '@tanstack/react-router';
+import SharedResImage from '@/assets/Slide-shared-resources.jpeg';
 import CallOutImage from '@/assets/Slide0.jpeg';
 import IntroImage from '@/assets/Slide1.jpeg';
 import EnvImage from '@/assets/Slide2.jpeg';
 import HostSiteImage from '@/assets/Slide3.jpeg';
 import ModuleDevImage from '@/assets/Slide4.jpeg';
-import SharedResImage from '@/assets/Slide-shared-resources.jpeg';
-import SuperModsImage from '@/assets/Slide7.jpeg';
 import DeploymentImage from '@/assets/Slide5.jpeg';
-import Stack from '@mui/material/Stack';
-import Image, {
-  AspectRatioContainer,
-  ResponsiveContentImageGrid,
-} from '@/components/Image';
+import SuperModsImage from '@/assets/Slide7.jpeg';
+import CallToAction from '@/components/CallToAction';
+import DisclaimerBlock from '@/components/DisclaimerBlock';
+import { ResponsiveContentImageGrid } from '@/components/Image';
+import IntroBlock from '@/components/IntroBlock';
+import type { ProseBlockProps } from '@/components/ProseBlock';
+import ProseBlock from '@/components/ProseBlock';
+import ProseList from '@/components/ProseList';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
+import TitleBlock from '@/components/TitleBlock';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'

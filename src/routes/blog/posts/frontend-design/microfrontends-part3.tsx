@@ -1,23 +1,20 @@
-import CallToAction from '@/components/CallToAction';
-import ProseBlock from '@/components/ProseBlock';
-import ProseList from '@/components/ProseList';
-import QuoteBlock from '@/components/QuoteBlock';
-import ReferenceLink from '@/components/ReferenceLink';
-import TitleBlock from '@/components/TitleBlock';
-import { createFileRoute } from '@tanstack/react-router';
-import type { ProseBlockProps } from '@/components/ProseBlock';
-import Image, {
-  AspectRatioContainer,
-  ResponsiveContentImageGrid,
-} from '@/components/Image';
-import { BodyBlock } from '@/components/BodyBlock';
 import CoffeeWizard1 from '@/assets/Slide15.jpeg';
 import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
 import TechDebt from '@/assets/Slide19.jpeg';
 import HardLessons from '@/assets/Slide21.jpeg';
-import { Spacer, SectionSpacer } from '@/components/Spacer';
+import { BodyBlock } from '@/components/BodyBlock';
+import CallToAction from '@/components/CallToAction';
+import { ResponsiveContentImageGrid } from '@/components/Image';
+import type { ProseBlockProps } from '@/components/ProseBlock';
+import ProseBlock from '@/components/ProseBlock';
+import ProseList from '@/components/ProseList';
+import QuoteBlock from '@/components/QuoteBlock';
+import ReferenceLink from '@/components/ReferenceLink';
+import { SectionSpacer, Spacer } from '@/components/Spacer';
+import TitleBlock from '@/components/TitleBlock';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part3'
@@ -52,6 +49,8 @@ function RouteComponent() {
         Communication Challenges in a Modular Front-End
       </TitleBlock>
       <BodyBlock>
+        {/* ### Why Communication Matters */}
+        <SectionSpacer id="why-communication-matters" />
         <ResponsiveContentImageGrid
           imageOnRight
           mobileImageFirst
@@ -114,6 +113,7 @@ function RouteComponent() {
             wrapper can add some extra utility and safety checks.
           </ProseBlock>
         </ResponsiveContentImageGrid>
+
         {/* ### Our Current Approach */}
         <SectionSpacer id="our-current-approach" />
         <ProseBlock title="Our Current Approach" />
@@ -123,6 +123,7 @@ function RouteComponent() {
           through a message bus, we can handle tricky iframe communication
           between modules.
         </ProseBlock>
+
         {/* ### Iframe Messaging Gotchas */}
         <SectionSpacer id="iframe-messaging-gotchas" />
         <ProseBlock title="Iframe Messaging Gotchas" />
@@ -154,7 +155,6 @@ function RouteComponent() {
         <SectionSpacer id="messaging-improvements" />
         <ResponsiveContentImageGrid
           imageOnRight={false}
-          // mobileImageFirst
           imageSrc={PostRobot}
           imageAlt="Post Robot"
           aspectRatio={1 / 1}

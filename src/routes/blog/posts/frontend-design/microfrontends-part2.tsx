@@ -1,9 +1,15 @@
+import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
+import SingleSpaImage from '@/assets/SingleSpa.jpg';
+import iframeImage from '@/assets/Slide-iframe.jpg';
+import CallOutImage from '@/assets/Slide8.jpeg';
+import MonolithImage from '@/assets/Slide9.jpeg';
 import CallToAction from '@/components/CallToAction';
+import { ResponsiveContentImageGrid } from '@/components/Image';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
+import { SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
-import CallOutImage from '@/assets/Slide8.jpeg';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -40,21 +46,31 @@ function RouteComponent() {
       </TitleBlock>
       <ProseBlock title="Before Micro Frontends:" />
       <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
+      <ResponsiveContentImageGrid
+        imageSrc={MonolithImage}
+        imageAlt="Monolith Image"
+        imageOnRight={false}
+        objectFit="cover"
+        caption="The Evolution of Frontend Architecture"
+        gap={2}
+        aspectRatio={1 / 1.05}
+      >
+        <ProseBlock>
+          Before micro-frontends, the development landscape was dominated by
+          monoliths and full-stack apps. This eventually gave way to separate
+          frontend and backend applications, which dominated for a time.
+        </ProseBlock>
 
-      <ProseBlock>
-        Before micro-frontends, the development landscape was dominated by
-        monoliths and full-stack apps. This eventually gave way to separate
-        frontend and backend applications, which dominated for a time.
-      </ProseBlock>
-
-      <ProseBlock>
-        I'm not sure exactly when, but microservices came into play along with
-        component-based apps. This architecture is still popular and meets the
-        needs of many applications. However, for large teams and applications,
-        another option exists: micro-frontends.
-      </ProseBlock>
+        <ProseBlock>
+          I'm not sure exactly when, but microservices came into play along with
+          component-based apps. This architecture is still popular and meets the
+          needs of many applications. However, for large teams and applications,
+          another option exists: micro-frontends.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
 
       {/* ### Micro-Frontend Strategies */}
+      <SectionSpacer id="micro-frontend-stragegies" />
       <ProseBlock title="Micro-Frontend Strategies:" />
       <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
 
@@ -79,27 +95,68 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Modern Micro-Frontend libraries */}
-      <ProseBlock title="Modern Micro-Frontend libraries:" />
-      <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
-
-      <ProseBlock title="Module Federation:" />
-      <ProseList items={bulletPointsMf1} subTitle="The Frontend Evolution:" />
+      <SectionSpacer id="module-federation" />
+      <ResponsiveContentImageGrid
+        imageSrc={ModuleFederationImage}
+        imageAlt="Module Federation"
+        imageOnRight={false}
+        objectFit="cover"
+        caption="Module Federation: shines at dynamic, runtime modules"
+        gap={2}
+        aspectRatio={16 / 11}
+      >
+        <ProseBlock title="Module Federation:" />
+        <ProseList items={bulletPointsMf1} subTitle="The Frontend Evolution:" />
+      </ResponsiveContentImageGrid>
       <ProseBlock>
-        Webpack Module Federation enables dynamic sharing and loading of modules
-        across independently deployed apps at runtime. Modules are fetched only
-        when needed, reducing initial load time.
+        Module Federation shines at dynamic, runtime module sharing. You can
+        mark some modules as part of your build (local) and others as
+        runtime-loaded remotes. It even supports nesting—each build becomes its
+        own “container” and can consume modules from other containers. Think of
+        it like an iframe inside an iframe, only without the messy postMessage
+        glue.
       </ProseBlock>
 
       <ProseBlock>
-        This flexibility adds complexity. Managing shared dependencies and
-        avoiding version conflicts requires careful coordination.
+        If you wanted to mirror our iframe framework, you'd use the “separate
+        builds per page” pattern. In that setup, each page in your SPA is a
+        remote container build, and your host site (the shell) is another
+        container build. Each page deploys on its own schedule, just like our
+        iframe modules.
       </ProseBlock>
 
-      <ProseBlock title="Single Spa:" />
-      <ProseList
-        items={bulletPointsSspa1}
-        subTitle="What it Brings to the Game:"
-      />
+      <ProseBlock>
+        The shell build declares common libraries as shared modules, so they
+        aren't duplicated in every page build. That keeps each page's bundle
+        small. Our iframe approach pulls in all packages for each entry point,
+        so we don't get that same savings. On paper that sounds bad, but in
+        production the difference isn't so severe—and you can always use rollup
+        or additional code-splitting to trim bloat.
+      </ProseBlock>
+
+      <ProseBlock>
+        With Module Federation, the shell stays stable while you push updates to
+        remote modules independently. That combination of independent
+        deployments, shared dependencies, and runtime loading is where Module
+        Federation really wins.
+      </ProseBlock>
+
+      <SectionSpacer id="single-spa" />
+      <ResponsiveContentImageGrid
+        imageSrc={SingleSpaImage}
+        imageAlt="Single SPA"
+        imageOnRight={false}
+        objectFit="cover"
+        caption="Single-SPA: coordinates multiple micro-apps on the same page"
+        gap={2}
+        aspectRatio={16 / 11}
+      >
+        <ProseBlock title="Single Spa:" />
+        <ProseList
+          items={bulletPointsSspa1}
+          subTitle="What it Brings to the Game:"
+        />
+      </ResponsiveContentImageGrid>
       <ProseBlock>
         Single-SPA coordinates multiple micro-apps on the same page, even if
         they use different frameworks. It handles routing, mounting, updating,
@@ -111,11 +168,22 @@ function RouteComponent() {
         shared assets can be tricky to manage and add complexity.
       </ProseBlock>
 
-      <ProseBlock title="Iframe-Based Approach:" />
-      <ProseList
-        items={bulletPointsIframe1}
-        subTitle="Simple, Secure, and Scalable:"
-      />
+      <SectionSpacer id="iframe" />
+      <ResponsiveContentImageGrid
+        imageSrc={iframeImage}
+        imageAlt="Iframe"
+        imageOnRight={false}
+        objectFit="cover"
+        caption="Iframe: isolation and independent updates"
+        gap={2}
+        aspectRatio={1 / 0.9}
+      >
+        <ProseBlock title="Iframe-Based Approach:" />
+        <ProseList
+          items={bulletPointsIframe1}
+          subTitle="Simple, Secure, and Scalable:"
+        />
+      </ResponsiveContentImageGrid>
 
       <ProseBlock>
         Iframes provide built-in isolation. Each module runs in its own browser
@@ -204,8 +272,8 @@ const bulletPoints2 = [
 // - Module Federation
 const bulletPointsMf1 = [
   'Dynamic, runtime module sharing',
-  'Supports independent deployments',
-  'Requires careful dependency management',
+  'Supports separate builds per page',
+  'Shared dependencies',
 ];
 // - Single SPA
 const bulletPointsSspa1 = [

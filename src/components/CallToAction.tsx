@@ -1,3 +1,4 @@
+import Image from '@/components/Image';
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -5,7 +6,6 @@ import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Image, { MobileImage } from '@/components/Image';
 
 const CallToActionContainer = styled(Box)(({ theme }) => ({
   display: 'block',
