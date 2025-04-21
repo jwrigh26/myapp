@@ -1,7 +1,7 @@
 import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
 import iframeImage from '@/assets/Slide-iframe.jpg';
-import CallOutImage from '@/assets/Slide8.jpeg';
+import CallOutImage from '@/assets/Slide10.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
 import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
