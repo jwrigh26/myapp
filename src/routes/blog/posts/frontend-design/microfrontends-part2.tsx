@@ -1,5 +1,6 @@
 import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
+import type { ProseBlockProps } from '@/components/ProseBlock';
 import iframeImage from '@/assets/Slide-iframe.jpg';
 import CallOutImage from '@/assets/Slide10.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
@@ -10,6 +11,7 @@ import ProseList from '@/components/ProseList';
 import { SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import ReferenceLink from '@/components/ReferenceLink';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -34,7 +36,7 @@ function RouteComponent() {
     <>
       <CallToAction
         title="Not Quite Micro-Frontends"
-        preSubtitle="Micro-Frontends Part 2:"
+        preSubtitle="Micro-Frontends Part 2"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
         imageSrc={CallOutImage}
@@ -44,17 +46,18 @@ function RouteComponent() {
       <TitleBlock subtitle="Comparing Our Approach to Modern Alternatives">
         Decision Making
       </TitleBlock>
-      <ProseBlock title="Before Micro Frontends:" />
-      <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
       <ResponsiveContentImageGrid
         imageSrc={MonolithImage}
         imageAlt="Monolith Image"
-        imageOnRight={false}
+        imageOnRight={true}
         objectFit="cover"
         caption="The Evolution of Frontend Architecture"
-        gap={2}
+        columns="2fr 1fr"
+        gap={3}
         aspectRatio={1 / 1.05}
       >
+        <ProseBlock title="Before Micro Frontends" />
+        <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
         <ProseBlock>
           Before micro-frontends, the development landscape was dominated by
           monoliths and full-stack apps. This eventually gave way to separate
@@ -71,8 +74,8 @@ function RouteComponent() {
 
       {/* ### Micro-Frontend Strategies */}
       <SectionSpacer id="micro-frontend-stragegies" />
-      <ProseBlock title="Micro-Frontend Strategies:" />
-      <ProseList items={bulletPoints2} subTitle="The Frontend Evolution:" />
+      <ProseBlock title="Micro-Frontend Strategies" />
+      <ProseList items={bulletPoints2} subTitle="Three flavors to choose from:" />
 
       <ProseBlock>
         Micro-frontend strategies offer several ways to structure your
@@ -99,24 +102,24 @@ function RouteComponent() {
       <ResponsiveContentImageGrid
         imageSrc={ModuleFederationImage}
         imageAlt="Module Federation"
-        imageOnRight={false}
+        imageOnRight={true}
         objectFit="cover"
         caption="Module Federation: shines at dynamic, runtime modules"
-        gap={2}
+        columns="2fr 1fr"
+        gap={3}
         aspectRatio={16 / 11}
       >
         <ProseBlock title="Module Federation:" />
-        <ProseList items={bulletPointsMf1} subTitle="The Frontend Evolution:" />
+        <ProseList items={bulletPointsMf1} subTitle="Shiny Happy Modules:" />
+        <ProseBlock>
+          Module Federation shines at dynamic, runtime module sharing. You can
+          mark some modules as part of your build (local) and others as
+          runtime-loaded remotes. It even supports nesting—each build becomes
+          its own "container" and can consume modules from other containers.
+          Think of it like an iframe inside an iframe, only without the messy
+          postMessage glue.
+        </ProseBlock>
       </ResponsiveContentImageGrid>
-      <ProseBlock>
-        Module Federation shines at dynamic, runtime module sharing. You can
-        mark some modules as part of your build (local) and others as
-        runtime-loaded remotes. It even supports nesting—each build becomes its
-        own “container” and can consume modules from other containers. Think of
-        it like an iframe inside an iframe, only without the messy postMessage
-        glue.
-      </ProseBlock>
-
       <ProseBlock>
         If you wanted to mirror our iframe framework, you'd use the “separate
         builds per page” pattern. In that setup, each page in your SPA is a
@@ -141,6 +144,22 @@ function RouteComponent() {
         Federation really wins.
       </ProseBlock>
 
+      <ProseBlock>
+        There are two main drawbacks to using Module Federation for your
+        micro-frontend architecture. First, it locks you into Webpack for
+        building all your applications. If you love Webpack, that's fine, but
+        you lose the freedom to choose alternatives like Vite or Rollup for
+        performance or simplicity reasons.
+      </ProseBlock>
+
+      <ProseBlock>
+        Second, it constrains your development stacks. As I mentioned earlier,
+        supporting multiple frameworks can be a double-edged sword. If any of
+        your apps are legacy and you want to include them without a full
+        rewrite, Module Federation may become a deal-breaker. You will need to
+        ultimately decide if the trade-offs are worth it.
+      </ProseBlock>
+
       <SectionSpacer id="single-spa" />
       <ResponsiveContentImageGrid
         imageSrc={SingleSpaImage}
@@ -148,37 +167,99 @@ function RouteComponent() {
         imageOnRight={false}
         objectFit="cover"
         caption="Single-SPA: coordinates multiple micro-apps on the same page"
+        columns="1fr 2fr"
         gap={2}
         aspectRatio={16 / 11}
       >
-        <ProseBlock title="Single Spa:" />
+        <ProseBlock title="Single Spa" />
         <ProseList
           items={bulletPointsSspa1}
           subTitle="What it Brings to the Game:"
         />
       </ResponsiveContentImageGrid>
       <ProseBlock>
-        Single-SPA coordinates multiple micro-apps on the same page, even if
-        they use different frameworks. It handles routing, mounting, updating,
-        and unmounting to ensure each app runs smoothly alongside the others.
+        Single-Spa is currently the most popular micro-frontend solution, and
+        for good reason. It avoids iframes by hosting multiple JavaScript
+        frameworks together so your micro-frontends work seamlessly. I don't
+        believe Single-Spa is for the faint of heart. Building a "Hello, world"
+        demo or an initial proof of concept is doable, but complexity grows
+        quickly. They even offer classes and tutorials because integrating it
+        properly takes careful planning.
       </ProseBlock>
 
       <ProseBlock>
-        This flexibility comes with trade-offs. CSS scoping, global state, and
-        shared assets can be tricky to manage and add complexity.
+        At a high level, Single-Spa drives the entire application lifecycle. You
+        create a root configuration file that renders the main HTML page and
+        registers each micro-frontend.
       </ProseBlock>
+      <ProseBlock>
+        Each micro-frontend must know how to bootstrap, mount, and unmount
+        itself from the DOM. That sounds like a regular SPA, but here you must
+        coordinate multiple SPAs on the same page—none of them have their own
+        standalone index.html.
+      </ProseBlock>
+      <ProseBlock>
+        Perhaps the biggest hurdle is migrating an existing SPA into Single-Spa.
+        Two challenges stand out:
+        <ol>
+          <li>
+            Implementing the unmount lifecycle. Most SPAs aren't designed to go
+            dormant and remove themselves from the DOM. Single-Spa provides
+            helpers, but you still need to refactor and plan carefully.
+          </li>{' '}
+          <li>
+            Managing dependencies. CSS and font conflicts are common because
+            traditional SPAs rely on a single index.html. Single-Spa advises
+            bundling as much as possible into your JavaScript bundles. If you
+            must load globals in your root config, be prepared for potential CSS
+            clashes.
+          </li>
+        </ol>
+      </ProseBlock>
+
+      <SubSectionStarter title="Getting Started">
+        Here is a high-level overview of how to  get started and set up a Single-Spa app:
+        <ul>
+          <li>
+            Choose your loader—Single-Spa suggests SystemJS, but you can use
+            alternatives, even Module Federation.
+          </li>
+          <li>Preload shared libraries to speed up performance.</li>
+          <li>
+            Share code and functions via import/exports, just like in a
+            monolith.
+          </li>
+          <li>
+            Apply lazy loading wherever possible to minimize initial load time.
+          </li>
+          <li>
+            Create an import map that routes application URLs to your local
+            environment.
+          </li>
+        </ul>
+      </SubSectionStarter>
+      <ProseBlock>
+        If you decide on Single-Spa, you'll need to tackle each of those areas
+        in depth.
+      </ProseBlock>
+      <ReferenceLink
+        url="https://single-spa.js.org/docs/recommended-setup"
+        linkText="https://single-spa.js.org/docs/recommended-setup"
+        text="Visit the recommended setup guide (https://single-spa.js.org/docs/recommended-setup) for full details."
+      />
 
       <SectionSpacer id="iframe" />
       <ResponsiveContentImageGrid
         imageSrc={iframeImage}
         imageAlt="Iframe"
-        imageOnRight={false}
+        imageOnRight={true}
         objectFit="cover"
         caption="Iframe: isolation and independent updates"
-        gap={2}
+        columns="2fr 1fr"
+        gap={3}
         aspectRatio={1 / 0.9}
       >
-        <ProseBlock title="Iframe-Based Approach:" />
+        <ProseBlock title="Iframe-Based Approach" />
         <ProseList
           items={bulletPointsIframe1}
           subTitle="Simple, Secure, and Scalable:"
@@ -200,15 +281,15 @@ function RouteComponent() {
 
       {/* ### Pros and Cons */}
       {/* TODO: Come back and style this better */}
-      <ProseBlock title="Pros and Cons:" />
+      <ProseBlock title="Pros and Cons" />
       <ProseBlock
-        title="Modern Micro-Frontend Frameworks (Webpack Module Federation, Single-SPA):"
+        title="Modern Micro-Frontend Frameworks (Webpack Module Federation, Single-SPA)"
         options={{ titleVariant: 'h5' }}
       />
       <ProseList items={bulletPointsMFLPros} subTitle="Pros" />
       <ProseList items={bulletPointsMFLCons} subTitle="Cons" />
       <ProseBlock
-        title="Our Iframe-Based Approach:"
+        title="Our Iframe-Based Approach"
         options={{ titleVariant: 'h5' }}
       />
       <ProseList items={bulletPointsIframePros} subTitle="Pros" />
@@ -227,10 +308,10 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Rationale Behind Our Choice */}
-      <ProseBlock title="Rationale Behind Our Choice:" />
+      <ProseBlock title="Rationale Behind Our Choice" />
       <ProseList
         items={bulletPointsRationale}
-        subTitle="Our Decision Factors"
+        subTitle="Our Decision Factors:"
       />
       <ProseBlock>
         When we first designed the system, tools like Single-SPA and Webpack
@@ -253,6 +334,26 @@ function RouteComponent() {
 // #################################################
 // ### Usuable Components
 // #################################################
+
+function SubSectionStarter({
+  children,
+  title,
+  subtitle,
+  dense = false,
+  spacingBottom = false,
+}: ProseBlockProps) {
+  return (
+    <ProseBlock
+      title={title}
+      subtitle={subtitle}
+      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
+      dense={dense}
+      spacingBottom={spacingBottom}
+    >
+      {children}
+    </ProseBlock>
+  );
+}
 
 // ### bullet points
 const bulletPoints1 = [
@@ -277,10 +378,13 @@ const bulletPointsMf1 = [
 ];
 // - Single SPA
 const bulletPointsSspa1 = [
-  'Coordinates multiple micro-applications on one page',
-  'Handles routing and lifecycle events',
-  'Complex setup (CSS, global state, etc.)',
+  'Use multiple frameworks on the same page without full reloads',
+  'Adopt new frameworks without rewriting your entire application',
+  'Lazy-load code for faster initial page loads',
+  'Independent deployments',
+  'No iframes',
 ];
+
 // - iFrames
 const bulletPointsIframe1 = [
   'Isolation: Each module runs in its own browser context',

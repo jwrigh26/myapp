@@ -91,7 +91,7 @@ function RouteComponent() {
         <ProseList items={bulletPoints2} subTitle="Host Sites:" />
       </ResponsiveContentImageGrid>
 
-      <SubSectionStarter title="Multiple Host Sites:">
+      <SubSectionStarter title="Multiple Host Sites">
         We support a handful of different host sites. They serve as the backbone
         for displaying various front-end modules.
       </SubSectionStarter>
@@ -111,7 +111,7 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Host sites: The backbone of our modular front-end"
       >
-        <SubSectionStarter title="Page Management:">
+        <SubSectionStarter title="Page Management">
           Each host site typically loads one or more modules inside an iframe
           per page. The goal is to have one iframe per page, but there have been
           instances where several iframes are loaded on a single screen.
@@ -123,7 +123,7 @@ function RouteComponent() {
           increases the complexity.
         </ProseBlock>
 
-        <SubSectionStarter title="Core Functions:" spacingBottom>
+        <SubSectionStarter title="Core Functions" spacingBottom>
           In addition to navigation, each host site has a few core
           responsibilities. These include authentication, analytics, and
           communication. By centralizing these functions, each module behaves
@@ -186,7 +186,7 @@ function RouteComponent() {
         caption="Module development: Beware of version drift"
       >
         <SubSectionStarter
-          title="Version Drift:"
+          title="Version Drift"
           subtitle="Racing Through Versions"
         >
           We started building our modular frontend when React was still on
@@ -227,7 +227,7 @@ function RouteComponent() {
 
       {/* ### Shared Resources */}
       <SectionSpacer id="shared-resources" />
-      <ProseBlock title="Shared Resources:" />
+      <ProseBlock title="Shared Resources" />
       <ProseList items={bulletPoints5} subTitle="Libraries:" />
 
       <ResponsiveContentImageGrid
@@ -239,7 +239,7 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Shared resources: UI library, utility methods, and context providers"
       >
-        <SubSectionStarter title="Our Shared Toolkit:">
+        <SubSectionStarter title="Our Shared Toolkit">
           Once our version drift issues were sorted out, we started building our
           shared resource library late in the development process. This library
           focused strictly on things we identified as being valuable. Team
@@ -286,12 +286,12 @@ function RouteComponent() {
 
         <ProseList
           items={bulletPoints6}
-          subTitle="Service Integration & Module Autonomy"
+          subTitle="Service Integration & Module Autonomy:"
         />
 
         <SubSectionStarter
           title="Decoupled Yet Connected"
-          subtitle="While modules operate autonomously, they're still tightly integrated through our APIs."
+          subtitle="While modules operate autonomously, they're still tightly integrated through our APIs"
         >
           We like to think our modules have superpowers. They consume API
           requests from a host site when it is available, but if it is not, they
@@ -341,10 +341,10 @@ function RouteComponent() {
         caption="Deployment Flexibility: Independent repositories and decoupled updates"
         aspectRatio={4 / 3}
       >
-        <SubSectionStarter title="Build Process & DevOps Excellence:">
-          Of course, this modular deployment couldn’t happen without a few other
+        <SubSectionStarter title="Build Process & DevOps Excellence">
+          Of course, this modular deployment couldn't happen without a few other
           critical actors: our QA team and DevOps engineers. Without their
-          skills and systems in place, our bi‑weekly release cycles, which now
+          skills and systems in place, our bi-weekly release cycles, which now
           take only one to two hours on average, would not be possible. Before
           we fully integrated into our current module framework, release nights
           were often postponed due to critical bugs that impacted multiple areas

@@ -127,17 +127,18 @@ const StyledBlock = styled(Box, {
     ...paddingStyles,
     ...gutterBottomStyles,
     '& ul, & ol': {
-      // This will target both unordered and ordered lists
-      margin: 0,
-      paddingLeft: theme.spacing(2),
+      marginTop: theme.spacing(1),
+      marginBottom: 0,
+      paddingLeft: theme.spacing(3),
       '& li': {
-        // This will target list items
-        color: theme.palette.text.primary,
         marginBottom: theme.spacing(1),
+        color: theme.palette.text.secondary,
+        '&::marker': {
+          color: theme.palette.primary.main,
+        },
       },
     },
     '& span.code': {
-      // Updated style for code spans
       backgroundColor:
         theme.palette.mode === 'light'
           ? theme.palette.grey[200]

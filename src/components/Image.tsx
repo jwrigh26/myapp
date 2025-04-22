@@ -200,19 +200,20 @@ export const AspectRatioContainer = styled(Box, {
 
 export const ContentImageGrid = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['imageOnRight', 'gap'].includes(prop as string),
+    !['imageOnRight', 'gap', 'columns'].includes(prop as string),
 })<{
   imageOnRight?: boolean;
   gap?: number | string;
-}>(({ theme, imageOnRight = true, gap = 2 }) => ({
+  columns?: string; // Customizable gridTemplateColumns for desktop
+}>(({ theme, imageOnRight = true, gap = 2, columns = '1fr 1fr' }) => ({
   display: 'grid',
-  gridTemplateColumns: '1fr',
+  gridTemplateColumns: '1fr', // Default for mobile
   gridTemplateRows: 'auto auto',
   gap: theme.spacing(gap),
   width: '100%',
 
   [theme.breakpoints.up('md')]: {
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: columns, // Customizable for desktop
     gridTemplateRows: '1fr',
     alignItems: 'flex-start',
   },
@@ -269,6 +270,7 @@ export const GridImage = styled(Box, {
 interface ContentImageGridProps {
   imageOnRight?: boolean;
   gap?: number | string;
+  columns?: string; // Customizable gridTemplateColumns for desktop
   imageSrc: string;
   imageAlt: string;
   children: React.ReactNode;
@@ -287,12 +289,13 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
   aspectRatio = 4 / 3,
   objectFit = 'cover',
   caption,
+  columns = '1fr 1fr', // Default desktop columns
   mobileImageFirst = false, // New prop for mobile-first image order
 }) => {
   const theme = useTheme();
 
   return (
-    <ContentImageGrid imageOnRight={imageOnRight} gap={gap}>
+    <ContentImageGrid imageOnRight={imageOnRight} gap={gap} columns={columns}>
       <GridContent
         imageOnRight={imageOnRight}
         mobileImageFirst={mobileImageFirst}
