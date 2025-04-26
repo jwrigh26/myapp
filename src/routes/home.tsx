@@ -6,8 +6,17 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, styled, useTheme } from '@mui/system';
 import { createFileRoute } from '@tanstack/react-router';
+import { Link as RouterLink } from '@tanstack/react-router';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Link from '@mui/material/Link';
 
 import splashImage from '@/assets/home_page_splash.jpg';
+import CallOutImage from '@/assets/Slide0.jpeg';
+import CallOutImage2 from '@/assets/Slide10.jpeg';
+import TechDebt from '@/assets/Slide19.jpeg';
 
 export const Route = createFileRoute('/home')({
   component: HomeComponent,
@@ -36,7 +45,72 @@ function HomeComponent() {
           </AspectRatioContainer>
         </HeroBackground>
       </HeroSection>
-      {/* <CodeBlock code={codeBlock} language="python" /> */}
+
+      {/* Latest Blog Posts Section */}
+      <Box sx={{ mt: 2, mb: 4, px: 2 }}>
+        <Typography variant="h3" sx={{ mb: 3, fontWeight: 700 }}>
+          Latest Blog Posts
+        </Typography>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          gap={3}
+          spacing={2}
+          alignItems="stretch"
+          justifyContent={{ xs: 'center', md: 'space-around' }}
+        >
+          {latestBlogPosts.map((post) => (
+            <Card
+              key={post.route}
+              sx={{
+                flex: 1,
+                minWidth: 260,
+                maxWidth: { xs: '100%', md: 400 },
+                minHeight: '380px',
+                display: 'flex',
+                flexDirection: 'column',
+                boxShadow: 3,
+                width: { xs: '100%', md: 'auto' }, // Make cards full width on mobile
+                alignSelf: { xs: 'stretch', md: 'flex-start' }, // Ensure stretch on mobile
+              }}
+            >
+              <CardActionArea
+                component={RouterLink}
+                to={post.route}
+                sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+              >
+                <CardMedia
+                  component="img"
+                  image={post.image}
+                  alt={post.title}
+                  sx={{
+                    height: 180,
+                    objectFit: 'cover',
+                  }}
+                />
+                <CardContent sx={{ flex: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                    {post.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {post.blurb}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <Box sx={{ px: 2, pb: 2 }}>
+                <Link
+                  component={RouterLink}
+                  to={post.route}
+                  underline="hover"
+                  color="primary"
+                  sx={{ fontWeight: 600 }}
+                >
+                  Read more &rarr;
+                </Link>
+              </Box>
+            </Card>
+          ))}
+        </Stack>
+      </Box>
     </PageLayout>
   );
 }
@@ -222,3 +296,28 @@ const Statement3 = styled(SupportingStatement)(({ theme }) => ({
     alignSelf: 'flex-end',
   },
 }));
+
+// Hardcoded latest blog posts
+const latestBlogPosts = [
+  {
+    title: 'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+    blurb:
+      'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
+    image: CallOutImage,
+    route: '/blog/posts/frontend-design/microfrontends-part1',
+  },
+  {
+    title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+    blurb:
+      'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+    image: CallOutImage2,
+    route: '/blog/posts/frontend-design/microfrontends-part2',
+  },
+  {
+    title: 'Micro-Frontends Part 3: Lessons Learned',
+    blurb:
+      'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
+    image: TechDebt,
+    route: '/blog/posts/frontend-design/microfrontends-part3',
+  },
+];
