@@ -29,7 +29,7 @@ export const Route = createFileRoute(
       {
         name: 'Micro-Frontends Part 1',
         content:
-          'Note QUite Micro-Frontends: How we built a modular front-end that scales',
+          'Not Quite Micro-Frontends: How we built a modular front-end that scales',
       },
       {
         title: 'Micro-Frontends Part 1',
@@ -67,10 +67,10 @@ function RouteComponent() {
         aspectRatio={4 / 3}
       >
         <Stack gap={2}>
-          <ProseList items={bulletPoints1} subTitle="The Backstory:" />
+          <ProseList items={bulletPoints1} subTitle="The Backstory" />
         </Stack>
       </ResponsiveContentImageGrid>
-      <DisclaimerBlock title="Disclaimer:">
+      <DisclaimerBlock title="Disclaimer">
         Our design choices fit our development needs, but they may not be right
         for you—and that's okay. Every application is different, and there's
         rarely a one-size-fits-all approach. My goal is to share insights,
@@ -88,7 +88,7 @@ function RouteComponent() {
         aspectRatio={16 / 9}
       >
         <ProseBlock title="The Environment and Requirements" />
-        <ProseList items={bulletPoints2} subTitle="Host Sites:" />
+        <ProseList items={bulletPoints2} subTitle="Host Sites" />
       </ResponsiveContentImageGrid>
 
       <SubSectionStarter title="Multiple Host Sites">
@@ -130,7 +130,7 @@ function RouteComponent() {
           consistently across the application.
         </SubSectionStarter>
       </ResponsiveContentImageGrid>
-      <Box sx={{ p: 2, border: '1px solid', borderColor: 'divider' }}>
+      <Box sx={{ p: 2, border: '2px solid', borderColor: 'divider' }}>
         <ProseBlock
           subtitle="Note:"
           options={{ subtitleVariant: 'subtitle2', textVariant: 'body2' }}
@@ -145,7 +145,7 @@ function RouteComponent() {
       {/* ### Module Development & Versioning */}
       <SectionSpacer id="module-development-and-versioning" />
       <ProseBlock title="Module Development & Versioning" />
-      <ProseList items={bulletPoints3} subTitle="Development:" />
+      <ProseList items={bulletPoints3} subTitle="Development" />
 
       <SubSectionStarter
         title="Managing Multiple Dev Stacks"
@@ -228,7 +228,7 @@ function RouteComponent() {
       {/* ### Shared Resources */}
       <SectionSpacer id="shared-resources" />
       <ProseBlock title="Shared Resources" />
-      <ProseList items={bulletPoints5} subTitle="Libraries:" />
+      <ProseList items={bulletPoints5} subTitle="Libraries" />
 
       <ResponsiveContentImageGrid
         imageSrc={SharedResImage}
@@ -286,7 +286,7 @@ function RouteComponent() {
 
         <ProseList
           items={bulletPoints6}
-          subTitle="Service Integration & Module Autonomy:"
+          subTitle="Service Integration & Module Autonomy"
         />
 
         <SubSectionStarter
@@ -315,14 +315,15 @@ function RouteComponent() {
       <SectionSpacer id="deployment-flexibility" />
       <ProseBlock
         title="Deployment"
+        subtitle='Super easy, barely an inconvenience'
         options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
       />
       <ProseList
         items={bulletPoints7}
-        subTitle="Super easy, barely an inconvenience"
+        subTitle="Key Benefits"
       />
 
-      <SubSectionStarter title="Modular Deployment:">
+      <SubSectionStarter title="Modular Deployment">
         One of the best things about our modular framework is that each module
         lives in its own repository. Each module gets its own entry point,
         loaded via an iframe. This setup enables independent deployment cycles;

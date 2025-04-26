@@ -22,6 +22,8 @@ interface ProseListProps {
   };
   indentLevel?: number;
   subTitle?: string;
+  /** Color for the list items. */
+  color?: string;
 }
 
 function ProseList({
@@ -32,6 +34,7 @@ function ProseList({
   indentLevel = 1,
   options = {},
   subTitle,
+  color = 'primary.main',
 }: ProseListProps): JSX.Element {
   const {
     itemVariant = 'body1',
@@ -45,9 +48,9 @@ function ProseList({
         <Typography
           variant="h6"
           component="h6"
-          color="textPrimary"
+          color={color}
           gutterBottom={false}
-          sx={{ ml: 0, color: 'primary.main' }}
+          sx={{ ml: 0 }}
         >
           {subTitle}
         </Typography>
@@ -58,6 +61,7 @@ function ProseList({
         ordered={ordered}
         component={listComponent}
         indentLevel={indentLevel}
+        color={color}
       >
         {items.map((item, index) => (
           <Typography
@@ -81,39 +85,47 @@ interface StyledListProps extends BoxProps {
   spacingBottom?: boolean;
   ordered: boolean;
   indentLevel?: number;
+  color?: string;
 }
+
+const getPaletteColor = (theme: any, color: string) => {
+  // Only handle palette colors in the form "primary.main"
+  const [section, shade] = color.split('.');
+  if (
+    section &&
+    shade &&
+    theme.palette[section] &&
+    theme.palette[section][shade]
+  ) {
+    return theme.palette[section][shade];
+  }
+  // Fallback to the color string itself (e.g. "#123456" or "red")
+  return color;
+};
 
 const StyledList = styled(Box, {
   shouldForwardProp: (prop) =>
     prop !== 'dense' &&
     prop !== 'spacingBottom' &&
     prop !== 'ordered' &&
-    prop !== 'indentLevel',
+    prop !== 'indentLevel' &&
+    prop !== 'color',
 })<StyledListProps>(({
   theme,
   dense = false,
   spacingBottom,
   ordered,
   indentLevel = 1,
+  color = 'primary.main',
 }) => {
-  // const paddingStyles = dense
-  //   ? { padding: theme.spacing(0, 2), paddingBottom: theme.spacing(2) }
-  //   : { padding: theme.spacing(2, 2) };
-
-  // const spacingBottomStyles = spacingBottom
-  //   ? { paddingBottom: theme.spacing(2) }
-  //   : {};
-
   return {
     margin: 0,
     paddingLeft: theme.spacing(1 + indentLevel * 2),
-    // ...paddingStyles,
-    // ...spacingBottomStyles,
     listStyleType: ordered ? 'decimal' : 'disc',
     '& li': {
       marginBottom: theme.spacing(1),
       '&: :marker': {
-        color: theme.palette.primary.main,
+        color: getPaletteColor(theme, color),
       },
     },
   };

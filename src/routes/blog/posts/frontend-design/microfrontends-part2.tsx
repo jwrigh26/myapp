@@ -1,4 +1,6 @@
 import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
 import type { ProseBlockProps } from '@/components/ProseBlock';
 import iframeImage from '@/assets/Slide-iframe.jpg';
@@ -36,7 +38,7 @@ function RouteComponent() {
     <>
       <CallToAction
         title="Not Quite Micro-Frontends"
-        preSubtitle="Micro-Frontends Part 2"
+        preSubtitle="Micro-Frontends Part 2:"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
         imageSrc={CallOutImage}
@@ -57,7 +59,7 @@ function RouteComponent() {
         aspectRatio={1 / 1.05}
       >
         <ProseBlock title="Before Micro Frontends" />
-        <ProseList items={bulletPoints1} subTitle="The Frontend Evolution:" />
+        <ProseList items={bulletPoints1} subTitle="The Frontend Evolution" />
         <ProseBlock>
           Before micro-frontends, the development landscape was dominated by
           monoliths and full-stack apps. This eventually gave way to separate
@@ -75,7 +77,10 @@ function RouteComponent() {
       {/* ### Micro-Frontend Strategies */}
       <SectionSpacer id="micro-frontend-stragegies" />
       <ProseBlock title="Micro-Frontend Strategies" />
-      <ProseList items={bulletPoints2} subTitle="Three flavors to choose from:" />
+      <ProseList
+        items={bulletPoints2}
+        subTitle="Three flavors to choose from"
+      />
 
       <ProseBlock>
         Micro-frontend strategies offer several ways to structure your
@@ -109,8 +114,8 @@ function RouteComponent() {
         gap={3}
         aspectRatio={16 / 11}
       >
-        <ProseBlock title="Module Federation:" />
-        <ProseList items={bulletPointsMf1} subTitle="Shiny Happy Modules:" />
+        <ProseBlock title="Module Federation" />
+        <ProseList items={bulletPointsMf1} subTitle="Shiny Happy Modules" />
         <ProseBlock>
           Module Federation shines at dynamic, runtime module sharing. You can
           mark some modules as part of your build (local) and others as
@@ -174,7 +179,7 @@ function RouteComponent() {
         <ProseBlock title="Single Spa" />
         <ProseList
           items={bulletPointsSspa1}
-          subTitle="What it Brings to the Game:"
+          subTitle="What it Brings to the Game"
         />
       </ResponsiveContentImageGrid>
       <ProseBlock>
@@ -218,10 +223,10 @@ function RouteComponent() {
       </ProseBlock>
 
       <SubSectionStarter title="Getting Started">
-        Here is a high-level overview of how to  get started and set up a Single-Spa app:
+        A high-level overview of how to get started with Single-Spa:
         <ul>
           <li>
-            Choose your loader—Single-Spa suggests SystemJS, but you can use
+            Choose your loader. Single-Spa suggests SystemJS, but you can use
             alternatives, even Module Federation.
           </li>
           <li>Preload shared libraries to speed up performance.</li>
@@ -244,8 +249,8 @@ function RouteComponent() {
       </ProseBlock>
       <ReferenceLink
         url="https://single-spa.js.org/docs/recommended-setup"
-        linkText="https://single-spa.js.org/docs/recommended-setup"
-        text="Visit the recommended setup guide (https://single-spa.js.org/docs/recommended-setup) for full details."
+        linkText="Visit the recommended setup guide for full details."
+        text="Visit the recommended setup guide for full details."
       />
 
       <SectionSpacer id="iframe" />
@@ -262,56 +267,57 @@ function RouteComponent() {
         <ProseBlock title="Iframe-Based Approach" />
         <ProseList
           items={bulletPointsIframe1}
-          subTitle="Simple, Secure, and Scalable:"
+          subTitle="Simple, Secure, and Scalable"
         />
       </ResponsiveContentImageGrid>
 
       <ProseBlock>
-        Iframes provide built-in isolation. Each module runs in its own browser
-        context, keeping JavaScript, CSS, and the DOM separate. This prevents
-        conflicts and protects global state. Sandboxing also improves security
-        by restricting iframe access.
+        Coming back to where we started, iframes remain a viable option in the
+        micro-frontend landscape. They lack some of the bells and whistles you
+        get with, say, Single-Spa, and they aren't as efficient at tree shaking
+        because each iframe runs its own browser context. At the same time, they
+        can be easier to manage. Each iframe provides true isolation, making it
+        ideal for embedding in third-party applications. That isolation,
+        combined with the ability to update modules independently with minimal
+        code changes, offers two big advantages.
       </ProseBlock>
 
       <ProseBlock>
-        This isolation simplifies deployment. Modules can be updated
-        independently, enabling efficient caching and faster rollouts. If one
-        module fails or runs slowly, the rest of the app remains unaffected.
+        They do seem a bit “dated” compared to newer approaches. Building your
+        own messaging layer and accommodating iframe quirks isn't always the
+        smoothest path when developing web apps. Despite these downsides, an
+        iframe approach lets you avoid lock-in to a third-party micro-frontend
+        framework.
+      </ProseBlock>
+
+      <ProseBlock>
+        For example, Module Federation requires you to adopt its own
+        requirements and dependencies, and your project must operate within its
+        constraints. That may not matter for most teams, but I've seen
+        developers struggle to update package libraries and simply make things
+        work. If you roll your own micro-frontend solution, you'll still face
+        challenges, but you maintain full control over your domain and enjoy
+        more freedom to evolve your application without being confined by
+        someone else's tooling choices.
       </ProseBlock>
 
       {/* ### Pros and Cons */}
       {/* TODO: Come back and style this better */}
+      <SectionSpacer id="pros-and-cons" />
       <ProseBlock title="Pros and Cons" />
-      <ProseBlock
-        title="Modern Micro-Frontend Frameworks (Webpack Module Federation, Single-SPA)"
-        options={{ titleVariant: 'h5' }}
-      />
-      <ProseList items={bulletPointsMFLPros} subTitle="Pros" />
-      <ProseList items={bulletPointsMFLCons} subTitle="Cons" />
-      <ProseBlock
-        title="Our Iframe-Based Approach"
-        options={{ titleVariant: 'h5' }}
-      />
-      <ProseList items={bulletPointsIframePros} subTitle="Pros" />
-      <ProseList items={bulletPointsIframeCons} subTitle="Cons" />
-      <ProseBlock>
-        Modern micro-frontend frameworks like Webpack Module Federation and
-        Single-SPA offer powerful dynamic integration and support multiple
-        frameworks. However, they add complexity due to tricky dependency
-        management, larger bundles, and tighter team coordination, all of which
-        can slow things down.
-      </ProseBlock>
-      <ProseBlock>
-        Our iframe-based approach prioritizes stability, security, and
-        simplicity. While less dynamic, it gives us reliable fault isolation,
-        easy deployments, and lower maintenance.
-      </ProseBlock>
+      <SubSectionStarter title="Module Federation" />
+      <ProsConsList pros={bulletPointsMFLPros} cons={bulletPointsMFLCons} />
+      <SubSectionStarter title="Single-Spa" />
+      <ProsConsList pros={bulletPointsSingleSpaPros} cons={bulletPointsSingleSpaCons} />
+      <SubSectionStarter title="iFrame" />
+      <ProsConsList pros={bulletPointsIframePros} cons={bulletPointsIframeCons} />
 
       {/* ### Rationale Behind Our Choice */}
+      <SectionSpacer id="rantionale-behinde-our-choice" />
       <ProseBlock title="Rationale Behind Our Choice" />
       <ProseList
         items={bulletPointsRationale}
-        subTitle="Our Decision Factors:"
+        subTitle="Our Decision Factors"
       />
       <ProseBlock>
         When we first designed the system, tools like Single-SPA and Webpack
@@ -355,6 +361,34 @@ function SubSectionStarter({
   );
 }
 
+// New ProsConsList component
+function ProsConsList({
+  pros,
+  cons,
+  prosColor = 'primary.light',
+  consColor = 'secondary.main',
+}: {
+  pros: string[];
+  cons: string[];
+  prosColor?: string;
+  consColor?: string;
+}) {
+  return (
+    <Stack
+      sx={{ border: '2px solid', borderColor: 'divider', p: 2, mb: 2 }}
+      direction={{ xs: 'column', sm: 'row' }}
+      gap={4}
+    >
+      <Box>
+        <ProseList color={prosColor} items={pros} subTitle="Pros" />
+      </Box>
+      <Box>
+        <ProseList color={consColor} items={cons} subTitle="Cons" />
+      </Box>
+    </Stack>
+  );
+}
+
 // ### bullet points
 const bulletPoints1 = [
   'Monolith, full stack apps',
@@ -390,32 +424,49 @@ const bulletPointsIframe1 = [
   'Isolation: Each module runs in its own browser context',
   'Independent Updates: Modules can be updated separately',
   'Simplicity: Quick deployments with reduced complexity',
-  'Custom Messaging: In-house iframe messaging (based on PostRobot.js)',
+  'Custom Messaging: window.postMessage for communication',
 ];
 
 // - Pros and Cons
 const bulletPointsMFLPros = [
-  'Dynamic module sharing and tighter integration (routing, lifecycle)',
-  'Flexibility to work with multiple frameworks',
+  'Share code between modules easily',
+  'Better tree shaking and smaller bundles',
+  'Complements tools like Single-Spa if you need both routing and federation',
 ];
 
 const bulletPointsMFLCons = [
-  'Complex dependency management',
-  'Increased coordination among teams',
-  'Larger bundles and potential performance issues',
-  'More challenging end-to-end testing',
+  'Forces you to use Webpack for all apps',
+  'Locks you into its configuration and versioning',
+  'Can be tricky to integrate legacy apps without a full rewrite',
+  'Dependency conflicts can surface when versions drift',
+];
+
+const bulletPointsSingleSpaPros = [
+  'Run multiple frameworks on the same page without full reloads',
+  'Pick up new frameworks without rewriting existing apps',
+  'Lazy load each micro-frontend for faster initial loads',
+  'Independent deployments and no iframes',
+];
+
+const bulletPointsSingleSpaCons = [
+  'Steep learning curve and added complexity beyond a simple SPA',
+  'You must implement mount and unmount lifecycles for each app',
+  'CSS and font management can be tricky without an index.html',
+  'Root config and import map setup add extra overhead',
 ];
 
 const bulletPointsIframePros = [
-  'High isolation and security (sandboxing, separate contexts)',
-  'Independent deployment cycles',
-  'Simpler build and maintenance processes',
-  'Reduced risk of global state conflicts',
+  'True isolation, ideal for embedding in third-party platforms',
+  'Independent update cycles with minimal code changes',
+  'No framework lock-in, you choose your own adventure',
+  'Simple and easy to sandbox security risks',
 ];
 
 const bulletPointsIframeCons = [
-  'Less dynamic integration compared to modern frameworks',
-  'Custom messaging requires ongoing support',
+  'Less efficient tree shaking since each iframe has its own context',
+  'You need to build and maintain your own messaging layer',
+  'Lacks out-of-the-box lifecycle and routing helpers',
+  'Feels dated compared to more modern micro-frontend methods',
 ];
 
 // Rational Behind Our Choice

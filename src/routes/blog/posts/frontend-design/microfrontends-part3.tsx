@@ -45,7 +45,7 @@ function RouteComponent() {
         imageSrc={TechDebt}
       />
       {/* ### Before Micro Frontends */}
-      <TitleBlock subtitle="">
+      <TitleBlock subtitle="Lessons learned from our micro-frontend journey">
         Communication Challenges in a Modular Front-End
       </TitleBlock>
       <BodyBlock>
