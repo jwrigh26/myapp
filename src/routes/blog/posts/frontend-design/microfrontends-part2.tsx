@@ -48,6 +48,7 @@ function RouteComponent() {
       <TitleBlock subtitle="Comparing Our Approach to Modern Alternatives">
         Decision Making
       </TitleBlock>
+      <SectionSpacer id="decision-making" />
       <ResponsiveContentImageGrid
         imageSrc={MonolithImage}
         imageAlt="Monolith Image"
@@ -308,9 +309,15 @@ function RouteComponent() {
       <SubSectionStarter title="Module Federation" />
       <ProsConsList pros={bulletPointsMFLPros} cons={bulletPointsMFLCons} />
       <SubSectionStarter title="Single-Spa" />
-      <ProsConsList pros={bulletPointsSingleSpaPros} cons={bulletPointsSingleSpaCons} />
+      <ProsConsList
+        pros={bulletPointsSingleSpaPros}
+        cons={bulletPointsSingleSpaCons}
+      />
       <SubSectionStarter title="iFrame" />
-      <ProsConsList pros={bulletPointsIframePros} cons={bulletPointsIframeCons} />
+      <ProsConsList
+        pros={bulletPointsIframePros}
+        cons={bulletPointsIframeCons}
+      />
 
       {/* ### Rationale Behind Our Choice */}
       <SectionSpacer id="rantionale-behinde-our-choice" />

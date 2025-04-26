@@ -59,6 +59,7 @@ function RouteComponent() {
         We'll also compare our solution to other alternatives and share lessons
         learned along the way.
       </IntroBlock>
+      <SectionSpacer id="introduction" />
       <ResponsiveContentImageGrid
         imageSrc={IntroImage}
         imageAlt="Empowering Small Businesses"
