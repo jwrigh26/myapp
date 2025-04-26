@@ -64,7 +64,7 @@ function HomeComponent() {
               sx={{
                 flex: 1,
                 minWidth: 260,
-                maxWidth: { xs: '100%', md: 400 },
+                maxWidth: { xs: '100%', md: 480 },
                 minHeight: '380px',
                 display: 'flex',
                 flexDirection: 'column',
