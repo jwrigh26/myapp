@@ -14,6 +14,7 @@ import { SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import ReferenceLink from '@/components/ReferenceLink';
+import RationaleChoiceImage from '@/assets/Slide14.jpeg';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -321,17 +322,28 @@ function RouteComponent() {
 
       {/* ### Rationale Behind Our Choice */}
       <SectionSpacer id="rantionale-behinde-our-choice" />
-      <ProseBlock title="Rationale Behind Our Choice" />
-      <ProseList
-        items={bulletPointsRationale}
-        subTitle="Our Decision Factors"
-      />
-      <ProseBlock>
-        When we first designed the system, tools like Single-SPA and Webpack
-        Module Federation were either unavailable or not mature. We needed a
-        fast way to integrate multiple pages into client sites. Given our
-        requirements, iframes were the most practical option.
-      </ProseBlock>
+      <ResponsiveContentImageGrid
+        imageSrc={RationaleChoiceImage}
+        imageAlt="Rationale Behind Our Choice"
+        imageOnRight={true}
+        objectFit="cover"
+        caption="Rationale Behind Our Choice"
+        columns="2fr 1fr"
+        gap={2}
+        aspectRatio={1/1.32}
+      >
+        <ProseBlock title="Rationale Behind Our Choice" />
+        <ProseList
+          items={bulletPointsRationale}
+          subTitle="Our Decision Factors"
+        />
+        <ProseBlock>
+          When we first designed the system, tools like Single-SPA and Webpack
+          Module Federation were either unavailable or not mature. We needed a
+          fast way to integrate multiple pages into client sites. Given our
+          requirements, iframes were the most practical option.
+        </ProseBlock>
+      </ResponsiveContentImageGrid>
 
       <ProseBlock>
         Team structure also influenced the decision. With a backend-heavy team
