@@ -4,6 +4,7 @@ import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
 import TechDebt from '@/assets/Slide19.jpeg';
 import HardLessons from '@/assets/Slide21.jpeg';
+import CallOutImage2 from '@/assets/Slide10.jpeg';
 import { BodyBlock } from '@/components/BodyBlock';
 import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
@@ -14,6 +15,7 @@ import QuoteBlock from '@/components/QuoteBlock';
 import ReferenceLink from '@/components/ReferenceLink';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
+import BlogPostNavigator from '@/components/BlogPostNavigator';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
@@ -264,6 +266,21 @@ function RouteComponent() {
           That's not always ideal for a feature-driven development shop.
         </ProseBlock>
       </BodyBlock>
+      <BlogPostNavigator
+        prev={{
+          title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+          route: '/blog/posts/frontend-design/microfrontends-part2',
+          image: CallOutImage2,
+          blurb:
+            'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+        }}
+        // suggested={{
+        //   title: 'Another Blog Post',
+        //   route: '/blog/posts/other-topic',
+        //   image: SomeOtherImage,
+        //   blurb: 'A suggested next read for you.',
+        // }}
+      />
     </>
   );
 }

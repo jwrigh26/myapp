@@ -12,6 +12,7 @@ export interface ProseBlockProps {
   children?: React.ReactNode;
   dense?: boolean;
   spacingBottom?: boolean;
+  backgroundColor?: string;
   options?: {
     titleVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     subtitleVariant?: 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
@@ -28,6 +29,7 @@ function ProseBlock({
   children,
   dense = false,
   spacingBottom = false,
+  backgroundColor,
   options = {}, // Default to an empty object
 }: ProseBlockProps): JSX.Element {
   const {
@@ -42,7 +44,11 @@ function ProseBlock({
   } = options;
 
   return (
-    <StyledBlock dense={dense} spacingBottom={spacingBottom}>
+    <StyledBlock
+      dense={dense}
+      spacingBottom={spacingBottom}
+      backgroundColor={backgroundColor}
+    >
       {title && (
         <Typography
           variant={titleVariant}
@@ -83,7 +89,8 @@ export default ProseBlock;
 interface StyledBlockProps extends BoxProps {
   dense: boolean;
   gutterBottom?: boolean;
-  spacingBottom?: boolean; // Ensure this is optional
+  spacingBottom?: boolean;
+  backgroundColor?: string;
 }
 
 const getPaddingStyles = (
@@ -112,8 +119,17 @@ const getPaddingStyles = (
 
 const StyledBlock = styled(Box, {
   shouldForwardProp: (prop) =>
-    prop !== 'dense' && prop !== 'gutterBottom' && prop !== 'spacingBottom',
-})<StyledBlockProps>(({ theme, dense, gutterBottom, spacingBottom }) => {
+    prop !== 'dense' &&
+    prop !== 'gutterBottom' &&
+    prop !== 'spacingBottom' &&
+    prop !== 'backgroundColor',
+})<StyledBlockProps>(({
+  theme,
+  dense,
+  gutterBottom,
+  spacingBottom,
+  backgroundColor = theme.palette.background.paper,
+}) => {
   const paddingStyles = getPaddingStyles(theme, dense, spacingBottom);
 
   const gutterBottomStyles = gutterBottom
@@ -122,7 +138,7 @@ const StyledBlock = styled(Box, {
 
   return {
     marginBottom: theme.spacing(0), // Add spacing between blocks
-    backgroundColor: theme.palette.background.paper, // Optional: Add a background
+    backgroundColor, // Optional: Add a background
     borderRadius: theme.shape.borderRadius,
     ...paddingStyles,
     ...gutterBottomStyles,

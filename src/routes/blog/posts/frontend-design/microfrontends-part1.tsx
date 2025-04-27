@@ -6,6 +6,7 @@ import HostSiteImage from '@/assets/Slide3.jpeg';
 import ModuleDevImage from '@/assets/Slide4.jpeg';
 import DeploymentImage from '@/assets/Slide5.jpeg';
 import SuperModsImage from '@/assets/Slide7.jpeg';
+import CallOutImage2 from '@/assets/Slide10.jpeg';
 import CallToAction from '@/components/CallToAction';
 import DisclaimerBlock from '@/components/DisclaimerBlock';
 import { ResponsiveContentImageGrid } from '@/components/Image';
@@ -15,9 +16,10 @@ import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
-import Box from '@mui/material/Box';
+import NoteBlock from '@/components/NoteBlock';
 import Stack from '@mui/material/Stack';
 import { createFileRoute } from '@tanstack/react-router';
+import BlogPostNavigator from '@/components/BlogPostNavigator';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -131,17 +133,12 @@ function RouteComponent() {
           consistently across the application.
         </SubSectionStarter>
       </ResponsiveContentImageGrid>
-      <Box sx={{ p: 2, border: '2px solid', borderColor: 'divider' }}>
-        <ProseBlock
-          subtitle="Note:"
-          options={{ subtitleVariant: 'subtitle2', textVariant: 'body2' }}
-        >
-          For communication, we employ a custom iframe messaging library (based
-          on PostRobot.js, now archived) to bridge interactions between modules.
-          While it sounds fancy, our library is just a helpful wrapper around
-          the <span className="code">window.postMessage</span> API.
-        </ProseBlock>
-      </Box>
+      <NoteBlock>
+        For communication, we employ a custom iframe messaging library (based on
+        PostRobot.js, now archived) to bridge interactions between modules.
+        While it sounds fancy, our library is just a helpful wrapper around the{' '}
+        <span className="code">window.postMessage</span> API.
+      </NoteBlock>
 
       {/* ### Module Development & Versioning */}
       <SectionSpacer id="module-development-and-versioning" />
@@ -316,13 +313,10 @@ function RouteComponent() {
       <SectionSpacer id="deployment-flexibility" />
       <ProseBlock
         title="Deployment"
-        subtitle='Super easy, barely an inconvenience'
+        subtitle="Super easy, barely an inconvenience"
         options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
       />
-      <ProseList
-        items={bulletPoints7}
-        subTitle="Key Benefits"
-      />
+      <ProseList items={bulletPoints7} subTitle="Key Benefits" />
 
       <SubSectionStarter title="Modular Deployment">
         One of the best things about our modular framework is that each module
@@ -362,6 +356,17 @@ function RouteComponent() {
           the win!
         </ProseBlock>
       </ResponsiveContentImageGrid>
+
+      <Spacer size={2} desktop />
+      <BlogPostNavigator
+        next={{
+          title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+          route: '/blog/posts/frontend-design/microfrontends-part2',
+          image: CallOutImage2,
+          blurb:
+            'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+        }}
+      />
     </>
   );
 }

@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
 import type { ProseBlockProps } from '@/components/ProseBlock';
+import NoteBlock from '@/components/NoteBlock';
 import iframeImage from '@/assets/Slide-iframe.jpg';
-import CallOutImage from '@/assets/Slide10.jpeg';
+import CallOutImage from '@/assets/Slide0.jpeg';
+import CallOutImage3 from '@/assets/Slide19.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
 import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
@@ -15,6 +17,7 @@ import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import ReferenceLink from '@/components/ReferenceLink';
 import RationaleChoiceImage from '@/assets/Slide14.jpeg';
+import BlogPostNavigator from '@/components/BlogPostNavigator';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -85,23 +88,54 @@ function RouteComponent() {
       />
 
       <ProseBlock>
-        Micro-frontend strategies offer several ways to structure your
-        application. With external app bootstrapping, a main app loads code from
-        different servers by fetching CSS, JS, and other assets, then stitches
-        them together using the window object and an event bus for
-        communication. This approach supports independent deployments while
-        keeping things cohesive.
+        To my knowledge, micro-frontend strategies come in three flavors. We've
+        already covered my favorite flavor, iframes, so let's move on to the
+        next one, which is actually similar to iframes. We considered adopting
+        this approach, but ultimately we went with iframes.
       </ProseBlock>
 
       <ProseBlock>
-        Other strategies involve dedicated micro-frontend libraries and
-        frameworks. For example, Single SPA provides a top-level router and lazy
-        loading, allowing legacy and new projects to coexist—though all code
-        lives on the same server and is bundled together. Module Federation,
-        introduced in Webpack v5, dynamically shares and loads modules across
-        independently deployed applications. Alternatively, iFrames host code on
-        separate servers, enabling independent deployments with communication
-        handled via window.postMessage method.
+        In a presentation I saw, the speaker called this flavor “External App
+        Bootstrapping.” It uses a host application to load CSS, JS, and other
+        assets from different servers. Then it stitches the code together using
+        the <span className="code">window</span> object and an event bus, much
+        like an iframe's messaging system. Like the other approaches, it
+        supports independent deployments and is able to look like a single
+        application.
+      </ProseBlock>
+
+      <ProseBlock>
+        The main reason we decided against External App Bootstrapping was the
+        speed and simplicity of iframes. Iframes let us hit market faster. They
+        were also the default choice for third-party integration at the time.
+      </ProseBlock>
+
+      <ReferenceLink
+        url="https://youtu.be/ftBc8w-lwmY?si=O_e2mgqSao6-o3Bi"
+        linkText="walkthrough on YouTube"
+        text="If you'd like to see External App Bootstrapping in action, check out this walkthrough on YouTube."
+      />
+
+      <SubSectionStarter title="Micro-Frontend Libraries" />
+      <ProseBlock>
+        A more modern approach to micro-frontends involves using libraries.
+        Single-spa, for example, provides a top-level router and built-in lazy
+        loading so that legacy and new projects can coexist on the same page.
+        You register each micro-frontend in a root config and supply an import
+        map (or SystemJS) to load individual bundles.
+      </ProseBlock>
+      <NoteBlock>
+        Single-spa's bundles can live on different servers or CDNs. There's no
+        requirement to host everything together.
+      </NoteBlock>
+      <ProseBlock>
+        Module Federation, introduced in Webpack 5, takes a different approach.
+        It lets you independently deploy applications, share and consume modules
+        at runtime. Unlike Single-spa's routing focus, Module Federation is
+        purely a performance technique: it dynamically pulls code from remote
+        builds without iframes or a central router. The downside is that you
+        must use Webpack for every application, and upgrades can become tricky
+        if dependency conflicts occur.
       </ProseBlock>
 
       {/* ### Modern Micro-Frontend libraries */}
@@ -251,7 +285,7 @@ function RouteComponent() {
       </ProseBlock>
       <ReferenceLink
         url="https://single-spa.js.org/docs/recommended-setup"
-        linkText="Visit the recommended setup guide for full details."
+        linkText="recommended setup guide"
         text="Visit the recommended setup guide for full details."
       />
 
@@ -330,7 +364,7 @@ function RouteComponent() {
         caption="Rationale Behind Our Choice"
         columns="2fr 1fr"
         gap={2}
-        aspectRatio={1/1.32}
+        aspectRatio={1 / 1.32}
       >
         <ProseBlock title="Rationale Behind Our Choice" />
         <ProseList
@@ -352,6 +386,22 @@ function RouteComponent() {
         front-end knowledge. Based on timing, needs, and team stucture, iframes
         made the most sense.
       </ProseBlock>
+      <BlogPostNavigator
+        prev={{
+          title: 'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+          route: '/blog/posts/frontend-design/microfrontends-part1',
+          image: CallOutImage,
+          blurb:
+            'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
+        }}
+        next={{
+          title: 'Micro-Frontends Part 3: Lessons Learned',
+          route: '/blog/posts/frontend-design/microfrontends-part3',
+          image: CallOutImage3,
+          blurb:
+            'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
+        }}
+      />
     </>
   );
 }
@@ -417,9 +467,9 @@ const bulletPoints1 = [
 ];
 
 const bulletPoints2 = [
-  'External app bootstrapping',
-  'Micro-Frontend libraries and frameworks',
   'iFrames',
+  'External app bootstrapping',
+  'Micro-Frontend libraries',
 ];
 
 // #### Micro Frontend Libraries
