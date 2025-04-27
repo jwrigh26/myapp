@@ -2,6 +2,7 @@ import CoffeeWizard1 from '@/assets/Slide15.jpeg';
 import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
+import IntroBlock from '@/components/IntroBlock';
 import TechDebt from '@/assets/Slide19.jpeg';
 import HardLessons from '@/assets/Slide21.jpeg';
 import CallOutImage2 from '@/assets/Slide10.jpeg';
@@ -50,6 +51,11 @@ function RouteComponent() {
       <TitleBlock subtitle="Lessons learned from our micro-frontend journey">
         Communication Challenges in a Modular Front-End
       </TitleBlock>
+      <IntroBlock>
+        In Part 3, We'll talk about how to use a messaging layer to act as a glue for iframes.
+        How to avoid over-engineering when it comes to routing and navigation.
+        And other lessons learned along the way.
+      </IntroBlock>
       <BodyBlock>
         {/* ### Why Communication Matters */}
         <SectionSpacer id="why-communication-matters" />

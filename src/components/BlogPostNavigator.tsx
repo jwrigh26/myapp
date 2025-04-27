@@ -37,7 +37,7 @@ export default function BlogPostNavigator({
       sx={{
         pt: 2,
         mt: 8,
-        mb: { xs: 8, sm: 2 },
+        mb: { xs: 4, sm: 2 },
         backgroundColor: 'background.default',
         borderTop: '2px solid',
         borderColor: 'divider',

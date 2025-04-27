@@ -17,6 +17,7 @@ import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import ReferenceLink from '@/components/ReferenceLink';
 import RationaleChoiceImage from '@/assets/Slide14.jpeg';
+import IntroBlock from '@/components/IntroBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 
 export const Route = createFileRoute(
@@ -52,6 +53,11 @@ function RouteComponent() {
       <TitleBlock subtitle="Comparing Our Approach to Modern Alternatives">
         Decision Making
       </TitleBlock>
+      <IntroBlock>
+        In Part 2, we'll cover a quick history of micro-frontends. We'll explore
+        different strategies for picking an architecture and compare the pros
+        and cons of each.
+      </IntroBlock>
       <SectionSpacer id="decision-making" />
       <ResponsiveContentImageGrid
         imageSrc={MonolithImage}
@@ -377,18 +383,19 @@ function RouteComponent() {
           fast way to integrate multiple pages into client sites. Given our
           requirements, iframes were the most practical option.
         </ProseBlock>
+        <ProseBlock>
+          Team structure also influenced the decision. With a backend-heavy team
+          and occasional front-end support from full-stack developers,
+          simplicity was important. Iframes let us update modules independently
+          without deep front-end knowledge. Based on timing, needs, and team
+          stucture, iframes made the most sense.
+        </ProseBlock>
       </ResponsiveContentImageGrid>
 
-      <ProseBlock>
-        Team structure also influenced the decision. With a backend-heavy team
-        and occasional front-end support from full-stack developers, simplicity
-        was important. Iframes let us update modules independently without deep
-        front-end knowledge. Based on timing, needs, and team stucture, iframes
-        made the most sense.
-      </ProseBlock>
       <BlogPostNavigator
         prev={{
-          title: 'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+          title:
+            'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
           route: '/blog/posts/frontend-design/microfrontends-part1',
           image: CallOutImage,
           blurb:
