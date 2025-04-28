@@ -17,8 +17,7 @@ import { Route as AboutImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
-import { Route as BlogPostsReactPatternsPage2Import } from './routes/blog/posts/react-patterns/page-2'
-import { Route as BlogPostsReactPatternsPage1Import } from './routes/blog/posts/react-patterns/page-1'
+import { Route as BlogPostsReactPatternsModelHookViewImport } from './routes/blog/posts/react-patterns/model-hook-view'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart3Import } from './routes/blog/posts/frontend-design/microfrontends-part3'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart2Import } from './routes/blog/posts/frontend-design/microfrontends-part2'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart1Import } from './routes/blog/posts/frontend-design/microfrontends-part1'
@@ -61,17 +60,10 @@ const BlogIndexRoute = BlogIndexImport.update({
   getParentRoute: () => BlogRouteRoute,
 } as any)
 
-const BlogPostsReactPatternsPage2Route =
-  BlogPostsReactPatternsPage2Import.update({
-    id: '/posts/react-patterns/page-2',
-    path: '/posts/react-patterns/page-2',
-    getParentRoute: () => BlogRouteRoute,
-  } as any)
-
-const BlogPostsReactPatternsPage1Route =
-  BlogPostsReactPatternsPage1Import.update({
-    id: '/posts/react-patterns/page-1',
-    path: '/posts/react-patterns/page-1',
+const BlogPostsReactPatternsModelHookViewRoute =
+  BlogPostsReactPatternsModelHookViewImport.update({
+    id: '/posts/react-patterns/model-hook-view',
+    path: '/posts/react-patterns/model-hook-view',
     getParentRoute: () => BlogRouteRoute,
   } as any)
 
@@ -163,18 +155,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart3Import
       parentRoute: typeof BlogRouteImport
     }
-    '/blog/posts/react-patterns/page-1': {
-      id: '/blog/posts/react-patterns/page-1'
-      path: '/posts/react-patterns/page-1'
-      fullPath: '/blog/posts/react-patterns/page-1'
-      preLoaderRoute: typeof BlogPostsReactPatternsPage1Import
-      parentRoute: typeof BlogRouteImport
-    }
-    '/blog/posts/react-patterns/page-2': {
-      id: '/blog/posts/react-patterns/page-2'
-      path: '/posts/react-patterns/page-2'
-      fullPath: '/blog/posts/react-patterns/page-2'
-      preLoaderRoute: typeof BlogPostsReactPatternsPage2Import
+    '/blog/posts/react-patterns/model-hook-view': {
+      id: '/blog/posts/react-patterns/model-hook-view'
+      path: '/posts/react-patterns/model-hook-view'
+      fullPath: '/blog/posts/react-patterns/model-hook-view'
+      preLoaderRoute: typeof BlogPostsReactPatternsModelHookViewImport
       parentRoute: typeof BlogRouteImport
     }
   }
@@ -187,8 +172,7 @@ interface BlogRouteRouteChildren {
   BlogPostsFrontendDesignMicrofrontendsPart1Route: typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   BlogPostsFrontendDesignMicrofrontendsPart2Route: typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   BlogPostsFrontendDesignMicrofrontendsPart3Route: typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
-  BlogPostsReactPatternsPage1Route: typeof BlogPostsReactPatternsPage1Route
-  BlogPostsReactPatternsPage2Route: typeof BlogPostsReactPatternsPage2Route
+  BlogPostsReactPatternsModelHookViewRoute: typeof BlogPostsReactPatternsModelHookViewRoute
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
@@ -199,8 +183,8 @@ const BlogRouteRouteChildren: BlogRouteRouteChildren = {
     BlogPostsFrontendDesignMicrofrontendsPart2Route,
   BlogPostsFrontendDesignMicrofrontendsPart3Route:
     BlogPostsFrontendDesignMicrofrontendsPart3Route,
-  BlogPostsReactPatternsPage1Route: BlogPostsReactPatternsPage1Route,
-  BlogPostsReactPatternsPage2Route: BlogPostsReactPatternsPage2Route,
+  BlogPostsReactPatternsModelHookViewRoute:
+    BlogPostsReactPatternsModelHookViewRoute,
 }
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
@@ -217,8 +201,7 @@ export interface FileRoutesByFullPath {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
-  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
-  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
+  '/blog/posts/react-patterns/model-hook-view': typeof BlogPostsReactPatternsModelHookViewRoute
 }
 
 export interface FileRoutesByTo {
@@ -230,8 +213,7 @@ export interface FileRoutesByTo {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
-  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
-  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
+  '/blog/posts/react-patterns/model-hook-view': typeof BlogPostsReactPatternsModelHookViewRoute
 }
 
 export interface FileRoutesById {
@@ -245,8 +227,7 @@ export interface FileRoutesById {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
-  '/blog/posts/react-patterns/page-1': typeof BlogPostsReactPatternsPage1Route
-  '/blog/posts/react-patterns/page-2': typeof BlogPostsReactPatternsPage2Route
+  '/blog/posts/react-patterns/model-hook-view': typeof BlogPostsReactPatternsModelHookViewRoute
 }
 
 export interface FileRouteTypes {
@@ -261,8 +242,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react-patterns/page-1'
-    | '/blog/posts/react-patterns/page-2'
+    | '/blog/posts/react-patterns/model-hook-view'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -273,8 +253,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react-patterns/page-1'
-    | '/blog/posts/react-patterns/page-2'
+    | '/blog/posts/react-patterns/model-hook-view'
   id:
     | '__root__'
     | '/'
@@ -286,8 +265,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react-patterns/page-1'
-    | '/blog/posts/react-patterns/page-2'
+    | '/blog/posts/react-patterns/model-hook-view'
   fileRoutesById: FileRoutesById
 }
 
@@ -334,8 +312,7 @@ export const routeTree = rootRoute
         "/blog/posts/frontend-design/microfrontends-part1",
         "/blog/posts/frontend-design/microfrontends-part2",
         "/blog/posts/frontend-design/microfrontends-part3",
-        "/blog/posts/react-patterns/page-1",
-        "/blog/posts/react-patterns/page-2"
+        "/blog/posts/react-patterns/model-hook-view"
       ]
     },
     "/about": {
@@ -363,12 +340,8 @@ export const routeTree = rootRoute
       "filePath": "blog/posts/frontend-design/microfrontends-part3.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/react-patterns/page-1": {
-      "filePath": "blog/posts/react-patterns/page-1.tsx",
-      "parent": "/blog"
-    },
-    "/blog/posts/react-patterns/page-2": {
-      "filePath": "blog/posts/react-patterns/page-2.tsx",
+    "/blog/posts/react-patterns/model-hook-view": {
+      "filePath": "blog/posts/react-patterns/model-hook-view.tsx",
       "parent": "/blog"
     }
   }
