@@ -1,4 +1,4 @@
-import Image from '@/components/Image';
+import Image, { AspectRatioContainer } from '@/components/Image';
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -21,17 +21,31 @@ const CallToActionContainer = styled(Box)(({ theme }) => ({
   margin: 0,
 }));
 
+// Mobile banner container
+const MobileBannerContainer = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius,
+  overflow: 'hidden',
+  width: '100%',
+  // Only show on mobile
+  display: 'block',
+  [theme.breakpoints.up('md')]: {
+    display: 'none',
+  },
+}));
+
 const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
   right: 16,
   top: '50%',
   transform: 'translateY(-50%)',
-  width: '130px', // Slightly larger than inner container
+  width: '130px',
   height: '130px',
   borderRadius: '50%',
   background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-  padding: '7px', // This creates the outer border thickness
-  display: 'none', // Hide on mobile by default
+  padding: '7px',
+  // Hide on mobile, show on desktop
+  display: 'none',
   [theme.breakpoints.up('md')]: {
     display: 'block',
     width: '174px',
@@ -44,13 +58,12 @@ const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-// Inner container with white border and image
 const CircularImageInnerContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   height: '100%',
   borderRadius: '50%',
   border: `3px solid ${theme.palette.common.white}`,
-  overflow: 'hidden', // Use 'hidden' instead of 'clip' for better browser compatibility
+  overflow: 'hidden',
   position: 'relative',
 }));
 
@@ -58,7 +71,6 @@ const ContentContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'hasImage',
 })<{ hasImage?: boolean }>(({ theme, hasImage }) => ({
   [theme.breakpoints.up('md')]: {
-    // width: hasImage ? 'calc(100% - 80px)' : '100%',
     width: '100%',
     paddingRight: hasImage ? theme.spacing(4) : 0,
   },
@@ -83,8 +95,8 @@ interface CallToActionProps {
   subtitle?: string;
   buttonText?: string;
   onClick?: () => void;
-  imageSrc?: string; // New prop for the image
-  imageAlt?: string; // Alt text for the image
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export default function CallToAction({
@@ -94,13 +106,26 @@ export default function CallToAction({
   buttonText,
   onClick,
   imageSrc,
-  imageAlt = 'Featured image', // Default alt text
+  imageAlt = 'Featured image',
 }: CallToActionProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
+      {/* Mobile Banner Image - only shown on mobile */}
+      {imageSrc && (
+        <MobileBannerContainer>
+          <AspectRatioContainer ratio={16 / 9}>
+            <Image
+              defaultSrc={imageSrc}
+              alt={imageAlt}
+              objectFit="cover"
+            />
+          </AspectRatioContainer>
+        </MobileBannerContainer>
+      )}
+
       <CallToActionContainer>
         <ContentContainer hasImage={!!imageSrc}>
           {title && (
@@ -139,6 +164,7 @@ export default function CallToAction({
           )}
         </ContentContainer>
 
+        {/* Desktop Circular Image - only shown on desktop */}
         {imageSrc && (
           <CircularImageOuterContainer>
             <CircularImageInnerContainer>
@@ -153,7 +179,6 @@ export default function CallToAction({
           </CircularImageOuterContainer>
         )}
       </CallToActionContainer>
-      {/* <MobileImage src={imageSrc} alt={imageAlt} width="100%" height="auto" /> */}
     </>
   );
 }

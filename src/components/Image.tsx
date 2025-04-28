@@ -186,7 +186,7 @@ export const AspectRatioContainer = styled(Box, {
   maxWidth,
   height: 0,
   paddingBottom: `${(1 / ratio) * 100}%`,
-  borderRadius: '4px',
+  borderRadius: '2px',
   overflow: 'hidden',
   '& > *': {
     position: 'absolute',

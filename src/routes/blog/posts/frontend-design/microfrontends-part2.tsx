@@ -6,6 +6,7 @@ import type { ProseBlockProps } from '@/components/ProseBlock';
 import NoteBlock from '@/components/NoteBlock';
 import iframeImage from '@/assets/Slide-iframe.jpg';
 import CallOutImage from '@/assets/Slide0.jpeg';
+import CallOutImage2 from '@/assets/Strats.jpg';
 import CallOutImage3 from '@/assets/Slide19.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
 import CallToAction from '@/components/CallToAction';
@@ -46,7 +47,7 @@ function RouteComponent() {
         preSubtitle="Micro-Frontends Part 2:"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
-        imageSrc={CallOutImage}
+        imageSrc={CallOutImage2}
       />
 
       {/* ### Before Micro Frontends */}
