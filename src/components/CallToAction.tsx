@@ -31,7 +31,6 @@ const CallToActionContainer = styled(Box)(({ theme }) => ({
 
 // Mobile banner container
 const MobileBannerContainer = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(1),
   borderRadius: theme.shape.borderRadius,
   overflow: 'hidden',
   width: '100%',
