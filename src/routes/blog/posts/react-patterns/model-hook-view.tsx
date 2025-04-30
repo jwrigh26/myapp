@@ -9,6 +9,7 @@ import DisclaimerBlock from '@/components/DisclaimerBlock';
 import TitleBlock from '@/components/TitleBlock';
 import NoteBlock from '@/components/NoteBlock';
 import Box from '@mui/material/Box';
+import SplashImage from '@/assets/MHVSplash.jpeg';
 
 export const Route = createFileRoute(
   '/blog/posts/react-patterns/model-hook-view'
@@ -33,7 +34,10 @@ function RouteComponent() {
     <>
       <CallToAction
         title="Model Hook View (MHV)"
-        preSubtitle="A React pattern for managing components using hooks as controllers"
+        subtitle="A React pattern for managing components using hooks as controllers"
+        imageAlt='Model Hook View'
+        imageSrc={SplashImage}
+        imagePosition={{ right: 48 }}
       />
       <TitleBlock subtitle="Writing about what I use every day">
         Sticking with React 18

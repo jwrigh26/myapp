@@ -6,6 +6,14 @@ import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { isNil } from '@/utils/safety';
+
+type PositionProps = {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
+};
 
 const CallToActionContainer = styled(Box)(({ theme }) => ({
   display: 'block',
@@ -37,25 +45,25 @@ const MobileBannerContainer = styled(Box)(({ theme }) => ({
 const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
   right: 16,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  width: '130px',
-  height: '130px',
-  borderRadius: '50%',
-  background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-  padding: '7px',
-  // Hide on mobile, show on desktop
-  display: 'none',
-  [theme.breakpoints.up('md')]: {
-    display: 'block',
-    width: '174px',
-    height: '174px',
-  },
-  [theme.breakpoints.up('lg')]: {
-    width: '214px',
-    height: '214px',
-    top: '60%',
-  },
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '130px',
+    height: '130px',
+    borderRadius: '50%',
+    background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
+    padding: '7px',
+    // Hide on mobile, show on desktop
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      width: '174px',
+      height: '174px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '214px',
+      height: '214px',
+      top: '60%',
+    },
 }));
 
 const CircularImageInnerContainer = styled(Box)(({ theme }) => ({
@@ -97,6 +105,7 @@ interface CallToActionProps {
   onClick?: () => void;
   imageSrc?: string;
   imageAlt?: string;
+  imagePosition?: PositionProps;
 }
 
 export default function CallToAction({
@@ -107,9 +116,11 @@ export default function CallToAction({
   onClick,
   imageSrc,
   imageAlt = 'Featured image',
+  imagePosition,
 }: CallToActionProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  console.log('imagePosition', imagePosition);
 
   return (
     <>
@@ -117,11 +128,7 @@ export default function CallToAction({
       {imageSrc && (
         <MobileBannerContainer>
           <AspectRatioContainer ratio={16 / 9}>
-            <Image
-              defaultSrc={imageSrc}
-              alt={imageAlt}
-              objectFit="cover"
-            />
+            <Image defaultSrc={imageSrc} alt={imageAlt} objectFit="cover" />
           </AspectRatioContainer>
         </MobileBannerContainer>
       )}
@@ -174,6 +181,7 @@ export default function CallToAction({
                 objectFit="cover"
                 width="auto"
                 height={200}
+                style={{ position: 'relative', ...imagePosition }}
               />
             </CircularImageInnerContainer>
           </CircularImageOuterContainer>
