@@ -31,7 +31,7 @@ const CallToActionContainer = styled(Box)(({ theme }) => ({
 
 // Mobile banner container
 const MobileBannerContainer = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(1),
   borderRadius: theme.shape.borderRadius,
   overflow: 'hidden',
   width: '100%',
@@ -45,25 +45,25 @@ const MobileBannerContainer = styled(Box)(({ theme }) => ({
 const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
   right: 16,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '130px',
-    height: '130px',
-    borderRadius: '50%',
-    background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-    padding: '7px',
-    // Hide on mobile, show on desktop
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block',
-      width: '174px',
-      height: '174px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '214px',
-      height: '214px',
-      top: '60%',
-    },
+  top: '50%',
+  transform: 'translateY(-50%)',
+  width: '130px',
+  height: '130px',
+  borderRadius: '50%',
+  background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
+  padding: '7px',
+  // Hide on mobile, show on desktop
+  display: 'none',
+  [theme.breakpoints.up('md')]: {
+    display: 'block',
+    width: '174px',
+    height: '174px',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '214px',
+    height: '214px',
+    top: '60%',
+  },
 }));
 
 const CircularImageInnerContainer = styled(Box)(({ theme }) => ({
@@ -106,6 +106,7 @@ interface CallToActionProps {
   imageSrc?: string;
   imageAlt?: string;
   imagePosition?: PositionProps;
+  imageRatio?: number;
 }
 
 export default function CallToAction({
@@ -116,6 +117,7 @@ export default function CallToAction({
   onClick,
   imageSrc,
   imageAlt = 'Featured image',
+  imageRatio = 16 / 9,
   imagePosition,
 }: CallToActionProps) {
   const theme = useTheme();
@@ -127,7 +129,7 @@ export default function CallToAction({
       {/* Mobile Banner Image - only shown on mobile */}
       {imageSrc && (
         <MobileBannerContainer>
-          <AspectRatioContainer ratio={16 / 9}>
+          <AspectRatioContainer ratio={imageRatio}>
             <Image defaultSrc={imageSrc} alt={imageAlt} objectFit="cover" />
           </AspectRatioContainer>
         </MobileBannerContainer>

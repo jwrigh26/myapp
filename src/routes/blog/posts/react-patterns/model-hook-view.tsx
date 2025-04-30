@@ -38,6 +38,7 @@ function RouteComponent() {
         imageAlt='Model Hook View'
         imageSrc={SplashImage}
         imagePosition={{ right: 48 }}
+        imageRatio={1/0.47}
       />
       <TitleBlock subtitle="Writing about what I use every day">
         Sticking with React 18
