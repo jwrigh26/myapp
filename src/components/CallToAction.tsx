@@ -7,6 +7,8 @@ import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { isNil } from '@/utils/safety';
+import { format, parse } from 'date-fns';
+import { formatDisplayDate } from '@/utils/date';
 
 type PositionProps = {
   top?: number;
@@ -106,6 +108,7 @@ interface CallToActionProps {
   imageAlt?: string;
   imagePosition?: PositionProps;
   imageRatio?: number;
+  date?: string; // New prop for date string
 }
 
 export default function CallToAction({
@@ -118,10 +121,14 @@ export default function CallToAction({
   imageAlt = 'Featured image',
   imageRatio = 16 / 9,
   imagePosition,
+  date = '01-26-1982', // Default date string
 }: CallToActionProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   console.log('imagePosition', imagePosition);
+
+  // Format the date string using the new utility
+  const formattedDate = formatDisplayDate(date);
 
   return (
     <>
@@ -169,6 +176,17 @@ export default function CallToAction({
             <CTAButton variant="contained" onClick={onClick}>
               {buttonText}
             </CTAButton>
+          )}
+          {/* Date display moved to bottom */}
+          {formattedDate && (
+            <Typography
+              variant="caption"
+              color="primary.light"
+              sx={{ display: 'block', mt: { xs: 1, md: 0 } }}
+              gutterBottom={isMobile}
+            >
+              {formattedDate}
+            </Typography>
           )}
         </ContentContainer>
 

@@ -49,6 +49,7 @@ function RouteComponent() {
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="A person typing on a laptop"
         imageSrc={CallOutImage}
+        date="2025-03-15"
       />
 
       {/* Intro: Empowering Small Businesses */}
@@ -363,6 +364,7 @@ function RouteComponent() {
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
           route: '/blog/posts/frontend-design/microfrontends-part2',
           image: CallOutImage2,
+          date: '2025-04-21',
           blurb:
             'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
         }}

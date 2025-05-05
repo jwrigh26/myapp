@@ -39,6 +39,7 @@ function RouteComponent() {
         imageSrc={SplashImage}
         imagePosition={{ right: 48 }}
         imageRatio={1/0.47}
+        date="06-01-2025"
       />
       <TitleBlock subtitle="Writing about what I use every day">
         Sticking with React 18

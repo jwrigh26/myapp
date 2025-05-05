@@ -48,6 +48,7 @@ function RouteComponent() {
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
         imageSrc={CallOutImage2}
+        date="04-21-2025"
       />
 
       {/* ### Before Micro Frontends */}
@@ -124,7 +125,7 @@ function RouteComponent() {
 
       <ProseBlock>
         The main reason we decided against External App Bootstrapping was the
-        speed and simplicity of iframes. Iframes let us hit market faster. They
+        speed and simplicity of iframes. iFrames let us hit market faster. They
         were also the default choice for third-party integration at the time.
       </ProseBlock>
 
@@ -301,18 +302,32 @@ function RouteComponent() {
         text="Visit the recommended setup guide for full details."
       />
 
+      <ProseBlock>
+        One more thing to note: If you're feeling bold and want to get the benefits of Single-spa with Module Federation, you can
+        combine the two. This lets you use Module Federation for dynamic module
+        sharing while still getting the lifecycle management and routing
+        benefits of Single-Spa. It's a bit more complex, but it can be a powerful
+        combination.
+      </ProseBlock>
+
+      <ReferenceLink
+        url="https://www.youtube.com/watch?v=wxnwPLLIJCY&t=328s"
+        linkText="See this video for a practical example"
+        text="It's possible to combine Single-Spa and Module Federation for advanced micro-frontend architectures. See this video for a practical example."
+      />
+
       <SectionSpacer id="iframe" />
       <ResponsiveContentImageGrid
         imageSrc={iframeImage}
-        imageAlt="Iframe"
+        imageAlt="iFrame"
         imageOnRight={true}
         objectFit="cover"
-        caption="Iframe: isolation and independent updates"
+        caption="iFrame: isolation and independent updates"
         columns="2fr 1fr"
         gap={3}
         aspectRatio={1 / 0.9}
       >
-        <ProseBlock title="Iframe-Based Approach" />
+        <ProseBlock title="iFrame-Based Approach" />
         <ProseList
           items={bulletPointsIframe1}
           subTitle="Simple, Secure, and Scalable"
@@ -348,6 +363,7 @@ function RouteComponent() {
         more freedom to evolve your application without being confined by
         someone else's tooling choices.
       </ProseBlock>
+
 
       {/* ### Pros and Cons */}
       {/* TODO: Come back and style this better */}
@@ -404,6 +420,7 @@ function RouteComponent() {
             'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
           route: '/blog/posts/frontend-design/microfrontends-part1',
           image: CallOutImage,
+          date: '2025-03-15',
           blurb:
             'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
         }}
@@ -411,6 +428,7 @@ function RouteComponent() {
           title: 'Micro-Frontends Part 3: Lessons Learned',
           route: '/blog/posts/frontend-design/microfrontends-part3',
           image: CallOutImage3,
+          date: '2025-05-01',
           blurb:
             'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
         }}
@@ -476,7 +494,7 @@ const bulletPoints1 = [
   'Monolith, full stack apps',
   'Frontend and Backend apps',
   'Component based Apps and Microservices',
-  'Micro Frontends',
+  'Micro-Frontends',
 ];
 
 const bulletPoints2 = [
@@ -497,16 +515,12 @@ const bulletPointsSspa1 = [
   'Use multiple frameworks on the same page without full reloads',
   'Adopt new frameworks without rewriting your entire application',
   'Lazy-load code for faster initial page loads',
-  'Independent deployments',
-  'No iframes',
 ];
 
 // - iFrames
 const bulletPointsIframe1 = [
   'Isolation: Each module runs in its own browser context',
-  'Independent Updates: Modules can be updated separately',
   'Simplicity: Quick deployments with reduced complexity',
-  'Custom Messaging: window.postMessage for communication',
 ];
 
 // - Pros and Cons

@@ -12,6 +12,8 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Link from '@mui/material/Link';
+import { format, parseISO } from 'date-fns';
+import { formatDisplayDate } from '@/utils/date';
 
 import splashImage from '@/assets/home_page_splash.jpg';
 import CallOutImage from '@/assets/Slide0.jpeg';
@@ -88,6 +90,9 @@ function HomeComponent() {
                   }}
                 />
                 <CardContent sx={{ flex: 1 }}>
+                  <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
+                    {formatDisplayDate(post.date)}
+                  </Typography>
                   <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
                     {post.title}
                   </Typography>
@@ -305,6 +310,7 @@ const latestBlogPosts = [
       'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
     image: CallOutImage,
     route: '/blog/posts/frontend-design/microfrontends-part1',
+    date: '2025-03-15',
   },
   {
     title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
@@ -312,6 +318,7 @@ const latestBlogPosts = [
       'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
     image: CallOutImage2,
     route: '/blog/posts/frontend-design/microfrontends-part2',
+    date: '2025-04-21',
   },
   {
     title: 'Micro-Frontends Part 3: Lessons Learned',
@@ -319,5 +326,6 @@ const latestBlogPosts = [
       'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
     image: TechDebt,
     route: '/blog/posts/frontend-design/microfrontends-part3',
+    date: '2025-05-01',
   },
 ];

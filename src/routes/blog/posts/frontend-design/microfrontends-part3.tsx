@@ -18,6 +18,7 @@ import { SectionSpacer, Spacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import { createFileRoute } from '@tanstack/react-router';
+import Gooddbye from '@/assets/Slide20.png';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part3'
@@ -46,6 +47,7 @@ function RouteComponent() {
         subtitle="Lessons Learned"
         imageAlt="Micro-Frontends Part 3"
         imageSrc={TechDebt}
+        date="2025-05-01"
       />
       {/* ### Before Micro Frontends */}
       <TitleBlock subtitle="Lessons learned from our micro-frontend journey">
@@ -271,12 +273,32 @@ function RouteComponent() {
           those who primarily focus on backend tasks, takes time and effort.
           That's not always ideal for a feature-driven development shop.
         </ProseBlock>
+        {/* ### Iframe Messaging Gotchas */}
+        <SectionSpacer id="thank-you" />
+        <ResponsiveContentImageGrid
+          // imageOnRight={false}
+          // mobileImageFirst
+          imageSrc={Gooddbye}
+          imageAlt="Thanks for reading!"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="If you made it this far, thanks for reading!"
+        >
+          <ProseBlock title="The Summary" />
+          <SubSectionStarter title="Micro-Frontends Are Not for Everyone">
+            If you made it this far, thanks for reading! I hope you found this
+            post helpful. I know I learned a lot writing it. I also hope you
+            learned something new about micro-frontends and how to use them
+            effectively.
+          </SubSectionStarter>
+          </ResponsiveContentImageGrid>
       </BodyBlock>
       <BlogPostNavigator
         prev={{
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
           route: '/blog/posts/frontend-design/microfrontends-part2',
           image: CallOutImage2,
+          date: '2025-04-21',
           blurb:
             'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
         }}

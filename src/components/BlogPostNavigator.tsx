@@ -7,28 +7,32 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import { Link as RouterLink } from '@tanstack/react-router';
+import { formatDisplayDate } from '@/utils/date';
 
-type PostNavInfo = {
+type BlogPostProps = {
   title: string;
   route: string;
   image: string;
   blurb?: string;
+  date?: string;
 };
+
+interface BlogPostNavigatorProps {
+  prev?: BlogPostProps;
+  next?: BlogPostProps;
+  suggested?: BlogPostProps;
+}
 
 export default function BlogPostNavigator({
   prev,
   next,
   suggested,
-}: {
-  prev?: PostNavInfo;
-  next?: PostNavInfo;
-  suggested?: PostNavInfo;
-}) {
+}: BlogPostNavigatorProps) {
   const items = [
     prev && { ...prev, label: 'Previous' },
     next && { ...next, label: 'Next' },
     !prev && !next && suggested && { ...suggested, label: 'Suggested' },
-  ].filter(Boolean) as (PostNavInfo & { label: string })[];
+  ].filter(Boolean) as (BlogPostProps & { label: string })[];
 
   if (!items.length) return null;
 
@@ -85,7 +89,7 @@ export default function BlogPostNavigator({
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 height: 'auto',
-                minHeight: 140, // optional: for consistent card size
+                minHeight: 140,
               }}
             >
               <CardMedia
@@ -106,6 +110,15 @@ export default function BlogPostNavigator({
                 <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
                   {item.title}
                 </Typography>
+                {item.date && (
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mt: 1, mb: 2, display: 'block' }}
+                  >
+                    {formatDisplayDate(item.date)}
+                  </Typography>
+                )}
                 {item.blurb && (
                   <Typography
                     variant="caption"
