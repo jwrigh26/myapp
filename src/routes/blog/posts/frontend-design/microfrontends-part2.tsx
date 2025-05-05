@@ -479,7 +479,7 @@ function ProsConsList({
       direction={{ xs: 'column', sm: 'row' }}
       gap={4}
     >
-      <Box>
+      <Box sx={{width: { xs: 'auto', sm: '412px', md: '512px', lg: '600px' }}}>
         <ProseList color={prosColor} items={pros} subTitle="Pros" />
       </Box>
       <Box>
