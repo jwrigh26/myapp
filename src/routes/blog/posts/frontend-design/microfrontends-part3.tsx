@@ -54,9 +54,9 @@ function RouteComponent() {
         Communication Challenges in a Modular Front-End
       </TitleBlock>
       <IntroBlock>
-        In Part 3, We'll talk about how to use a messaging layer to act as a glue for iframes.
-        How to avoid over-engineering when it comes to routing and navigation.
-        And other lessons learned along the way.
+        In Part 3, We'll talk about how to use a messaging layer to act as a
+        glue for iframes. How to avoid over-engineering when it comes to routing
+        and navigation. And other lessons learned along the way.
       </IntroBlock>
       <BodyBlock>
         {/* ### Why Communication Matters */}
@@ -147,8 +147,6 @@ function RouteComponent() {
           same mistakes we made along the way?
         </ProseBlock>
         <ResponsiveContentImageGrid
-          // imageOnRight={false}
-          // mobileImageFirst
           imageSrc={MemoryLeak}
           imageAlt="Memory Leak"
           aspectRatio={4 / 3}
@@ -208,6 +206,7 @@ function RouteComponent() {
         {/* ### Iframe Messaging Gotchas */}
         <SectionSpacer id="hard-lessons" />
         <ResponsiveContentImageGrid
+          columns="2fr 1fr"
           // imageOnRight={false}
           // mobileImageFirst
           imageSrc={HardLessons}
@@ -282,6 +281,7 @@ function RouteComponent() {
           imageAlt="Thanks for reading!"
           aspectRatio={4 / 3}
           objectFit="cover"
+          columns="2fr 1fr"
           caption="If you made it this far, thanks for reading!"
         >
           <ProseBlock title="The Summary" />
@@ -291,7 +291,7 @@ function RouteComponent() {
             learned something new about micro-frontends and how to use them
             effectively.
           </SubSectionStarter>
-          </ResponsiveContentImageGrid>
+        </ResponsiveContentImageGrid>
       </BodyBlock>
       <BlogPostNavigator
         prev={{

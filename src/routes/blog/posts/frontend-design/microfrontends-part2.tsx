@@ -113,8 +113,8 @@ function RouteComponent() {
         </ProseBlock>
 
         <ProseBlock>
-          In a presentation I saw, the speaker called this flavor “External App
-          Bootstrapping.” It uses a host application to load CSS, JS, and other
+          In a presentation I saw, the speaker called this flavor "External App
+          Bootstrapping." It uses a host application to load CSS, JS, and other
           assets from different servers. Then it stitches the code together
           using the <span className="code">window</span> object and an event
           bus, much like an iframe's messaging system. Like the other
@@ -175,8 +175,8 @@ function RouteComponent() {
         </ProseBlock>
       </ResponsiveContentImageGrid>
       <ProseBlock>
-        If you wanted to mirror our iframe framework, you'd use the “separate
-        builds per page” pattern. In that setup, each page in your SPA is a
+        If you wanted to mirror our iframe framework, you'd use the "separate
+        builds per page" pattern. In that setup, each page in your SPA is a
         remote container build, and your host site (the shell) is another
         container build. Each page deploys on its own schedule, just like our
         iframe modules.
@@ -237,8 +237,8 @@ function RouteComponent() {
         frameworks together so your micro-frontends work seamlessly. I don't
         believe Single-Spa is for the faint of heart. Building a "Hello, world"
         demo or an initial proof of concept is doable, but complexity grows
-        quickly. They even offer classes and tutorials because integrating it
-        properly takes careful planning.
+        quickly. Because of the complexity they offer classes and
+        tutorias to help with integrating it properly.
       </ProseBlock>
 
       <ProseBlock>
@@ -303,10 +303,11 @@ function RouteComponent() {
       />
 
       <ProseBlock>
-        One more thing to note: If you're feeling bold and want to get the benefits of Single-spa with Module Federation, you can
-        combine the two. This lets you use Module Federation for dynamic module
-        sharing while still getting the lifecycle management and routing
-        benefits of Single-Spa. It's a bit more complex, but it can be a powerful
+        One more thing to note: If you're feeling bold and want to get the
+        benefits of Single-spa with Module Federation, you can combine the two.
+        This lets you use Module Federation for dynamic module sharing while
+        still getting the lifecycle management and routing benefits of
+        Single-Spa. It's a bit more complex, but it can be a powerful
         combination.
       </ProseBlock>
 
@@ -363,7 +364,6 @@ function RouteComponent() {
         more freedom to evolve your application without being confined by
         someone else's tooling choices.
       </ProseBlock>
-
 
       {/* ### Pros and Cons */}
       {/* TODO: Come back and style this better */}
@@ -479,7 +479,9 @@ function ProsConsList({
       direction={{ xs: 'column', sm: 'row' }}
       gap={4}
     >
-      <Box sx={{width: { xs: 'auto', sm: '412px', md: '512px', lg: '600px' }}}>
+      <Box
+        sx={{ width: { xs: 'auto', sm: '412px', md: '512px', lg: '600px' } }}
+      >
         <ProseList color={prosColor} items={pros} subTitle="Pros" />
       </Box>
       <Box>

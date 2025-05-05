@@ -170,7 +170,7 @@ function RouteComponent() {
         firsthand. Since we're primarily a React shop, our legacy Angular
         projects often don't get the attention they need because most of our
         Angular developers have moved on from the company. So in short, the
-        moreal of the story is that if you adopt a modular frameowkr supporting
+        moreal of the story is that if you adopt a modular framework supporting
         multiple development stacks, you must be prepared to manage both sides
         of this powerful developer sword.
       </ProseBlock>
@@ -200,18 +200,17 @@ function RouteComponent() {
           versions. While today we aim for uniform versioning across all
           projects, that wasn't always the case. At one point, we had projects
           on React 16, 17, and 18 all running at once. Version drift always
-          happens to some extent, but when the gaps grew too wide, working
-          together got tricky, especially when we tried building shared
-          libraries. That's when library conflicts decided to show their ugly
-          faces and crash our modular frontend party.
+          happens to some extent, but when the gaps grow too wide problems
+          quickly start to show their ugly faces. Version drifts can crash a
+          modular frontend party.
         </ProseBlock>
       </ResponsiveContentImageGrid>
 
       <ProseBlock>
-        A big reason for this mess was drastic differences in UI libraries. We
-        had to pause shared-library development to sort these conflicts out
-        first. Our initial refactoring estimates were way off, and before we
-        knew it, we were knocking right on refactor hell's door.
+        The big party crasher for us, was a drastic differences in UI libraries.
+        We had to pause development to sort these conflicts out first, and our
+        initial refactoring estimates were way off. Before we knew it, we were
+        knocking right on refactor hell's door.
       </ProseBlock>
 
       <ProseBlock>
@@ -239,11 +238,13 @@ function RouteComponent() {
         caption="Shared resources: UI library, utility methods, and context providers"
       >
         <SubSectionStarter title="Our Shared Toolkit">
-          Once our version drift issues were sorted out, we started building our
+          Once our version drift issues were sorted out, we started building a
           shared resource library late in the development process. This library
           focused strictly on things we identified as being valuable. Team
           buy-in was important too, since we wanted everyone using the shared
-          resources instead of teams going rogue and doing their own thing.
+          resources instead of teams going rogue and doing their own thing. The
+          idea being that we could use the shared resources to help prevent
+          issues with version drift we previously experienced.
         </SubSectionStarter>
 
         <ProseBlock>
@@ -257,7 +258,7 @@ function RouteComponent() {
           The utility methods are somewhat unique because we only share them in
           specific areas of development: safety, validation, date handling,
           messaging, and authentication. This approach simplifies debugging and
-          establishes unified standards around code we deem critical.
+          establishes standards around code we deem important.
         </ProseBlock>
       </ResponsiveContentImageGrid>
 
