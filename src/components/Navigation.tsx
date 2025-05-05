@@ -21,7 +21,7 @@ export default function Navigation({
         <>
           <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
           <NavButton to="/home">Home</NavButton>
-          <NavButton to="/about">About</NavButton>
+          {/* <NavButton to="/about">About</NavButton> */}
           <NavButton to="/blog">Blog</NavButton>
           {/* <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
           <NavButton to="/learn">Learn</NavButton>
