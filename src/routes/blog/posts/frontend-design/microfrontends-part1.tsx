@@ -209,18 +209,14 @@ function RouteComponent() {
       <ProseBlock>
         The big party crasher for us, was a drastic differences in UI libraries.
         We had to pause development to sort these conflicts out first, and our
-        initial refactoring estimates were way off. Before we knew it, we were
-        knocking right on refactor hell's door.
+        initial refactoring estimates were way off. I'll spare you the drama and
+        just say our team managed to overcome these hurrdles.
       </ProseBlock>
 
       <ProseBlock>
-        I'll spare you the drama and just say our team managed to overcome these
-        hurdles. For now, we've decided to freeze our dev stack. We're happy
-        with our current patterns and don't see a strong business need to jump
-        from React 18 to 19 or to switch from dynamic SPAs to SSR. We're totally
-        fine being a little behind the latest and greatest for now. It lets us
-        focus on feature-driven development and keeps our developers trained up
-        on the best practices that matter most for our team.
+        For now, we've decided to freeze our dev stack. We're happy with our
+        current patterns and don't see a strong business need to jump from React
+        18 to 19 or to switch from dynamic SPAs to SSR.
       </ProseBlock>
 
       {/* ### Shared Resources */}
@@ -242,9 +238,8 @@ function RouteComponent() {
           shared resource library late in the development process. This library
           focused strictly on things we identified as being valuable. Team
           buy-in was important too, since we wanted everyone using the shared
-          resources instead of teams going rogue and doing their own thing. The
-          idea being that we could use the shared resources to help prevent
-          issues with version drift we previously experienced.
+          resources. The idea being it will help keep version drift to a
+          minimum.
         </SubSectionStarter>
 
         <ProseBlock>
@@ -253,23 +248,15 @@ function RouteComponent() {
           team stay consistent in their designs and in how they interact with
           the host sites.
         </ProseBlock>
-
         <ProseBlock>
-          The utility methods are somewhat unique because we only share them in
-          specific areas of development: safety, validation, date handling,
-          messaging, and authentication. This approach simplifies debugging and
-          establishes standards around code we deem important.
+          These shareable resources only emerged after our module development
+          matured. This gave us enough time to spot common patterns across teams
+          and add them to the shared library when there was clear overlap. By
+          taking this approach, we could gradually build out our library and
+          handle small, "bite-size" refactors as part of regular feature
+          development.
         </ProseBlock>
       </ResponsiveContentImageGrid>
-
-      <ProseBlock>
-        These shareable resources only emerged after our module development
-        matured. This gave us enough time to spot common patterns across teams
-        and add them to the shared library when there was clear overlap. By
-        taking this approach, we could gradually build out our library and
-        handle small, "bite-size" refactors as part of regular feature
-        development.
-      </ProseBlock>
 
       {/* ### Service Integration & Module Autonomy */}
       <SectionSpacer id="service-integration-and-module-autonomy" />
@@ -300,15 +287,18 @@ function RouteComponent() {
           integrations seamlessly, whether as a standalone application or
           embedded in a third-party platform.
         </SubSectionStarter>
+        <ProseBlock>
+          But superpowers come at a price. Ensuring our modules run correctly in
+          every environment takes extra work and rigorous testing. You might
+          even say that the freedom to inject modules anywhere is our kryptonite
+          because of the maintence that comes with it.
+        </ProseBlock>
       </ResponsiveContentImageGrid>
-      <ProseBlock>
-        But superpowers come at a price. Ensuring our modules run correctly in
-        every environment takes extra work and rigorous testing. You might even
-        say that the freedom to inject modules anywhere is our kryptonite.
-        Sunsetting legacy modules is challenging because we have to track which
-        clients still use each version and plan their migration to newer
-        modules. Still, this balance of service integration and module autonomy
-        keeps our system flexible.
+      <ProseBlock subtitle="Example:">
+        Sunsetting legacy modules is challenging because we have to
+        track which clients still use each version and plan their migration to
+        newer modules. Still, this balance of service integration and module
+        autonomy keeps our system flexible.
       </ProseBlock>
 
       {/* ### Deployment Flexibility */}

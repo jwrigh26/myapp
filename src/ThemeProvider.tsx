@@ -6,7 +6,7 @@ import {
   decomposeColor,
   responsiveFontSizes,
 } from '@mui/material/styles';
-import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
+import { ReactNode, createContext, useContext, useMemo, useState, useEffect } from 'react';
 
 // Module augmentation for custom theme properties
 declare module '@mui/material/styles' {
@@ -350,8 +350,40 @@ export const useThemeMode = () => useContext(ThemeContext);
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('themeMode') === 'dark';
+    const stored = localStorage.getItem('themeMode');
+    if (stored === 'dark') return true;
+    if (stored === 'light') return false;
+    // Fallback to OS preference
+    return window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+
+  // Persist theme mode to localStorage
+  useEffect(() => {
+    localStorage.setItem('themeMode', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  // Listen for themeMode changes in other tabs
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'themeMode' && e.newValue) {
+        setIsDarkMode(e.newValue === 'dark');
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  // Listen for OS preference changes (optional)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      const stored = localStorage.getItem('themeMode');
+      if (!stored) setIsDarkMode(mq.matches);
+    };
+    mq.addEventListener('change', handleChange);
+    return () => mq.removeEventListener('change', handleChange);
+  }, []);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
@@ -365,15 +397,15 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       toggleTheme,
       isDarkMode,
     }),
-    [isDarkMode]
+    [toggleTheme, isDarkMode]
   );
-
-  console.log('theme', theme);
 
   return (
     <ThemeContext.Provider value={themeMode}>
-      <CssBaseline />
-      <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
     </ThemeContext.Provider>
   );
 }

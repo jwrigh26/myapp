@@ -57,9 +57,9 @@ interface NavHistoryEntry {
 // Main navigation data
 const mainNavItems: NavItem[] = [
   { id: 'home', title: 'Home', path: '/home', icon: mdiHome },
-  { id: 'about', title: 'About', path: '/about', icon: mdiInformation },
+  // { id: 'about', title: 'About', path: '/about', icon: mdiInformation },
   { id: 'blog', title: 'Blog', path: '/blog', icon: mdiBookOpen },
-  { id: 'game', title: 'Game', path: '/game', icon: mdiGamepadVariant },
+  // { id: 'game', title: 'Game', path: '/game', icon: mdiGamepadVariant },
 ];
 
 // Blog categories
