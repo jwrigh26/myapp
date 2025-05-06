@@ -169,10 +169,13 @@ function RouteComponent() {
         As you can imagine, we've experienced both edges of this sword
         firsthand. Since we're primarily a React shop, our legacy Angular
         projects often don't get the attention they need because most of our
-        Angular developers have moved on from the company. So in short, the
-        moreal of the story is that if you adopt a modular framework supporting
-        multiple development stacks, you must be prepared to manage both sides
-        of this powerful developer sword.
+        Angular developers have moved on from the company.
+      </ProseBlock>
+
+      <ProseBlock subtitle="In short...">
+        The moreal of the story is that if you use a modular framework
+        supporting multiple development stacks, you must be prepared to manage
+        both sides of this double-edged sword.
       </ProseBlock>
 
       <Spacer size={2} desktop />
@@ -295,10 +298,10 @@ function RouteComponent() {
         </ProseBlock>
       </ResponsiveContentImageGrid>
       <ProseBlock subtitle="Example:">
-        Sunsetting legacy modules is challenging because we have to
-        track which clients still use each version and plan their migration to
-        newer modules. Still, this balance of service integration and module
-        autonomy keeps our system flexible.
+        Sunsetting legacy modules is challenging because we have to track which
+        clients still use each version and plan their migration to newer
+        modules. Still, this balance of service integration and module autonomy
+        keeps our system flexible.
       </ProseBlock>
 
       {/* ### Deployment Flexibility */}
