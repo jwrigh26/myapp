@@ -422,8 +422,8 @@ const bulletPoints5 = [
 
 // ### Module Autonomy
 const bulletPoints6 = [
-  'Consumption: Each module consumes APIs from various .NET backend services.',
-  'Standalone Operation: Some modules run as independent applications outside of a host site.',
+  'Each module consumes APIs from various .NET backend services.',
+  'Some modules run as independent applications outside of a host site.',
 ];
 
 // ### Deployment Flexibility
