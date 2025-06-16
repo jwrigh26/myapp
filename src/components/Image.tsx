@@ -11,20 +11,7 @@ interface SourceProps {
   sizes?: string; // e.g., "100vw"
 }
 
-// Extend the default img props for extra flexibility
-interface ResponsiveImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {
-  alt: string;
-  defaultSrc: string; // Fallback image source
-  sources?: SourceProps[]; // Array of source objects for the <picture> element
-  width?: number | string;
-  height?: number | string; // This is only for skeleton loading
-  style?: React.CSSProperties;
-  skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
-  isLoading?: boolean; // Optional loading state
-  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-}
-// Extend the default img props for extra flexibility
+// Main Image component props
 interface ResponsiveImageProps
   extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'loading'> {
   alt: string;
@@ -34,8 +21,8 @@ interface ResponsiveImageProps
   height?: number | string;
   style?: React.CSSProperties;
   skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
-  isLoading?: boolean; // Optional manual loading state
   isLazyLoading?: boolean; // Controls the loading="lazy" attribute
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
 const Image: React.FC<ResponsiveImageProps> = ({
   alt,
@@ -45,31 +32,67 @@ const Image: React.FC<ResponsiveImageProps> = ({
   height,
   style,
   skeletonProps,
-  isLoading = false, // default to not loading
   isLazyLoading = true, // default to lazy loading
   objectFit = 'cover',
   ...rest
 }) => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [hasError, setHasError] = React.useState(false);
+
+  const handleLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleError = () => {
+    setIsLoading(false);
+    setHasError(true);
+  };
+
   const combinedStyle: React.CSSProperties = {
-    maxWidth: width || '100%',
-    height: height || 'auto',
+    width: '100%',
+    height: '100%',
     objectFit,
     ...style,
-    display: isLoading ? 'none' : 'block',
   };
 
   return (
-    <Box position="relative">
+    <>
       {isLoading && (
         <Skeleton
           variant="rectangular"
-          width={width || '100%'}
-          height={height || '100%'}
-          animation={undefined}
+          animation={false}
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '2px',
+            bgcolor: 'action.hover',
+          }}
           {...skeletonProps}
         />
       )}
-      <picture>
+      {hasError && !isLoading && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            bgcolor: 'action.hover',
+            borderRadius: '2px',
+            color: 'text.secondary',
+          }}
+        >
+          <Typography variant="body2">Failed to load image</Typography>
+        </Box>
+      )}
+      <picture style={{ width: '100%', height: '100%' }}>
         {sources.map((source, index) => (
           <source
             key={index}
@@ -81,99 +104,18 @@ const Image: React.FC<ResponsiveImageProps> = ({
         <img
           src={defaultSrc}
           alt={alt}
-          loading="lazy"
+          loading={isLazyLoading ? 'lazy' : 'eager'}
+          onLoad={handleLoad}
+          onError={handleError}
           style={combinedStyle}
           {...rest}
         />
       </picture>
-    </Box>
+    </>
   );
 };
 
 export default Image;
-
-export const ClearFloat = styled(Box)({
-  clear: 'both',
-  display: 'block',
-  width: '100%',
-});
-
-export const ShapeOutsideContainer = styled(Box, {
-  shouldForwardProp: (prop) =>
-    !['float', 'width', 'shape', 'margin'].includes(prop as string),
-})<{
-  float?: 'left' | 'right';
-  width?: string | number;
-  shape?: 'circle' | 'ellipse' | 'inset' | 'polygon' | null;
-  margin?: string | number;
-}>(({
-  float = 'left',
-  width = '320px',
-  shape = null,
-  margin = '0 1rem 1rem 0',
-}) => {
-  const shapeValue =
-    shape === 'circle'
-      ? 'circle(50%)'
-      : shape === 'ellipse'
-        ? 'ellipse(50% 50% at 50% 50%)'
-        : shape === 'inset'
-          ? 'inset(10% 10% 10% 10%)'
-          : shape === 'polygon'
-            ? 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
-            : null;
-
-  return {
-    float,
-    width,
-    margin: float === 'left' ? margin : '0 0 1rem 1rem',
-    shapeOutside: shapeValue || 'none',
-    WebkitShapeOutside: shapeValue || 'none', // Safari support
-    ...(shapeValue && {
-      clipPath: shapeValue,
-      WebkitClipPath: shapeValue, // Safari support
-    }),
-  };
-});
-
-export const BackgroundImageContainer = styled(Box, {
-  shouldForwardProp: (prop) =>
-    ![
-      'src',
-      'maxWidth',
-      'height',
-      'bgSize',
-      'bgPosition',
-      'borderRadius',
-    ].includes(prop as string),
-})<{
-  src: string;
-  maxWidth?: string | number;
-  height?: string | number;
-  bgSize?: 'contain' | 'cover' | string;
-  bgPosition?: string;
-  borderRadius?: string | number;
-}>(
-  ({
-    src,
-    maxWidth = '800px',
-    height = '300px',
-    bgSize = 'contain',
-    bgPosition = 'center',
-    borderRadius = 0,
-  }) => ({
-    width: '100%',
-    maxWidth,
-    height,
-    margin: '0 auto',
-    backgroundImage: `url(${src})`,
-    backgroundPosition: bgPosition,
-    backgroundSize: bgSize,
-    backgroundRepeat: 'no-repeat',
-    borderRadius,
-    transition: 'background-image 0.3s ease-in-out',
-  })
-);
 
 export const AspectRatioContainer = styled(Box, {
   shouldForwardProp: (prop) => !['ratio', 'maxWidth'].includes(prop as string),
