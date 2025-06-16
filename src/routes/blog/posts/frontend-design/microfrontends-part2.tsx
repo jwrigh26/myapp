@@ -10,16 +10,16 @@ import CallOutImage3 from '@/assets/Slide19.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
 import StratsAndChoices from '@/assets/Slide8.jpeg';
 import CallToAction from '@/components/CallToAction';
-import { ResponsiveContentImageGrid } from '@/components/Image';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
-import { SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import ReferenceLink from '@/components/ReferenceLink';
 import RationaleChoiceImage from '@/assets/Slide14.jpeg';
 import IntroBlock from '@/components/IntroBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
+import BlogSection from '@/components/blog/BlogSection';
+import BlogSubsection from '@/components/blog/BlogSubsection';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -60,8 +60,10 @@ function RouteComponent() {
         different strategies for picking an architecture and compare the pros
         and cons of each.
       </IntroBlock>
-      <SectionSpacer id="decision-making" />
-      <ResponsiveContentImageGrid
+      
+      <BlogSection 
+        id="decision-making"
+        title="Before Micro Frontends"
         imageSrc={MonolithImage}
         imageAlt="Monolith Image"
         imageOnRight={true}
@@ -71,7 +73,6 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 1.05}
       >
-        <ProseBlock title="Before Micro Frontends" />
         <ProseList items={bulletPoints1} subTitle="The Frontend Evolution" />
         <ProseBlock>
           Before micro-frontends, the development landscape was dominated by
@@ -85,11 +86,12 @@ function RouteComponent() {
           needs of many applications. However, for large teams and applications,
           another option exists: micro-frontends.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
       {/* ### Micro-Frontend Strategies */}
-      <SectionSpacer id="micro-frontend-stragegies" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="micro-frontend-stragegies"
+        title="Micro-Frontend Strategies"
         imageSrc={StratsAndChoices}
         imageAlt="Strategies and Choices"
         imageOnRight={false}
@@ -99,7 +101,6 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 0.95}
       >
-        <ProseBlock title="Micro-Frontend Strategies" />
         <ProseList
           items={bulletPoints2}
           subTitle="Three flavors to choose from"
@@ -121,7 +122,7 @@ function RouteComponent() {
           approaches, it supports independent deployments and is able to look
           like a single application.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
       <ProseBlock>
         The main reason we decided against External App Bootstrapping was the
@@ -135,7 +136,7 @@ function RouteComponent() {
         text="If you'd like to see External App Bootstrapping in action, check out this walkthrough on YouTube."
       />
 
-      <SubSectionStarter title="Micro-Frontend Libraries" />
+      <BlogSubsection title="Micro-Frontend Libraries" />
       <ProseBlock>
         A more modern approach to micro-frontends involves using libraries.
         Single-spa, for example, provides a top-level router and built-in lazy
@@ -152,8 +153,9 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Modern Micro-Frontend libraries */}
-      <SectionSpacer id="module-federation" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="module-federation"
+        title="Module Federation"
         imageSrc={ModuleFederationImage}
         imageAlt="Module Federation"
         imageOnRight={true}
@@ -163,7 +165,6 @@ function RouteComponent() {
         gap={3}
         aspectRatio={16 / 11}
       >
-        <ProseBlock title="Module Federation" />
         <ProseList items={bulletPointsMf1} subTitle="Shiny Happy Modules" />
         <ProseBlock>
           Module Federation shines at dynamic, runtime module sharing. You can
@@ -173,7 +174,7 @@ function RouteComponent() {
           Think of it like an iframe inside an iframe, only without the messy
           postMessage glue.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
       <ProseBlock>
         If you wanted to mirror our iframe framework, you'd use the "separate
         builds per page" pattern. In that setup, each page in your SPA is a
@@ -214,8 +215,9 @@ function RouteComponent() {
         ultimately decide if the trade-offs are worth it.
       </ProseBlock>
 
-      <SectionSpacer id="single-spa" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="single-spa"
+        title="Single Spa"
         imageSrc={SingleSpaImage}
         imageAlt="Single SPA"
         imageOnRight={false}
@@ -225,12 +227,11 @@ function RouteComponent() {
         gap={2}
         aspectRatio={16 / 11}
       >
-        <ProseBlock title="Single Spa" />
         <ProseList
           items={bulletPointsSspa1}
           subTitle="What it Brings to the Game"
         />
-      </ResponsiveContentImageGrid>
+      </BlogSection>
       <ProseBlock>
         Single-Spa is currently the most popular micro-frontend solution, and
         for good reason. It avoids iframes by hosting multiple JavaScript
@@ -271,7 +272,7 @@ function RouteComponent() {
         </ol>
       </ProseBlock>
 
-      <SubSectionStarter title="Getting Started">
+      <BlogSubsection title="Getting Started">
         A high-level overview of how to get started with Single-Spa:
         <ul>
           <li>
@@ -291,7 +292,7 @@ function RouteComponent() {
             environment.
           </li>
         </ul>
-      </SubSectionStarter>
+      </BlogSubsection>
       <ProseBlock>
         If you decide on Single-Spa, you'll need to tackle each of those areas
         in depth.
@@ -317,8 +318,9 @@ function RouteComponent() {
         text="It's possible to combine Single-Spa and Module Federation for advanced micro-frontend architectures. See this video for a practical example."
       />
 
-      <SectionSpacer id="iframe" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="iframe"
+        title="iFrame-Based Approach"
         imageSrc={iframeImage}
         imageAlt="iFrame"
         imageOnRight={true}
@@ -328,12 +330,11 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 0.9}
       >
-        <ProseBlock title="iFrame-Based Approach" />
         <ProseList
           items={bulletPointsIframe1}
           subTitle="Simple, Secure, and Scalable"
         />
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
       <ProseBlock>
         Coming back to where we started, iframes remain a viable option in the
@@ -367,24 +368,28 @@ function RouteComponent() {
 
       {/* ### Pros and Cons */}
       {/* TODO: Come back and style this better */}
-      <SectionSpacer id="pros-and-cons" />
-      <ProseBlock title="Pros and Cons" />
-      <SubSectionStarter title="Module Federation" />
-      <ProsConsList pros={bulletPointsMFLPros} cons={bulletPointsMFLCons} />
-      <SubSectionStarter title="Single-Spa" />
-      <ProsConsList
-        pros={bulletPointsSingleSpaPros}
-        cons={bulletPointsSingleSpaCons}
-      />
-      <SubSectionStarter title="iFrame" />
-      <ProsConsList
-        pros={bulletPointsIframePros}
-        cons={bulletPointsIframeCons}
-      />
+      <BlogSection 
+        id="pros-and-cons"
+        title="Pros and Cons"
+      >
+        <BlogSubsection title="Module Federation" />
+        <ProsConsList pros={bulletPointsMFLPros} cons={bulletPointsMFLCons} />
+        <BlogSubsection title="Single-Spa" />
+        <ProsConsList
+          pros={bulletPointsSingleSpaPros}
+          cons={bulletPointsSingleSpaCons}
+        />
+        <BlogSubsection title="iFrame" />
+        <ProsConsList
+          pros={bulletPointsIframePros}
+          cons={bulletPointsIframeCons}
+        />
+      </BlogSection>
 
       {/* ### Rationale Behind Our Choice */}
-      <SectionSpacer id="rantionale-behinde-our-choice" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="rantionale-behinde-our-choice"
+        title="Rationale Behind Our Choice"
         imageSrc={RationaleChoiceImage}
         imageAlt="Rationale Behind Our Choice"
         imageOnRight={true}
@@ -394,7 +399,6 @@ function RouteComponent() {
         gap={2}
         aspectRatio={1 / 1.32}
       >
-        <ProseBlock title="Rationale Behind Our Choice" />
         <ProseList
           items={bulletPointsRationale}
           subTitle="Our Decision Factors"
@@ -412,7 +416,7 @@ function RouteComponent() {
           without deep front-end knowledge. Based on timing, needs, and team
           stucture, iframes made the most sense.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
       <BlogPostNavigator
         prev={{
@@ -440,26 +444,6 @@ function RouteComponent() {
 // #################################################
 // ### Usuable Components
 // #################################################
-
-function SubSectionStarter({
-  children,
-  title,
-  subtitle,
-  dense = false,
-  spacingBottom = false,
-}: ProseBlockProps) {
-  return (
-    <ProseBlock
-      title={title}
-      subtitle={subtitle}
-      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
-      dense={dense}
-      spacingBottom={spacingBottom}
-    >
-      {children}
-    </ProseBlock>
-  );
-}
 
 // New ProsConsList component
 function ProsConsList({

@@ -9,7 +9,6 @@ import CallOutImage2 from '@/assets/Slide10.jpeg';
 import { BodyBlock } from '@/components/BodyBlock';
 import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
-import type { ProseBlockProps } from '@/components/ProseBlock';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import QuoteBlock from '@/components/QuoteBlock';
@@ -17,6 +16,8 @@ import ReferenceLink from '@/components/ReferenceLink';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
+import BlogSection from '@/components/blog/BlogSection';
+import BlogSubsection from '@/components/blog/BlogSubsection';
 import { createFileRoute } from '@tanstack/react-router';
 import Gooddbye from '@/assets/Slide20.png';
 
@@ -60,8 +61,9 @@ function RouteComponent() {
       </IntroBlock>
       <BodyBlock>
         {/* ### Why Communication Matters */}
-        <SectionSpacer id="why-communication-matters" />
-        <ResponsiveContentImageGrid
+        <BlogSection 
+          id="why-communication-matters"
+          title="Why Communication Matters"
           imageOnRight
           mobileImageFirst
           imageSrc={CoffeeWizard1}
@@ -70,15 +72,14 @@ function RouteComponent() {
           objectFit="cover"
           caption="Host site displaying a coffee brewing wizard"
         >
-          <ProseBlock title="Why Communication Matters" />
           <ProseList items={bulletPoints1} />
           <QuoteBlock>
             Example: The Magic Coffee site is currently showing a coffee brewing
-            wizard. The site is the “host site” and is responsible for main
+            wizard. The site is the "host site" and is responsible for main
             navigation, and the wizard is an iframe that manages its own
             step-by-step process.
           </QuoteBlock>
-        </ResponsiveContentImageGrid>
+        </BlogSection>
         <ProseBlock>
           The host site, without any custom messaging bus required, has the
           ability to load iframes that display various pages or modules, such as
@@ -125,43 +126,45 @@ function RouteComponent() {
         </ResponsiveContentImageGrid>
 
         {/* ### Our Current Approach */}
-        <SectionSpacer id="our-current-approach" />
-        <ProseBlock title="Our Current Approach" />
-        <ProseList items={bulletPoints2} />
-        <ProseBlock>
-          By using custom messaging, deep navigation, and event broadcasting
-          through a message bus, we can handle tricky iframe communication
-          between modules.
-        </ProseBlock>
+        <BlogSection id="our-current-approach" title="Our Current Approach">
+          <ProseList items={bulletPoints2} />
+          <ProseBlock>
+            By using custom messaging, deep navigation, and event broadcasting
+            through a message bus, we can handle tricky iframe communication
+            between modules.
+          </ProseBlock>
+        </BlogSection>
 
         {/* ### Iframe Messaging Gotchas */}
-        <SectionSpacer id="iframe-messaging-gotchas" />
-        <ProseBlock title="Iframe Messaging Gotchas" />
-        <ProseBlock>
-          While iframe messaging helps glue everything together, it's important
-          to plan ahead. If you don't, you'll end up with a rushed arts and
-          crafts project covered in Elmer’s glue.
-        </ProseBlock>
-        <ProseBlock>
-          To help you create a work of art, might I suggest avoiding some of the
-          same mistakes we made along the way?
-        </ProseBlock>
-        <ResponsiveContentImageGrid
+        <BlogSection 
+          id="iframe-messaging-gotchas"
+          title="Iframe Messaging Gotchas"
           imageSrc={MemoryLeak}
           imageAlt="Memory Leak"
           aspectRatio={4 / 3}
           objectFit="cover"
           caption="Memory Leaks from Iframe Messaging can flood your app. Be careful!"
         >
+          <ProseBlock>
+            While iframe messaging helps glue everything together, it's important
+            to plan ahead. If you don't, you'll end up with a rushed arts and
+            crafts project covered in Elmer's glue.
+          </ProseBlock>
+          <ProseBlock>
+            To help you create a work of art, might I suggest avoiding some of the
+            same mistakes we made along the way?
+          </ProseBlock>
           <ProseList
             subTitle="Our Biggest Iframe Messaging Gotchas"
             items={bulletPoints3}
           />
-        </ResponsiveContentImageGrid>
+        </BlogSection>
 
         {/* ### Messaging Improvements*/}
-        <SectionSpacer id="messaging-improvements" />
-        <ResponsiveContentImageGrid
+        <BlogSection 
+          id="messaging-improvements"
+          title="Messaging Improvements"
+          subtitle="Lessons From Post-Robot"
           imageOnRight={false}
           imageSrc={PostRobot}
           imageAlt="Post Robot"
@@ -169,16 +172,12 @@ function RouteComponent() {
           objectFit="cover"
           caption="Post-Robot: reliable messaging between iframes"
         >
-          <ProseBlock
-            title="Messaging Improvements"
-            subtitle="Lessons From Post-Robot"
-          />
           <ProseList items={bulletPoints4} />
           <ProseBlock>
             Let's talk more about those memory leaks. When we first started
             working with Post-Robot to create our messaging app, we didn't
             account for all the ways things could fail. While Post-Robot
-            provides what I call a “robust handshake protocol,” we used it more
+            provides what I call a "robust handshake protocol," we used it more
             like a quick high-five because, in some instances, we assumed it
             would just work.
           </ProseBlock>
@@ -195,7 +194,7 @@ function RouteComponent() {
             when needed. Since making these changes, our iframe messaging is
             operating like a brand-new faucet — no more leaks.
           </ProseBlock>
-        </ResponsiveContentImageGrid>
+        </BlogSection>
 
         <ReferenceLink
           text="For more information on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
@@ -203,56 +202,54 @@ function RouteComponent() {
           linkText="Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
         />
 
-        {/* ### Iframe Messaging Gotchas */}
-        <SectionSpacer id="hard-lessons" />
-        <ResponsiveContentImageGrid
+        {/* ### Hard Lessons */}
+        <BlogSection 
+          id="hard-lessons"
+          title="Hard Lessons in Micro-Frontend Development"
           columns="2fr 1fr"
-          // imageOnRight={false}
-          // mobileImageFirst
           imageSrc={HardLessons}
           imageAlt="Hard Lessons in Micro-Frontend Development"
           aspectRatio={4 / 3}
           objectFit="cover"
           caption="Hard Lessons: Are you sure you want to go down this path?"
         >
-          <ProseBlock title="Hard Lessons in Micro-Frontend Development" />
-          <SubSectionStarter title="Standardize Your Navigation Patterns">
+          <BlogSubsection title="Standardize Your Navigation Patterns">
             One area where we could have been more consistent is how we route
             dropdown navigation lists in drawers. From settings to admin pages,
             we use this kind of navigation everywhere. In each app, we
             approached it differently, and this made it challenging to
             standardize how things are done.
-          </SubSectionStarter>
+          </BlogSubsection>
 
-          <SubSectionStarter title="Beware of Over-Engineering">
+          <BlogSubsection title="Beware of Over-Engineering">
             In addition to navigation and routing, we also overcomplicated parts
             of our apps by trying to "future-proof" them. This created a lot of
             unused spaghetti code and unnecessary layers that now make very
             little sense.
-          </SubSectionStarter>
+          </BlogSubsection>
 
           <ProseBlock>
             One example: in one app, we set up dynamic routing to handle various
             payloads and display different navigation drawers. The code is
             impressive and works well to this day. The only issue is that we
-            only use it for a single list. It’s like designing a warehouse to
+            only use it for a single list. It's like designing a warehouse to
             store amazing Hot Wheels collections — but only using it to park
             your sedan.
           </ProseBlock>
-        </ResponsiveContentImageGrid>
+        </BlogSection>
 
-        <SubSectionStarter title="Accept That Some Wet Code Is Okay">
+        <BlogSubsection title="Accept That Some Wet Code Is Okay">
           After over-engineering ourselves into a corner a few times, we learned
           an important lesson: a little bit of "wet code" is not the end of the
           world. In a micro-frontend, some messiness is expected. Each team will
           do things a little differently, no matter how many guardrails you set
           up along the path to deployment.
-        </SubSectionStarter>
+        </BlogSubsection>
 
-        <SubSectionStarter title="The Fallacy of Staying Current">
+        <BlogSubsection title="The Fallacy of Staying Current">
           The final lesson learned is about what I call the fallacy of staying
           current.
-        </SubSectionStarter>
+        </BlogSubsection>
         <ProseBlock>
           This is something I had to learn the hard way: you don't always need
           to use bleeding-edge frameworks. Early in my career, I was
@@ -272,11 +269,10 @@ function RouteComponent() {
           those who primarily focus on backend tasks, takes time and effort.
           That's not always ideal for a feature-driven development shop.
         </ProseBlock>
-        {/* ### Iframe Messaging Gotchas */}
-        <SectionSpacer id="thank-you" />
-        <ResponsiveContentImageGrid
-          // imageOnRight={false}
-          // mobileImageFirst
+        {/* ### Thank You */}
+        <BlogSection 
+          id="thank-you"
+          title="The Summary"
           imageSrc={Gooddbye}
           imageAlt="Thanks for reading!"
           aspectRatio={4 / 3}
@@ -284,14 +280,13 @@ function RouteComponent() {
           columns="2fr 1fr"
           caption="If you made it this far, thanks for reading!"
         >
-          <ProseBlock title="The Summary" />
-          <SubSectionStarter title="Micro-Frontends Are Not for Everyone">
+          <BlogSubsection title="Micro-Frontends Are Not for Everyone">
             If you made it this far, thanks for reading! I hope you found this
             post helpful. I know I learned a lot writing it. I also hope you
             learned something new about micro-frontends and how to use them
             effectively.
-          </SubSectionStarter>
-        </ResponsiveContentImageGrid>
+          </BlogSubsection>
+        </BlogSection>
       </BodyBlock>
       <BlogPostNavigator
         prev={{
@@ -310,26 +305,6 @@ function RouteComponent() {
         // }}
       />
     </>
-  );
-}
-
-function SubSectionStarter({
-  children,
-  title,
-  subtitle,
-  dense = false,
-  spacingBottom = false,
-}: ProseBlockProps) {
-  return (
-    <ProseBlock
-      title={title}
-      subtitle={subtitle}
-      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
-      dense={dense}
-      spacingBottom={spacingBottom}
-    >
-      {children}
-    </ProseBlock>
   );
 }
 

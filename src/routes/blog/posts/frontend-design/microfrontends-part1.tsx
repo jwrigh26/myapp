@@ -11,7 +11,6 @@ import CallToAction from '@/components/CallToAction';
 import DisclaimerBlock from '@/components/DisclaimerBlock';
 import { ResponsiveContentImageGrid } from '@/components/Image';
 import IntroBlock from '@/components/IntroBlock';
-import type { ProseBlockProps } from '@/components/ProseBlock';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
@@ -20,6 +19,8 @@ import NoteBlock from '@/components/NoteBlock';
 import Stack from '@mui/material/Stack';
 import { createFileRoute } from '@tanstack/react-router';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
+import BlogSubsection from '@/components/blog/BlogSubsection';
+import BlogSection from '@/components/blog/BlogSection';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -62,8 +63,9 @@ function RouteComponent() {
         We'll also compare our solution to other alternatives and share lessons
         learned along the way.
       </IntroBlock>
-      <SectionSpacer id="introduction" />
-      <ResponsiveContentImageGrid
+      
+      <BlogSection 
+        id="introduction"
         imageSrc={IntroImage}
         imageAlt="Empowering Small Businesses"
         imageOnRight={false}
@@ -73,7 +75,7 @@ function RouteComponent() {
         <Stack gap={2}>
           <ProseList items={bulletPoints1} subTitle="The Backstory" />
         </Stack>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
       <DisclaimerBlock title="Disclaimer">
         Our design choices fit our development needs, but they may not be right
         for you—and that's okay. Every application is different, and there's
@@ -83,22 +85,22 @@ function RouteComponent() {
       </DisclaimerBlock>
 
       {/* ### The Environment and Requirements */}
-      <SectionSpacer id="environment-and-requirements" />
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="environment-and-requirements"
+        title="The Environment and Requirements"
         imageSrc={EnvImage}
         imageAlt="The Environment and Requirements"
         imageOnRight={true}
         gap={2}
         aspectRatio={16 / 9}
       >
-        <ProseBlock title="The Environment and Requirements" />
         <ProseList items={bulletPoints2} subTitle="Host Sites" />
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
-      <SubSectionStarter title="Multiple Host Sites">
+      <BlogSubsection title="Multiple Host Sites">
         We support a handful of different host sites. They serve as the backbone
         for displaying various front-end modules.
-      </SubSectionStarter>
+      </BlogSubsection>
 
       <ProseBlock>
         Each host sitess main role is to handle navigation to ensure users feel
@@ -115,11 +117,11 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Host sites: The backbone of our modular front-end"
       >
-        <SubSectionStarter title="Page Management">
+        <BlogSubsection title="Page Management">
           Each host site typically loads one or more modules inside an iframe
           per page. The goal is to have one iframe per page, but there have been
           instances where several iframes are loaded on a single screen.
-        </SubSectionStarter>
+        </BlogSubsection>
         <ProseBlock>
           Sometimes, we even encounter an "inception" scenario, with an iframe
           nested within an iframe, and then within yet another iframe. To reduce
@@ -127,12 +129,12 @@ function RouteComponent() {
           increases the complexity.
         </ProseBlock>
 
-        <SubSectionStarter title="Core Functions" spacingBottom>
+        <BlogSubsection title="Core Functions" spacingBottom>
           In addition to navigation, each host site has a few core
           responsibilities. These include authentication, analytics, and
           communication. By centralizing these functions, each module behaves
           consistently across the application.
-        </SubSectionStarter>
+        </BlogSubsection>
       </ResponsiveContentImageGrid>
       <NoteBlock>
         For communication, we employ a custom iframe messaging library (based on
@@ -142,11 +144,14 @@ function RouteComponent() {
       </NoteBlock>
 
       {/* ### Module Development & Versioning */}
-      <SectionSpacer id="module-development-and-versioning" />
-      <ProseBlock title="Module Development & Versioning" />
-      <ProseList items={bulletPoints3} subTitle="Development" />
+      <BlogSection 
+        id="module-development-and-versioning"
+        title="Module Development & Versioning"
+      >
+        <ProseList items={bulletPoints3} subTitle="Development" />
+      </BlogSection>
 
-      <SubSectionStarter
+      <BlogSubsection
         title="Managing Multiple Dev Stacks"
         subtitle="Lessons from React, Angular, and Beyond"
       >
@@ -154,7 +159,7 @@ function RouteComponent() {
         points. Each entry point represents a page or module that can be loaded
         into any of our host sites. These repositories primarily use React, but
         we still maintain a few Angular modules.
-      </SubSectionStarter>
+      </BlogSubsection>
 
       <ProseBlock>
         The ability to use multiple development stacks is a double-edged sword.
@@ -187,7 +192,7 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Module development: Beware of version drift"
       >
-        <SubSectionStarter
+        <BlogSubsection
           title="Version Drift"
           subtitle="Racing Through Versions"
         >
@@ -195,7 +200,7 @@ function RouteComponent() {
           version 15. But pretty soon into development, React 16 dropped, and
           with it came hooks. A lot of our team quickly jumped ship from class
           components and lifecycle methods to functional components with hooks.
-        </SubSectionStarter>
+        </BlogSubsection>
 
         <ProseBlock>
           This was great in many ways. React hooks really made development
@@ -223,11 +228,9 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Shared Resources */}
-      <SectionSpacer id="shared-resources" />
-      <ProseBlock title="Shared Resources" />
-      <ProseList items={bulletPoints5} subTitle="Libraries" />
-
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="shared-resources"
+        title="Shared Resources"
         imageSrc={SharedResImage}
         imageAlt="Shared Resources"
         imageOnRight={false}
@@ -236,14 +239,16 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Shared resources: UI library, utility methods, and context providers"
       >
-        <SubSectionStarter title="Our Shared Toolkit">
+        <ProseList items={bulletPoints5} subTitle="Libraries" />
+        
+        <BlogSubsection title="Our Shared Toolkit">
           Once our version drift issues were sorted out, we started building a
           shared resource library late in the development process. This library
           focused strictly on things we identified as being valuable. Team
           buy-in was important too, since we wanted everyone using the shared
           resources. The idea being it will help keep version drift to a
           minimum.
-        </SubSectionStarter>
+        </BlogSubsection>
 
         <ProseBlock>
           The library includes a shared UI library for common components,
@@ -259,12 +264,12 @@ function RouteComponent() {
           handle small, "bite-size" refactors as part of regular feature
           development.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
       {/* ### Service Integration & Module Autonomy */}
-      <SectionSpacer id="service-integration-and-module-autonomy" />
-
-      <ResponsiveContentImageGrid
+      <BlogSection 
+        id="service-integration-and-module-autonomy"
+        title="Super Mods"
         imageSrc={SuperModsImage}
         imageAlt="Super Mods: Service Integration & Module Autonomy"
         imageOnRight={true}
@@ -272,14 +277,12 @@ function RouteComponent() {
         caption="Super Mods have standalone power"
         aspectRatio={4 / 3}
       >
-        <ProseBlock title="Super Mods" />
-
         <ProseList
           items={bulletPoints6}
           subTitle="Service Integration & Module Autonomy"
         />
 
-        <SubSectionStarter
+        <BlogSubsection
           title="Decoupled Yet Connected"
           subtitle="While modules operate autonomously, they're still tightly integrated through our APIs"
         >
@@ -289,14 +292,14 @@ function RouteComponent() {
           our .NET backend services on their own. This lets them handle multiple
           integrations seamlessly, whether as a standalone application or
           embedded in a third-party platform.
-        </SubSectionStarter>
+        </BlogSubsection>
         <ProseBlock>
           But superpowers come at a price. Ensuring our modules run correctly in
           every environment takes extra work and rigorous testing. You might
           even say that the freedom to inject modules anywhere is our kryptonite
           because of the maintence that comes with it.
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
       <ProseBlock subtitle="Example:">
         Sunsetting legacy modules is challenging because we have to track which
         clients still use each version and plan their migration to newer
@@ -305,26 +308,11 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Deployment Flexibility */}
-      <SectionSpacer id="deployment-flexibility" />
-      <ProseBlock
+      <BlogSection 
+        id="deployment-flexibility"
         title="Deployment"
         subtitle="Super easy, barely an inconvenience"
-        options={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
-      />
-      <ProseList items={bulletPoints7} subTitle="Key Benefits" />
-
-      <SubSectionStarter title="Modular Deployment">
-        One of the best things about our modular framework is that each module
-        lives in its own repository. Each module gets its own entry point,
-        loaded via an iframe. This setup enables independent deployment cycles;
-        we can deploy a single module without affecting the rest of the system.
-        This decoupled approach ensures minimal disruption when other modules
-        change. Different parts are updated at different times; everything runs
-        smoothly.
-      </SubSectionStarter>
-
-      <Spacer size={2} desktop />
-      <ResponsiveContentImageGrid
+        titleOptions={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
         imageSrc={DeploymentImage}
         imageAlt="Deployment Flexibility"
         imageOnRight={true}
@@ -332,7 +320,19 @@ function RouteComponent() {
         caption="Deployment Flexibility: Independent repositories and decoupled updates"
         aspectRatio={4 / 3}
       >
-        <SubSectionStarter title="Build Process & DevOps Excellence">
+        <ProseList items={bulletPoints7} subTitle="Key Benefits" />
+
+        <BlogSubsection title="Modular Deployment">
+          One of the best things about our modular framework is that each module
+          lives in its own repository. Each module gets its own entry point,
+          loaded via an iframe. This setup enables independent deployment cycles;
+          we can deploy a single module without affecting the rest of the system.
+          This decoupled approach ensures minimal disruption when other modules
+          change. Different parts are updated at different times; everything runs
+          smoothly.
+        </BlogSubsection>
+
+        <BlogSubsection title="Build Process & DevOps Excellence">
           Of course, this modular deployment couldn't happen without a few other
           critical actors: our QA team and DevOps engineers. Without their
           skills and systems in place, our bi-weekly release cycles, which now
@@ -341,7 +341,7 @@ function RouteComponent() {
           were often postponed due to critical bugs that impacted multiple areas
           of the application. Those issues and other factors sometimes pushed
           releases well into the early morning hours.
-        </SubSectionStarter>
+        </BlogSubsection>
 
         <ProseBlock>
           The time and investment required to move to our module framework have
@@ -350,9 +350,8 @@ function RouteComponent() {
           which means our work-life balance has improved. Module frameworks for
           the win!
         </ProseBlock>
-      </ResponsiveContentImageGrid>
+      </BlogSection>
 
-      <Spacer size={2} desktop />
       <BlogPostNavigator
         next={{
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
@@ -368,28 +367,8 @@ function RouteComponent() {
 }
 
 // #################################################
-// ### Usuable Components
+// ### Data Arrays
 // #################################################
-
-function SubSectionStarter({
-  children,
-  title,
-  subtitle,
-  dense = false,
-  spacingBottom = false,
-}: ProseBlockProps) {
-  return (
-    <ProseBlock
-      title={title}
-      subtitle={subtitle}
-      options={{ titleVariant: 'h6', subtitleVariant: 'subtitle1' }}
-      dense={dense}
-      spacingBottom={spacingBottom}
-    >
-      {children}
-    </ProseBlock>
-  );
-}
 
 // ### How a Scalable Front-End Drives HR Innovation
 const bulletPoints1 = [

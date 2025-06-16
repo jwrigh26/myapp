@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
 import { Link as RouterLink } from '@tanstack/react-router';
 import { formatDisplayDate } from '@/utils/date';
 
@@ -138,15 +137,13 @@ export default function BlogPostNavigator({
                     {item.blurb}
                   </Typography>
                 )}
-                <Link
-                  component={RouterLink}
-                  to={item.route}
-                  underline="hover"
-                  color="primary"
+                <Typography
+                  variant="caption"
+                  color="primary.main"
                   sx={{ fontWeight: 600, mt: 1, display: 'inline-block' }}
                 >
                   Read &rarr;
-                </Link>
+                </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
