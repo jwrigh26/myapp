@@ -1,3 +1,9 @@
+/**
+ * Displays formatted text content with optional title and subtitle.
+ * 
+ * "Prose" refers to ordinary written content styled for readability.
+ * Maintains consistent typography using Material UI design.
+ */
 import Box, { BoxProps } from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';

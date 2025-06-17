@@ -1,25 +1,19 @@
 import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
-import type { ProseBlockProps } from '@/components/ProseBlock';
 import iframeImage from '@/assets/Slide-iframe.jpg';
 import CallOutImage from '@/assets/Slide0.jpeg';
 import CallOutImage2 from '@/assets/Strats.jpg';
 import CallOutImage3 from '@/assets/Slide19.jpeg';
 import MonolithImage from '@/assets/Slide9.jpeg';
 import StratsAndChoices from '@/assets/Slide8.jpeg';
-import CallToAction from '@/components/CallToAction';
 import ProseBlock from '@/components/ProseBlock';
-import ProseList from '@/components/ProseList';
-import TitleBlock from '@/components/TitleBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import ReferenceLink from '@/components/ReferenceLink';
 import RationaleChoiceImage from '@/assets/Slide14.jpeg';
-import IntroBlock from '@/components/IntroBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import { TopicBlock, ComparisonSection, ArticleLayout } from '@/components/blog';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -42,24 +36,23 @@ export const Route = createFileRoute(
 function RouteComponent() {
   return (
     <>
-      <CallToAction
+      <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 2:"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
         imageSrc={CallOutImage2}
         date="04-21-2025"
-      />
-
-      {/* ### Before Micro Frontends */}
-      <TitleBlock subtitle="Comparing Our Approach to Modern Alternatives">
-        Decision Making
-      </TitleBlock>
-      <IntroBlock>
-        In Part 2, we'll cover a quick history of micro-frontends. We'll explore
-        different strategies for picking an architecture and compare the pros
-        and cons of each.
-      </IntroBlock>
+        sectionTitle="Decision Making"
+        sectionSubtitle="Comparing Our Approach to Modern Alternatives"
+        introContent={
+          <>
+            In Part 2, we'll cover a quick history of micro-frontends. We'll explore
+            different strategies for picking an architecture and compare the pros
+            and cons of each.
+          </>
+        }
+      >
       
       <BlogSection 
         id="decision-making"
@@ -73,7 +66,10 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 1.05}
       >
-        <ProseList items={bulletPoints1} subTitle="The Frontend Evolution" />
+        <TopicBlock 
+          title="The Frontend Evolution"
+          items={bulletPoints1}
+        />
         <ProseBlock>
           Before micro-frontends, the development landscape was dominated by
           monoliths and full-stack apps. This eventually gave way to separate
@@ -101,9 +97,9 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 0.95}
       >
-        <ProseList
+        <TopicBlock 
+          title="Three flavors to choose from"
           items={bulletPoints2}
-          subTitle="Three flavors to choose from"
         />
 
         <ProseBlock>
@@ -165,7 +161,10 @@ function RouteComponent() {
         gap={3}
         aspectRatio={16 / 11}
       >
-        <ProseList items={bulletPointsMf1} subTitle="Shiny Happy Modules" />
+        <TopicBlock 
+          title="Shiny Happy Modules"
+          items={bulletPointsMf1}
+        />
         <ProseBlock>
           Module Federation shines at dynamic, runtime module sharing. You can
           mark some modules as part of your build (local) and others as
@@ -227,9 +226,9 @@ function RouteComponent() {
         gap={2}
         aspectRatio={16 / 11}
       >
-        <ProseList
+        <TopicBlock 
+          title="What it Brings to the Game"
           items={bulletPointsSspa1}
-          subTitle="What it Brings to the Game"
         />
       </BlogSection>
       <ProseBlock>
@@ -330,9 +329,9 @@ function RouteComponent() {
         gap={3}
         aspectRatio={1 / 0.9}
       >
-        <ProseList
+        <TopicBlock 
+          title="Simple, Secure, and Scalable"
           items={bulletPointsIframe1}
-          subTitle="Simple, Secure, and Scalable"
         />
       </BlogSection>
 
@@ -367,22 +366,43 @@ function RouteComponent() {
       </ProseBlock>
 
       {/* ### Pros and Cons */}
-      {/* TODO: Come back and style this better */}
       <BlogSection 
         id="pros-and-cons"
         title="Pros and Cons"
       >
-        <BlogSubsection title="Module Federation" />
-        <ProsConsList pros={bulletPointsMFLPros} cons={bulletPointsMFLCons} />
-        <BlogSubsection title="Single-Spa" />
-        <ProsConsList
-          pros={bulletPointsSingleSpaPros}
-          cons={bulletPointsSingleSpaCons}
-        />
-        <BlogSubsection title="iFrame" />
-        <ProsConsList
-          pros={bulletPointsIframePros}
-          cons={bulletPointsIframeCons}
+        <ComparisonSection
+          comparisons={[
+            {
+              title: "Module Federation",
+              items: bulletPointsMFLPros,
+              subTitle: "Pros"
+            },
+            {
+              title: "",
+              items: bulletPointsMFLCons,
+              subTitle: "Cons"
+            },
+            {
+              title: "Single-Spa",
+              items: bulletPointsSingleSpaPros,
+              subTitle: "Pros"
+            },
+            {
+              title: "",
+              items: bulletPointsSingleSpaCons,
+              subTitle: "Cons"
+            },
+            {
+              title: "iFrame",
+              items: bulletPointsIframePros,
+              subTitle: "Pros"
+            },
+            {
+              title: "",
+              items: bulletPointsIframeCons,
+              subTitle: "Cons"
+            }
+          ]}
         />
       </BlogSection>
 
@@ -399,9 +419,9 @@ function RouteComponent() {
         gap={2}
         aspectRatio={1 / 1.32}
       >
-        <ProseList
+        <TopicBlock 
+          title="Our Decision Factors"
           items={bulletPointsRationale}
-          subTitle="Our Decision Factors"
         />
         <ProseBlock>
           When we first designed the system, tools like Single-SPA and Webpack
@@ -417,6 +437,8 @@ function RouteComponent() {
           stucture, iframes made the most sense.
         </ProseBlock>
       </BlogSection>
+
+      </ArticleLayout>
 
       <BlogPostNavigator
         prev={{
@@ -442,38 +464,8 @@ function RouteComponent() {
 }
 
 // #################################################
-// ### Usuable Components
+// ### Data Arrays
 // #################################################
-
-// New ProsConsList component
-function ProsConsList({
-  pros,
-  cons,
-  prosColor = 'primary.light',
-  consColor = 'secondary.main',
-}: {
-  pros: string[];
-  cons: string[];
-  prosColor?: string;
-  consColor?: string;
-}) {
-  return (
-    <Stack
-      sx={{ border: '2px solid', borderColor: 'divider', p: 2, mb: 2 }}
-      direction={{ xs: 'column', sm: 'row' }}
-      gap={4}
-    >
-      <Box
-        sx={{ width: { xs: 'auto', sm: '412px', md: '512px', lg: '600px' } }}
-      >
-        <ProseList color={prosColor} items={pros} subTitle="Pros" />
-      </Box>
-      <Box>
-        <ProseList color={consColor} items={cons} subTitle="Cons" />
-      </Box>
-    </Stack>
-  );
-}
 
 // ### bullet points
 const bulletPoints1 = [

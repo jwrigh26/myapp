@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
@@ -145,17 +145,17 @@ export const ContentImageGrid = styled(Box, {
     !['imageOnRight', 'gap', 'columns'].includes(prop as string),
 })<{
   imageOnRight?: boolean;
-  gap?: number | string;
-  columns?: string; // Customizable gridTemplateColumns for desktop
-}>(({ theme, imageOnRight = true, gap = 2, columns = '1fr 1fr' }) => ({
+  gap?: number;
+  columns?: string;
+}>(({ theme, gap = 2, columns = '1fr 1fr' }) => ({
   display: 'grid',
-  gridTemplateColumns: '1fr', // Default for mobile
+  gridTemplateColumns: '1fr',
   gridTemplateRows: 'auto auto',
   gap: theme.spacing(gap),
   width: '100%',
 
   [theme.breakpoints.up('md')]: {
-    gridTemplateColumns: columns, // Customizable for desktop
+    gridTemplateColumns: columns,
     gridTemplateRows: '1fr',
     alignItems: 'flex-start',
   },
@@ -167,16 +167,15 @@ export const GridContent = styled(Box, {
 })<{
   imageOnRight?: boolean;
   mobileImageFirst?: boolean;
-  gap?: number | string;
+  gap?: number;
 }>(({ theme, imageOnRight = true, mobileImageFirst = false, gap = 2 }) => ({
-  order: mobileImageFirst ? 2 : 1, // Default mobile order
+  order: mobileImageFirst ? 2 : 1,
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(gap),
 
   [theme.breakpoints.up('md')]: {
-    order: imageOnRight ? 1 : 2, // Desktop order
-    gap: theme.spacing(gap),
+    order: imageOnRight ? 1 : 2,
   },
 }));
 
@@ -185,7 +184,7 @@ export const GridImage = styled(Box, {
     !['imageOnRight', 'mobileImageFirst'].includes(prop as string),
 })<{ imageOnRight?: boolean; mobileImageFirst?: boolean }>(
   ({ theme, imageOnRight = true, mobileImageFirst = false }) => ({
-    order: mobileImageFirst ? 1 : 2, // Default mobile order
+    order: mobileImageFirst ? 1 : 2,
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
 
@@ -194,7 +193,6 @@ export const GridImage = styled(Box, {
         ? {
             boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
             border: `2px solid ${theme.palette.grey[400]}`,
-            // border: `2px solid ${theme.palette.secondary.light}`,
           }
         : {
             border: `4px solid ${theme.palette.grey[700]}`,
@@ -202,24 +200,35 @@ export const GridImage = styled(Box, {
     },
 
     [theme.breakpoints.up('md')]: {
-      order: imageOnRight ? 2 : 1, // Desktop order
+      order: imageOnRight ? 2 : 1,
       paddingBottom: 0,
       paddingTop: 0,
     },
   })
 );
 
+const ImageCaption = styled(Typography)(({ theme }) => ({
+  color:
+    theme.palette.mode === 'light'
+      ? theme.palette.secondary.dark
+      : theme.palette.secondary.main,
+  display: 'block',
+  textAlign: 'center',
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(2),
+}));
+
 interface ContentImageGridProps {
-  imageOnRight?: boolean;
-  gap?: number | string;
-  columns?: string; // Customizable gridTemplateColumns for desktop
   imageSrc: string;
   imageAlt: string;
   children: React.ReactNode;
+  imageOnRight?: boolean;
+  gap?: number;
+  columns?: string; // Customizable gridTemplateColumns for desktop
   aspectRatio?: number;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
   caption?: string;
-  mobileImageFirst?: boolean; // New prop for mobile-first image order
+  mobileImageFirst?: boolean; // Controls mobile ordering: true = image first, false = content first
 }
 
 export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
@@ -231,13 +240,11 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
   aspectRatio = 4 / 3,
   objectFit = 'cover',
   caption,
-  columns = '1fr 1fr', // Default desktop columns
-  mobileImageFirst = false, // New prop for mobile-first image order
+  columns = '1fr 1fr',
+  mobileImageFirst = false,
 }) => {
-  const theme = useTheme();
-
   return (
-    <ContentImageGrid imageOnRight={imageOnRight} gap={gap} columns={columns}>
+    <ContentImageGrid gap={gap} columns={columns}>
       <GridContent
         imageOnRight={imageOnRight}
         mobileImageFirst={mobileImageFirst}
@@ -256,21 +263,9 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
           <Image defaultSrc={imageSrc} alt={imageAlt} objectFit={objectFit} />
         </AspectRatioContainer>
         {caption && (
-          <Typography
-            variant="caption"
-            sx={{
-              color:
-                theme.palette.mode === 'light'
-                  ? theme.palette.secondary.dark
-                  : theme.palette.secondary.main,
-              display: 'block',
-              textAlign: 'center',
-              marginTop: theme.spacing(1),
-              marginBottom: theme.spacing(2),
-            }}
-          >
+          <ImageCaption variant="caption">
             {caption}
-          </Typography>
+          </ImageCaption>
         )}
       </GridImage>
     </ContentImageGrid>

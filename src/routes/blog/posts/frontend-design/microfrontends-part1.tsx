@@ -7,20 +7,16 @@ import ModuleDevImage from '@/assets/Slide4.jpeg';
 import DeploymentImage from '@/assets/Slide5.jpeg';
 import SuperModsImage from '@/assets/Slide7.jpeg';
 import CallOutImage2 from '@/assets/Slide10.jpeg';
-import CallToAction from '@/components/CallToAction';
 import DisclaimerBlock from '@/components/DisclaimerBlock';
 import { ResponsiveContentImageGrid } from '@/components/Image';
-import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
-import ProseList from '@/components/ProseList';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
-import TitleBlock from '@/components/TitleBlock';
 import NoteBlock from '@/components/NoteBlock';
-import Stack from '@mui/material/Stack';
 import { createFileRoute } from '@tanstack/react-router';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import BlogSubsection from '@/components/blog/BlogSubsection';
 import BlogSection from '@/components/blog/BlogSection';
+import { TopicBlock, ArticleLayout } from '@/components/blog';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part1'
@@ -44,27 +40,26 @@ export const Route = createFileRoute(
 function RouteComponent() {
   return (
     <>
-      <CallToAction
+      <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 1:"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="A person typing on a laptop"
         imageSrc={CallOutImage}
         date="2025-03-15"
-      />
-
-      {/* Intro: Empowering Small Businesses */}
-      <TitleBlock subtitle="By building a Scalable Front-End that Drives HR Innovation">
-        Empowering Small Businesses
-      </TitleBlock>
-      <IntroBlock>
-        In this post, we'll explore building a modular front-end using iframes.
-        I'll cover the approach we took to handle inter-module communication.
-        We'll also compare our solution to other alternatives and share lessons
-        learned along the way.
-      </IntroBlock>
-      
-      <BlogSection 
+        sectionTitle="Empowering Small Businesses"
+        sectionSubtitle="By building a Scalable Front-End that Drives HR Innovation"
+        introContent={
+          <>
+            In this post, we'll explore building a modular front-end using iframes.
+            I'll cover the approach we took to handle inter-module communication.
+            We'll also compare our solution to other alternatives and share lessons
+            learned along the way.
+          </>
+        }
+      >
+        
+        <BlogSection 
         id="introduction"
         imageSrc={IntroImage}
         imageAlt="Empowering Small Businesses"
@@ -72,9 +67,10 @@ function RouteComponent() {
         gap={2}
         aspectRatio={4 / 3}
       >
-        <Stack gap={2}>
-          <ProseList items={bulletPoints1} subTitle="The Backstory" />
-        </Stack>
+        <TopicBlock 
+          title="The Backstory"
+          items={bulletPoints1}
+        />
       </BlogSection>
       <DisclaimerBlock title="Disclaimer">
         Our design choices fit our development needs, but they may not be right
@@ -94,7 +90,10 @@ function RouteComponent() {
         gap={2}
         aspectRatio={16 / 9}
       >
-        <ProseList items={bulletPoints2} subTitle="Host Sites" />
+        <TopicBlock 
+          title="Host Sites"
+          items={bulletPoints2}
+        />
       </BlogSection>
 
       <BlogSubsection title="Multiple Host Sites">
@@ -148,7 +147,10 @@ function RouteComponent() {
         id="module-development-and-versioning"
         title="Module Development & Versioning"
       >
-        <ProseList items={bulletPoints3} subTitle="Development" />
+        <TopicBlock 
+          title="Development"
+          items={bulletPoints3}
+        />
       </BlogSection>
 
       <BlogSubsection
@@ -239,7 +241,10 @@ function RouteComponent() {
         aspectRatio={4 / 3}
         caption="Shared resources: UI library, utility methods, and context providers"
       >
-        <ProseList items={bulletPoints5} subTitle="Libraries" />
+        <TopicBlock 
+          title="Libraries"
+          items={bulletPoints5}
+        />
         
         <BlogSubsection title="Our Shared Toolkit">
           Once our version drift issues were sorted out, we started building a
@@ -277,9 +282,9 @@ function RouteComponent() {
         caption="Super Mods have standalone power"
         aspectRatio={4 / 3}
       >
-        <ProseList
+        <TopicBlock 
+          title="Service Integration & Module Autonomy"
           items={bulletPoints6}
-          subTitle="Service Integration & Module Autonomy"
         />
 
         <BlogSubsection
@@ -320,7 +325,10 @@ function RouteComponent() {
         caption="Deployment Flexibility: Independent repositories and decoupled updates"
         aspectRatio={4 / 3}
       >
-        <ProseList items={bulletPoints7} subTitle="Key Benefits" />
+        <TopicBlock 
+          title="Key Benefits"
+          items={bulletPoints7}
+        />
 
         <BlogSubsection title="Modular Deployment">
           One of the best things about our modular framework is that each module
@@ -351,6 +359,8 @@ function RouteComponent() {
           the win!
         </ProseBlock>
       </BlogSection>
+
+      </ArticleLayout>
 
       <BlogPostNavigator
         next={{

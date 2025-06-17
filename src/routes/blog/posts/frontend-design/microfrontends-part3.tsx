@@ -2,22 +2,19 @@ import CoffeeWizard1 from '@/assets/Slide15.jpeg';
 import CoffeeWizard2 from '@/assets/Slide16.jpeg';
 import MemoryLeak from '@/assets/Slide17.a.jpeg';
 import PostRobot from '@/assets/Slide18.jpeg';
-import IntroBlock from '@/components/IntroBlock';
 import TechDebt from '@/assets/Slide19.jpeg';
 import HardLessons from '@/assets/Slide21.jpeg';
 import CallOutImage2 from '@/assets/Slide10.jpeg';
 import { BodyBlock } from '@/components/BodyBlock';
-import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
 import ProseBlock from '@/components/ProseBlock';
-import ProseList from '@/components/ProseList';
 import QuoteBlock from '@/components/QuoteBlock';
 import ReferenceLink from '@/components/ReferenceLink';
 import { SectionSpacer, Spacer } from '@/components/Spacer';
-import TitleBlock from '@/components/TitleBlock';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import { TopicBlock, DenseContent, ArticleLayout } from '@/components/blog';
 import { createFileRoute } from '@tanstack/react-router';
 import Gooddbye from '@/assets/Slide20.png';
 
@@ -42,23 +39,24 @@ export const Route = createFileRoute(
 function RouteComponent() {
   return (
     <>
-      <CallToAction
+      <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 3:"
         subtitle="Lessons Learned"
         imageAlt="Micro-Frontends Part 3"
         imageSrc={TechDebt}
         date="2025-05-01"
-      />
-      {/* ### Before Micro Frontends */}
-      <TitleBlock subtitle="Lessons learned from our micro-frontend journey">
-        Communication Challenges in a Modular Front-End
-      </TitleBlock>
-      <IntroBlock>
-        In Part 3, We'll talk about how to use a messaging layer to act as a
-        glue for iframes. How to avoid over-engineering when it comes to routing
-        and navigation. And other lessons learned along the way.
-      </IntroBlock>
+        sectionTitle="Communication Challenges in a Modular Front-End"
+        sectionSubtitle="Lessons learned from our micro-frontend journey"
+        introContent={
+          <>
+            In Part 3, We'll talk about how to use a messaging layer to act as a
+            glue for iframes. How to avoid over-engineering when it comes to routing
+            and navigation. And other lessons learned along the way.
+          </>
+        }
+      >
+        
       <BodyBlock>
         {/* ### Why Communication Matters */}
         <BlogSection 
@@ -72,7 +70,10 @@ function RouteComponent() {
           objectFit="cover"
           caption="Host site displaying a coffee brewing wizard"
         >
-          <ProseList items={bulletPoints1} />
+          <TopicBlock 
+            title="Communication Responsibilities"
+            items={bulletPoints1}
+          />
           <QuoteBlock>
             Example: The Magic Coffee site is currently showing a coffee brewing
             wizard. The site is the "host site" and is responsible for main
@@ -105,29 +106,36 @@ function RouteComponent() {
           objectFit="cover"
           caption="Exernal action to buy a V60 is triggered by the wizard"
         >
-          <ProseBlock>
-            However, what happens if the wizard wants to display an option to
-            buy an item used in its brewing tutorial? If a user clicks the "buy"
-            button, things get a little more complicated.
-          </ProseBlock>
-          <ProseBlock>
-            Iframes aren't very social — they prefer to keep to themselves. To
-            get our wizard's buy button to actually navigate to the shopping
-            page's Hario V60 page, we need to provide a messaging layer that
-            uses the window's <span className="code">postMessage</span> method
-            so the two can talk and play nicely.
-          </ProseBlock>
-          <ProseBlock>
-            You can use the window's <span className="code">postMessage</span>{' '}
-            method directly, but I encourage you to either roll your own wrapper
-            or piggyback off another library out there that provides one. A good
-            wrapper can add some extra utility and safety checks.
-          </ProseBlock>
+          <DenseContent 
+            paragraphs={[
+              <>
+                However, what happens if the wizard wants to display an option to
+                buy an item used in its brewing tutorial? If a user clicks the "buy"
+                button, things get a little more complicated.
+              </>,
+              <>
+                Iframes aren't very social — they prefer to keep to themselves. To
+                get our wizard's buy button to actually navigate to the shopping
+                page's Hario V60 page, we need to provide a messaging layer that
+                uses the window's <span className="code">postMessage</span> method
+                so the two can talk and play nicely.
+              </>,
+              <>
+                You can use the window's <span className="code">postMessage</span>{' '}
+                method directly, but I encourage you to either roll your own wrapper
+                or piggyback off another library out there that provides one. A good
+                wrapper can add some extra utility and safety checks.
+              </>
+            ]}
+          />
         </ResponsiveContentImageGrid>
 
         {/* ### Our Current Approach */}
         <BlogSection id="our-current-approach" title="Our Current Approach">
-          <ProseList items={bulletPoints2} />
+          <TopicBlock 
+            title="Our Messaging Strategy"
+            items={bulletPoints2}
+          />
           <ProseBlock>
             By using custom messaging, deep navigation, and event broadcasting
             through a message bus, we can handle tricky iframe communication
@@ -145,17 +153,21 @@ function RouteComponent() {
           objectFit="cover"
           caption="Memory Leaks from Iframe Messaging can flood your app. Be careful!"
         >
-          <ProseBlock>
-            While iframe messaging helps glue everything together, it's important
-            to plan ahead. If you don't, you'll end up with a rushed arts and
-            crafts project covered in Elmer's glue.
-          </ProseBlock>
-          <ProseBlock>
-            To help you create a work of art, might I suggest avoiding some of the
-            same mistakes we made along the way?
-          </ProseBlock>
-          <ProseList
-            subTitle="Our Biggest Iframe Messaging Gotchas"
+          <DenseContent 
+            paragraphs={[
+              <>
+                While iframe messaging helps glue everything together, it's important
+                to plan ahead. If you don't, you'll end up with a rushed arts and
+                crafts project covered in Elmer's glue.
+              </>,
+              <>
+                To help you create a work of art, might I suggest avoiding some of the
+                same mistakes we made along the way?
+              </>
+            ]}
+          />
+          <TopicBlock 
+            title="Our Biggest Iframe Messaging Gotchas"
             items={bulletPoints3}
           />
         </BlogSection>
@@ -172,28 +184,35 @@ function RouteComponent() {
           objectFit="cover"
           caption="Post-Robot: reliable messaging between iframes"
         >
-          <ProseList items={bulletPoints4} />
-          <ProseBlock>
-            Let's talk more about those memory leaks. When we first started
-            working with Post-Robot to create our messaging app, we didn't
-            account for all the ways things could fail. While Post-Robot
-            provides what I call a "robust handshake protocol," we used it more
-            like a quick high-five because, in some instances, we assumed it
-            would just work.
-          </ProseBlock>
-          <ProseBlock>
-            This caused an intense week of bug fixing after a major refactor. We
-            discovered our navigation was loading pages slower and slower
-            because the host site kept trying to send messages to clients that
-            no longer existed.
-          </ProseBlock>
-          <ProseBlock>
-            To fix the problem, we made use of everything Post-Robot offers for
-            error handling. We implemented a way for the sender to recover when
-            it fails to send messages, and for the client to fail gracefully
-            when needed. Since making these changes, our iframe messaging is
-            operating like a brand-new faucet — no more leaks.
-          </ProseBlock>
+          <TopicBlock 
+            title="Key Improvements"
+            items={bulletPoints4}
+          />
+          <DenseContent 
+            paragraphs={[
+              <>
+                Let's talk more about those memory leaks. When we first started
+                working with Post-Robot to create our messaging app, we didn't
+                account for all the ways things could fail. While Post-Robot
+                provides what I call a "robust handshake protocol," we used it more
+                like a quick high-five because, in some instances, we assumed it
+                would just work.
+              </>,
+              <>
+                This caused an intense week of bug fixing after a major refactor. We
+                discovered our navigation was loading pages slower and slower
+                because the host site kept trying to send messages to clients that
+                no longer existed.
+              </>,
+              <>
+                To fix the problem, we made use of everything Post-Robot offers for
+                error handling. We implemented a way for the sender to recover when
+                it fails to send messages, and for the client to fail gracefully
+                when needed. Since making these changes, our iframe messaging is
+                operating like a brand-new faucet — no more leaks.
+              </>
+            ]}
+          />
         </BlogSection>
 
         <ReferenceLink
@@ -288,6 +307,9 @@ function RouteComponent() {
           </BlogSubsection>
         </BlogSection>
       </BodyBlock>
+
+      </ArticleLayout>
+
       <BlogPostNavigator
         prev={{
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
