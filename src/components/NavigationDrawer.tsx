@@ -1,16 +1,13 @@
 import { MobileDrawer, Sheet } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer } from '@/hooks/useContext';
+import { navigationConfig } from '@/config/navigationConfig';
+import { NavLevel, type NavHistoryEntry, type NavItem, type NavCategory } from '@/types/navigation';
 import {
   mdiArrowLeft,
   mdiBookOpen,
   mdiChevronRight,
   mdiCloseBoxOutline,
-  mdiGamepadVariant,
-  mdiHome,
-  mdiInformation,
-  mdiPencilRuler,
-  mdiReact,
 } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -27,56 +24,11 @@ import { useRouter } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 
 // ################################################
-// ### Types & Constants
+// ### Configuration
 // ################################################
 
-// Define all possible navigation levels
-enum NavLevel {
-  MAIN = 'main',
-  BLOG = 'blog',
-  BLOG_CATEGORY = 'blog-category',
-  BLOG_POST_DETAILS = 'blog-post-details',
-}
-
-// Navigation item structure
-interface NavItem {
-  id: string;
-  title: string;
-  path?: string;
-  icon?: string;
-  children?: NavItem[];
-}
-
-// Navigation history entry
-interface NavHistoryEntry {
-  level: NavLevel;
-  title: string;
-  data?: any;
-}
-
-// Main navigation data
-const mainNavItems: NavItem[] = [
-  { id: 'home', title: 'Home', path: '/home', icon: mdiHome },
-  // { id: 'about', title: 'About', path: '/about', icon: mdiInformation },
-  { id: 'blog', title: 'Blog', path: '/blog', icon: mdiBookOpen },
-  // { id: 'game', title: 'Game', path: '/game', icon: mdiGamepadVariant },
-];
-
-// Blog categories
-const blogCategories: NavItem[] = [
-  {
-    id: 'frontend-design',
-    title: 'Frontend Design',
-    icon: mdiPencilRuler,
-    path: '/blog/posts/frontend-design',
-  },
-  {
-    id: 'react-patterns',
-    title: 'React Patterns',
-    icon: mdiReact,
-    path: '/blog/posts/react-patterns',
-  },
-];
+// Import navigation data from configuration
+const { mainItems: mainNavItems, blogCategories } = navigationConfig;
 
 // ################################################
 // ### Styled Components
@@ -202,7 +154,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   const [navigationDirection, setNavigationDirection] = useState<
     'forward' | 'backward'
   >('forward');
-  const [navHistory, setNavHistory] = useState<NavHistoryEntry[]>([
+  const [navHistory, setNavHistory] = useState<NavHistoryEntry<NavCategory>[]>([
     { level: NavLevel.MAIN, title: 'Menu' },
   ]);
   const [categoryPosts, setCategoryPosts] = useState<Record<string, NavItem[]>>(
@@ -255,7 +207,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   }
 
   // Navigate forward to a new level
-  const navigateForward = (level: NavLevel, title: string, data?: any) => {
+  const navigateForward = (level: NavLevel, title: string, data?: NavCategory) => {
     setPreviousLevel(currentLevel);
     setNavigationDirection('forward');
     setCurrentLevel(level);
