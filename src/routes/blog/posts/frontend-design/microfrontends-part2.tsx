@@ -1,19 +1,23 @@
 import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
 import SingleSpaImage from '@/assets/SingleSpa.jpg';
 import iframeImage from '@/assets/Slide-iframe.jpg';
-import CallOutImage from '@/assets/Slide0.jpeg';
-import CallOutImage2 from '@/assets/Strats.jpg';
-import CallOutImage3 from '@/assets/Slide19.jpeg';
-import MonolithImage from '@/assets/Slide9.jpeg';
-import StratsAndChoices from '@/assets/Slide8.jpeg';
-import ProseBlock from '@/components/ProseBlock';
-import { createFileRoute } from '@tanstack/react-router';
-import ReferenceLink from '@/components/ReferenceLink';
 import RationaleChoiceImage from '@/assets/Slide14.jpeg';
+import CallOutImage3 from '@/assets/Slide19.jpeg';
+import StratsAndChoices from '@/assets/Slide8.jpeg';
+import MonolithImage from '@/assets/Slide9.jpeg';
+import CallOutImage2 from '@/assets/Strats.jpg';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
+import ProseBlock from '@/components/ProseBlock';
+import ReferenceLink from '@/components/ReferenceLink';
+import {
+  ArticleLayout,
+  ComparisonSection,
+  TopicBlock,
+} from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
-import { TopicBlock, ComparisonSection, ArticleLayout } from '@/components/blog';
+import { getThumbImageSrc } from '@/utils/images';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
   '/blog/posts/frontend-design/microfrontends-part2'
@@ -47,397 +51,388 @@ function RouteComponent() {
         sectionSubtitle="Comparing Our Approach to Modern Alternatives"
         introContent={
           <>
-            In Part 2, we'll cover a quick history of micro-frontends. We'll explore
-            different strategies for picking an architecture and compare the pros
-            and cons of each.
+            In Part 2, we'll cover a quick history of micro-frontends. We'll
+            explore different strategies for picking an architecture and compare
+            the pros and cons of each.
           </>
         }
       >
-      
-      <BlogSection 
-        id="decision-making"
-        title="Before Micro Frontends"
-        imageSrc={MonolithImage}
-        imageAlt="Monolith Image"
-        imageOnRight={true}
-        objectFit="cover"
-        caption="The Evolution of Frontend Architecture"
-        columns="2fr 1fr"
-        gap={3}
-        aspectRatio={1 / 1.05}
-      >
-        <TopicBlock 
-          title="The Frontend Evolution"
-          items={bulletPoints1}
-        />
+        <BlogSection
+          id="decision-making"
+          title="Before Micro Frontends"
+          imageSrc={MonolithImage}
+          imageAlt="Monolith Image"
+          imageOnRight={true}
+          objectFit="cover"
+          caption="The Evolution of Frontend Architecture"
+          columns="2fr 1fr"
+          gap={3}
+          aspectRatio={1 / 1.05}
+        >
+          <TopicBlock title="The Frontend Evolution" items={bulletPoints1} />
+          <ProseBlock>
+            Before micro-frontends, the development landscape was dominated by
+            monoliths and full-stack apps. This eventually gave way to separate
+            frontend and backend applications, which dominated for a time.
+          </ProseBlock>
+
+          <ProseBlock>
+            I'm not sure exactly when, but microservices came into play along
+            with component-based apps. This architecture is still popular and
+            meets the needs of many applications. However, for large teams and
+            applications, another option exists: micro-frontends.
+          </ProseBlock>
+        </BlogSection>
+
+        {/* ### Micro-Frontend Strategies */}
+        <BlogSection
+          id="micro-frontend-stragegies"
+          title="Micro-Frontend Strategies"
+          imageSrc={StratsAndChoices}
+          imageAlt="Strategies and Choices"
+          imageOnRight={false}
+          objectFit="cover"
+          caption="Micro-Frontend Strategies: How to Choose?"
+          columns="1fr 2fr"
+          gap={3}
+          aspectRatio={1 / 0.95}
+        >
+          <TopicBlock
+            title="Three flavors to choose from"
+            items={bulletPoints2}
+          />
+
+          <ProseBlock>
+            To my knowledge, micro-frontend strategies come in three flavors.
+            We've already covered my favorite flavor, iframes, so let's move on
+            to the next one, which is actually similar to iframes. We considered
+            adopting this approach, but ultimately we went with iframes.
+          </ProseBlock>
+
+          <ProseBlock>
+            In a presentation I saw, the speaker called this flavor "External
+            App Bootstrapping." It uses a host application to load CSS, JS, and
+            other assets from different servers. Then it stitches the code
+            together using the <span className="code">window</span> object and
+            an event bus, much like an iframe's messaging system. Like the other
+            approaches, it supports independent deployments and is able to look
+            like a single application.
+          </ProseBlock>
+        </BlogSection>
+
         <ProseBlock>
-          Before micro-frontends, the development landscape was dominated by
-          monoliths and full-stack apps. This eventually gave way to separate
-          frontend and backend applications, which dominated for a time.
+          The main reason we decided against External App Bootstrapping was the
+          speed and simplicity of iframes. iFrames let us hit market faster.
+          They were also the default choice for third-party integration at the
+          time.
+        </ProseBlock>
+
+        <ReferenceLink
+          url="https://youtu.be/ftBc8w-lwmY?si=O_e2mgqSao6-o3Bi"
+          linkText="walkthrough on YouTube"
+          text="If you'd like to see External App Bootstrapping in action, check out this walkthrough on YouTube."
+        />
+
+        <BlogSubsection title="Micro-Frontend Libraries" />
+        <ProseBlock>
+          A more modern approach to micro-frontends involves using libraries.
+          Single-spa, for example, provides a top-level router and built-in lazy
+          loading so that legacy and new projects can coexist on the same page.
+          While another library, Module Federation, is a Webpack plugin that
+          enables dynamic module sharing between different applications. It
+          allows you to load remote modules at runtime, making it easier to
+          develop and deploy micro-frontends.
         </ProseBlock>
 
         <ProseBlock>
-          I'm not sure exactly when, but microservices came into play along with
-          component-based apps. This architecture is still popular and meets the
-          needs of many applications. However, for large teams and applications,
-          another option exists: micro-frontends.
+          Let's take a closer look at these two libraries and how they compare
+          to our iframe approach.
         </ProseBlock>
-      </BlogSection>
 
-      {/* ### Micro-Frontend Strategies */}
-      <BlogSection 
-        id="micro-frontend-stragegies"
-        title="Micro-Frontend Strategies"
-        imageSrc={StratsAndChoices}
-        imageAlt="Strategies and Choices"
-        imageOnRight={false}
-        objectFit="cover"
-        caption="Micro-Frontend Strategies: How to Choose?"
-        columns="1fr 2fr"
-        gap={3}
-        aspectRatio={1 / 0.95}
-      >
-        <TopicBlock 
-          title="Three flavors to choose from"
-          items={bulletPoints2}
+        {/* ### Modern Micro-Frontend libraries */}
+        <BlogSection
+          id="module-federation"
+          title="Module Federation"
+          imageSrc={ModuleFederationImage}
+          imageAlt="Module Federation"
+          imageOnRight={true}
+          objectFit="cover"
+          caption="Module Federation: shines at dynamic, runtime modules"
+          columns="2fr 1fr"
+          gap={3}
+          aspectRatio={16 / 11}
+        >
+          <TopicBlock title="Shiny Happy Modules" items={bulletPointsMf1} />
+          <ProseBlock>
+            Module Federation shines at dynamic, runtime module sharing. You can
+            mark some modules as part of your build (local) and others as
+            runtime-loaded remotes. It even supports nesting—each build becomes
+            its own "container" and can consume modules from other containers.
+            Think of it like an iframe inside an iframe, only without the messy
+            postMessage glue.
+          </ProseBlock>
+        </BlogSection>
+        <ProseBlock>
+          If you wanted to mirror our iframe framework, you'd use the "separate
+          builds per page" pattern. In that setup, each page in your SPA is a
+          remote container build, and your host site (the shell) is another
+          container build. Each page deploys on its own schedule, just like our
+          iframe modules.
+        </ProseBlock>
+
+        <ProseBlock>
+          The shell build declares common libraries as shared modules, so they
+          aren't duplicated in every page build. That keeps each page's bundle
+          small. Our iframe approach pulls in all packages for each entry point,
+          so we don't get that same savings. On paper that sounds bad, but in
+          production the difference isn't so severe—and you can always use
+          rollup or additional code-splitting to trim bloat.
+        </ProseBlock>
+
+        <ProseBlock>
+          With Module Federation, the shell stays stable while you push updates
+          to remote modules independently. That combination of independent
+          deployments, shared dependencies, and runtime loading is where Module
+          Federation really wins.
+        </ProseBlock>
+
+        <ProseBlock>
+          There are two main drawbacks to using Module Federation for your
+          micro-frontend architecture. First, it locks you into Webpack for
+          building all your applications. If you love Webpack, that's fine, but
+          you lose the freedom to choose alternatives like Vite or Rollup for
+          performance or simplicity reasons.
+        </ProseBlock>
+
+        <ProseBlock>
+          Second, it constrains your development stacks. As I mentioned earlier,
+          supporting multiple frameworks can be a double-edged sword. If any of
+          your apps are legacy and you want to include them without a full
+          rewrite, Module Federation may become a deal-breaker. You will need to
+          ultimately decide if the trade-offs are worth it.
+        </ProseBlock>
+
+        <BlogSection
+          id="single-spa"
+          title="Single Spa"
+          imageSrc={SingleSpaImage}
+          imageAlt="Single SPA"
+          imageOnRight={false}
+          objectFit="cover"
+          caption="Single-SPA: coordinates multiple micro-apps on the same page"
+          columns="1fr 2fr"
+          gap={2}
+          aspectRatio={16 / 11}
+        >
+          <TopicBlock
+            title="What it Brings to the Game"
+            items={bulletPointsSspa1}
+          />
+        </BlogSection>
+        <ProseBlock>
+          Single-Spa is currently the most popular micro-frontend solution, and
+          for good reason. It avoids iframes by hosting multiple JavaScript
+          frameworks together so your micro-frontends work seamlessly. I don't
+          believe Single-Spa is for the faint of heart. Building a "Hello,
+          world" demo or an initial proof of concept is doable, but complexity
+          grows quickly. Because of the complexity they offer classes and
+          tutorias to help with integrating it properly.
+        </ProseBlock>
+
+        <ProseBlock>
+          At a high level, Single-Spa drives the entire application lifecycle.
+          You create a root configuration file that renders the main HTML page
+          and registers each micro-frontend.
+        </ProseBlock>
+        <ProseBlock>
+          Each micro-frontend must know how to bootstrap, mount, and unmount
+          itself from the DOM. That sounds like a regular SPA, but here you must
+          coordinate multiple SPAs on the same page—none of them have their own
+          standalone index.html.
+        </ProseBlock>
+        <ProseBlock>
+          Perhaps the biggest hurdle is migrating an existing SPA into
+          Single-Spa. Two challenges stand out:
+          <ol>
+            <li>
+              Implementing the unmount lifecycle. Most SPAs aren't designed to
+              go dormant and remove themselves from the DOM. Single-Spa provides
+              helpers, but you still need to refactor and plan carefully.
+            </li>{' '}
+            <li>
+              Managing dependencies. CSS and font conflicts are common because
+              traditional SPAs rely on a single index.html. Single-Spa advises
+              bundling as much as possible into your JavaScript bundles. If you
+              must load globals in your root config, be prepared for potential
+              CSS clashes.
+            </li>
+          </ol>
+        </ProseBlock>
+
+        <BlogSubsection title="Getting Started">
+          A high-level overview of how to get started with Single-Spa:
+          <ul>
+            <li>
+              Choose your loader. Single-Spa suggests SystemJS, but you can use
+              alternatives, even Module Federation.
+            </li>
+            <li>Preload shared libraries to speed up performance.</li>
+            <li>
+              Share code and functions via import/exports, just like in a
+              monolith.
+            </li>
+            <li>
+              Apply lazy loading wherever possible to minimize initial load
+              time.
+            </li>
+            <li>
+              Create an import map that routes application URLs to your local
+              environment.
+            </li>
+          </ul>
+        </BlogSubsection>
+        <ProseBlock>
+          If you decide on Single-Spa, you'll need to tackle each of those areas
+          in depth.
+        </ProseBlock>
+        <ReferenceLink
+          url="https://single-spa.js.org/docs/recommended-setup"
+          linkText="recommended setup guide"
+          text="Visit the recommended setup guide for full details."
         />
 
         <ProseBlock>
-          To my knowledge, micro-frontend strategies come in three flavors.
-          We've already covered my favorite flavor, iframes, so let's move on to
-          the next one, which is actually similar to iframes. We considered
-          adopting this approach, but ultimately we went with iframes.
+          One more thing to note: If you're feeling bold and want to get the
+          benefits of Single-spa with Module Federation, you can combine the
+          two. This lets you use Module Federation for dynamic module sharing
+          while still getting the lifecycle management and routing benefits of
+          Single-Spa. It's a bit more complex, but it can be a powerful
+          combination.
+        </ProseBlock>
+
+        <ReferenceLink
+          url="https://www.youtube.com/watch?v=wxnwPLLIJCY&t=328s"
+          linkText="See this video for a practical example"
+          text="It's possible to combine Single-Spa and Module Federation for advanced micro-frontend architectures. See this video for a practical example."
+        />
+
+        <BlogSection
+          id="iframe"
+          title="iFrame-Based Approach"
+          imageSrc={iframeImage}
+          imageAlt="iFrame"
+          imageOnRight={true}
+          objectFit="cover"
+          caption="iFrame: isolation and independent updates"
+          columns="2fr 1fr"
+          gap={3}
+          aspectRatio={1 / 0.9}
+        >
+          <TopicBlock
+            title="Simple, Secure, and Scalable"
+            items={bulletPointsIframe1}
+          />
+        </BlogSection>
+
+        <ProseBlock>
+          Coming back to where we started, iframes remain a viable option in the
+          micro-frontend landscape. They lack some of the bells and whistles you
+          get with, say, Single-Spa, and they aren't as efficient at tree
+          shaking because each iframe runs its own browser context. At the same
+          time, they can be easier to manage. Each iframe provides true
+          isolation, making it ideal for embedding in third-party applications.
+          That isolation, combined with the ability to update modules
+          independently with minimal code changes, offers two big advantages.
         </ProseBlock>
 
         <ProseBlock>
-          In a presentation I saw, the speaker called this flavor "External App
-          Bootstrapping." It uses a host application to load CSS, JS, and other
-          assets from different servers. Then it stitches the code together
-          using the <span className="code">window</span> object and an event
-          bus, much like an iframe's messaging system. Like the other
-          approaches, it supports independent deployments and is able to look
-          like a single application.
+          They do seem a bit “dated” compared to newer approaches. Building your
+          own messaging layer and accommodating iframe quirks isn't always the
+          smoothest path when developing web apps. Despite these downsides, an
+          iframe approach lets you avoid lock-in to a third-party micro-frontend
+          framework.
         </ProseBlock>
-      </BlogSection>
 
-      <ProseBlock>
-        The main reason we decided against External App Bootstrapping was the
-        speed and simplicity of iframes. iFrames let us hit market faster. They
-        were also the default choice for third-party integration at the time.
-      </ProseBlock>
-
-      <ReferenceLink
-        url="https://youtu.be/ftBc8w-lwmY?si=O_e2mgqSao6-o3Bi"
-        linkText="walkthrough on YouTube"
-        text="If you'd like to see External App Bootstrapping in action, check out this walkthrough on YouTube."
-      />
-
-      <BlogSubsection title="Micro-Frontend Libraries" />
-      <ProseBlock>
-        A more modern approach to micro-frontends involves using libraries.
-        Single-spa, for example, provides a top-level router and built-in lazy
-        loading so that legacy and new projects can coexist on the same page.
-        While another library, Module Federation, is a Webpack plugin that
-        enables dynamic module sharing between different applications. It allows
-        you to load remote modules at runtime, making it easier to develop and
-        deploy micro-frontends.
-      </ProseBlock>
-
-      <ProseBlock>
-        Let's take a closer look at these two libraries and how they compare to
-        our iframe approach.
-      </ProseBlock>
-
-      {/* ### Modern Micro-Frontend libraries */}
-      <BlogSection 
-        id="module-federation"
-        title="Module Federation"
-        imageSrc={ModuleFederationImage}
-        imageAlt="Module Federation"
-        imageOnRight={true}
-        objectFit="cover"
-        caption="Module Federation: shines at dynamic, runtime modules"
-        columns="2fr 1fr"
-        gap={3}
-        aspectRatio={16 / 11}
-      >
-        <TopicBlock 
-          title="Shiny Happy Modules"
-          items={bulletPointsMf1}
-        />
         <ProseBlock>
-          Module Federation shines at dynamic, runtime module sharing. You can
-          mark some modules as part of your build (local) and others as
-          runtime-loaded remotes. It even supports nesting—each build becomes
-          its own "container" and can consume modules from other containers.
-          Think of it like an iframe inside an iframe, only without the messy
-          postMessage glue.
+          For example, Module Federation requires you to adopt its own
+          requirements and dependencies, and your project must operate within
+          its constraints. That may not matter for most teams, but I've seen
+          developers struggle to update package libraries and simply make things
+          work. If you roll your own micro-frontend solution, you'll still face
+          challenges, but you maintain full control over your domain and enjoy
+          more freedom to evolve your application without being confined by
+          someone else's tooling choices.
         </ProseBlock>
-      </BlogSection>
-      <ProseBlock>
-        If you wanted to mirror our iframe framework, you'd use the "separate
-        builds per page" pattern. In that setup, each page in your SPA is a
-        remote container build, and your host site (the shell) is another
-        container build. Each page deploys on its own schedule, just like our
-        iframe modules.
-      </ProseBlock>
 
-      <ProseBlock>
-        The shell build declares common libraries as shared modules, so they
-        aren't duplicated in every page build. That keeps each page's bundle
-        small. Our iframe approach pulls in all packages for each entry point,
-        so we don't get that same savings. On paper that sounds bad, but in
-        production the difference isn't so severe—and you can always use rollup
-        or additional code-splitting to trim bloat.
-      </ProseBlock>
+        {/* ### Pros and Cons */}
+        <BlogSection id="pros-and-cons" title="Pros and Cons">
+          <ComparisonSection
+            comparisons={[
+              {
+                title: 'Module Federation',
+                items: bulletPointsMFLPros,
+                subTitle: 'Pros',
+              },
+              {
+                title: '',
+                items: bulletPointsMFLCons,
+                subTitle: 'Cons',
+              },
+              {
+                title: 'Single-Spa',
+                items: bulletPointsSingleSpaPros,
+                subTitle: 'Pros',
+              },
+              {
+                title: '',
+                items: bulletPointsSingleSpaCons,
+                subTitle: 'Cons',
+              },
+              {
+                title: 'iFrame',
+                items: bulletPointsIframePros,
+                subTitle: 'Pros',
+              },
+              {
+                title: '',
+                items: bulletPointsIframeCons,
+                subTitle: 'Cons',
+              },
+            ]}
+          />
+        </BlogSection>
 
-      <ProseBlock>
-        With Module Federation, the shell stays stable while you push updates to
-        remote modules independently. That combination of independent
-        deployments, shared dependencies, and runtime loading is where Module
-        Federation really wins.
-      </ProseBlock>
-
-      <ProseBlock>
-        There are two main drawbacks to using Module Federation for your
-        micro-frontend architecture. First, it locks you into Webpack for
-        building all your applications. If you love Webpack, that's fine, but
-        you lose the freedom to choose alternatives like Vite or Rollup for
-        performance or simplicity reasons.
-      </ProseBlock>
-
-      <ProseBlock>
-        Second, it constrains your development stacks. As I mentioned earlier,
-        supporting multiple frameworks can be a double-edged sword. If any of
-        your apps are legacy and you want to include them without a full
-        rewrite, Module Federation may become a deal-breaker. You will need to
-        ultimately decide if the trade-offs are worth it.
-      </ProseBlock>
-
-      <BlogSection 
-        id="single-spa"
-        title="Single Spa"
-        imageSrc={SingleSpaImage}
-        imageAlt="Single SPA"
-        imageOnRight={false}
-        objectFit="cover"
-        caption="Single-SPA: coordinates multiple micro-apps on the same page"
-        columns="1fr 2fr"
-        gap={2}
-        aspectRatio={16 / 11}
-      >
-        <TopicBlock 
-          title="What it Brings to the Game"
-          items={bulletPointsSspa1}
-        />
-      </BlogSection>
-      <ProseBlock>
-        Single-Spa is currently the most popular micro-frontend solution, and
-        for good reason. It avoids iframes by hosting multiple JavaScript
-        frameworks together so your micro-frontends work seamlessly. I don't
-        believe Single-Spa is for the faint of heart. Building a "Hello, world"
-        demo or an initial proof of concept is doable, but complexity grows
-        quickly. Because of the complexity they offer classes and
-        tutorias to help with integrating it properly.
-      </ProseBlock>
-
-      <ProseBlock>
-        At a high level, Single-Spa drives the entire application lifecycle. You
-        create a root configuration file that renders the main HTML page and
-        registers each micro-frontend.
-      </ProseBlock>
-      <ProseBlock>
-        Each micro-frontend must know how to bootstrap, mount, and unmount
-        itself from the DOM. That sounds like a regular SPA, but here you must
-        coordinate multiple SPAs on the same page—none of them have their own
-        standalone index.html.
-      </ProseBlock>
-      <ProseBlock>
-        Perhaps the biggest hurdle is migrating an existing SPA into Single-Spa.
-        Two challenges stand out:
-        <ol>
-          <li>
-            Implementing the unmount lifecycle. Most SPAs aren't designed to go
-            dormant and remove themselves from the DOM. Single-Spa provides
-            helpers, but you still need to refactor and plan carefully.
-          </li>{' '}
-          <li>
-            Managing dependencies. CSS and font conflicts are common because
-            traditional SPAs rely on a single index.html. Single-Spa advises
-            bundling as much as possible into your JavaScript bundles. If you
-            must load globals in your root config, be prepared for potential CSS
-            clashes.
-          </li>
-        </ol>
-      </ProseBlock>
-
-      <BlogSubsection title="Getting Started">
-        A high-level overview of how to get started with Single-Spa:
-        <ul>
-          <li>
-            Choose your loader. Single-Spa suggests SystemJS, but you can use
-            alternatives, even Module Federation.
-          </li>
-          <li>Preload shared libraries to speed up performance.</li>
-          <li>
-            Share code and functions via import/exports, just like in a
-            monolith.
-          </li>
-          <li>
-            Apply lazy loading wherever possible to minimize initial load time.
-          </li>
-          <li>
-            Create an import map that routes application URLs to your local
-            environment.
-          </li>
-        </ul>
-      </BlogSubsection>
-      <ProseBlock>
-        If you decide on Single-Spa, you'll need to tackle each of those areas
-        in depth.
-      </ProseBlock>
-      <ReferenceLink
-        url="https://single-spa.js.org/docs/recommended-setup"
-        linkText="recommended setup guide"
-        text="Visit the recommended setup guide for full details."
-      />
-
-      <ProseBlock>
-        One more thing to note: If you're feeling bold and want to get the
-        benefits of Single-spa with Module Federation, you can combine the two.
-        This lets you use Module Federation for dynamic module sharing while
-        still getting the lifecycle management and routing benefits of
-        Single-Spa. It's a bit more complex, but it can be a powerful
-        combination.
-      </ProseBlock>
-
-      <ReferenceLink
-        url="https://www.youtube.com/watch?v=wxnwPLLIJCY&t=328s"
-        linkText="See this video for a practical example"
-        text="It's possible to combine Single-Spa and Module Federation for advanced micro-frontend architectures. See this video for a practical example."
-      />
-
-      <BlogSection 
-        id="iframe"
-        title="iFrame-Based Approach"
-        imageSrc={iframeImage}
-        imageAlt="iFrame"
-        imageOnRight={true}
-        objectFit="cover"
-        caption="iFrame: isolation and independent updates"
-        columns="2fr 1fr"
-        gap={3}
-        aspectRatio={1 / 0.9}
-      >
-        <TopicBlock 
-          title="Simple, Secure, and Scalable"
-          items={bulletPointsIframe1}
-        />
-      </BlogSection>
-
-      <ProseBlock>
-        Coming back to where we started, iframes remain a viable option in the
-        micro-frontend landscape. They lack some of the bells and whistles you
-        get with, say, Single-Spa, and they aren't as efficient at tree shaking
-        because each iframe runs its own browser context. At the same time, they
-        can be easier to manage. Each iframe provides true isolation, making it
-        ideal for embedding in third-party applications. That isolation,
-        combined with the ability to update modules independently with minimal
-        code changes, offers two big advantages.
-      </ProseBlock>
-
-      <ProseBlock>
-        They do seem a bit “dated” compared to newer approaches. Building your
-        own messaging layer and accommodating iframe quirks isn't always the
-        smoothest path when developing web apps. Despite these downsides, an
-        iframe approach lets you avoid lock-in to a third-party micro-frontend
-        framework.
-      </ProseBlock>
-
-      <ProseBlock>
-        For example, Module Federation requires you to adopt its own
-        requirements and dependencies, and your project must operate within its
-        constraints. That may not matter for most teams, but I've seen
-        developers struggle to update package libraries and simply make things
-        work. If you roll your own micro-frontend solution, you'll still face
-        challenges, but you maintain full control over your domain and enjoy
-        more freedom to evolve your application without being confined by
-        someone else's tooling choices.
-      </ProseBlock>
-
-      {/* ### Pros and Cons */}
-      <BlogSection 
-        id="pros-and-cons"
-        title="Pros and Cons"
-      >
-        <ComparisonSection
-          comparisons={[
-            {
-              title: "Module Federation",
-              items: bulletPointsMFLPros,
-              subTitle: "Pros"
-            },
-            {
-              title: "",
-              items: bulletPointsMFLCons,
-              subTitle: "Cons"
-            },
-            {
-              title: "Single-Spa",
-              items: bulletPointsSingleSpaPros,
-              subTitle: "Pros"
-            },
-            {
-              title: "",
-              items: bulletPointsSingleSpaCons,
-              subTitle: "Cons"
-            },
-            {
-              title: "iFrame",
-              items: bulletPointsIframePros,
-              subTitle: "Pros"
-            },
-            {
-              title: "",
-              items: bulletPointsIframeCons,
-              subTitle: "Cons"
-            }
-          ]}
-        />
-      </BlogSection>
-
-      {/* ### Rationale Behind Our Choice */}
-      <BlogSection 
-        id="rantionale-behinde-our-choice"
-        title="Rationale Behind Our Choice"
-        imageSrc={RationaleChoiceImage}
-        imageAlt="Rationale Behind Our Choice"
-        imageOnRight={true}
-        objectFit="cover"
-        caption="Rationale Behind Our Choice"
-        columns="2fr 1fr"
-        gap={2}
-        aspectRatio={1 / 1.32}
-      >
-        <TopicBlock 
-          title="Our Decision Factors"
-          items={bulletPointsRationale}
-        />
-        <ProseBlock>
-          When we first designed the system, tools like Single-SPA and Webpack
-          Module Federation were either unavailable or not mature. We needed a
-          fast way to integrate multiple pages into client sites. Given our
-          requirements, iframes were the most practical option.
-        </ProseBlock>
-        <ProseBlock>
-          Team structure also influenced the decision. With a backend-heavy team
-          and occasional front-end support from full-stack developers,
-          simplicity was important. Iframes let us update modules independently
-          without deep front-end knowledge. Based on timing, needs, and team
-          stucture, iframes made the most sense.
-        </ProseBlock>
-      </BlogSection>
-
+        {/* ### Rationale Behind Our Choice */}
+        <BlogSection
+          id="rantionale-behinde-our-choice"
+          title="Rationale Behind Our Choice"
+          imageSrc={RationaleChoiceImage}
+          imageAlt="Rationale Behind Our Choice"
+          imageOnRight={true}
+          objectFit="cover"
+          caption="Rationale Behind Our Choice"
+          columns="2fr 1fr"
+          gap={2}
+          aspectRatio={1 / 1.32}
+        >
+          <TopicBlock
+            title="Our Decision Factors"
+            items={bulletPointsRationale}
+          />
+          <ProseBlock>
+            When we first designed the system, tools like Single-SPA and Webpack
+            Module Federation were either unavailable or not mature. We needed a
+            fast way to integrate multiple pages into client sites. Given our
+            requirements, iframes were the most practical option.
+          </ProseBlock>
+          <ProseBlock>
+            Team structure also influenced the decision. With a backend-heavy
+            team and occasional front-end support from full-stack developers,
+            simplicity was important. Iframes let us update modules
+            independently without deep front-end knowledge. Based on timing,
+            needs, and team stucture, iframes made the most sense.
+          </ProseBlock>
+        </BlogSection>
       </ArticleLayout>
 
       <BlogPostNavigator
@@ -445,7 +440,7 @@ function RouteComponent() {
           title:
             'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
           route: '/blog/posts/frontend-design/microfrontends-part1',
-          image: CallOutImage,
+          image: getThumbImageSrc('20250601-image-slide0'),
           date: '2025-03-15',
           blurb:
             'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',

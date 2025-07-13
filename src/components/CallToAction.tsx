@@ -1,4 +1,8 @@
-import Image, { AspectRatioContainer } from '@/components/Image';
+import Image, {
+  AspectRatioContainer,
+  type SourceProps,
+} from '@/components/Image';
+import { formatDisplayDate } from '@/utils/date';
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,9 +10,6 @@ import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { isNil } from '@/utils/safety';
-import { format, parse } from 'date-fns';
-import { formatDisplayDate } from '@/utils/date';
 
 type PositionProps = {
   top?: number;
@@ -105,6 +106,7 @@ interface CallToActionProps {
   buttonText?: string;
   onClick?: () => void;
   imageSrc?: string;
+  sources?: SourceProps[];
   imageAlt?: string;
   imagePosition?: PositionProps;
   imageRatio?: number;
@@ -118,6 +120,7 @@ export default function CallToAction({
   buttonText,
   onClick,
   imageSrc,
+  sources,
   imageAlt = 'Featured image',
   imageRatio = 16 / 9,
   imagePosition,
@@ -130,19 +133,30 @@ export default function CallToAction({
   // Format the date string using the new utility
   const formattedDate = formatDisplayDate(date);
 
+  // Determine the image configuration
+  // Priority: sources (if provided) > imageSrc (fallback)
+  const hasImage = !!(sources?.length || imageSrc);
+  const defaultImageSrc = imageSrc || '';
+  const imageSources = sources?.length ? sources : undefined;
+
   return (
     <>
       {/* Mobile Banner Image - only shown on mobile */}
-      {imageSrc && (
+      {hasImage && (
         <MobileBannerContainer>
           <AspectRatioContainer ratio={imageRatio}>
-            <Image defaultSrc={imageSrc} alt={imageAlt} objectFit="cover" />
+            <Image
+              sources={imageSources}
+              defaultSrc={defaultImageSrc}
+              alt={imageAlt}
+              objectFit="cover"
+            />
           </AspectRatioContainer>
         </MobileBannerContainer>
       )}
 
       <CallToActionContainer>
-        <ContentContainer hasImage={!!imageSrc}>
+        <ContentContainer hasImage={hasImage}>
           {title && (
             <Typography
               variant="h1"
@@ -191,11 +205,12 @@ export default function CallToAction({
         </ContentContainer>
 
         {/* Desktop Circular Image - only shown on desktop */}
-        {imageSrc && (
+        {hasImage && (
           <CircularImageOuterContainer>
             <CircularImageInnerContainer>
               <Image
-                defaultSrc={imageSrc}
+                sources={imageSources}
+                defaultSrc={defaultImageSrc}
                 alt={imageAlt}
                 objectFit="cover"
                 width="auto"

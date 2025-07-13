@@ -1,7 +1,8 @@
-import React from 'react';
 import CallToAction from '@/components/CallToAction';
-import TitleBlock from '@/components/TitleBlock';
+import type { SourceProps } from '@/components/Image';
 import IntroBlock from '@/components/IntroBlock';
+import TitleBlock from '@/components/TitleBlock';
+import React from 'react';
 
 interface ArticleLayoutProps {
   /** Main article title */
@@ -12,6 +13,8 @@ interface ArticleLayoutProps {
   preSubtitle?: string;
   /** Optional image source for CallToAction */
   imageSrc?: string;
+  /** Optional responsive image sources for CallToAction */
+  sources?: SourceProps[];
   /** Optional image alt text for CallToAction */
   imageAlt?: string;
   /** Optional date for CallToAction */
@@ -35,6 +38,7 @@ export function ArticleLayout({
   subtitle,
   preSubtitle,
   imageSrc,
+  sources,
   imageAlt,
   date,
   sectionTitle,
@@ -49,17 +53,14 @@ export function ArticleLayout({
         preSubtitle={preSubtitle}
         subtitle={subtitle}
         imageSrc={imageSrc}
+        sources={sources}
         imageAlt={imageAlt}
         date={date}
       />
 
-      <TitleBlock subtitle={sectionSubtitle}>
-        {sectionTitle}
-      </TitleBlock>
-      
-      <IntroBlock>
-        {introContent}
-      </IntroBlock>
+      <TitleBlock subtitle={sectionSubtitle}>{sectionTitle}</TitleBlock>
+
+      <IntroBlock>{introContent}</IntroBlock>
 
       {children}
     </>

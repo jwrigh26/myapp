@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 // Define the structure for each image source
-interface SourceProps {
+export interface SourceProps {
   media: string; // e.g., "(min-width: 768px)"
   srcSet: string; // e.g., "image-large.jpg 2x, image-large@1x.jpg 1x"
   sizes?: string; // e.g., "100vw"
@@ -262,11 +262,7 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
         >
           <Image defaultSrc={imageSrc} alt={imageAlt} objectFit={objectFit} />
         </AspectRatioContainer>
-        {caption && (
-          <ImageCaption variant="caption">
-            {caption}
-          </ImageCaption>
-        )}
+        {caption && <ImageCaption variant="caption">{caption}</ImageCaption>}
       </GridImage>
     </ContentImageGrid>
   );

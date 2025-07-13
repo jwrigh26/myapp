@@ -1,12 +1,12 @@
+import { formatDisplayDate } from '@/utils/date';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { Link as RouterLink } from '@tanstack/react-router';
-import { formatDisplayDate } from '@/utils/date';
 
 type BlogPostProps = {
   title: string;
@@ -87,7 +87,7 @@ export default function BlogPostNavigator({
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'stretch',
-                height: 'auto',
+                height: '100%', // Make CardActionArea fill the Card height
                 minHeight: 140,
               }}
             >
@@ -97,12 +97,26 @@ export default function BlogPostNavigator({
                 alt={item.title}
                 sx={{
                   width: 120,
-                  height: '100%',
                   objectFit: 'cover',
-                  borderRadius: 1,
+                  borderTopLeftRadius: 1,
+                  borderBottomLeftRadius: 1,
+                  borderTopRightRadius: 0,
+                  borderBottomRightRadius: 0,
+                  alignSelf: 'stretch',
                 }}
               />
-              <CardContent sx={{ flex: 1, pl: 2, py: 1, minWidth: 0 }}>
+              <CardContent
+                sx={{
+                  flex: 1,
+                  pl: 2,
+                  py: 1,
+                  minWidth: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  height: 200,
+                }}
+              >
                 <Typography variant="overline" color="text.secondary">
                   {item.label}
                 </Typography>
