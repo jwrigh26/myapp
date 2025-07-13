@@ -1,11 +1,3 @@
-import ModuleFederationImage from '@/assets/ModuleFederation.jpg';
-import SingleSpaImage from '@/assets/SingleSpa.jpg';
-import iframeImage from '@/assets/Slide-iframe.jpg';
-import RationaleChoiceImage from '@/assets/Slide14.jpeg';
-import CallOutImage3 from '@/assets/Slide19.jpeg';
-import StratsAndChoices from '@/assets/Slide8.jpeg';
-import MonolithImage from '@/assets/Slide9.jpeg';
-import CallOutImage2 from '@/assets/Strats.jpg';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import ProseBlock from '@/components/ProseBlock';
 import ReferenceLink from '@/components/ReferenceLink';
@@ -16,7 +8,11 @@ import {
 } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
-import { getThumbImageSrc } from '@/utils/images';
+import {
+  createImageSources,
+  getDefaultImageSrc,
+  getThumbImageSrc,
+} from '@/utils/images';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
@@ -45,7 +41,8 @@ function RouteComponent() {
         preSubtitle="Micro-Frontends Part 2:"
         subtitle="How We Built a Modular Front-End that Scales"
         imageAlt="Micro-Frontends Part 2"
-        imageSrc={CallOutImage2}
+        imageSrc={getDefaultImageSrc('20250601-image-strats')}
+        sources={createImageSources('20250601-image-strats')}
         date="04-21-2025"
         sectionTitle="Decision Making"
         sectionSubtitle="Comparing Our Approach to Modern Alternatives"
@@ -60,7 +57,8 @@ function RouteComponent() {
         <BlogSection
           id="decision-making"
           title="Before Micro Frontends"
-          imageSrc={MonolithImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide9')}
+          sources={createImageSources('20250601-image-slide9')}
           imageAlt="Monolith Image"
           imageOnRight={true}
           objectFit="cover"
@@ -88,7 +86,8 @@ function RouteComponent() {
         <BlogSection
           id="micro-frontend-stragegies"
           title="Micro-Frontend Strategies"
-          imageSrc={StratsAndChoices}
+          imageSrc={getDefaultImageSrc('20250601-image-slide8')}
+          sources={createImageSources('20250601-image-slide8')}
           imageAlt="Strategies and Choices"
           imageOnRight={false}
           objectFit="cover"
@@ -153,7 +152,8 @@ function RouteComponent() {
         <BlogSection
           id="module-federation"
           title="Module Federation"
-          imageSrc={ModuleFederationImage}
+          imageSrc={getDefaultImageSrc('20250601-image-modulefederation')}
+          sources={createImageSources('20250601-image-modulefederation')}
           imageAlt="Module Federation"
           imageOnRight={true}
           objectFit="cover"
@@ -215,7 +215,8 @@ function RouteComponent() {
         <BlogSection
           id="single-spa"
           title="Single Spa"
-          imageSrc={SingleSpaImage}
+          imageSrc={getDefaultImageSrc('20250601-image-singlespa')}
+          sources={createImageSources('20250601-image-singlespa')}
           imageAlt="Single SPA"
           imageOnRight={false}
           objectFit="cover"
@@ -319,7 +320,8 @@ function RouteComponent() {
         <BlogSection
           id="iframe"
           title="iFrame-Based Approach"
-          imageSrc={iframeImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide-iframe')}
+          sources={createImageSources('20250601-image-slide-iframe')}
           imageAlt="iFrame"
           imageOnRight={true}
           objectFit="cover"
@@ -406,7 +408,8 @@ function RouteComponent() {
         <BlogSection
           id="rantionale-behinde-our-choice"
           title="Rationale Behind Our Choice"
-          imageSrc={RationaleChoiceImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide14')}
+          sources={createImageSources('20250601-image-slide14')}
           imageAlt="Rationale Behind Our Choice"
           imageOnRight={true}
           objectFit="cover"
@@ -448,7 +451,7 @@ function RouteComponent() {
         next={{
           title: 'Micro-Frontends Part 3: Lessons Learned',
           route: '/blog/posts/frontend-design/microfrontends-part3',
-          image: CallOutImage3,
+          image: getDefaultImageSrc('20250601-image-slide19'),
           date: '2025-05-01',
           blurb:
             'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',

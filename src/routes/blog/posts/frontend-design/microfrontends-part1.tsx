@@ -1,11 +1,3 @@
-import SharedResImage from '@/assets/Slide-shared-resources.jpeg';
-import IntroImage from '@/assets/Slide1.jpeg';
-import CallOutImage2 from '@/assets/Slide10.jpeg';
-import EnvImage from '@/assets/Slide2.jpeg';
-import HostSiteImage from '@/assets/Slide3.jpeg';
-import ModuleDevImage from '@/assets/Slide4.jpeg';
-import DeploymentImage from '@/assets/Slide5.jpeg';
-import SuperModsImage from '@/assets/Slide7.jpeg';
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import DisclaimerBlock from '@/components/DisclaimerBlock';
 import { ResponsiveContentImageGrid } from '@/components/Image';
@@ -61,11 +53,12 @@ function RouteComponent() {
       >
         <BlogSection
           id="introduction"
-          imageSrc={IntroImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide1')}
+          sources={createImageSources('20250601-image-slide1')}
           imageAlt="Empowering Small Businesses"
           imageOnRight={false}
           gap={2}
-          aspectRatio={4 / 3}
+          aspectRatio={4 / 3.4}
         >
           <TopicBlock title="The Backstory" items={bulletPoints1} />
         </BlogSection>
@@ -81,11 +74,12 @@ function RouteComponent() {
         <BlogSection
           id="environment-and-requirements"
           title="The Environment and Requirements"
-          imageSrc={EnvImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide2')}
+          sources={createImageSources('20250601-image-slide2')}
           imageAlt="The Environment and Requirements"
           imageOnRight={true}
           gap={2}
-          aspectRatio={16 / 9}
+          aspectRatio={15.4 / 9}
         >
           <TopicBlock title="Host Sites" items={bulletPoints2} />
         </BlogSection>
@@ -103,7 +97,8 @@ function RouteComponent() {
 
         <Spacer size={2} desktop />
         <ResponsiveContentImageGrid
-          imageSrc={HostSiteImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide3')}
+          sources={createImageSources('20250601-image-slide3')}
           imageAlt="The Host Sites"
           imageOnRight={true}
           gap={2}
@@ -178,11 +173,12 @@ function RouteComponent() {
 
         <Spacer size={2} desktop />
         <ResponsiveContentImageGrid
-          imageSrc={ModuleDevImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide4')}
+          sources={createImageSources('20250601-image-slide4')}
           imageAlt="Module Development & Versioning"
           imageOnRight={false}
           gap={2}
-          aspectRatio={4 / 3}
+          aspectRatio={3.8 / 3.4}
           caption="Module development: Beware of version drift"
         >
           <BlogSubsection
@@ -226,7 +222,8 @@ function RouteComponent() {
         <BlogSection
           id="shared-resources"
           title="Shared Resources"
-          imageSrc={SharedResImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide-shared-resources')}
+          sources={createImageSources('20250601-image-slide-shared-resources')}
           imageAlt="Shared Resources"
           imageOnRight={false}
           mobileImageFirst={true}
@@ -265,12 +262,13 @@ function RouteComponent() {
         <BlogSection
           id="service-integration-and-module-autonomy"
           title="Super Mods"
-          imageSrc={SuperModsImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide7')}
+          sources={createImageSources('20250601-image-slide7')}
           imageAlt="Super Mods: Service Integration & Module Autonomy"
           imageOnRight={true}
           gap={2}
           caption="Super Mods have standalone power"
-          aspectRatio={4 / 3}
+          aspectRatio={4 / 2.7}
         >
           <TopicBlock
             title="Service Integration & Module Autonomy"
@@ -308,12 +306,13 @@ function RouteComponent() {
           title="Deployment"
           subtitle="Super easy, barely an inconvenience"
           titleOptions={{ titleVariant: 'h4', subtitleVariant: 'subtitle1' }}
-          imageSrc={DeploymentImage}
+          imageSrc={getDefaultImageSrc('20250601-image-slide5')}
+          sources={createImageSources('20250601-image-slide5')}
           imageAlt="Deployment Flexibility"
           imageOnRight={true}
           gap={2}
           caption="Deployment Flexibility: Independent repositories and decoupled updates"
-          aspectRatio={4 / 3}
+          aspectRatio={4 / 2.7}
         >
           <TopicBlock title="Key Benefits" items={bulletPoints7} />
 
@@ -353,7 +352,7 @@ function RouteComponent() {
         next={{
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
           route: '/blog/posts/frontend-design/microfrontends-part2',
-          image: CallOutImage2,
+          image: getDefaultImageSrc('20250601-image-slide10'),
           date: '2025-04-21',
           blurb:
             'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',

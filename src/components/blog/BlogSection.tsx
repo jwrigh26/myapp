@@ -1,8 +1,9 @@
-import React from 'react';
-import { SectionSpacer } from '@/components/Spacer';
+import type { SourceProps } from '@/components/Image';
 import { ResponsiveContentImageGrid } from '@/components/Image';
-import ProseBlock from '@/components/ProseBlock';
 import type { ProseBlockProps } from '@/components/ProseBlock';
+import ProseBlock from '@/components/ProseBlock';
+import { SectionSpacer } from '@/components/Spacer';
+import React from 'react';
 
 interface BlogSectionProps {
   /** Unique ID for the section anchor */
@@ -13,6 +14,8 @@ interface BlogSectionProps {
   subtitle?: string;
   /** Image source for the content grid */
   imageSrc?: string;
+  /** Optional responsive image sources */
+  sources?: SourceProps[];
   /** Alt text for the image */
   imageAlt?: string;
   /** Whether image should be on the right side */
@@ -44,6 +47,7 @@ export function BlogSection({
   title,
   subtitle,
   imageSrc,
+  sources,
   imageAlt,
   imageOnRight = true,
   aspectRatio = 4 / 3,
@@ -55,23 +59,26 @@ export function BlogSection({
   children,
   titleOptions,
 }: BlogSectionProps): JSX.Element {
+  // Determine the image configuration
+  // Priority: sources (if provided) > imageSrc (fallback)
+  const hasImage = !!(sources?.length || imageSrc);
+  const defaultImageSrc = imageSrc || '';
+  const imageSources = sources?.length ? sources : undefined;
+
   return (
     <>
       <SectionSpacer id={id} />
-      
+
       {/* Title block (if no image grid) */}
-      {title && !imageSrc && (
-        <ProseBlock 
-          title={title} 
-          subtitle={subtitle}
-          options={titleOptions}
-        />
+      {title && !hasImage && (
+        <ProseBlock title={title} subtitle={subtitle} options={titleOptions} />
       )}
-      
+
       {/* Content with image */}
-      {imageSrc ? (
+      {hasImage ? (
         <ResponsiveContentImageGrid
-          imageSrc={imageSrc}
+          imageSrc={defaultImageSrc}
+          sources={imageSources}
           imageAlt={imageAlt || title || 'Section image'}
           imageOnRight={imageOnRight}
           gap={gap}
@@ -83,8 +90,8 @@ export function BlogSection({
         >
           {/* Title inside image grid */}
           {title && (
-            <ProseBlock 
-              title={title} 
+            <ProseBlock
+              title={title}
               subtitle={subtitle}
               options={titleOptions}
             />

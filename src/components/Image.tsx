@@ -220,6 +220,7 @@ const ImageCaption = styled(Typography)(({ theme }) => ({
 
 interface ContentImageGridProps {
   imageSrc: string;
+  sources?: SourceProps[];
   imageAlt: string;
   children: React.ReactNode;
   imageOnRight?: boolean;
@@ -235,6 +236,7 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
   imageOnRight = true,
   gap = 2,
   imageSrc,
+  sources,
   imageAlt,
   children,
   aspectRatio = 4 / 3,
@@ -260,7 +262,12 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
           ratio={aspectRatio}
           className="aspect-ratio-container"
         >
-          <Image defaultSrc={imageSrc} alt={imageAlt} objectFit={objectFit} />
+          <Image
+            sources={sources}
+            defaultSrc={imageSrc}
+            alt={imageAlt}
+            objectFit={objectFit}
+          />
         </AspectRatioContainer>
         {caption && <ImageCaption variant="caption">{caption}</ImageCaption>}
       </GridImage>

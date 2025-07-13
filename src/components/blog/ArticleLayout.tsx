@@ -46,14 +46,20 @@ export function ArticleLayout({
   introContent,
   children,
 }: ArticleLayoutProps): JSX.Element {
+  // Determine the image configuration
+  // Priority: sources (if provided) > imageSrc (fallback)
+  const hasImage = !!(sources?.length || imageSrc);
+  const defaultImageSrc = imageSrc || '';
+  const imageSources = sources?.length ? sources : undefined;
+
   return (
     <>
       <CallToAction
         title={title}
         preSubtitle={preSubtitle}
         subtitle={subtitle}
-        imageSrc={imageSrc}
-        sources={sources}
+        imageSrc={hasImage ? defaultImageSrc : undefined}
+        sources={imageSources}
         imageAlt={imageAlt}
         date={date}
       />
