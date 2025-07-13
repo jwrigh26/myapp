@@ -1,6 +1,6 @@
 /**
  * Displays formatted text content with optional title and subtitle.
- * 
+ *
  * "Prose" refers to ordinary written content styled for readability.
  * Maintains consistent typography using Material UI design.
  */

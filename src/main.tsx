@@ -7,8 +7,8 @@ import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import { queryClient } from './utils/queryClient';
 
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_FB_API_URL,
@@ -17,9 +17,8 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_REACT_APP_FB_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_REACT_APP_FB_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_REACT_APP_FB_APP_ID,
-  measurementId: import.meta.env.VITE_REACT_APP_FB_MEASUREMENT_ID
+  measurementId: import.meta.env.VITE_REACT_APP_FB_MEASUREMENT_ID,
 };
-
 
 interface MyRouterContext {
   user?: string;

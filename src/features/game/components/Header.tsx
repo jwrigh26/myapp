@@ -37,16 +37,17 @@ interface CallToActionProps {
   onClick?: () => void;
 }
 
-export function Header({
-  title,
-  buttonText,
-  onClick,
-}: CallToActionProps) {
+export function Header({ title, buttonText, onClick }: CallToActionProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <CallToActionContainer>
-      <Typography variant="h3" component="h1" color="common.white" gutterBottom={!isMobile}>
+      <Typography
+        variant="h3"
+        component="h1"
+        color="common.white"
+        gutterBottom={!isMobile}
+      >
         {title}
       </Typography>
       {isFunction(onClick) && (

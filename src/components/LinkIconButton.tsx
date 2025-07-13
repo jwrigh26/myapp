@@ -15,7 +15,9 @@ const MUILinkComponent = forwardRef<HTMLAnchorElement, MUILinkProps>(
 
 const CreatedLinkComponent = createLink(MUILinkComponent);
 
-export const CustomIconLink: LinkComponent<typeof MUILinkComponent> = (props) => {
+export const CustomIconLink: LinkComponent<typeof MUILinkComponent> = (
+  props
+) => {
   return <CreatedLinkComponent preload={'intent'} {...props} />;
 };
 

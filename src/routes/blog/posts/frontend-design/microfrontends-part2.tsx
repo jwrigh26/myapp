@@ -451,7 +451,7 @@ function RouteComponent() {
         next={{
           title: 'Micro-Frontends Part 3: Lessons Learned',
           route: '/blog/posts/frontend-design/microfrontends-part3',
-          image: getDefaultImageSrc('20250601-image-slide19'),
+          image: getThumbImageSrc('20250601-image-slide19'),
           date: '2025-05-01',
           blurb:
             'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',

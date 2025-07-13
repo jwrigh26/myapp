@@ -74,7 +74,7 @@ function getDefineObject(env: EnvObject): Record<string, string> {
   const prefix = 'VITE_REACT_APP_';
 
   // Source of environment variables (from .env or `process.env` depending on the environment)
-  const source =  env;
+  const source = env;
 
   const define: Record<string, string | undefined> = {};
 

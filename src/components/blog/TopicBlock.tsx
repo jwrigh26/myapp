@@ -38,8 +38,8 @@ export function TopicBlock({
   return (
     <>
       <ProseBlock title={title} options={titleOptions} />
-      <ProseList 
-        items={items} 
+      <ProseList
+        items={items}
         subTitle={subTitle}
         ordered={ordered}
         dense={dense}

@@ -47,11 +47,13 @@ export function ComparisonSection({
             options={{ titleVariant: 'h5' }}
             dense={dense}
           />
-          <ProseList 
+          <ProseList
             items={comparison.items}
             subTitle={comparison.subTitle}
             dense={dense}
-            spacingBottom={index === comparisons.length - 1 ? spacingBottom : false}
+            spacingBottom={
+              index === comparisons.length - 1 ? spacingBottom : false
+            }
           />
         </React.Fragment>
       ))}

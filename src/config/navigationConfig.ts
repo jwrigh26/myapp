@@ -6,36 +6,41 @@ import {
   mdiPencilRuler,
   mdiReact,
 } from '@mdi/js';
-import { NavigationConfig, NavLevel, type NavItem, type NavCategory } from '@/types/navigation';
+import {
+  NavigationConfig,
+  NavLevel,
+  type NavItem,
+  type NavCategory,
+} from '@/types/navigation';
 
 // Main navigation items configuration
 const mainNavItems: NavItem[] = [
-  { 
-    id: 'home', 
-    title: 'Home', 
-    path: '/home', 
-    icon: mdiHome 
+  {
+    id: 'home',
+    title: 'Home',
+    path: '/home',
+    icon: mdiHome,
   },
   // Commented out items from original code
-  // { 
-  //   id: 'about', 
-  //   title: 'About', 
-  //   path: '/about', 
-  //   icon: mdiInformation 
+  // {
+  //   id: 'about',
+  //   title: 'About',
+  //   path: '/about',
+  //   icon: mdiInformation
   // },
-  { 
-    id: 'blog', 
-    title: 'Blog', 
-    path: '/blog', 
+  {
+    id: 'blog',
+    title: 'Blog',
+    path: '/blog',
     icon: mdiBookOpen,
     hasSublevels: true,
-    targetLevel: NavLevel.BLOG
+    targetLevel: NavLevel.BLOG,
   },
-  // { 
-  //   id: 'game', 
-  //   title: 'Game', 
-  //   path: '/game', 
-  //   icon: mdiGamepadVariant 
+  // {
+  //   id: 'game',
+  //   title: 'Game',
+  //   path: '/game',
+  //   icon: mdiGamepadVariant
   // },
 ];
 
@@ -68,17 +73,19 @@ export { mainNavItems, blogCategories };
 
 // Helper functions for navigation configuration
 export const getNavItemById = (id: string) => {
-  return navigationConfig.mainItems.find(item => item.id === id);
+  return navigationConfig.mainItems.find((item) => item.id === id);
 };
 
 export const getBlogCategoryById = (id: string) => {
-  return navigationConfig.blogCategories.find(category => category.id === id);
+  return navigationConfig.blogCategories.find((category) => category.id === id);
 };
 
 export const getNavItemByPath = (path: string) => {
-  return navigationConfig.mainItems.find(item => item.path === path);
+  return navigationConfig.mainItems.find((item) => item.path === path);
 };
 
 export const getBlogCategoryByPath = (path: string) => {
-  return navigationConfig.blogCategories.find(category => category.path === path);
+  return navigationConfig.blogCategories.find(
+    (category) => category.path === path
+  );
 };

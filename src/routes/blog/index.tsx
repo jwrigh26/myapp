@@ -1,5 +1,3 @@
-import CallOutImage2 from '@/assets/Slide10.jpeg';
-import TechDebt from '@/assets/Slide19.jpeg';
 import { PageLayout } from '@/layout';
 import { formatDisplayDate } from '@/utils/date';
 import { getThumbImageSrc } from '@/utils/images';
@@ -140,7 +138,7 @@ const allBlogPosts = [
     title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
     blurb:
       'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
-    image: CallOutImage2,
+    image: getThumbImageSrc('20250601-image-slide10'),
     route: '/blog/posts/frontend-design/microfrontends-part2',
     date: '2025-04-21',
   },
@@ -148,7 +146,7 @@ const allBlogPosts = [
     title: 'Micro-Frontends Part 3: Lessons Learned',
     blurb:
       'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
-    image: TechDebt,
+    image: getThumbImageSrc('20250601-image-slide19'),
     route: '/blog/posts/frontend-design/microfrontends-part3',
     date: '2025-05-01',
   },

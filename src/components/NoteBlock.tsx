@@ -39,17 +39,17 @@ const StyledNoteBox = styled(Box, {
   };
 });
 
-export default function NoteBlock({ 
-  children, 
+export default function NoteBlock({
+  children,
   title = 'Note:',
-  variant = 'default'
+  variant = 'default',
 }: NoteBlockProps) {
   return (
     <StyledNoteBox variant={variant}>
       <ProseBlock
         subtitle={title}
         options={{ subtitleVariant: 'subtitle2', textVariant: 'body2' }}
-        backgroundColor='transparent'
+        backgroundColor="transparent"
       >
         {children}
       </ProseBlock>

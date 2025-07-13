@@ -64,3 +64,4 @@ The `objectFit` property controls how the image content fits within its containe
   alt="Technical diagram"
   objectFit="scale-down"
 />
+```

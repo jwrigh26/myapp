@@ -14,11 +14,11 @@ export function hasValue(value: unknown): boolean {
   }
 
   if (isString(value)) {
-    if (typeof value !== "string") {
+    if (typeof value !== 'string') {
       return false;
     }
     const isEmptyString = !value || value.trim().length === 0;
-    const isUndefinedString = value === "undefined" || value === "null";
+    const isUndefinedString = value === 'undefined' || value === 'null';
     return !isEmptyString && !isUndefinedString;
   }
 
@@ -41,14 +41,14 @@ export function isNil(value: unknown): boolean {
 }
 
 export function isFunction(func: unknown): func is Function {
-  return typeof func === "function";
+  return typeof func === 'function';
 }
 
 export function isNumeric(num: unknown): boolean {
-  if (typeof num === "number") {
+  if (typeof num === 'number') {
     return !Number.isNaN(num) && Number.isFinite(num);
   }
-  if (typeof num === "string") {
+  if (typeof num === 'string') {
     return !Number.isNaN(parseFloat(num)) && Number.isFinite(+num);
   }
   return false;
@@ -59,7 +59,7 @@ export function isObject(obj: unknown): obj is Record<string, unknown> {
 }
 
 export function isString(str: unknown): str is string {
-  return typeof str === "string" || str instanceof String;
+  return typeof str === 'string' || str instanceof String;
 }
 
 export function trimSpaces(value: unknown): string | unknown {
@@ -75,8 +75,8 @@ export function isDate(value: unknown): value is Date {
 export function isValidSearchParam(value: unknown): boolean {
   return (
     value !== undefined &&
-    value !== "undefined" &&
+    value !== 'undefined' &&
     value !== null &&
-    value !== "null"
+    value !== 'null'
   );
 }

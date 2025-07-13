@@ -7,15 +7,18 @@ interface ButtonBaseLinkProps extends Omit<ButtonBaseProps, 'href'> {
   // Add any additional props you want to pass to the button
 }
 
-const ButtonBaseLinkComponent = forwardRef<HTMLAnchorElement, ButtonBaseLinkProps>(
-  (props, ref) => {
-    return <ButtonBase component={'a'} ref={ref} {...props} />;
-  }
-);
+const ButtonBaseLinkComponent = forwardRef<
+  HTMLAnchorElement,
+  ButtonBaseLinkProps
+>((props, ref) => {
+  return <ButtonBase component={'a'} ref={ref} {...props} />;
+});
 
 const CreatedButtonBaseLink = createLink(ButtonBaseLinkComponent);
 
-export const LinkButtonBase: LinkComponent<typeof ButtonBaseLinkComponent> = (props) => {
+export const LinkButtonBase: LinkComponent<typeof ButtonBaseLinkComponent> = (
+  props
+) => {
   return <CreatedButtonBaseLink preload={'intent'} {...props} />;
 };
 

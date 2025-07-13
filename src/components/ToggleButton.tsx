@@ -30,17 +30,19 @@ export default function ToggleButton({
   );
 }
 
-
 const StyledToggleButton = styled(MUIToggleButton)(({ theme }) => {
   console.log('Current palette mode:', theme.palette.mode);
 
   const isDarkMode = theme.palette.mode === 'dark';
   const opacity = isDarkMode ? 0.7 : 0.6;
-  const color = theme.mixins.decomposeColor(theme.palette.common.white, opacity); 
+  const color = theme.mixins.decomposeColor(
+    theme.palette.common.white,
+    opacity
+  );
 
   return {
     color,
-    borderColor: color, 
+    borderColor: color,
     '&:hover': {
       color: theme.palette.common.white,
       borderColor: theme.palette.common.white,

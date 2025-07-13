@@ -2,7 +2,12 @@ import { MobileDrawer, Sheet } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer } from '@/hooks/useContext';
 import { navigationConfig } from '@/config/navigationConfig';
-import { NavLevel, type NavHistoryEntry, type NavItem, type NavCategory } from '@/types/navigation';
+import {
+  NavLevel,
+  type NavHistoryEntry,
+  type NavItem,
+  type NavCategory,
+} from '@/types/navigation';
 import {
   mdiArrowLeft,
   mdiBookOpen,
@@ -207,7 +212,11 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   }
 
   // Navigate forward to a new level
-  const navigateForward = (level: NavLevel, title: string, data?: NavCategory) => {
+  const navigateForward = (
+    level: NavLevel,
+    title: string,
+    data?: NavCategory
+  ) => {
     setPreviousLevel(currentLevel);
     setNavigationDirection('forward');
     setCurrentLevel(level);

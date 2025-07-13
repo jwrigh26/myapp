@@ -14,7 +14,8 @@ export interface BodyBlockProps {
 }
 
 const StyledBodyBlock = styled(Stack, {
-  shouldForwardProp: (prop: string) => !['gap', 'padding', 'color'].includes(prop),
+  shouldForwardProp: (prop: string) =>
+    !['gap', 'padding', 'color'].includes(prop),
 })(({ theme, gap, padding, color }: any) => ({
   display: 'flex',
   flexDirection: 'column',

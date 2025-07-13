@@ -6,7 +6,15 @@ import {
   decomposeColor,
   responsiveFontSizes,
 } from '@mui/material/styles';
-import { ReactNode, createContext, useContext, useMemo, useState, useEffect, useCallback } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 
 // Module augmentation for custom theme properties
 declare module '@mui/material/styles' {
@@ -286,7 +294,7 @@ const createComponentOverrides = (mode: PaletteMode) => ({
 // Optimized theme generation with memoization
 const generateTheme = (mode: PaletteMode): Theme => {
   const colors = COLORS[mode];
-  
+
   const options: ThemeOptions = {
     mixins: MIXINS,
     shape: { borderRadius: 2 },
@@ -325,7 +333,9 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     const stored = localStorage.getItem('themeMode');
     if (stored === 'dark') return true;
     if (stored === 'light') return false;
-    return window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false;
+    return (
+      window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false
+    );
   });
 
   const toggleTheme = useCallback(() => {
@@ -357,7 +367,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
         setIsDarkMode(e.matches);
       }
     };
-    
+
     if (mq.addEventListener) {
       mq.addEventListener('change', handleChange);
       return () => mq.removeEventListener('change', handleChange);

@@ -12,8 +12,18 @@ interface SpacerProps extends BoxProps {
 }
 
 export const Spacer = styled(Box, {
-  shouldForwardProp: (prop) => !['size', 'axis', 'flexSpace', 'mobile', 'desktop'].includes(prop as string),
-})<SpacerProps>(({ theme, size = 1, axis = 'vertical', flexSpace = false, mobile, desktop }) => {
+  shouldForwardProp: (prop) =>
+    !['size', 'axis', 'flexSpace', 'mobile', 'desktop'].includes(
+      prop as string
+    ),
+})<SpacerProps>(({
+  theme,
+  size = 1,
+  axis = 'vertical',
+  flexSpace = false,
+  mobile,
+  desktop,
+}) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
@@ -46,7 +56,11 @@ export function SectionSpacer({
   id,
   className,
   style,
-}: SpacerProps & { id?: string; className?: string; style?: React.CSSProperties }) {
+}: SpacerProps & {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   return (
     <Spacer
       size={size}

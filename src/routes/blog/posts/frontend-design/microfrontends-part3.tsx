@@ -8,7 +8,11 @@ import { Spacer } from '@/components/Spacer';
 import { ArticleLayout, DenseContent, TopicBlock } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
-import { createImageSources, getDefaultImageSrc } from '@/utils/images';
+import {
+  createImageSources,
+  getDefaultImageSrc,
+  getThumbImageSrc,
+} from '@/utils/images';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
@@ -310,7 +314,7 @@ function RouteComponent() {
         prev={{
           title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
           route: '/blog/posts/frontend-design/microfrontends-part2',
-          image: getDefaultImageSrc('20250601-image-slide10'),
+          image: getThumbImageSrc('20250601-image-slide10'),
           date: '2025-04-21',
           blurb:
             'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
