@@ -1,24 +1,22 @@
 import Image, { AspectRatioContainer } from '@/components/Image';
 import { PageLayout } from '@/layout';
+import { formatDisplayDate } from '@/utils/date';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { alpha, styled, useTheme } from '@mui/system';
-import { createFileRoute } from '@tanstack/react-router';
-import { Link as RouterLink } from '@tanstack/react-router';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Link from '@mui/material/Link';
-import { format, parseISO } from 'date-fns';
-import { formatDisplayDate } from '@/utils/date';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { alpha, styled, useTheme } from '@mui/system';
+import { createFileRoute, Link as RouterLink } from '@tanstack/react-router';
 
 import splashImage from '@/assets/home_page_splash.jpg';
-import CallOutImage from '@/assets/Slide0.jpeg';
 import CallOutImage2 from '@/assets/Slide10.jpeg';
 import TechDebt from '@/assets/Slide19.jpeg';
+import { getThumbImageSrc } from '@/utils/images';
 
 export const Route = createFileRoute('/home')({
   component: HomeComponent,
@@ -78,7 +76,12 @@ function HomeComponent() {
               <CardActionArea
                 component={RouterLink}
                 to={post.route}
-                sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+                sx={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'stretch',
+                }}
               >
                 <CardMedia
                   component="img"
@@ -90,7 +93,11 @@ function HomeComponent() {
                   }}
                 />
                 <CardContent sx={{ flex: 1 }}>
-                  <Typography variant="caption" color="text.secondary" sx={{ mb: 0.5, display: 'block' }}>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mb: 0.5, display: 'block' }}
+                  >
                     {formatDisplayDate(post.date)}
                   </Typography>
                   <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
@@ -305,10 +312,11 @@ const Statement3 = styled(SupportingStatement)(({ theme }) => ({
 // Hardcoded latest blog posts
 const latestBlogPosts = [
   {
-    title: 'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+    title:
+      'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
     blurb:
       'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
-    image: CallOutImage,
+    image: getThumbImageSrc('20250601-image-slide0'),
     route: '/blog/posts/frontend-design/microfrontends-part1',
     date: '2025-03-15',
   },
