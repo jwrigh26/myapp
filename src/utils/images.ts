@@ -1,4 +1,6 @@
 import type { SourceProps } from '@/components/Image';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useMemo } from 'react';
 import { imageRegistry, type ImageKey } from './imageRegistry';
 
 export type { ImageKey };
@@ -113,4 +115,68 @@ export function getThumbImageSrc(imageKey: ImageKey): string {
 
   // Prefer small, fallback to medium, then large
   return imageSizes.medium || imageSizes.small || imageSizes.large || '';
+}
+
+// Helper to get the best background image based on viewport/container size
+export function getBackgroundImageSrc(
+  imageKey: ImageKey,
+  containerWidth?: number
+): string {
+  const images = imageRegistry[imageKey];
+  if (!images) {
+    return `@/assets/blog/2025/06/${imageKey}-large.webp`;
+  }
+
+  const imageSizes = images as {
+    large?: string;
+    medium?: string;
+    small?: string;
+  };
+
+  // If no container width provided, use viewport width or default to large
+  const width =
+    containerWidth ||
+    (typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  // Choose size based on container/viewport width
+  if (width >= 1200) {
+    // Large screens - prefer large, fallback to medium, then small
+    return imageSizes.large || imageSizes.medium || imageSizes.small || '';
+  } else if (width >= 768) {
+    // Medium screens - prefer medium, fallback to large, then small
+    return imageSizes.medium || imageSizes.large || imageSizes.small || '';
+  } else {
+    // Small screens - prefer small, fallback to medium, then large
+    return imageSizes.small || imageSizes.medium || imageSizes.large || '';
+  }
+}
+
+// Optimized hook for background images that uses MUI's media query system
+export function useBackgroundImageSrc(imageKey: ImageKey): string {
+  const isLarge = useMediaQuery('(min-width: 1200px)');
+  const isMedium = useMediaQuery('(min-width: 768px)');
+
+  return useMemo(() => {
+    const images = imageRegistry[imageKey];
+    if (!images) {
+      return `@/assets/blog/2025/06/${imageKey}-large.webp`;
+    }
+
+    const imageSizes = images as {
+      large?: string;
+      medium?: string;
+      small?: string;
+    };
+
+    if (isLarge) {
+      // Large screens - prefer large, fallback to medium, then small
+      return imageSizes.large || imageSizes.medium || imageSizes.small || '';
+    } else if (isMedium) {
+      // Medium screens - prefer medium, fallback to large, then small
+      return imageSizes.medium || imageSizes.large || imageSizes.small || '';
+    } else {
+      // Small screens - prefer small, fallback to medium, then large
+      return imageSizes.small || imageSizes.medium || imageSizes.large || '';
+    }
+  }, [imageKey, isLarge, isMedium]);
 }

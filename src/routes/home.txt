@@ -1,6 +1,6 @@
+import Image, { AspectRatioContainer } from '@/components/Image';
 import { PageLayout } from '@/layout';
 import { formatDisplayDate } from '@/utils/date';
-import { getThumbImageSrc, useBackgroundImageSrc } from '@/utils/images';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -13,7 +13,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, styled, useTheme } from '@mui/system';
 import { createFileRoute, Link as RouterLink } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/home')({
+import { getDefaultImageSrc, getThumbImageSrc } from '@/utils/images';
+
+export const Route = createFileRoute('/home copy')({
   component: HomeComponent,
 });
 
@@ -21,60 +23,27 @@ function HomeComponent() {
   const theme = useTheme();
   const isSizeXL = useMediaQuery(theme.breakpoints.down('xl'));
   const padding = isSizeXL ? 0 : 2;
-  const heroBackgroundImage = useBackgroundImageSrc(
-    '20250601-image-home-page-splash'
-  );
 
   return (
     <PageLayout padding={padding}>
-      <HeroSection id="hero-section" backgroundImageUrl={heroBackgroundImage}>
-        <HeroCallout>
-          <Typography
-            variant="h1"
-            sx={{
-              color: 'white',
-              textShadow:
-                '2px 2px 12px rgba(0,0,0,0.6), 0 0 8px rgba(0,0,0,0.4)',
-              mb: 2,
-              textWrap: 'balance',
-              fontWeight: 700,
-              letterSpacing: '-0.01em',
-              fontSize: {
-                xs: '3rem',
-                sm: '4rem',
-                md: '5rem',
-                lg: '6rem',
-                xl: '7rem',
-              },
-            }}
-          >
-            Justin Wright
-          </Typography>
-          <Typography
-            variant="h2"
-            sx={{
-              color: theme.palette.primary.superLight,
-              textShadow: {
-                xs: '2px 2px 10px rgba(0,0,0,0.6), 0 0 6px rgba(0,0,0,0.4)', // Stronger shadow on mobile
-                md: '1px 1px 8px rgba(0,0,0,0.5), 0 0 4px rgba(0,0,0,0.3)', // Softer shadow on larger screens
-              },
-              textWrap: 'balance',
-              fontWeight: {
-                xs: 600,
-                md: 500,
-              },
-              letterSpacing: '0.005em',
-              fontSize: {
-                xs: '1.2rem',
-                sm: '1.4rem',
-                md: '1.9rem',
-                lg: '2.4rem',
-              },
-            }}
-          >
-            Senior Frontend Engineer with UX + Product Brain
-          </Typography>
-        </HeroCallout>
+      <HeroSection id="hero-section">
+        <HeroCallOut>
+          <MainHeader variant="h1">Justin Wright</MainHeader>
+          <StatementBlock>
+            <Statement1 variant="h4">Think</Statement1>
+            <Statement2 variant="h4">Code</Statement2>
+            <Statement3 variant="h4">Run</Statement3>
+          </StatementBlock>
+        </HeroCallOut>
+
+        <HeroBackground id="hero-background">
+          <AspectRatioContainer ratio={4 / 3} id="hero-image">
+            <Image
+              defaultSrc={getDefaultImageSrc('20250601-image-home-page-splash')}
+              alt="Micro-Frontends Part 1"
+            />
+          </AspectRatioContainer>
+        </HeroBackground>
       </HeroSection>
 
       {/* Latest Blog Posts Section */}
@@ -158,62 +127,58 @@ function HomeComponent() {
   );
 }
 
-const alphaOffset = 0.7;
-
-export const HeroSection = styled(Stack, {
-  shouldForwardProp: (prop) => prop !== 'backgroundImageUrl',
-})<{ backgroundImageUrl?: string }>(({ theme, backgroundImageUrl }) => {
-  const linearPrimaryGradient = `linear-gradient(45deg, ${alpha(theme.palette.primary.dark, alphaOffset)} 0%, ${alpha(theme.palette.primary.main, alphaOffset)} 50%, ${alpha(theme.palette.primary.light, alphaOffset)} 100%)`;
+export const HeroSection = styled(Stack)(({ theme }) => {
+  const linearPrimaryGradient = `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.primary.light} 100%)`;
   return {
     backgroundColor: theme.palette.primary.dark,
-    backgroundImage: backgroundImageUrl
-      ? `${linearPrimaryGradient}, url(${backgroundImageUrl})`
-      : linearPrimaryGradient,
-    backgroundBlendMode: 'multiply, normal',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center', // Start with center, then adjust
+    backgroundImage: linearPrimaryGradient,
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingTop: 40,
-    paddingBottom: 140,
-    marginBottom: theme.spacing(4),
-    position: 'relative',
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
+    justifyContent: 'center',
     [theme.breakpoints.up('md')]: {
-      paddingTop: 80,
-      paddingBottom: 220,
-      marginBottom: theme.spacing(8),
+      padding: theme.spacing(4),
+      marginBottom: theme.spacing(4),
+      alignItems: 'flex-start',
+      flexDirection: 'row',
     },
   };
 });
 
-export const HeroCallout = styled(Box)(({ theme }) => ({
+export const HeroCallOut = styled(Box)(({ theme }) => ({
+  flex: 1,
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  textAlign: 'left',
-  zIndex: 2,
-  padding: theme.spacing(4),
-  maxWidth: '800px',
-  width: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
   position: 'relative',
-  '&::before': {
+  zIndex: 1,
+  padding: theme.spacing(2),
+}));
+
+export const HeroBackground = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  maxWidth: '100%',
+  height: 'auto',
+  zIndex: 1,
+  flex: 2,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  overflow: 'hidden',
+  '&::after': {
     content: '""',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `linear-gradient(135deg,
-      rgba(0,0,0,0.3) 0%,
-      rgba(0,0,0,0.16) 50%,
-      rgba(0,0,0,0.18) 100%)`,
-    borderRadius: theme.shape.borderRadius,
     zIndex: -1,
-    backdropFilter: 'blur(0.5px)',
+    top: '8px',
+    left: '8px',
+    width: '100%',
+    height: '100%',
+    backgroundColor:
+      theme.palette.mode === 'light'
+        ? 'rgba(0, 0, 0, 0.3)'
+        : 'rgba(255, 255, 255, 0.7)',
   },
 }));
 

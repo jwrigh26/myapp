@@ -9,11 +9,11 @@ import {
 import {
   ReactNode,
   createContext,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
-  useCallback,
 } from 'react';
 
 // Module augmentation for custom theme properties
@@ -59,6 +59,7 @@ const COLORS = {
     primary: {
       main: '#5567C8',
       light: '#7F8DF1',
+      superLight: '#B8C3F7',
       dark: '#3A4490',
       contrastText: '#FFFFFF',
     },
@@ -81,6 +82,7 @@ const COLORS = {
     primary: {
       main: '#6C8AE4',
       light: '#95B1FF',
+      superLight: '#C5D3FF',
       dark: '#4558B2',
       contrastText: '#FFFFFF',
     },
@@ -386,6 +388,11 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     }),
     [toggleTheme, isDarkMode]
   );
+  console.log(
+    'ThemeProvider rendered with mode:',
+    isDarkMode ? 'dark' : 'light'
+  );
+  console.log(theme);
 
   return (
     <ThemeContext.Provider value={themeContextValue}>
