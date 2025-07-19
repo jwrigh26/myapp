@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Define the structure for each image source
 export interface SourceProps {
@@ -10,6 +10,8 @@ export interface SourceProps {
   srcSet: string; // e.g., "image-large.jpg 2x, image-large@1x.jpg 1x"
   sizes?: string; // e.g., "100vw"
 }
+
+const loadedImageCache = new Set<string>();
 
 // Main Image component props
 interface ResponsiveImageProps
@@ -36,11 +38,19 @@ const Image: React.FC<ResponsiveImageProps> = ({
   objectFit = 'cover',
   ...rest
 }) => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [hasError, setHasError] = React.useState(false);
+  const initialIsLoading = !loadedImageCache.has(defaultSrc);
+  const [isLoading, setIsLoading] = React.useState(initialIsLoading);
+  const [hasError, setHasError] = useState(false);
+
+  // Reset loading state when defaultSrc changes
+  useEffect(() => {
+    setIsLoading(!loadedImageCache.has(defaultSrc));
+    setHasError(false);
+  }, [defaultSrc]);
 
   const handleLoad = () => {
     setIsLoading(false);
+    loadedImageCache.add(defaultSrc);
   };
 
   const handleError = () => {
@@ -52,6 +62,9 @@ const Image: React.FC<ResponsiveImageProps> = ({
     width: '100%',
     height: '100%',
     objectFit,
+    opacity: isLoading ? 0 : 1,
+    transform: isLoading ? 'scale(0.98)' : 'scale(1)',
+    transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
     ...style,
   };
 
@@ -274,3 +287,38 @@ export const ResponsiveContentImageGrid: React.FC<ContentImageGridProps> = ({
     </ContentImageGrid>
   );
 };
+
+/*
+ * NOTES: Image Loading & CSS Transitions Pattern
+ *
+ * This component demonstrates a key React pattern that solves common image loading UX issues:
+ *
+ * THE KNOWLEDGE GAP:
+ * Many developers struggle with image loading in React because they try to handle
+ * everything with JavaScript state management and complex conditional rendering.
+ *
+ * THE SOLUTION:
+ * - React manages simple boolean state (isLoading: true/false)
+ * - CSS handles the visual transitions (opacity, transform, transition)
+ * - Browser does the heavy lifting with hardware-accelerated transitions
+ *
+ * WHY THIS WORKS SO WELL:
+ * 1. Single Source of Truth: One simple boolean state
+ * 2. CSS Transitions Are Optimized: Hardware-accelerated, smooth
+ * 3. No Layout Thrashing: Image stays in DOM, just changes appearance
+ * 4. Separation of Concerns: React = state, CSS = animation
+ *
+ * KEY INSIGHT:
+ * Instead of complex conditional rendering like:
+ *   {isLoading ? <Skeleton /> : <img />}
+ *
+ * Use smooth transitions with:
+ *   style={{
+ *     opacity: isLoading ? 0 : 1,
+ *     transform: isLoading ? 'scale(0.98)' : 'scale(1)',
+ *     transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
+ *   }}
+ *
+ * This pattern beats complex JavaScript animations 90% of the time and provides
+ * a much better developer experience with predictable, performant results.
+ */

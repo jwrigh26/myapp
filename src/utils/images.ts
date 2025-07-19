@@ -102,7 +102,7 @@ export function getDefaultImageSrc(imageKey: ImageKey): string {
 export function getThumbImageSrc(imageKey: ImageKey): string {
   const images = imageRegistry[imageKey];
   if (!images) {
-    return `@/assets/blog/2025/06/${imageKey}-small.webp`;
+    return `@/assets/blog/2025/06/${imageKey}-medium.webp`;
   }
 
   const imageSizes = images as {
@@ -112,5 +112,5 @@ export function getThumbImageSrc(imageKey: ImageKey): string {
   };
 
   // Prefer small, fallback to medium, then large
-  return imageSizes.small || imageSizes.medium || imageSizes.large || '';
+  return imageSizes.medium || imageSizes.small || imageSizes.large || '';
 }
