@@ -9,13 +9,14 @@
   --clr-1: #5567c8; /* primary.main */
   --clr-2: #7f8df1; /* primary.light */
   --clr-3: #b8c3f7; /* primary.superLight */
-  --clr-4: #7f8df1; /* primary.light */
-  --clr-5: #5567c8; /* primary.main */
+  --clr-4: rgba(85, 103, 200, 0.8); /* primary.main with alpha */
+  --clr-5: rgba(85, 103, 200, 0.4); /* primary.main with lower alpha */
   --surface-color: white;
-  --glow-intensity: 0.25;
-  --glow-size: 2px;
+  --glow-intensity: 0.4;
+  --glow-size: 3px;
   --glow-height: 0px;
-  --border-width: 8px;
+  --border-width: 4px;
+  --glow-speed: 20s;
 }
 
 /* Dark mode colors */
@@ -23,13 +24,13 @@
   --clr-1: #6c8ae4; /* primary.main dark */
   --clr-2: #95b1ff; /* primary.light dark */
   --clr-3: #c5d3ff; /* primary.superLight dark */
-  --clr-4: #95b1ff; /* primary.light dark */
-  --clr-5: #6c8ae4; /* primary.main dark */
+  --clr-4: rgba(108, 138, 228, 0.8); /* primary.main dark with alpha */
+  --clr-5: rgba(108, 138, 228, 0.4); /* primary.main dark with lower alpha */
   --surface-color: #23272e;
-  --glow-intensity: 0.5;
-  --glow-size: 2px;
+  --glow-intensity: 0.7;
+  --glow-size: 4px;
   --glow-height: 0px;
-  --border-width: 8px;
+  --border-width: 4px;
 }
 
 .glowing-border {
@@ -39,12 +40,15 @@
     var(--clr-1);
   --linear-gradient-glow: linear-gradient(
     90deg,
-    var(--clr-4) calc(var(--glow-position) - 20%),
-    var(--clr-1) calc(var(--glow-position) - 10%),
-    var(--clr-2) var(--glow-position),
-    var(--clr-3) calc(var(--glow-position) + 10%),
-    var(--clr-1) calc(var(--glow-position) + 20%),
-    var(--clr-4) calc(var(--glow-position) + 30%)
+    var(--clr-5) 0%,
+    var(--clr-4) calc(var(--glow-position) - 60%),
+    var(--clr-1) calc(var(--glow-position) - 35%),
+    var(--clr-2) calc(var(--glow-position) - 15%),
+    var(--clr-3) var(--glow-position),
+    var(--clr-2) calc(var(--glow-position) + 15%),
+    var(--clr-1) calc(var(--glow-position) + 35%),
+    var(--clr-4) calc(var(--glow-position) + 60%),
+    var(--clr-5) 100%
   );
 
   margin-bottom: var(--glow-height);
@@ -57,15 +61,15 @@
   position: relative;
   isolation: isolate;
 
-  animation: glow 10s infinite linear;
+  animation: glow 8s infinite ease-in-out alternate;
 }
 
 @keyframes glow {
   0% {
-    --glow-position: -30%;
+    --glow-position: 25%;
   }
   100% {
-    --glow-position: 130%;
+    --glow-position: 75%;
   }
 }
 

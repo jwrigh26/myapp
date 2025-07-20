@@ -1,3 +1,4 @@
+import '@/features/blog/blog.css';
 import { PageLayout } from '@/layout';
 import { formatDisplayDate } from '@/utils/date';
 import { getThumbImageSrc } from '@/utils/images';
@@ -27,6 +28,27 @@ export const Route = createFileRoute('/blog/')({
   }),
 });
 
+const BlogPostCard = styled(Card)(({ theme }) => ({
+  flex: 1,
+  minWidth: 260,
+  maxWidth: '100%',
+  [theme.breakpoints.up('md')]: {
+    maxWidth: 480,
+  },
+  minHeight: '380px',
+  display: 'flex',
+  flexDirection: 'column',
+  boxShadow: '0px 3px 6px rgba(0,0,0,0.12), 0px 1.5px 3px rgba(0,0,0,0.08)',
+  width: '100%',
+  [theme.breakpoints.up('md')]: {
+    width: 'auto',
+  },
+  alignSelf: 'stretch',
+  [theme.breakpoints.up('md')]: {
+    alignSelf: 'flex-start',
+  },
+}));
+
 function BlogHome() {
   return (
     <PageLayout>
@@ -49,20 +71,8 @@ function BlogHome() {
           flexWrap="wrap"
         >
           {allBlogPosts.map((post) => (
-            <Card
-              key={post.route}
-              sx={{
-                flex: 1,
-                minWidth: 260,
-                maxWidth: { xs: '100%', md: 420 },
-                minHeight: '380px',
-                display: 'flex',
-                flexDirection: 'column',
-                boxShadow: 3,
-                width: { xs: '100%', md: 'auto' },
-                alignSelf: { xs: 'stretch', md: 'flex-start' },
-              }}
-            >
+            <BlogPostCard>
+              <div className="glowing-border" />
               <CardActionArea
                 component={RouterLink}
                 to={post.route}
@@ -109,7 +119,7 @@ function BlogHome() {
                   Read more &rarr;
                 </Link>
               </Box>
-            </Card>
+            </BlogPostCard>
           ))}
         </Stack>
       </Box>
@@ -118,7 +128,6 @@ function BlogHome() {
 }
 
 const BlogHeader = styled(Box)(({ theme }) => ({
-  textAlign: 'center',
   marginBottom: theme.spacing(4),
   marginTop: theme.spacing(2),
 }));
