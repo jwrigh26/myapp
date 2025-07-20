@@ -347,6 +347,11 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   // Persist theme mode to localStorage
   useEffect(() => {
     localStorage.setItem('themeMode', isDarkMode ? 'dark' : 'light');
+    // Update document data attribute for CSS
+    document.documentElement.setAttribute(
+      'data-theme',
+      isDarkMode ? 'dark' : 'light'
+    );
   }, [isDarkMode]);
 
   // Listen for themeMode changes in other tabs

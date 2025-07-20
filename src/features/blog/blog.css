@@ -4,39 +4,36 @@
   initial-value: 0%;
 }
 
-/* the colors don't need to be registed */
-@property --clr-1 {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #5567c8; /* primary.main */
+/* Light mode colors (default) */
+:root {
+  --clr-1: #5567c8; /* primary.main */
+  --clr-2: #7f8df1; /* primary.light */
+  --clr-3: #b8c3f7; /* primary.superLight */
+  --clr-4: #7f8df1; /* primary.light */
+  --clr-5: #5567c8; /* primary.main */
+  --surface-color: white;
+  --glow-intensity: 0.25;
+  --glow-size: 2px;
+  --glow-height: 4px;
+  --border-width: 4px;
 }
 
-@property --clr-2 {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #7f8df1; /* primary.light */
-}
-
-@property --clr-3 {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #b8c3f7; /* primary.superLight */
-}
-
-@property --clr-4 {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #3a4490; /* primary.dark */
-}
-
-@property --clr-5 {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #ffffff; /* primary.contrastText */
+/* Dark mode colors */
+[data-theme='dark'] {
+  --clr-1: #6c8ae4; /* primary.main dark */
+  --clr-2: #95b1ff; /* primary.light dark */
+  --clr-3: #c5d3ff; /* primary.superLight dark */
+  --clr-4: #95b1ff; /* primary.light dark */
+  --clr-5: #6c8ae4; /* primary.main dark */
+  --surface-color: #23272e;
+  --glow-intensity: 0.5;
+  --glow-size: 2px;
+  --glow-height: 0px;
+  --border-width: 6px;
 }
 
 .glowing-border {
-  --surface: white; /* default for light mode */
+  --surface: var(--surface-color); /* Use the theme-aware surface color */
   --gradient-glow:
     var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4), var(--clr-5),
     var(--clr-1);
@@ -50,10 +47,9 @@
     var(--clr-4) calc(var(--glow-position) + 30%)
   );
 
-  margin-top: 8px;
-  max-width: 60ch;
+  margin-bottom: var(--glow-height);
 
-  border-top: var(--border-width, 10px) solid transparent;
+  border-top: var(--border-width, 3px) solid transparent;
   background:
     linear-gradient(canvas 0 0) padding-box,
     var(--linear-gradient-glow) border-box;
@@ -62,12 +58,6 @@
   isolation: isolate;
 
   animation: glow 10s infinite linear;
-}
-
-@media (prefers-color-scheme: dark) {
-  .glowing-border {
-    --surface: #23272e; /* your dark mode color */
-  }
 }
 
 @keyframes glow {
@@ -89,21 +79,21 @@
 .glowing-border::before {
   z-index: -1;
   background: canvas;
-  inset-block-start: 0;
+  inset-block-end: 0px;
   left: 0;
   right: 0;
-  bottom: 0;
+  top: 0;
   /* filter: blur(var(--glow-size, 2px)); */
 }
 
 .glowing-border::after {
   z-index: -2;
-  /* Only inset the top (block start) */
-  inset-block-start: -8px;
+  /* Only inset the bottom (block end) */
+  inset-block-end: calc(-1 * var(--glow-height));
   left: 0;
   right: 0;
-  bottom: 0;
+  top: 0;
   background: var(--linear-gradient-glow);
-  filter: blur(var(--glow-size, 8px));
-  opacity: var(--glow-intensity, 0.125);
+  filter: blur(var(--glow-size, 2px));
+  opacity: var(--glow-intensity, 0.5);
 }
