@@ -1,0 +1,109 @@
+@property --glow-position {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+/* the colors don't need to be registed */
+@property --clr-1 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #5567c8; /* primary.main */
+}
+
+@property --clr-2 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #7f8df1; /* primary.light */
+}
+
+@property --clr-3 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #b8c3f7; /* primary.superLight */
+}
+
+@property --clr-4 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #3a4490; /* primary.dark */
+}
+
+@property --clr-5 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff; /* primary.contrastText */
+}
+
+.glowing-border {
+  --surface: white; /* default for light mode */
+  --gradient-glow:
+    var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4), var(--clr-5),
+    var(--clr-1);
+  --linear-gradient-glow: linear-gradient(
+    90deg,
+    var(--clr-4) calc(var(--glow-position) - 20%),
+    var(--clr-1) calc(var(--glow-position) - 10%),
+    var(--clr-2) var(--glow-position),
+    var(--clr-3) calc(var(--glow-position) + 10%),
+    var(--clr-1) calc(var(--glow-position) + 20%),
+    var(--clr-4) calc(var(--glow-position) + 30%)
+  );
+
+  margin-top: 8px;
+  max-width: 60ch;
+
+  border-top: var(--border-width, 10px) solid transparent;
+  background:
+    linear-gradient(canvas 0 0) padding-box,
+    var(--linear-gradient-glow) border-box;
+
+  position: relative;
+  isolation: isolate;
+
+  animation: glow 10s infinite linear;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glowing-border {
+    --surface: #23272e; /* your dark mode color */
+  }
+}
+
+@keyframes glow {
+  0% {
+    --glow-position: -30%;
+  }
+  100% {
+    --glow-position: 130%;
+  }
+}
+
+.glowing-border::before,
+.glowing-border::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+}
+
+.glowing-border::before {
+  z-index: -1;
+  background: canvas;
+  inset-block-start: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* filter: blur(var(--glow-size, 2px)); */
+}
+
+.glowing-border::after {
+  z-index: -2;
+  /* Only inset the top (block start) */
+  inset-block-start: -8px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--linear-gradient-glow);
+  filter: blur(var(--glow-size, 8px));
+  opacity: var(--glow-intensity, 0.125);
+}

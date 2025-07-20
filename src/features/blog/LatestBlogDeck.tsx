@@ -1,0 +1,132 @@
+import { formatDisplayDate } from '@/utils/date';
+import { getThumbImageSrc } from '@/utils/images';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/system';
+import { Link as RouterLink } from '@tanstack/react-router';
+import './blog.css'; // Import custom styles for the blog deck
+
+// Hardcoded latest blog posts
+const latestBlogPosts = [
+  {
+    title:
+      'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+    blurb:
+      'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
+    image: getThumbImageSrc('20250601-image-slide0'),
+    route: '/blog/posts/frontend-design/microfrontends-part1',
+    date: '2025-03-15',
+  },
+  {
+    title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+    blurb:
+      'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+    image: getThumbImageSrc('20250601-image-slide10'),
+    route: '/blog/posts/frontend-design/microfrontends-part2',
+    date: '2025-04-21',
+  },
+  {
+    title: 'Micro-Frontends Part 3: Lessons Learned',
+    blurb:
+      'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
+    image: getThumbImageSrc('20250601-image-slide19'),
+    route: '/blog/posts/frontend-design/microfrontends-part3',
+    date: '2025-05-01',
+  },
+];
+
+const BlogPostCard = styled(Card)(({ theme }) => ({
+  flex: 1,
+  minWidth: 260,
+  maxWidth: '100%',
+  [theme.breakpoints.up('md')]: {
+    maxWidth: 480,
+  },
+  minHeight: '380px',
+  display: 'flex',
+  flexDirection: 'column',
+  boxShadow: '0px 3px 6px rgba(0,0,0,0.12), 0px 1.5px 3px rgba(0,0,0,0.08)',
+  width: '100%',
+  [theme.breakpoints.up('md')]: {
+    width: 'auto',
+  },
+  alignSelf: 'stretch',
+  [theme.breakpoints.up('md')]: {
+    alignSelf: 'flex-start',
+  },
+}));
+
+export default function LatestBlogDeck() {
+  return (
+    <Box sx={{ mt: 2, mb: 4, px: 2 }}>
+      <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+        Latest Blog Posts
+      </Typography>
+      <Stack
+        direction={{ xs: 'column', md: 'row' }}
+        gap={3}
+        spacing={2}
+        alignItems="stretch"
+        justifyContent={{ xs: 'center', md: 'space-around' }}
+      >
+        {latestBlogPosts.map((post) => (
+          <BlogPostCard key={post.route}>
+            <div className="glowing-border" />
+            <CardActionArea
+              component={RouterLink}
+              to={post.route}
+              sx={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+              }}
+            >
+              <CardMedia
+                component="img"
+                image={post.image}
+                alt={post.title}
+                sx={{
+                  height: 180,
+                  objectFit: 'cover',
+                }}
+              />
+              <CardContent sx={{ flex: 1 }}>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ mb: 0.5, display: 'block' }}
+                >
+                  {formatDisplayDate(post.date)}
+                </Typography>
+                <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                  {post.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {post.blurb}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <Box sx={{ px: 2, pb: 2 }}>
+              <Link
+                component={RouterLink}
+                to={post.route}
+                underline="hover"
+                color="primary"
+                sx={{ fontWeight: 600 }}
+              >
+                Read more &rarr;
+              </Link>
+            </Box>
+          </BlogPostCard>
+        ))}
+      </Stack>
+    </Box>
+  );
+}
