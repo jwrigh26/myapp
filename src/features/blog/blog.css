@@ -14,8 +14,8 @@
   --surface-color: white;
   --glow-intensity: 0.25;
   --glow-size: 2px;
-  --glow-height: 4px;
-  --border-width: 4px;
+  --glow-height: 0px;
+  --border-width: 8px;
 }
 
 /* Dark mode colors */
@@ -29,7 +29,7 @@
   --glow-intensity: 0.5;
   --glow-size: 2px;
   --glow-height: 0px;
-  --border-width: 6px;
+  --border-width: 8px;
 }
 
 .glowing-border {
