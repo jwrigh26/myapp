@@ -7,6 +7,7 @@ import { Spacer } from '@/components/Spacer';
 import { ArticleLayout, TopicBlock } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import { PageLayout } from '@/layout';
 import {
   createImageSources,
   getDefaultImageSrc,
@@ -35,7 +36,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <>
+    <PageLayout>
       <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 1:"
@@ -362,7 +363,7 @@ function RouteComponent() {
             'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 

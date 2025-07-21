@@ -17,6 +17,7 @@ import { Route as AboutImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as BlogIndexImport } from './routes/blog/index'
+import { Route as BlogPostsSoftSkillsLearnNamesImport } from './routes/blog/posts/soft-skills/learn-names'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart3Import } from './routes/blog/posts/frontend-design/microfrontends-part3'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart2Import } from './routes/blog/posts/frontend-design/microfrontends-part2'
 import { Route as BlogPostsFrontendDesignMicrofrontendsPart1Import } from './routes/blog/posts/frontend-design/microfrontends-part1'
@@ -58,6 +59,13 @@ const BlogIndexRoute = BlogIndexImport.update({
   path: '/',
   getParentRoute: () => BlogRouteRoute,
 } as any)
+
+const BlogPostsSoftSkillsLearnNamesRoute =
+  BlogPostsSoftSkillsLearnNamesImport.update({
+    id: '/posts/soft-skills/learn-names',
+    path: '/posts/soft-skills/learn-names',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
 
 const BlogPostsFrontendDesignMicrofrontendsPart3Route =
   BlogPostsFrontendDesignMicrofrontendsPart3Import.update({
@@ -147,6 +155,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart3Import
       parentRoute: typeof BlogRouteImport
     }
+    '/blog/posts/soft-skills/learn-names': {
+      id: '/blog/posts/soft-skills/learn-names'
+      path: '/posts/soft-skills/learn-names'
+      fullPath: '/blog/posts/soft-skills/learn-names'
+      preLoaderRoute: typeof BlogPostsSoftSkillsLearnNamesImport
+      parentRoute: typeof BlogRouteImport
+    }
   }
 }
 
@@ -157,6 +172,7 @@ interface BlogRouteRouteChildren {
   BlogPostsFrontendDesignMicrofrontendsPart1Route: typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   BlogPostsFrontendDesignMicrofrontendsPart2Route: typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   BlogPostsFrontendDesignMicrofrontendsPart3Route: typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  BlogPostsSoftSkillsLearnNamesRoute: typeof BlogPostsSoftSkillsLearnNamesRoute
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
@@ -167,6 +183,7 @@ const BlogRouteRouteChildren: BlogRouteRouteChildren = {
     BlogPostsFrontendDesignMicrofrontendsPart2Route,
   BlogPostsFrontendDesignMicrofrontendsPart3Route:
     BlogPostsFrontendDesignMicrofrontendsPart3Route,
+  BlogPostsSoftSkillsLearnNamesRoute: BlogPostsSoftSkillsLearnNamesRoute,
 }
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
@@ -183,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
 }
 
 export interface FileRoutesByTo {
@@ -194,6 +212,7 @@ export interface FileRoutesByTo {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
 }
 
 export interface FileRoutesById {
@@ -207,6 +226,7 @@ export interface FileRoutesById {
   '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
   '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
   '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
 }
 
 export interface FileRouteTypes {
@@ -221,6 +241,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
+    | '/blog/posts/soft-skills/learn-names'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -231,6 +252,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
+    | '/blog/posts/soft-skills/learn-names'
   id:
     | '__root__'
     | '/'
@@ -242,6 +264,7 @@ export interface FileRouteTypes {
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
+    | '/blog/posts/soft-skills/learn-names'
   fileRoutesById: FileRoutesById
 }
 
@@ -287,7 +310,8 @@ export const routeTree = rootRoute
         "/blog/",
         "/blog/posts/frontend-design/microfrontends-part1",
         "/blog/posts/frontend-design/microfrontends-part2",
-        "/blog/posts/frontend-design/microfrontends-part3"
+        "/blog/posts/frontend-design/microfrontends-part3",
+        "/blog/posts/soft-skills/learn-names"
       ]
     },
     "/about": {
@@ -313,6 +337,10 @@ export const routeTree = rootRoute
     },
     "/blog/posts/frontend-design/microfrontends-part3": {
       "filePath": "blog/posts/frontend-design/microfrontends-part3.tsx",
+      "parent": "/blog"
+    },
+    "/blog/posts/soft-skills/learn-names": {
+      "filePath": "blog/posts/soft-skills/learn-names.jsx",
       "parent": "/blog"
     }
   }

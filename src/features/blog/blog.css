@@ -12,11 +12,10 @@
   --clr-4: rgba(85, 103, 200, 0.8); /* primary.main with alpha */
   --clr-5: rgba(85, 103, 200, 0.4); /* primary.main with lower alpha */
   --surface-color: white;
-  --glow-intensity: 0.4;
+  --glow-intensity: 0.25;
   --glow-size: 3px;
   --glow-height: 0px;
-  --border-width: 4px;
-  --glow-speed: 20s;
+  --border-width: 6px;
 }
 
 /* Dark mode colors */
@@ -27,10 +26,10 @@
   --clr-4: rgba(108, 138, 228, 0.8); /* primary.main dark with alpha */
   --clr-5: rgba(108, 138, 228, 0.4); /* primary.main dark with lower alpha */
   --surface-color: #23272e;
-  --glow-intensity: 0.7;
+  --glow-intensity: 0.4;
   --glow-size: 4px;
   --glow-height: 0px;
-  --border-width: 4px;
+  --border-width: 6px;
 }
 
 .glowing-border {
@@ -40,15 +39,17 @@
     var(--clr-1);
   --linear-gradient-glow: linear-gradient(
     90deg,
-    var(--clr-5) 0%,
-    var(--clr-4) calc(var(--glow-position) - 60%),
-    var(--clr-1) calc(var(--glow-position) - 35%),
-    var(--clr-2) calc(var(--glow-position) - 15%),
+    transparent calc(var(--glow-position) - 50%),
+    var(--clr-5) calc(var(--glow-position) - 35%),
+    var(--clr-4) calc(var(--glow-position) - 20%),
+    var(--clr-1) calc(var(--glow-position) - 10%),
+    var(--clr-2) calc(var(--glow-position) - 5%),
     var(--clr-3) var(--glow-position),
-    var(--clr-2) calc(var(--glow-position) + 15%),
-    var(--clr-1) calc(var(--glow-position) + 35%),
-    var(--clr-4) calc(var(--glow-position) + 60%),
-    var(--clr-5) 100%
+    var(--clr-2) calc(var(--glow-position) + 5%),
+    var(--clr-1) calc(var(--glow-position) + 10%),
+    var(--clr-4) calc(var(--glow-position) + 20%),
+    var(--clr-5) calc(var(--glow-position) + 35%),
+    transparent calc(var(--glow-position) + 50%)
   );
 
   margin-bottom: var(--glow-height);
@@ -61,15 +62,15 @@
   position: relative;
   isolation: isolate;
 
-  animation: glow 8s infinite ease-in-out alternate;
+  animation: glow 8s infinite linear;
 }
 
 @keyframes glow {
   0% {
-    --glow-position: 25%;
+    --glow-position: -50%;
   }
   100% {
-    --glow-position: 75%;
+    --glow-position: 150%;
   }
 }
 

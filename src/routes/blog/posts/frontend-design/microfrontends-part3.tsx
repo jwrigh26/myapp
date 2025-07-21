@@ -8,6 +8,7 @@ import { Spacer } from '@/components/Spacer';
 import { ArticleLayout, DenseContent, TopicBlock } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import { PageLayout } from '@/layout';
 import {
   createImageSources,
   getDefaultImageSrc,
@@ -35,7 +36,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <>
+    <PageLayout>
       <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 3:"
@@ -326,7 +327,7 @@ function RouteComponent() {
         //   blurb: 'A suggested next read for you.',
         // }}
       />
-    </>
+    </PageLayout>
   );
 }
 

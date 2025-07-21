@@ -1,17 +1,10 @@
 import {
-  mdiBookOpen,
-  mdiGamepadVariant,
-  mdiHome,
-  mdiInformation,
-  mdiPencilRuler,
-  mdiReact,
-} from '@mdi/js';
-import {
   NavigationConfig,
   NavLevel,
-  type NavItem,
   type NavCategory,
+  type NavItem,
 } from '@/types/navigation';
+import { mdiAccountGroup, mdiBookOpen, mdiHome, mdiPencilRuler } from '@mdi/js';
 
 // Main navigation items configuration
 const mainNavItems: NavItem[] = [
@@ -53,11 +46,17 @@ const blogCategories: NavCategory[] = [
     path: '/blog/posts/frontend-design',
   },
   {
-    id: 'react-patterns',
-    title: 'React Patterns',
-    icon: mdiReact,
-    path: '/blog/posts/react-patterns',
+    id: 'soft-skills',
+    title: 'Soft Skills',
+    icon: mdiAccountGroup,
+    path: '/blog/posts/soft-skills',
   },
+  // {
+  //   id: 'react-patterns',
+  //   title: 'React Patterns',
+  //   icon: mdiReact,
+  //   path: '/blog/posts/react-patterns',
+  // },
 ];
 
 // Complete navigation configuration
@@ -69,7 +68,7 @@ export const navigationConfig: NavigationConfig = {
 };
 
 // Re-export individual configurations for backward compatibility
-export { mainNavItems, blogCategories };
+export { blogCategories, mainNavItems };
 
 // Helper functions for navigation configuration
 export const getNavItemById = (id: string) => {

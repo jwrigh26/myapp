@@ -1,6 +1,6 @@
 import { PermanentDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
-import { mdiChevronRight, mdiPencilRuler, mdiReact } from '@mdi/js';
+import { mdiAccountGroup, mdiChevronRight, mdiPencilRuler } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -16,7 +16,8 @@ import type { MUILinkProps } from './types';
 
 const blogPaths = {
   frontendDesign: '/blog/posts/frontend-design',
-  reactPatterns: '/blog/posts/react-patterns',
+  softSkills: '/blog/posts/soft-skills',
+  // reactPatterns: '/blog/posts/react-patterns',
 };
 
 export function BlogDrawer() {
@@ -29,8 +30,11 @@ export function BlogDrawer() {
   );
   const fontendDesignRoutes = filterRoutes(router, blogPaths.frontendDesign);
 
-  const isReactPatternsRoute = currentRoute.startsWith(blogPaths.reactPatterns);
-  const reactPatternsRoutes = filterRoutes(router, blogPaths.reactPatterns);
+  const isSoftSkillsRoute = currentRoute.startsWith(blogPaths.softSkills);
+  const softSkillsRoutes = filterRoutes(router, blogPaths.softSkills);
+
+  // const isReactPatternsRoute = currentRoute.startsWith(blogPaths.reactPatterns);
+  // const reactPatternsRoutes = filterRoutes(router, blogPaths.reactPatterns);
 
   return (
     <PermanentDrawer width={256}>
@@ -43,11 +47,18 @@ export function BlogDrawer() {
       />
 
       <PostCategory
+        title="Soft Skills"
+        icon={mdiAccountGroup}
+        isActive={isSoftSkillsRoute}
+        routes={softSkillsRoutes}
+      />
+
+      {/* <PostCategory
         title="React Patterns"
-        icon={mdiReact} // You might want a different icon here
+        icon={mdiReact}
         isActive={isReactPatternsRoute}
         routes={reactPatternsRoutes}
-      />
+      /> */}
     </PermanentDrawer>
   );
 }

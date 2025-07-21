@@ -8,6 +8,7 @@ import {
 } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import { PageLayout } from '@/layout';
 import {
   createImageSources,
   getDefaultImageSrc,
@@ -35,7 +36,7 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <>
+    <PageLayout>
       <ArticleLayout
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 2:"
@@ -457,7 +458,7 @@ function RouteComponent() {
             'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
         }}
       />
-    </>
+    </PageLayout>
   );
 }
 
