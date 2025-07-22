@@ -1,5 +1,10 @@
 import { useDrawer } from '@/hooks/useContext';
-import { mdiChevronLeft, mdiChevronRight, mdiCloseBoxOutline } from '@mdi/js';
+import {
+  mdiBookOpen,
+  mdiChevronLeft,
+  mdiChevronRight,
+  mdiCloseBoxOutline,
+} from '@mdi/js';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
@@ -9,7 +14,9 @@ import Stack from '@mui/material/Stack';
 import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useMatchRoute } from '@tanstack/react-router';
 import Icon from './Icon';
+import CustomLink from './LinkButton';
 
 const Content = styled(Box)(({ theme }) => ({
   height: '100%',
@@ -171,7 +178,7 @@ const MiniDrawerHeader = styled('div', {
 })<{ open?: boolean }>(({ theme, open }) => ({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: open ? 'flex-end' : 'center',
+  justifyContent: open ? 'space-between' : 'center',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
@@ -229,6 +236,7 @@ export function MiniVariantDrawer({
 }: MiniVariantDrawerProps) {
   const theme = useTheme();
   const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
+  const matchRoute = useMatchRoute();
 
   const handleDrawerToggle = () => {
     if (open) {
@@ -238,10 +246,60 @@ export function MiniVariantDrawer({
     }
   };
 
+  const headerColor = theme.mixins.decomposeColor(
+    theme.palette.primary.contrastText,
+    0.5
+  );
+
+  // Check if we're on the exact /blog route
+  const isOnBlogOverview = !!matchRoute({
+    to: '/blog',
+    fuzzy: false, // Exact match only
+  });
+
   return (
     <StyledMiniDrawer variant="permanent" open={open} width={width}>
       <ToolbarSpacer />
       <MiniDrawerHeader open={open}>
+        {open && (
+          <CustomLink
+            to="/blog"
+            variant="text"
+            size="small"
+            startIcon={
+              <Icon
+                path={mdiBookOpen}
+                fontSize="small"
+                sx={{
+                  color: isOnBlogOverview
+                    ? theme.palette.primary.contrastText
+                    : headerColor,
+                }}
+              />
+            }
+            sx={{
+              color: isOnBlogOverview
+                ? theme.palette.primary.contrastText
+                : headerColor,
+              textTransform: 'none',
+              fontSize: '0.875rem',
+              minWidth: 'auto',
+              padding: theme.spacing(0.5, 1),
+              backgroundColor: isOnBlogOverview
+                ? 'rgba(255, 255, 255, 0.08)'
+                : 'transparent',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                color: theme.palette.primary.contrastText,
+                '& .MuiSvgIcon-root': {
+                  color: theme.palette.primary.contrastText,
+                },
+              },
+            }}
+          >
+            Overview
+          </CustomLink>
+        )}
         <IconButton onClick={handleDrawerToggle}>
           <Icon
             path={theme.direction === 'rtl' ? mdiChevronRight : mdiChevronLeft}

@@ -279,20 +279,38 @@ function CollapsedCategoryIcon({
       }
     });
 
-    // Determine the category path based on title
-    let categoryPath = '';
-
+    // Determine the category base path based on title
+    let categoryBasePath = '';
     if (title === 'Frontend Design') {
-      categoryPath = blogPaths.frontendDesign + '/';
+      categoryBasePath = blogPaths.frontendDesign;
     }
-
     if (title === 'Soft Skills') {
-      categoryPath = blogPaths.softSkills + '/';
+      categoryBasePath = blogPaths.softSkills;
     }
 
-    // Navigate to the category index page
-    console.log('CategoryPath', categoryPath, 'key', sectionKey);
-    router.navigate({ to: categoryPath as any });
+    // Smart navigation: stay on current page if in category, otherwise go to first route
+    const currentPath = router.state.location.pathname;
+    const isAlreadyInCategory = currentPath.startsWith(categoryBasePath);
+
+    let targetPath;
+    if (isAlreadyInCategory) {
+      // Stay on current page
+      targetPath = currentPath;
+    } else {
+      // Go to first route in category
+      const categoryRoutes = filterRoutes(router, categoryBasePath);
+      targetPath = categoryRoutes[0]?.fullPath || categoryBasePath + '/';
+    }
+
+    // Navigate to the determined path
+    console.log('Smart navigation:', {
+      currentPath,
+      categoryBasePath,
+      isAlreadyInCategory,
+      targetPath,
+      sectionKey,
+    });
+    router.navigate({ to: targetPath as any });
 
     // Open the drawer first
     openDrawer();
