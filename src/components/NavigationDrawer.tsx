@@ -1,12 +1,12 @@
 import { MobileDrawer, Sheet } from '@/components/Drawer';
 import Icon from '@/components/Icon';
-import { useDrawer } from '@/hooks/useContext';
 import { navigationConfig } from '@/config/navigationConfig';
+import { useDrawer } from '@/hooks/useContext';
 import {
   NavLevel,
+  type NavCategory,
   type NavHistoryEntry,
   type NavItem,
-  type NavCategory,
 } from '@/types/navigation';
 import {
   mdiArrowLeft,

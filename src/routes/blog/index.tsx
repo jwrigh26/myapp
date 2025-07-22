@@ -71,7 +71,7 @@ function BlogHome() {
           flexWrap="wrap"
         >
           {allBlogPosts.map((post) => (
-            <BlogPostCard>
+            <BlogPostCard key={post.route}>
               <div className="glowing-border" />
               <CardActionArea
                 component={RouterLink}

@@ -1,11 +1,12 @@
-import { mdiCloseBoxOutline } from '@mdi/js';
+import { useDrawer } from '@/hooks/useContext';
+import { mdiChevronLeft, mdiChevronRight, mdiCloseBoxOutline } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import { styled, useTheme } from '@mui/material/styles';
+import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Icon from './Icon';
@@ -139,6 +140,144 @@ export function MobileDrawer({
     </StyledMobileDrawer>
   );
 }
+
+// ################################################
+// ### Mini Variant Drawer
+// ################################################
+
+const openedMixin = (theme: Theme, width: number): CSSObject => ({
+  width,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const MiniDrawerHeader = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<{ open?: boolean }>(({ theme, open }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: open ? 'flex-end' : 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+const StyledMiniDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== 'open' && prop !== 'width',
+})<{ open?: boolean; width?: number }>(({ theme, width = 256 }) => ({
+  width,
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  display: 'none',
+  variants: [
+    {
+      props: ({ open }) => open,
+      style: {
+        ...openedMixin(theme, width),
+        '& .MuiDrawer-paper': {
+          ...openedMixin(theme, width),
+          backgroundColor: theme.palette.primary.dark,
+          border: 'none',
+          boxShadow: '4px 0 6px -3px rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+    {
+      props: ({ open }) => !open,
+      style: {
+        ...closedMixin(theme),
+        '& .MuiDrawer-paper': {
+          ...closedMixin(theme),
+          backgroundColor: theme.palette.primary.dark,
+          border: 'none',
+          boxShadow: '4px 0 6px -3px rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+  ],
+  [theme.breakpoints.up('sm')]: {
+    display: 'block',
+    flexShrink: 0,
+  },
+}));
+
+interface MiniVariantDrawerProps {
+  children: React.ReactNode;
+  width?: number;
+  drawerKey: string;
+}
+
+export function MiniVariantDrawer({
+  children,
+  width = 256,
+  drawerKey,
+}: MiniVariantDrawerProps) {
+  const theme = useTheme();
+  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
+
+  const handleDrawerToggle = () => {
+    if (open) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  };
+
+  return (
+    <StyledMiniDrawer variant="permanent" open={open} width={width}>
+      <ToolbarSpacer />
+      <MiniDrawerHeader open={open}>
+        <IconButton onClick={handleDrawerToggle}>
+          <Icon
+            path={theme.direction === 'rtl' ? mdiChevronRight : mdiChevronLeft}
+            sx={{
+              color: theme.palette.primary.contrastText,
+              transform: open ? 'rotate(0deg)' : 'rotate(180deg)',
+              transition: theme.transitions.create('transform', {
+                duration: theme.transitions.duration.shortest,
+              }),
+            }}
+          />
+        </IconButton>
+      </MiniDrawerHeader>
+      <Divider sx={{ borderColor: theme.palette.primary.main }} />
+      <MiniContent open={open}>{children}</MiniContent>
+    </StyledMiniDrawer>
+  );
+}
+
+const MiniContent = styled(Box)<{ open?: boolean }>(({ theme, open }) => ({
+  height: '100%',
+  width: '100%',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+
+  // Collapsed icons - show when closed, hide when open
+  '& .collapsed-icon': {
+    display: open ? 'none' : 'block',
+  },
+
+  // Expanded content - show when open, hide when closed
+  '& .mini-drawer-content': {
+    display: open ? 'block' : 'none',
+  },
+}));
 
 // ################################################
 // ### Drawer Header

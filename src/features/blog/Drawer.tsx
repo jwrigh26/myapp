@@ -1,5 +1,7 @@
-import { PermanentDrawer } from '@/components/Drawer';
+import { MiniVariantDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
+import { useComponentStateContext } from '@/context/ComponentStateContext';
+import { useDrawer, useToggle } from '@/hooks/useContext';
 import { mdiAccountGroup, mdiChevronRight, mdiPencilRuler } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -10,8 +12,8 @@ import { styled, useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import type { RegisteredRouter } from '@tanstack/react-router';
-import { createLink, useRouter } from '@tanstack/react-router';
-import { forwardRef, useState } from 'react';
+import { createLink, useMatchRoute, useRouter } from '@tanstack/react-router';
+import { forwardRef } from 'react';
 import type { MUILinkProps } from './types';
 
 const blogPaths = {
@@ -23,27 +25,37 @@ const blogPaths = {
 export function BlogDrawer() {
   const router = useRouter();
   const theme = useTheme();
-  const currentRoute = router.state.resolvedLocation?.pathname ?? '/';
+  const matchRoute = useMatchRoute();
 
-  const isFrontendDesignRoute = currentRoute.startsWith(
-    blogPaths.frontendDesign
-  );
+  // Use useMatchRoute for reactive route matching
+  const isFrontendDesignRoute = !!matchRoute({
+    to: blogPaths.frontendDesign,
+    fuzzy: true, // This makes it match child routes too
+  });
+
+  const isSoftSkillsRoute = !!matchRoute({
+    to: blogPaths.softSkills,
+    fuzzy: true,
+  });
+
+  // These can stay the same since they're just filtering static route data
   const fontendDesignRoutes = filterRoutes(router, blogPaths.frontendDesign);
-
-  const isSoftSkillsRoute = currentRoute.startsWith(blogPaths.softSkills);
   const softSkillsRoutes = filterRoutes(router, blogPaths.softSkills);
 
-  // const isReactPatternsRoute = currentRoute.startsWith(blogPaths.reactPatterns);
+  // const isReactPatternsRoute = !!matchRoute({
+  //   to: blogPaths.reactPatterns,
+  //   fuzzy: true,
+  // });
   // const reactPatternsRoutes = filterRoutes(router, blogPaths.reactPatterns);
 
   return (
-    <PermanentDrawer width={256}>
-      <ToolbarSpacer />
+    <MiniVariantDrawer width={256} drawerKey="blog-drawer">
       <PostCategory
         title="Frontend Design"
         icon={mdiPencilRuler}
         isActive={isFrontendDesignRoute}
         routes={fontendDesignRoutes}
+        categoryPath={blogPaths.frontendDesign + '/'}
       />
 
       <PostCategory
@@ -51,6 +63,7 @@ export function BlogDrawer() {
         icon={mdiAccountGroup}
         isActive={isSoftSkillsRoute}
         routes={softSkillsRoutes}
+        categoryPath={blogPaths.softSkills + '/'}
       />
 
       {/* <PostCategory
@@ -58,8 +71,9 @@ export function BlogDrawer() {
         icon={mdiReact}
         isActive={isReactPatternsRoute}
         routes={reactPatternsRoutes}
+        categoryPath={blogPaths.reactPatterns + '/'}
       /> */}
-    </PermanentDrawer>
+    </MiniVariantDrawer>
   );
 }
 
@@ -76,7 +90,8 @@ interface PostSectionProps {
   title: string;
   icon: string;
   children: React.ReactNode;
-  open?: boolean;
+  categoryPath?: string;
+  isActive?: boolean;
 }
 
 interface PostCategoryProps {
@@ -84,10 +99,12 @@ interface PostCategoryProps {
   icon: string;
   isActive: boolean;
   routes: Route[];
+  categoryPath: string;
 }
 
-function PostHeader({ title, icon }: PostHeaderProps) {
+function PostSubHeader({ title, icon }: PostHeaderProps) {
   const theme = useTheme();
+
   const headerColor = theme.mixins.decomposeColor(
     theme.palette.primary.contrastText,
     0.5
@@ -103,31 +120,72 @@ function PostHeader({ title, icon }: PostHeaderProps) {
   );
 }
 
+function PostHeader({
+  title,
+  icon,
+  categoryPath,
+  isActive = false,
+}: PostHeaderProps & { categoryPath: string; isActive?: boolean }) {
+  const theme = useTheme();
+  const headerColor = theme.mixins.decomposeColor(
+    theme.palette.primary.contrastText,
+    0.5
+  );
+  const headerActiveColor = theme.palette.primary.contrastText;
+
+  return (
+    <Header>
+      <Icon path={icon} fontSize="small" sx={{ color: headerColor }} />
+      <Typography
+        variant="subtitle2"
+        sx={{
+          color: isActive ? headerActiveColor : headerColor,
+          fontWeight: isActive ? 'bold' : 'normal',
+        }}
+      >
+        {title}
+      </Typography>
+    </Header>
+  );
+}
+
 function PostSection({
   title,
   icon,
   children,
-  open: isOpen = false,
+  categoryPath,
+  isActive = false,
 }: PostSectionProps) {
-  const [open, setOpen] = useState(isOpen);
-
-  const handleToggle = () => setOpen((prev) => !prev);
+  // Create a unique key for this PostSection using title
+  const sectionKey = `post-section-${title.toLowerCase().replace(/\s+/g, '-')}`;
+  // Use isActive to determine if this section should start open
+  const { isOpen, toggleOpen } = useToggle(sectionKey, isActive);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Just toggle the section open/closed
+    console.log('PostSection key:', sectionKey);
     e.preventDefault();
     e.stopPropagation();
-    handleToggle();
-    console.log(children);
+    toggleOpen();
   };
 
   return (
     <>
       <ToggleButton onClick={handleClick} level={0}>
-        <PostHeader title={title} icon={icon} />
-        <RotateIcon path={mdiChevronRight} rotate={open ? 1 : 0} />
+        {categoryPath ? (
+          <PostHeader
+            title={title}
+            icon={icon}
+            categoryPath={categoryPath}
+            isActive={isActive}
+          />
+        ) : (
+          <PostSubHeader title={title} icon={icon} />
+        )}
+        <RotateIcon path={mdiChevronRight} rotate={isOpen ? 1 : 0} />
       </ToggleButton>
       {children && (
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} timeout="auto" unmountOnExit>
           {children}
         </Collapse>
       )}
@@ -140,20 +198,133 @@ export function PostCategory({
   icon,
   isActive,
   routes,
+  categoryPath,
 }: PostCategoryProps) {
   return (
-    <PostSection title={title} icon={icon} open={isActive}>
-      <StyledList>
-        {routes.map((route) => {
-          const routeTitle = route.options.head?.()?.getTitle?.() || route.id;
-          return (
-            <NavButton key={route.id} to={route.id}>
-              <ListItemText primary={routeTitle} />
-            </NavButton>
-          );
-        })}
-      </StyledList>
-    </PostSection>
+    <>
+      {/* Icon-only version for collapsed drawer */}
+      <div className="collapsed-icon">
+        <CollapsedCategoryIcon
+          title={title}
+          icon={icon}
+          isActive={isActive}
+          drawerKey="blog-drawer"
+        />
+      </div>
+
+      {/* Full version for expanded drawer */}
+      <div className="mini-drawer-content">
+        <PostSection
+          title={title}
+          icon={icon}
+          categoryPath={categoryPath}
+          isActive={isActive}
+        >
+          <StyledList>
+            {routes.map((route) => {
+              const routeTitle =
+                route.options.head?.()?.getTitle?.() || route.id;
+              return (
+                <NavButton key={route.id} to={route.id}>
+                  <ListItemText primary={routeTitle} />
+                </NavButton>
+              );
+            })}
+          </StyledList>
+        </PostSection>
+      </div>
+    </>
+  );
+}
+
+function CollapsedCategoryIcon({
+  title,
+  icon,
+  isActive,
+  drawerKey,
+}: {
+  title: string;
+  icon: string;
+  isActive: boolean;
+  drawerKey: string;
+}) {
+  const theme = useTheme();
+  const router = useRouter();
+  const { openDrawer } = useDrawer(drawerKey, true);
+
+  // Get the same section key as PostSection uses
+  const sectionKey = `post-section-${title.toLowerCase().replace(/\s+/g, '-')}`;
+  const { isOpen, toggleOpen } = useToggle(sectionKey);
+
+  // Get access to close other sections
+  const context = useComponentStateContext();
+  const { setClose } = context!;
+
+  const handleCategoryClick = () => {
+    // Generate section keys dynamically from blogPaths
+    const allSectionKeys = Object.keys(blogPaths).map((pathKey) => {
+      // Convert camelCase to kebab-case for section keys
+      // e.g., 'frontendDesign' -> 'frontend-design'
+      const kebabCase = pathKey.replace(
+        /[A-Z]/g,
+        (letter) => `-${letter.toLowerCase()}`
+      );
+      return `post-section-${kebabCase}`;
+    });
+
+    // Close all other PostSections
+    allSectionKeys.forEach((key) => {
+      if (key !== sectionKey) {
+        setClose(key)();
+      }
+    });
+
+    // Determine the category path based on title
+    let categoryPath = '';
+
+    if (title === 'Frontend Design') {
+      categoryPath = blogPaths.frontendDesign + '/';
+    }
+
+    if (title === 'Soft Skills') {
+      categoryPath = blogPaths.softSkills + '/';
+    }
+
+    // Navigate to the category index page
+    console.log('CategoryPath', categoryPath, 'key', sectionKey);
+    router.navigate({ to: categoryPath as any });
+
+    // Open the drawer first
+    openDrawer();
+
+    // Then open the PostSection with a slight delay to ensure smooth animation
+    if (!isOpen) {
+      // Use setTimeout to allow drawer animation to start first
+      setTimeout(() => {
+        toggleOpen();
+      }, theme.transitions.duration.enteringScreen * 0.3); // 30% of drawer animation
+    }
+  };
+
+  return (
+    <CollapsedIconButton
+      isActive={isActive}
+      title={title}
+      onClick={handleCategoryClick}
+    >
+      <Icon
+        path={icon}
+        fontSize="small"
+        sx={{
+          color: isActive
+            ? theme.palette.primary.contrastText
+            : theme.mixins.decomposeColor(
+                theme.palette.primary.contrastText,
+                0.7
+              ),
+        }}
+      />
+    </CollapsedIconButton>
   );
 }
 
@@ -165,6 +336,28 @@ const StyledList = styled(List)(({ theme }) => ({
   width: '100%',
   backgroundColor: theme.palette.primary.dark,
   paddingTop: 0,
+}));
+
+const CollapsedIconButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})<{ isActive: boolean }>(({ theme, isActive }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: 48,
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(1),
+  marginLeft: theme.spacing(1),
+  marginRight: theme.spacing(1),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: isActive ? theme.palette.primary.main : 'transparent',
+  transition: 'background-color 0.3s ease',
+
+  '&:hover': {
+    backgroundColor: isActive
+      ? theme.palette.primary.main
+      : theme.palette.primary.light,
+  },
 }));
 
 const ToggleButton = styled(ListItemButton)<{ level: number }>(({ theme }) => ({
@@ -275,9 +468,12 @@ interface Route {
 }
 
 const filterRoutes = (router: RegisteredRouter, path: string): Route[] => {
-  const routes = Object.values(router.routesByPath).filter((route) =>
-    (route as Route).fullPath.startsWith(path)
-  );
+  const routes = Object.values(router.routesByPath).filter((route) => {
+    const routePath = (route as Route).fullPath;
+    return (
+      routePath.startsWith(path) && !routePath.endsWith('/') // Exclude index pages (they end with /)
+    );
+  });
 
   return routes;
 };
