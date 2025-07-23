@@ -1,19 +1,27 @@
 import type { SourceProps } from '@/components/Image';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useMemo } from 'react';
-import { imageRegistry, type ImageKey } from './imageRegistry';
+import {
+  imageRegistry,
+  type ImageAssetCategory,
+  type ImageKey,
+} from './imageRegistry';
 
 export type { ImageKey };
 
 // Helper function to create responsive image sources from registry data
-export function createImageSources(imageKey: ImageKey): SourceProps[] {
+export function createImageSources(
+  imageKey: ImageKey,
+  assetCategory: ImageAssetCategory = 'blog'
+): SourceProps[] {
   const images = imageRegistry[imageKey];
   if (!images) {
     console.warn(
       `Image key "${imageKey}" not found in registry. Using fallback method.`
     );
+    const datePath = extractDatePath(imageKey);
     return createManualImageSources(
-      `@/assets/blog/2025/06/${imageKey}-large.webp`
+      `@/assets/${assetCategory}/${datePath}/${imageKey}-large.webp`
     );
   }
 
@@ -83,10 +91,14 @@ export function createManualImageSources(basePath: string): SourceProps[] {
 }
 
 // Helper to get the default fallback image (medium size preferred)
-export function getDefaultImageSrc(imageKey: ImageKey): string {
+export function getDefaultImageSrc(
+  imageKey: ImageKey,
+  assetCategory: ImageAssetCategory = 'blog'
+): string {
   const images = imageRegistry[imageKey];
+  const datePath = extractDatePath(imageKey);
   if (!images) {
-    return `@/assets/blog/2025/06/${imageKey}-large.webp`;
+    return `@/assets/${assetCategory}/${datePath}/${imageKey}-large.webp`;
   }
 
   // Type assertion to work with the const assertion
@@ -101,10 +113,14 @@ export function getDefaultImageSrc(imageKey: ImageKey): string {
 }
 
 // Helper to get the thumbnail (small) image src
-export function getThumbImageSrc(imageKey: ImageKey): string {
+export function getThumbImageSrc(
+  imageKey: ImageKey,
+  assetCategory: ImageAssetCategory = 'blog'
+): string {
   const images = imageRegistry[imageKey];
+  const datePath = extractDatePath(imageKey);
   if (!images) {
-    return `@/assets/blog/2025/06/${imageKey}-medium.webp`;
+    return `@/assets/${assetCategory}/${datePath}/${imageKey}-medium.webp`;
   }
 
   const imageSizes = images as {
@@ -120,11 +136,13 @@ export function getThumbImageSrc(imageKey: ImageKey): string {
 // Helper to get the best background image based on viewport/container size
 export function getBackgroundImageSrc(
   imageKey: ImageKey,
+  assetCategory: ImageAssetCategory = 'blog',
   containerWidth?: number
 ): string {
   const images = imageRegistry[imageKey];
+  const datePath = extractDatePath(imageKey);
   if (!images) {
-    return `@/assets/blog/2025/06/${imageKey}-large.webp`;
+    return `@/assets/${assetCategory}/${datePath}/${imageKey}-large.webp`;
   }
 
   const imageSizes = images as {
@@ -152,14 +170,18 @@ export function getBackgroundImageSrc(
 }
 
 // Optimized hook for background images that uses MUI's media query system
-export function useBackgroundImageSrc(imageKey: ImageKey): string {
+export function useBackgroundImageSrc(
+  imageKey: ImageKey,
+  assetCategory: ImageAssetCategory = 'blog'
+): string {
   const isLarge = useMediaQuery('(min-width: 1200px)');
   const isMedium = useMediaQuery('(min-width: 768px)');
 
   return useMemo(() => {
     const images = imageRegistry[imageKey];
+    const datePath = extractDatePath(imageKey);
     if (!images) {
-      return `@/assets/blog/2025/06/${imageKey}-large.webp`;
+      return `@/assets/${assetCategory}/${datePath}/${imageKey}-large.webp`;
     }
 
     const imageSizes = images as {
@@ -179,4 +201,15 @@ export function useBackgroundImageSrc(imageKey: ImageKey): string {
       return imageSizes.small || imageSizes.medium || imageSizes.large || '';
     }
   }, [imageKey, isLarge, isMedium]);
+}
+
+// Assuming imageKey format like: "20250712-image-description"
+function extractDatePath(imageKey: ImageKey): string {
+  const match = imageKey.match(/^(\d{4})(\d{2})(\d{2})-/);
+  if (match) {
+    const [, year, month] = match;
+    return `${year}/${month}`;
+  }
+  // Fallback to current date or a default
+  return '2025/07'; // or use current date
 }

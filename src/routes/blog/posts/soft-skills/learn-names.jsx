@@ -28,8 +28,14 @@ function LearnNamesPost() {
         title="Learn Names"
         preSubtitle="Foo Herp"
         imageAlt="Learn Names"
-        sources={createImageSources('20250701-image-20250712-dumbdumber')}
-        imageSrc={getDefaultImageSrc('20250701-image-20250712-dumbdumber')}
+        sources={createImageSources(
+          '20250701-image-20250723-learnnames-avatar'
+        )}
+        imageSrc={getDefaultImageSrc(
+          '20250701-image-20250723-learnnames-avata'
+        )}
+        // sources={createImageSources('20250701-image-20250712-dumbdumber')}
+        // imageSrc={getDefaultImageSrc('20250701-image-20250712-dumbdumber')}
         date="2025-07-21"
         sectionTitle="Soft Skills"
         sectionSubtitle="Why remembering names is important"

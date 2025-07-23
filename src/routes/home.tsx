@@ -1,4 +1,5 @@
 import BackdropSection from '@/components/BackdropSection';
+import HomeCallout from '@/components/HomeCallout';
 import { LatestBlogDeck } from '@/features/blog';
 import { HomeLayout } from '@/layout';
 import { useBackgroundImageSrc } from '@/utils/images';
@@ -75,6 +76,19 @@ function HomeComponent() {
           </Typography>
         </HeroCallout>
       </HeroSection>
+
+      {/* Home callout section */}
+      <Box component="section" sx={{ mb: 4 }}>
+        <HomeCallout
+          title="Building Better User Experiences"
+          description="I'm passionate about creating intuitive, performant web applications that solve real problems. With expertise in React, TypeScript, and modern frontend architecture, I help teams deliver products that users love."
+          imageKey="20250701-image-20250723-home1"
+          imageAlt="Justin Wright working on frontend development"
+          imageOnRight={true}
+          aspectRatio={16 / 10}
+          mobileImageFirst={false}
+        />
+      </Box>
 
       {/* Latest blog posts in content zone */}
       <BackdropSection showBackdrop={theme.palette.mode === 'light'}>

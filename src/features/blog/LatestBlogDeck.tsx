@@ -72,6 +72,11 @@ const BlogPostCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     maxWidth: 480,
   },
+  // Only show border in light mode
+  border:
+    theme.palette.mode === 'light'
+      ? `1px solid ${theme.palette.primary.dark}`
+      : 'none',
   minHeight: '380px',
   display: 'flex',
   flexDirection: 'column',

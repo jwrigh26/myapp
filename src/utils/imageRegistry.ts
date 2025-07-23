@@ -1,6 +1,6 @@
 // Auto-generated image registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-07-20T04:48:05.603Z
-// Images found: 34
+// Generated on: 2025-07-23T21:57:36.073Z
+// Images found: 36
 
 import img_20250601_image_home_page_splash_large from '@/assets/blog/2025/06/20250601-image-home-page-splash-large.webp';
 import img_20250601_image_home_page_splash_medium from '@/assets/blog/2025/06/20250601-image-home-page-splash-medium.webp';
@@ -104,6 +104,12 @@ import img_20250701_image_20250712_brainfull_frame4_small from '@/assets/blog/20
 import img_20250701_image_20250712_dumbdumber_large from '@/assets/blog/2025/07/20250701-image-20250712-dumbdumber-large.webp';
 import img_20250701_image_20250712_dumbdumber_medium from '@/assets/blog/2025/07/20250701-image-20250712-dumbdumber-medium.webp';
 import img_20250701_image_20250712_dumbdumber_small from '@/assets/blog/2025/07/20250701-image-20250712-dumbdumber-small.webp';
+import img_20250701_image_20250723_learnnames_avatar_large from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-large.webp';
+import img_20250701_image_20250723_learnnames_avatar_medium from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-medium.webp';
+import img_20250701_image_20250723_learnnames_avatar_small from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-small.webp';
+import img_20250701_image_20250723_home1_large from '@/assets/home/20250701-image-20250723-home1-large.webp';
+import img_20250701_image_20250723_home1_medium from '@/assets/home/20250701-image-20250723-home1-medium.webp';
+import img_20250701_image_20250723_home1_small from '@/assets/home/20250701-image-20250723-home1-small.webp';
 
 export const imageRegistry = {
   "20250601-image-home-page-splash": {
@@ -275,6 +281,16 @@ export const imageRegistry = {
     "large": img_20250701_image_20250712_dumbdumber_large,
     "medium": img_20250701_image_20250712_dumbdumber_medium,
     "small": img_20250701_image_20250712_dumbdumber_small
+  },
+  "20250701-image-20250723-learnnames-avatar": {
+    "large": img_20250701_image_20250723_learnnames_avatar_large,
+    "medium": img_20250701_image_20250723_learnnames_avatar_medium,
+    "small": img_20250701_image_20250723_learnnames_avatar_small
+  },
+  "20250701-image-20250723-home1": {
+    "large": img_20250701_image_20250723_home1_large,
+    "medium": img_20250701_image_20250723_home1_medium,
+    "small": img_20250701_image_20250723_home1_small
   }
 } as const;
 
