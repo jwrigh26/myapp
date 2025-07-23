@@ -6,7 +6,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
 import { Link as RouterLink } from '@tanstack/react-router';
@@ -53,6 +53,7 @@ const BlogPostCard = styled(Card)(({ theme }) => ({
   flexDirection: 'column',
   boxShadow: '0px 3px 6px rgba(0,0,0,0.12), 0px 1.5px 3px rgba(0,0,0,0.08)',
   width: '100%',
+  height: '440px',
   [theme.breakpoints.up('md')]: {
     width: 'auto',
   },
@@ -63,17 +64,37 @@ const BlogPostCard = styled(Card)(({ theme }) => ({
 }));
 
 export default function LatestBlogDeck() {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ mt: 2, mb: 4, px: 2 }}>
-      <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+    <Box
+      sx={{
+        mt: 2,
+        mb: 2,
+        p: 2,
+      }}
+    >
+      <Typography
+        variant="h2"
+        sx={{
+          mb: 3,
+          fontWeight: 700,
+          color: theme.palette.primary.contrastText,
+        }}
+      >
         Latest Blog Posts
       </Typography>
-      <Stack
-        direction={{ xs: 'column', md: 'row' }}
-        gap={3}
-        spacing={2}
-        alignItems="stretch"
-        justifyContent={{ xs: 'center', md: 'space-around' }}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+          },
+          gap: 3,
+          alignItems: 'stretch',
+        }}
       >
         {latestBlogPosts.map((post) => (
           <BlogPostCard key={post.route}>
@@ -126,7 +147,7 @@ export default function LatestBlogDeck() {
             </Box>
           </BlogPostCard>
         ))}
-      </Stack>
+      </Box>
     </Box>
   );
 }

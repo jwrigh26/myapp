@@ -1,10 +1,9 @@
 import { LatestBlogDeck } from '@/features/blog';
-import { PageLayout } from '@/layout';
+import { HomeLayout } from '@/layout';
 import { useBackgroundImageSrc } from '@/utils/images';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { alpha, styled, useTheme } from '@mui/system';
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -14,15 +13,19 @@ export const Route = createFileRoute('/home')({
 
 function HomeComponent() {
   const theme = useTheme();
-  const isSizeXL = useMediaQuery(theme.breakpoints.down('xl'));
-  const padding = isSizeXL ? 0 : 2;
   const heroBackgroundImage = useBackgroundImageSrc(
     '20250601-image-home-page-splash'
   );
 
   return (
-    <PageLayout padding={padding}>
-      <HeroSection id="hero-section" backgroundImageUrl={heroBackgroundImage}>
+    <HomeLayout>
+      {/* Hero section in content zone */}
+      <HeroSection
+        id="hero-section"
+        backgroundImageUrl={heroBackgroundImage}
+        className="breakout"
+      >
+        {/* <HeroBackground id="hero-background" className="full-width" /> */}
         <HeroCallout>
           <Typography
             variant="h1"
@@ -72,16 +75,19 @@ function HomeComponent() {
         </HeroCallout>
       </HeroSection>
 
-      <LatestBlogDeck />
-    </PageLayout>
+      {/* Latest blog posts in content zone */}
+      <Box className="content" sx={{ position: 'relative', zIndex: 1 }}>
+        {theme.palette.mode === 'light' && <BreakOutBackground />}
+        <LatestBlogDeck />
+      </Box>
+    </HomeLayout>
   );
 }
-
-const alphaOffset = 0.7;
 
 export const HeroSection = styled(Stack, {
   shouldForwardProp: (prop) => prop !== 'backgroundImageUrl',
 })<{ backgroundImageUrl?: string }>(({ theme, backgroundImageUrl }) => {
+  const alphaOffset = theme.palette.mode === 'dark' ? 0.88 : 0.44;
   const linearPrimaryGradient = `linear-gradient(45deg, ${alpha(theme.palette.primary.dark, alphaOffset)} 0%, ${alpha(theme.palette.primary.main, alphaOffset)} 50%, ${alpha(theme.palette.primary.light, alphaOffset)} 100%)`;
   return {
     backgroundColor: theme.palette.primary.dark,
@@ -90,8 +96,15 @@ export const HeroSection = styled(Stack, {
       : linearPrimaryGradient,
     backgroundBlendMode: 'multiply, normal',
     backgroundSize: 'cover',
-    backgroundPosition: 'center center', // Start with center, then adjust
+    backgroundPosition: 'center center',
     borderRadius: theme.shape.borderRadius,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    // border:
+    //   theme.palette.mode === 'light'
+    //     ? `2px solid ${theme.palette.primary.main}`
+    //     : 'none',
+    borderTop: 'none',
     boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -136,129 +149,14 @@ export const HeroCallout = styled(Box)(({ theme }) => ({
   },
 }));
 
-const MainHeader = styled(Typography)(({ theme }) => ({
-  fontWeight: 800,
-  color: alpha(theme.palette.primary.contrastText, 0.7),
-  marginBottom: theme.spacing(2),
-  // Base size for smallest screens
-  fontSize: 'clamp(1.5rem, 5vw, 2rem)',
-  // Control line height to be tighter
-  lineHeight: 1.1,
-
-  // Small phones (320px+)
-  [theme.breakpoints.up(320)]: {
-    fontSize: 'clamp(1.8rem, 5.5vw, 2.5rem)',
-  },
-
-  // Medium phones (400px+)
-  [theme.breakpoints.up(400)]: {
-    fontSize: 'clamp(2.2rem, 6vw, 3rem)',
-  },
-
-  // Large phones (480px+)
-  [theme.breakpoints.up(480)]: {
-    fontSize: 'clamp(2.6rem, 6.5vw, 3.5rem)',
-  },
-
-  // Small tablets (600px+)
-  [theme.breakpoints.up(600)]: {
-    fontSize: 'clamp(3rem, 7vw, 4rem)',
-  },
-
-  // Tablets (768px+)
-  [theme.breakpoints.up('md')]: {
-    // 900px in MUI
-    marginBottom: theme.spacing(3),
-    fontSize: 'clamp(3.5rem, 7.5vw, 4.5rem)',
-    lineHeight: 1.15, // Slightly looser for larger screens
-  },
-
-  // Small desktops (1024px+)
-  [theme.breakpoints.up('lg')]: {
-    // 1200px in MUI
-    fontSize: 'clamp(4rem, 8vw, 5rem)',
-  },
-
-  // Large desktops (1280px+)
-  [theme.breakpoints.up(1280)]: {
-    fontSize: 'clamp(4.5rem, 9vw, 5.5rem)', // Reduced from 7rem to 5.5rem max
-    lineHeight: 1.2, // More comfortable for reading at largest size
-  },
-
-  // Additional control for very large screens
-  [theme.breakpoints.up(1600)]: {
-    fontSize: '5.5rem', // Hard cap at 5.5rem for largest screens
-  },
-
-  zIndex: 2,
-}));
-
-const StatementBlock = styled(Stack)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'baseline',
-  gap: theme.spacing(1),
-  borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
-  paddingBottom: theme.spacing(1),
-  [theme.breakpoints.up('md')]: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 0,
-    paddingBottom: theme.spacing(1),
-    '&:after': {
-      content: '""',
-      display: 'block',
-      width: '50%',
-      translate: '50% 0',
-      borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
-      position: 'relative',
-      top: theme.spacing(3),
-    },
-  },
-}));
-
-const SupportingStatement = styled(Typography)(({ theme }) => ({
-  fontWeight: 600,
-  fontSize: 'clamp(1.25rem, 4vw, 2rem)',
-  textShadow: '1px 1px 3px rgba(0,0,0,0.1)',
-  width: 'max-content',
-  lineHeight: 1.2,
-}));
-
-// Now refactor your Statement1, Statement2, Statement3 to use these size variants
-const Statement1 = styled(SupportingStatement)(({ theme }) => ({
-  background: `linear-gradient(45deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  fontSize: 'clamp(1.6rem, 4.5vw, 2.6rem)',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-  },
-  [theme.breakpoints.up('md')]: {
-    alignSelf: 'flex-start',
-  },
-}));
-
-const Statement2 = styled(SupportingStatement)(({ theme }) => ({
-  background: `linear-gradient(45deg, ${theme.palette.info.main}, ${theme.palette.info.light})`,
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  fontSize: 'clamp(2.2rem, 6vw, 3.5rem)',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
-  },
-}));
-
-const Statement3 = styled(SupportingStatement)(({ theme }) => ({
-  background: `linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.common.white})`,
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  fontSize: 'clamp(1.6rem, 4.5vw, 2.6rem)',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-  },
-  [theme.breakpoints.up('md')]: {
-    alignSelf: 'flex-end',
-  },
+const BreakOutBackground = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: '100vw',
+  backgroundColor: theme.palette.primary.dark,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  zIndex: -1,
 }));
