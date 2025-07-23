@@ -36,6 +36,8 @@ interface BlogSectionProps {
   children?: React.ReactNode;
   /** Options for title styling */
   titleOptions?: ProseBlockProps['options'];
+  /** Whether to add bottom spacing */
+  spacingBottom?: boolean; // Default to true for spacing
 }
 
 /**
@@ -58,6 +60,7 @@ export function BlogSection({
   objectFit,
   children,
   titleOptions,
+  spacingBottom = false, // Default to true for spacing
 }: BlogSectionProps): JSX.Element {
   // Determine the image configuration
   // Priority: sources (if provided) > imageSrc (fallback)
@@ -68,11 +71,6 @@ export function BlogSection({
   return (
     <>
       <SectionSpacer id={id} />
-
-      {/* Title block (if no image grid) */}
-      {title && !hasImage && (
-        <ProseBlock title={title} subtitle={subtitle} options={titleOptions} />
-      )}
 
       {/* Content with image */}
       {hasImage ? (
@@ -99,8 +97,15 @@ export function BlogSection({
           {children}
         </ResponsiveContentImageGrid>
       ) : (
-        /* Content without image */
-        children
+        /* Content without image - wrapped in ProseBlock like BlogSubsection */
+        <ProseBlock
+          title={title}
+          subtitle={subtitle}
+          options={titleOptions}
+          spacingBottom={spacingBottom}
+        >
+          {children}
+        </ProseBlock>
       )}
     </>
   );
