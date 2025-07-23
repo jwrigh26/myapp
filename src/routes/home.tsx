@@ -1,3 +1,4 @@
+import BackdropSection from '@/components/BackdropSection';
 import { LatestBlogDeck } from '@/features/blog';
 import { HomeLayout } from '@/layout';
 import { useBackgroundImageSrc } from '@/utils/images';
@@ -76,10 +77,9 @@ function HomeComponent() {
       </HeroSection>
 
       {/* Latest blog posts in content zone */}
-      <Box className="content" sx={{ position: 'relative', zIndex: 1 }}>
-        {theme.palette.mode === 'light' && <BreakOutBackground />}
+      <BackdropSection showBackdrop={theme.palette.mode === 'light'}>
         <LatestBlogDeck />
-      </Box>
+      </BackdropSection>
     </HomeLayout>
   );
 }
@@ -147,16 +147,4 @@ export const HeroCallout = styled(Box)(({ theme }) => ({
     zIndex: -1,
     backdropFilter: 'blur(0.5px)',
   },
-}));
-
-const BreakOutBackground = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: '100vw',
-  backgroundColor: theme.palette.primary.dark,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-  zIndex: -1,
 }));

@@ -41,6 +41,30 @@ const latestBlogPosts = [
   },
 ];
 
+const HeroCallout = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(3),
+  fontWeight: 700,
+  color: theme.palette.primary.contrastText,
+  position: 'relative',
+  display: 'inline-block',
+  padding: theme.spacing(2),
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: `linear-gradient(135deg,
+      rgba(0,0,0,0.3) 0%,
+      rgba(0,0,0,0.16) 50%,
+      rgba(0,0,0,0.18) 100%)`,
+    borderRadius: theme.shape.borderRadius,
+    zIndex: -1,
+    backdropFilter: 'blur(0.5px)',
+  },
+}));
+
 const BlogPostCard = styled(Card)(({ theme }) => ({
   flex: 1,
   minWidth: 260,
@@ -74,16 +98,7 @@ export default function LatestBlogDeck() {
         p: 2,
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{
-          mb: 3,
-          fontWeight: 700,
-          color: theme.palette.primary.contrastText,
-        }}
-      >
-        Latest Blog Posts
-      </Typography>
+      <HeroCallout variant="h2">Latest Blog Posts</HeroCallout>
       <Box
         sx={{
           display: 'grid',
