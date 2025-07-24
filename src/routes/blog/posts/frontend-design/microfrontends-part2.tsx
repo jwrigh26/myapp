@@ -14,6 +14,7 @@ import {
   getDefaultImageSrc,
   getThumbImageSrc,
 } from '@/utils/images';
+import { generateBlogPostMeta } from '@/utils/openGraph';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
@@ -22,15 +23,14 @@ export const Route = createFileRoute(
   component: RouteComponent,
   head: () => ({
     getTitle: () => 'Micro-Frontends Part 2',
-    meta: [
-      {
-        name: 'Micro-Frontends Part 2',
-        content: 'My Post Page 1',
-      },
-      {
-        title: 'Micro-Frontends Part 2',
-      },
-    ],
+    meta: generateBlogPostMeta({
+      title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+      description:
+        'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+      imageKey: '20250601-image-slide10',
+      route: '/blog/posts/frontend-design/microfrontends-part2',
+      publishedDate: '2025-04-21',
+    }),
   }),
 });
 

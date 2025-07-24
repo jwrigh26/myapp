@@ -25,11 +25,26 @@ const CallToActionContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(4),
   },
-  backgroundColor: theme.palette.primary.main,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  // backgroundColor: theme.palette.primary.main,
+  // backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   borderRadius: theme.shape.borderRadius,
   color: theme.palette.primary.superLight,
   margin: 0,
+  isolation: 'isolate',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    zIndex: -1,
+    left: '50%',
+    top: 0,
+    transform: 'translateX(-50%)',
+    width: '100vw',
+    maxWidth: 'var(--full-width-max-width, 1920px)',
+    height: '100%',
+    backgroundColor: theme.palette.primary.main,
+    backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+    borderRadius: theme.shape.borderRadius,
+  },
 }));
 
 // Mobile banner container
@@ -128,7 +143,6 @@ export default function CallToAction({
 }: CallToActionProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  console.log('imagePosition', imagePosition);
 
   // Format the date string using the new utility
   const formattedDate = formatDisplayDate(date);
@@ -179,7 +193,7 @@ export default function CallToAction({
             {subtitle && (
               <Typography
                 variant="subtitle1"
-                color="primary.light"
+                color="primary.superLight"
                 gutterBottom={!isMobile}
               >
                 {subtitle}
@@ -195,7 +209,7 @@ export default function CallToAction({
           {formattedDate && (
             <Typography
               variant="caption"
-              color="primary.light"
+              color="primary.superLight"
               sx={{ display: 'block', mt: { xs: 1, md: 0 } }}
               gutterBottom={isMobile}
             >

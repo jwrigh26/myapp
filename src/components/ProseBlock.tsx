@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 export interface ProseBlockProps {
+  id?: string;
   title?: string;
   subtitle?: string;
   /**
@@ -19,6 +20,7 @@ export interface ProseBlockProps {
   dense?: boolean;
   spacingBottom?: boolean;
   backgroundColor?: string;
+  color?: string; // Override default text.primary color
   options?: {
     titleVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     subtitleVariant?: 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
@@ -30,12 +32,14 @@ export interface ProseBlockProps {
 }
 
 function ProseBlock({
+  id,
   title,
   subtitle,
   children,
   dense = false,
   spacingBottom = false,
   backgroundColor,
+  color = 'text.primary', // Default to text.primary
   options = {}, // Default to an empty object
 }: ProseBlockProps): JSX.Element {
   const {
@@ -51,6 +55,7 @@ function ProseBlock({
 
   return (
     <StyledBlock
+      id={id}
       dense={dense}
       spacingBottom={spacingBottom}
       backgroundColor={backgroundColor}
@@ -75,11 +80,7 @@ function ProseBlock({
           {subtitle}
         </Typography>
       )}
-      <Typography
-        variant={textVariant}
-        component={textComponent}
-        color="text.primary"
-      >
+      <Typography variant={textVariant} component={textComponent} color={color}>
         {children}
       </Typography>
     </StyledBlock>
@@ -173,6 +174,24 @@ const StyledBlock = styled(Box, {
       borderRadius: theme.shape.borderRadius,
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.caption.fontSize,
+    },
+    '& span.name': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
+      fontWeight: 'bold',
+      padding: theme.spacing(0.25, 0.75),
+      marginRight: theme.spacing(0.25),
+      marginLeft: theme.spacing(0.25),
+      borderRadius: theme.shape.borderRadius,
+    },
+    '& span.name-alt': {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.contrastText,
+      fontWeight: 'bold',
+      padding: theme.spacing(0.25, 0.75),
+      marginRight: theme.spacing(0.25),
+      marginLeft: theme.spacing(0.25),
+      borderRadius: theme.shape.borderRadius,
     },
   };
 });

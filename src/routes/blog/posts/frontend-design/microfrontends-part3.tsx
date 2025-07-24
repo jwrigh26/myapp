@@ -14,6 +14,7 @@ import {
   getDefaultImageSrc,
   getThumbImageSrc,
 } from '@/utils/images';
+import { generateBlogPostMeta } from '@/utils/openGraph';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute(
@@ -22,15 +23,14 @@ export const Route = createFileRoute(
   component: RouteComponent,
   head: () => ({
     getTitle: () => 'Micro-Frontends Part3',
-    meta: [
-      {
-        name: 'Micro-Frontends Part3',
-        content: 'My Post Page 1',
-      },
-      {
-        title: 'Micro-Frontends Part3',
-      },
-    ],
+    meta: generateBlogPostMeta({
+      title: 'Micro-Frontends Part 3: Lessons Learned',
+      description:
+        'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
+      imageKey: '20250601-image-slide19',
+      route: '/blog/posts/frontend-design/microfrontends-part3',
+      publishedDate: '2025-05-01',
+    }),
   }),
 });
 

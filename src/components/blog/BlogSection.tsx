@@ -96,8 +96,7 @@ export function BlogSection({
           )}
           {children}
         </ResponsiveContentImageGrid>
-      ) : (
-        /* Content without image - wrapped in ProseBlock like BlogSubsection */
+      ) : title || typeof children === 'string' ? (
         <ProseBlock
           title={title}
           subtitle={subtitle}
@@ -106,6 +105,8 @@ export function BlogSection({
         >
           {children}
         </ProseBlock>
+      ) : (
+        children
       )}
     </>
   );

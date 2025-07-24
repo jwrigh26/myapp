@@ -3,6 +3,7 @@ import HomeCallout from '@/components/HomeCallout';
 import { LatestBlogDeck } from '@/features/blog';
 import { HomeLayout } from '@/layout';
 import { useBackgroundImageSrc } from '@/utils/images';
+import { generateOpenGraphMeta } from '@/utils/openGraph';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -11,6 +12,17 @@ import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/home')({
   component: HomeComponent,
+  head: () => ({
+    title: 'Justin Wright - Senior Frontend Engineer with UX + Product Brain',
+    meta: generateOpenGraphMeta({
+      title: 'Justin Wright - Senior Frontend Engineer',
+      description:
+        'Senior Frontend Engineer with UX + Product Brain. I build intuitive, performant web applications that solve real problems using React, TypeScript, and modern frontend architecture.',
+      imageKey: '20250701-image-20250723-home1',
+      url: '/home',
+      type: 'website',
+    }),
+  }),
 });
 
 function HomeComponent() {
@@ -101,7 +113,7 @@ function HomeComponent() {
 export const HeroSection = styled(Stack, {
   shouldForwardProp: (prop) => prop !== 'backgroundImageUrl',
 })<{ backgroundImageUrl?: string }>(({ theme, backgroundImageUrl }) => {
-  const alphaOffset = theme.palette.mode === 'dark' ? 0.88 : 0.44;
+  const alphaOffset = theme.palette.mode === 'dark' ? 0.64 : 0.44;
   const linearPrimaryGradient = `linear-gradient(45deg, ${alpha(theme.palette.primary.dark, alphaOffset)} 0%, ${alpha(theme.palette.primary.main, alphaOffset)} 50%, ${alpha(theme.palette.primary.light, alphaOffset)} 100%)`;
   return {
     backgroundColor: theme.palette.primary.dark,

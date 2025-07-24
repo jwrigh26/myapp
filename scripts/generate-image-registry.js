@@ -204,6 +204,8 @@ export type ImageSizes = {
   medium?: string;
   small?: string;
 };
+
+export type ImageAssetCategory = 'blog' | 'home' | 'game' | 'learn' | 'default';
 `;
 
   // Write the registry file
