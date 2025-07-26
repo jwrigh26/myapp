@@ -1,14 +1,17 @@
 import BlogPostNavigator from '@/components/BlogPostNavigator';
 import { BodyBlock } from '@/components/BodyBlock';
+import CallToAction from '@/components/CallToAction';
 import { ResponsiveContentImageGrid } from '@/components/Image';
+import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
 import QuoteBlock from '@/components/QuoteBlock';
 import ReferenceLink from '@/components/ReferenceLink';
 import { Spacer } from '@/components/Spacer';
-import { ArticleLayout, DenseContent, TopicBlock } from '@/components/blog';
+import TitleBlock from '@/components/TitleBlock';
+import { DenseContent, TopicBlock } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
-import { PageLayout } from '@/layout';
+import { BlogLayout } from '@/layout';
 import {
   createImageSources,
   getDefaultImageSrc,
@@ -36,8 +39,8 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <PageLayout>
-      <ArticleLayout
+    <BlogLayout>
+      <CallToAction
         title="Not Quite Micro-Frontends"
         preSubtitle="Micro-Frontends Part 3:"
         subtitle="Lessons Learned"
@@ -45,271 +48,267 @@ function RouteComponent() {
         imageSrc={getDefaultImageSrc('20250601-image-slide19')}
         sources={createImageSources('20250601-image-slide19')}
         date="2025-05-01"
-        sectionTitle="Communication Challenges in a Modular Front-End"
-        sectionSubtitle="Lessons learned from our micro-frontend journey"
-        introContent={
-          <>
-            In Part 3, We'll talk about how to use a messaging layer to act as a
-            glue for iframes. How to avoid over-engineering when it comes to
-            routing and navigation. And other lessons learned along the way.
-          </>
-        }
-      >
-        <BodyBlock>
-          {/* ### Why Communication Matters */}
-          <BlogSection
-            id="why-communication-matters"
-            title="Why Communication Matters"
-            imageOnRight
-            mobileImageFirst
-            imageSrc={getDefaultImageSrc('20250601-image-slide15')}
-            sources={createImageSources('20250601-image-slide15')}
-            imageAlt="Coffee Wizard 1"
-            aspectRatio={4 / 3}
-            objectFit="cover"
-            caption="Host site displaying a coffee brewing wizard"
-          >
-            <TopicBlock
-              title="Communication Responsibilities"
-              items={bulletPoints1}
-            />
-            <QuoteBlock>
-              Example: The Magic Coffee site is currently showing a coffee
-              brewing wizard. The site is the "host site" and is responsible for
-              main navigation, and the wizard is an iframe that manages its own
-              step-by-step process.
-            </QuoteBlock>
-          </BlogSection>
-          <ProseBlock>
-            The host site, without any custom messaging bus required, has the
-            ability to load iframes that display various pages or modules, such
-            as a wizard.
-          </ProseBlock>
-          <ProseBlock>
-            When performing basic routing, the host site is only concerned with
-            converting routes into various iframe URLs.
-          </ProseBlock>
-          <ProseBlock>
-            If a user navigates to a wizard, such as the Magic Coffee site’s
-            Brew wizard, then once the page is loaded, all user actions related
-            to the wizard are managed by the iframe’s module.
-          </ProseBlock>
+      />
+      <TitleBlock>Communication Challenges in a Modular Front-End</TitleBlock>
+      <IntroBlock>
+        In Part 3, We'll talk about how to use a messaging layer to act as a
+        glue for iframes. How to avoid over-engineering when it comes to routing
+        and navigation. And other lessons learned along the way.
+      </IntroBlock>
 
-          <Spacer size={2} desktop />
-          <ResponsiveContentImageGrid
-            imageOnRight={false}
-            mobileImageFirst
-            imageSrc={getDefaultImageSrc('20250601-image-slide16')}
-            sources={createImageSources('20250601-image-slide16')}
-            imageAlt="Coffee Wizard 2"
-            aspectRatio={4 / 3}
-            objectFit="cover"
-            caption="Exernal action to buy a V60 is triggered by the wizard"
-          >
-            <DenseContent
-              paragraphs={[
-                <>
-                  However, what happens if the wizard wants to display an option
-                  to buy an item used in its brewing tutorial? If a user clicks
-                  the "buy" button, things get a little more complicated.
-                </>,
-                <>
-                  Iframes aren't very social — they prefer to keep to
-                  themselves. To get our wizard's buy button to actually
-                  navigate to the shopping page's Hario V60 page, we need to
-                  provide a messaging layer that uses the window's{' '}
-                  <span className="code">postMessage</span> method so the two
-                  can talk and play nicely.
-                </>,
-                <>
-                  You can use the window's{' '}
-                  <span className="code">postMessage</span> method directly, but
-                  I encourage you to either roll your own wrapper or piggyback
-                  off another library out there that provides one. A good
-                  wrapper can add some extra utility and safety checks.
-                </>,
-              ]}
-            />
-          </ResponsiveContentImageGrid>
-
-          {/* ### Our Current Approach */}
-          <BlogSection id="our-current-approach" title="Our Current Approach">
-            <TopicBlock title="Our Messaging Strategy" items={bulletPoints2} />
-            <ProseBlock>
-              By using custom messaging, deep navigation, and event broadcasting
-              through a message bus, we can handle tricky iframe communication
-              between modules.
-            </ProseBlock>
-          </BlogSection>
-
-          {/* ### Iframe Messaging Gotchas */}
-          <BlogSection
-            id="iframe-messaging-gotchas"
-            title="Iframe Messaging Gotchas"
-            imageSrc={getDefaultImageSrc('20250601-image-slide17-a')}
-            sources={createImageSources('20250601-image-slide17-a')}
-            imageAlt="Memory Leak"
-            aspectRatio={3.7 / 3.7}
-            objectFit="cover"
-            caption="Memory Leaks from Iframe Messaging can flood your app. Be careful!"
-          >
-            <DenseContent
-              paragraphs={[
-                <>
-                  While iframe messaging helps glue everything together, it's
-                  important to plan ahead. If you don't, you'll end up with a
-                  rushed arts and crafts project covered in Elmer's glue.
-                </>,
-                <>
-                  To help you create a work of art, might I suggest avoiding
-                  some of the same mistakes we made along the way?
-                </>,
-              ]}
-            />
-            <TopicBlock
-              title="Our Biggest Iframe Messaging Gotchas"
-              items={bulletPoints3}
-            />
-          </BlogSection>
-
-          {/* ### Messaging Improvements*/}
-          <BlogSection
-            id="messaging-improvements"
-            title="Messaging Improvements"
-            subtitle="Lessons From Post-Robot"
-            imageOnRight={false}
-            imageSrc={getDefaultImageSrc('20250601-image-slide18')}
-            sources={createImageSources('20250601-image-slide18')}
-            imageAlt="Post Robot"
-            aspectRatio={1 / 1}
-            objectFit="cover"
-            caption="Post-Robot: reliable messaging between iframes"
-          >
-            <TopicBlock title="Key Improvements" items={bulletPoints4} />
-            <DenseContent
-              paragraphs={[
-                <>
-                  Let's talk more about those memory leaks. When we first
-                  started working with Post-Robot to create our messaging app,
-                  we didn't account for all the ways things could fail. While
-                  Post-Robot provides what I call a "robust handshake protocol,"
-                  we used it more like a quick high-five because, in some
-                  instances, we assumed it would just work.
-                </>,
-                <>
-                  This caused an intense week of bug fixing after a major
-                  refactor. We discovered our navigation was loading pages
-                  slower and slower because the host site kept trying to send
-                  messages to clients that no longer existed.
-                </>,
-                <>
-                  To fix the problem, we made use of everything Post-Robot
-                  offers for error handling. We implemented a way for the sender
-                  to recover when it fails to send messages, and for the client
-                  to fail gracefully when needed. Since making these changes,
-                  our iframe messaging is operating like a brand-new faucet — no
-                  more leaks.
-                </>,
-              ]}
-            />
-          </BlogSection>
-
-          <ReferenceLink
-            text="For more information on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
-            url="https://bluepnume.medium.com/introducing-post-robot-smart-cross-domain-messaging-from-paypal-bebf27c8619e"
-            linkText="Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
+      <BodyBlock>
+        {/* ### Why Communication Matters */}
+        <BlogSection
+          id="why-communication-matters"
+          title="Why Communication Matters"
+          imageOnRight
+          mobileImageFirst
+          imageSrc={getDefaultImageSrc('20250601-image-slide15')}
+          sources={createImageSources('20250601-image-slide15')}
+          imageAlt="Coffee Wizard 1"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="Host site displaying a coffee brewing wizard"
+        >
+          <TopicBlock
+            title="Communication Responsibilities"
+            items={bulletPoints1}
           />
+          <QuoteBlock>
+            Example: The Magic Coffee site is currently showing a coffee brewing
+            wizard. The site is the "host site" and is responsible for main
+            navigation, and the wizard is an iframe that manages its own
+            step-by-step process.
+          </QuoteBlock>
+        </BlogSection>
+        <ProseBlock>
+          The host site, without any custom messaging bus required, has the
+          ability to load iframes that display various pages or modules, such as
+          a wizard.
+        </ProseBlock>
+        <ProseBlock>
+          When performing basic routing, the host site is only concerned with
+          converting routes into various iframe URLs.
+        </ProseBlock>
+        <ProseBlock>
+          If a user navigates to a wizard, such as the Magic Coffee site’s Brew
+          wizard, then once the page is loaded, all user actions related to the
+          wizard are managed by the iframe’s module.
+        </ProseBlock>
 
-          {/* ### Hard Lessons */}
-          <BlogSection
-            id="hard-lessons"
-            title="Hard Lessons in Micro-Frontend Development"
-            columns="2fr 1fr"
-            imageSrc={getDefaultImageSrc('20250601-image-slide21')}
-            sources={createImageSources('20250601-image-slide21')}
-            imageAlt="Hard Lessons in Micro-Frontend Development"
-            aspectRatio={4 / 3}
-            objectFit="cover"
-            caption="Hard Lessons: Are you sure you want to go down this path?"
-          >
-            <BlogSubsection title="Standardize Your Navigation Patterns">
-              One area where we could have been more consistent is how we route
-              dropdown navigation lists in drawers. From settings to admin
-              pages, we use this kind of navigation everywhere. In each app, we
-              approached it differently, and this made it challenging to
-              standardize how things are done.
-            </BlogSubsection>
+        <Spacer size={2} desktop />
+        <ResponsiveContentImageGrid
+          imageOnRight={false}
+          mobileImageFirst
+          imageSrc={getDefaultImageSrc('20250601-image-slide16')}
+          sources={createImageSources('20250601-image-slide16')}
+          imageAlt="Coffee Wizard 2"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="Exernal action to buy a V60 is triggered by the wizard"
+        >
+          <DenseContent
+            paragraphs={[
+              <>
+                However, what happens if the wizard wants to display an option
+                to buy an item used in its brewing tutorial? If a user clicks
+                the "buy" button, things get a little more complicated.
+              </>,
+              <>
+                Iframes aren't very social — they prefer to keep to themselves.
+                To get our wizard's buy button to actually navigate to the
+                shopping page's Hario V60 page, we need to provide a messaging
+                layer that uses the window's{' '}
+                <span className="code">postMessage</span> method so the two can
+                talk and play nicely.
+              </>,
+              <>
+                You can use the window's{' '}
+                <span className="code">postMessage</span> method directly, but I
+                encourage you to either roll your own wrapper or piggyback off
+                another library out there that provides one. A good wrapper can
+                add some extra utility and safety checks.
+              </>,
+            ]}
+          />
+        </ResponsiveContentImageGrid>
 
-            <BlogSubsection title="Beware of Over-Engineering">
-              In addition to navigation and routing, we also overcomplicated
-              parts of our apps by trying to "future-proof" them. This created a
-              lot of unused spaghetti code and unnecessary layers that now make
-              very little sense.
-            </BlogSubsection>
+        {/* ### Our Current Approach */}
+        <BlogSection id="our-current-approach" title="Our Current Approach">
+          <TopicBlock title="Our Messaging Strategy" items={bulletPoints2} />
+          <ProseBlock>
+            By using custom messaging, deep navigation, and event broadcasting
+            through a message bus, we can handle tricky iframe communication
+            between modules.
+          </ProseBlock>
+        </BlogSection>
 
-            <ProseBlock>
-              One example: in one app, we set up dynamic routing to handle
-              various payloads and display different navigation drawers. The
-              code is impressive and works well to this day. The only issue is
-              that we only use it for a single list. It's like designing a
-              warehouse to store amazing Hot Wheels collections — but only using
-              it to park your sedan.
-            </ProseBlock>
-          </BlogSection>
+        {/* ### Iframe Messaging Gotchas */}
+        <BlogSection
+          id="iframe-messaging-gotchas"
+          title="Iframe Messaging Gotchas"
+          imageSrc={getDefaultImageSrc('20250601-image-slide17-a')}
+          sources={createImageSources('20250601-image-slide17-a')}
+          imageAlt="Memory Leak"
+          aspectRatio={3.7 / 3.7}
+          objectFit="cover"
+          caption="Memory Leaks from Iframe Messaging can flood your app. Be careful!"
+        >
+          <DenseContent
+            paragraphs={[
+              <>
+                While iframe messaging helps glue everything together, it's
+                important to plan ahead. If you don't, you'll end up with a
+                rushed arts and crafts project covered in Elmer's glue.
+              </>,
+              <>
+                To help you create a work of art, might I suggest avoiding some
+                of the same mistakes we made along the way?
+              </>,
+            ]}
+          />
+          <TopicBlock
+            title="Our Biggest Iframe Messaging Gotchas"
+            items={bulletPoints3}
+          />
+        </BlogSection>
 
-          <BlogSubsection title="Accept That Some Wet Code Is Okay">
-            After over-engineering ourselves into a corner a few times, we
-            learned an important lesson: a little bit of "wet code" is not the
-            end of the world. In a micro-frontend, some messiness is expected.
-            Each team will do things a little differently, no matter how many
-            guardrails you set up along the path to deployment.
+        {/* ### Messaging Improvements*/}
+        <BlogSection
+          id="messaging-improvements"
+          title="Messaging Improvements"
+          subtitle="Lessons From Post-Robot"
+          imageOnRight={false}
+          imageSrc={getDefaultImageSrc('20250601-image-slide18')}
+          sources={createImageSources('20250601-image-slide18')}
+          imageAlt="Post Robot"
+          aspectRatio={1 / 1}
+          objectFit="cover"
+          caption="Post-Robot: reliable messaging between iframes"
+        >
+          <TopicBlock title="Key Improvements" items={bulletPoints4} />
+          <DenseContent
+            paragraphs={[
+              <>
+                Let's talk more about those memory leaks. When we first started
+                working with Post-Robot to create our messaging app, we didn't
+                account for all the ways things could fail. While Post-Robot
+                provides what I call a "robust handshake protocol," we used it
+                more like a quick high-five because, in some instances, we
+                assumed it would just work.
+              </>,
+              <>
+                This caused an intense week of bug fixing after a major
+                refactor. We discovered our navigation was loading pages slower
+                and slower because the host site kept trying to send messages to
+                clients that no longer existed.
+              </>,
+              <>
+                To fix the problem, we made use of everything Post-Robot offers
+                for error handling. We implemented a way for the sender to
+                recover when it fails to send messages, and for the client to
+                fail gracefully when needed. Since making these changes, our
+                iframe messaging is operating like a brand-new faucet — no more
+                leaks.
+              </>,
+            ]}
+          />
+        </BlogSection>
+
+        <ReferenceLink
+          text="For more information on PostRobot and iframe messaging best practices, check out Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
+          url="https://bluepnume.medium.com/introducing-post-robot-smart-cross-domain-messaging-from-paypal-bebf27c8619e"
+          linkText="Daniel Brain's article on Medium: Introducing post-robot — smart cross-domain messaging, from PayPal"
+        />
+
+        {/* ### Hard Lessons */}
+        <BlogSection
+          id="hard-lessons"
+          title="Hard Lessons in Micro-Frontend Development"
+          columns="2fr 1fr"
+          imageSrc={getDefaultImageSrc('20250601-image-slide21')}
+          sources={createImageSources('20250601-image-slide21')}
+          imageAlt="Hard Lessons in Micro-Frontend Development"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          caption="Hard Lessons: Are you sure you want to go down this path?"
+        >
+          <BlogSubsection title="Standardize Your Navigation Patterns">
+            One area where we could have been more consistent is how we route
+            dropdown navigation lists in drawers. From settings to admin pages,
+            we use this kind of navigation everywhere. In each app, we
+            approached it differently, and this made it challenging to
+            standardize how things are done.
           </BlogSubsection>
 
-          <BlogSubsection title="The Fallacy of Staying Current">
-            The final lesson learned is about what I call the fallacy of staying
-            current.
+          <BlogSubsection title="Beware of Over-Engineering">
+            In addition to navigation and routing, we also overcomplicated parts
+            of our apps by trying to "future-proof" them. This created a lot of
+            unused spaghetti code and unnecessary layers that now make very
+            little sense.
           </BlogSubsection>
+
           <ProseBlock>
-            This is something I had to learn the hard way: you don't always need
-            to use bleeding-edge frameworks. Early in my career, I was
-            hyper-focused on avoiding "static" projects. I pushed myself — and
-            sometimes the companies I worked for — to update packages and
-            libraries constantly.
+            One example: in one app, we set up dynamic routing to handle various
+            payloads and display different navigation drawers. The code is
+            impressive and works well to this day. The only issue is that we
+            only use it for a single list. It's like designing a warehouse to
+            store amazing Hot Wheels collections — but only using it to park
+            your sedan.
           </ProseBlock>
-          <ProseBlock>
-            But there's an art to updating. After doing several big refactor
-            projects in our micro-frontend, I've learned that sometimes it's
-            better to freeze a project and create a new repo if business needs
-            drive updating to the latest and greatest JS framework.
-          </ProseBlock>
-          <ProseBlock>
-            It's important to remember that while getting up-to-date libraries
-            feels good, it also comes with a cost. Training developers,
-            especially those who primarily focus on backend tasks, takes time
-            and effort. That's not always ideal for a feature-driven development
-            shop.
-          </ProseBlock>
-          {/* ### Thank You */}
-          <BlogSection
-            id="thank-you"
-            title="The Summary"
-            imageSrc={getDefaultImageSrc('20250601-image-slide20')}
-            sources={createImageSources('20250601-image-slide20')}
-            imageAlt="Thanks for reading!"
-            aspectRatio={4 / 3}
-            objectFit="cover"
-            columns="2fr 1fr"
-            caption="If you made it this far, thanks for reading!"
-          >
-            <BlogSubsection title="Micro-Frontends Are Not for Everyone">
-              If you made it this far, thanks for reading! I hope you found this
-              post helpful. I know I learned a lot writing it. I also hope you
-              learned something new about micro-frontends and how to use them
-              effectively.
-            </BlogSubsection>
-          </BlogSection>
-        </BodyBlock>
-      </ArticleLayout>
+        </BlogSection>
+
+        <BlogSubsection title="Accept That Some Wet Code Is Okay">
+          After over-engineering ourselves into a corner a few times, we learned
+          an important lesson: a little bit of "wet code" is not the end of the
+          world. In a micro-frontend, some messiness is expected. Each team will
+          do things a little differently, no matter how many guardrails you set
+          up along the path to deployment.
+        </BlogSubsection>
+
+        <BlogSubsection title="The Fallacy of Staying Current">
+          The final lesson learned is about what I call the fallacy of staying
+          current.
+        </BlogSubsection>
+        <ProseBlock>
+          This is something I had to learn the hard way: you don't always need
+          to use bleeding-edge frameworks. Early in my career, I was
+          hyper-focused on avoiding "static" projects. I pushed myself — and
+          sometimes the companies I worked for — to update packages and
+          libraries constantly.
+        </ProseBlock>
+        <ProseBlock>
+          But there's an art to updating. After doing several big refactor
+          projects in our micro-frontend, I've learned that sometimes it's
+          better to freeze a project and create a new repo if business needs
+          drive updating to the latest and greatest JS framework.
+        </ProseBlock>
+        <ProseBlock>
+          It's important to remember that while getting up-to-date libraries
+          feels good, it also comes with a cost. Training developers, especially
+          those who primarily focus on backend tasks, takes time and effort.
+          That's not always ideal for a feature-driven development shop.
+        </ProseBlock>
+        {/* ### Thank You */}
+        <BlogSection
+          id="thank-you"
+          title="The Summary"
+          imageSrc={getDefaultImageSrc('20250601-image-slide20')}
+          sources={createImageSources('20250601-image-slide20')}
+          imageAlt="Thanks for reading!"
+          aspectRatio={4 / 3}
+          objectFit="cover"
+          columns="2fr 1fr"
+          caption="If you made it this far, thanks for reading!"
+        >
+          <BlogSubsection title="Micro-Frontends Are Not for Everyone">
+            If you made it this far, thanks for reading! I hope you found this
+            post helpful. I know I learned a lot writing it. I also hope you
+            learned something new about micro-frontends and how to use them
+            effectively.
+          </BlogSubsection>
+        </BlogSection>
+      </BodyBlock>
 
       <BlogPostNavigator
         prev={{
@@ -327,7 +326,7 @@ function RouteComponent() {
         //   blurb: 'A suggested next read for you.',
         // }}
       />
-    </PageLayout>
+    </BlogLayout>
   );
 }
 

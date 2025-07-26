@@ -162,13 +162,12 @@ export default function CallToAction({
   const hasImage = !!(sources?.length || imageSrc);
   const defaultImageSrc = imageSrc || '';
   const imageSources = sources?.length ? sources : undefined;
-  const className = isMobile ? 'content' : 'full-width';
 
   return (
     <>
       {/* Mobile Banner Image - only shown on mobile */}
       {isMobile && hasImage && (
-        <MobileBannerContainer className={className}>
+        <MobileBannerContainer className="full-width">
           <AspectRatioContainer ratio={imageRatio}>
             <Image
               sources={imageSources}
