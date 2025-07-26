@@ -3,9 +3,9 @@ import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
 import CallToAction from '@/components/CallToAction';
 import IntroBlock from '@/components/IntroBlock';
-import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { SectionSpacer } from '@/components/Spacer';
+import TitleBlock from '@/components/TitleBlock';
 import { BlogLayout } from '@/layout';
 import { createImageSources, getDefaultImageSrc } from '@/utils/images';
 import Stack from '@mui/material/Stack';
@@ -32,7 +32,8 @@ function LearnNamesPost() {
     <BlogLayout id="learn-names-post">
       <CallToAction
         title="Learn Names"
-        preSubtitle="Why Remembering Names is Important"
+        preSubtitle="Soft Skills"
+        subtitle="Why Remembering Names is Important"
         imageAlt="Learn Names"
         sources={createImageSources(
           '20250701-image-20250723-learnnames-avatar'
@@ -42,11 +43,10 @@ function LearnNamesPost() {
         )}
         date="2025-07-21"
       />
-      <TitleBlock>Soft Skills</TitleBlock>
-      <IntroBlock>Why Remembering Names is Important</IntroBlock>
+      <TitleBlock>When Harry Forgot Mary</TitleBlock>
+      <IntroBlock>Maybe it's on the brefcase.</IntroBlock>
       <BlogSection
         id="introduction"
-        title="When Harry Forgot Mary"
         imageAlt="Learn Names"
         sources={createImageSources('20250701-image-20250712-dumbdumber')}
         imageSrc={getDefaultImageSrc('20250701-image-20250712-dumbdumber')}

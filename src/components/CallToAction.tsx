@@ -186,11 +186,7 @@ export default function CallToAction({
       >
         <InternalWrapper>
           {title && (
-            <Typography
-              variant="h1"
-              color="common.white"
-              gutterBottom={!isMobile}
-            >
+            <Typography variant="h1" color="common.white" gutterBottom>
               {title}
             </Typography>
           )}

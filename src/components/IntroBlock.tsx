@@ -39,6 +39,7 @@ const StyledIntroBlock = styled(Box)<BoxProps>(({ theme }) => ({
   borderTop: `3px solid ${theme.palette.primary.main}`,
   '& p': {
     fontSize: theme.typography.body1.fontSize,
-    color: theme.palette.text.primary,
+    // color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
   },
 }));
