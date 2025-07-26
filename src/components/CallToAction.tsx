@@ -2,6 +2,7 @@ import Image, {
   AspectRatioContainer,
   type SourceProps,
 } from '@/components/Image';
+import { useDrawer } from '@/hooks/useContext';
 import { formatDisplayDate } from '@/utils/date';
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
@@ -18,32 +19,41 @@ type PositionProps = {
   left?: number;
 };
 
-const CallToActionContainer = styled(Box)(({ theme }) => ({
+const InternalWrapper = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
+  padding: theme.spacing(2, 0),
+  maxWidth: 'var(--content-max-width)',
+  margin: '0 auto',
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(2, 2),
+  },
+  [theme.breakpoints.up('lg')]: {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+}));
+
+const CallToActionContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'drawerWidth',
+})<{ drawerWidth?: number }>(({ theme, drawerWidth = 65 }) => ({
   display: 'block',
   padding: theme.spacing(2),
   position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(4),
-  },
-  // backgroundColor: theme.palette.primary.main,
-  // backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+  marginTop: 0,
   borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.primary.main,
+  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   color: theme.palette.primary.superLight,
   margin: 0,
   isolation: 'isolate',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    zIndex: -1,
-    left: '50%',
-    top: 0,
-    transform: 'translateX(-50%)',
-    width: '100vw',
-    maxWidth: 'var(--full-width-max-width, 1920px)',
-    height: '100%',
-    backgroundColor: theme.palette.primary.main,
-    backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-    borderRadius: theme.shape.borderRadius,
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(0),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
+  [theme.breakpoints.up('lg')]: {
+    marginTop: theme.spacing(4),
   },
 }));
 
@@ -61,25 +71,30 @@ const MobileBannerContainer = styled(Box)(({ theme }) => ({
 
 const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  right: 16,
+  right: 0,
   top: '50%',
   transform: 'translateY(-50%)',
   width: '130px',
   height: '130px',
   borderRadius: '50%',
   background: `linear-gradient(45deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-  padding: '7px',
+  padding: theme.spacing(1),
   // Hide on mobile, show on desktop
   display: 'none',
   [theme.breakpoints.up('md')]: {
     display: 'block',
     width: '174px',
     height: '174px',
+    top: '64%',
   },
   [theme.breakpoints.up('lg')]: {
     width: '214px',
     height: '214px',
-    top: '60%',
+    top: '53%',
+    right: -32,
+  },
+  [theme.breakpoints.up('xl')]: {
+    right: -64,
   },
 }));
 
@@ -87,18 +102,9 @@ const CircularImageInnerContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   height: '100%',
   borderRadius: '50%',
-  border: `3px solid ${theme.palette.common.white}`,
+  // border: `3px solid ${theme.palette.common.white}`,
   overflow: 'hidden',
   position: 'relative',
-}));
-
-const ContentContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'hasImage',
-})<{ hasImage?: boolean }>(({ theme, hasImage }) => ({
-  [theme.breakpoints.up('md')]: {
-    width: '100%',
-    paddingRight: hasImage ? theme.spacing(4) : 0,
-  },
 }));
 
 const CTAButton = styled(Button)(({ theme }) => ({
@@ -144,6 +150,10 @@ export default function CallToAction({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  // Get drawer state to determine width
+  const { isOpen: isDrawerOpen } = useDrawer('blog-drawer');
+  const drawerWidth = isDrawerOpen ? 256 : 65;
+
   // Format the date string using the new utility
   const formattedDate = formatDisplayDate(date);
 
@@ -152,12 +162,13 @@ export default function CallToAction({
   const hasImage = !!(sources?.length || imageSrc);
   const defaultImageSrc = imageSrc || '';
   const imageSources = sources?.length ? sources : undefined;
+  const className = isMobile ? 'content' : 'full-width';
 
   return (
     <>
       {/* Mobile Banner Image - only shown on mobile */}
-      {hasImage && (
-        <MobileBannerContainer>
+      {isMobile && hasImage && (
+        <MobileBannerContainer className={className}>
           <AspectRatioContainer ratio={imageRatio}>
             <Image
               sources={imageSources}
@@ -169,8 +180,12 @@ export default function CallToAction({
         </MobileBannerContainer>
       )}
 
-      <CallToActionContainer>
-        <ContentContainer hasImage={hasImage}>
+      <CallToActionContainer
+        id="call-to-action"
+        className="full-width"
+        drawerWidth={drawerWidth}
+      >
+        <InternalWrapper>
           {title && (
             <Typography
               variant="h1"
@@ -216,24 +231,24 @@ export default function CallToAction({
               {formattedDate}
             </Typography>
           )}
-        </ContentContainer>
 
-        {/* Desktop Circular Image - only shown on desktop */}
-        {hasImage && (
-          <CircularImageOuterContainer>
-            <CircularImageInnerContainer>
-              <Image
-                sources={imageSources}
-                defaultSrc={defaultImageSrc}
-                alt={imageAlt}
-                objectFit="cover"
-                width="auto"
-                height={200}
-                style={{ position: 'relative', ...imagePosition }}
-              />
-            </CircularImageInnerContainer>
-          </CircularImageOuterContainer>
-        )}
+          {/* Desktop Circular Image - only shown on desktop */}
+          {hasImage && (
+            <CircularImageOuterContainer>
+              <CircularImageInnerContainer>
+                <Image
+                  sources={imageSources}
+                  defaultSrc={defaultImageSrc}
+                  alt={imageAlt}
+                  objectFit="cover"
+                  width="auto"
+                  height={200}
+                  style={{ position: 'relative', ...imagePosition }}
+                />
+              </CircularImageInnerContainer>
+            </CircularImageOuterContainer>
+          )}
+        </InternalWrapper>
       </CallToActionContainer>
     </>
   );

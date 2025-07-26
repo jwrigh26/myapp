@@ -1,40 +1,59 @@
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
+import { styled, useTheme } from '@mui/system';
 import { ReactNode } from 'react';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface BackdropSectionProps {
   children: ReactNode;
-  showBackdrop?: boolean;
-  className?: string;
+  backdrop?: 'default' | 'primary';
 }
 
-const SectionContainer = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  zIndex: 1,
+const BackdropBackground = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'drawerWidth',
+})<{ drawerWidth?: number }>(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
 }));
 
-const BackdropBackground = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: '100vw',
-  backgroundColor: theme.palette.primary.dark,
-  backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-  zIndex: -1,
+const PrimaryBackground = styled(BackdropBackground)(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? theme.palette.background.default
+      : theme.palette.primary.dark,
+  backgroundImage:
+    theme.palette.mode === 'dark'
+      ? undefined
+      : `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+}));
+
+const ForeGround = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  zIndex: 1,
+  width: '100%',
+  maxWidth: '1000px',
+  margin: '0 auto',
+  padding: theme.spacing(2),
+  [theme.breakpoints.up('lg')]: {
+    padding: theme.spacing(1),
+  },
 }));
 
 export default function BackdropSection({
+  backdrop = 'default',
   children,
-  showBackdrop = true,
-  className = 'content',
   ...props
 }: BackdropSectionProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  // const className = isMobile ? 'full-width' : 'breakout';
+  const className = 'full-width'; // Default className for full-width sections
+
+  const BackgroundComponent =
+    backdrop === 'primary' ? PrimaryBackground : BackdropBackground;
+
   return (
-    <SectionContainer className={className} {...props}>
-      {showBackdrop && <BackdropBackground />}
-      {children}
-    </SectionContainer>
+    <BackgroundComponent className={className} {...props}>
+      <ForeGround>{children}</ForeGround>
+    </BackgroundComponent>
   );
 }

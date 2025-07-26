@@ -70,7 +70,7 @@ export function BlogSection({
 
   return (
     <>
-      <SectionSpacer id={id} />
+      <SectionSpacer id={`${id}-section-spacer`} />
 
       {/* Content with image */}
       {hasImage ? (

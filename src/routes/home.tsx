@@ -103,7 +103,7 @@ function HomeComponent() {
       </Box>
 
       {/* Latest blog posts in content zone */}
-      <BackdropSection showBackdrop={theme.palette.mode === 'light'}>
+      <BackdropSection backdrop="primary">
         <LatestBlogDeck />
       </BackdropSection>
     </HomeLayout>

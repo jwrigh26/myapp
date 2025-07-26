@@ -11,8 +11,8 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
   // CSS Custom Properties for content-grid system
   '--padding-inline': theme.spacing(2),
   '--content-max-width': '1000px', // Stays comfortably under lg breakpoint
-  '--breakout-max-width': '1400px', // Fits nicely between lg (1200) and xl (1536)
-  '--full-width-max-width': '1920px', // For full-width sections
+  '--breakout-max-width': '1200px', // Fits nicely between lg (1200) and xl (1536)
+  '--full-width-max-width': '1536px', // For full-width sections
   '--breakout-size':
     'calc((var(--breakout-max-width) - var(--content-max-width)) / 2)',
 

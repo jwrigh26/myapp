@@ -2,12 +2,16 @@
 
 /* Root CSS Custom Properties */
 :root {
-  --content-grid-padding-inline: 1rem;
-  --content-grid-content-max-width: 900px;
+  --content-grid-padding-inline: 16px;
+  --content-grid-content-max-width: 1000px;
   --content-grid-breakout-max-width: 1200px;
   --content-grid-full-width-max-width: 1536px;
   --content-grid-breakout-size: calc(
-    (var(--content-grid-breakout-max-width) - var(--content-grid-content-max-width)) / 2
+    (
+        var(--content-grid-breakout-max-width) -
+          var(--content-grid-content-max-width)
+      ) /
+      2
   );
 }
 
@@ -66,7 +70,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --content-grid-padding-inline: 1rem;
+    --content-grid-padding-inline: 8px;
     --content-grid-content-max-width: 100%;
     --content-grid-breakout-max-width: 100%;
   }

@@ -1,3 +1,4 @@
+import { useDrawer } from '@/hooks/useContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
@@ -6,18 +7,21 @@ import './blog-layout.css';
 interface BlogLayoutProps extends PropsWithChildren<{}> {
   id?: string;
   className?: string;
+  drawerWidth?: number;
 }
 
-const StyledContentGrid = styled(Box)(({ theme }) => ({
+// Add shouldForwardProp to filter out drawerWidth
+const StyledContentGrid = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'drawerWidth',
+})<{ drawerWidth?: number }>(({ theme, drawerWidth = 0 }) => ({
   // CSS Custom Properties for content-grid system
   '--padding-inline': theme.spacing(2),
-  '--content-max-width': '1000px', // Stays comfortably under lg breakpoint
-  '--breakout-max-width': '1400px', // Fits nicely between lg (1200) and xl (1536)
-  '--full-width-max-width': '1920px', // For full-width sections
+  '--content-max-width': `${1000 - 0}px`,
+  '--breakout-max-width': `${1200 - 0}px`,
+  '--full-width-max-width': `${1536 - 0}px`,
   '--breakout-size':
     'calc((var(--breakout-max-width) - var(--content-max-width)) / 2)',
 
-  marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
   gap: 0,
   rowGap: 0,
@@ -34,7 +38,6 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
     minmax(var(--padding-inline), 1fr) [full-width-end]
   `,
   backgroundColor: theme.palette.background.paper,
-  // minHeight: '100vh',
 
   // Default all children to content zone
   '& > *': {
@@ -64,11 +67,29 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
     '--content-max-width': '100%',
     '--breakout-max-width': '100%',
   },
+
+  // Responsive behavior
+  // [theme.breakpoints.down('md')]: {
+  //   '--padding-inline': theme.spacing(1),
+  //   '--content-max-width': '100%',
+  //   '--breakout-max-width': '100%',
+  //   '--full-width-max-width': '100%',
+  // },
+
+  // [theme.breakpoints.down('sm')]: {
+  //   '--content-max-width': '100%',
+  //   '--breakout-max-width': '100%',
+  //   '--full-width-max-width': '100%',
+  // },
 }));
 
 const BlogLayout = ({ children, id, className }: BlogLayoutProps) => {
+  // Get drawer state to determine width
+  const { isOpen: isDrawerOpen } = useDrawer('blog-drawer');
+  const drawerWidth = isDrawerOpen ? 256 : 65;
+
   return (
-    <StyledContentGrid id={id} className={className}>
+    <StyledContentGrid id={id} className={className} drawerWidth={drawerWidth}>
       {children}
     </StyledContentGrid>
   );

@@ -1,9 +1,11 @@
 import BackdropSection from '@/components/BackdropSection';
-import { ArticleLayout } from '@/components/blog';
 import BlogSection from '@/components/blog/BlogSection';
 import BlogSubsection from '@/components/blog/BlogSubsection';
+import CallToAction from '@/components/CallToAction';
+import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { SectionSpacer } from '@/components/Spacer';
+import TitleBlock from '@/components/TitleBlock';
 import { BlogLayout } from '@/layout';
 import { createImageSources, getDefaultImageSrc } from '@/utils/images';
 import Stack from '@mui/material/Stack';
@@ -27,8 +29,8 @@ export const Route = createFileRoute('/blog/posts/soft-skills/learn-names')({
 
 function LearnNamesPost() {
   return (
-    <BlogLayout id="learn-names-post">
-      <ArticleLayout
+    <>
+      {/* <ArticleLayout
         title="Learn Names"
         preSubtitle={<span className="name-alt">Foo Herp</span>}
         imageAlt="Learn Names"
@@ -49,7 +51,22 @@ function LearnNamesPost() {
             avatars,
           </>
         }
-      >
+      /> */}
+      <BlogLayout id="learn-names-post">
+        <CallToAction
+          title="Learn Names"
+          preSubtitle="Why Remembering Names is Important"
+          imageAlt="Learn Names"
+          sources={createImageSources(
+            '20250701-image-20250723-learnnames-avatar'
+          )}
+          imageSrc={getDefaultImageSrc(
+            '20250701-image-20250723-learnnames-avata'
+          )}
+          date="2025-07-21"
+        />
+        <TitleBlock>Soft Skills</TitleBlock>
+        <IntroBlock>Why Remembering Names is Important</IntroBlock>
         <BlogSection
           id="introduction"
           title="When Harry Forgot Mary"
@@ -104,7 +121,7 @@ function LearnNamesPost() {
           </ProseBlock>
         </Stack>
         <SectionSpacer />
-        <BackdropSection>
+        <BackdropSection backdrop="primary">
           <Stack gap={2} sx={{ py: 2 }}>
             <ProseBlock backgroundColor="transparent" color="white">
               I relate so much to this meme because up to this point in my life,
@@ -171,7 +188,7 @@ function LearnNamesPost() {
             </ProseBlock>
           </Stack>
         </BlogSection>
-      </ArticleLayout>
-    </BlogLayout>
+      </BlogLayout>
+    </>
   );
 }
