@@ -1,6 +1,5 @@
 import BackdropSection from '@/components/BackdropSection';
 import BlogSection from '@/components/blog/BlogSection';
-import BlogSubsection from '@/components/blog/BlogSubsection';
 import CallToAction from '@/components/CallToAction';
 import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
@@ -78,7 +77,7 @@ function LearnNamesPost() {
         </ProseBlock>
       </BlogSection>
 
-      <BlogSubsection title="Say Jarvis..." />
+      <BlogSection id="packed-brain" title="Packed Brain" />
       <Stack gap={2}>
         <ProseBlock>
           Remembering names has been such a challenge for me that when I
