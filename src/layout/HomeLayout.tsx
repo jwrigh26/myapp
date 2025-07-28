@@ -60,6 +60,7 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
     '--padding-inline': theme.spacing(2),
     '--content-max-width': '100%',
     '--breakout-max-width': '100%',
+    marginTop: 0,
   },
 }));
 

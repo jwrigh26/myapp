@@ -28,7 +28,7 @@ const InternalWrapper = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(2, 2),
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     paddingLeft: 0,
     paddingRight: 0,
   },
@@ -86,15 +86,16 @@ const CircularImageOuterContainer = styled(Box)(({ theme }) => ({
     width: '174px',
     height: '174px',
     top: '64%',
+    right: 0,
   },
   [theme.breakpoints.up('lg')]: {
     width: '214px',
     height: '214px',
     top: '53%',
-    right: -32,
+    right: 0,
   },
   [theme.breakpoints.up('xl')]: {
-    right: -64,
+    right: 0,
   },
 }));
 

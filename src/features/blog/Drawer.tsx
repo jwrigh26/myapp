@@ -1,6 +1,5 @@
 import { MiniVariantDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
-import { useComponentStateContext } from '@/context/ComponentStateContext';
 import { useDrawer, useToggle } from '@/hooks/useContext';
 import { mdiAccountGroup, mdiChevronRight, mdiPencilRuler } from '@mdi/js';
 import Box from '@mui/material/Box';
@@ -163,7 +162,7 @@ function PostSection({
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Just toggle the section open/closed
-    console.log('PostSection key:', sectionKey);
+    // console.log('PostSection key:', sectionKey);
     e.preventDefault();
     e.stopPropagation();
     toggleOpen();
@@ -253,12 +252,7 @@ function CollapsedCategoryIcon({
   const { openDrawer } = useDrawer(drawerKey, true);
 
   // Get the same section key as PostSection uses
-  const sectionKey = `post-section-${title.toLowerCase().replace(/\s+/g, '-')}`;
-  const { isOpen, toggleOpen } = useToggle(sectionKey);
-
-  // Get access to close other sections
-  const context = useComponentStateContext();
-  const { setClose } = context!;
+  // const sectionKey = `post-section-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
   const handleCategoryClick = () => {
     // Generate section keys dynamically from blogPaths
@@ -270,13 +264,6 @@ function CollapsedCategoryIcon({
         (letter) => `-${letter.toLowerCase()}`
       );
       return `post-section-${kebabCase}`;
-    });
-
-    // Close all other PostSections
-    allSectionKeys.forEach((key) => {
-      if (key !== sectionKey) {
-        setClose(key)();
-      }
     });
 
     // Determine the category base path based on title
@@ -303,25 +290,17 @@ function CollapsedCategoryIcon({
     }
 
     // Navigate to the determined path
-    console.log('Smart navigation:', {
-      currentPath,
-      categoryBasePath,
-      isAlreadyInCategory,
-      targetPath,
-      sectionKey,
-    });
+    // console.log('Smart navigation:', {
+    //   currentPath,
+    //   categoryBasePath,
+    //   isAlreadyInCategory,
+    //   targetPath,
+    //   sectionKey,
+    // });
     router.navigate({ to: targetPath as any });
 
     // Open the drawer first
     openDrawer();
-
-    // Then open the PostSection with a slight delay to ensure smooth animation
-    if (!isOpen) {
-      // Use setTimeout to allow drawer animation to start first
-      setTimeout(() => {
-        toggleOpen();
-      }, theme.transitions.duration.enteringScreen * 0.3); // 30% of drawer animation
-    }
   };
 
   return (

@@ -1,6 +1,6 @@
 // Auto-generated image registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-07-26T04:15:00.553Z
-// Images found: 36
+// Generated on: 2025-07-28T04:20:20.404Z
+// Images found: 38
 
 import img_20250601_image_home_page_splash_large from '@/assets/blog/2025/06/20250601-image-home-page-splash-large.webp';
 import img_20250601_image_home_page_splash_medium from '@/assets/blog/2025/06/20250601-image-home-page-splash-medium.webp';
@@ -110,6 +110,12 @@ import img_20250701_image_20250723_learnnames_avatar_small from '@/assets/blog/2
 import img_20250701_image_20250723_home1_large from '@/assets/home/20250701-image-20250723-home1-large.webp';
 import img_20250701_image_20250723_home1_medium from '@/assets/home/20250701-image-20250723-home1-medium.webp';
 import img_20250701_image_20250723_home1_small from '@/assets/home/20250701-image-20250723-home1-small.webp';
+import img_20250701_image_home2_1_large from '@/assets/home/20250701-image-home2-1-large.webp';
+import img_20250701_image_home2_1_medium from '@/assets/home/20250701-image-home2-1-medium.webp';
+import img_20250701_image_home2_1_small from '@/assets/home/20250701-image-home2-1-small.webp';
+import img_20250701_image_home2_large from '@/assets/home/20250701-image-home2-large.webp';
+import img_20250701_image_home2_medium from '@/assets/home/20250701-image-home2-medium.webp';
+import img_20250701_image_home2_small from '@/assets/home/20250701-image-home2-small.webp';
 
 export const imageRegistry = {
   "20250601-image-home-page-splash": {
@@ -291,6 +297,16 @@ export const imageRegistry = {
     "large": img_20250701_image_20250723_home1_large,
     "medium": img_20250701_image_20250723_home1_medium,
     "small": img_20250701_image_20250723_home1_small
+  },
+  "20250701-image-home2-1": {
+    "large": img_20250701_image_home2_1_large,
+    "medium": img_20250701_image_home2_1_medium,
+    "small": img_20250701_image_home2_1_small
+  },
+  "20250701-image-home2": {
+    "large": img_20250701_image_home2_large,
+    "medium": img_20250701_image_home2_medium,
+    "small": img_20250701_image_home2_small
   }
 } as const;
 

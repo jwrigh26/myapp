@@ -43,7 +43,7 @@ function LearnNamesPost() {
         date="2025-07-21"
       />
       <TitleBlock>When Harry Forgot Mary</TitleBlock>
-      <IntroBlock>Maybe it's on the brefcase.</IntroBlock>
+      <IntroBlock>Maybe it's on the briefcase.</IntroBlock>
       <BlogSection
         id="introduction"
         imageAlt="Learn Names"

@@ -73,7 +73,6 @@ Implement a new content-grid based `BlogLayout` system alongside existing `PageL
 - **File**: `/src/routes/blog/posts/soft-skills/learn-names.jsx`
 - **Actions**:
   - Replace `PageLayout` with `BlogLayout`
-  - Wrap `ArticleLayout` in appropriate grid zones
   - Test responsive behavior
 - **Time**: 15 minutes
 
@@ -185,9 +184,7 @@ src/
 
 // Legacy PageLayout posts (unchanged)
 <PageLayout>
-  <ArticleLayout>
     {/* All existing functionality preserved */}
-  </ArticleLayout>
 </PageLayout>
 ```
 

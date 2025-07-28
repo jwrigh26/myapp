@@ -7,7 +7,7 @@ import { generateOpenGraphMeta } from '@/utils/openGraph';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { alpha, styled, useTheme } from '@mui/system';
+import { alpha, styled, useMediaQuery, useTheme } from '@mui/system';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/home')({
@@ -31,13 +31,15 @@ function HomeComponent() {
     '20250601-image-home-page-splash'
   );
 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <HomeLayout>
       {/* Hero section in content zone */}
       <HeroSection
         id="hero-section"
         backgroundImageUrl={heroBackgroundImage}
-        className="breakout"
+        className={isMobile ? 'full-width' : 'breakout'}
       >
         {/* <HeroBackground id="hero-background" className="full-width" /> */}
         <HeroCallout>
@@ -92,13 +94,30 @@ function HomeComponent() {
       {/* Home callout section */}
       <Box component="section" sx={{ mb: 4 }}>
         <HomeCallout
-          title="Building Better User Experiences"
-          description="I'm passionate about creating intuitive, performant web applications that solve real problems. With expertise in React, TypeScript, and modern frontend architecture, I help teams deliver products that users love."
+          title="Lightning-Fast Code with Steady Focus"
+          description="By day, I pair with AI to write shockingly good code at lightning speed.
+By night, I code solo with my hands on the keyboard. Slow and steady. It keeps my skills sharp.
+"
           imageKey="20250701-image-20250723-home1"
           imageAlt="Justin Wright working on frontend development"
           imageOnRight={true}
-          aspectRatio={16 / 10}
           mobileImageFirst={false}
+          fixedImageHeight="300px" // Consistent height for all home callouts
+        />
+      </Box>
+      <Box component="section" sx={{ mb: 4 }}>
+        <HomeCallout
+          title="Crafting Code, Block by Block"
+          description="Legos fueled my passion for software design and development.
+I visualize code as Lego bricks while I build them up  in a blaze of text on my IDE.
+I love it!
+"
+          imageKey="20250701-image-home2-1"
+          imageAlt="Product strategy and development planning"
+          imageOnRight={false}
+          objectFit="cover"
+          mobileImageFirst={false}
+          fixedImageHeight="300px" // Same consistent height
         />
       </Box>
 
