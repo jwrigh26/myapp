@@ -92,7 +92,7 @@ function HomeComponent() {
       </HeroSection>
 
       {/* Home callout section */}
-      <Box component="section" sx={{ mb: 4 }}>
+      <CalloutSection component="section">
         <HomeCallout
           title="Lightning-Fast Code with Steady Focus"
           description="By day, I pair with AI to write shockingly good code at lightning speed.
@@ -104,12 +104,12 @@ By night, I code solo with my hands on the keyboard. Slow and steady. It keeps m
           mobileImageFirst={false}
           fixedImageHeight="300px" // Consistent height for all home callouts
         />
-      </Box>
-      <Box component="section" sx={{ mb: 4 }}>
+      </CalloutSection>
+      <CalloutSection component="section">
         <HomeCallout
-          title="Crafting Code, Block by Block"
+          title="Crafting Apps, Block by Block"
           description="Legos fueled my passion for software design and development.
-I visualize code as Lego bricks while I build them up  in a blaze of text on my IDE.
+I visualize apps as Lego bricks while I build them up in a blaze of text on my IDE.
 I love it!
 "
           imageKey="20250701-image-home2-1"
@@ -119,7 +119,7 @@ I love it!
           mobileImageFirst={false}
           fixedImageHeight="300px" // Same consistent height
         />
-      </Box>
+      </CalloutSection>
 
       {/* Latest blog posts in content zone */}
       <BackdropSection backdrop="primary">
@@ -193,3 +193,10 @@ export const HeroCallout = styled(Box)(({ theme }) => ({
     backdropFilter: 'blur(0.5px)',
   },
 }));
+
+export const CalloutSection = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+  [theme.breakpoints.up('md')]: {
+    marginBottom: theme.spacing(8),
+  },
+})) as typeof Box;
