@@ -249,7 +249,6 @@ function CollapsedCategoryIcon({
 }) {
   const theme = useTheme();
   const router = useRouter();
-  const { openDrawer } = useDrawer(drawerKey, true);
 
   // Get the same section key as PostSection uses
   // const sectionKey = `post-section-${title.toLowerCase().replace(/\s+/g, '-')}`;
@@ -298,9 +297,6 @@ function CollapsedCategoryIcon({
     //   sectionKey,
     // });
     router.navigate({ to: targetPath as any });
-
-    // Open the drawer first
-    openDrawer();
   };
 
   return (
