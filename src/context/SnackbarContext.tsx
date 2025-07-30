@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import {
   createContext,
   ReactNode,
-  useCallback,
   useContext,
   useMemo,
   useReducer,
@@ -103,26 +102,23 @@ export interface SnackbarProviderProps {
 export function SnackbarProvider({ children }: SnackbarProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const setSnackbar = useCallback((snackbar: Snackbar) => {
+  const setSnackbar = (snackbar: Snackbar) => {
     if (!hasValue(snackbar?.id)) {
       console.error('Snackbar must have an id');
       return;
     }
 
     dispatch({ type: 'SET_SNACKBAR', payload: snackbar });
-  }, []);
+  };
 
-  const removeSnackbar = useCallback(
-    (id: string) => () => {
-      const currentSnackbar = state.snackbars.find((s) => s.id === id);
-      if (isFunction(currentSnackbar?.onRemove)) {
-        currentSnackbar.onRemove();
-      }
+  const removeSnackbar = (id: string) => () => {
+    const currentSnackbar = state.snackbars.find((s) => s.id === id);
+    if (isFunction(currentSnackbar?.onRemove)) {
+      currentSnackbar.onRemove();
+    }
 
-      dispatch({ type: 'REMOVE_SNACKBAR', payload: { id } });
-    },
-    [state]
-  );
+    dispatch({ type: 'REMOVE_SNACKBAR', payload: { id } });
+  };
 
   const privateValue = useMemo(
     () => ({

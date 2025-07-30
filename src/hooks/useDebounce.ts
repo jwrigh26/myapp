@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 
 // Generic type for any function
 type AnyFunction = (...args: any[]) => any;
@@ -24,12 +24,18 @@ export function useDebounce<T extends AnyFunction>(
   callback: T,
   delay: number = 250
 ): (...args: Parameters<T>) => void {
+  // Latest Ref Pattern with useLayoutEffect
+  const callbackRef = useRef(callback);
+
+  useLayoutEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
   const handleDebounce = useMemo(
     () =>
       debounce((...args: Parameters<T>) => {
         callback(...args);
       }, delay),
-    [callback, delay] // Add dependencies
+    [delay] // Add dependencies
   );
 
   return handleDebounce;
