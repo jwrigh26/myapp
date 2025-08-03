@@ -1,14 +1,17 @@
 import BackdropSection from '@/components/BackdropSection';
 import BlogSection from '@/components/blog/BlogSection';
 import CallToAction from '@/components/CallToAction';
+import ComicStrip from '@/components/ComicStrip';
 import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
+import QuoteBlock from '@/components/QuoteBlock';
 import { SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import { BlogLayout } from '@/layout';
 import { createImageSources, getDefaultImageSrc } from '@/utils/images';
 import Stack from '@mui/material/Stack';
 import { createFileRoute } from '@tanstack/react-router';
+import { useMemo } from 'react';
 
 export const Route = createFileRoute('/blog/posts/soft-skills/learn-names')({
   component: LearnNamesPost,
@@ -27,6 +30,28 @@ export const Route = createFileRoute('/blog/posts/soft-skills/learn-names')({
 });
 
 function LearnNamesPost() {
+  const comicFrames = useMemo(
+    () => [
+      {
+        imageName: '20250701-image-20250712-brainfull-frame1',
+        alt: 'Person introduces themselves as Jason',
+      },
+      {
+        imageName: '20250701-image-20250712-brainfull-frame2',
+        alt: "Listener's brain is already packed with information",
+      },
+      {
+        imageName: '20250701-image-20250712-brainfull-frame3',
+        alt: "Brain cramming Jason's name into overcrowded memory",
+      },
+      {
+        imageName: '20250701-image-20250712-brainfull-frame4',
+        alt: 'Person calls Jason "Jarvis" while talking about their own interests',
+      },
+    ],
+    []
+  );
+
   return (
     <BlogLayout id="learn-names-post">
       <CallToAction
@@ -76,7 +101,6 @@ function LearnNamesPost() {
           from the inability to remember names.
         </ProseBlock>
       </BlogSection>
-
       <BlogSection id="packed-brain" title="Packed Brain" />
       <Stack gap={2}>
         <ProseBlock>
@@ -95,6 +119,7 @@ function LearnNamesPost() {
         </ProseBlock>
       </Stack>
       <SectionSpacer />
+      <ComicStrip frames={comicFrames} aspectRatio={1 / 0.87} />
       <BackdropSection backdrop="primary">
         <Stack gap={2} sx={{ py: 2 }}>
           <ProseBlock backgroundColor="transparent" color="white">
@@ -128,14 +153,14 @@ function LearnNamesPost() {
             I believe to make an impact for positivity when dealing with others
             at work or in our daily lives we must remember, as Carnegie stated:
           </ProseBlock>
-          <ProseBlock>
+          <QuoteBlock>
             We should be aware of the magic contained in a name… The name sets
             the individual apart; it makes him or her unique among all others.
             The information we are imparting or the request we are making takes
             on a special importance when we approach the situation with the name
             of the individual. From the waitress to the senior executive, the
             name will work magic as we deal with others.
-          </ProseBlock>
+          </QuoteBlock>
 
           <ProseBlock>
             Reading the passage up above makes sense. If we don't remember

@@ -1,3 +1,46 @@
+# Components Documentation
+
+## ComicStrip Component
+
+A responsive comic strip component for displaying sequential images in blog posts.
+
+### Features
+
+- **Responsive Layout**: Single column (mobile) → 2-column grid (tablet) → horizontal strip (desktop)
+- **Comic Book Styling**: Borders, shadows, and proper aspect ratios
+- **Frame Numbering**: Subtle mobile indicators for reading order
+- **Accessibility**: Proper alt text and ARIA labels
+- **Performance**: Memoized with stable array references
+
+### Usage
+
+```jsx
+const comicFrames = useMemo(
+  () => [
+    {
+      imageName: '20250701-image-frame1',
+      alt: 'Description of first frame',
+    },
+    {
+      imageName: '20250701-image-frame2',
+      alt: 'Description of second frame',
+    },
+  ],
+  []
+);
+
+<ComicStrip frames={comicFrames} title="Comic Title" aspectRatio={4 / 3} />;
+```
+
+### Props
+
+- `frames`: Array of `ComicFrame` objects with `imageName` and `alt`
+- `title?`: Optional comic title for accessibility
+- `aspectRatio?`: Frame aspect ratio (default: 4/3)
+- `className?`: Additional CSS classes
+
+---
+
 # Image Component Documentation
 
 ## `objectFit` Property Guide
