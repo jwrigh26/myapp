@@ -23,6 +23,11 @@ export default defineConfig(({ mode }) => {
     server: {
       hmr: true,
     },
+    test: {
+      environment: 'jsdom', // This uses the jsdom you already have
+      setupFiles: ['./src/test/setup.ts'],
+      globals: true, // Use global variables like `describe`, `it`, etc.
+    },
     define: getDefineObject(env),
     resolve: {
       alias: {

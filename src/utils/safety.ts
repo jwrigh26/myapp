@@ -1,7 +1,7 @@
 // TypeScript version of the file with improvements and type annotations
 
 export function hasValue(value: unknown): boolean {
-  if (value === window) {
+  if (typeof window !== 'undefined' && value === window) {
     return !isNil(value);
   }
 

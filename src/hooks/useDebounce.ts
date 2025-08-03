@@ -29,13 +29,14 @@ export function useDebounce<T extends AnyFunction>(
 
   useLayoutEffect(() => {
     callbackRef.current = callback;
-  }, [callback]);
+  });
+
   const handleDebounce = useMemo(
     () =>
       debounce((...args: Parameters<T>) => {
-        callback(...args);
+        callbackRef.current(...args); // Use the ref, not the original callback
       }, delay),
-    [delay] // Add dependencies
+    [delay] // Only depend on delay
   );
 
   return handleDebounce;
