@@ -31,62 +31,86 @@ export interface ProseBlockProps {
   };
 }
 
-function ProseBlock({
-  id,
-  title,
-  subtitle,
-  children,
-  dense = false,
-  spacingBottom = false,
-  backgroundColor,
-  color = 'text.primary', // Default to text.primary
-  options = {}, // Default to an empty object
-}: ProseBlockProps): JSX.Element {
-  const {
-    // Variant defaults
-    titleVariant = 'h4',
-    subtitleVariant = 'subtitle1',
-    textVariant = 'body1',
-    // Component defaults
-    titleComponent = 'h2',
-    subtitleComponent = 'p',
-    textComponent = 'div',
-  } = options;
+const ProseBlock = React.memo(
+  function ProseBlock({
+    id,
+    title,
+    subtitle,
+    children,
+    dense = false,
+    spacingBottom = true,
+    backgroundColor,
+    color = 'text.primary', // Default to text.primary
+    options = {}, // Default to an empty object
+  }: ProseBlockProps): JSX.Element {
+    const {
+      // Variant defaults
+      titleVariant = 'h4',
+      subtitleVariant = 'subtitle1',
+      textVariant = 'body1',
+      // Component defaults
+      titleComponent = 'h2',
+      subtitleComponent = 'p',
+      textComponent = 'div',
+    } = options;
 
-  return (
-    <StyledBlock
-      id={id}
-      dense={dense}
-      spacingBottom={spacingBottom}
-      backgroundColor={backgroundColor}
-    >
-      {title && (
+    return (
+      <StyledBlock
+        id={id}
+        dense={dense}
+        spacingBottom={spacingBottom}
+        backgroundColor={backgroundColor}
+      >
+        {title && (
+          <Typography
+            variant={titleVariant}
+            component={titleComponent}
+            color="primary.main"
+            gutterBottom
+          >
+            {title}
+          </Typography>
+        )}
+        {subtitle && (
+          <Typography
+            variant={subtitleVariant}
+            component={subtitleComponent}
+            gutterBottom
+            color="text.secondary"
+          >
+            {subtitle}
+          </Typography>
+        )}
         <Typography
-          variant={titleVariant}
-          component={titleComponent}
-          color="primary.main"
-          gutterBottom
+          variant={textVariant}
+          component={textComponent}
+          color={color}
         >
-          {title}
+          {children}
         </Typography>
-      )}
-      {subtitle && (
-        <Typography
-          variant={subtitleVariant}
-          component={subtitleComponent}
-          gutterBottom
-          color="text.secondary"
-        >
-          {subtitle}
-        </Typography>
-      )}
-      <Typography variant={textVariant} component={textComponent} color={color}>
-        {children}
-      </Typography>
-    </StyledBlock>
-  );
-}
+      </StyledBlock>
+    );
+  },
+  (prevProps, nextProps) => {
+    // Compare all primitive props for performance optimization
+    return (
+      prevProps.id === nextProps.id &&
+      prevProps.title === nextProps.title &&
+      prevProps.subtitle === nextProps.subtitle &&
+      prevProps.dense === nextProps.dense &&
+      prevProps.spacingBottom === nextProps.spacingBottom &&
+      prevProps.backgroundColor === nextProps.backgroundColor &&
+      prevProps.color === nextProps.color &&
+      // Stable references (options is usually a static object, children typically stable in blog context)
+      prevProps.options === nextProps.options &&
+      prevProps.children === nextProps.children
+    );
+  }
+);
 
+ProseBlock.displayName = 'ProseBlock';
+
+export { ProseBlock };
 export default ProseBlock;
 
 //#######################################

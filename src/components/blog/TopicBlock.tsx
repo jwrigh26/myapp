@@ -1,6 +1,6 @@
-import React from 'react';
 import ProseBlock from '@/components/ProseBlock';
 import ProseList from '@/components/ProseList';
+import React from 'react';
 
 interface TopicBlockProps {
   /** Title for the topic */
@@ -37,7 +37,11 @@ export function TopicBlock({
 }: TopicBlockProps): JSX.Element {
   return (
     <>
-      <ProseBlock title={title} options={titleOptions} />
+      <ProseBlock
+        title={title}
+        options={titleOptions}
+        spacingBottom={spacingBottom}
+      />
       <ProseList
         items={items}
         subTitle={subTitle}

@@ -59,7 +59,6 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide1')}
         imageAlt="Empowering Small Businesses"
         imageOnRight={false}
-        gap={2}
         aspectRatio={4 / 3.4}
       >
         <TopicBlock title="The Backstory" items={bulletPoints1} />
@@ -80,7 +79,6 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide2')}
         imageAlt="The Environment and Requirements"
         imageOnRight={true}
-        gap={2}
         aspectRatio={15.4 / 9}
       >
         <TopicBlock title="Host Sites" items={bulletPoints2} />
@@ -103,11 +101,10 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide3')}
         imageAlt="The Host Sites"
         imageOnRight={true}
-        gap={2}
         aspectRatio={4 / 3}
         caption="Host sites: The backbone of our modular front-end"
       >
-        <BlogSubsection title="Page Management">
+        <BlogSubsection title="Page Management" spacingTop={false}>
           Each host site typically loads one or more modules inside an iframe
           per page. The goal is to have one iframe per page, but there have been
           instances where several iframes are loaded on a single screen.
@@ -167,11 +164,11 @@ function RouteComponent() {
         Angular developers have moved on from the company.
       </ProseBlock>
 
-      <ProseBlock subtitle="In short...">
+      <BlogSubsection subtitle="In short...">
         The moreal of the story is that if you use a modular framework
         supporting multiple development stacks, you must be prepared to manage
         both sides of this double-edged sword.
-      </ProseBlock>
+      </BlogSubsection>
 
       <Spacer size={2} desktop />
       <ResponsiveContentImageGrid
@@ -179,13 +176,13 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide4')}
         imageAlt="Module Development & Versioning"
         imageOnRight={false}
-        gap={2}
         aspectRatio={3.8 / 3.4}
         caption="Module development: Beware of version drift"
       >
         <BlogSubsection
           title="Version Drift"
           subtitle="Racing Through Versions"
+          spacingTop={false}
         >
           We started building our modular frontend when React was still on
           version 15. But pretty soon into development, React 16 dropped, and
@@ -227,36 +224,32 @@ function RouteComponent() {
         imageAlt="Shared Resources"
         imageOnRight={false}
         mobileImageFirst={true}
-        gap={2}
         aspectRatio={4 / 3}
         caption="Shared resources: UI library, utility methods, and context providers"
       >
         <TopicBlock title="Libraries" items={bulletPoints5} />
-
-        <BlogSubsection title="Our Shared Toolkit">
-          Once our version drift issues were sorted out, we started building a
-          shared resource library late in the development process. This library
-          focused strictly on things we identified as being valuable. Team
-          buy-in was important too, since we wanted everyone using the shared
-          resources. The idea being it will help keep version drift to a
-          minimum.
-        </BlogSubsection>
-
-        <ProseBlock>
-          The library includes a shared UI library for common components,
-          various utility methods, and context providers. This setup helps each
-          team stay consistent in their designs and in how they interact with
-          the host sites.
-        </ProseBlock>
-        <ProseBlock>
-          These shareable resources only emerged after our module development
-          matured. This gave us enough time to spot common patterns across teams
-          and add them to the shared library when there was clear overlap. By
-          taking this approach, we could gradually build out our library and
-          handle small, "bite-size" refactors as part of regular feature
-          development.
-        </ProseBlock>
       </BlogSection>
+      <BlogSubsection title="Our Shared Toolkit">
+        Once our version drift issues were sorted out, we started building a
+        shared resource library late in the development process. This library
+        focused strictly on things we identified as being valuable. Team buy-in
+        was important too, since we wanted everyone using the shared resources.
+        The idea being it will help keep version drift to a minimum.
+      </BlogSubsection>
+      <ProseBlock>
+        The library includes a shared UI library for common components, various
+        utility methods, and context providers. This setup helps each team stay
+        consistent in their designs and in how they interact with the host
+        sites.
+      </ProseBlock>
+      <ProseBlock>
+        These shareable resources only emerged after our module development
+        matured. This gave us enough time to spot common patterns across teams
+        and add them to the shared library when there was clear overlap. By
+        taking this approach, we could gradually build out our library and
+        handle small, "bite-size" refactors as part of regular feature
+        development.
+      </ProseBlock>
 
       {/* ### Service Integration & Module Autonomy */}
       <BlogSection
@@ -266,7 +259,6 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide7')}
         imageAlt="Super Mods: Service Integration & Module Autonomy"
         imageOnRight={true}
-        gap={2}
         caption="Super Mods have standalone power"
         aspectRatio={4 / 2.7}
       >
@@ -274,31 +266,30 @@ function RouteComponent() {
           title="Service Integration & Module Autonomy"
           items={bulletPoints6}
         />
-
-        <BlogSubsection
-          title="Decoupled Yet Connected"
-          subtitle="While modules operate autonomously, they're still tightly integrated through our APIs"
-        >
-          We like to think our modules have superpowers. They consume API
-          requests from a host site when it is available, but if it is not, they
-          morph into super modules. These super modules fetch data directly from
-          our .NET backend services on their own. This lets them handle multiple
-          integrations seamlessly, whether as a standalone application or
-          embedded in a third-party platform.
-        </BlogSubsection>
-        <ProseBlock>
-          But superpowers come at a price. Ensuring our modules run correctly in
-          every environment takes extra work and rigorous testing. You might
-          even say that the freedom to inject modules anywhere is our kryptonite
-          because of the maintence that comes with it.
-        </ProseBlock>
       </BlogSection>
-      <ProseBlock subtitle="Example:">
+      <BlogSubsection
+        title="Decoupled Yet Connected"
+        subtitle="While modules operate autonomously, they're still tightly integrated through our APIs"
+      >
+        We like to think our modules have superpowers. They consume API requests
+        from a host site when it is available, but if it is not, they morph into
+        super modules. These super modules fetch data directly from our .NET
+        backend services on their own. This lets them handle multiple
+        integrations seamlessly, whether as a standalone application or embedded
+        in a third-party platform.
+      </BlogSubsection>
+      <ProseBlock>
+        But superpowers come at a price. Ensuring our modules run correctly in
+        every environment takes extra work and rigorous testing. You might even
+        say that the freedom to inject modules anywhere is our kryptonite
+        because of the maintence that comes with it.
+      </ProseBlock>
+      <BlogSubsection subtitle="Example:">
         Sunsetting legacy modules is challenging because we have to track which
         clients still use each version and plan their migration to newer
         modules. Still, this balance of service integration and module autonomy
         keeps our system flexible.
-      </ProseBlock>
+      </BlogSubsection>
 
       {/* ### Deployment Flexibility */}
       <BlogSection
@@ -310,41 +301,39 @@ function RouteComponent() {
         sources={createImageSources('20250601-image-slide5')}
         imageAlt="Deployment Flexibility"
         imageOnRight={true}
-        gap={2}
         caption="Deployment Flexibility: Independent repositories and decoupled updates"
         aspectRatio={4 / 2.7}
       >
         <TopicBlock title="Key Benefits" items={bulletPoints7} />
-
-        <BlogSubsection title="Modular Deployment">
-          One of the best things about our modular framework is that each module
-          lives in its own repository. Each module gets its own entry point,
-          loaded via an iframe. This setup enables independent deployment
-          cycles; we can deploy a single module without affecting the rest of
-          the system. This decoupled approach ensures minimal disruption when
-          other modules change. Different parts are updated at different times;
-          everything runs smoothly.
-        </BlogSubsection>
-
-        <BlogSubsection title="Build Process & DevOps Excellence">
-          Of course, this modular deployment couldn't happen without a few other
-          critical actors: our QA team and DevOps engineers. Without their
-          skills and systems in place, our bi-weekly release cycles, which now
-          take only one to two hours on average, would not be possible. Before
-          we fully integrated into our current module framework, release nights
-          were often postponed due to critical bugs that impacted multiple areas
-          of the application. Those issues and other factors sometimes pushed
-          releases well into the early morning hours.
-        </BlogSubsection>
-
-        <ProseBlock>
-          The time and investment required to move to our module framework have
-          turned "release night" from a dreaded event into a smooth process. Our
-          build process supports consistent release cycles and quick updates,
-          which means our work-life balance has improved. Module frameworks for
-          the win!
-        </ProseBlock>
       </BlogSection>
+      <BlogSubsection title="Modular Deployment">
+        One of the best things about our modular framework is that each module
+        lives in its own repository. Each module gets its own entry point,
+        loaded via an iframe. This setup enables independent deployment cycles;
+        we can deploy a single module without affecting the rest of the system.
+        This decoupled approach ensures minimal disruption when other modules
+        change. Different parts are updated at different times; everything runs
+        smoothly.
+      </BlogSubsection>
+
+      <BlogSubsection title="Build Process & DevOps Excellence">
+        Of course, this modular deployment couldn't happen without a few other
+        critical actors: our QA team and DevOps engineers. Without their skills
+        and systems in place, our bi-weekly release cycles, which now take only
+        one to two hours on average, would not be possible. Before we fully
+        integrated into our current module framework, release nights were often
+        postponed due to critical bugs that impacted multiple areas of the
+        application. Those issues and other factors sometimes pushed releases
+        well into the early morning hours.
+      </BlogSubsection>
+
+      <ProseBlock>
+        The time and investment required to move to our module framework have
+        turned "release night" from a dreaded event into a smooth process. Our
+        build process supports consistent release cycles and quick updates,
+        which means our work-life balance has improved. Module frameworks for
+        the win!
+      </ProseBlock>
 
       <BlogPostNavigator
         next={{

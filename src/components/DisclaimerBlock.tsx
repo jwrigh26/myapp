@@ -20,7 +20,7 @@ const DisclaimerBlock: React.FC<DisclaimerBlockProps> = ({
   return (
     <StyledDisclaimerBlock>
       {title && (
-        <Stack direction="row" spacing={1} alignItems={'center'}>
+        <Stack direction="row" gap={1} alignItems={'center'}>
           <Icon path={mdiMessageAlert} color="secondary" fontSize="small" />
           <Typography variant="h6" component="h2" gutterBottom>
             {title}
@@ -39,6 +39,7 @@ const DisclaimerBlock: React.FC<DisclaimerBlockProps> = ({
 export default DisclaimerBlock;
 
 const StyledDisclaimerBlock = styled(Box)<BoxProps>(({ theme }) => ({
+  marginTop: theme.spacing(2),
   padding: theme.spacing(2),
   backgroundColor: theme.palette.background.default,
   border: `1px solid ${theme.palette.secondary.main}`,

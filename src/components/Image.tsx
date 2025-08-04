@@ -185,7 +185,7 @@ export const GridContent = styled(Box, {
   order: mobileImageFirst ? 2 : 1,
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(gap),
+  spacing: theme.spacing(gap), // For sake of not refactoring existing code we want spacing so it doesn't break mobile layout
 
   [theme.breakpoints.up('md')]: {
     order: imageOnRight ? 1 : 2,
