@@ -1,17 +1,17 @@
 import '@/features/blog/blog.css';
+import { BlogPostCard, BlogPostGrid } from '@/components/blog';
 import { PageLayout } from '@/layout';
 import { formatDisplayDate } from '@/utils/date';
 import { getThumbImageSrc } from '@/utils/images';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
 import { createFileRoute, Link as RouterLink } from '@tanstack/react-router';
+import { useBlogPosts } from '@/features/blog';
 
 export const Route = createFileRoute('/blog/')({
   component: BlogHome,
@@ -28,28 +28,14 @@ export const Route = createFileRoute('/blog/')({
   }),
 });
 
-const BlogPostCard = styled(Card)(({ theme }) => ({
-  flex: 1,
-  minWidth: 260,
-  maxWidth: '100%',
-  [theme.breakpoints.up('md')]: {
-    maxWidth: 480,
-  },
-  minHeight: '380px',
-  display: 'flex',
-  flexDirection: 'column',
-  boxShadow: '0px 3px 6px rgba(0,0,0,0.12), 0px 1.5px 3px rgba(0,0,0,0.08)',
-  width: '100%',
-  [theme.breakpoints.up('md')]: {
-    width: 'auto',
-  },
-  alignSelf: 'stretch',
-  [theme.breakpoints.up('md')]: {
-    alignSelf: 'flex-start',
-  },
+const BlogHeader = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+  marginTop: theme.spacing(2),
 }));
 
 function BlogHome() {
+  const { data: posts = [] } = useBlogPosts({ limit: 25 });
+
   return (
     <PageLayout>
       <BlogHeader>
@@ -62,17 +48,9 @@ function BlogHome() {
         </Typography>
       </BlogHeader>
       <Box sx={{ px: 2 }}>
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          gap={3}
-          spacing={2}
-          alignItems="stretch"
-          justifyContent={{ xs: 'center', md: 'flex-start' }}
-          flexWrap="wrap"
-        >
-          {allBlogPosts.map((post) => (
-            <BlogPostCard key={post.route}>
-              <div className="glowing-border" />
+        <BlogPostGrid>
+          {posts.map((post) => (
+            <BlogPostCard key={post.route} glow>
               <CardActionArea
                 component={RouterLink}
                 to={post.route}
@@ -121,42 +99,8 @@ function BlogHome() {
               </Box>
             </BlogPostCard>
           ))}
-        </Stack>
+        </BlogPostGrid>
       </Box>
     </PageLayout>
   );
 }
-
-const BlogHeader = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(4),
-  marginTop: theme.spacing(2),
-}));
-
-// For now, reuse the same posts as home page
-const allBlogPosts = [
-  {
-    title:
-      'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
-    blurb:
-      'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift.',
-    image: getThumbImageSrc('20250601-image-slide0'),
-    route: '/blog/posts/frontend-design/microfrontends-part1',
-    date: '2025-03-15',
-  },
-  {
-    title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
-    blurb:
-      'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
-    image: getThumbImageSrc('20250601-image-slide10'),
-    route: '/blog/posts/frontend-design/microfrontends-part2',
-    date: '2025-04-21',
-  },
-  {
-    title: 'Micro-Frontends Part 3: Lessons Learned',
-    blurb:
-      'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
-    image: getThumbImageSrc('20250601-image-slide19'),
-    route: '/blog/posts/frontend-design/microfrontends-part3',
-    date: '2025-05-01',
-  },
-];

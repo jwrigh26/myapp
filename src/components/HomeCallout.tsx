@@ -30,15 +30,45 @@ const CalloutDescription = styled(Typography)(({ theme }) => ({
 }));
 
 // Specialized container for consistent home page image sizing
+interface HomeImageContainerProps {
+  fixedHeight?: string | number;
+  glow?: boolean;
+}
+
 const HomeImageContainer = styled(Box, {
-  shouldForwardProp: (prop) => !['fixedHeight'].includes(prop as string),
-})<{ fixedHeight?: string | number }>(({ theme, fixedHeight = '280px' }) => ({
+  shouldForwardProp: (prop) => !['fixedHeight', 'glow'].includes(prop as string),
+})<HomeImageContainerProps>(({ theme, fixedHeight = '280px', glow }) => ({
   position: 'relative',
   width: '100%',
   height: fixedHeight,
-  borderRadius: '2px',
+  borderRadius: '8px',
   overflow: 'hidden',
-  ...(theme.palette.mode === 'light'
+  ...(glow
+    ? {
+        border: `2px solid ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}`,
+        boxShadow: `
+          0 0 0 2px ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}33,
+          0 4px 16px ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}55,
+          0 6px 24px ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}22
+        `,
+        transition: 'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
+        '&:hover, &:focus-within': {
+          transform: 'translateY(-1px)',
+          boxShadow: theme.palette.mode === 'light'
+            ? `
+              0 0 0 3px ${theme.palette.primary.main}66,
+              0 8px 32px ${theme.palette.primary.main}77,
+              0 16px 48px ${theme.palette.primary.main}44
+            `
+            : `
+              0 0 0 2px ${theme.palette.primary.light}55,
+              0 6px 28px ${theme.palette.primary.light}66,
+              0 12px 40px ${theme.palette.primary.light}38
+            `,
+          borderColor: theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.primary.light,
+        },
+      }
+    : theme.palette.mode === 'light'
     ? {
         boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
         border: `2px solid ${theme.palette.grey[400]}`,
@@ -78,6 +108,7 @@ interface HomeCalloutProps {
   useFixedImageHeight?: boolean; // When true, uses fixed height instead of aspect ratio
   fixedImageHeight?: string | number; // Height for the image container (default: 280px)
   columns?: string; // Allow customization of grid columns
+  glow?: boolean; // Option to enable glowing border
 }
 
 export default function HomeCallout({
@@ -93,6 +124,7 @@ export default function HomeCallout({
   useFixedImageHeight = true, // Default to true for consistent home page styling
   fixedImageHeight = '280px',
   columns = '1fr 1fr',
+  glow = false,
 }: HomeCalloutProps) {
   const theme = useTheme();
 
@@ -120,7 +152,7 @@ export default function HomeCallout({
           imageOnRight={imageOnRight}
           mobileImageFirst={mobileImageFirst}
         >
-          <HomeImageContainer fixedHeight={fixedImageHeight}>
+          <HomeImageContainer fixedHeight={fixedImageHeight} glow={glow}>
             <Image
               sources={imageSources}
               defaultSrc={defaultImageSrc}

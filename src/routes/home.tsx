@@ -103,6 +103,7 @@ By night, I code solo with my hands on the keyboard. Slow and steady. It keeps m
           imageOnRight={true}
           mobileImageFirst={false}
           fixedImageHeight="300px" // Consistent height for all home callouts
+          glow
         />
       </CalloutSection>
       <CalloutSection component="section">
@@ -118,6 +119,7 @@ I love it!
           objectFit="cover"
           mobileImageFirst={false}
           fixedImageHeight="300px" // Same consistent height
+          glow
         />
       </CalloutSection>
 

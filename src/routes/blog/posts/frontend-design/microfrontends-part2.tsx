@@ -21,6 +21,14 @@ export const Route = createFileRoute(
 )({
   component: RouteComponent,
   head: () => ({
+    staticData: {
+      title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
+      description:
+        'Explore the pros and cons of Module Federation, Single-Spa, and iframe-based micro-frontends, and why we chose our approach.',
+      imageKey: '20250601-image-slide10',
+      route: '/frontend-design/microfrontends-part2',
+      publishedDate: '2025-04-21',
+    },
     getTitle: () => 'Micro-Frontends Part 2',
     meta: generateBlogPostMeta({
       title: 'Micro-Frontends Part 2: Comparing Modern Alternatives',
@@ -61,7 +69,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="The Evolution of Frontend Architecture"
         columns="2fr 1fr"
-        gap={3}
         aspectRatio={1 / 1.05}
       >
         <TopicBlock title="The Frontend Evolution" items={bulletPoints1} />
@@ -90,7 +97,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="Micro-Frontend Strategies: How to Choose?"
         columns="1fr 2fr"
-        gap={3}
         aspectRatio={1 / 0.95}
       >
         <TopicBlock
@@ -155,7 +161,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="Module Federation: shines at dynamic, runtime modules"
         columns="2fr 1fr"
-        gap={3}
         aspectRatio={16 / 11}
       >
         <TopicBlock title="Shiny Happy Modules" items={bulletPointsMf1} />
@@ -218,7 +223,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="Single-SPA: coordinates multiple micro-apps on the same page"
         columns="1fr 2fr"
-        gap={2}
         aspectRatio={16 / 11}
       >
         <TopicBlock
@@ -322,7 +326,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="iFrame: isolation and independent updates"
         columns="2fr 1fr"
-        gap={3}
         aspectRatio={1 / 0.9}
       >
         <TopicBlock
@@ -410,7 +413,6 @@ function RouteComponent() {
         objectFit="cover"
         caption="Rationale Behind Our Choice"
         columns="2fr 1fr"
-        gap={2}
         aspectRatio={1 / 1.32}
       >
         <TopicBlock

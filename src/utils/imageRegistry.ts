@@ -1,6 +1,6 @@
 // Auto-generated image registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-08-03T03:48:07.553Z
-// Images found: 38
+// Generated on: 2025-08-12T15:02:31.539Z
+// Images found: 40
 
 import img_20250601_image_home_page_splash_large from '@/assets/blog/2025/06/20250601-image-home-page-splash-large.webp';
 import img_20250601_image_home_page_splash_medium from '@/assets/blog/2025/06/20250601-image-home-page-splash-medium.webp';
@@ -107,6 +107,12 @@ import img_20250701_image_20250712_dumbdumber_small from '@/assets/blog/2025/07/
 import img_20250701_image_20250723_learnnames_avatar_large from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-large.webp';
 import img_20250701_image_20250723_learnnames_avatar_medium from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-medium.webp';
 import img_20250701_image_20250723_learnnames_avatar_small from '@/assets/blog/2025/07/20250701-image-20250723-learnnames-avatar-small.webp';
+import img_20250801_image_react_monster_avatar_large from '@/assets/blog/2025/08/20250801-image-react-monster-avatar-large.webp';
+import img_20250801_image_react_monster_avatar_medium from '@/assets/blog/2025/08/20250801-image-react-monster-avatar-medium.webp';
+import img_20250801_image_react_monster_avatar_small from '@/assets/blog/2025/08/20250801-image-react-monster-avatar-small.webp';
+import img_20250801_image_react_monster_large from '@/assets/blog/2025/08/20250801-image-react-monster-large.webp';
+import img_20250801_image_react_monster_medium from '@/assets/blog/2025/08/20250801-image-react-monster-medium.webp';
+import img_20250801_image_react_monster_small from '@/assets/blog/2025/08/20250801-image-react-monster-small.webp';
 import img_20250701_image_20250723_home1_large from '@/assets/home/20250701-image-20250723-home1-large.webp';
 import img_20250701_image_20250723_home1_medium from '@/assets/home/20250701-image-20250723-home1-medium.webp';
 import img_20250701_image_20250723_home1_small from '@/assets/home/20250701-image-20250723-home1-small.webp';
@@ -292,6 +298,16 @@ export const imageRegistry = {
     "large": img_20250701_image_20250723_learnnames_avatar_large,
     "medium": img_20250701_image_20250723_learnnames_avatar_medium,
     "small": img_20250701_image_20250723_learnnames_avatar_small
+  },
+  "20250801-image-react-monster-avatar": {
+    "large": img_20250801_image_react_monster_avatar_large,
+    "medium": img_20250801_image_react_monster_avatar_medium,
+    "small": img_20250801_image_react_monster_avatar_small
+  },
+  "20250801-image-react-monster": {
+    "large": img_20250801_image_react_monster_large,
+    "medium": img_20250801_image_react_monster_medium,
+    "small": img_20250801_image_react_monster_small
   },
   "20250701-image-20250723-home1": {
     "large": img_20250701_image_20250723_home1_large,

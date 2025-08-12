@@ -16,14 +16,22 @@ import { useMemo } from 'react';
 export const Route = createFileRoute('/blog/posts/soft-skills/learn-names')({
   component: LearnNamesPost,
   head: () => ({
+    staticData: {
+      title: 'Learn Names',
+      description: 'Why remembering names is important',
+      imageKey: '20250701-image-20250723-learnnames-avatar',
+      route: '/soft-skills/learn-names',
+      publishedDate: '2025-07-21',
+    },
     getTitle: () => 'Learn Names',
     meta: [
       {
-        name: 'description',
-        content: 'Why remembering names is important',
-      },
-      {
         title: 'Learn Names',
+        description: 'Why remembering names is important',
+        imageKey: '20250701-image-20250723-learnnames-avatar',
+        content: 'Why remembering names is important',
+        route: '/blog/posts/soft-skills/learn-names',
+        publishedDate: '2025-07-21',
       },
     ],
   }),

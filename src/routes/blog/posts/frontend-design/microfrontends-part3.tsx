@@ -25,6 +25,14 @@ export const Route = createFileRoute(
 )({
   component: RouteComponent,
   head: () => ({
+    staticData: {
+      title: 'Micro-Frontends Part 3: Lessons Learned',
+      description:
+        'Lessons from our micro-frontend journey: communication, messaging gotchas, and hard-won advice for modular front-end teams.',
+      imageKey: '20250601-image-slide19',
+      route: '/frontend-design/microfrontends-part3',
+      publishedDate: '2025-05-01',
+    },
     getTitle: () => 'Micro-Frontends Part3',
     meta: generateBlogPostMeta({
       title: 'Micro-Frontends Part 3: Lessons Learned',
