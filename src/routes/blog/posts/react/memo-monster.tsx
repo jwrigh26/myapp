@@ -48,7 +48,6 @@ function RouteComponent() {
         mobileImageSources={createImageSources('20250801-image-react-monster')}
         date="2025-08-12"
       />
-
       <TitleBlock>Memoization is a Monster!</TitleBlock>
       <IntroBlock>
         In this post, I share my experiences with React and the challenges I
@@ -65,7 +64,7 @@ function RouteComponent() {
       >
         <ProseBlock>
           Every couple of years in React, I look at my code and see a{' '}
-          <b>monster</b>
+          <b>monster</b>.
         </ProseBlock>
 
         <ProseBlock>
@@ -85,13 +84,24 @@ function RouteComponent() {
           maintainer of TanStack Query and Router, states:
         </ProseBlock>
       </BlogSection>
-
       <QuoteBlock>
         I thought I'd written enough about memoization by now, but I feel there
         is one pattern I'm seeing a lot lately that makes me think otherwise. So
         today, I want to look at useCallback, and to some extent useMemo, in
         situations where I think they are totally pointless.
       </QuoteBlock>
+      <ProseBlock>
+        While I'm not prtending to be an expert on React, please read on for a
+        monsterous tail about React and memoization. If you want to learn more
+        about the useless useCallback pattern, you can check out Dominik's
+        original post on the topic.
+      </ProseBlock>
+      j
+      <ReferenceLink
+        url="https://tkdodo.eu/blog/the-useless-use-callback"
+        linkText="The Useless useCallback"
+        text="A great article by Dominik Homberger that explains the useless useCallback pattern in detail."
+      />
       <BlogSection
         id="memo-monster-example"
         title="Frankenstein's Memo Monster"
@@ -280,9 +290,7 @@ function SimpleComponent({ ownerName }) {
         <Stack gap={2}>
           <ProseBlock>
             The Memo Monster is a cautionary tale of how well-intentioned
-            optimizations can lead to unexpected complexity. Instead of creating
-            a monster, let's focus on writing clear, maintainable code that
-            doesn't rely on unnecessary memoization.
+            optimizations can lead to unexpected complexity. 
           </ProseBlock>
 
           <ProseBlock>
