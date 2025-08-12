@@ -19,7 +19,7 @@ export const Route = createFileRoute('/blog/posts/react/memo-monster')({
       description: 'My Haunted Past with React and Memoization',
       imageKey: '20250801-image-react-monster-avatar',
       route: '/react/memo-monster',
-      publishedDate: '2025-07-21',
+      publishedDate: '2025-08-12',
     },
     getTitle: () => 'Attack of the Memo Monster',
     meta: [
