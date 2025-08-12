@@ -1,5 +1,5 @@
 // Auto-generated image registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-08-12T21:20:22.558Z
+// Generated on: 2025-08-12T21:39:00.312Z
 // Images found: 40
 
 import img_20250601_image_home_page_splash_large from '@/assets/blog/2025/06/20250601-image-home-page-splash-large.webp';

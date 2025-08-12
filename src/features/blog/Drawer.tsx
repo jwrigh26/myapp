@@ -275,6 +275,9 @@ function CollapsedCategoryIcon({
       categoryBasePath = blogPaths.softSkills;
     }
 
+    if (title === 'React') {
+      categoryBasePath = blogPaths.react;
+    }
     // Smart navigation: stay on current page if in category, otherwise go to first route
     const currentPath = router.state.location.pathname;
     const isAlreadyInCategory = currentPath.startsWith(categoryBasePath);
