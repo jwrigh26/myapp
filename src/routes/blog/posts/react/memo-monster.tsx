@@ -1,0 +1,307 @@
+import BlogSection from '@/components/blog/BlogSection';
+import CallToAction from '@/components/CallToAction';
+import CodeBlock from '@/components/CodeBlock';
+import IntroBlock from '@/components/IntroBlock';
+import ProseBlock from '@/components/ProseBlock';
+import QuoteBlock from '@/components/QuoteBlock';
+import TitleBlock from '@/components/TitleBlock';
+import ReferenceLink from '@/components/ReferenceLink';
+import { BlogLayout } from '@/layout';
+import { createImageSources, getDefaultImageSrc } from '@/utils/images';
+import Stack from '@mui/material/Stack';
+import { createFileRoute } from '@tanstack/react-router';
+
+export const Route = createFileRoute('/blog/posts/react/memo-monster')({
+  component: RouteComponent,
+  head: () => ({
+    staticData: {
+      title: 'Attack of the Memo Monster',
+      description: 'My Haunted Past with React and Memoization',
+      imageKey: '20250801-image-react-monster-avatar',
+      route: '/react/memo-monster',
+      publishedDate: '2025-07-21',
+    },
+    getTitle: () => 'Attack of the Memo Monster',
+    meta: [
+      {
+        title: 'Attack of the Memo Monster',
+        description: 'My Haunted Past with React and Memoization',
+        imageKey: '20250801-image-react-monster-avatar',
+        content: 'Why remembering names is important',
+        route: '/blog/posts/react/memo-monster',
+        publishedDate: '2025-08-12',
+      },
+    ],
+  }),
+});
+
+function RouteComponent() {
+  return (
+    <BlogLayout id="react-monster-post">
+      <CallToAction
+        title="Attack of the Memo Monster"
+        subtitle="A tribute to useless useCallbacks"
+        preSubtitle="My Haunted Past with React and Memoization"
+        imageAlt="Attack of the Memo Monster"
+        sources={createImageSources('20250801-image-react-monster-avatar')}
+        imageSrc={getDefaultImageSrc('20250801-image-react-monster-avatar')}
+        mobileImageSources={createImageSources('20250801-image-react-monster')}
+        date="2025-08-12"
+      />
+
+      <TitleBlock>Memoization is a Monster!</TitleBlock>
+      <IntroBlock>
+        In this post, I share my experiences with React and the challenges I
+        faced with memoization.
+      </IntroBlock>
+      <BlogSection
+        id="introduction"
+        imageAlt="React Memo Monster"
+        sources={createImageSources('20250801-image-react-monster')}
+        imageSrc={getDefaultImageSrc('20250801-image-react-monster')}
+        aspectRatio={4 / 2.5}
+        caption="It's Alive!!!"
+        hideImageOnMobile={true}
+      >
+        <ProseBlock>
+          Every couple of years in React, I look at my code and see a{' '}
+          <b>monster</b>
+        </ProseBlock>
+
+        <ProseBlock>
+          Recently, I gave one design pattern a name:{' '}
+          <span className="name">The Memo Monster</span>.
+        </ProseBlock>
+
+        <ProseBlock>
+          It crept in bit by bit, like pieces of cadavers stitched together. I
+          thought I was building something amazing, but in the end, I sadly
+          admit, I created yet another monster.
+        </ProseBlock>
+
+        <ProseBlock>
+          I'm not the only one. Enough React developers have been trampled by a
+          common memoization pattern that, in the words of Dominik, the current
+          maintainer of TanStack Query and Router, states:
+        </ProseBlock>
+      </BlogSection>
+
+      <QuoteBlock>
+        I thought I'd written enough about memoization by now, but I feel there
+        is one pattern I'm seeing a lot lately that makes me think otherwise. So
+        today, I want to look at useCallback, and to some extent useMemo, in
+        situations where I think they are totally pointless.
+      </QuoteBlock>
+      <BlogSection
+        id="memo-monster-example"
+        title="Frankenstein's Memo Monster"
+      >
+        <Stack gap={2}>
+          <ProseBlock>
+            Let's take a closer look at this pattern and see how it can lead to
+            unexpected behavior in our applications. Like Dr. Frankenstein
+            stitching together body parts, we often stitch together hooks
+            thinking we're creating something optimized.
+          </ProseBlock>
+
+          <ProseBlock>
+            Here's a classic example of the{' '}
+            <span className="name">Memo Monster</span>
+            pattern - a component that appears optimized but creates unnecessary
+            complexity:
+          </ProseBlock>
+
+          <CodeBlock
+            language="javascript"
+            code={`// The Frankenstein Memo Monster 🧟‍♂️
+function FrankensteinComponent() {
+  // Body part #1: Memoized object (the torso)
+  const laboratoryEquipment = useMemo(() => ({ 
+    electrodes: 'copper',
+    voltage: '10000V',
+    experiment: 'bring code to life'
+  }), [])
+  
+  // Body part #2: Memoized callback (the arms)
+  const onExperimentComplete = useCallback((result) => {
+    console.log('IT\\'S ALIVE!', result)
+    // More complex logic here...
+  }, [])
+  
+  // Body part #3: Another memoized value (the legs)
+  const monsterStats = useMemo(() => ({
+    strength: 'overwhelming',
+    speed: 'surprisingly fast',
+    intelligence: 'questionable'
+  }), [])
+
+  // The final creation - passing all our "optimized" parts
+  return (
+    <MemoizedMonster 
+      equipment={laboratoryEquipment}
+      onComplete={onExperimentComplete}
+      stats={monsterStats}
+    />
+  )
+}`}
+          />
+
+          <ProseBlock>
+            At first glance, this looks like good React optimization. We're
+            using <code>useMemo</code> and <code>useCallback</code> to ensure
+            stable references for our memoized component. And yes,{' '}
+            <code>MemoizedMonster</code> will skip re-rendering! But here's
+            where the real monster lurks...
+          </ProseBlock>
+
+          <ProseBlock>
+            <b>The Hidden Monster:</b> What happens when a well-meaning
+            developer comes along and adds "just one little prop" from a parent
+            component?
+          </ProseBlock>
+
+          <CodeBlock
+            language="javascript"
+            code={`// Parent component (written by a different developer)
+function LaboratoryPage({ user }) {
+  // Innocent-looking user info (but creates new object every render!)
+  const userInfo = { name: user.name, id: user.id }
+  
+  return <FrankensteinComponent owner={userInfo} />
+}
+
+// Now our "optimized" component becomes a monster
+function FrankensteinComponent({ owner }) {
+  // Body part #1: Now depends on unstable owner object
+  const laboratoryEquipment = useMemo(() => ({ 
+    electrodes: 'copper',
+    voltage: '10000V',
+    experiment: 'bring code to life',
+    owner: owner.name // The value stays the same across renders if the primitive value doesn't change
+  }), [owner.name]) // ✅ Object.is(prevOwnerName, newOwnerName) === true 
+  
+  // Body part #2: Callback that depends on owner
+  const onExperimentComplete = useCallback((result) => {
+    console.log(\`IT'S ALIVE! Created by \${owner.name}\`, result)
+  }, []) // Stale closure! owner is not in dependencies!
+  
+  // Body part #3: Stats with owner context  
+  const monsterStats = useMemo(() => ({
+    strength: 'overwhelming',
+    speed: 'surprisingly fast',
+    intelligence: owner.name === 'Dr. Frankenstein' ? 'enhanced' : 'questionable'
+  }), [owner]) // 💀 Object.is(prevOwner, newOwner) === false every time! 
+
+  // The final creation - mixed results!
+  return (
+    <MemoizedMonster 
+      equipment={laboratoryEquipment}
+      onComplete={onExperimentComplete}
+      stats={monsterStats}
+    />
+  )
+}`}
+          />
+
+          <ProseBlock>
+            <b>The Monster's True Face:</b> Here's where it gets interesting -
+            notice how the first hook uses <code>owner.name</code> in its
+            dependency array, while the third hook uses <code>owner</code>. The
+            first hook will actually work correctly because{' '}
+            <code>owner.name</code> is a primitive that doesn't change! But the
+            third hook fails because it depends on the entire <code>owner</code>{' '}
+            object reference.
+          </ProseBlock>
+
+          <ProseBlock>
+            This is the <span className="name">Real Memo Monster</span> - a mix
+            of working and broken optimizations in the same component. Some
+            hooks work, others don't, creating inconsistent behavior that's hard
+            to debug and reason about.
+          </ProseBlock>
+
+          <CodeBlock
+            language="javascript"
+            code={`// The cascade of mixed results:
+// 1. LaboratoryPage re-renders (userInfo = new object reference)
+// 2. FrankensteinComponent receives new owner object  
+// 3. First hook: owner.name is stable (primitive) - works correctly!
+// 4. Second hook: no dependencies - works correctly!
+// 5. Third hook: owner object reference changes - fails and re-computes!
+// 6. MemoizedMonster receives mix of stable and unstable props
+// 7. Some optimizations work, others don't - inconsistent behavior!
+
+// The simple fix that breaks our "optimization":
+function LaboratoryPage({ user }) {
+  const ownerName = user.name // Primitive value - stable reference!
+  return <FrankensteinComponent ownerName={ownerName} />
+}
+
+// Or even better - the simple version fails gracefully:
+function SimpleComponent({ ownerName }) {
+  const equipment = { 
+    electrodes: 'copper',
+    voltage: '10000V', 
+    experiment: 'bring code to life',
+    owner: ownerName // Same "instability", same result
+  }
+  
+  const onComplete = (result) => {
+    console.log(\`IT'S ALIVE! Created by \${ownerName}\`, result)
+  }
+  
+  const stats = {
+    strength: 'overwhelming',
+    speed: 'surprisingly fast', 
+    intelligence: ownerName === 'Dr. Frankenstein' ? 'enhanced' : 'questionable'
+  }
+
+  return (
+    <Monster 
+      equipment={equipment}
+      onComplete={onComplete}
+      stats={stats}
+    />
+  )
+}
+// Same performance, but no illusion of optimization! 
+// We're not even memoizing the monster because it's not needed!`}
+          />
+
+          <ProseBlock>
+            The monster isn't the memoization itself - it's the{' '}
+            <b>illusion of optimization</b> that crumbles when reality hits.
+            We've created a house of cards that looks sturdy until someone
+            sneezes (adds an unstable prop) and the whole thing collapses!
+          </ProseBlock>
+        </Stack>
+      </BlogSection>
+      <BlogSection id="conclusion" title="Conclusion">
+        <Stack gap={2}>
+          <ProseBlock>
+            The Memo Monster is a cautionary tale of how well-intentioned
+            optimizations can lead to unexpected complexity. Instead of creating
+            a monster, let's focus on writing clear, maintainable code that
+            doesn't rely on unnecessary memoization.
+          </ProseBlock>
+
+          <ProseBlock>
+            Remember, sometimes the simplest solution is the best one. Don't let
+            the illusion of optimization create a monster in your codebase!
+          </ProseBlock>
+
+          <ReferenceLink
+            url="https://tkdodo.eu/blog/the-useless-use-callback"
+            linkText="The Useless useCallback"
+            text="A great article by Dominik Homberger that explains the useless useCallback pattern in detail."
+          />
+          <ReferenceLink
+            url="https://github.com/jwrigh26/react-useless-usecallback"
+            linkText="react-useless-usecallback"
+            text="A simple React quiz app that demonstrates the useless useCallback pattern."
+          />
+        </Stack>
+      </BlogSection>
+    </BlogLayout>
+  );
+}

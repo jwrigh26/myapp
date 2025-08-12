@@ -129,6 +129,7 @@ interface CallToActionProps {
   onClick?: () => void;
   imageSrc?: string;
   sources?: SourceProps[];
+  mobileImageSources?: SourceProps[]; // New prop for mobile image sources
   imageAlt?: string;
   imagePosition?: PositionProps;
   imageRatio?: number;
@@ -142,6 +143,7 @@ export default function CallToAction({
   buttonText,
   onClick,
   imageSrc,
+  mobileImageSources,
   sources,
   imageAlt = 'Featured image',
   imageRatio = 16 / 9,
@@ -159,10 +161,11 @@ export default function CallToAction({
   const formattedDate = formatDisplayDate(date);
 
   // Determine the image configuration
-  // Priority: sources (if provided) > imageSrc (fallback)
-  const hasImage = !!(sources?.length || imageSrc);
-  const defaultImageSrc = imageSrc || '';
+  // Priority: sources (if provided) > mobileImageSources (on mobile) > imageSrc (fallback)
+  const hasImage = !!(sources?.length || imageSrc || mobileImageSources);
+  const defaultImageSrc = (imageSrc || '');
   const imageSources = sources?.length ? sources : undefined;
+
 
   return (
     <>
@@ -171,7 +174,7 @@ export default function CallToAction({
         <MobileBannerContainer className="full-width">
           <AspectRatioContainer ratio={imageRatio}>
             <Image
-              sources={imageSources}
+              sources={mobileImageSources || sources}
               defaultSrc={defaultImageSrc}
               alt={imageAlt}
               objectFit="cover"

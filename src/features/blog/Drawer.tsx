@@ -1,7 +1,7 @@
 import { MiniVariantDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer, useToggle } from '@/hooks/useContext';
-import { mdiAccountGroup, mdiChevronRight, mdiPencilRuler } from '@mdi/js';
+import { mdiAccountGroup, mdiChevronRight, mdiReact, mdiPencilRuler } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -18,7 +18,7 @@ import type { MUILinkProps } from './types';
 const blogPaths = {
   frontendDesign: '/blog/posts/frontend-design',
   softSkills: '/blog/posts/soft-skills',
-  // reactPatterns: '/blog/posts/react-patterns',
+  react: '/blog/posts/react',
 };
 
 export function BlogDrawer() {
@@ -41,11 +41,11 @@ export function BlogDrawer() {
   const fontendDesignRoutes = filterRoutes(router, blogPaths.frontendDesign);
   const softSkillsRoutes = filterRoutes(router, blogPaths.softSkills);
 
-  // const isReactPatternsRoute = !!matchRoute({
-  //   to: blogPaths.reactPatterns,
-  //   fuzzy: true,
-  // });
-  // const reactPatternsRoutes = filterRoutes(router, blogPaths.reactPatterns);
+  const isReactRoute = !!matchRoute({
+    to: blogPaths.react,
+    fuzzy: true,
+  });
+  const reactRoutes = filterRoutes(router, blogPaths.react);
 
   return (
     <MiniVariantDrawer width={256} drawerKey="blog-drawer">
@@ -58,6 +58,14 @@ export function BlogDrawer() {
       />
 
       <PostCategory
+        title="React"
+        icon={mdiReact}
+        isActive={isReactRoute}
+        routes={reactRoutes}
+        categoryPath={blogPaths.react + '/'}
+      />
+
+      <PostCategory
         title="Soft Skills"
         icon={mdiAccountGroup}
         isActive={isSoftSkillsRoute}
@@ -65,13 +73,6 @@ export function BlogDrawer() {
         categoryPath={blogPaths.softSkills + '/'}
       />
 
-      {/* <PostCategory
-        title="React Patterns"
-        icon={mdiReact}
-        isActive={isReactPatternsRoute}
-        routes={reactPatternsRoutes}
-        categoryPath={blogPaths.reactPatterns + '/'}
-      /> */}
     </MiniVariantDrawer>
   );
 }

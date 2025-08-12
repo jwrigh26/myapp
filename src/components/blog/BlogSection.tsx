@@ -3,7 +3,29 @@ import { ResponsiveContentImageGrid } from '@/components/Image';
 import type { ProseBlockProps } from '@/components/ProseBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { SectionSpacer } from '@/components/Spacer';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import React from 'react';
+
+const ConditionalImageWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'hideImageOnMobile',
+})<{ hideImageOnMobile?: boolean }>(({ theme, hideImageOnMobile }) => ({
+  ...(hideImageOnMobile && {
+    // Hide the image container on mobile
+    '& > div:first-of-type > div:last-child': {
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'block',
+      },
+    },
+    // Adjust grid layout on mobile when image is hidden
+    '& > div:first-of-type': {
+      [theme.breakpoints.down('md')]: {
+        gridTemplateColumns: '1fr !important',
+      },
+    },
+  }),
+}));
 
 interface BlogSectionProps {
   /** Unique ID for the section anchor */
@@ -26,6 +48,8 @@ interface BlogSectionProps {
   caption?: string;
   /** Whether to show mobile image first */
   mobileImageFirst?: boolean;
+  /** Whether to hide image on mobile devices */
+  hideImageOnMobile?: boolean;
   /** Custom grid columns (e.g., "2fr 1fr", "1fr 2fr") */
   columns?: string;
   /** Object fit for images */
@@ -54,6 +78,7 @@ const BlogSection = React.memo(
     aspectRatio = 4 / 3,
     caption,
     mobileImageFirst,
+    hideImageOnMobile = false,
     columns,
     objectFit,
     children,
@@ -72,28 +97,30 @@ const BlogSection = React.memo(
 
         {/* Content with image */}
         {hasImage ? (
-          <ResponsiveContentImageGrid
-            imageSrc={defaultImageSrc}
-            sources={imageSources}
-            imageAlt={imageAlt || title || 'Section image'}
-            imageOnRight={imageOnRight}
-            gap={2}
-            aspectRatio={aspectRatio}
-            caption={caption}
-            mobileImageFirst={mobileImageFirst}
-            columns={columns}
-            objectFit={objectFit}
-          >
-            {/* Title inside image grid */}
-            {title && (
-              <ProseBlock
-                title={title}
-                subtitle={subtitle}
-                options={titleOptions}
-              />
-            )}
-            {children}
-          </ResponsiveContentImageGrid>
+          <ConditionalImageWrapper hideImageOnMobile={hideImageOnMobile}>
+            <ResponsiveContentImageGrid
+              imageSrc={defaultImageSrc}
+              sources={imageSources}
+              imageAlt={imageAlt || title || 'Section image'}
+              imageOnRight={imageOnRight}
+              gap={2}
+              aspectRatio={aspectRatio}
+              caption={caption}
+              mobileImageFirst={mobileImageFirst}
+              columns={columns}
+              objectFit={objectFit}
+            >
+              {/* Title inside image grid */}
+              {title && (
+                <ProseBlock
+                  title={title}
+                  subtitle={subtitle}
+                  options={titleOptions}
+                />
+              )}
+              {children}
+            </ResponsiveContentImageGrid>
+          </ConditionalImageWrapper>
         ) : title || typeof children === 'string' ? (
           <ProseBlock
             title={title}
@@ -122,6 +149,7 @@ const BlogSection = React.memo(
       prevProps.aspectRatio === nextProps.aspectRatio &&
       prevProps.caption === nextProps.caption &&
       prevProps.mobileImageFirst === nextProps.mobileImageFirst &&
+      prevProps.hideImageOnMobile === nextProps.hideImageOnMobile &&
       prevProps.columns === nextProps.columns &&
       prevProps.objectFit === nextProps.objectFit &&
       prevProps.spacingBottom === nextProps.spacingBottom &&

@@ -4,7 +4,7 @@ import {
   type NavCategory,
   type NavItem,
 } from '@/types/navigation';
-import { mdiAccountGroup, mdiBookOpen, mdiHome, mdiPencilRuler } from '@mdi/js';
+import { mdiAccountGroup, mdiBookOpen, mdiHome, mdiReact, mdiPencilRuler } from '@mdi/js';
 
 // Main navigation items configuration
 const mainNavItems: NavItem[] = [
@@ -46,17 +46,17 @@ const blogCategories: NavCategory[] = [
     path: '/blog/posts/frontend-design',
   },
   {
+    id: 'react',
+    title: 'React',
+    icon: mdiReact,
+    path: '/blog/posts/react',
+  },
+  {
     id: 'soft-skills',
     title: 'Soft Skills',
     icon: mdiAccountGroup,
     path: '/blog/posts/soft-skills',
   },
-  // {
-  //   id: 'react-patterns',
-  //   title: 'React Patterns',
-  //   icon: mdiReact,
-  //   path: '/blog/posts/react-patterns',
-  // },
 ];
 
 // Complete navigation configuration

@@ -73,6 +73,9 @@ function LearnNamesPost() {
         imageSrc={getDefaultImageSrc(
           '20250701-image-20250723-learnnames-avatar'
         )}
+        mobileImageSources={createImageSources(
+          '20250701-image-20250712-dumbdumber'
+        )}
         date="2025-07-21"
       />
       <TitleBlock>When Harry Forgot Mary</TitleBlock>
@@ -80,9 +83,10 @@ function LearnNamesPost() {
       <BlogSection
         id="introduction"
         imageAlt="Learn Names"
+        hideImageOnMobile={true}
         sources={createImageSources('20250701-image-20250712-dumbdumber')}
         imageSrc={getDefaultImageSrc('20250701-image-20250712-dumbdumber')}
-        apsectRatio={4 / 3.4}
+        aspectRatio={4 / 3}
         caption="Lloyd Christmas and Harry Dunne in Dumb and Dumber"
       >
         <ProseBlock>
