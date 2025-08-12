@@ -96,7 +96,6 @@ function RouteComponent() {
         about the useless useCallback pattern, you can check out Dominik's
         original post on the topic.
       </ProseBlock>
-      j
       <ReferenceLink
         url="https://tkdodo.eu/blog/the-useless-use-callback"
         linkText="The Useless useCallback"
@@ -115,17 +114,16 @@ function RouteComponent() {
           </ProseBlock>
 
           <ProseBlock>
-            Here's a classic example of the{' '}
-            <span className="name">Memo Monster</span>
-            pattern - a component that appears optimized but creates unnecessary
-            complexity:
+            Here's a classic example of{' '}
+            <span className="name">The Memo Monster</span> pattern - a component
+            that appears optimized but creates unnecessary complexity:
           </ProseBlock>
 
           <CodeBlock
             language="javascript"
             code={`// The Frankenstein Memo Monster 🧟‍♂️
 function FrankensteinComponent() {
-  // Body part #1: Memoized object (the torso)
+  // Body part #1: Memoized object (the brain)
   const laboratoryEquipment = useMemo(() => ({ 
     electrodes: 'copper',
     voltage: '10000V',
@@ -158,10 +156,11 @@ function FrankensteinComponent() {
 
           <ProseBlock>
             At first glance, this looks like good React optimization. We're
-            using <code>useMemo</code> and <code>useCallback</code> to ensure
-            stable references for our memoized component. And yes,{' '}
-            <code>MemoizedMonster</code> will skip re-rendering! But here's
-            where the real monster lurks...
+            using <span className="code">useMemo</span> and{' '}
+            <span className="code">useCallback</span> to ensure stable
+            references for our memoized component. And yes,{' '}
+            <span className="code">MemoizedMonster</span> will skip
+            re-rendering! But here's where the real monster lurks...
           </ProseBlock>
 
           <ProseBlock>
@@ -214,18 +213,19 @@ function FrankensteinComponent({ owner }) {
           />
 
           <ProseBlock>
-            <b>The Monster's True Face:</b> Here's where it gets interesting -
-            notice how the first hook uses <code>owner.name</code> in its
-            dependency array, while the third hook uses <code>owner</code>. The
+            <span className="name-alt">The Monster's True Face:</span> Here's
+            where it gets interesting. Notice how the first hook uses{' '}
+            <span className="code">owner.name</span> in its dependency array,
+            while the third hook uses <span className="code">owner</span>. The
             first hook will actually work correctly because{' '}
-            <code>owner.name</code> is a primitive that doesn't change! But the
-            third hook fails because it depends on the entire <code>owner</code>{' '}
-            object reference.
+            <span className="code">owner.name</span> is a primitive that doesn't
+            change. But the third hook fails because it depends on the entire{' '}
+            <span className="code">owner</span> object reference.
           </ProseBlock>
 
           <ProseBlock>
-            This is the <span className="name">Real Memo Monster</span> - a mix
-            of working and broken optimizations in the same component. Some
+            This is the <span className="name">Real Memo Monster</span>! It's a
+            mix of working and broken optimizations in the same component. Some
             hooks work, others don't, creating inconsistent behavior that's hard
             to debug and reason about.
           </ProseBlock>
@@ -279,25 +279,25 @@ function SimpleComponent({ ownerName }) {
           />
 
           <ProseBlock>
-            The monster isn't the memoization itself - it's the{' '}
-            <b>illusion of optimization</b> that crumbles when reality hits.
-            We've created a house of cards that looks sturdy until someone
-            sneezes (adds an unstable prop) and the whole thing collapses!
+            The monster or problem isn't the memoization itself. Nope, it's the{' '}
+            <b>illusion of optimization</b> hiden behind the green fleshy beast
+            of our codebase that is the truly scary ghoul.
           </ProseBlock>
         </Stack>
       </BlogSection>
       <BlogSection id="conclusion" title="Conclusion">
         <Stack gap={2}>
           <ProseBlock>
-            The Memo Monster is a cautionary tale of how well-intentioned
-            optimizations can lead to unexpected complexity. 
+            <span className="name">The Memo Monster</span> is a cautionary tale
+            of how well-intentioned optimizations can lead to unexpected
+            complexity. Remember, sometimes the simplest solution is the best
+            one. Don't let the illusion of optimization create a <b>monster</b>{' '}
+            in your codebase!
           </ProseBlock>
-
-          <ProseBlock>
-            Remember, sometimes the simplest solution is the best one. Don't let
-            the illusion of optimization create a monster in your codebase!
-          </ProseBlock>
-
+        </Stack>
+      </BlogSection>
+      <BlogSection id="refences" title="References">
+        <Stack gap={2}>
           <ReferenceLink
             url="https://tkdodo.eu/blog/the-useless-use-callback"
             linkText="The Useless useCallback"
