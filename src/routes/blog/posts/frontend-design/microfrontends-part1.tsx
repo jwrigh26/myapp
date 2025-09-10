@@ -25,7 +25,8 @@ export const Route = createFileRoute(
   component: RouteComponent,
   head: () => ({
     staticData: {
-      title: 'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
+      title:
+        'Micro-Frontends Part 1: How We Built a Modular Front-End that Scales',
       description:
         'Discover how we built a scalable modular front-end using iframes, tackled inter-module communication, and managed version drift. Learn from our journey building HR software for small businesses.',
       imageKey: '20250601-image-slide0',

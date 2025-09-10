@@ -1,20 +1,20 @@
 /* Set MUI primary color CSS variables for glowing border effect */
 :root {
-  --mui-primary-main: #5567C8;
-  --mui-primary-light: #7F8DF1;
-  --mui-primary-dark: #3A4490;
-  --mui-primary-superLight: #B8C3F7;
+  --mui-primary-main: #5567c8;
+  --mui-primary-light: #7f8df1;
+  --mui-primary-dark: #3a4490;
+  --mui-primary-superLight: #b8c3f7;
 }
 
 /* Light mode - use darker colors for better contrast */
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --glow-border-color: var(--mui-primary-dark);
   --glow-shadow-color: var(--mui-primary-dark);
   --glow-hover-color: var(--mui-primary-main);
 }
 
 /* Dark mode - use lighter colors */
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --glow-border-color: var(--mui-primary-main);
   --glow-shadow-color: var(--mui-primary-main);
   --glow-hover-color: var(--mui-primary-light);
@@ -22,32 +22,35 @@
 
 .glowing-border {
   border: 2px solid var(--glow-border-color, var(--mui-primary-main, #646cff));
-  box-shadow: 
+  box-shadow:
     0 0 0 2px var(--glow-shadow-color, var(--mui-primary-main, #646cff33)),
     0 4px 20px var(--glow-shadow-color, var(--mui-primary-main, #646cff66)),
     0 8px 32px var(--glow-shadow-color, var(--mui-primary-main, #646cff33));
   border-radius: 8px;
   background: inherit;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s ease;
 }
 /* Light mode - stronger hover for visibility */
-:root[data-theme="light"] .glowing-border:hover,
-:root[data-theme="light"] .glowing-border:focus {
+:root[data-theme='light'] .glowing-border:hover,
+:root[data-theme='light'] .glowing-border:focus {
   transform: translateY(-1px);
-  box-shadow: 
-    0 0 0 3px var(--glow-hover-color, var(--mui-primary-main, #5567C8))66,
-    0 8px 32px var(--glow-hover-color, var(--mui-primary-main, #5567C8))77,
-    0 16px 48px var(--glow-hover-color, var(--mui-primary-main, #5567C8))44;
-  border-color: var(--glow-hover-color, var(--mui-primary-main, #5567C8));
+  box-shadow:
+    0 0 0 3px var(--glow-hover-color, var(--mui-primary-main, #5567c8)) 66,
+    0 8px 32px var(--glow-hover-color, var(--mui-primary-main, #5567c8)) 77,
+    0 16px 48px var(--glow-hover-color, var(--mui-primary-main, #5567c8)) 44;
+  border-color: var(--glow-hover-color, var(--mui-primary-main, #5567c8));
 }
 
 /* Dark mode - subtle hover */
-:root[data-theme="dark"] .glowing-border:hover,
-:root[data-theme="dark"] .glowing-border:focus {
+:root[data-theme='dark'] .glowing-border:hover,
+:root[data-theme='dark'] .glowing-border:focus {
   transform: translateY(-1px);
-  box-shadow: 
-    0 0 0 2px var(--glow-hover-color, var(--mui-primary-light, #7F8DF1))55,
-    0 6px 28px var(--glow-hover-color, var(--mui-primary-light, #7F8DF1))66,
-    0 12px 40px var(--glow-hover-color, var(--mui-primary-light, #7F8DF1))38;
-  border-color: var(--glow-hover-color, var(--mui-primary-light, #7F8DF1));
+  box-shadow:
+    0 0 0 2px var(--glow-hover-color, var(--mui-primary-light, #7f8df1)) 55,
+    0 6px 28px var(--glow-hover-color, var(--mui-primary-light, #7f8df1)) 66,
+    0 12px 40px var(--glow-hover-color, var(--mui-primary-light, #7f8df1)) 38;
+  border-color: var(--glow-hover-color, var(--mui-primary-light, #7f8df1));
 }

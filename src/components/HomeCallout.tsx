@@ -36,7 +36,8 @@ interface HomeImageContainerProps {
 }
 
 const HomeImageContainer = styled(Box, {
-  shouldForwardProp: (prop) => !['fixedHeight', 'glow'].includes(prop as string),
+  shouldForwardProp: (prop) =>
+    !['fixedHeight', 'glow'].includes(prop as string),
 })<HomeImageContainerProps>(({ theme, fixedHeight = '280px', glow }) => ({
   position: 'relative',
   width: '100%',
@@ -51,31 +52,36 @@ const HomeImageContainer = styled(Box, {
           0 4px 16px ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}55,
           0 6px 24px ${theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.primary.main}22
         `,
-        transition: 'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
+        transition:
+          'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
         '&:hover, &:focus-within': {
           transform: 'translateY(-1px)',
-          boxShadow: theme.palette.mode === 'light'
-            ? `
+          boxShadow:
+            theme.palette.mode === 'light'
+              ? `
               0 0 0 3px ${theme.palette.primary.main}66,
               0 8px 32px ${theme.palette.primary.main}77,
               0 16px 48px ${theme.palette.primary.main}44
             `
-            : `
+              : `
               0 0 0 2px ${theme.palette.primary.light}55,
               0 6px 28px ${theme.palette.primary.light}66,
               0 12px 40px ${theme.palette.primary.light}38
             `,
-          borderColor: theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.primary.light,
+          borderColor:
+            theme.palette.mode === 'light'
+              ? theme.palette.primary.main
+              : theme.palette.primary.light,
         },
       }
     : theme.palette.mode === 'light'
-    ? {
-        boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
-        border: `2px solid ${theme.palette.grey[400]}`,
-      }
-    : {
-        border: `4px solid ${theme.palette.grey[700]}`,
-      }),
+      ? {
+          boxShadow: '0 3px 8px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12)',
+          border: `2px solid ${theme.palette.grey[400]}`,
+        }
+      : {
+          border: `4px solid ${theme.palette.grey[700]}`,
+        }),
 
   '& > *': {
     position: 'absolute',

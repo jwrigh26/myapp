@@ -1,7 +1,12 @@
 import { MiniVariantDrawer } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer, useToggle } from '@/hooks/useContext';
-import { mdiAccountGroup, mdiChevronRight, mdiReact, mdiPencilRuler } from '@mdi/js';
+import {
+  mdiAccountGroup,
+  mdiChevronRight,
+  mdiReact,
+  mdiPencilRuler,
+} from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -72,7 +77,6 @@ export function BlogDrawer() {
         routes={softSkillsRoutes}
         categoryPath={blogPaths.softSkills + '/'}
       />
-
     </MiniVariantDrawer>
   );
 }

@@ -13,9 +13,15 @@ export const BlogPostCard = styled(Card, {
 })<BlogPostCardProps>(({ theme, glow }) => {
   const isLight = theme.palette.mode === 'light';
   if (glow) {
-    const borderColor = isLight ? theme.palette.primary.dark : theme.palette.primary.main;
-    const glowColor = isLight ? theme.palette.primary.dark : theme.palette.primary.main;
-    const hoverGlow = isLight ? theme.palette.primary.main : theme.palette.primary.light;
+    const borderColor = isLight
+      ? theme.palette.primary.dark
+      : theme.palette.primary.main;
+    const glowColor = isLight
+      ? theme.palette.primary.dark
+      : theme.palette.primary.main;
+    const hoverGlow = isLight
+      ? theme.palette.primary.main
+      : theme.palette.primary.light;
     return {
       border: `2px solid ${borderColor}`,
       borderRadius: '8px',
@@ -24,10 +30,11 @@ export const BlogPostCard = styled(Card, {
         0 4px 16px ${glowColor}55,
         0 6px 24px ${glowColor}22
       `,
-      transition: 'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
+      transition:
+        'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
       '&:hover, &:focus-within': {
         transform: 'translateY(-1px)',
-        boxShadow: isLight 
+        boxShadow: isLight
           ? `
             0 0 0 3px ${hoverGlow}66,
             0 8px 32px ${hoverGlow}77,

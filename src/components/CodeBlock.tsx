@@ -34,19 +34,20 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
   const prismTheme = isDarkMode ? themes.vsDark : themes.vsLight;
-  
+
   // Responsive breakpoints
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   // State for collapsible functionality
   const codeLines = code.split('\n');
-  const shouldCollapse = collapsible && isMobile && codeLines.length > maxLinesBeforeCollapse;
+  const shouldCollapse =
+    collapsible && isMobile && codeLines.length > maxLinesBeforeCollapse;
   const [isExpanded, setIsExpanded] = useState(!shouldCollapse);
-  
+
   // Copy functionality
   const [copySuccess, setCopySuccess] = useState(false);
-  
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(code);
@@ -60,23 +61,32 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const getFontSize = () => {
     if (isMobile) {
       switch (size) {
-        case CodeBlockSize.SMALL: return '0.75rem';
-        case CodeBlockSize.LARGE: return '0.9rem';
-        default: return '0.8rem';
+        case CodeBlockSize.SMALL:
+          return '0.75rem';
+        case CodeBlockSize.LARGE:
+          return '0.9rem';
+        default:
+          return '0.8rem';
       }
     }
     if (isTablet) {
       switch (size) {
-        case CodeBlockSize.SMALL: return '0.8rem';
-        case CodeBlockSize.LARGE: return '1rem';
-        default: return '0.9rem';
+        case CodeBlockSize.SMALL:
+          return '0.8rem';
+        case CodeBlockSize.LARGE:
+          return '1rem';
+        default:
+          return '0.9rem';
       }
     }
     // Desktop
     switch (size) {
-      case CodeBlockSize.SMALL: return theme.typography.body2.fontSize;
-      case CodeBlockSize.LARGE: return theme.typography.h5.fontSize;
-      default: return theme.typography.body1.fontSize;
+      case CodeBlockSize.SMALL:
+        return theme.typography.body2.fontSize;
+      case CodeBlockSize.LARGE:
+        return theme.typography.h5.fontSize;
+      default:
+        return theme.typography.body1.fontSize;
     }
   };
 
@@ -117,9 +127,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     backgroundAttachment: 'local, local, scroll, scroll',
   };
 
-  const displayCode = shouldCollapse && !isExpanded 
-    ? codeLines.slice(0, maxLinesBeforeCollapse).join('\n') + '\n// ... more code'
-    : code;
+  const displayCode =
+    shouldCollapse && !isExpanded
+      ? codeLines.slice(0, maxLinesBeforeCollapse).join('\n') +
+        '\n// ... more code'
+      : code;
 
   const containerStyles = {
     position: 'relative' as const,
@@ -168,7 +180,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           </pre>
         )}
       </Highlight>
-      
+
       {/* Copy Button */}
       {showCopyButton && (
         <Tooltip title={copySuccess ? 'Copied!' : 'Copy code'}>
@@ -183,7 +195,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           </Button>
         </Tooltip>
       )}
-      
+
       {/* Expand/Collapse Button */}
       {shouldCollapse && (
         <Box sx={{ textAlign: 'center', mt: 1 }}>
@@ -194,7 +206,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             sx={{
               fontSize: '0.75rem',
               padding: theme.spacing(0.5, 1),
-              borderColor: isDarkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+              borderColor: isDarkMode
+                ? 'rgba(255,255,255,0.3)'
+                : 'rgba(0,0,0,0.3)',
               color: isDarkMode ? '#fff' : '#000',
             }}
           >

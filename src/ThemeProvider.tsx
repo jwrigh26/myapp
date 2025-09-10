@@ -47,9 +47,11 @@ declare module '@mui/material/styles/createPalette' {
 declare module '@mui/material/styles/createTypography' {
   interface TypographyOptions {
     fontWeightSemiBold: number;
+    comic?: React.CSSProperties;
   }
   interface Typography {
     fontWeightSemiBold: number;
+    comic: React.CSSProperties;
   }
 }
 
@@ -124,6 +126,14 @@ const TYPOGRAPHY_CONFIG = {
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,
   fontWeightBold: 700,
+  // Add comic typography variant
+  comic: {
+    fontFamily: '"Happy Monkey", system-ui, sans-serif',
+    fontWeight: 400,
+    fontSize: '0.875rem',
+    lineHeight: 1.25,
+    letterSpacing: '0.005em',
+  },
   h1: {
     fontWeight: 700,
     fontSize: '2.75rem',

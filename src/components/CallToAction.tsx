@@ -163,9 +163,8 @@ export default function CallToAction({
   // Determine the image configuration
   // Priority: sources (if provided) > mobileImageSources (on mobile) > imageSrc (fallback)
   const hasImage = !!(sources?.length || imageSrc || mobileImageSources);
-  const defaultImageSrc = (imageSrc || '');
+  const defaultImageSrc = imageSrc || '';
   const imageSources = sources?.length ? sources : undefined;
-
 
   return (
     <>

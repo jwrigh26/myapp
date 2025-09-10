@@ -4,7 +4,14 @@ import {
   type NavCategory,
   type NavItem,
 } from '@/types/navigation';
-import { mdiAccountGroup, mdiBookOpen, mdiHome, mdiReact, mdiPencilRuler } from '@mdi/js';
+import {
+  mdiAccountGroup,
+  mdiBookOpen,
+  mdiHome,
+  mdiReact,
+  mdiPencilRuler,
+  mdiInformation,
+} from '@mdi/js';
 
 // Main navigation items configuration
 const mainNavItems: NavItem[] = [
@@ -15,12 +22,12 @@ const mainNavItems: NavItem[] = [
     icon: mdiHome,
   },
   // Commented out items from original code
-  // {
-  //   id: 'about',
-  //   title: 'About',
-  //   path: '/about',
-  //   icon: mdiInformation
-  // },
+  {
+    id: 'about',
+    title: 'About',
+    path: '/about',
+    icon: mdiInformation,
+  },
   {
     id: 'blog',
     title: 'Blog',

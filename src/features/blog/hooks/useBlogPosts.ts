@@ -35,7 +35,13 @@ function generateBlogPostsFromRoutes(): BlogPostSummary[] {
     if (node.options?.head) {
       const { staticData } = node.options.head() ?? {};
       if (staticData) {
-        const { title, description: blurb, publishedDate: date, imageKey, route } = staticData;
+        const {
+          title,
+          description: blurb,
+          publishedDate: date,
+          imageKey,
+          route,
+        } = staticData;
         blogPosts.push({
           title,
           blurb,
