@@ -1,7 +1,7 @@
 import { createImageSources, getDefaultImageSrc } from '@/utils/images';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme, Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
 import Image, { AspectRatioContainer } from '../Image';
@@ -126,8 +126,8 @@ const ComicStrip = React.memo(
     className,
   }: LegacyComicStripProps) => {
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-    const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+    const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('md', 'lg'));
 
     // Determine grid class based on screen size
     const getGridClass = () => {

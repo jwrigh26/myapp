@@ -8,7 +8,7 @@ import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -151,7 +151,7 @@ export default function CallToAction({
   date = '01-26-1982', // Default date string
 }: CallToActionProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   // Get drawer state to determine width
   const { isOpen: isDrawerOpen } = useDrawer('blog-drawer');

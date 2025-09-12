@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme, Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -36,8 +36,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const prismTheme = isDarkMode ? themes.vsDark : themes.vsLight;
 
   // Responsive breakpoints
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'md'));
 
   // State for collapsible functionality
   const codeLines = code.split('\n');

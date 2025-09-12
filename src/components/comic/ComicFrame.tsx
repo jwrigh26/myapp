@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from '../Image';
@@ -117,11 +117,10 @@ const DEFAULT_SCALE: Required<ScaleMap> = {
 };
 
 function useActiveBreakpointKey() {
-  const theme = useTheme();
-  const isXl = useMediaQuery(theme.breakpoints.up('xl'));
-  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
-  const isMd = useMediaQuery(theme.breakpoints.up('md'));
-  const isSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const isXl = useMediaQuery((theme: Theme) => theme.breakpoints.up('xl'));
+  const isLg = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
+  const isMd = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
+  const isSm = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
   if (isXl) return 'xl' as const;
   if (isLg) return 'lg' as const;
   if (isMd) return 'md' as const;

@@ -1,7 +1,7 @@
 import { isFunction } from '@/utils/safety';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -39,7 +39,7 @@ interface CallToActionProps {
 
 export function Header({ title, buttonText, onClick }: CallToActionProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   return (
     <CallToActionContainer>
       <Typography

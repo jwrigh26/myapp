@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
+import { styled, Theme } from '@mui/system';
 import { ReactNode } from 'react';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -43,7 +43,7 @@ export default function BackdropSection({
   children,
   ...props
 }: BackdropSectionProps) {
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   // const className = isMobile ? 'full-width' : 'breakout';
   const className = 'full-width'; // Default className for full-width sections
 
