@@ -44,7 +44,7 @@ export interface ComicPanelProps {
   gap?: number;
 }
 
-export function ComicBreakoutPanel({ children, columns = '1fr 1fr', gap = 2 }: ComicPanelProps) {
+export function ComicBreakoutPanel({ children, columns = '1fr', gap = 2 }: ComicPanelProps) {
     // Prefer the theme-callback form; it's more performant and avoids
     // reading the theme synchronously from the module scope.
     const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));

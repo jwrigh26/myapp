@@ -25,6 +25,7 @@ interface ResponsiveImageProps
   skeletonProps?: React.ComponentProps<typeof Skeleton>; // Optional Skeleton props
   isLazyLoading?: boolean; // Controls the loading="lazy" attribute
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  objectPosition?: string; // CSS object-position: 'center', 'center bottom', '50% 80%', etc.
 }
 const Image: React.FC<ResponsiveImageProps> = ({
   alt,
@@ -36,6 +37,7 @@ const Image: React.FC<ResponsiveImageProps> = ({
   skeletonProps,
   isLazyLoading = true, // default to lazy loading
   objectFit = 'cover',
+  objectPosition = 'center', // default to center positioning
   ...rest
 }) => {
   const initialIsLoading = !loadedImageCache.has(defaultSrc);
@@ -62,6 +64,7 @@ const Image: React.FC<ResponsiveImageProps> = ({
     width: '100%',
     height: '100%',
     objectFit,
+    objectPosition,
     opacity: isLoading ? 0 : 1,
     transform: isLoading ? 'scale(0.98)' : 'scale(1)',
     transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',

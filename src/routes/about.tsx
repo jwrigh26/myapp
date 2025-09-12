@@ -2,6 +2,9 @@ import { PageLayout } from '@/layout';
 import { generateOpenGraphMeta } from '@/utils/openGraph';
 import { createFileRoute } from '@tanstack/react-router';
 
+// Panels
+import { Panel1 } from '@/features/about';
+
 export const Route = createFileRoute('/about')({
   component: AboutComponent,
   head: () => ({
@@ -20,7 +23,7 @@ export const Route = createFileRoute('/about')({
 function AboutComponent() {
   return (
     <PageLayout>
-      <h1>About Me</h1>
+      <Panel1 />
     </PageLayout>
   );
 }

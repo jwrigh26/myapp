@@ -9,27 +9,52 @@ import Image from '../Image';
 // TODO: Thought needs to draw bubbles
 // Shout needs to be A big circle and normal tail.
 
-const ComicAspectRatioContainer = styled(Box, {
-  shouldForwardProp: (prop) => !['ratio', 'maxWidth'].includes(prop as string),
+const ComicFrameContainer = styled(Box, {
+  shouldForwardProp: (prop) => !['ratio', 'height', 'minHeight', 'maxWidth', 'heightScale'].includes(prop as string),
 })<{
   ratio?: number;
+  height?: string | number;
+  minHeight?: string | number;
   maxWidth?: string | number;
-}>(({ ratio = 16 / 9, maxWidth = '100%' }) => ({
-  position: 'relative',
-  width: '100%',
-  maxWidth,
-  height: 0,
-  paddingBottom: `${(1 / ratio) * 100}%`,
-  borderRadius: '2px',
-  '& > *': {
-    position: 'absolute',
-    top: 0,
-    left: 0,
+  heightScale?: number; // Scale factor for responsive height (1 = 100%, 0.5 = 50%)
+}>(({ ratio = 16 / 9, height, minHeight, maxWidth = '100%', heightScale = 1 }) => {
+  const scaledHeight = height && heightScale !== 1
+    ? typeof height === 'number' 
+      ? Math.round(height * heightScale)
+      : `calc(${height} * ${heightScale})`
+    : height;
+
+  const minHeightValue = minHeight 
+    ? typeof minHeight === 'number' ? `${minHeight}px` : minHeight
+    : undefined;
+
+  return {
+    position: 'relative',
     width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-}));
+    maxWidth,
+    ...(scaledHeight 
+      ? {
+          height: typeof scaledHeight === 'number' ? `${scaledHeight}px` : scaledHeight,
+          minHeight: minHeightValue,
+        }
+      : {
+          height: 0,
+          paddingBottom: `${(1 / ratio) * 100}%`,
+        }
+    ),
+    borderRadius: '2px',
+    // No overflow hidden here - bubbles can extend outside the frame
+    overflow: 'visible',
+    '& > *': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
+  };
+});
 
 export type BubbleRole = 'speech' | 'thought' | 'shout';
 export type BubbleAnchor =
@@ -96,7 +121,10 @@ export interface ComicFrameWithBubblesProps {
   src: string;
   sources?: React.ComponentProps<typeof Image>['sources'];
   aspectRatio?: number;
+  height?: string | number;
+  minHeight?: string | number; // Minimum height to prevent over-scaling (default: 200px)
   objectFit?: React.ComponentProps<typeof Image>['objectFit'];
+  objectPosition?: string; // CSS object-position: 'center', 'center bottom', '50% 80%', etc.
   bubbles: BubbleSpec[];
   className?: string;
 
@@ -137,6 +165,13 @@ function useScalePercent(
   const fromGlobal = globalScale?.[bp];
   const fromDefault = DEFAULT_SCALE[bp];
   return (fromBubble ?? fromGlobal ?? fromDefault) || 100;
+}
+
+function useHeightScale(globalScale?: ScaleMap): number {
+  const bp = useActiveBreakpointKey();
+  const fromGlobal = globalScale?.[bp];
+  const fromDefault = DEFAULT_SCALE[bp];
+  return ((fromGlobal ?? fromDefault) || 100) / 100;
 }
 
 // NEW: resolve position for current breakpoint (fall back to base x/y)
@@ -303,22 +338,35 @@ export default function ComicFrameWithBubbles({
   src,
   sources,
   aspectRatio = 4 / 3,
+  height,
+  minHeight = 200, // Default minimum height of 200px
   objectFit = 'cover',
+  objectPosition = 'center',
   bubbles,
   className,
   defaultScaleByBreakpoint,
   defaultPositionByBreakpoint, // NEW
 }: ComicFrameWithBubblesProps) {
   const theme = useTheme();
+  
+  // Calculate responsive height scale (only applies when using fixed height)
+  const heightScale = height ? useHeightScale(defaultScaleByBreakpoint) : 1;
 
   return (
     <FrameRoot className={className}>
-      <ComicAspectRatioContainer ratio={aspectRatio} className="frame">
+      <ComicFrameContainer 
+        ratio={aspectRatio} 
+        height={height}
+        minHeight={minHeight}
+        heightScale={heightScale}
+        className="frame"
+      >
         <Image
           defaultSrc={src}
           sources={sources}
           alt={alt}
           objectFit={objectFit}
+          objectPosition={objectPosition}
         />
         <Overlay>
           {bubbles.map((b) => {
@@ -422,7 +470,7 @@ export default function ComicFrameWithBubbles({
             );
           })}
         </Overlay>
-      </ComicAspectRatioContainer>
+      </ComicFrameContainer>
     </FrameRoot>
   );
 }

@@ -1,6 +1,6 @@
 export { default as ComicFrame } from './ComicFrame';
 export type { BubbleAnchor, BubbleRole, BubbleSpec, ComicFrameWithBubblesProps } from './ComicFrame';
-export { ComicWrapper } from './ComicWrapper';
+export { ComicWrapper, ComicPanel, ComicBreakoutPanel } from './ComicPanel';
 
 
 // Legacy
