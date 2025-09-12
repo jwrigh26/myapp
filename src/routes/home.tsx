@@ -1,7 +1,7 @@
 import BackdropSection from '@/components/BackdropSection';
 import HomeCallout from '@/components/HomeCallout';
 import { LatestBlogDeck } from '@/features/blog';
-import { HomeLayout } from '@/layout';
+import { PageLayout as HomeLayout } from '@/layout';
 import { useBackgroundImageSrc } from '@/utils/images';
 import { generateOpenGraphMeta } from '@/utils/openGraph';
 import Box from '@mui/material/Box';

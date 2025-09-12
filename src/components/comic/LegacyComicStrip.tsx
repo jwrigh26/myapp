@@ -4,15 +4,15 @@ import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
-import Image, { AspectRatioContainer } from './Image';
+import Image, { AspectRatioContainer } from '../Image';
 
-interface ComicFrame {
+interface LegacyComicFrame {
   imageName: string;
   alt: string;
 }
 
-interface ComicStripProps {
-  frames: ComicFrame[];
+interface LegacyComicStripProps {
+  frames: LegacyComicFrame[];
   title?: string; // Optional comic title for accessibility
   aspectRatio?: number; // Default: 4/3, but configurable per comic
   className?: string; // Additional styling if needed
@@ -119,7 +119,12 @@ const ComicTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const ComicStrip = React.memo(
-  ({ frames, title, aspectRatio = 4 / 3, className }: ComicStripProps) => {
+  ({
+    frames,
+    title,
+    aspectRatio = 4 / 3,
+    className,
+  }: LegacyComicStripProps) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
@@ -178,4 +183,7 @@ const ComicStrip = React.memo(
 ComicStrip.displayName = 'ComicStrip';
 
 export default ComicStrip;
-export type { ComicFrame, ComicStripProps };
+export type { LegacyComicFrame, LegacyComicStripProps };
+
+// TODO: Needs to be updated to use ComicFrame and BubbleSpec eventually
+// Used for first comic in learn-names page

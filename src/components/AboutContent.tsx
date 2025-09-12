@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
-import ComicFrame from '@/components/ComicFrame';
+import type { BubbleSpec } from '@/components/comic';
+import { ComicFrame } from '@/components/comic';
 import { createImageSources, getDefaultImageSrc } from '@/utils/images';
-import type { BubbleSpec } from '@/components/ComicFrame';
 
 // Smart grid that adapts columns based on aspect ratio
 const AdaptiveGrid = styled(Box, {
@@ -89,6 +89,30 @@ export default function AboutContent() {
         xs: { x: 64, y: -30 },
       },
       nudgePx: { x: -5 },
+    },
+    {
+      id: 'b3',
+      text: 'BOOM! TypeScript rocks!',
+      x: 15,
+      y: 85,
+      anchor: 'top-left',
+      role: 'shout',
+      maxWidthPx: 200,
+      minWidthPx: 150,
+      // Sharp, aggressive tail for shouting
+      tailPointsPx: {
+        baseLeft: [0, 0],
+        baseRight: [25, 0],
+        tip: [12, 60],
+      },
+      tailOffsetPx: 15,
+      baseOverlapPx: 2,
+      positionByBreakpoint: {
+        lg: { x: 18, y: 82 },
+        md: { x: 20, y: 80 },
+        sm: { x: 15, y: 75 },
+        xs: { x: 10, y: 70 },
+      },
     },
   ];
 

@@ -1,7 +1,7 @@
 import BackdropSection from '@/components/BackdropSection';
 import BlogSection from '@/components/blog/BlogSection';
 import CallToAction from '@/components/CallToAction';
-import ComicStrip from '@/components/ComicStrip';
+import { LegacyComicStrip as ComicStrip } from '@/components/comic';
 import IntroBlock from '@/components/IntroBlock';
 import ProseBlock from '@/components/ProseBlock';
 import QuoteBlock from '@/components/QuoteBlock';

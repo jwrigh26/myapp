@@ -3,7 +3,11 @@ import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Image from './Image';
+import Image from '../Image';
+
+
+// TODO: Thought needs to draw bubbles
+// Shout needs to be A big circle and normal tail.
 
 const ComicAspectRatioContainer = styled(Box, {
   shouldForwardProp: (prop) => !['ratio', 'maxWidth'].includes(prop as string),
