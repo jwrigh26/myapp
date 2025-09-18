@@ -18,6 +18,18 @@ import {
 
 // Module augmentation for custom theme properties
 declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true; // removes the `xs` breakpoint
+    sm: true;
+    tablet: true; // custom breakpoint at 720px
+    md: true;
+    lg: true;
+    xl: true;
+    // Add custom breakpoints
+    mobile: true; // 375px
+    mobileLg: true; // 414px
+  }
+  
   interface Palette {
     custom: {
       neutral: PaletteColor;
@@ -308,6 +320,18 @@ const generateTheme = (mode: PaletteMode): Theme => {
   const colors = COLORS[mode];
 
   const options: ThemeOptions = {
+    breakpoints: {
+      values: {
+        xs: 0,
+        mobile: 375,
+        mobileLg: 414,
+        sm: 600,
+        tablet: 720,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
     mixins: MIXINS,
     shape: { borderRadius: 2 },
     palette: {

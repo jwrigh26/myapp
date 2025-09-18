@@ -1,3 +1,4 @@
+import { BreakpointProvider } from '@/context/BreakpointContext';
 import { ComponentStateProvider } from '@/context/ComponentStateContext';
 import { SnackbarProvider } from '@/context/SnackbarContext';
 import ThemeProvider from '@/ThemeProvider';
@@ -50,11 +51,13 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <SnackbarProvider>
-          <ComponentStateProvider>
-            <RouterProvider router={router} context={{ user: 'Me' }} />
-          </ComponentStateProvider>
-        </SnackbarProvider>
+        <BreakpointProvider>
+          <SnackbarProvider>
+            <ComponentStateProvider>
+              <RouterProvider router={router} context={{ user: 'Me' }} />
+            </ComponentStateProvider>
+          </SnackbarProvider>
+        </BreakpointProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

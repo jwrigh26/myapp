@@ -68,6 +68,7 @@ const Image: React.FC<ResponsiveImageProps> = ({
     opacity: isLoading ? 0 : 1,
     transform: isLoading ? 'scale(0.98)' : 'scale(1)',
     transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
+    borderRadius: '4px', // hardcoded to avoid mui theme dependency
     ...style,
   };
 

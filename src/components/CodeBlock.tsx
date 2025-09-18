@@ -1,5 +1,5 @@
 import { useTheme, Theme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useIsMobile, useIsTablet } from '@/context/BreakpointContext';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -36,8 +36,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const prismTheme = isDarkMode ? themes.vsDark : themes.vsLight;
 
   // Responsive breakpoints
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('sm', 'md'));
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   // State for collapsible functionality
   const codeLines = code.split('\n');

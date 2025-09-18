@@ -7,7 +7,8 @@ import { generateOpenGraphMeta } from '@/utils/openGraph';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { alpha, styled, useMediaQuery, useTheme, Theme } from '@mui/system';
+import { alpha, styled, useTheme, Theme } from '@mui/system';
+import { useIsMobile } from '@/context/BreakpointContext';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/home')({
@@ -31,7 +32,7 @@ function HomeComponent() {
     '20250601-image-home-page-splash'
   );
 
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isMobile = useIsMobile();
 
   return (
     <HomeLayout>
