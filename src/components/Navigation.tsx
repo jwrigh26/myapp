@@ -23,6 +23,7 @@ export default function Navigation({
           <NavButton to="/home">Home</NavButton>
           <NavButton to="/about">About</NavButton>
           <NavButton to="/blog">Blog</NavButton>
+          <NavButton to="/learn">Learn</NavButton>
           {/* <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
           <NavButton to="/learn">Learn</NavButton>
           <NavButton to="/game">Game</NavButton> */}

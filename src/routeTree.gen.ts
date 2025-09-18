@@ -10,20 +10,28 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as HomeImport } from './routes/home';
-import { Route as GameImport } from './routes/game';
-import { Route as AboutImport } from './routes/about';
-import { Route as BlogRouteImport } from './routes/blog/route';
-import { Route as IndexImport } from './routes/index';
-import { Route as BlogIndexImport } from './routes/blog/index';
-import { Route as BlogPostsSoftSkillsIndexImport } from './routes/blog/posts/soft-skills/index';
-import { Route as BlogPostsFrontendDesignIndexImport } from './routes/blog/posts/frontend-design/index';
-import { Route as BlogPostsSoftSkillsLearnNamesImport } from './routes/blog/posts/soft-skills/learn-names';
-import { Route as BlogPostsReactMemoMonsterImport } from './routes/blog/posts/react/memo-monster';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart3Import } from './routes/blog/posts/frontend-design/microfrontends-part3';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart2Import } from './routes/blog/posts/frontend-design/microfrontends-part2';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart1Import } from './routes/blog/posts/frontend-design/microfrontends-part1';
+import { Route as rootRoute } from './routes/__root'
+import { Route as HomeImport } from './routes/home'
+import { Route as GameImport } from './routes/game'
+import { Route as AboutImport } from './routes/about'
+import { Route as LearnRouteImport } from './routes/learn/route'
+import { Route as BlogRouteImport } from './routes/blog/route'
+import { Route as IndexImport } from './routes/index'
+import { Route as LearnIndexImport } from './routes/learn/index'
+import { Route as BlogIndexImport } from './routes/blog/index'
+import { Route as LearnPostsMathIndexImport } from './routes/learn/posts/math/index'
+import { Route as LearnPostsDsaIndexImport } from './routes/learn/posts/dsa/index'
+import { Route as LearnPostsAiIndexImport } from './routes/learn/posts/ai/index'
+import { Route as BlogPostsSoftSkillsIndexImport } from './routes/blog/posts/soft-skills/index'
+import { Route as BlogPostsFrontendDesignIndexImport } from './routes/blog/posts/frontend-design/index'
+import { Route as LearnPostsMathHelloWorldImport } from './routes/learn/posts/math/hello-world'
+import { Route as LearnPostsDsaHelloWorldImport } from './routes/learn/posts/dsa/hello-world'
+import { Route as LearnPostsAiHelloWorldImport } from './routes/learn/posts/ai/hello-world'
+import { Route as BlogPostsSoftSkillsLearnNamesImport } from './routes/blog/posts/soft-skills/learn-names'
+import { Route as BlogPostsReactMemoMonsterImport } from './routes/blog/posts/react/memo-monster'
+import { Route as BlogPostsFrontendDesignMicrofrontendsPart3Import } from './routes/blog/posts/frontend-design/microfrontends-part3'
+import { Route as BlogPostsFrontendDesignMicrofrontendsPart2Import } from './routes/blog/posts/frontend-design/microfrontends-part2'
+import { Route as BlogPostsFrontendDesignMicrofrontendsPart1Import } from './routes/blog/posts/frontend-design/microfrontends-part1'
 
 // Create/Update Routes
 
@@ -31,194 +39,298 @@ const HomeRoute = HomeImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const GameRoute = GameImport.update({
   id: '/game',
   path: '/game',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const LearnRouteRoute = LearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const BlogRouteRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
+
+const LearnIndexRoute = LearnIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
 
 const BlogIndexRoute = BlogIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
+
+const LearnPostsMathIndexRoute = LearnPostsMathIndexImport.update({
+  id: '/posts/math/',
+  path: '/posts/math/',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnPostsDsaIndexRoute = LearnPostsDsaIndexImport.update({
+  id: '/posts/dsa/',
+  path: '/posts/dsa/',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnPostsAiIndexRoute = LearnPostsAiIndexImport.update({
+  id: '/posts/ai/',
+  path: '/posts/ai/',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
 
 const BlogPostsSoftSkillsIndexRoute = BlogPostsSoftSkillsIndexImport.update({
   id: '/posts/soft-skills/',
   path: '/posts/soft-skills/',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
 
 const BlogPostsFrontendDesignIndexRoute =
   BlogPostsFrontendDesignIndexImport.update({
     id: '/posts/frontend-design/',
     path: '/posts/frontend-design/',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
+
+const LearnPostsMathHelloWorldRoute = LearnPostsMathHelloWorldImport.update({
+  id: '/posts/math/hello-world',
+  path: '/posts/math/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnPostsDsaHelloWorldRoute = LearnPostsDsaHelloWorldImport.update({
+  id: '/posts/dsa/hello-world',
+  path: '/posts/dsa/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnPostsAiHelloWorldRoute = LearnPostsAiHelloWorldImport.update({
+  id: '/posts/ai/hello-world',
+  path: '/posts/ai/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
 
 const BlogPostsSoftSkillsLearnNamesRoute =
   BlogPostsSoftSkillsLearnNamesImport.update({
     id: '/posts/soft-skills/learn-names',
     path: '/posts/soft-skills/learn-names',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
 
 const BlogPostsReactMemoMonsterRoute = BlogPostsReactMemoMonsterImport.update({
   id: '/posts/react/memo-monster',
   path: '/posts/react/memo-monster',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
 
 const BlogPostsFrontendDesignMicrofrontendsPart3Route =
   BlogPostsFrontendDesignMicrofrontendsPart3Import.update({
     id: '/posts/frontend-design/microfrontends-part3',
     path: '/posts/frontend-design/microfrontends-part3',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
 
 const BlogPostsFrontendDesignMicrofrontendsPart2Route =
   BlogPostsFrontendDesignMicrofrontendsPart2Import.update({
     id: '/posts/frontend-design/microfrontends-part2',
     path: '/posts/frontend-design/microfrontends-part2',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
 
 const BlogPostsFrontendDesignMicrofrontendsPart1Route =
   BlogPostsFrontendDesignMicrofrontendsPart1Import.update({
     id: '/posts/frontend-design/microfrontends-part1',
     path: '/posts/frontend-design/microfrontends-part1',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/blog': {
-      id: '/blog';
-      path: '/blog';
-      fullPath: '/blog';
-      preLoaderRoute: typeof BlogRouteImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/learn': {
+      id: '/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof LearnRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
-      id: '/about';
-      path: '/about';
-      fullPath: '/about';
-      preLoaderRoute: typeof AboutImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
     '/game': {
-      id: '/game';
-      path: '/game';
-      fullPath: '/game';
-      preLoaderRoute: typeof GameImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameImport
+      parentRoute: typeof rootRoute
+    }
     '/home': {
-      id: '/home';
-      path: '/home';
-      fullPath: '/home';
-      preLoaderRoute: typeof HomeImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/': {
-      id: '/blog/';
-      path: '/';
-      fullPath: '/blog/';
-      preLoaderRoute: typeof BlogIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/learn/': {
+      id: '/learn/'
+      path: '/'
+      fullPath: '/learn/'
+      preLoaderRoute: typeof LearnIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/blog/posts/frontend-design/microfrontends-part1': {
-      id: '/blog/posts/frontend-design/microfrontends-part1';
-      path: '/posts/frontend-design/microfrontends-part1';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part1';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart1Import;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/frontend-design/microfrontends-part1'
+      path: '/posts/frontend-design/microfrontends-part1'
+      fullPath: '/blog/posts/frontend-design/microfrontends-part1'
+      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart1Import
+      parentRoute: typeof BlogRouteImport
+    }
     '/blog/posts/frontend-design/microfrontends-part2': {
-      id: '/blog/posts/frontend-design/microfrontends-part2';
-      path: '/posts/frontend-design/microfrontends-part2';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part2';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart2Import;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/frontend-design/microfrontends-part2'
+      path: '/posts/frontend-design/microfrontends-part2'
+      fullPath: '/blog/posts/frontend-design/microfrontends-part2'
+      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart2Import
+      parentRoute: typeof BlogRouteImport
+    }
     '/blog/posts/frontend-design/microfrontends-part3': {
-      id: '/blog/posts/frontend-design/microfrontends-part3';
-      path: '/posts/frontend-design/microfrontends-part3';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part3';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart3Import;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/frontend-design/microfrontends-part3'
+      path: '/posts/frontend-design/microfrontends-part3'
+      fullPath: '/blog/posts/frontend-design/microfrontends-part3'
+      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart3Import
+      parentRoute: typeof BlogRouteImport
+    }
     '/blog/posts/react/memo-monster': {
-      id: '/blog/posts/react/memo-monster';
-      path: '/posts/react/memo-monster';
-      fullPath: '/blog/posts/react/memo-monster';
-      preLoaderRoute: typeof BlogPostsReactMemoMonsterImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/react/memo-monster'
+      path: '/posts/react/memo-monster'
+      fullPath: '/blog/posts/react/memo-monster'
+      preLoaderRoute: typeof BlogPostsReactMemoMonsterImport
+      parentRoute: typeof BlogRouteImport
+    }
     '/blog/posts/soft-skills/learn-names': {
-      id: '/blog/posts/soft-skills/learn-names';
-      path: '/posts/soft-skills/learn-names';
-      fullPath: '/blog/posts/soft-skills/learn-names';
-      preLoaderRoute: typeof BlogPostsSoftSkillsLearnNamesImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/soft-skills/learn-names'
+      path: '/posts/soft-skills/learn-names'
+      fullPath: '/blog/posts/soft-skills/learn-names'
+      preLoaderRoute: typeof BlogPostsSoftSkillsLearnNamesImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/learn/posts/ai/hello-world': {
+      id: '/learn/posts/ai/hello-world'
+      path: '/posts/ai/hello-world'
+      fullPath: '/learn/posts/ai/hello-world'
+      preLoaderRoute: typeof LearnPostsAiHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/posts/dsa/hello-world': {
+      id: '/learn/posts/dsa/hello-world'
+      path: '/posts/dsa/hello-world'
+      fullPath: '/learn/posts/dsa/hello-world'
+      preLoaderRoute: typeof LearnPostsDsaHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/posts/math/hello-world': {
+      id: '/learn/posts/math/hello-world'
+      path: '/posts/math/hello-world'
+      fullPath: '/learn/posts/math/hello-world'
+      preLoaderRoute: typeof LearnPostsMathHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/blog/posts/frontend-design/': {
-      id: '/blog/posts/frontend-design/';
-      path: '/posts/frontend-design';
-      fullPath: '/blog/posts/frontend-design';
-      preLoaderRoute: typeof BlogPostsFrontendDesignIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/frontend-design/'
+      path: '/posts/frontend-design'
+      fullPath: '/blog/posts/frontend-design'
+      preLoaderRoute: typeof BlogPostsFrontendDesignIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
     '/blog/posts/soft-skills/': {
-      id: '/blog/posts/soft-skills/';
-      path: '/posts/soft-skills';
-      fullPath: '/blog/posts/soft-skills';
-      preLoaderRoute: typeof BlogPostsSoftSkillsIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/posts/soft-skills/'
+      path: '/posts/soft-skills'
+      fullPath: '/blog/posts/soft-skills'
+      preLoaderRoute: typeof BlogPostsSoftSkillsIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/learn/posts/ai/': {
+      id: '/learn/posts/ai/'
+      path: '/posts/ai'
+      fullPath: '/learn/posts/ai'
+      preLoaderRoute: typeof LearnPostsAiIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/posts/dsa/': {
+      id: '/learn/posts/dsa/'
+      path: '/posts/dsa'
+      fullPath: '/learn/posts/dsa'
+      preLoaderRoute: typeof LearnPostsDsaIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/posts/math/': {
+      id: '/learn/posts/math/'
+      path: '/posts/math'
+      fullPath: '/learn/posts/math'
+      preLoaderRoute: typeof LearnPostsMathIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface BlogRouteRouteChildren {
-  BlogIndexRoute: typeof BlogIndexRoute;
-  BlogPostsFrontendDesignMicrofrontendsPart1Route: typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  BlogPostsFrontendDesignMicrofrontendsPart2Route: typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  BlogPostsFrontendDesignMicrofrontendsPart3Route: typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  BlogPostsReactMemoMonsterRoute: typeof BlogPostsReactMemoMonsterRoute;
-  BlogPostsSoftSkillsLearnNamesRoute: typeof BlogPostsSoftSkillsLearnNamesRoute;
-  BlogPostsFrontendDesignIndexRoute: typeof BlogPostsFrontendDesignIndexRoute;
-  BlogPostsSoftSkillsIndexRoute: typeof BlogPostsSoftSkillsIndexRoute;
+  BlogIndexRoute: typeof BlogIndexRoute
+  BlogPostsFrontendDesignMicrofrontendsPart1Route: typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
+  BlogPostsFrontendDesignMicrofrontendsPart2Route: typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
+  BlogPostsFrontendDesignMicrofrontendsPart3Route: typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  BlogPostsReactMemoMonsterRoute: typeof BlogPostsReactMemoMonsterRoute
+  BlogPostsSoftSkillsLearnNamesRoute: typeof BlogPostsSoftSkillsLearnNamesRoute
+  BlogPostsFrontendDesignIndexRoute: typeof BlogPostsFrontendDesignIndexRoute
+  BlogPostsSoftSkillsIndexRoute: typeof BlogPostsSoftSkillsIndexRoute
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
@@ -233,127 +345,199 @@ const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogPostsSoftSkillsLearnNamesRoute: BlogPostsSoftSkillsLearnNamesRoute,
   BlogPostsFrontendDesignIndexRoute: BlogPostsFrontendDesignIndexRoute,
   BlogPostsSoftSkillsIndexRoute: BlogPostsSoftSkillsIndexRoute,
-};
+}
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
-  BlogRouteRouteChildren
-);
+  BlogRouteRouteChildren,
+)
+
+interface LearnRouteRouteChildren {
+  LearnIndexRoute: typeof LearnIndexRoute
+  LearnPostsAiHelloWorldRoute: typeof LearnPostsAiHelloWorldRoute
+  LearnPostsDsaHelloWorldRoute: typeof LearnPostsDsaHelloWorldRoute
+  LearnPostsMathHelloWorldRoute: typeof LearnPostsMathHelloWorldRoute
+  LearnPostsAiIndexRoute: typeof LearnPostsAiIndexRoute
+  LearnPostsDsaIndexRoute: typeof LearnPostsDsaIndexRoute
+  LearnPostsMathIndexRoute: typeof LearnPostsMathIndexRoute
+}
+
+const LearnRouteRouteChildren: LearnRouteRouteChildren = {
+  LearnIndexRoute: LearnIndexRoute,
+  LearnPostsAiHelloWorldRoute: LearnPostsAiHelloWorldRoute,
+  LearnPostsDsaHelloWorldRoute: LearnPostsDsaHelloWorldRoute,
+  LearnPostsMathHelloWorldRoute: LearnPostsMathHelloWorldRoute,
+  LearnPostsAiIndexRoute: LearnPostsAiIndexRoute,
+  LearnPostsDsaIndexRoute: LearnPostsDsaIndexRoute,
+  LearnPostsMathIndexRoute: LearnPostsMathIndexRoute,
+}
+
+const LearnRouteRouteWithChildren = LearnRouteRoute._addFileChildren(
+  LearnRouteRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/blog': typeof BlogRouteRouteWithChildren;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog/': typeof BlogIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute;
+  '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
+  '/learn': typeof LearnRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
+  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
+  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
+  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
+  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute
+  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
+  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute
+  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute
+  '/learn/posts/ai': typeof LearnPostsAiIndexRoute
+  '/learn/posts/dsa': typeof LearnPostsDsaIndexRoute
+  '/learn/posts/math': typeof LearnPostsMathIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog': typeof BlogIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog': typeof BlogIndexRoute
+  '/learn': typeof LearnIndexRoute
+  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
+  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
+  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
+  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute
+  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
+  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute
+  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute
+  '/learn/posts/ai': typeof LearnPostsAiIndexRoute
+  '/learn/posts/dsa': typeof LearnPostsDsaIndexRoute
+  '/learn/posts/math': typeof LearnPostsMathIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
-  '/blog': typeof BlogRouteRouteWithChildren;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog/': typeof BlogIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/blog/posts/frontend-design/': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills/': typeof BlogPostsSoftSkillsIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
+  '/learn': typeof LearnRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
+  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route
+  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route
+  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route
+  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute
+  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute
+  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute
+  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
+  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/blog/posts/frontend-design/': typeof BlogPostsFrontendDesignIndexRoute
+  '/blog/posts/soft-skills/': typeof BlogPostsSoftSkillsIndexRoute
+  '/learn/posts/ai/': typeof LearnPostsAiIndexRoute
+  '/learn/posts/dsa/': typeof LearnPostsDsaIndexRoute
+  '/learn/posts/math/': typeof LearnPostsMathIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/blog'
+    | '/learn'
     | '/about'
     | '/game'
     | '/home'
     | '/blog/'
+    | '/learn/'
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
     | '/blog/posts/react/memo-monster'
     | '/blog/posts/soft-skills/learn-names'
+    | '/learn/posts/ai/hello-world'
+    | '/learn/posts/dsa/hello-world'
+    | '/learn/posts/math/hello-world'
     | '/blog/posts/frontend-design'
-    | '/blog/posts/soft-skills';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/blog/posts/soft-skills'
+    | '/learn/posts/ai'
+    | '/learn/posts/dsa'
+    | '/learn/posts/math'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/game'
     | '/home'
     | '/blog'
+    | '/learn'
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
     | '/blog/posts/react/memo-monster'
     | '/blog/posts/soft-skills/learn-names'
+    | '/learn/posts/ai/hello-world'
+    | '/learn/posts/dsa/hello-world'
+    | '/learn/posts/math/hello-world'
     | '/blog/posts/frontend-design'
-    | '/blog/posts/soft-skills';
+    | '/blog/posts/soft-skills'
+    | '/learn/posts/ai'
+    | '/learn/posts/dsa'
+    | '/learn/posts/math'
   id:
     | '__root__'
     | '/'
     | '/blog'
+    | '/learn'
     | '/about'
     | '/game'
     | '/home'
     | '/blog/'
+    | '/learn/'
     | '/blog/posts/frontend-design/microfrontends-part1'
     | '/blog/posts/frontend-design/microfrontends-part2'
     | '/blog/posts/frontend-design/microfrontends-part3'
     | '/blog/posts/react/memo-monster'
     | '/blog/posts/soft-skills/learn-names'
+    | '/learn/posts/ai/hello-world'
+    | '/learn/posts/dsa/hello-world'
+    | '/learn/posts/math/hello-world'
     | '/blog/posts/frontend-design/'
-    | '/blog/posts/soft-skills/';
-  fileRoutesById: FileRoutesById;
+    | '/blog/posts/soft-skills/'
+    | '/learn/posts/ai/'
+    | '/learn/posts/dsa/'
+    | '/learn/posts/math/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  BlogRouteRoute: typeof BlogRouteRouteWithChildren;
-  AboutRoute: typeof AboutRoute;
-  GameRoute: typeof GameRoute;
-  HomeRoute: typeof HomeRoute;
+  IndexRoute: typeof IndexRoute
+  BlogRouteRoute: typeof BlogRouteRouteWithChildren
+  LearnRouteRoute: typeof LearnRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  GameRoute: typeof GameRoute
+  HomeRoute: typeof HomeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRouteRoute: BlogRouteRouteWithChildren,
+  LearnRouteRoute: LearnRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   GameRoute: GameRoute,
   HomeRoute: HomeRoute,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -363,6 +547,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/blog",
+        "/learn",
         "/about",
         "/game",
         "/home"
@@ -384,6 +569,18 @@ export const routeTree = rootRoute
         "/blog/posts/soft-skills/"
       ]
     },
+    "/learn": {
+      "filePath": "learn/route.tsx",
+      "children": [
+        "/learn/",
+        "/learn/posts/ai/hello-world",
+        "/learn/posts/dsa/hello-world",
+        "/learn/posts/math/hello-world",
+        "/learn/posts/ai/",
+        "/learn/posts/dsa/",
+        "/learn/posts/math/"
+      ]
+    },
     "/about": {
       "filePath": "about.tsx"
     },
@@ -396,6 +593,10 @@ export const routeTree = rootRoute
     "/blog/": {
       "filePath": "blog/index.tsx",
       "parent": "/blog"
+    },
+    "/learn/": {
+      "filePath": "learn/index.tsx",
+      "parent": "/learn"
     },
     "/blog/posts/frontend-design/microfrontends-part1": {
       "filePath": "blog/posts/frontend-design/microfrontends-part1.tsx",
@@ -417,6 +618,18 @@ export const routeTree = rootRoute
       "filePath": "blog/posts/soft-skills/learn-names.jsx",
       "parent": "/blog"
     },
+    "/learn/posts/ai/hello-world": {
+      "filePath": "learn/posts/ai/hello-world.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/dsa/hello-world": {
+      "filePath": "learn/posts/dsa/hello-world.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/math/hello-world": {
+      "filePath": "learn/posts/math/hello-world.tsx",
+      "parent": "/learn"
+    },
     "/blog/posts/frontend-design/": {
       "filePath": "blog/posts/frontend-design/index.tsx",
       "parent": "/blog"
@@ -424,6 +637,18 @@ export const routeTree = rootRoute
     "/blog/posts/soft-skills/": {
       "filePath": "blog/posts/soft-skills/index.tsx",
       "parent": "/blog"
+    },
+    "/learn/posts/ai/": {
+      "filePath": "learn/posts/ai/index.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/dsa/": {
+      "filePath": "learn/posts/dsa/index.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/math/": {
+      "filePath": "learn/posts/math/index.tsx",
+      "parent": "/learn"
     }
   }
 }

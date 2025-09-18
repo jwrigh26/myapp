@@ -5,6 +5,9 @@ export enum NavLevel {
   BLOG = 'blog',
   BLOG_CATEGORY = 'blog-category',
   BLOG_POST_DETAILS = 'blog-post-details',
+  LEARN = 'learn',
+  LEARN_CATEGORY = 'learn-category',
+  LEARN_POST_DETAILS = 'learn-post-details',
 }
 
 // Base navigation item structure
@@ -52,6 +55,7 @@ export interface NavigationState {
 export interface NavigationConfig {
   mainItems: NavItem[];
   blogCategories: NavCategory[];
+  learnCategories: NavCategory[];
   /** Default navigation level */
   defaultLevel: NavLevel;
   /** Maximum navigation history depth */

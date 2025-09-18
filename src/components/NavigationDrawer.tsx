@@ -33,7 +33,7 @@ import { useEffect, useState } from 'react';
 // ################################################
 
 // Import navigation data from configuration
-const { mainItems: mainNavItems, blogCategories } = navigationConfig;
+const { mainItems: mainNavItems, blogCategories, learnCategories } = navigationConfig;
 
 // ################################################
 // ### Styled Components
@@ -171,7 +171,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
 
   // Load posts for a category when needed
   useEffect(() => {
-    if (currentLevel === NavLevel.BLOG_CATEGORY) {
+    if (currentLevel === NavLevel.BLOG_CATEGORY || currentLevel === NavLevel.LEARN_CATEGORY) {
       const categoryId = currentContext.data?.id;
       const categoryPath = currentContext.data?.path;
 
@@ -268,6 +268,8 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                     onClick={() => {
                       if (item.id === 'blog') {
                         navigateForward(NavLevel.BLOG, 'Blog');
+                      } else if (item.id === 'learn') {
+                        navigateForward(NavLevel.LEARN, 'Learn');
                       } else if (item.path) {
                         navigateToRoute(item.path);
                       }
@@ -279,7 +281,7 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                       </StyledListItemIcon>
                     )}
                     <ListItemText primary={item.title} />
-                    {item.id === 'blog' && (
+                    {(item.id === 'blog' || item.id === 'learn') && (
                       <Icon path={mdiChevronRight} fontSize="small" />
                     )}
                   </StyledListItemButton>
@@ -312,6 +314,47 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                     onClick={() => {
                       navigateForward(
                         NavLevel.BLOG_CATEGORY,
+                        category.title,
+                        category
+                      );
+                    }}
+                  >
+                    {category.icon && (
+                      <StyledListItemIcon>
+                        <Icon path={category.icon} />
+                      </StyledListItemIcon>
+                    )}
+                    <ListItemText primary={category.title} />
+                    <Icon path={mdiChevronRight} fontSize="small" />
+                  </StyledListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Sheet>
+        </NavLevelPane>
+
+        {/* Learn Categories Level */}
+        <NavLevelPane
+          active={currentLevel === NavLevel.LEARN}
+          previous={previousLevel === NavLevel.LEARN}
+          direction={navigationDirection}
+        >
+          <DrawerHeader
+            title="Learn"
+            showBack={true}
+            onBack={navigateBack}
+            onClose={closeDrawer}
+          />
+          <Divider />
+          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
+            <List>
+              {learnCategories.map((category) => (
+                <ListItem key={category.id} disablePadding>
+                  <StyledListItemButton
+                    active={currentPath.startsWith(category.path || '')}
+                    onClick={() => {
+                      navigateForward(
+                        NavLevel.LEARN_CATEGORY,
                         category.title,
                         category
                       );
@@ -394,6 +437,72 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
           <Divider />
           <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
             {/* Future implementation for post details if needed */}
+          </Sheet>
+        </NavLevelPane>
+
+        {/* Learn Posts in Category Level */}
+        <NavLevelPane
+          active={currentLevel === NavLevel.LEARN_CATEGORY}
+          previous={previousLevel === NavLevel.LEARN_CATEGORY}
+          direction={navigationDirection}
+        >
+          <DrawerHeader
+            title={currentContext.title || 'Learn Topics'}
+            showBack={true}
+            onBack={navigateBack}
+            onClose={closeDrawer}
+          />
+          <Divider />
+          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
+            {currentContext.data?.id &&
+            categoryPosts[currentContext.data.id] ? (
+              <List>
+                {categoryPosts[currentContext.data.id].map((post) => (
+                  <ListItem key={post.id} disablePadding>
+                    <StyledListItemButton
+                      active={currentPath === post.path}
+                      onClick={() => {
+                        if (post.path) {
+                          navigateToRoute(post.path);
+                        }
+                      }}
+                    >
+                      <ListItemText
+                        primary={post.title}
+                        primaryTypographyProps={{
+                          noWrap: true,
+                          sx: { maxWidth: '210px' },
+                        }}
+                      />
+                    </StyledListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Box sx={{ p: 2 }}>
+                <Typography variant="body2" color="text.secondary">
+                  Loading topics...
+                </Typography>
+              </Box>
+            )}
+          </Sheet>
+        </NavLevelPane>
+
+        {/* Learn Post Details Level (if needed in the future) */}
+        <NavLevelPane
+          active={currentLevel === NavLevel.LEARN_POST_DETAILS}
+          previous={previousLevel === NavLevel.LEARN_POST_DETAILS}
+          direction={navigationDirection}
+        >
+          <DrawerHeader
+            title={currentContext.title || 'Topic Details'}
+            showBack={true}
+            onBack={navigateBack}
+            onClose={closeDrawer}
+          />
+          <Divider />
+          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
+            {/* Future implementation for topic details if needed */}
           </Sheet>
         </NavLevelPane>
       </DrawerNavContainer>
