@@ -74,6 +74,14 @@ export interface BubbleSpec {
     y: number;        // px offset from bubble top-left (can be negative)
     zIndex?: number;  // control layering (default: 1 = in front)
   };
+
+  /** Decorative text styling rules */
+  decorativeText?: {
+    type: 'first-letter' | 'search-replace' | 'symbol-replace';
+    className: string;
+    searchText?: string; // For search-replace type
+    symbolText?: string; // For symbol-replace type (what to replace the text with)
+  }[];
 }
 
 export interface ComicFrameWithBubblesProps {

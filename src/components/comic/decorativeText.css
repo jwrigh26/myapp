@@ -1,0 +1,85 @@
+/* Decorative Text Styles for Comic Bubbles */
+
+/* Drop Cap - Large first letter with primary color */
+.bubble-drop-cap {
+  font-size: 2.5em;
+  line-height: 0.8;
+  float: left;
+  margin-right: 4px;
+  margin-top: 2px;
+  font-weight: 700;
+  color: var(--mui-palette-primary-main, #1976d2);
+}
+
+/* Drop Cap Secondary - Large first letter with secondary color */
+.bubble-drop-cap-secondary {
+  font-size: 2.5em;
+  line-height: 0.8;
+  float: left;
+  margin-right: 4px;
+  margin-top: 2px;
+  font-weight: 700;
+  color: var(--mui-palette-secondary-main, #dc004e);
+}
+
+/* Highlight - Light pale background with primary color */
+.bubble-highlight {
+  background-color: rgba(var(--mui-palette-primary-main-rgb, 25, 118, 210), 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: inherit;
+}
+
+/* Highlight Secondary - Light pale background with secondary color */
+.bubble-highlight-secondary {
+  background-color: rgba(var(--mui-palette-secondary-main-rgb, 220, 0, 78), 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: inherit;
+}
+
+/* Emphasis - Bold and colored text */
+.bubble-emphasis {
+  font-weight: 700;
+  color: var(--mui-palette-primary-main, #1976d2);
+}
+
+/* Shout - Larger, bold text for emphasis */
+.bubble-shout {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--mui-palette-error-main, #d32f2f);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Whisper - Smaller, lighter text */
+.bubble-whisper {
+  font-size: 0.85em;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Comic Book Sound Effect */
+.bubble-sound-effect {
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--mui-palette-warning-main, #ff9800);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Comic Expletive - Replace curse words with symbols */
+.bubble-expletive {
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 1.1em;
+  color: var(--mui-palette-error-main, #d32f2f);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+/* Alternative using Unicode symbols */
+.bubble-symbols {
+  font-size: 1.2em;
+  color: var(--mui-palette-primary-main, #1976d2);
+  font-weight: 700;
+}

@@ -9,6 +9,8 @@ import {
 } from './constants';
 import { BubbleTail } from './BubbleTail';
 import { calculateBubbleProps, getChildBubbles } from './utils/bubbleHelpers';
+import { applyDecorativeText } from './utils/decorativeText';
+import './decorativeText.css';
 
 interface BubbleProps {
   bubble: BubbleSpec;
@@ -90,7 +92,7 @@ export function Bubble({
               minWidth: scaledMinWidth ? `${scaledMinWidth}px` : undefined,
             }}
           >
-            <BubbleText>{bubble.text}</BubbleText>
+            <BubbleText>{applyDecorativeText(bubble.text, bubble.decorativeText)}</BubbleText>
             {/* Render tail for regular speech bubbles */}
             {bubble.tailPointsPx && (
               <BubbleTail

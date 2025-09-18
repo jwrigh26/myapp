@@ -15,8 +15,8 @@ export function Panel1({ id }: { id?: string }) {
       y: 78,
       anchor: 'top-left',
       role: 'speech',
-      maxWidthPx: 200,
-      minWidthPx: 150,
+      maxWidthPx: 256,
+      minWidthPx: 200,
       // Sharp, aggressive tail for shouting
       tailPointsPx: {
         baseLeft: [0, 0],
@@ -34,6 +34,12 @@ export function Panel1({ id }: { id?: string }) {
         mobile: { x: 25, y: 120 },
         xs: { x: 20, y: 120 },
       },
+      decorativeText: [
+        {
+          type: 'first-letter',
+          className: 'bubble-drop-cap',
+        },
+      ],
     },
     {
       id: 'b2',
@@ -49,8 +55,20 @@ export function Panel1({ id }: { id?: string }) {
         height: 80,
         x: -10,
         y: 20,
-        zIndex: 2, 
+        zIndex: 2,
       },
+      decorativeText: [
+        {
+          type: 'search-replace',
+          searchText: 'JustinWright',
+          className: 'bubble-emphasis',
+        },
+        {
+          type: 'search-replace',
+          searchText: 'Salt Lake City',
+          className: 'bubble-highlight',
+        },
+      ],
     },
     // {
     //   id: 'b2',

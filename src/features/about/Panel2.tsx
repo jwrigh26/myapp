@@ -6,7 +6,7 @@ export function Panel2({ id }: { id?: string }) {
   const bubble1: BubbleSpec[] = [
     {
       id: 'p2-b1',
-      text: 'This is placeholder text for the first comic panel!',
+      text: 'Oh darn, this code is really messed up!',
       x: 50,
       y: 20,
       anchor: 'bottom-left',
@@ -20,13 +20,20 @@ export function Panel2({ id }: { id?: string }) {
       },
       tailOffsetPx: 15,
       baseOverlapPx: 1,
+      decorativeText: [
+        {
+          type: 'search-replace',
+          searchText: 'darn',
+          className: 'bubble-expletive',
+        },
+      ],
     },
   ];
 
   const bubble2: BubbleSpec[] = [
     {
       id: 'p2-b2',
-      text: 'And this is placeholder text for the second comic panel!',
+      text: 'This damn bug is driving me crazy! What the hell?',
       x: 50,
       y: 100,
       anchor: 'top-right',
@@ -40,6 +47,19 @@ export function Panel2({ id }: { id?: string }) {
       },
       tailOffsetPx: 20,
       baseOverlapPx: 1,
+      decorativeText: [
+        {
+          type: 'symbol-replace',
+          searchText: 'damn',
+          className: 'bubble-symbols',
+        },
+        {
+          type: 'symbol-replace',
+          searchText: 'hell',
+          className: 'bubble-symbols',
+          symbolText: '☠️💀🔥', // Custom symbols
+        },
+      ],
     },
   ];
 
