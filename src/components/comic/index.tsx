@@ -1,5 +1,10 @@
 export { default as ComicFrame } from './ComicFrame';
-export type { BubbleAnchor, BubbleRole, BubbleSpec, ComicFrameWithBubblesProps } from './types';
+export type {
+  BubbleAnchor,
+  BubbleRole,
+  BubbleSpec,
+  ComicFrameWithBubblesProps,
+} from './types';
 export { ComicWrapper, ComicPanel, ComicBreakoutPanel } from './ComicPanel';
 
 // New modular components
@@ -11,4 +16,7 @@ export * from './utils';
 
 // Legacy
 export { default as LegacyComicStrip } from './LegacyComicStrip';
-export type { LegacyComicStripProps, LegacyComicFrame } from './LegacyComicStrip';
+export type {
+  LegacyComicStripProps,
+  LegacyComicFrame,
+} from './LegacyComicStrip';

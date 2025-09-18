@@ -6,15 +6,11 @@ import {
   NavLevel,
   type NavCategory,
   type NavHistoryEntry,
-  type NavItem,
 } from '@/types/navigation';
-import {
-  mdiArrowLeft,
-  mdiBookOpen,
-  mdiChevronRight,
-  mdiCloseBoxOutline,
-} from '@mdi/js';
+import { mdiArrowLeft, mdiChevronRight, mdiCloseBoxOutline } from '@mdi/js';
+import { sleep } from '@/utils/utils';
 import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
@@ -26,14 +22,18 @@ import Stack from '@mui/material/Stack';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useRouter } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // ################################################
 // ### Configuration
 // ################################################
 
 // Import navigation data from configuration
-const { mainItems: mainNavItems, blogCategories, learnCategories } = navigationConfig;
+const {
+  mainItems: mainNavItems,
+  blogCategories,
+  learnCategories,
+} = navigationConfig;
 
 // ################################################
 // ### Styled Components
@@ -150,7 +150,6 @@ const NavLevelPane = styled(Box, {
 export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   const { isOpen, closeDrawer } = useDrawer('navigation-drawer');
   const router = useRouter();
-  const theme = useTheme();
   const currentPath = router.state.location.pathname;
 
   // State for navigation
@@ -162,77 +161,48 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
   const [navHistory, setNavHistory] = useState<NavHistoryEntry<NavCategory>[]>([
     { level: NavLevel.MAIN, title: 'Menu' },
   ]);
-  const [categoryPosts, setCategoryPosts] = useState<Record<string, NavItem[]>>(
-    {}
-  );
 
   // Current navigation context
-  const currentContext = navHistory[navHistory.length - 1];
-
-  // Load posts for a category when needed
-  useEffect(() => {
-    if (currentLevel === NavLevel.BLOG_CATEGORY || currentLevel === NavLevel.LEARN_CATEGORY) {
-      const categoryId = currentContext.data?.id;
-      const categoryPath = currentContext.data?.path;
-
-      if (categoryId && categoryPath && !categoryPosts[categoryId]) {
-        // Get posts for this category from router
-        const postsInCategory = Object.values(router.routesByPath)
-          .filter((route: any) => {
-            return (
-              route.fullPath.startsWith(categoryPath) &&
-              route.fullPath !== categoryPath
-            );
-          })
-          .map((route: any) => {
-            const pathParts = route.fullPath.split('/');
-            const lastPart = pathParts[pathParts.length - 1];
-            const formattedTitle = lastPart
-              .replace(/-/g, ' ')
-              .replace(/\b\w/g, (c: string) => c.toUpperCase());
-
-            return {
-              id: route.id,
-              title: route.options?.title || formattedTitle,
-              path: route.fullPath,
-              icon: mdiBookOpen,
-            };
-          });
-
-        setCategoryPosts((prev) => ({
-          ...prev,
-          [categoryId]: postsInCategory,
-        }));
-      }
-    }
-  }, [currentLevel, currentContext, router.routesByPath]);
+  // const currentContext = navHistory[navHistory.length - 1];
+  // console.log('Current Navigation Context:', currentContext);
 
   if (desktop) {
     return null; // Don't render the drawer on desktop
   }
 
-  // Navigate forward to a new level
-  const navigateForward = (
-    level: NavLevel,
-    title: string,
-    data?: NavCategory
-  ) => {
-    setPreviousLevel(currentLevel);
-    setNavigationDirection('forward');
-    setCurrentLevel(level);
-    setNavHistory([...navHistory, { level, title, data }]);
-  };
-
   // Navigate back one level
-  const navigateBack = () => {
+  const navigateBack = async () => {
+    let newHistory = null;
     if (navHistory.length > 1) {
-      const newHistory = [...navHistory];
+      newHistory = [...navHistory];
       newHistory.pop();
       setPreviousLevel(currentLevel);
       setNavigationDirection('backward');
       setCurrentLevel(newHistory[newHistory.length - 1].level);
       setNavHistory(newHistory);
     }
+
+    if (newHistory?.[0].level === NavLevel.MAIN) {
+      // Wait for CSS transition to complete before resetting navigation state
+      // This prevents the "slide from wrong direction" bug when navigating
+      // Main → Blog → Back → Learn (ensures Learn slides from right, not left)
+      // Duration matches theme.transitions.duration.standard (300ms)
+      await sleep(300);
+
+      setPreviousLevel(null);
+      setNavigationDirection('forward');
+      setCurrentLevel(NavLevel.MAIN);
+      setNavHistory([{ level: NavLevel.MAIN, title: 'Menu' }]);
+    }
+  };
+
+  // Navigate forward to a new level (only for blog/learn main levels)
+  const navigateToSection = (level: NavLevel, title: string) => {
+    setPreviousLevel(currentLevel);
+    setNavigationDirection('forward');
+    setCurrentLevel(level);
+    setNavHistory([...navHistory, { level, title }]);
+    router.navigate({ to: `/${level}` as any }); // ← This DOES change the route
   };
 
   // Navigate to a route and close drawer
@@ -263,13 +233,19 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                 <ListItem key={item.id} disablePadding>
                   <StyledListItemButton
                     active={
-                      item.path ? currentPath.startsWith(item.path) : false
+                      item.path
+                        ? currentPath.startsWith(item.path)
+                        : (item.id === 'blog' &&
+                            currentLevel === NavLevel.BLOG) ||
+                          (item.id === 'learn' &&
+                            currentLevel === NavLevel.LEARN)
                     }
+                    // In the main navigation onClick handler:
                     onClick={() => {
                       if (item.id === 'blog') {
-                        navigateForward(NavLevel.BLOG, 'Blog');
+                        navigateToSection(NavLevel.BLOG, 'Blog');
                       } else if (item.id === 'learn') {
-                        navigateForward(NavLevel.LEARN, 'Learn');
+                        navigateToSection(NavLevel.LEARN, 'Learn');
                       } else if (item.path) {
                         navigateToRoute(item.path);
                       }
@@ -312,11 +288,9 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                   <StyledListItemButton
                     active={currentPath.startsWith(category.path || '')}
                     onClick={() => {
-                      navigateForward(
-                        NavLevel.BLOG_CATEGORY,
-                        category.title,
-                        category
-                      );
+                      if (category.path) {
+                        navigateToRoute(category.path + '/');
+                      }
                     }}
                   >
                     {category.icon && (
@@ -325,7 +299,6 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                       </StyledListItemIcon>
                     )}
                     <ListItemText primary={category.title} />
-                    <Icon path={mdiChevronRight} fontSize="small" />
                   </StyledListItemButton>
                 </ListItem>
               ))}
@@ -353,11 +326,9 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                   <StyledListItemButton
                     active={currentPath.startsWith(category.path || '')}
                     onClick={() => {
-                      navigateForward(
-                        NavLevel.LEARN_CATEGORY,
-                        category.title,
-                        category
-                      );
+                      if (category.path) {
+                        navigateToRoute(category.path + '/');
+                      }
                     }}
                   >
                     {category.icon && (
@@ -366,143 +337,10 @@ export function NavigationDrawer({ desktop }: { desktop: boolean }) {
                       </StyledListItemIcon>
                     )}
                     <ListItemText primary={category.title} />
-                    <Icon path={mdiChevronRight} fontSize="small" />
                   </StyledListItemButton>
                 </ListItem>
               ))}
             </List>
-          </Sheet>
-        </NavLevelPane>
-
-        {/* Blog Posts in Category Level */}
-        <NavLevelPane
-          active={currentLevel === NavLevel.BLOG_CATEGORY}
-          previous={previousLevel === NavLevel.BLOG_CATEGORY}
-          direction={navigationDirection}
-        >
-          <DrawerHeader
-            title={currentContext.title || 'Posts'}
-            showBack={true}
-            onBack={navigateBack}
-            onClose={closeDrawer}
-          />
-          <Divider />
-          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
-            {currentContext.data?.id &&
-            categoryPosts[currentContext.data.id] ? (
-              <List>
-                {categoryPosts[currentContext.data.id].map((post) => (
-                  <ListItem key={post.id} disablePadding>
-                    <StyledListItemButton
-                      active={currentPath === post.path}
-                      onClick={() => {
-                        if (post.path) {
-                          navigateToRoute(post.path);
-                        }
-                      }}
-                    >
-                      <ListItemText
-                        primary={post.title}
-                        primaryTypographyProps={{
-                          noWrap: true,
-                          sx: { maxWidth: '210px' },
-                        }}
-                      />
-                    </StyledListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <Box sx={{ p: 2 }}>
-                <Typography variant="body2" color="text.secondary">
-                  Loading posts...
-                </Typography>
-              </Box>
-            )}
-          </Sheet>
-        </NavLevelPane>
-
-        {/* Blog Post Details Level (if needed in the future) */}
-        <NavLevelPane
-          active={currentLevel === NavLevel.BLOG_POST_DETAILS}
-          previous={previousLevel === NavLevel.BLOG_POST_DETAILS}
-          direction={navigationDirection}
-        >
-          <DrawerHeader
-            title={currentContext.title || 'Post Details'}
-            showBack={true}
-            onBack={navigateBack}
-            onClose={closeDrawer}
-          />
-          <Divider />
-          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
-            {/* Future implementation for post details if needed */}
-          </Sheet>
-        </NavLevelPane>
-
-        {/* Learn Posts in Category Level */}
-        <NavLevelPane
-          active={currentLevel === NavLevel.LEARN_CATEGORY}
-          previous={previousLevel === NavLevel.LEARN_CATEGORY}
-          direction={navigationDirection}
-        >
-          <DrawerHeader
-            title={currentContext.title || 'Learn Topics'}
-            showBack={true}
-            onBack={navigateBack}
-            onClose={closeDrawer}
-          />
-          <Divider />
-          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
-            {currentContext.data?.id &&
-            categoryPosts[currentContext.data.id] ? (
-              <List>
-                {categoryPosts[currentContext.data.id].map((post) => (
-                  <ListItem key={post.id} disablePadding>
-                    <StyledListItemButton
-                      active={currentPath === post.path}
-                      onClick={() => {
-                        if (post.path) {
-                          navigateToRoute(post.path);
-                        }
-                      }}
-                    >
-                      <ListItemText
-                        primary={post.title}
-                        primaryTypographyProps={{
-                          noWrap: true,
-                          sx: { maxWidth: '210px' },
-                        }}
-                      />
-                    </StyledListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <Box sx={{ p: 2 }}>
-                <Typography variant="body2" color="text.secondary">
-                  Loading topics...
-                </Typography>
-              </Box>
-            )}
-          </Sheet>
-        </NavLevelPane>
-
-        {/* Learn Post Details Level (if needed in the future) */}
-        <NavLevelPane
-          active={currentLevel === NavLevel.LEARN_POST_DETAILS}
-          previous={previousLevel === NavLevel.LEARN_POST_DETAILS}
-          direction={navigationDirection}
-        >
-          <DrawerHeader
-            title={currentContext.title || 'Topic Details'}
-            showBack={true}
-            onBack={navigateBack}
-            onClose={closeDrawer}
-          />
-          <Divider />
-          <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
-            {/* Future implementation for topic details if needed */}
           </Sheet>
         </NavLevelPane>
       </DrawerNavContainer>
@@ -529,6 +367,8 @@ function DrawerHeader({
 }: DrawerHeaderProps) {
   const theme = useTheme();
 
+  const handleOnClick = showBack && onBack ? onBack : onClose;
+
   return (
     <Box
       sx={{
@@ -544,29 +384,47 @@ function DrawerHeader({
         },
       }}
     >
-      <Stack direction="row" spacing={1} alignItems="center">
+      <Stack direction="row" spacing={1} alignItems="center" sx={{ flex: 1 }}>
+        <ButtonBase onClick={handleOnClick}>
+          {showBack && onBack ? (
+            <IconButton
+              edge="start"
+              onClick={onBack}
+              size="small"
+              sx={{ color: theme.palette.primary.contrastText }}
+            >
+              <Icon path={mdiArrowLeft} />
+            </IconButton>
+          ) : (
+            <IconButton
+              edge="start"
+              onClick={onClose}
+              size="small"
+              sx={{ color: theme.palette.primary.contrastText }}
+            >
+              <Icon path={mdiCloseBoxOutline} />
+            </IconButton>
+          )}
+          <Typography
+            variant="h6"
+            color="common.white"
+            sx={{ '&:hover': { opacity: 0.8 } }}
+          >
+            {title}
+          </Typography>
+        </ButtonBase>
         {showBack && onBack ? (
           <IconButton
-            edge="start"
-            onClick={onBack}
-            size="small"
-            sx={{ color: theme.palette.primary.contrastText }}
-          >
-            <Icon path={mdiArrowLeft} />
-          </IconButton>
-        ) : (
-          <IconButton
-            edge="start"
             onClick={onClose}
             size="small"
-            sx={{ color: theme.palette.primary.contrastText }}
+            sx={{
+              ml: 'auto !important',
+              color: theme.palette.primary.contrastText,
+            }}
           >
             <Icon path={mdiCloseBoxOutline} />
           </IconButton>
-        )}
-        <Typography variant="h6" color="common.white">
-          {title}
-        </Typography>
+        ) : null}
       </Stack>
     </Box>
   );

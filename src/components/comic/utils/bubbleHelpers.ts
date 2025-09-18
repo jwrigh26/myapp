@@ -26,10 +26,10 @@ export function calculateBubblePosition(
 ): { x: number; y: number } {
   const fromBubblePos = bubble.positionByBreakpoint?.[breakpoint];
   const fromGlobalPos = defaultPositionByBreakpoint?.[breakpoint];
-  
+
   const x = fromBubblePos?.x ?? fromGlobalPos?.x ?? bubble.x;
   const y = fromBubblePos?.y ?? fromGlobalPos?.y ?? bubble.y;
-  
+
   return { x, y };
 }
 
@@ -42,7 +42,7 @@ export function calculateBubbleNudge(
 ): { nudgeX: number; nudgeY: number } {
   const nudgeX = (bubble.nudgePx?.x ?? 0) * scale;
   const nudgeY = (bubble.nudgePx?.y ?? 0) * scale;
-  
+
   return { nudgeX, nudgeY };
 }
 
@@ -56,9 +56,13 @@ export function calculateBubbleWidthConstraints(
   scaledMinWidth?: number;
   scaledMaxWidth?: number;
 } {
-  const scaledMinWidth = bubble.minWidthPx ? bubble.minWidthPx * scale : undefined;
-  const scaledMaxWidth = bubble.maxWidthPx ? bubble.maxWidthPx * scale : undefined;
-  
+  const scaledMinWidth = bubble.minWidthPx
+    ? bubble.minWidthPx * scale
+    : undefined;
+  const scaledMaxWidth = bubble.maxWidthPx
+    ? bubble.maxWidthPx * scale
+    : undefined;
+
   return {
     scaledMinWidth,
     scaledMaxWidth,
@@ -76,17 +80,26 @@ export function calculateBubbleProps(
   parentScale: number = 1
 ) {
   // Calculate scale (multiply by parent scale for child bubbles)
-  const scale = calculateBubbleScale(bubble, breakpoint, defaultScaleByBreakpoint) * parentScale;
-  
+  const scale =
+    calculateBubbleScale(bubble, breakpoint, defaultScaleByBreakpoint) *
+    parentScale;
+
   // Calculate position
-  const { x, y } = calculateBubblePosition(bubble, breakpoint, defaultPositionByBreakpoint);
-  
+  const { x, y } = calculateBubblePosition(
+    bubble,
+    breakpoint,
+    defaultPositionByBreakpoint
+  );
+
   // Calculate nudges
   const { nudgeX, nudgeY } = calculateBubbleNudge(bubble, scale);
-  
+
   // Calculate width constraints
-  const { scaledMinWidth, scaledMaxWidth } = calculateBubbleWidthConstraints(bubble, scale);
-  
+  const { scaledMinWidth, scaledMaxWidth } = calculateBubbleWidthConstraints(
+    bubble,
+    scale
+  );
+
   return {
     scale,
     x,
@@ -102,12 +115,15 @@ export function calculateBubbleProps(
  * Filters bubbles to get only top-level bubbles (no anchorEl)
  */
 export function getTopLevelBubbles(bubbles: BubbleSpec[]): BubbleSpec[] {
-  return bubbles.filter(bubble => !bubble.anchorEl);
+  return bubbles.filter((bubble) => !bubble.anchorEl);
 }
 
 /**
  * Finds child bubbles for a given parent bubble ID
  */
-export function getChildBubbles(bubbles: BubbleSpec[], parentId: string): BubbleSpec[] {
-  return bubbles.filter(bubble => bubble.anchorEl === parentId);
+export function getChildBubbles(
+  bubbles: BubbleSpec[],
+  parentId: string
+): BubbleSpec[] {
+  return bubbles.filter((bubble) => bubble.anchorEl === parentId);
 }

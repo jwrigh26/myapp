@@ -126,8 +126,12 @@ const ComicStrip = React.memo(
     className,
   }: LegacyComicStripProps) => {
     const theme = useTheme();
-    const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-    const isTablet = useMediaQuery((theme: Theme) => theme.breakpoints.between('md', 'lg'));
+    const isMobile = useMediaQuery((theme: Theme) =>
+      theme.breakpoints.down('md')
+    );
+    const isTablet = useMediaQuery((theme: Theme) =>
+      theme.breakpoints.between('md', 'lg')
+    );
 
     // Determine grid class based on screen size
     const getGridClass = () => {

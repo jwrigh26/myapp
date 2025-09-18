@@ -92,7 +92,9 @@ export function Bubble({
               minWidth: scaledMinWidth ? `${scaledMinWidth}px` : undefined,
             }}
           >
-            <BubbleText>{applyDecorativeText(bubble.text, bubble.decorativeText)}</BubbleText>
+            <BubbleText>
+              {applyDecorativeText(bubble.text, bubble.decorativeText)}
+            </BubbleText>
             {/* Render tail for regular speech bubbles */}
             {bubble.tailPointsPx && (
               <BubbleTail
@@ -103,7 +105,7 @@ export function Bubble({
                 strokeWidth={bubble.tailStrokePx ?? 3}
               />
             )}
-            
+
             {/* White connector box for child bubbles only (renders in front) */}
             {isChildBubble && bubble.connector && (
               <ConnectorBox
@@ -116,7 +118,7 @@ export function Bubble({
                 }}
               />
             )}
-            
+
             {childBubbles.map((childBubble) => {
               const childProps = calculateBubbleProps(
                 childBubble,

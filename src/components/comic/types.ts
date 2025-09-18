@@ -8,7 +8,15 @@ export type BubbleAnchor =
   | 'bottom-right'
   | 'center';
 
-export type BreakpointKey = 'xl' | 'lg' | 'md' | 'tablet' | 'sm' | 'mobileLg' | 'mobile' | 'xs';
+export type BreakpointKey =
+  | 'xl'
+  | 'lg'
+  | 'md'
+  | 'tablet'
+  | 'sm'
+  | 'mobileLg'
+  | 'mobile'
+  | 'xs';
 export type ScaleMap = Partial<Record<BreakpointKey, number>>;
 export type PosMap = Partial<Record<BreakpointKey, { x?: number; y?: number }>>;
 
@@ -68,11 +76,11 @@ export interface BubbleSpec {
 
   /** White connector box for child bubbles to hide parent borders (px) */
   connector?: {
-    width: number;    // px width of white connector box
-    height: number;   // px height of white connector box  
-    x: number;        // px offset from bubble top-left (can be negative)
-    y: number;        // px offset from bubble top-left (can be negative)
-    zIndex?: number;  // control layering (default: 1 = in front)
+    width: number; // px width of white connector box
+    height: number; // px height of white connector box
+    x: number; // px offset from bubble top-left (can be negative)
+    y: number; // px offset from bubble top-left (can be negative)
+    zIndex?: number; // control layering (default: 1 = in front)
   };
 
   /** Decorative text styling rules */

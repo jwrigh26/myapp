@@ -40,7 +40,6 @@ const HeroCallout = styled(Typography)(({ theme }) => ({
 export default function LatestBlogDeck() {
   const theme = useTheme();
   const { data: posts = [] } = useLatestBlogPosts(3);
-  console.log('Latest blog posts:', posts);
 
   return (
     <Box

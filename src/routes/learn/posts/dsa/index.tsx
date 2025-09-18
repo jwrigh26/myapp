@@ -67,11 +67,11 @@ function DsaIndex() {
           Building blocks of efficient computing and problem-solving
         </Typography>
         <Typography variant="body1" paragraph>
-          Data structures and algorithms are the heart of computer science. 
-          This section covers everything from basic arrays and linked lists 
-          to advanced topics like graph algorithms and dynamic programming. 
-          We'll explore not just how these concepts work, but when and why 
-          to use them in real-world applications.
+          Data structures and algorithms are the heart of computer science. This
+          section covers everything from basic arrays and linked lists to
+          advanced topics like graph algorithms and dynamic programming. We'll
+          explore not just how these concepts work, but when and why to use them
+          in real-world applications.
         </Typography>
       </Box>
 

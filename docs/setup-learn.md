@@ -13,7 +13,7 @@ Please be aware of how imports work. Meaning we have this in our tsconfig.json:
     }
 ```
 
-Please follow exact patterns you see for route createFileRoute. 
+Please follow exact patterns you see for route createFileRoute.
 </ctirital-thinking>
 
 <key-points>

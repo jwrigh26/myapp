@@ -65,7 +65,6 @@ const NavButton = styled(LinkButton)(({ theme }) => ({
   opacity: 0.8,
   borderRadius: 2,
   '&:hover': {
-    // opacity: 0.6,
     backgroundColor: theme.mixins.decomposeColor(
       theme.palette.primary.light,
       0.5

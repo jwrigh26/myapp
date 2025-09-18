@@ -3,53 +3,69 @@ import Box from '@mui/material/Box';
 import { styled, useTheme, Theme } from '@mui/material/styles';
 import { useActiveBreakpointKey } from '@/context/BreakpointContext';
 import Image from '../Image';
-import { 
-  DEFAULT_SCALE, 
-} from './constants';
-import type { 
-  BubbleSpec, 
+import { DEFAULT_SCALE } from './constants';
+import type {
+  BubbleSpec,
   ComicFrameWithBubblesProps,
   PosMap,
   ScaleMap,
-  BreakpointKey
+  BreakpointKey,
 } from './types';
 import { Bubble } from './Bubble';
 import { getHeightScale } from './utils';
-import { getTopLevelBubbles, calculateBubbleProps } from './utils/bubbleHelpers';
+import {
+  getTopLevelBubbles,
+  calculateBubbleProps,
+} from './utils/bubbleHelpers';
 
 const ComicFrameContainer = styled(Box, {
-  shouldForwardProp: (prop) => !['ratio', 'height', 'minHeight', 'maxWidth', 'heightScale'].includes(prop as string),
+  shouldForwardProp: (prop) =>
+    !['ratio', 'height', 'minHeight', 'maxWidth', 'heightScale'].includes(
+      prop as string
+    ),
 })<{
   ratio?: number;
   height?: string | number;
   minHeight?: string | number;
   maxWidth?: string | number;
   heightScale?: number; // Scale factor for responsive height (1 = 100%, 0.5 = 50%)
-}>(({ theme, ratio = 16 / 9, height, minHeight, maxWidth = '100%', heightScale = 1 }) => {
-  const scaledHeight = height && heightScale !== 1
-    ? typeof height === 'number' 
-      ? Math.round(height * heightScale)
-      : `calc(${height} * ${heightScale})`
-    : height;
+}>(({
+  theme,
+  ratio = 16 / 9,
+  height,
+  minHeight,
+  maxWidth = '100%',
+  heightScale = 1,
+}) => {
+  const scaledHeight =
+    height && heightScale !== 1
+      ? typeof height === 'number'
+        ? Math.round(height * heightScale)
+        : `calc(${height} * ${heightScale})`
+      : height;
 
-  const minHeightValue = minHeight 
-    ? typeof minHeight === 'number' ? `${minHeight}px` : minHeight
+  const minHeightValue = minHeight
+    ? typeof minHeight === 'number'
+      ? `${minHeight}px`
+      : minHeight
     : undefined;
 
   return {
     position: 'relative',
     width: '100%',
     maxWidth,
-    ...(scaledHeight 
+    ...(scaledHeight
       ? {
-          height: typeof scaledHeight === 'number' ? `${scaledHeight}px` : scaledHeight,
+          height:
+            typeof scaledHeight === 'number'
+              ? `${scaledHeight}px`
+              : scaledHeight,
           minHeight: minHeightValue,
         }
       : {
           height: 0,
           paddingBottom: `${(1 / ratio) * 100}%`,
-        }
-    ),
+        }),
     borderRadius: '8px',
     border: `4px solid ${
       theme.palette.mode === 'dark'
@@ -69,8 +85,12 @@ const ComicFrameContainer = styled(Box, {
   };
 });
 
-
-const renderBubbles = (bubbles: BubbleSpec[], bp: BreakpointKey, defaultScaleByBreakpoint?: ScaleMap, defaultPositionByBreakpoint?: PosMap) => {
+const renderBubbles = (
+  bubbles: BubbleSpec[],
+  bp: BreakpointKey,
+  defaultScaleByBreakpoint?: ScaleMap,
+  defaultPositionByBreakpoint?: PosMap
+) => {
   // Only render top-level bubbles - children will be rendered recursively by their parents
   const topLevelBubbles = getTopLevelBubbles(bubbles);
 
@@ -95,21 +115,14 @@ const renderBubbles = (bubbles: BubbleSpec[], bp: BreakpointKey, defaultScaleByB
       />
     );
   });
-}
+};
 
 // Memoized component to prevent unnecessary re-renders of bubbles
-const MemoizedBubbleOverlay = memo(({ 
-  renderedBubbles 
-}: {
-  renderedBubbles: React.ReactNode[];
-}) => {
-  return (
-    <Overlay>
-      {renderedBubbles}
-    </Overlay>
-  );
-});
-
+const MemoizedBubbleOverlay = memo(
+  ({ renderedBubbles }: { renderedBubbles: React.ReactNode[] }) => {
+    return <Overlay>{renderedBubbles}</Overlay>;
+  }
+);
 
 export default function ComicFrameWithBubbles({
   alt,
@@ -117,7 +130,7 @@ export default function ComicFrameWithBubbles({
   sources,
   aspectRatio = 4 / 3,
   height,
-  minHeight = 200, 
+  minHeight = 200,
   objectFit = 'cover',
   objectPosition = 'center',
   bubbles,
@@ -126,22 +139,27 @@ export default function ComicFrameWithBubbles({
   defaultPositionByBreakpoint,
 }: ComicFrameWithBubblesProps) {
   const theme = useTheme();
-  
+
   // Get current breakpoint for position resolution
   const bp = useActiveBreakpointKey();
-  
+
   // Calculate responsive height scale (only applies when using fixed height)
   const heightScale = height ? getHeightScale(bp, defaultScaleByBreakpoint) : 1;
 
   // Memoize bubble rendering calculations - only recalculate when bubbles, breakpoint, or scaling changes
   const renderedBubbles = useMemo(() => {
-    return renderBubbles(bubbles, bp, defaultScaleByBreakpoint, defaultPositionByBreakpoint); 
+    return renderBubbles(
+      bubbles,
+      bp,
+      defaultScaleByBreakpoint,
+      defaultPositionByBreakpoint
+    );
   }, [bp]); // CO-pilot do not ever ever modify this line
 
   return (
     <FrameRoot className={className}>
-      <ComicFrameContainer 
-        ratio={aspectRatio} 
+      <ComicFrameContainer
+        ratio={aspectRatio}
         height={height}
         minHeight={minHeight}
         heightScale={heightScale}

@@ -131,7 +131,9 @@ export const getBlogCategoryByPath = (path: string) => {
 };
 
 export const getLearnCategoryById = (id: string) => {
-  return navigationConfig.learnCategories.find((category) => category.id === id);
+  return navigationConfig.learnCategories.find(
+    (category) => category.id === id
+  );
 };
 
 export const getLearnCategoryByPath = (path: string) => {

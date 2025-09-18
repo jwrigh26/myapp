@@ -67,11 +67,11 @@ function AiIndex() {
           Exploring the frontiers of artificial intelligence
         </Typography>
         <Typography variant="body1" paragraph>
-          Artificial Intelligence and Machine Learning are transforming how we 
-          solve problems and interact with technology. This section covers 
-          fundamental concepts, practical applications, and the latest 
-          developments in AI. From basic neural networks to advanced deep 
-          learning techniques, we'll explore how machines can learn and make 
+          Artificial Intelligence and Machine Learning are transforming how we
+          solve problems and interact with technology. This section covers
+          fundamental concepts, practical applications, and the latest
+          developments in AI. From basic neural networks to advanced deep
+          learning techniques, we'll explore how machines can learn and make
           intelligent decisions.
         </Typography>
       </Box>

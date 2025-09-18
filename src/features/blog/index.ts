@@ -1,4 +1,3 @@
-export { BlogDrawer } from './Drawer';
 export { default as LatestBlogDeck } from './LatestBlogDeck';
 // Blog hooks
 export {
@@ -6,3 +5,4 @@ export {
   useLatestBlogPosts,
   getAllBlogPosts,
 } from './hooks/useBlogPosts';
+export { BlogDrawer } from './Drawer';

@@ -23,7 +23,9 @@ export default function IndexLayout({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('sm')
+  );
   const isDesktop = !isMobile; // Just for readability
 
   const router = useRouter();

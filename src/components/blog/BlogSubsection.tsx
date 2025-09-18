@@ -25,7 +25,9 @@ const BlogSubsection = React.memo(function BlogSubsection({
   spacingBottom = true,
   spacingTop = true,
 }: BlogSubsectionProps): JSX.Element {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md')
+  );
   return (
     <>
       {(isMobile || (!isMobile && spacingTop)) && (

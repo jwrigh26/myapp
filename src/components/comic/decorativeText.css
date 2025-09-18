@@ -24,7 +24,10 @@
 
 /* Highlight - Light pale background with primary color */
 .bubble-highlight {
-  background-color: rgba(var(--mui-palette-primary-main-rgb, 25, 118, 210), 0.1);
+  background-color: rgba(
+    var(--mui-palette-primary-main-rgb, 25, 118, 210),
+    0.1
+  );
   padding: 2px 4px;
   border-radius: 4px;
   color: inherit;
@@ -32,7 +35,10 @@
 
 /* Highlight Secondary - Light pale background with secondary color */
 .bubble-highlight-secondary {
-  background-color: rgba(var(--mui-palette-secondary-main-rgb, 220, 0, 78), 0.1);
+  background-color: rgba(
+    var(--mui-palette-secondary-main-rgb, 220, 0, 78),
+    0.1
+  );
   padding: 2px 4px;
   border-radius: 4px;
   color: inherit;

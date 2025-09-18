@@ -39,7 +39,9 @@ interface CallToActionProps {
 
 export function Header({ title, buttonText, onClick }: CallToActionProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md')
+  );
   return (
     <CallToActionContainer>
       <Typography

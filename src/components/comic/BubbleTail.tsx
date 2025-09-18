@@ -54,7 +54,7 @@ export function BubbleTail({
   // Memoize positioning style - only recalculate when positioning params change
   const positionStyle = useMemo((): React.CSSProperties => {
     const { width, height } = svgData;
-    
+
     switch (attach) {
       case 'bottom-left':
         return {

@@ -43,7 +43,9 @@ export default function BackdropSection({
   children,
   ...props
 }: BackdropSectionProps) {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down('md')
+  );
   // const className = isMobile ? 'full-width' : 'breakout';
   const className = 'full-width'; // Default className for full-width sections
 

@@ -24,9 +24,15 @@ function applyAllRulesToString(
   decorativeRules: NonNullable<BubbleSpec['decorativeText']>
 ): React.ReactNode {
   // Separate rules by type
-  const firstLetterRule = decorativeRules.find(rule => rule.type === 'first-letter');
-  const searchReplaceRules = decorativeRules.filter(rule => rule.type === 'search-replace');
-  const symbolReplaceRules = decorativeRules.filter(rule => rule.type === 'symbol-replace');
+  const firstLetterRule = decorativeRules.find(
+    (rule) => rule.type === 'first-letter'
+  );
+  const searchReplaceRules = decorativeRules.filter(
+    (rule) => rule.type === 'search-replace'
+  );
+  const symbolReplaceRules = decorativeRules.filter(
+    (rule) => rule.type === 'symbol-replace'
+  );
 
   // Start with the original text
   let result: React.ReactNode = text;
@@ -35,7 +41,7 @@ function applyAllRulesToString(
   if (firstLetterRule && text.length > 0) {
     const firstChar = text.charAt(0);
     const restOfText = text.slice(1);
-    
+
     result = (
       <Fragment key="first-letter">
         <span className={firstLetterRule.className}>{firstChar}</span>
@@ -49,15 +55,22 @@ function applyAllRulesToString(
   if (allTextRules.length > 0) {
     const textToProcess = firstLetterRule ? text.slice(1) : text;
     // Filter out rules without searchText and ensure type safety
-    const validRules = allTextRules.filter((rule): rule is 
-      { type: 'search-replace'; className: string; searchText: string } |
-      { type: 'symbol-replace'; className: string; searchText: string; symbolText?: string } => 
-      Boolean(rule.searchText)
+    const validRules = allTextRules.filter(
+      (
+        rule
+      ): rule is
+        | { type: 'search-replace'; className: string; searchText: string }
+        | {
+            type: 'symbol-replace';
+            className: string;
+            searchText: string;
+            symbolText?: string;
+          } => Boolean(rule.searchText)
     );
-    
+
     if (validRules.length > 0) {
       const processedText = applyMultipleTextReplace(textToProcess, validRules);
-      
+
       if (firstLetterRule) {
         const firstChar = text.charAt(0);
         result = (
@@ -81,18 +94,23 @@ function applyAllRulesToString(
 function applyMultipleTextReplace(
   text: string,
   textRules: Array<
-    { type: 'search-replace'; className: string; searchText: string } |
-    { type: 'symbol-replace'; className: string; searchText: string; symbolText?: string }
+    | { type: 'search-replace'; className: string; searchText: string }
+    | {
+        type: 'symbol-replace';
+        className: string;
+        searchText: string;
+        symbolText?: string;
+      }
   >
 ): React.ReactNode {
   if (textRules.length === 0) return text;
 
   // Build a single regex that captures all search terms
   const searchTerms = textRules
-    .map(rule => rule.searchText)
+    .map((rule) => rule.searchText)
     .filter(Boolean)
     .map(escapeRegExp);
-  
+
   if (searchTerms.length === 0) return text;
 
   const combinedRegex = new RegExp(`(${searchTerms.join('|')})`, 'gi');
@@ -103,14 +121,18 @@ function applyMultipleTextReplace(
       {parts.map((part, index) => {
         // Find which rule matches this part
         const matchingRule = textRules.find(
-          rule => rule.searchText && part.toLowerCase() === rule.searchText.toLowerCase()
+          (rule) =>
+            rule.searchText &&
+            part.toLowerCase() === rule.searchText.toLowerCase()
         );
 
         if (matchingRule) {
           // For symbol-replace, use symbolText or default symbols
-          const displayText = matchingRule.type === 'symbol-replace' 
-            ? (matchingRule.symbolText || getDefaultSymbols(matchingRule.searchText))
-            : part;
+          const displayText =
+            matchingRule.type === 'symbol-replace'
+              ? matchingRule.symbolText ||
+                getDefaultSymbols(matchingRule.searchText)
+              : part;
 
           return (
             <span key={index} className={matchingRule.className}>
@@ -130,15 +152,15 @@ function applyMultipleTextReplace(
  */
 function getDefaultSymbols(word: string): string {
   const symbolMap: Record<string, string> = {
-    'damn': '@#$%',
-    'hell': '#@!!',
-    'crap': '$#!†',
-    'darn': '@#*!',
-    'shit': '$#!†',
-    'fuck': '#@$%',
-    'ass': '@$$',
+    damn: '@#$%',
+    hell: '#@!!',
+    crap: '$#!†',
+    darn: '@#*!',
+    shit: '$#!†',
+    fuck: '#@$%',
+    ass: '@$$',
   };
-  
+
   return symbolMap[word.toLowerCase()] || '@#$%';
 }
 

@@ -29,7 +29,7 @@ declare module '@mui/material/styles' {
     mobile: true; // 375px
     mobileLg: true; // 414px
   }
-  
+
   interface Palette {
     custom: {
       neutral: PaletteColor;
@@ -427,11 +427,11 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     }),
     [toggleTheme, isDarkMode]
   );
-  console.log(
-    'ThemeProvider rendered with mode:',
-    isDarkMode ? 'dark' : 'light'
-  );
-  console.log(theme);
+  // console.log(
+  //   'ThemeProvider rendered with mode:',
+  //   isDarkMode ? 'dark' : 'light'
+  // );
+  // console.log(theme);
 
   return (
     <ThemeContext.Provider value={themeContextValue}>

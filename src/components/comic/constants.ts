@@ -20,15 +20,18 @@ export const ANCHOR_TRANSFORMS: Record<BubbleAnchor, string> = {
   'top-right': 'translate(-100%, -100%)',
   'bottom-left': 'translate(0%, 0%)',
   'bottom-right': 'translate(-100%, 0%)',
-  'center': 'translate(-50%, -50%)',
+  center: 'translate(-50%, -50%)',
 } as const;
 
-export const ANCHOR_TRANSFORM_ORIGINS: Record<BubbleAnchor, React.CSSProperties['transformOrigin']> = {
+export const ANCHOR_TRANSFORM_ORIGINS: Record<
+  BubbleAnchor,
+  React.CSSProperties['transformOrigin']
+> = {
   'top-left': 'top left',
   'top-right': 'top right',
   'bottom-left': 'bottom left',
   'bottom-right': 'bottom right',
-  'center': 'center',
+  center: 'center',
 } as const;
 
 // Static base style for SVG tail positioning - avoids object recreation

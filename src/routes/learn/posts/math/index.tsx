@@ -46,7 +46,7 @@ function MathIndex() {
     {
       title: 'Hello Math World',
       description:
-        'A friendly introduction to the mathematical concepts we\'ll explore together',
+        "A friendly introduction to the mathematical concepts we'll explore together",
       path: '/learn/posts/math/hello-world',
       date: '2025-01-01',
       readTime: '3 min read',
@@ -68,7 +68,7 @@ function MathIndex() {
         </Typography>
         <Typography variant="body1" paragraph>
           Mathematics forms the foundation of computer science and engineering.
-          Here you'll find explorations of mathematical concepts, proofs, and 
+          Here you'll find explorations of mathematical concepts, proofs, and
           their practical applications in solving real-world problems. Whether
           it's discrete math, calculus, linear algebra, or statistics, we'll
           break down complex topics into understandable pieces.

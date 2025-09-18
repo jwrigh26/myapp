@@ -54,12 +54,12 @@ export function ComicBreakoutPanel({
   const isMobile = useIsMobile();
   return (
     <>
-    <Spacer size={gap} />
-    <ComicWrapper className={isMobile ? 'fullwidth' : 'breakout'}>
-      <ComicInternalGrid columns={columns} gap={0} id={id}>
-        {children}
-      </ComicInternalGrid>
-    </ComicWrapper>
+      <Spacer size={gap} />
+      <ComicWrapper className={isMobile ? 'fullwidth' : 'breakout'}>
+        <ComicInternalGrid columns={columns} gap={0} id={id}>
+          {children}
+        </ComicInternalGrid>
+      </ComicWrapper>
     </>
   );
 }
@@ -73,12 +73,12 @@ export function ComicPanel({
   const isMobile = useIsMobile();
   return (
     <>
-    <Spacer size={gap} />
-    <ComicWrapper className={isMobile ? 'fullwidth' : 'breakout'}>
-      <ComicInternalGrid columns={columns} gap={gap} id={id}>
-        {children}
-      </ComicInternalGrid>
-    </ComicWrapper>
+      <Spacer size={gap} />
+      <ComicWrapper className={isMobile ? 'fullwidth' : 'breakout'}>
+        <ComicInternalGrid columns={columns} gap={gap} id={id}>
+          {children}
+        </ComicInternalGrid>
+      </ComicWrapper>
     </>
   );
 }
