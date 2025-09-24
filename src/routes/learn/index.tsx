@@ -49,6 +49,14 @@ function LearnHome() {
           🧠 <strong>Data Structures & Algorithms</strong> - Problem-solving
           techniques and computational thinking
         </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          🐍 <strong>Python Programming</strong> - From basics to advanced
+          Python development
+        </Typography>
+        <Typography variant="body1" sx={{ mb: 2 }}>
+          📝 <strong>Git & Version Control</strong> - Mastering collaborative
+          development workflows
+        </Typography>
         <Typography variant="body1" sx={{ mb: 3 }}>
           🤖 <strong>AI & Machine Learning</strong> - Exploring the frontiers of
           artificial intelligence

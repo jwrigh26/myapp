@@ -14,6 +14,8 @@ import {
   mdiReact,
   mdiPencilRuler,
   mdiInformation,
+  mdiLanguagePython,
+  mdiGit,
 } from '@mdi/js';
 
 // Main navigation items configuration
@@ -90,6 +92,18 @@ const learnCategories: NavCategory[] = [
     title: 'Data Structures & Algorithms',
     icon: mdiBrain,
     path: '/learn/posts/dsa',
+  },
+  {
+    id: 'python',
+    title: 'Python Programming',
+    icon: mdiLanguagePython,
+    path: '/learn/posts/python',
+  },
+  {
+    id: 'git',
+    title: 'Git & Version Control',
+    icon: mdiGit,
+    path: '/learn/posts/git',
   },
   {
     id: 'ai',

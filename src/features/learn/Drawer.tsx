@@ -2,7 +2,7 @@ import {
   FeatureDrawer,
   type FeatureCategory,
 } from '@/components/FeatureDrawer';
-import { mdiBookEducationOutline, mdiBrain, mdiCalculator } from '@mdi/js';
+import { mdiBookEducationOutline, mdiBrain, mdiCalculator, mdiLanguagePython, mdiGit } from '@mdi/js';
 
 const learnCategories: FeatureCategory[] = [
   {
@@ -16,6 +16,18 @@ const learnCategories: FeatureCategory[] = [
     title: 'DSA',
     icon: mdiBrain,
     path: '/learn/posts/dsa',
+  },
+  {
+    id: 'python',
+    title: 'Python',
+    icon: mdiLanguagePython,
+    path: '/learn/posts/python',
+  },
+  {
+    id: 'git',
+    title: 'Git',
+    icon: mdiGit,
+    path: '/learn/posts/git',
   },
   {
     id: 'ai',

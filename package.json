@@ -27,6 +27,7 @@
     "@types/node": "^22.13.5",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@types/react-katex": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
     "@vitejs/plugin-react": "^4.3.2",
@@ -54,6 +55,7 @@
     "react-dnd-preview": "^9.0.0",
     "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "^18.3.1",
+    "react-katex": "^3.1.0",
     "react-transition-group": "^4.4.5"
   }
 }

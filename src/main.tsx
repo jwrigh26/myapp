@@ -4,6 +4,7 @@ import { SnackbarProvider } from '@/context/SnackbarContext';
 import ThemeProvider from '@/ThemeProvider';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { StyledEngineProvider } from '@mui/material/styles';
 import ReactDOM from 'react-dom/client';
 import { routeTree } from './routeTree.gen';
 import { queryClient } from './utils/queryClient';
@@ -50,15 +51,17 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <BreakpointProvider>
-          <SnackbarProvider>
-            <ComponentStateProvider>
-              <RouterProvider router={router} context={{ user: 'Me' }} />
-            </ComponentStateProvider>
-          </SnackbarProvider>
-        </BreakpointProvider>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider>
+          <BreakpointProvider>
+            <SnackbarProvider>
+              <ComponentStateProvider>
+                <RouterProvider router={router} context={{ user: 'Me' }} />
+              </ComponentStateProvider>
+            </SnackbarProvider>
+          </BreakpointProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </QueryClientProvider>
   );
 }
