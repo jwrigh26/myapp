@@ -1,18 +1,20 @@
-import { MiniVariantDrawer } from '@/components/Drawer';
+import { MiniVariantDrawer, MiniDrawerHeader } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer, useToggle } from '@/hooks/useContext';
-import { mdiBookOpen, mdiChevronRight } from '@mdi/js';
+import { mdiBookOpen, mdiChevronRight, mdiChevronLeft } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
+import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { styled, useTheme } from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import type { RegisteredRouter } from '@tanstack/react-router';
 import { createLink, useMatchRoute, useRouter } from '@tanstack/react-router';
 import { forwardRef } from 'react';
+import CustomLink from './LinkButton';
 
 // ################################################
 // ### Types
@@ -28,7 +30,7 @@ export interface FeatureCategory {
 export interface FeatureDrawerConfig {
   categories: FeatureCategory[];
   drawerKey: string;
-  featureName: string; // for navigation context
+  featureName: 'blog' | 'learn';
 }
 
 interface MUILinkProps {
@@ -71,7 +73,7 @@ export function FeatureDrawer({
   );
 
   return (
-    <MiniVariantDrawer width={256} drawerKey={drawerKey}>
+    <MiniVariantDrawer width={256} drawerKey={drawerKey} header={<DrawerHeader drawerKey={drawerKey} featureName={featureName} />} anchor='left'>
       {categories.map((category) => {
         const isActiveRoute = !!matchRoute({
           to: category.path,
@@ -94,6 +96,96 @@ export function FeatureDrawer({
         );
       })}
     </MiniVariantDrawer>
+  );
+}
+
+// ################################################
+// ### Drawer Header
+// ################################################
+
+function DrawerHeader({ drawerKey, featureName: type }: { drawerKey: string, featureName: 'blog' | 'learn' }) {
+  const theme = useTheme();
+  const router = useRouter();
+  const matchRoute = useMatchRoute();
+
+  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
+
+  const handleDrawerToggle = () => {
+    if (open) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  };
+
+  const headerColor = theme.mixins.decomposeColor(
+    theme.palette.primary.contrastText,
+    0.5
+  );
+
+  // Check if we're on the exact /blog route
+  const isOnBlogOverview = !!matchRoute({
+    to: `/${type}`,
+    fuzzy: false, // Exact match only
+  });
+
+  return (
+    <>
+      <MiniDrawerHeader open={open}>
+        {open && (
+          <CustomLink
+            to={`/${type}`}
+            variant="text"
+            size="small"
+            startIcon={
+              <Icon
+                path={mdiBookOpen}
+                fontSize="small"
+                sx={{
+                  color: isOnBlogOverview
+                    ? theme.palette.primary.contrastText
+                    : headerColor,
+                }}
+              />
+            }
+            sx={{
+              color: isOnBlogOverview
+                ? theme.palette.primary.contrastText
+                : headerColor,
+              textTransform: 'none',
+              fontSize: '0.875rem',
+              minWidth: 'auto',
+              padding: theme.spacing(0.5, 1),
+              backgroundColor: isOnBlogOverview
+                ? 'rgba(255, 255, 255, 0.08)'
+                : 'transparent',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                color: theme.palette.primary.contrastText,
+                '& .MuiSvgIcon-root': {
+                  color: theme.palette.primary.contrastText,
+                },
+              },
+            }}
+          >
+            {type === 'blog' ? 'Blog' : 'Learn'}
+          </CustomLink>
+        )}
+        <IconButton onClick={handleDrawerToggle}>
+          <Icon
+            path={theme.direction === 'rtl' ? mdiChevronRight : mdiChevronLeft}
+            sx={{
+              color: theme.palette.primary.contrastText,
+              transform: open ? 'rotate(0deg)' : 'rotate(180deg)',
+              transition: theme.transitions.create('transform', {
+                duration: theme.transitions.duration.shortest,
+              }),
+            }}
+          />
+        </IconButton>
+      </MiniDrawerHeader>
+      <Divider sx={{ borderColor: theme.palette.primary.main }} />
+    </>
   );
 }
 

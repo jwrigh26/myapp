@@ -1,10 +1,5 @@
 import { useDrawer } from '@/hooks/useContext';
-import {
-  mdiBookOpen,
-  mdiChevronLeft,
-  mdiChevronRight,
-  mdiCloseBoxOutline,
-} from '@mdi/js';
+import { mdiCloseBoxOutline } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
@@ -40,7 +35,7 @@ export const StyledPermanentDrawer = styled(Drawer, {
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.background.default,
     border: 'none',
     [theme.breakpoints.up('sm')]: {
       width: width || theme.mixins.drawerWidth,
@@ -55,22 +50,20 @@ export const StyledPermanentDrawer = styled(Drawer, {
 
 interface PermanentDrawerProps extends DrawerProps {
   width?: number;
+  secondary?: boolean; // If true, use secondary color scheme
+  anchor?: 'left' | 'right';
 }
 
 export function PermanentDrawer({
   anchor = 'left',
   children,
   width,
-  ...props
 }: PermanentDrawerProps) {
+  const StyledDrawer = StyledPermanentDrawer;
   return (
-    <StyledPermanentDrawer
-      anchor={anchor}
-      variant="permanent"
-      width={width}
-      {...props}
-    >
-      <Content>{children}</Content>
+    <StyledPermanentDrawer anchor={anchor} variant="permanent" width={width}>
+      <ToolbarSpacer />
+      {children}
     </StyledPermanentDrawer>
   );
 }
@@ -96,7 +89,6 @@ export function TemporaryDrawer({
   children,
   onClose: handleClose,
   open,
-  ...props
 }: DrawerProps) {
   return (
     <StyledTemporaryDrawer
@@ -104,9 +96,8 @@ export function TemporaryDrawer({
       variant="temporary"
       open={open}
       onClose={handleClose}
-      {...props}
     >
-      <Content>{children}</Content>
+      {children}
     </StyledTemporaryDrawer>
   );
 }
@@ -132,7 +123,6 @@ export function MobileDrawer({
   children,
   onClose: handleClose,
   open,
-  ...props
 }: DrawerProps) {
   return (
     <StyledMobileDrawer
@@ -140,10 +130,9 @@ export function MobileDrawer({
       variant="temporary"
       open={open}
       onClose={handleClose}
-      {...props}
     >
       {/* <ToolbarSpacer /> */}
-      <Content>{children}</Content>
+      {children}
     </StyledMobileDrawer>
   );
 }
@@ -173,7 +162,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const MiniDrawerHeader = styled('div', {
+export const MiniDrawerHeader = styled('div', {
   shouldForwardProp: (prop) => prop !== 'open',
 })<{ open?: boolean }>(({ theme, open }) => ({
   display: 'flex',
@@ -183,7 +172,7 @@ const MiniDrawerHeader = styled('div', {
   ...theme.mixins.toolbar,
 }));
 
-const StyledMiniDrawer = styled(Drawer, {
+const StyledMiniPrimaryDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== 'open' && prop !== 'width',
 })<{ open?: boolean; width?: number }>(({ theme, width = 256 }) => ({
   width,
@@ -225,14 +214,20 @@ const StyledMiniDrawer = styled(Drawer, {
 
 interface MiniVariantDrawerProps {
   children: React.ReactNode;
+  header?: React.ReactNode;
   width?: number;
   drawerKey: string;
+  anchor?: 'left' | 'right';
+  secondary?: boolean; // If true, use secondary color scheme
 }
 
 export function MiniVariantDrawer({
   children,
+  header,
   width = 256,
   drawerKey,
+  anchor = 'left',
+  secondary = false,
 }: MiniVariantDrawerProps) {
   const theme = useTheme();
   const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
@@ -257,65 +252,15 @@ export function MiniVariantDrawer({
     fuzzy: false, // Exact match only
   });
 
+  // const StyledDrawer = secondary ? StyledMiniSecondaryDrawer : StyledMiniPrimaryDrawer;
+  const StyledDrawer = StyledMiniPrimaryDrawer;
+
   return (
-    <StyledMiniDrawer variant="permanent" open={open} width={width}>
+    <StyledDrawer variant="permanent" open={open} width={width} anchor={anchor}>
       <ToolbarSpacer />
-      <MiniDrawerHeader open={open}>
-        {open && (
-          <CustomLink
-            to="/blog"
-            variant="text"
-            size="small"
-            startIcon={
-              <Icon
-                path={mdiBookOpen}
-                fontSize="small"
-                sx={{
-                  color: isOnBlogOverview
-                    ? theme.palette.primary.contrastText
-                    : headerColor,
-                }}
-              />
-            }
-            sx={{
-              color: isOnBlogOverview
-                ? theme.palette.primary.contrastText
-                : headerColor,
-              textTransform: 'none',
-              fontSize: '0.875rem',
-              minWidth: 'auto',
-              padding: theme.spacing(0.5, 1),
-              backgroundColor: isOnBlogOverview
-                ? 'rgba(255, 255, 255, 0.08)'
-                : 'transparent',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                color: theme.palette.primary.contrastText,
-                '& .MuiSvgIcon-root': {
-                  color: theme.palette.primary.contrastText,
-                },
-              },
-            }}
-          >
-            Overview
-          </CustomLink>
-        )}
-        <IconButton onClick={handleDrawerToggle}>
-          <Icon
-            path={theme.direction === 'rtl' ? mdiChevronRight : mdiChevronLeft}
-            sx={{
-              color: theme.palette.primary.contrastText,
-              transform: open ? 'rotate(0deg)' : 'rotate(180deg)',
-              transition: theme.transitions.create('transform', {
-                duration: theme.transitions.duration.shortest,
-              }),
-            }}
-          />
-        </IconButton>
-      </MiniDrawerHeader>
-      <Divider sx={{ borderColor: theme.palette.primary.main }} />
+      {header}
       <MiniContent open={open}>{children}</MiniContent>
-    </StyledMiniDrawer>
+    </StyledDrawer>
   );
 }
 
@@ -386,10 +331,13 @@ export function DrawerHeader({
 // ### Drawer Content
 // ################################################
 
+// Currently being used in NavigationDrawer and Settings
+
 interface SheetProps {
   children?: React.ReactNode;
   sx?: object;
   className?: string;
+  gap?: number;
 }
 const SheetPaper = styled(Paper)(({ theme }) => ({
   height: '100%',
@@ -402,10 +350,10 @@ const SheetContent = styled(Stack)(({ theme }) => ({
   flex: 1,
 }));
 
-export function Sheet({ children, sx, className }: SheetProps) {
+export function Sheet({ children, sx, className, gap = 2 }: SheetProps) {
   return (
     <SheetPaper sx={sx} className={className}>
-      <SheetContent gap={2}>{children}</SheetContent>
+      <SheetContent gap={gap}>{children}</SheetContent>
     </SheetPaper>
   );
 }

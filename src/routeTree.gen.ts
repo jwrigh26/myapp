@@ -27,6 +27,8 @@ import { Route as LearnPostsAiIndexImport } from './routes/learn/posts/ai/index'
 import { Route as BlogPostsSoftSkillsIndexImport } from './routes/blog/posts/soft-skills/index'
 import { Route as BlogPostsFrontendDesignIndexImport } from './routes/blog/posts/frontend-design/index'
 import { Route as LearnPostsPythonWhiteboardingEssentialsImport } from './routes/learn/posts/python/whiteboarding-essentials'
+import { Route as LearnPostsPythonStylingExampleImport } from './routes/learn/posts/python/styling-example'
+import { Route as LearnPostsPythonDataStructuresDeepDiveImport } from './routes/learn/posts/python/data-structures-deep-dive'
 import { Route as LearnPostsMathHelloWorldImport } from './routes/learn/posts/math/hello-world'
 import { Route as LearnPostsGitHelloWorldImport } from './routes/learn/posts/git/hello-world'
 import { Route as LearnPostsDsaHelloWorldImport } from './routes/learn/posts/dsa/hello-world'
@@ -134,6 +136,20 @@ const LearnPostsPythonWhiteboardingEssentialsRoute =
   LearnPostsPythonWhiteboardingEssentialsImport.update({
     id: '/posts/python/whiteboarding-essentials',
     path: '/posts/python/whiteboarding-essentials',
+    getParentRoute: () => LearnRouteRoute,
+  } as any)
+
+const LearnPostsPythonStylingExampleRoute =
+  LearnPostsPythonStylingExampleImport.update({
+    id: '/posts/python/styling-example',
+    path: '/posts/python/styling-example',
+    getParentRoute: () => LearnRouteRoute,
+  } as any)
+
+const LearnPostsPythonDataStructuresDeepDiveRoute =
+  LearnPostsPythonDataStructuresDeepDiveImport.update({
+    id: '/posts/python/data-structures-deep-dive',
+    path: '/posts/python/data-structures-deep-dive',
     getParentRoute: () => LearnRouteRoute,
   } as any)
 
@@ -318,6 +334,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnPostsMathHelloWorldImport
       parentRoute: typeof LearnRouteImport
     }
+    '/learn/posts/python/data-structures-deep-dive': {
+      id: '/learn/posts/python/data-structures-deep-dive'
+      path: '/posts/python/data-structures-deep-dive'
+      fullPath: '/learn/posts/python/data-structures-deep-dive'
+      preLoaderRoute: typeof LearnPostsPythonDataStructuresDeepDiveImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/posts/python/styling-example': {
+      id: '/learn/posts/python/styling-example'
+      path: '/posts/python/styling-example'
+      fullPath: '/learn/posts/python/styling-example'
+      preLoaderRoute: typeof LearnPostsPythonStylingExampleImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/learn/posts/python/whiteboarding-essentials': {
       id: '/learn/posts/python/whiteboarding-essentials'
       path: '/posts/python/whiteboarding-essentials'
@@ -414,6 +444,8 @@ interface LearnRouteRouteChildren {
   LearnPostsDsaHelloWorldRoute: typeof LearnPostsDsaHelloWorldRoute
   LearnPostsGitHelloWorldRoute: typeof LearnPostsGitHelloWorldRoute
   LearnPostsMathHelloWorldRoute: typeof LearnPostsMathHelloWorldRoute
+  LearnPostsPythonDataStructuresDeepDiveRoute: typeof LearnPostsPythonDataStructuresDeepDiveRoute
+  LearnPostsPythonStylingExampleRoute: typeof LearnPostsPythonStylingExampleRoute
   LearnPostsPythonWhiteboardingEssentialsRoute: typeof LearnPostsPythonWhiteboardingEssentialsRoute
   LearnPostsAiIndexRoute: typeof LearnPostsAiIndexRoute
   LearnPostsDsaIndexRoute: typeof LearnPostsDsaIndexRoute
@@ -428,6 +460,9 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnPostsDsaHelloWorldRoute: LearnPostsDsaHelloWorldRoute,
   LearnPostsGitHelloWorldRoute: LearnPostsGitHelloWorldRoute,
   LearnPostsMathHelloWorldRoute: LearnPostsMathHelloWorldRoute,
+  LearnPostsPythonDataStructuresDeepDiveRoute:
+    LearnPostsPythonDataStructuresDeepDiveRoute,
+  LearnPostsPythonStylingExampleRoute: LearnPostsPythonStylingExampleRoute,
   LearnPostsPythonWhiteboardingEssentialsRoute:
     LearnPostsPythonWhiteboardingEssentialsRoute,
   LearnPostsAiIndexRoute: LearnPostsAiIndexRoute,
@@ -459,6 +494,8 @@ export interface FileRoutesByFullPath {
   '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
   '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute
   '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute
+  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute
   '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute
   '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute
   '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute
@@ -485,6 +522,8 @@ export interface FileRoutesByTo {
   '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
   '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute
   '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute
+  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute
   '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute
   '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute
   '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute
@@ -514,6 +553,8 @@ export interface FileRoutesById {
   '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute
   '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute
   '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute
+  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute
+  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute
   '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute
   '/blog/posts/frontend-design/': typeof BlogPostsFrontendDesignIndexRoute
   '/blog/posts/soft-skills/': typeof BlogPostsSoftSkillsIndexRoute
@@ -544,6 +585,8 @@ export interface FileRouteTypes {
     | '/learn/posts/dsa/hello-world'
     | '/learn/posts/git/hello-world'
     | '/learn/posts/math/hello-world'
+    | '/learn/posts/python/data-structures-deep-dive'
+    | '/learn/posts/python/styling-example'
     | '/learn/posts/python/whiteboarding-essentials'
     | '/blog/posts/frontend-design'
     | '/blog/posts/soft-skills'
@@ -569,6 +612,8 @@ export interface FileRouteTypes {
     | '/learn/posts/dsa/hello-world'
     | '/learn/posts/git/hello-world'
     | '/learn/posts/math/hello-world'
+    | '/learn/posts/python/data-structures-deep-dive'
+    | '/learn/posts/python/styling-example'
     | '/learn/posts/python/whiteboarding-essentials'
     | '/blog/posts/frontend-design'
     | '/blog/posts/soft-skills'
@@ -596,6 +641,8 @@ export interface FileRouteTypes {
     | '/learn/posts/dsa/hello-world'
     | '/learn/posts/git/hello-world'
     | '/learn/posts/math/hello-world'
+    | '/learn/posts/python/data-structures-deep-dive'
+    | '/learn/posts/python/styling-example'
     | '/learn/posts/python/whiteboarding-essentials'
     | '/blog/posts/frontend-design/'
     | '/blog/posts/soft-skills/'
@@ -667,6 +714,8 @@ export const routeTree = rootRoute
         "/learn/posts/dsa/hello-world",
         "/learn/posts/git/hello-world",
         "/learn/posts/math/hello-world",
+        "/learn/posts/python/data-structures-deep-dive",
+        "/learn/posts/python/styling-example",
         "/learn/posts/python/whiteboarding-essentials",
         "/learn/posts/ai/",
         "/learn/posts/dsa/",
@@ -726,6 +775,14 @@ export const routeTree = rootRoute
     },
     "/learn/posts/math/hello-world": {
       "filePath": "learn/posts/math/hello-world.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/python/data-structures-deep-dive": {
+      "filePath": "learn/posts/python/data-structures-deep-dive.tsx",
+      "parent": "/learn"
+    },
+    "/learn/posts/python/styling-example": {
+      "filePath": "learn/posts/python/styling-example.tsx",
       "parent": "/learn"
     },
     "/learn/posts/python/whiteboarding-essentials": {

@@ -385,7 +385,17 @@ function DrawerHeader({
       }}
     >
       <Stack direction="row" spacing={1} alignItems="center" sx={{ flex: 1 }}>
-        <ButtonBase onClick={handleOnClick}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={1}
+          onClick={handleOnClick}
+          sx={{
+            cursor: 'pointer',
+            userSelect: 'none',
+            '&:hover': { opacity: 0.8 },
+          }}
+        >
           {showBack && onBack ? (
             <IconButton
               edge="start"
@@ -412,7 +422,7 @@ function DrawerHeader({
           >
             {title}
           </Typography>
-        </ButtonBase>
+        </Stack>
         {showBack && onBack ? (
           <IconButton
             onClick={onClose}
