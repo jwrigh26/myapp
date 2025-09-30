@@ -7,14 +7,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/learn/posts/python/data-structures-deep-dive')({
+export const Route = createFileRoute(
+  '/learn/posts/python/data-structures-deep-dive'
+)({
   component: DataStructuresDeepDive,
   head: () => ({
     getTitle: () => 'Data Structures Deep Dive',
     meta: [
       {
         name: 'description',
-        content: 'Advanced Python data structures for competitive programming and system design',
+        content:
+          'Advanced Python data structures for competitive programming and system design',
       },
       {
         title: 'Data Structures Deep Dive',
@@ -32,10 +35,10 @@ function DataStructuresDeepDive() {
       />
 
       <IntroBlock>
-        Beyond the basics lie powerful data structures that can make the 
-        difference between an elegant solution and a brute force approach. 
-        Let's explore advanced Python patterns used in competitive programming 
-        and system design.
+        Beyond the basics lie powerful data structures that can make the
+        difference between an elegant solution and a brute force approach. Let's
+        explore advanced Python patterns used in competitive programming and
+        system design.
       </IntroBlock>
 
       <SectionSpacer />
@@ -47,9 +50,9 @@ function DataStructuresDeepDive() {
         </Typography>
 
         <ProseBlock>
-          Perfect for autocomplete, spell checkers, and any prefix-based 
-          operations. A trie can search, insert, and delete strings in 
-          O(m) time where m is the length of the string.
+          Perfect for autocomplete, spell checkers, and any prefix-based
+          operations. A trie can search, insert, and delete strings in O(m) time
+          where m is the length of the string.
         </ProseBlock>
 
         <CodeBlock
@@ -106,8 +109,8 @@ print(trie.starts_with("appl"))  # True`}
 
         <ProseBlock>
           Essential for graph problems involving connectivity, cycle detection,
-          and dynamic connectivity queries. Near constant time operations
-          with path compression and union by rank.
+          and dynamic connectivity queries. Near constant time operations with
+          path compression and union by rank.
         </ProseBlock>
 
         <CodeBlock
@@ -191,7 +194,7 @@ def num_islands(grid):
 
           <ProseBlock>
             Perfect for problems requiring frequent range queries and updates.
-            Both operations run in O(log n) time, making it ideal for 
+            Both operations run in O(log n) time, making it ideal for
             competitive programming scenarios.
           </ProseBlock>
 

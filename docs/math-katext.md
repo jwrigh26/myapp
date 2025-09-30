@@ -1,8 +1,9 @@
 ---
+title: 'LaTeX Math Cheatsheet (for React + KaTeX)'
+description: 'Practical LaTeX math you’ll actually use in a blog/app UI. Works great with react-katex and MUI.'
+---
 
-title: "LaTeX Math Cheatsheet (for React + KaTeX)"
-description: "Practical LaTeX math you’ll actually use in a blog/app UI. Works great with react-katex and MUI."
----------------------------------------------------------------------------------------------------------------
+---
 
 > **TL;DR** Use KaTeX via `react-katex` for fast, beautiful math in React. This page shows the LaTeX you’ll use 90% of the time, with React-ready snippets.
 
@@ -20,7 +21,9 @@ export default function Demo() {
   return (
     <div>
       <InlineMath math="E = mc^2" />
-      <BlockMath math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`} />
+      <BlockMath
+        math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`}
+      />
     </div>
   );
 }
@@ -101,7 +104,8 @@ A &= \ell \cdot w \\
 **React example:**
 
 ```tsx
-<BlockMath math={String.raw`\begin{aligned}
+<BlockMath
+  math={String.raw`\begin{aligned}
 A &= \ell \cdot w \\
   &= \frac{20\,\text{m}^2}{4\,\text{m}} \\
   &= 5\,\text{m}
@@ -179,13 +183,15 @@ A = \ell \cdot w,\quad \; \frac{A}{\ell} = w
 
 ## React + MUI Tips
 
-* Wrap KaTeX output in MUI `Typography` to inherit font sizing/colors.
-* Prefer a light **panel** background in light mode and a subtle **hover** tint in dark mode.
-* Example (from a reusable `MathBlock`):
+- Wrap KaTeX output in MUI `Typography` to inherit font sizing/colors.
+- Prefer a light **panel** background in light mode and a subtle **hover** tint in dark mode.
+- Example (from a reusable `MathBlock`):
 
 ```tsx
 <Typography component="div" sx={{ '& .katex': { color: 'inherit' } }}>
-  <BlockMath math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`} />
+  <BlockMath
+    math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`}
+  />
 </Typography>
 ```
 
@@ -193,31 +199,31 @@ A = \ell \cdot w,\quad \; \frac{A}{\ell} = w
 
 ## Escaping in JS/TS Strings
 
-* In normal string literals, write `"\\frac{a}{b}"`.
-* Prefer template literals with `String.raw`:
+- In normal string literals, write `"\\frac{a}{b}"`.
+- Prefer template literals with `String.raw`:
 
 ```tsx
 const expr = String.raw`\frac{a}{b}`;
-<BlockMath math={expr} />
+<BlockMath math={expr} />;
 ```
 
 ---
 
 ## Debugging Render Errors
 
-* Check the **KaTeX Supported Functions** list for the command you used.
-* Ensure braces `{ ... }` are balanced.
-* For alignment, you must include `&` before the alignment point and `\\` for newlines.
-* If something renders inline too small, switch to a **block** equation.
+- Check the **KaTeX Supported Functions** list for the command you used.
+- Ensure braces `{ ... }` are balanced.
+- For alignment, you must include `&` before the alignment point and `\\` for newlines.
+- If something renders inline too small, switch to a **block** equation.
 
 ---
 
 ## Handy References
 
-* **KaTeX Supported Functions:** [https://katex.org/docs/supported.html](https://katex.org/docs/supported.html)
-* **Overleaf Math Guide:** [https://www.overleaf.com/learn/latex/Mathematical\_expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
-* **Detexify (draw a symbol → LaTeX code):** [http://detexify.kirelabs.org/classify.html](http://detexify.kirelabs.org/classify.html)
-* **LaTeX Math Symbols PDF:** [https://wch.github.io/latexsheet/latexsheet.pdf](https://wch.github.io/latexsheet/latexsheet.pdf)
+- **KaTeX Supported Functions:** [https://katex.org/docs/supported.html](https://katex.org/docs/supported.html)
+- **Overleaf Math Guide:** [https://www.overleaf.com/learn/latex/Mathematical_expressions](https://www.overleaf.com/learn/latex/Mathematical_expressions)
+- **Detexify (draw a symbol → LaTeX code):** [http://detexify.kirelabs.org/classify.html](http://detexify.kirelabs.org/classify.html)
+- **LaTeX Math Symbols PDF:** [https://wch.github.io/latexsheet/latexsheet.pdf](https://wch.github.io/latexsheet/latexsheet.pdf)
 
 ---
 

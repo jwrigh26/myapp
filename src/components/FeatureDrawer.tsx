@@ -73,7 +73,12 @@ export function FeatureDrawer({
   );
 
   return (
-    <MiniVariantDrawer width={256} drawerKey={drawerKey} header={<DrawerHeader drawerKey={drawerKey} featureName={featureName} />} anchor='left'>
+    <MiniVariantDrawer
+      width={256}
+      drawerKey={drawerKey}
+      header={<DrawerHeader drawerKey={drawerKey} featureName={featureName} />}
+      anchor="left"
+    >
       {categories.map((category) => {
         const isActiveRoute = !!matchRoute({
           to: category.path,
@@ -103,7 +108,13 @@ export function FeatureDrawer({
 // ### Drawer Header
 // ################################################
 
-function DrawerHeader({ drawerKey, featureName: type }: { drawerKey: string, featureName: 'blog' | 'learn' }) {
+function DrawerHeader({
+  drawerKey,
+  featureName: type,
+}: {
+  drawerKey: string;
+  featureName: 'blog' | 'learn';
+}) {
   const theme = useTheme();
   const router = useRouter();
   const matchRoute = useMatchRoute();

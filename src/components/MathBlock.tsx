@@ -10,7 +10,10 @@ import { styled } from '@mui/material/styles';
 
 // KaTeX renderer (fast, great for app UIs)
 import 'katex/dist/katex.min.css';
-import { InlineMath as KaTeXInline, BlockMath as KaTeXBlock } from 'react-katex';
+import {
+  InlineMath as KaTeXInline,
+  BlockMath as KaTeXBlock,
+} from 'react-katex';
 
 // ---------------------------------------------
 // Public API
@@ -21,14 +24,30 @@ export interface MathInlineProps {
   /** Color token or any CSS color (defaults to `inherit`). */
   color?: string;
   /** MUI Typography variant for surrounding text context. */
-  variant?: 'body1' | 'body2' | 'caption' | 'overline' | 'subtitle1' | 'subtitle2';
+  variant?:
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'overline'
+    | 'subtitle1'
+    | 'subtitle2';
   /** Add left/right padding so the inline math breathes in prose. */
   padded?: boolean;
 }
 
-export function MathInline({ math, color, variant = 'body1', padded = false }: MathInlineProps) {
+export function MathInline({
+  math,
+  color,
+  variant = 'body1',
+  padded = false,
+}: MathInlineProps) {
   return (
-    <Typography component="span" variant={variant} color={color} sx={{ px: padded ? 0.5 : 0 }}>
+    <Typography
+      component="span"
+      variant={variant}
+      color={color}
+      sx={{ px: padded ? 0.5 : 0 }}
+    >
       {/* KaTeX renders only the math span; Typography keeps font sizing consistent with prose */}
       <KaTeXInline math={math} />
     </Typography>
@@ -62,7 +81,11 @@ export function MathBlock({
         <KaTeXBlock math={math} />
       </Typography>
       {caption && (
-        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', textAlign: align, mt: 0.5 }}>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ display: 'block', textAlign: align, mt: 0.5 }}
+        >
           {caption}
         </Typography>
       )}
@@ -83,7 +106,13 @@ export interface EquationStepsProps {
   outlined?: boolean;
 }
 
-export function EquationSteps({ steps, title, subtitle, alignEquals = true, outlined = true }: EquationStepsProps) {
+export function EquationSteps({
+  steps,
+  title,
+  subtitle,
+  alignEquals = true,
+  outlined = true,
+}: EquationStepsProps) {
   const joined = steps
     .map((line) => (alignEquals ? toAlignedLine(line) : line))
     .join(' \\ ');
@@ -91,7 +120,10 @@ export function EquationSteps({ steps, title, subtitle, alignEquals = true, outl
   const math = String.raw`\begin{aligned} ${joined} \end{aligned}`;
 
   return (
-    <Card variant={outlined ? 'outlined' : undefined} sx={{ overflowX: 'auto' }}>
+    <Card
+      variant={outlined ? 'outlined' : undefined}
+      sx={{ overflowX: 'auto' }}
+    >
       {(title || subtitle) && (
         <CardHeader
           title={title}
@@ -126,11 +158,20 @@ export interface EquationCardProps {
   footer?: React.ReactNode; // e.g., explanation text
 }
 
-export function EquationCard({ title, subtitle, equations, footer }: EquationCardProps) {
+export function EquationCard({
+  title,
+  subtitle,
+  equations,
+  footer,
+}: EquationCardProps) {
   return (
     <Card variant="outlined" sx={{ overflowX: 'auto' }}>
       {(title || subtitle) && (
-        <CardHeader title={title} subheader={subtitle} sx={{ '& .MuiCardHeader-title': { fontWeight: 600 } }} />
+        <CardHeader
+          title={title}
+          subheader={subtitle}
+          sx={{ '& .MuiCardHeader-title': { fontWeight: 600 } }}
+        />
       )}
       {(title || subtitle) && <Divider />}
       <CardContent>
@@ -159,11 +200,22 @@ export interface ProseMathBlockProps {
   caption?: string;
 }
 
-export function ProseMathBlock({ title, subtitle, children, equation, caption }: ProseMathBlockProps) {
+export function ProseMathBlock({
+  title,
+  subtitle,
+  children,
+  equation,
+  caption,
+}: ProseMathBlockProps) {
   return (
     <Box>
       {title && (
-        <Typography variant="h4" component="h2" color="primary.main" gutterBottom>
+        <Typography
+          variant="h4"
+          component="h2"
+          color="primary.main"
+          gutterBottom
+        >
           {title}
         </Typography>
       )}
@@ -173,7 +225,12 @@ export function ProseMathBlock({ title, subtitle, children, equation, caption }:
         </Typography>
       )}
       {children && (
-        <Typography variant="body1" component="div" color="text.primary" sx={{ mb: equation ? 1 : 0 }}>
+        <Typography
+          variant="body1"
+          component="div"
+          color="text.primary"
+          sx={{ mb: equation ? 1 : 0 }}
+        >
           {children}
         </Typography>
       )}
@@ -192,10 +249,14 @@ interface BlockRootProps {
 }
 
 const BlockRoot = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'align' && prop !== 'dense' && prop !== 'backgroundColor',
+  shouldForwardProp: (prop) =>
+    prop !== 'align' && prop !== 'dense' && prop !== 'backgroundColor',
 })<BlockRootProps>(({ theme, align, dense, backgroundColor }) => {
-  const defaultBg = backgroundColor ??
-    (theme.palette.mode === 'dark' ? theme.palette.action.hover : theme.palette.action.selected);
+  const defaultBg =
+    backgroundColor ??
+    (theme.palette.mode === 'dark'
+      ? theme.palette.action.hover
+      : theme.palette.action.selected);
   return {
     display: 'block',
     textAlign: align,
@@ -222,9 +283,11 @@ export function _DemoExamples() {
         equation={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`}
         caption="Area ÷ side length = other side length"
       >
-        When reading story problems, write one equation that matches the sentence. Use
+        When reading story problems, write one equation that matches the
+        sentence. Use
         <MathInline math={String.raw`\,\text{m}^2\,`} padded /> for area and
-        <MathInline math={String.raw`\,\text{m}\,`} padded /> for length, then simplify.
+        <MathInline math={String.raw`\,\text{m}\,`} padded /> for length, then
+        simplify.
       </ProseMathBlock>
 
       <EquationCard
@@ -234,7 +297,12 @@ export function _DemoExamples() {
           String.raw`\frac{21}{10} \div \frac{14}{5} = \frac{21}{10} \cdot \frac{5}{14}`,
           String.raw`= \frac{105}{140} = \frac{3}{4}`,
         ]}
-        footer={<Typography variant="body2">So each shift was \(\tfrac{3}{4}\) hours (45 minutes).</Typography>}
+        footer={
+          <Typography variant="body2">
+            So each shift was \(\tfrac{3}
+            {4}\) hours (45 minutes).
+          </Typography>
+        }
       />
 
       <EquationSteps
@@ -263,6 +331,6 @@ export function _DemoExamples() {
  * \div               % division symbol ÷
  * \leq, \geq         % ≤, ≥
  * \approx, \equiv    % ≈, ≡
- * 
+ *
  * <MathBlock math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`} />
  */

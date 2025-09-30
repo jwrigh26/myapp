@@ -7,11 +7,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PermanentDrawer, Sheet } from './Drawer';
-import { useIsMobile } from '@/context/BreakpointContext';
+import { PermanentDrawer, Sheet, MobileDrawer } from './Drawer';
+import { useDrawer } from '@/hooks/useContext';
 
 // ################################################
 // ### Types
@@ -30,42 +31,8 @@ export interface InlineDrawerProps {
   title?: string;
   open?: boolean;
   onToggle?: () => void;
+  desktop?: boolean;
 }
-
-// ################################################
-// ### Styled Components
-// ################################################
-
-const StyledListItemButton = styled(ListItemButton, {
-  shouldForwardProp: (prop) => prop !== 'itemLevel' && prop !== 'active',
-})<{ itemLevel: 1 | 2 | 3; active?: boolean }>(
-  ({ theme, itemLevel, active }) => ({
-    paddingLeft: theme.spacing(itemLevel === 1 ? 1 : itemLevel === 2 ? 2 : 4),
-    paddingRight: theme.spacing(0),
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    borderRadius: theme.shape.borderRadius,
-    margin: theme.spacing(0.25, 1),
-    backgroundColor: active ? theme.palette.action.selected : 'transparent',
-    fontSize:
-      itemLevel === 1 ? '0.90rem' : itemLevel === 2 ? '0.875rem' : '0.8rem',
-    '&:hover': {
-      backgroundColor: active
-        ? theme.palette.action.selected
-        : theme.palette.action.hover,
-    },
-    '& .list-item-text': {
-      fontSize: 'inherit',
-      fontWeight: 300,
-      color:
-        itemLevel === 1
-          ? theme.palette.text.primary
-          : itemLevel === 2
-            ? theme.palette.text.secondary
-            : theme.palette.text.disabled,
-    },
-  })
-);
 
 // ################################################
 // ### Main Component
@@ -74,17 +41,13 @@ const StyledListItemButton = styled(ListItemButton, {
 export function SecondaryDrawer({
   items,
   title,
-  open: controlledOpen,
-  onToggle,
+  desktop = true,
 }: InlineDrawerProps) {
-  const isMobile = useIsMobile();
-  const [internalOpen, setInternalOpen] = useState(false);
+  const { isOpen: drawerIsOpen, closeDrawer } = useDrawer('secondary-drawer');
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [activeAnchor, setActiveAnchor] = useState<string>('');
 
   // Use controlled open state if provided, otherwise use internal state
-  const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
-  const handleToggle = onToggle || (() => setInternalOpen(!internalOpen));
 
   // Flatten items for easier anchor tracking
   const flatItems = useMemo(() => {
@@ -111,12 +74,12 @@ export function SecondaryDrawer({
         });
         setActiveAnchor(anchor);
         // Close mobile drawer after navigation
-        if (isMobile) {
-          handleToggle();
+        if (!desktop) {
+          closeDrawer();
         }
       }
     },
-    [isMobile, handleToggle]
+    [desktop, closeDrawer]
   );
 
   // Track scroll position to highlight active section
@@ -207,19 +170,46 @@ export function SecondaryDrawer({
     [expandedItems, activeAnchor, toggleExpanded, scrollToAnchor]
   );
 
-  // Desktop version - inline sticky drawer
+  // Render navigation content
+  const navigationContent = (
+    <>
+      {title && (
+        <>
+          <Typography variant="subtitle2" sx={{ pt: 2, pb: 1, pl: 1 }}>
+            {title}
+          </Typography>
+          <Divider />
+        </>
+      )}
+      <List disablePadding sx={{ mt: 1 }}>
+        {renderItems(items)}
+      </List>
+    </>
+  );
+
+  // Desktop version - permanent drawer
+  if (desktop) {
+    return (
+      <PermanentDrawer width={228} key="inline-drawer" anchor="right" secondary>
+        {navigationContent}
+      </PermanentDrawer>
+    );
+  }
+
+  // Mobile/Tablet version - temporary drawer
   return (
-    <PermanentDrawer width={228} key="inline-drawer" anchor="right" secondary>
-        {title && (
-          <>
-            <Typography variant="subtitle2" sx={{ pt: 2, pb: 1, pl: 1 }}>
-              {title}
-            </Typography>
-            <Divider/>
-          </>
-        )}
-        <List disablePadding sx={{mt: 1}}>{renderItems(items)}</List>
-    </PermanentDrawer>
+    <MobileDrawer anchor="right" open={drawerIsOpen} onClose={closeDrawer}>
+      <SecondaryDrawerHeader
+        title={title || 'Contents'}
+        onClose={closeDrawer}
+      />
+      <Divider />
+      <Sheet sx={{ flexGrow: 1, overflow: 'auto' }}>
+        <List disablePadding sx={{ mt: 1 }}>
+          {renderItems(items)}
+        </List>
+      </Sheet>
+    </MobileDrawer>
   );
 }
 
@@ -252,3 +242,82 @@ export function createNavigationItems(
     })),
   }));
 }
+
+// ################################################
+// ### Supporting Components
+// ################################################
+
+interface SecondaryDrawerHeaderProps {
+  title: string;
+  onClose: () => void;
+}
+
+function SecondaryDrawerHeader({ title, onClose }: SecondaryDrawerHeaderProps) {
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+        '& *': {
+          userSelect: 'none',
+        },
+      }}
+    >
+      <Typography variant="h6" color="common.white" sx={{ flex: 1 }}>
+        {title}
+      </Typography>
+      <IconButton
+        onClick={onClose}
+        size="small"
+        sx={{
+          color: theme.palette.primary.contrastText,
+          '&:hover': { opacity: 0.8 },
+        }}
+      >
+        <Icon path={mdiClose} />
+      </IconButton>
+    </Box>
+  );
+}
+
+// ################################################
+// ### Styled Components
+// ################################################
+
+const StyledListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'itemLevel' && prop !== 'active',
+})<{ itemLevel: 1 | 2 | 3; active?: boolean }>(
+  ({ theme, itemLevel, active }) => ({
+    paddingLeft: theme.spacing(itemLevel === 1 ? 1 : itemLevel === 2 ? 2 : 4),
+    paddingRight: theme.spacing(0),
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    borderRadius: theme.shape.borderRadius,
+    margin: theme.spacing(0.25, 1),
+    backgroundColor: active ? theme.palette.action.selected : 'transparent',
+    fontSize:
+      itemLevel === 1 ? '0.90rem' : itemLevel === 2 ? '0.875rem' : '0.8rem',
+    '&:hover': {
+      backgroundColor: active
+        ? theme.palette.action.selected
+        : theme.palette.action.hover,
+    },
+    '& .list-item-text': {
+      fontSize: 'inherit',
+      fontWeight: 300,
+      color:
+        itemLevel === 1
+          ? theme.palette.text.primary
+          : itemLevel === 2
+            ? theme.palette.text.secondary
+            : theme.palette.text.disabled,
+    },
+  })
+);

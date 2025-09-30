@@ -59,13 +59,16 @@ function StylingExample() {
       </Box>
 
       {/* Method 2: className with data attributes - most explicit */}
-      <div className="anchor-section my-custom-section-styles" data-id="explicit-data-attrs">
+      <div
+        className="anchor-section my-custom-section-styles"
+        data-id="explicit-data-attrs"
+      >
         <h3 className="anchor-title my-custom-title-styles" data-level="1">
           Method 2: Explicit Data Attributes
         </h3>
 
         <ProseBlock>
-          This approach uses className="anchor-section" with data-id and 
+          This approach uses className="anchor-section" with data-id and
           className="anchor-title" with data-level. Most explicit and flexible.
         </ProseBlock>
 
@@ -87,8 +90,8 @@ function StylingExample() {
         </h3>
 
         <ProseBlock>
-          Use semantic HTML with className markers. The parser infers level 
-          from the heading tag (h1-h6) and maps to navigation levels.
+          Use semantic HTML with className markers. The parser infers level from
+          the heading tag (h1-h6) and maps to navigation levels.
         </ProseBlock>
 
         <CodeBlock
@@ -108,8 +111,8 @@ function StylingExample() {
           </h4>
 
           <ProseBlock>
-            This subsection will automatically be nested under its parent
-            based on the h4 tag (level 2).
+            This subsection will automatically be nested under its parent based
+            on the h4 tag (level 2).
           </ProseBlock>
         </div>
       </section>
@@ -123,8 +126,8 @@ function StylingExample() {
         </header>
 
         <ProseBlock>
-          Use semantic HTML5 elements like article, section, header for 
-          better accessibility and SEO while maintaining navigation parsing.
+          Use semantic HTML5 elements like article, section, header for better
+          accessibility and SEO while maintaining navigation parsing.
         </ProseBlock>
 
         <CodeBlock
@@ -142,9 +145,7 @@ function StylingExample() {
 
       {/* Styling Benefits Section */}
       <div className="anchor-section" id="styling-benefits">
-        <h3 className="anchor-title">
-          Styling Benefits
-        </h3>
+        <h3 className="anchor-title">Styling Benefits</h3>
 
         <ProseBlock>
           With className-based navigation markers, you can:
@@ -152,16 +153,16 @@ function StylingExample() {
 
         <ul>
           <li>Use any HTML element (div, section, article, aside, etc.)</li>
-          <li>Apply any CSS framework (Tailwind, styled-components, emotion)</li>
+          <li>
+            Apply any CSS framework (Tailwind, styled-components, emotion)
+          </li>
           <li>Create custom design systems without MUI dependency</li>
           <li>Maintain semantic HTML for accessibility</li>
           <li>Use CSS Grid, Flexbox, or any layout approach</li>
         </ul>
 
         <div className="anchor-section" id="css-examples">
-          <h4 className="anchor-title">
-            CSS Styling Examples
-          </h4>
+          <h4 className="anchor-title">CSS Styling Examples</h4>
 
           <CodeBlock
             language="css"

@@ -12,9 +12,9 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { createFileRoute } from '@tanstack/react-router';
 
-
-
-export const Route = createFileRoute('/learn/posts/python/whiteboarding-essentials')({
+export const Route = createFileRoute(
+  '/learn/posts/python/whiteboarding-essentials'
+)({
   component: PythonWhiteboardingGuide,
   head: () => ({
     getTitle: () => 'Whiteboarding Essentials',
@@ -34,33 +34,33 @@ export const Route = createFileRoute('/learn/posts/python/whiteboarding-essentia
 function PythonWhiteboardingGuide() {
   return (
     <>
-        <TitleBlock
-          title="Python Whiteboarding Essentials"
-          subtitle="Your complete guide to acing technical interviews"
-        />
+      <TitleBlock
+        title="Python Whiteboarding Essentials"
+        subtitle="Your complete guide to acing technical interviews"
+      />
 
-        <IntroBlock>
-          Master the Python fundamentals that matter most in technical interviews.
-          This comprehensive guide covers everything from basic syntax to advanced
-          data structures, with practical examples you'll actually use in coding
-          challenges.
-        </IntroBlock>
+      <IntroBlock>
+        Master the Python fundamentals that matter most in technical interviews.
+        This comprehensive guide covers everything from basic syntax to advanced
+        data structures, with practical examples you'll actually use in coding
+        challenges.
+      </IntroBlock>
 
-        <ProseBlock>
-          Whether you're preparing for your first technical interview or
-          refreshing your Python knowledge, this guide distills the essential
-          concepts into practical, interview-focused examples. Let's dive into the
-          Python patterns that will make you confident at the whiteboard.
-        </ProseBlock>
+      <ProseBlock>
+        Whether you're preparing for your first technical interview or
+        refreshing your Python knowledge, this guide distills the essential
+        concepts into practical, interview-focused examples. Let's dive into the
+        Python patterns that will make you confident at the whiteboard.
+      </ProseBlock>
 
-        <SectionSpacer />
+      <SectionSpacer />
 
-        {/* Variables Section */}
-        <Box id="variables" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Variables & Dynamic Typing
-          </Typography>
-        
+      {/* Variables Section */}
+      <Box id="variables" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Variables & Dynamic Typing
+        </Typography>
+
         <ProseBlock>
           Python's dynamic typing is both a blessing and a potential pitfall in
           interviews. Understanding how variables work is crucial for writing
@@ -103,11 +103,11 @@ if result is None:
         </NoteBlock>
       </Box>
 
-        {/* If Statements Section */}
-        <Box id="conditionals" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            If Statements & Logic
-          </Typography>
+      {/* If Statements Section */}
+      <Box id="conditionals" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          If Statements & Logic
+        </Typography>
 
         <ProseBlock>
           Python's clean syntax shines in conditional statements. No parentheses
@@ -176,11 +176,11 @@ if not value:       # Catches None AND empty values
         </BackdropSection>
       </Box>
 
-        {/* Loops Section */}
-        <Box id="loops" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Loops & Iteration Patterns
-          </Typography>
+      {/* Loops Section */}
+      <Box id="loops" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Loops & Iteration Patterns
+        </Typography>
 
         <ProseBlock>
           Mastering Python's loop patterns is essential for algorithmic
@@ -229,18 +229,18 @@ for n1, n2 in zip(nums1, nums2):
         />
 
         <NoteBlock>
-          <strong>Pro Tip:</strong> <span className="code">enumerate()</span> and{' '}
-          <span className="code">zip()</span> are incredibly useful in
+          <strong>Pro Tip:</strong> <span className="code">enumerate()</span>{' '}
+          and <span className="code">zip()</span> are incredibly useful in
           interviews. They often lead to cleaner solutions than manual index
           management!
         </NoteBlock>
       </Box>
 
-        {/* Math Section */}
-        <Box id="math" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Math Operations & Edge Cases
-          </Typography>
+      {/* Math Section */}
+      <Box id="math" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Math Operations & Edge Cases
+        </Typography>
 
         <ProseBlock>
           Python's math operations have some unique behaviors that can trip you
@@ -292,11 +292,11 @@ print(2**200 < pos_inf)   # True - Python handles big numbers!`}
         </QuoteBlock>
       </Box>
 
-        {/* Arrays Section */}
-        <Box id="arrays" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Arrays (Lists) - The Interview Workhorse
-          </Typography>
+      {/* Arrays Section */}
+      <Box id="arrays" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Arrays (Lists) - The Interview Workhorse
+        </Typography>
 
         <ProseBlock>
           Python lists are incredibly versatile and appear in almost every
@@ -366,11 +366,11 @@ matrix = [[i+j for j in range(3)] for i in range(3)]`}
 
       <Divider sx={{ my: 4 }} />
 
-        {/* Strings Section */}
-        <Box id="strings" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Strings - Immutable but Powerful
-          </Typography>
+      {/* Strings Section */}
+      <Box id="strings" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Strings - Immutable but Powerful
+        </Typography>
 
         <CodeBlock
           language="python"
@@ -410,20 +410,20 @@ print(text.replace('l', 'x'))  # 'Hexxo Worxd'`}
         />
       </Box>
 
-        {/* Data Structures Section */}
-        <Box id="data-structures" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Essential Data Structures
+      {/* Data Structures Section */}
+      <Box id="data-structures" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Essential Data Structures
+        </Typography>
+
+        <Box id="queues">
+          <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
+            Queues (Collections.deque)
           </Typography>
 
-          <Box id="queues">
-            <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
-              Queues (Collections.deque)
-            </Typography>
-
-        <CodeBlock
-          language="python"
-          code={`from collections import deque
+          <CodeBlock
+            language="python"
+            code={`from collections import deque
 
 # Queues - O(1) operations on both ends!
 queue = deque()
@@ -444,17 +444,17 @@ top = stack.pop()      # Pop (LIFO)
 bfs_queue = deque([1])
 bfs_queue.append(2)    # Enqueue
 first = bfs_queue.popleft()  # Dequeue (FIFO)`}
-        />
-          </Box>
+          />
+        </Box>
 
-          <Box id="sets">
-            <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
-              Sets - O(1) Lookups
-            </Typography>
+        <Box id="sets">
+          <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
+            Sets - O(1) Lookups
+          </Typography>
 
-        <CodeBlock
-          language="python"
-          code={`# Sets - no duplicates, O(1) operations
+          <CodeBlock
+            language="python"
+            code={`# Sets - no duplicates, O(1) operations
 my_set = set()
 my_set.add(1)
 my_set.add(2)
@@ -479,17 +479,17 @@ print(evens)           # {0, 2, 4, 6, 8}
 # Convert list to set for O(1) lookups
 nums = [1, 2, 3, 4, 5]
 num_set = set(nums)    # Now O(1) to check if value exists`}
-        />
-          </Box>
+          />
+        </Box>
 
-          <Box id="dictionaries">
-            <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
-              Dictionaries (Hash Maps)
-            </Typography>
+        <Box id="dictionaries">
+          <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
+            Dictionaries (Hash Maps)
+          </Typography>
 
-        <CodeBlock
-          language="python"
-          code={`# Dictionaries - the interview MVP!
+          <CodeBlock
+            language="python"
+            code={`# Dictionaries - the interview MVP!
 my_dict = {}
 my_dict['key'] = 'value'    # Insert/Update - O(1)
 print(my_dict['key'])       # Access - O(1)
@@ -520,17 +520,17 @@ for value in my_dict.values():         # Values only
     
 for key, value in my_dict.items():     # Both
     print(f"{key}: {value}")`}
-        />
-          </Box>
+          />
+        </Box>
 
-          <Box id="tuples">
-            <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
-              Tuples - Immutable Sequences
-            </Typography>
+        <Box id="tuples">
+          <Typography variant="h4" component="h4" sx={{ mb: 2, mt: 3 }}>
+            Tuples - Immutable Sequences
+          </Typography>
 
-        <CodeBlock
-          language="python"
-          code={`# Tuples - immutable, hashable
+          <CodeBlock
+            language="python"
+            code={`# Tuples - immutable, hashable
 coords = (1, 2)
 point = (x, y) = (3, 4)  # Unpacking
 print(coords[0])         # 1
@@ -552,15 +552,15 @@ visited = set()
 visited.add((0, 0))
 visited.add((1, 2))
 print((0, 0) in visited)  # True - O(1) lookup`}
-        />
-          </Box>
+          />
         </Box>
+      </Box>
 
-        {/* Heaps Section */}
-        <Box id="heaps" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Heaps - Priority Queue Magic
-          </Typography>
+      {/* Heaps Section */}
+      <Box id="heaps" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Heaps - Priority Queue Magic
+        </Typography>
 
         <CodeBlock
           language="python"
@@ -630,11 +630,11 @@ def merge_k_lists(lists):
         </NoteBlock>
       </Box>
 
-        {/* Functions Section */}
-        <Box id="functions" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Functions & Scope
-          </Typography>
+      {/* Functions Section */}
+      <Box id="functions" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Functions & Scope
+        </Typography>
 
         <CodeBlock
           language="python"
@@ -698,11 +698,11 @@ print(value)        # 5 - original unchanged`}
         />
       </Box>
 
-        {/* Classes Section */}
-        <Box id="classes" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Classes for Data Structure Problems
-          </Typography>
+      {/* Classes Section */}
+      <Box id="classes" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Classes for Data Structure Problems
+        </Typography>
 
         <CodeBlock
           language="python"
@@ -775,16 +775,16 @@ def build_tree_from_array(arr):
         />
       </Box>
 
-        {/* Lambda Section */}
-        <Box id="lambdas" sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-            Lambda Functions - Concise Power
-          </Typography>
+      {/* Lambda Section */}
+      <Box id="lambdas" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
+          Lambda Functions - Concise Power
+        </Typography>
 
         <ProseBlock>
-          Lambda functions are anonymous, one-line functions perfect for sorting,
-          filtering, and binary search predicates. Master these patterns for
-          clean, Pythonic solutions.
+          Lambda functions are anonymous, one-line functions perfect for
+          sorting, filtering, and binary search predicates. Master these
+          patterns for clean, Pythonic solutions.
         </ProseBlock>
 
         <CodeBlock
@@ -867,7 +867,7 @@ print(triple(5))  # 15`}
           >
             Ready for the Whiteboard!
           </Typography>
-          
+
           <ProseBlock backgroundColor="transparent" color="white">
             These Python fundamentals form the foundation of virtually every
             technical interview problem. From basic variable manipulation to

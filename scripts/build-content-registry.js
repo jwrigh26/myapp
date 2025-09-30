@@ -13,25 +13,31 @@ export class ContentAnalyzer {
   constructor() {
     this.patterns = {
       // Box with id followed by Typography heading (current approach)
-      boxWithHeading: /<Box\s+[^>]*id="([^"]+)"[^>]*>[\s\S]*?<Typography\s+[^>]*variant="h([1-6])"[^>]*>\s*([^<]+?)\s*<\/Typography>/g,
-      
+      boxWithHeading:
+        /<Box\s+[^>]*id="([^"]+)"[^>]*>[\s\S]*?<Typography\s+[^>]*variant="h([1-6])"[^>]*>\s*([^<]+?)\s*<\/Typography>/g,
+
       // Typography with id attribute
-      typographyWithId: /<Typography[^>]*id="([^"]+)"[^>]*variant="h([1-6])"[^>]*>\s*([^<]+?)\s*<\/Typography>/g,
-      
+      typographyWithId:
+        /<Typography[^>]*id="([^"]+)"[^>]*variant="h([1-6])"[^>]*>\s*([^<]+?)\s*<\/Typography>/g,
+
       // Comments indicating sections
-      sectionComments: /\/\*[^*]*([^*]+?)\s*Section[^*]*\*\/[\s\S]*?<Box[^>]*id="([^"]+)"/g,
-      
+      sectionComments:
+        /\/\*[^*]*([^*]+?)\s*Section[^*]*\*\/[\s\S]*?<Box[^>]*id="([^"]+)"/g,
+
       // TitleBlock components
       titleBlock: /<TitleBlock[^>]*title="([^"]+)"/g,
-      
+
       // NEW: className="anchor-section" with data-id + className="anchor-title" with data-level
-      classNameWithDataAttrs: /className="[^"]*anchor-section[^"]*"[^>]*data-id="([^"]+)"[^>]*>[\s\S]*?className="[^"]*anchor-title[^"]*"[^>]*data-level="([1-3])"[^>]*>\s*([^<]+?)\s*</g,
-      
+      classNameWithDataAttrs:
+        /className="[^"]*anchor-section[^"]*"[^>]*data-id="([^"]+)"[^>]*>[\s\S]*?className="[^"]*anchor-title[^"]*"[^>]*data-level="([1-3])"[^>]*>\s*([^<]+?)\s*</g,
+
       // NEW: Simpler className approach - anchor-section with id + anchor-title (infer level from heading tag)
-      classNameWithId: /className="[^"]*anchor-section[^"]*"[^>]*id="([^"]+)"[^>]*>[\s\S]*?<(h[1-6])[^>]*className="[^"]*anchor-title[^"]*"[^>]*>\s*([^<]+?)\s*<\/\2>/g,
-      
+      classNameWithId:
+        /className="[^"]*anchor-section[^"]*"[^>]*id="([^"]+)"[^>]*>[\s\S]*?<(h[1-6])[^>]*className="[^"]*anchor-title[^"]*"[^>]*>\s*([^<]+?)\s*<\/\2>/g,
+
       // NEW: Most flexible - any element with anchor-section class containing anchor-title
-      flexibleClassName: /<[^>]+className="[^"]*anchor-section[^"]*"[^>]*id="([^"]+)"[^>]*>[\s\S]*?<[^>]+className="[^"]*anchor-title[^"]*"[^>]*>\s*([^<]+?)\s*<\/[^>]+>/g,
+      flexibleClassName:
+        /<[^>]+className="[^"]*anchor-section[^"]*"[^>]*id="([^"]+)"[^>]*>[\s\S]*?<[^>]+className="[^"]*anchor-title[^"]*"[^>]*>\s*([^<]+?)\s*<\/[^>]+>/g,
     };
   }
 
@@ -42,12 +48,12 @@ export class ContentAnalyzer {
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
       const items = [];
-      
+
       // Extract all potential navigation items
       this.extractBoxWithHeadings(content, items);
       this.extractTypographyWithIds(content, items);
       this.extractFromComments(content, items);
-      
+
       // Sort by position in file and build hierarchy
       const sorted = items.sort((a, b) => a.position - b.position);
       return this.buildHierarchy(sorted);
@@ -59,36 +65,38 @@ export class ContentAnalyzer {
 
   extractBoxWithHeadings(content, items) {
     let match;
-    
+
     // Original Box + Typography pattern
     while ((match = this.patterns.boxWithHeading.exec(content)) !== null) {
       const [fullMatch, id, levelStr, title] = match;
       const level = this.normalizeLevel(parseInt(levelStr));
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level,
         position,
-        source: 'box-heading'
+        source: 'box-heading',
       });
     }
 
     // NEW: className with data attributes
-    while ((match = this.patterns.classNameWithDataAttrs.exec(content)) !== null) {
+    while (
+      (match = this.patterns.classNameWithDataAttrs.exec(content)) !== null
+    ) {
       const [fullMatch, id, levelStr, title] = match;
       const level = parseInt(levelStr);
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level,
         position,
-        source: 'className-data-attrs'
+        source: 'className-data-attrs',
       });
     }
 
@@ -97,14 +105,14 @@ export class ContentAnalyzer {
       const [fullMatch, id, headingTag, title] = match;
       const level = this.normalizeLevel(parseInt(headingTag.charAt(1))); // h1 -> 1, h2 -> 2, etc.
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level,
         position,
-        source: 'className-with-heading'
+        source: 'className-with-heading',
       });
     }
 
@@ -112,14 +120,14 @@ export class ContentAnalyzer {
     while ((match = this.patterns.flexibleClassName.exec(content)) !== null) {
       const [fullMatch, id, title] = match;
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level: 1, // Default to level 1
         position,
-        source: 'flexible-className'
+        source: 'flexible-className',
       });
     }
   }
@@ -130,14 +138,14 @@ export class ContentAnalyzer {
       const [fullMatch, id, levelStr, title] = match;
       const level = this.normalizeLevel(parseInt(levelStr));
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level,
         position,
-        source: 'typography-id'
+        source: 'typography-id',
       });
     }
   }
@@ -147,14 +155,14 @@ export class ContentAnalyzer {
     while ((match = this.patterns.sectionComments.exec(content)) !== null) {
       const [fullMatch, title, id] = match;
       const position = match.index;
-      
+
       items.push({
         id: id.trim(),
         title: this.cleanTitle(title),
         anchor: id.trim(),
         level: 1, // Comments typically indicate major sections
         position,
-        source: 'comment'
+        source: 'comment',
       });
     }
   }
@@ -162,7 +170,7 @@ export class ContentAnalyzer {
   normalizeLevel(headingLevel) {
     // Convert h1-h6 to 1-3 levels for navigation
     // h1, h2, h3 -> level 1 (main sections)
-    // h4 -> level 2 (subsections)  
+    // h4 -> level 2 (subsections)
     // h5, h6 -> level 3 (sub-subsections)
     if (headingLevel <= 3) return 1;
     if (headingLevel === 4) return 2;
@@ -184,10 +192,10 @@ export class ContentAnalyzer {
   buildHierarchy(items) {
     // Deduplicate and merge items by ID
     const itemMap = new Map();
-    
-    items.forEach(item => {
+
+    items.forEach((item) => {
       if (!item.title || item.title.trim() === '') return; // Skip empty titles
-      
+
       const existing = itemMap.get(item.id);
       if (existing) {
         // Keep the one with better title (longer, more descriptive)
@@ -199,13 +207,14 @@ export class ContentAnalyzer {
       }
     });
 
-    const uniqueItems = Array.from(itemMap.values())
-      .sort((a, b) => a.position - b.position);
+    const uniqueItems = Array.from(itemMap.values()).sort(
+      (a, b) => a.position - b.position
+    );
 
     const hierarchy = [];
     const stack = [];
 
-    uniqueItems.forEach(item => {
+    uniqueItems.forEach((item) => {
       // Pop items from stack that are at same or higher level
       while (stack.length > 0 && stack[stack.length - 1].level >= item.level) {
         stack.pop();
@@ -215,7 +224,7 @@ export class ContentAnalyzer {
         id: item.id,
         title: item.title,
         anchor: item.anchor,
-        level: item.level
+        level: item.level,
       };
 
       if (stack.length === 0) {
@@ -242,7 +251,7 @@ export class ContentAnalyzer {
   extractMetadata(filePath) {
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
-      
+
       const metadata = {
         title: this.extractTitle(content),
         description: this.extractDescription(content),
@@ -261,7 +270,7 @@ export class ContentAnalyzer {
       /getTitle:\s*\(\)\s*=>\s*['"`]([^'"`]+)['"`]/,
       /<TitleBlock[^>]*title="([^"]+)"/,
       /<Typography[^>]*variant="h1"[^>]*>\s*([^<]+?)\s*<\/Typography>/,
-      /title:\s*['"`]([^'"`]+)['"`]/
+      /title:\s*['"`]([^'"`]+)['"`]/,
     ];
 
     for (const pattern of patterns) {
@@ -278,7 +287,7 @@ export class ContentAnalyzer {
     const patterns = [
       /content:\s*['"`]([^'"`]+)['"`]/,
       /<IntroBlock[^>]*>\s*([^<]+?)\s*<\/IntroBlock>/,
-      /description:\s*['"`]([^'"`]+)['"`]/
+      /description:\s*['"`]([^'"`]+)['"`]/,
     ];
 
     for (const pattern of patterns) {
@@ -295,7 +304,7 @@ export class ContentAnalyzer {
     // Look for tags in comments or metadata
     const tagMatches = content.match(/\/\*[^*]*tags?:\s*([^*]+?)\*\//i);
     if (tagMatches) {
-      return tagMatches[1].split(',').map(tag => tag.trim());
+      return tagMatches[1].split(',').map((tag) => tag.trim());
     }
     return [];
   }
@@ -306,7 +315,7 @@ export class ContentAnalyzer {
  */
 export function buildAdvancedContentRegistry() {
   console.log('🔍 Building advanced content registry...');
-  
+
   const analyzer = new ContentAnalyzer();
   const registry = {};
   const postsDir = path.join(__dirname, '../src/routes/learn/posts');
@@ -315,29 +324,29 @@ export function buildAdvancedContentRegistry() {
     if (!fs.existsSync(dir)) return;
 
     const entries = fs.readdirSync(dir, { withFileTypes: true });
-    
-    entries.forEach(entry => {
+
+    entries.forEach((entry) => {
       const fullPath = path.join(dir, entry.name);
-      
+
       if (entry.isDirectory()) {
         scanDirectory(fullPath, `${routePrefix}/${entry.name}`);
       } else if (entry.name.endsWith('.tsx') && entry.name !== 'index.tsx') {
         const routeName = entry.name.replace('.tsx', '');
         const routePath = `${routePrefix}/${routeName}`.substring(1);
-        
+
         console.log(`   📄 Analyzing: ${routePath}`);
-        
+
         const items = analyzer.parseComponent(fullPath);
         const metadata = analyzer.extractMetadata(fullPath);
-        
+
         if (items.length > 0) {
           registry[routePath] = {
             ...metadata,
             items,
             lastUpdated: fs.statSync(fullPath).mtime.toISOString(),
-            filepath: fullPath
+            filepath: fullPath,
           };
-          
+
           console.log(`      ✅ Found ${items.length} sections`);
         }
       }
@@ -405,11 +414,11 @@ export function searchContent(query: string): Array<{ route: string; entry: Cont
 `;
 
   fs.writeFileSync(outputPath, output);
-  
+
   console.log(`✅ Advanced content registry generated:`);
   console.log(`   📊 ${Object.keys(registry).length} routes processed`);
   console.log(`   💾 Saved to: ${outputPath}`);
-  
+
   return registry;
 }
 

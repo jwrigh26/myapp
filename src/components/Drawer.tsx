@@ -26,9 +26,9 @@ const Content = styled(Box)(({ theme }) => ({
 export const StyledPermanentDrawer = styled(Drawer, {
   shouldForwardProp: (prop: string) => prop !== 'width',
 })<{ width?: number | string }>(({ theme, width }) => ({
-  flexShrink: 0,
+  flexShrink: 1,
   width: width || theme.mixins.drawerWidth,
-  display: 'none',
+  display: 'block',
   ['& .MuiDrawer-paper']: {
     overFlowX: 'hidden',
     height: '100%',
@@ -41,10 +41,6 @@ export const StyledPermanentDrawer = styled(Drawer, {
       width: width || theme.mixins.drawerWidth,
       boxShadow: '4px 0 6px -3px rgba(0, 0, 0, 0.1)',
     },
-  },
-  [theme.breakpoints.up('sm')]: {
-    display: 'block',
-    flexShrink: 0,
   },
 }));
 
@@ -105,16 +101,13 @@ export function TemporaryDrawer({
 export const StyledMobileDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
   boxSizing: 'border-box',
-  zIndex: theme.zIndex.appBar + 1,
+  zIndex: theme.zIndex.drawer + 2,
   ['& .MuiDrawer-paper']: {
     overFlowX: 'hidden',
     height: '100%',
     width: '80vw',
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
   },
 }));
 

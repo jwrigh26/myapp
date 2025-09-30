@@ -2,7 +2,7 @@ import Icon from '@/components/Icon';
 import LinkButton from '@/components/LinkButton';
 import LinkIconButton from '@/components/LinkIconButton';
 import { useDrawer } from '@/hooks/useContext';
-import { mdiCog, mdiGithub, mdiLinkedin } from '@mdi/js';
+import { mdiCog, mdiGithub, mdiLinkedin, mdiFormatListBulleted } from '@mdi/js';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Stack, { StackProps } from '@mui/material/Stack';
@@ -10,11 +10,15 @@ import { styled } from '@mui/material/styles';
 
 export default function Navigation({
   isMobile = false,
+  isTablet = false,
+  showSecondaryDrawer = false,
 }: {
   isMobile?: boolean;
+  isTablet?: boolean;
+  showSecondaryDrawer?: boolean;
 }) {
   const { openDrawer } = useDrawer('settings-drawer');
-
+  const { openDrawer: openSecondaryDrawer } = useDrawer('secondary-drawer');
   return (
     <NavStack direction="row" component="nav" gap={1}>
       {!isMobile && (
@@ -45,6 +49,12 @@ export default function Navigation({
           <Icon path={mdiLinkedin} />
         </NavLinkIconButton>
         <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+        {/* Secondary drawer icon for tablet/mobile */}
+        {(isTablet || isMobile) && showSecondaryDrawer && (
+          <NavIconButton size="medium" onClick={openSecondaryDrawer}>
+            <Icon fontSize="inherit" path={mdiFormatListBulleted} />
+          </NavIconButton>
+        )}
         <NavIconButton size="medium" edge="end" onClick={openDrawer}>
           <Icon fontSize="inherit" path={mdiCog} />
         </NavIconButton>

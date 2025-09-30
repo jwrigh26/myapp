@@ -9,24 +9,24 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Slide from '@mui/material/Slide';
-import { styled, useTheme, Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useRouter } from '@tanstack/react-router';
 import { ReactElement } from 'react';
+import {
+  useIsBreakpointUp,
+  useIsBreakpointDown,
+} from '@/context/BreakpointContext';
 
 export default function IndexLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down('sm')
-  );
-  const isDesktop = !isMobile; // Just for readability
+  const isDesktop = useIsBreakpointUp('sm'); // Just for readability
+  const isMobile = !isDesktop;
 
   const router = useRouter();
 
@@ -59,6 +59,13 @@ export default function IndexLayout({
 // ################################################
 
 function AppBarToolbar() {
+  const router = useRouter();
+  const isTablet = useIsBreakpointDown('sm');
+
+  // Show secondary drawer icon on learn routes
+  const showSecondaryDrawer =
+    router.state.location.pathname.startsWith('/learn/posts/');
+
   return (
     <StyledAppBar id="AppBar" elevation={0}>
       <Toolbar id="AppBarToolbar">
@@ -67,38 +74,22 @@ function AppBarToolbar() {
             JW
           </Typography>
         </StyledButtonBase>
-        <Navigation />
+        <Navigation
+          isTablet={isTablet}
+          showSecondaryDrawer={showSecondaryDrawer}
+        />
       </Toolbar>
     </StyledAppBar>
   );
 }
 
 function MobileAppToolbar() {
-  const { isOpen, toggleOpen } = useToggle('navigation-drawer');
+  const { toggleOpen } = useToggle('navigation-drawer');
   const router = useRouter();
-  const pathname = router.state.location.pathname;
 
-  // Get the base path (e.g., "blog" from "/blog/posts/foo1")
-  const pathParts = pathname.split('/').filter(Boolean);
-  const basePath = pathParts.length > 0 ? pathParts[0] : null;
-
-  const routePaths = {
-    blog: '/blog',
-    about: '/about',
-    game: '/game',
-    home: '/home',
-  };
-
-  // Format the base path to be capitalized (e.g., "Blog")
-  const formattedBasePath = basePath
-    ? basePath.charAt(0).toUpperCase() + basePath.slice(1)
-    : null;
-
-  // Note on how link below works safely with TS:
-  // typeof routePaths gets the type of the object (its structure)
-  // keyof then extracts all possible key names as a union type
-  // The 'as' keyword performs a type assertion, ensuring basePath
-  // can only be one of the valid keys
+  // Show secondary drawer icon on learn routes
+  const showSecondaryDrawer =
+    router.state.location.pathname.startsWith('/learn/posts/');
 
   return (
     <HideOnScroll>
@@ -118,7 +109,11 @@ function MobileAppToolbar() {
               JW
             </Typography>
           </StyledButtonBase>
-          <Navigation isMobile />
+          <Navigation
+            isMobile
+            isTablet
+            showSecondaryDrawer={showSecondaryDrawer}
+          />
         </Toolbar>
       </StyledAppBar>
     </HideOnScroll>

@@ -5,11 +5,11 @@ import Image, {
 import { useDrawer } from '@/hooks/useContext';
 import { formatDisplayDate } from '@/utils/date';
 import { isFunction } from '@/utils/safety';
-import { useIsMobile } from '@/context/BreakpointContext';
+import { useIsBreakpointDown } from '@/context/BreakpointContext';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { styled, useTheme, Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 type PositionProps = {
@@ -150,8 +150,7 @@ export default function CallToAction({
   imagePosition,
   date = '01-26-1982', // Default date string
 }: CallToActionProps) {
-  const theme = useTheme();
-  const isMobile = useIsMobile();
+  const isMobile = useIsBreakpointDown('md');
 
   // Get drawer state to determine width
   const { isOpen: isDrawerOpen } = useDrawer('blog-drawer');

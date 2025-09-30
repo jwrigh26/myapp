@@ -21,7 +21,6 @@ export function useNavigationItems(): {
 
   const { pathname } = location;
 
-
   useEffect(() => {
     function loadNavigation() {
       try {
@@ -34,10 +33,10 @@ export function useNavigationItems(): {
         if (currentPath.startsWith('/learn/posts/')) {
           // Extract route path (e.g., "/learn/posts/python/whiteboarding-essentials" -> "python/whiteboarding-essentials")
           const routePath = currentPath.replace('/learn/posts/', '');
-          
+
           const navigationItems = getNavigationItems(routePath);
           const contentTitle = getContentTitle(routePath);
-          
+
           setItems(navigationItems);
           setTitle(contentTitle);
         } else {
@@ -46,7 +45,9 @@ export function useNavigationItems(): {
           setTitle('Learn');
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load navigation');
+        setError(
+          err instanceof Error ? err.message : 'Failed to load navigation'
+        );
         console.error('Navigation loading error:', err);
       } finally {
         setLoading(false);

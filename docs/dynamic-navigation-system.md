@@ -11,6 +11,7 @@ The system automatically parses React component files to extract heading structu
 ### 1. Content Parser (`scripts/build-content-registry.js`)
 
 An advanced content analyzer that:
+
 - Parses React component files using regex patterns
 - Extracts heading structures from JSX elements
 - Builds hierarchical navigation trees
@@ -18,6 +19,7 @@ An advanced content analyzer that:
 - Generates a TypeScript registry file
 
 **Key Features:**
+
 - **Automatic Section Detection**: Finds `<Box id="section">` + `<Typography variant="h3">` patterns
 - **Hierarchical Structure**: Supports 3 levels of nesting (h3→1, h4→2, h5→3)
 - **Deduplication**: Merges duplicate IDs and keeps the best title
@@ -26,6 +28,7 @@ An advanced content analyzer that:
 ### 2. Generated Registry (`src/utils/contentRegistry.ts`)
 
 Auto-generated TypeScript file containing:
+
 ```typescript
 export const contentRegistry: Record<string, ContentEntry> = {
   "python/whiteboarding-essentials": {
@@ -47,6 +50,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
 ### 3. Navigation Hook (`src/hooks/useNavigationItems.ts`)
 
 React hook that:
+
 - Watches for route changes
 - Loads navigation items for the current route
 - Provides loading and error states
@@ -55,6 +59,7 @@ React hook that:
 ### 4. Dynamic Route Layout (`src/routes/learn/route.tsx`)
 
 Layout component that:
+
 - Uses the navigation hook
 - Conditionally renders the SecondaryDrawer
 - Shows loading/error states
@@ -90,11 +95,9 @@ The system supports multiple markup patterns, giving you flexibility in styling 
 
 ```tsx
 <section className="anchor-section prose-section" id="section-name">
-  <h3 className="anchor-title section-heading">
-    Section Title
-  </h3>
+  <h3 className="anchor-title section-heading">Section Title</h3>
   {/* content */}
-  
+
   <div className="anchor-section" id="subsection">
     <h4 className="anchor-title">Subsection Title</h4>
     {/* subsection content */}
@@ -107,9 +110,7 @@ The system supports multiple markup patterns, giving you flexibility in styling 
 ```tsx
 <article className="anchor-section content-article" id="section-name">
   <header>
-    <h3 className="anchor-title article-heading">
-      Section Title
-    </h3>
+    <h3 className="anchor-title article-heading">Section Title</h3>
   </header>
   {/* content */}
 </article>
@@ -137,9 +138,11 @@ The system supports multiple markup patterns, giving you flexibility in styling 
 ## Adding New Content
 
 ### Step 1: Create Component File
+
 Create a new `.tsx` file in `/src/routes/learn/posts/{category}/`
 
 ### Step 2: Use Structured Headings
+
 Follow the Box + Typography pattern for sections you want in navigation:
 
 ```tsx
@@ -159,10 +162,7 @@ export const Route = createFileRoute('/learn/posts/python/my-new-post')({
 function MyNewPost() {
   return (
     <>
-      <TitleBlock 
-        title="My New Post Title"
-        subtitle="Engaging subtitle"
-      />
+      <TitleBlock title="My New Post Title" subtitle="Engaging subtitle" />
 
       <IntroBlock>
         Introduction content that may be extracted as description.
@@ -177,9 +177,9 @@ function MyNewPost() {
 
       <Box id="second-section" sx={{ mb: 4 }}>
         <Typography variant="h3" component="h3" sx={{ mb: 3 }}>
-          Second Main Section  
+          Second Main Section
         </Typography>
-        
+
         <Box id="subsection">
           <Typography variant="h4" component="h4" sx={{ mb: 2 }}>
             Important Subsection
@@ -234,10 +234,10 @@ Access rich metadata for each post:
 import { contentRegistry } from '@/utils/contentRegistry';
 
 const entry = contentRegistry['python/whiteboarding-essentials'];
-console.log(entry.title);        // "Whiteboarding Essentials"
-console.log(entry.description);  // "Complete guide to Python..."
-console.log(entry.lastUpdated);  // "2025-09-26T15:28:30.220Z"
-console.log(entry.tags);         // ["python", "interview", "algorithms"]
+console.log(entry.title); // "Whiteboarding Essentials"
+console.log(entry.description); // "Complete guide to Python..."
+console.log(entry.lastUpdated); // "2025-09-26T15:28:30.220Z"
+console.log(entry.tags); // ["python", "interview", "algorithms"]
 ```
 
 ### Route Discovery
@@ -254,35 +254,41 @@ const routes = getAllRoutes();
 ## Benefits
 
 ### 1. **Zero Maintenance Navigation**
+
 - Add new sections → navigation updates automatically
 - Rename sections → navigation reflects changes
 - No manual navigation configuration needed
 
 ### 2. **Complete Styling Freedom**
+
 - Use any HTML element (div, section, article, aside, main, etc.)
 - Apply any CSS framework (Tailwind, styled-components, emotion, vanilla CSS)
 - No dependency on MUI or specific component libraries
 - Maintain semantic HTML for accessibility and SEO
 
 ### 3. **Multiple Markup Patterns**
+
 - Legacy Box + Typography support for existing content
-- Modern className-based approach for new content  
+- Modern className-based approach for new content
 - Semantic HTML5 elements for better accessibility
 - Flexible data attributes for explicit control
 
 ### 4. **Performance Optimized**
+
 - Generated at build time (no runtime parsing)
 - Minimal bundle size impact
 - Fast navigation rendering
 - No client-side content parsing
 
 ### 5. **Developer Experience**
+
 - Simple, predictable patterns
 - Immediate feedback during development
 - Easy to extend and customize
 - Backward compatible with existing content
 
 ### 6. **SEO & Accessibility**
+
 - Proper heading hierarchy for screen readers
 - Semantic HTML structure with h1-h6 tags
 - Rich metadata extraction for search engines
@@ -340,7 +346,7 @@ const SectionContainer = styled.div.attrs({
   border-left: 4px solid ${props => props.theme.primary};
   background: ${props => props.theme.sectionBg};
   border-radius: 8px;
-  
+
   &:hover .anchor-title::before {
     opacity: 1;
   }
@@ -353,7 +359,7 @@ const SectionTitle = styled.h3.attrs({
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  
+
   &::before {
     content: "🔗";
     position: absolute;
@@ -378,11 +384,9 @@ const Title = styled.h3`
 
 // Usage
 <Section className="anchor-section" id="my-section">
-  <Title className="anchor-title">
-    My Section Title
-  </Title>
+  <Title className="anchor-title">My Section Title</Title>
   {/* content */}
-</Section>
+</Section>;
 ```
 
 ## Customization
@@ -422,21 +426,25 @@ extractMetadata(filePath) {
 ## Best Practices
 
 ### 1. **Consistent ID Naming**
+
 - Use kebab-case: `data-structures`, `binary-search`
 - Be descriptive: `trie-implementation` not `trie`
 - Avoid spaces and special characters
 
 ### 2. **Meaningful Titles**
+
 - Make titles scannable: "Variables & Dynamic Typing"
 - Include context: "Heaps - Priority Queue Magic"
 - Keep under 50 characters for mobile
 
 ### 3. **Logical Hierarchy**
+
 - Use h3 for main sections
 - Use h4 for subsections
 - Use h5 for sub-subsections (sparingly)
 
 ### 4. **Performance Considerations**
+
 - Regenerate registry after content changes
 - Keep section titles concise
 - Avoid deeply nested structures (>3 levels)
@@ -444,17 +452,20 @@ extractMetadata(filePath) {
 ## Troubleshooting
 
 ### Navigation Not Appearing
+
 1. Check if sections follow the Box + Typography pattern
 2. Verify IDs are unique and properly formatted
 3. Regenerate the registry: `npm run content:generate`
 4. Check console for parsing errors
 
 ### Duplicate or Missing Sections
+
 1. Ensure unique IDs across the file
 2. Check Typography variant levels (h3, h4, h5)
 3. Verify Box elements have proper `id` attributes
 
 ### Build Errors
+
 1. Run registry generation separately: `node scripts/build-content-registry.js`
 2. Check file permissions on the `/src/utils/` directory
 3. Verify all component files are valid React components
