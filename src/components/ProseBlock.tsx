@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 export interface ProseBlockProps {
+  anchor?: boolean; // If true, adds anchor id for linking
   id?: string;
   title?: string;
   subtitle?: string;
@@ -18,6 +19,7 @@ export interface ProseBlockProps {
    */
   children?: React.ReactNode;
   dense?: boolean;
+  spacingTop?: boolean;
   spacingBottom?: boolean;
   backgroundColor?: string;
   color?: string; // Override default text.primary color
@@ -33,11 +35,13 @@ export interface ProseBlockProps {
 
 const ProseBlock = React.memo(
   function ProseBlock({
+    anchor = false,
     id,
     title,
     subtitle,
     children,
     dense = false,
+    spacingTop = false,
     spacingBottom = true,
     backgroundColor,
     color = 'text.primary', // Default to text.primary
@@ -54,19 +58,24 @@ const ProseBlock = React.memo(
       textComponent = 'div',
     } = options;
 
+    const titleGutter = !subtitle;
+
     return (
       <StyledBlock
         id={id}
         dense={dense}
+        spacingTop={spacingTop}
         spacingBottom={spacingBottom}
         backgroundColor={backgroundColor}
+        className={anchor && id ? 'anchor-section' : undefined}
       >
         {title && (
           <Typography
             variant={titleVariant}
             component={titleComponent}
             color="primary.main"
-            gutterBottom
+            gutterBottom={titleGutter}
+            className={anchor ? 'anchor-title' : undefined}
           >
             {title}
           </Typography>
@@ -77,6 +86,7 @@ const ProseBlock = React.memo(
             component={subtitleComponent}
             gutterBottom
             color="text.secondary"
+            className={!title && anchor ? 'anchor-title' : undefined}
           >
             {subtitle}
           </Typography>
@@ -121,13 +131,15 @@ interface StyledBlockProps extends BoxProps {
   dense: boolean;
   gutterBottom?: boolean;
   spacingBottom?: boolean;
+  spacingTop?:boolean;
   backgroundColor?: string;
 }
 
 const getPaddingStyles = (
   theme: any,
   dense: boolean,
-  spacingBottom?: boolean
+  spacingBottom?: boolean,
+  spacingTop?: boolean
 ) => {
   const paddingStyles = dense
     ? {
@@ -142,9 +154,12 @@ const getPaddingStyles = (
     ? { paddingBottom: theme.spacing(2) }
     : { paddingBottom: theme.spacing(0) };
 
+  const spacingTopStyles = spacingTop ? { paddingTop: theme.spacing(2) } : { paddingTop: theme.spacing(0) };
+
   return {
     ...paddingStyles,
     ...spacingBottomStyles,
+    ...spacingTopStyles,
   };
 };
 
@@ -152,20 +167,23 @@ const StyledBlock = styled(Box, {
   shouldForwardProp: (prop) =>
     prop !== 'dense' &&
     prop !== 'gutterBottom' &&
+    prop !== 'spacingTop' &&
     prop !== 'spacingBottom' &&
     prop !== 'backgroundColor',
 })<StyledBlockProps>(({
   theme,
   dense,
   gutterBottom,
+  spacingTop,
   spacingBottom,
   backgroundColor = theme.palette.background.paper,
 }) => {
-  const paddingStyles = getPaddingStyles(theme, dense, spacingBottom);
+  const paddingStyles = getPaddingStyles(theme, dense, spacingBottom, spacingTop);
 
   const gutterBottomStyles = gutterBottom
     ? { marginBottom: theme.spacing(1) }
     : {};
+
 
   return {
     marginBottom: theme.spacing(0), // Add spacing between blocks
@@ -199,7 +217,7 @@ const StyledBlock = styled(Box, {
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.caption.fontSize,
     },
-    '& span.name': {
+    '& span.name, & span.bold': {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',
@@ -208,7 +226,7 @@ const StyledBlock = styled(Box, {
       marginLeft: theme.spacing(0.25),
       borderRadius: theme.shape.borderRadius,
     },
-    '& span.name-alt': {
+    '& span.name-alt, span.bold-alt': {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',

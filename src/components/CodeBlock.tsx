@@ -1,12 +1,56 @@
-import { useTheme, Theme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { useIsMobile, useIsTablet } from '@/context/BreakpointContext';
+import Icon from '@/components/Icon';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
 import Tooltip from '@mui/material/Tooltip';
 import { Highlight, themes } from 'prism-react-renderer';
+import { mdiContentCopy, mdiCheck } from '@mdi/js';
 import React, { useState } from 'react';
+// import '@/styles/glowing-border.css';
+
+// Styled component for CodeBlock container with optional glowing border
+const CodeBlockContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'codeBorder',
+})<{ codeBorder?: boolean }>(({ theme, codeBorder }) => ({
+  position: 'relative',
+  width: '100%',
+  maxWidth: '100%',
+  display: 'block',
+  '&:hover .copy-button': {
+    // opacity: 1,
+  },
+  ...(codeBorder &&
+    theme.palette.mode === 'light' && {
+      margin: theme.spacing(1, 0),
+      padding: theme.spacing(1, 0),
+      border: `1px solid ${theme.palette.divider}`,
+    }),
+  ...(codeBorder &&
+    theme.palette.mode !== 'light' && {
+      // Apply the glowing-border class when glow is true
+      margin: theme.spacing(1, 0),
+      padding: theme.spacing(1, 0),
+      border: `1px solid ${theme.palette.primary.main}`,
+      boxShadow: `
+          0 0 0 1px ${theme.palette.primary.main}22,
+          0 2px 8px ${theme.palette.primary.main}44,
+          0 3px 12px ${theme.palette.primary.main}11
+        `,
+      transition:
+        'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
+      '&:hover, &:focus-within': {
+        transform: 'translateY(-1px)',
+        boxShadow: `
+              0 0 0 1px ${theme.palette.primary.light}22,
+              0 3px 12px ${theme.palette.primary.light}44,
+              0 4px 16px ${theme.palette.primary.light}11
+            `,
+        borderColor: theme.palette.primary.main,
+      },
+    }),
+}));
 
 export enum CodeBlockSize {
   SMALL = 'small',
@@ -21,6 +65,7 @@ interface CodeBlockProps {
   showCopyButton?: boolean;
   collapsible?: boolean;
   maxLinesBeforeCollapse?: number;
+  border?: boolean;
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -30,6 +75,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   showCopyButton = true,
   collapsible = true,
   maxLinesBeforeCollapse = 15,
+  border = false,
 }) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === 'dark';
@@ -91,9 +137,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   };
 
   const getPadding = () => {
-    if (isMobile) return theme.spacing(1, 1);
-    if (isTablet) return theme.spacing(1.5, 2);
-    return theme.spacing(2, 3);
+    if (isMobile) return theme.spacing(0.5, 0.5);
+    if (isTablet) return theme.spacing(0.5, 1);
+    return theme.spacing(1, 2);
   };
 
   const overrideStyles: React.CSSProperties = {
@@ -133,23 +179,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         '\n// ... more code'
       : code;
 
-  const containerStyles = {
-    position: 'relative' as const,
-    width: '100%',
-    maxWidth: '100%',
-    // Force containment and prevent overflow
-    // overflow: 'hidden',
-    display: 'block',
-    '&:hover .copy-button': {
-      opacity: 1,
-    },
-  };
-
   const copyButtonStyles = {
     position: 'absolute' as const,
     top: theme.spacing(1),
     right: theme.spacing(1),
-    opacity: isMobile ? 1 : 0,
+    opacity: isMobile ? 1 : 0.5,
     transition: 'opacity 0.2s ease',
     backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
     color: isDarkMode ? '#fff' : '#000',
@@ -158,11 +192,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     fontSize: '0.75rem',
     '&:hover': {
       backgroundColor: isDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
+      opacity: '1'
     },
   };
 
   return (
-    <Box sx={containerStyles} className="code-block-container">
+    <CodeBlockContainer
+      codeBorder={border}
+      className={`code-block-container`}
+    >
       <Highlight theme={prismTheme} code={displayCode} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, ...overrideStyles }}>
@@ -183,16 +221,23 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
       {/* Copy Button */}
       {showCopyButton && (
-        <Tooltip title={copySuccess ? 'Copied!' : 'Copy code'}>
-          <Button
+        <Tooltip open={copySuccess} arrow title={'Copied!'}>
+          <IconButton
             className="copy-button"
             onClick={handleCopy}
-            sx={copyButtonStyles}
-            variant="text"
+            sx={{
+              ...copyButtonStyles,
+              minWidth: 'auto',
+              width: 32,
+              height: 32,
+            }}
             size="small"
           >
-            {copySuccess ? '✓' : '📋'}
-          </Button>
+            <Icon
+              path={copySuccess ? mdiCheck : mdiContentCopy}
+              fontSize="small"
+            />
+          </IconButton>
         </Tooltip>
       )}
 
@@ -216,7 +261,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           </Button>
         </Box>
       )}
-    </Box>
+    </CodeBlockContainer>
   );
 };
 

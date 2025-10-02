@@ -46,13 +46,13 @@ export function generateNavigationItems(path: string): InlineDrawerItem[] {
 export async function getNavigationForRoute(
   route: string
 ): Promise<InlineDrawerItem[]> {
-  // Extract the clean path (e.g., "/learn/posts/python/whiteboarding-essentials" -> "python/whiteboarding-essentials")
-  const pathParts = route.split('/').slice(3); // Remove '/learn/posts'
+  // Extract the clean path (e.g., "/learn/python/whiteboarding-essentials" -> "python/whiteboarding-essentials")
+  const pathParts = route.split('/').slice(2); // Remove '/learn'
   const contentPath = pathParts.join('/');
 
   // Try to dynamically import the content to ensure it's registered
   try {
-    await import(`@/routes/learn/posts/${contentPath}.tsx`);
+    await import(`@/routes/learn/${contentPath}.tsx`);
     return generateNavigationItems(contentPath);
   } catch (error) {
     console.warn(`Could not load navigation for ${contentPath}:`, error);

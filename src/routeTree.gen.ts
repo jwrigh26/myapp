@@ -8,36 +8,48 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root';
-import { Route as HomeImport } from './routes/home';
-import { Route as GameImport } from './routes/game';
-import { Route as AboutImport } from './routes/about';
-import { Route as LearnRouteImport } from './routes/learn/route';
-import { Route as BlogRouteImport } from './routes/blog/route';
-import { Route as IndexImport } from './routes/index';
-import { Route as LearnIndexImport } from './routes/learn/index';
-import { Route as BlogIndexImport } from './routes/blog/index';
-import { Route as LearnPostsPythonIndexImport } from './routes/learn/posts/python/index';
-import { Route as LearnPostsMathIndexImport } from './routes/learn/posts/math/index';
-import { Route as LearnPostsGitIndexImport } from './routes/learn/posts/git/index';
-import { Route as LearnPostsDsaIndexImport } from './routes/learn/posts/dsa/index';
-import { Route as LearnPostsAiIndexImport } from './routes/learn/posts/ai/index';
-import { Route as BlogPostsSoftSkillsIndexImport } from './routes/blog/posts/soft-skills/index';
-import { Route as BlogPostsFrontendDesignIndexImport } from './routes/blog/posts/frontend-design/index';
-import { Route as LearnPostsPythonWhiteboardingEssentialsImport } from './routes/learn/posts/python/whiteboarding-essentials';
-import { Route as LearnPostsPythonStylingExampleImport } from './routes/learn/posts/python/styling-example';
-import { Route as LearnPostsPythonDataStructuresDeepDiveImport } from './routes/learn/posts/python/data-structures-deep-dive';
-import { Route as LearnPostsMathHelloWorldImport } from './routes/learn/posts/math/hello-world';
-import { Route as LearnPostsGitHelloWorldImport } from './routes/learn/posts/git/hello-world';
-import { Route as LearnPostsDsaHelloWorldImport } from './routes/learn/posts/dsa/hello-world';
-import { Route as LearnPostsAiHelloWorldImport } from './routes/learn/posts/ai/hello-world';
-import { Route as BlogPostsSoftSkillsLearnNamesImport } from './routes/blog/posts/soft-skills/learn-names';
-import { Route as BlogPostsReactMemoMonsterImport } from './routes/blog/posts/react/memo-monster';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart3Import } from './routes/blog/posts/frontend-design/microfrontends-part3';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart2Import } from './routes/blog/posts/frontend-design/microfrontends-part2';
-import { Route as BlogPostsFrontendDesignMicrofrontendsPart1Import } from './routes/blog/posts/frontend-design/microfrontends-part1';
+import { Route as rootRoute } from './routes/__root'
+import { Route as HomeImport } from './routes/home'
+import { Route as GameImport } from './routes/game'
+import { Route as AboutImport } from './routes/about'
+import { Route as LearnRouteImport } from './routes/learn/route'
+import { Route as BlogRouteImport } from './routes/blog/route'
+import { Route as IndexImport } from './routes/index'
+import { Route as LearnIndexImport } from './routes/learn/index'
+import { Route as BlogIndexImport } from './routes/blog/index'
+import { Route as LearnPythonIndexImport } from './routes/learn/python/index'
+import { Route as LearnMathIndexImport } from './routes/learn/math/index'
+import { Route as LearnGitIndexImport } from './routes/learn/git/index'
+import { Route as LearnDsaIndexImport } from './routes/learn/dsa/index'
+import { Route as LearnAiIndexImport } from './routes/learn/ai/index'
+import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/index'
+import { Route as BlogReactIndexImport } from './routes/blog/react/index'
+import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
+import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
+import { Route as LearnMathHelloWorld01Import } from './routes/learn/math.hello-world-01'
+import { Route as LearnGitHelloWorldImport } from './routes/learn/git/hello-world'
+import { Route as LearnDsaHelloWorldImport } from './routes/learn/dsa/hello-world'
+import { Route as LearnAiHelloWorldImport } from './routes/learn/ai/hello-world'
+import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names'
+import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster'
+import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
+import { Route as BlogFrontendDesignMicrofrontendsPart2Import } from './routes/blog/frontend-design/microfrontends-part2'
+import { Route as BlogFrontendDesignMicrofrontendsPart1Import } from './routes/blog/frontend-design/microfrontends-part1'
+import { Route as LearnMathHelloWorldRouteImport } from './routes/learn/math/hello-world/route'
+import { Route as LearnMathHelloWorldIndexImport } from './routes/learn/math/hello-world/index'
+
+// Create Virtual Routes
+
+const LearnMathHelloWorldExamplesLazyImport = createFileRoute(
+  '/learn/math/hello-world/examples',
+)()
+const LearnMathHelloWorldAdvancedLazyImport = createFileRoute(
+  '/learn/math/hello-world/advanced',
+)()
 
 // Create/Update Routes
 
@@ -45,528 +57,598 @@ const HomeRoute = HomeImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const GameRoute = GameImport.update({
   id: '/game',
   path: '/game',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const LearnRouteRoute = LearnRouteImport.update({
   id: '/learn',
   path: '/learn',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const BlogRouteRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const LearnIndexRoute = LearnIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
 const BlogIndexRoute = BlogIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
 
-const LearnPostsPythonIndexRoute = LearnPostsPythonIndexImport.update({
-  id: '/posts/python/',
-  path: '/posts/python/',
+const LearnPythonIndexRoute = LearnPythonIndexImport.update({
+  id: '/python/',
+  path: '/python/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
-const LearnPostsMathIndexRoute = LearnPostsMathIndexImport.update({
-  id: '/posts/math/',
-  path: '/posts/math/',
+const LearnMathIndexRoute = LearnMathIndexImport.update({
+  id: '/math/',
+  path: '/math/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
-const LearnPostsGitIndexRoute = LearnPostsGitIndexImport.update({
-  id: '/posts/git/',
-  path: '/posts/git/',
+const LearnGitIndexRoute = LearnGitIndexImport.update({
+  id: '/git/',
+  path: '/git/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
-const LearnPostsDsaIndexRoute = LearnPostsDsaIndexImport.update({
-  id: '/posts/dsa/',
-  path: '/posts/dsa/',
+const LearnDsaIndexRoute = LearnDsaIndexImport.update({
+  id: '/dsa/',
+  path: '/dsa/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
-const LearnPostsAiIndexRoute = LearnPostsAiIndexImport.update({
-  id: '/posts/ai/',
-  path: '/posts/ai/',
+const LearnAiIndexRoute = LearnAiIndexImport.update({
+  id: '/ai/',
+  path: '/ai/',
   getParentRoute: () => LearnRouteRoute,
-} as any);
+} as any)
 
-const BlogPostsSoftSkillsIndexRoute = BlogPostsSoftSkillsIndexImport.update({
-  id: '/posts/soft-skills/',
-  path: '/posts/soft-skills/',
+const BlogSoftSkillsIndexRoute = BlogSoftSkillsIndexImport.update({
+  id: '/soft-skills/',
+  path: '/soft-skills/',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
 
-const BlogPostsFrontendDesignIndexRoute =
-  BlogPostsFrontendDesignIndexImport.update({
-    id: '/posts/frontend-design/',
-    path: '/posts/frontend-design/',
-    getParentRoute: () => BlogRouteRoute,
-  } as any);
-
-const LearnPostsPythonWhiteboardingEssentialsRoute =
-  LearnPostsPythonWhiteboardingEssentialsImport.update({
-    id: '/posts/python/whiteboarding-essentials',
-    path: '/posts/python/whiteboarding-essentials',
-    getParentRoute: () => LearnRouteRoute,
-  } as any);
-
-const LearnPostsPythonStylingExampleRoute =
-  LearnPostsPythonStylingExampleImport.update({
-    id: '/posts/python/styling-example',
-    path: '/posts/python/styling-example',
-    getParentRoute: () => LearnRouteRoute,
-  } as any);
-
-const LearnPostsPythonDataStructuresDeepDiveRoute =
-  LearnPostsPythonDataStructuresDeepDiveImport.update({
-    id: '/posts/python/data-structures-deep-dive',
-    path: '/posts/python/data-structures-deep-dive',
-    getParentRoute: () => LearnRouteRoute,
-  } as any);
-
-const LearnPostsMathHelloWorldRoute = LearnPostsMathHelloWorldImport.update({
-  id: '/posts/math/hello-world',
-  path: '/posts/math/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any);
-
-const LearnPostsGitHelloWorldRoute = LearnPostsGitHelloWorldImport.update({
-  id: '/posts/git/hello-world',
-  path: '/posts/git/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any);
-
-const LearnPostsDsaHelloWorldRoute = LearnPostsDsaHelloWorldImport.update({
-  id: '/posts/dsa/hello-world',
-  path: '/posts/dsa/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any);
-
-const LearnPostsAiHelloWorldRoute = LearnPostsAiHelloWorldImport.update({
-  id: '/posts/ai/hello-world',
-  path: '/posts/ai/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any);
-
-const BlogPostsSoftSkillsLearnNamesRoute =
-  BlogPostsSoftSkillsLearnNamesImport.update({
-    id: '/posts/soft-skills/learn-names',
-    path: '/posts/soft-skills/learn-names',
-    getParentRoute: () => BlogRouteRoute,
-  } as any);
-
-const BlogPostsReactMemoMonsterRoute = BlogPostsReactMemoMonsterImport.update({
-  id: '/posts/react/memo-monster',
-  path: '/posts/react/memo-monster',
+const BlogReactIndexRoute = BlogReactIndexImport.update({
+  id: '/react/',
+  path: '/react/',
   getParentRoute: () => BlogRouteRoute,
-} as any);
+} as any)
 
-const BlogPostsFrontendDesignMicrofrontendsPart3Route =
-  BlogPostsFrontendDesignMicrofrontendsPart3Import.update({
-    id: '/posts/frontend-design/microfrontends-part3',
-    path: '/posts/frontend-design/microfrontends-part3',
-    getParentRoute: () => BlogRouteRoute,
-  } as any);
+const BlogFrontendDesignIndexRoute = BlogFrontendDesignIndexImport.update({
+  id: '/frontend-design/',
+  path: '/frontend-design/',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
 
-const BlogPostsFrontendDesignMicrofrontendsPart2Route =
-  BlogPostsFrontendDesignMicrofrontendsPart2Import.update({
-    id: '/posts/frontend-design/microfrontends-part2',
-    path: '/posts/frontend-design/microfrontends-part2',
-    getParentRoute: () => BlogRouteRoute,
-  } as any);
+const LearnPythonWhiteboardingEssentialsRoute =
+  LearnPythonWhiteboardingEssentialsImport.update({
+    id: '/python/whiteboarding-essentials',
+    path: '/python/whiteboarding-essentials',
+    getParentRoute: () => LearnRouteRoute,
+  } as any)
 
-const BlogPostsFrontendDesignMicrofrontendsPart1Route =
-  BlogPostsFrontendDesignMicrofrontendsPart1Import.update({
-    id: '/posts/frontend-design/microfrontends-part1',
-    path: '/posts/frontend-design/microfrontends-part1',
+const LearnMathHelloWorld01Route = LearnMathHelloWorld01Import.update({
+  id: '/math/hello-world-01',
+  path: '/math/hello-world-01',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnGitHelloWorldRoute = LearnGitHelloWorldImport.update({
+  id: '/git/hello-world',
+  path: '/git/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnDsaHelloWorldRoute = LearnDsaHelloWorldImport.update({
+  id: '/dsa/hello-world',
+  path: '/dsa/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnAiHelloWorldRoute = LearnAiHelloWorldImport.update({
+  id: '/ai/hello-world',
+  path: '/ai/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const BlogSoftSkillsLearnNamesRoute = BlogSoftSkillsLearnNamesImport.update({
+  id: '/soft-skills/learn-names',
+  path: '/soft-skills/learn-names',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+
+const BlogReactMemoMonsterRoute = BlogReactMemoMonsterImport.update({
+  id: '/react/memo-monster',
+  path: '/react/memo-monster',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+
+const BlogFrontendDesignMicrofrontendsPart3Route =
+  BlogFrontendDesignMicrofrontendsPart3Import.update({
+    id: '/frontend-design/microfrontends-part3',
+    path: '/frontend-design/microfrontends-part3',
     getParentRoute: () => BlogRouteRoute,
-  } as any);
+  } as any)
+
+const BlogFrontendDesignMicrofrontendsPart2Route =
+  BlogFrontendDesignMicrofrontendsPart2Import.update({
+    id: '/frontend-design/microfrontends-part2',
+    path: '/frontend-design/microfrontends-part2',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
+
+const BlogFrontendDesignMicrofrontendsPart1Route =
+  BlogFrontendDesignMicrofrontendsPart1Import.update({
+    id: '/frontend-design/microfrontends-part1',
+    path: '/frontend-design/microfrontends-part1',
+    getParentRoute: () => BlogRouteRoute,
+  } as any)
+
+const LearnMathHelloWorldRouteRoute = LearnMathHelloWorldRouteImport.update({
+  id: '/math/hello-world',
+  path: '/math/hello-world',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnMathHelloWorldIndexRoute = LearnMathHelloWorldIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnMathHelloWorldRouteRoute,
+} as any)
+
+const LearnMathHelloWorldExamplesLazyRoute =
+  LearnMathHelloWorldExamplesLazyImport.update({
+    id: '/examples',
+    path: '/examples',
+    getParentRoute: () => LearnMathHelloWorldRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/learn/math/hello-world/examples.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const LearnMathHelloWorldAdvancedLazyRoute =
+  LearnMathHelloWorldAdvancedLazyImport.update({
+    id: '/advanced',
+    path: '/advanced',
+    getParentRoute: () => LearnMathHelloWorldRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/learn/math/hello-world/advanced.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/blog': {
-      id: '/blog';
-      path: '/blog';
-      fullPath: '/blog';
-      preLoaderRoute: typeof BlogRouteImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/learn': {
-      id: '/learn';
-      path: '/learn';
-      fullPath: '/learn';
-      preLoaderRoute: typeof LearnRouteImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/learn'
+      path: '/learn'
+      fullPath: '/learn'
+      preLoaderRoute: typeof LearnRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
-      id: '/about';
-      path: '/about';
-      fullPath: '/about';
-      preLoaderRoute: typeof AboutImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
     '/game': {
-      id: '/game';
-      path: '/game';
-      fullPath: '/game';
-      preLoaderRoute: typeof GameImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameImport
+      parentRoute: typeof rootRoute
+    }
     '/home': {
-      id: '/home';
-      path: '/home';
-      fullPath: '/home';
-      preLoaderRoute: typeof HomeImport;
-      parentRoute: typeof rootRoute;
-    };
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/': {
-      id: '/blog/';
-      path: '/';
-      fullPath: '/blog/';
-      preLoaderRoute: typeof BlogIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
     '/learn/': {
-      id: '/learn/';
-      path: '/';
-      fullPath: '/learn/';
-      preLoaderRoute: typeof LearnIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/blog/posts/frontend-design/microfrontends-part1': {
-      id: '/blog/posts/frontend-design/microfrontends-part1';
-      path: '/posts/frontend-design/microfrontends-part1';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part1';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart1Import;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/blog/posts/frontend-design/microfrontends-part2': {
-      id: '/blog/posts/frontend-design/microfrontends-part2';
-      path: '/posts/frontend-design/microfrontends-part2';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part2';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart2Import;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/blog/posts/frontend-design/microfrontends-part3': {
-      id: '/blog/posts/frontend-design/microfrontends-part3';
-      path: '/posts/frontend-design/microfrontends-part3';
-      fullPath: '/blog/posts/frontend-design/microfrontends-part3';
-      preLoaderRoute: typeof BlogPostsFrontendDesignMicrofrontendsPart3Import;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/blog/posts/react/memo-monster': {
-      id: '/blog/posts/react/memo-monster';
-      path: '/posts/react/memo-monster';
-      fullPath: '/blog/posts/react/memo-monster';
-      preLoaderRoute: typeof BlogPostsReactMemoMonsterImport;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/blog/posts/soft-skills/learn-names': {
-      id: '/blog/posts/soft-skills/learn-names';
-      path: '/posts/soft-skills/learn-names';
-      fullPath: '/blog/posts/soft-skills/learn-names';
-      preLoaderRoute: typeof BlogPostsSoftSkillsLearnNamesImport;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/learn/posts/ai/hello-world': {
-      id: '/learn/posts/ai/hello-world';
-      path: '/posts/ai/hello-world';
-      fullPath: '/learn/posts/ai/hello-world';
-      preLoaderRoute: typeof LearnPostsAiHelloWorldImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/dsa/hello-world': {
-      id: '/learn/posts/dsa/hello-world';
-      path: '/posts/dsa/hello-world';
-      fullPath: '/learn/posts/dsa/hello-world';
-      preLoaderRoute: typeof LearnPostsDsaHelloWorldImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/git/hello-world': {
-      id: '/learn/posts/git/hello-world';
-      path: '/posts/git/hello-world';
-      fullPath: '/learn/posts/git/hello-world';
-      preLoaderRoute: typeof LearnPostsGitHelloWorldImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/math/hello-world': {
-      id: '/learn/posts/math/hello-world';
-      path: '/posts/math/hello-world';
-      fullPath: '/learn/posts/math/hello-world';
-      preLoaderRoute: typeof LearnPostsMathHelloWorldImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/python/data-structures-deep-dive': {
-      id: '/learn/posts/python/data-structures-deep-dive';
-      path: '/posts/python/data-structures-deep-dive';
-      fullPath: '/learn/posts/python/data-structures-deep-dive';
-      preLoaderRoute: typeof LearnPostsPythonDataStructuresDeepDiveImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/python/styling-example': {
-      id: '/learn/posts/python/styling-example';
-      path: '/posts/python/styling-example';
-      fullPath: '/learn/posts/python/styling-example';
-      preLoaderRoute: typeof LearnPostsPythonStylingExampleImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/python/whiteboarding-essentials': {
-      id: '/learn/posts/python/whiteboarding-essentials';
-      path: '/posts/python/whiteboarding-essentials';
-      fullPath: '/learn/posts/python/whiteboarding-essentials';
-      preLoaderRoute: typeof LearnPostsPythonWhiteboardingEssentialsImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/blog/posts/frontend-design/': {
-      id: '/blog/posts/frontend-design/';
-      path: '/posts/frontend-design';
-      fullPath: '/blog/posts/frontend-design';
-      preLoaderRoute: typeof BlogPostsFrontendDesignIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/blog/posts/soft-skills/': {
-      id: '/blog/posts/soft-skills/';
-      path: '/posts/soft-skills';
-      fullPath: '/blog/posts/soft-skills';
-      preLoaderRoute: typeof BlogPostsSoftSkillsIndexImport;
-      parentRoute: typeof BlogRouteImport;
-    };
-    '/learn/posts/ai/': {
-      id: '/learn/posts/ai/';
-      path: '/posts/ai';
-      fullPath: '/learn/posts/ai';
-      preLoaderRoute: typeof LearnPostsAiIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/dsa/': {
-      id: '/learn/posts/dsa/';
-      path: '/posts/dsa';
-      fullPath: '/learn/posts/dsa';
-      preLoaderRoute: typeof LearnPostsDsaIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/git/': {
-      id: '/learn/posts/git/';
-      path: '/posts/git';
-      fullPath: '/learn/posts/git';
-      preLoaderRoute: typeof LearnPostsGitIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/math/': {
-      id: '/learn/posts/math/';
-      path: '/posts/math';
-      fullPath: '/learn/posts/math';
-      preLoaderRoute: typeof LearnPostsMathIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
-    '/learn/posts/python/': {
-      id: '/learn/posts/python/';
-      path: '/posts/python';
-      fullPath: '/learn/posts/python';
-      preLoaderRoute: typeof LearnPostsPythonIndexImport;
-      parentRoute: typeof LearnRouteImport;
-    };
+      id: '/learn/'
+      path: '/'
+      fullPath: '/learn/'
+      preLoaderRoute: typeof LearnIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/hello-world': {
+      id: '/learn/math/hello-world'
+      path: '/math/hello-world'
+      fullPath: '/learn/math/hello-world'
+      preLoaderRoute: typeof LearnMathHelloWorldRouteImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/blog/frontend-design/microfrontends-part1': {
+      id: '/blog/frontend-design/microfrontends-part1'
+      path: '/frontend-design/microfrontends-part1'
+      fullPath: '/blog/frontend-design/microfrontends-part1'
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart1Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/frontend-design/microfrontends-part2': {
+      id: '/blog/frontend-design/microfrontends-part2'
+      path: '/frontend-design/microfrontends-part2'
+      fullPath: '/blog/frontend-design/microfrontends-part2'
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart2Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/frontend-design/microfrontends-part3': {
+      id: '/blog/frontend-design/microfrontends-part3'
+      path: '/frontend-design/microfrontends-part3'
+      fullPath: '/blog/frontend-design/microfrontends-part3'
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart3Import
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/react/memo-monster': {
+      id: '/blog/react/memo-monster'
+      path: '/react/memo-monster'
+      fullPath: '/blog/react/memo-monster'
+      preLoaderRoute: typeof BlogReactMemoMonsterImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/soft-skills/learn-names': {
+      id: '/blog/soft-skills/learn-names'
+      path: '/soft-skills/learn-names'
+      fullPath: '/blog/soft-skills/learn-names'
+      preLoaderRoute: typeof BlogSoftSkillsLearnNamesImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/learn/ai/hello-world': {
+      id: '/learn/ai/hello-world'
+      path: '/ai/hello-world'
+      fullPath: '/learn/ai/hello-world'
+      preLoaderRoute: typeof LearnAiHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/dsa/hello-world': {
+      id: '/learn/dsa/hello-world'
+      path: '/dsa/hello-world'
+      fullPath: '/learn/dsa/hello-world'
+      preLoaderRoute: typeof LearnDsaHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/git/hello-world': {
+      id: '/learn/git/hello-world'
+      path: '/git/hello-world'
+      fullPath: '/learn/git/hello-world'
+      preLoaderRoute: typeof LearnGitHelloWorldImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/hello-world-01': {
+      id: '/learn/math/hello-world-01'
+      path: '/math/hello-world-01'
+      fullPath: '/learn/math/hello-world-01'
+      preLoaderRoute: typeof LearnMathHelloWorld01Import
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/python/whiteboarding-essentials': {
+      id: '/learn/python/whiteboarding-essentials'
+      path: '/python/whiteboarding-essentials'
+      fullPath: '/learn/python/whiteboarding-essentials'
+      preLoaderRoute: typeof LearnPythonWhiteboardingEssentialsImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/blog/frontend-design/': {
+      id: '/blog/frontend-design/'
+      path: '/frontend-design'
+      fullPath: '/blog/frontend-design'
+      preLoaderRoute: typeof BlogFrontendDesignIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/react/': {
+      id: '/blog/react/'
+      path: '/react'
+      fullPath: '/blog/react'
+      preLoaderRoute: typeof BlogReactIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/blog/soft-skills/': {
+      id: '/blog/soft-skills/'
+      path: '/soft-skills'
+      fullPath: '/blog/soft-skills'
+      preLoaderRoute: typeof BlogSoftSkillsIndexImport
+      parentRoute: typeof BlogRouteImport
+    }
+    '/learn/ai/': {
+      id: '/learn/ai/'
+      path: '/ai'
+      fullPath: '/learn/ai'
+      preLoaderRoute: typeof LearnAiIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/dsa/': {
+      id: '/learn/dsa/'
+      path: '/dsa'
+      fullPath: '/learn/dsa'
+      preLoaderRoute: typeof LearnDsaIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/git/': {
+      id: '/learn/git/'
+      path: '/git'
+      fullPath: '/learn/git'
+      preLoaderRoute: typeof LearnGitIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/': {
+      id: '/learn/math/'
+      path: '/math'
+      fullPath: '/learn/math'
+      preLoaderRoute: typeof LearnMathIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/python/': {
+      id: '/learn/python/'
+      path: '/python'
+      fullPath: '/learn/python'
+      preLoaderRoute: typeof LearnPythonIndexImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/hello-world/advanced': {
+      id: '/learn/math/hello-world/advanced'
+      path: '/advanced'
+      fullPath: '/learn/math/hello-world/advanced'
+      preLoaderRoute: typeof LearnMathHelloWorldAdvancedLazyImport
+      parentRoute: typeof LearnMathHelloWorldRouteImport
+    }
+    '/learn/math/hello-world/examples': {
+      id: '/learn/math/hello-world/examples'
+      path: '/examples'
+      fullPath: '/learn/math/hello-world/examples'
+      preLoaderRoute: typeof LearnMathHelloWorldExamplesLazyImport
+      parentRoute: typeof LearnMathHelloWorldRouteImport
+    }
+    '/learn/math/hello-world/': {
+      id: '/learn/math/hello-world/'
+      path: '/'
+      fullPath: '/learn/math/hello-world/'
+      preLoaderRoute: typeof LearnMathHelloWorldIndexImport
+      parentRoute: typeof LearnMathHelloWorldRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface BlogRouteRouteChildren {
-  BlogIndexRoute: typeof BlogIndexRoute;
-  BlogPostsFrontendDesignMicrofrontendsPart1Route: typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  BlogPostsFrontendDesignMicrofrontendsPart2Route: typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  BlogPostsFrontendDesignMicrofrontendsPart3Route: typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  BlogPostsReactMemoMonsterRoute: typeof BlogPostsReactMemoMonsterRoute;
-  BlogPostsSoftSkillsLearnNamesRoute: typeof BlogPostsSoftSkillsLearnNamesRoute;
-  BlogPostsFrontendDesignIndexRoute: typeof BlogPostsFrontendDesignIndexRoute;
-  BlogPostsSoftSkillsIndexRoute: typeof BlogPostsSoftSkillsIndexRoute;
+  BlogIndexRoute: typeof BlogIndexRoute
+  BlogFrontendDesignMicrofrontendsPart1Route: typeof BlogFrontendDesignMicrofrontendsPart1Route
+  BlogFrontendDesignMicrofrontendsPart2Route: typeof BlogFrontendDesignMicrofrontendsPart2Route
+  BlogFrontendDesignMicrofrontendsPart3Route: typeof BlogFrontendDesignMicrofrontendsPart3Route
+  BlogReactMemoMonsterRoute: typeof BlogReactMemoMonsterRoute
+  BlogSoftSkillsLearnNamesRoute: typeof BlogSoftSkillsLearnNamesRoute
+  BlogFrontendDesignIndexRoute: typeof BlogFrontendDesignIndexRoute
+  BlogReactIndexRoute: typeof BlogReactIndexRoute
+  BlogSoftSkillsIndexRoute: typeof BlogSoftSkillsIndexRoute
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
-  BlogPostsFrontendDesignMicrofrontendsPart1Route:
-    BlogPostsFrontendDesignMicrofrontendsPart1Route,
-  BlogPostsFrontendDesignMicrofrontendsPart2Route:
-    BlogPostsFrontendDesignMicrofrontendsPart2Route,
-  BlogPostsFrontendDesignMicrofrontendsPart3Route:
-    BlogPostsFrontendDesignMicrofrontendsPart3Route,
-  BlogPostsReactMemoMonsterRoute: BlogPostsReactMemoMonsterRoute,
-  BlogPostsSoftSkillsLearnNamesRoute: BlogPostsSoftSkillsLearnNamesRoute,
-  BlogPostsFrontendDesignIndexRoute: BlogPostsFrontendDesignIndexRoute,
-  BlogPostsSoftSkillsIndexRoute: BlogPostsSoftSkillsIndexRoute,
-};
+  BlogFrontendDesignMicrofrontendsPart1Route:
+    BlogFrontendDesignMicrofrontendsPart1Route,
+  BlogFrontendDesignMicrofrontendsPart2Route:
+    BlogFrontendDesignMicrofrontendsPart2Route,
+  BlogFrontendDesignMicrofrontendsPart3Route:
+    BlogFrontendDesignMicrofrontendsPart3Route,
+  BlogReactMemoMonsterRoute: BlogReactMemoMonsterRoute,
+  BlogSoftSkillsLearnNamesRoute: BlogSoftSkillsLearnNamesRoute,
+  BlogFrontendDesignIndexRoute: BlogFrontendDesignIndexRoute,
+  BlogReactIndexRoute: BlogReactIndexRoute,
+  BlogSoftSkillsIndexRoute: BlogSoftSkillsIndexRoute,
+}
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
-  BlogRouteRouteChildren
-);
+  BlogRouteRouteChildren,
+)
+
+interface LearnMathHelloWorldRouteRouteChildren {
+  LearnMathHelloWorldAdvancedLazyRoute: typeof LearnMathHelloWorldAdvancedLazyRoute
+  LearnMathHelloWorldExamplesLazyRoute: typeof LearnMathHelloWorldExamplesLazyRoute
+  LearnMathHelloWorldIndexRoute: typeof LearnMathHelloWorldIndexRoute
+}
+
+const LearnMathHelloWorldRouteRouteChildren: LearnMathHelloWorldRouteRouteChildren =
+  {
+    LearnMathHelloWorldAdvancedLazyRoute: LearnMathHelloWorldAdvancedLazyRoute,
+    LearnMathHelloWorldExamplesLazyRoute: LearnMathHelloWorldExamplesLazyRoute,
+    LearnMathHelloWorldIndexRoute: LearnMathHelloWorldIndexRoute,
+  }
+
+const LearnMathHelloWorldRouteRouteWithChildren =
+  LearnMathHelloWorldRouteRoute._addFileChildren(
+    LearnMathHelloWorldRouteRouteChildren,
+  )
 
 interface LearnRouteRouteChildren {
-  LearnIndexRoute: typeof LearnIndexRoute;
-  LearnPostsAiHelloWorldRoute: typeof LearnPostsAiHelloWorldRoute;
-  LearnPostsDsaHelloWorldRoute: typeof LearnPostsDsaHelloWorldRoute;
-  LearnPostsGitHelloWorldRoute: typeof LearnPostsGitHelloWorldRoute;
-  LearnPostsMathHelloWorldRoute: typeof LearnPostsMathHelloWorldRoute;
-  LearnPostsPythonDataStructuresDeepDiveRoute: typeof LearnPostsPythonDataStructuresDeepDiveRoute;
-  LearnPostsPythonStylingExampleRoute: typeof LearnPostsPythonStylingExampleRoute;
-  LearnPostsPythonWhiteboardingEssentialsRoute: typeof LearnPostsPythonWhiteboardingEssentialsRoute;
-  LearnPostsAiIndexRoute: typeof LearnPostsAiIndexRoute;
-  LearnPostsDsaIndexRoute: typeof LearnPostsDsaIndexRoute;
-  LearnPostsGitIndexRoute: typeof LearnPostsGitIndexRoute;
-  LearnPostsMathIndexRoute: typeof LearnPostsMathIndexRoute;
-  LearnPostsPythonIndexRoute: typeof LearnPostsPythonIndexRoute;
+  LearnIndexRoute: typeof LearnIndexRoute
+  LearnMathHelloWorldRouteRoute: typeof LearnMathHelloWorldRouteRouteWithChildren
+  LearnAiHelloWorldRoute: typeof LearnAiHelloWorldRoute
+  LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
+  LearnGitHelloWorldRoute: typeof LearnGitHelloWorldRoute
+  LearnMathHelloWorld01Route: typeof LearnMathHelloWorld01Route
+  LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
+  LearnAiIndexRoute: typeof LearnAiIndexRoute
+  LearnDsaIndexRoute: typeof LearnDsaIndexRoute
+  LearnGitIndexRoute: typeof LearnGitIndexRoute
+  LearnMathIndexRoute: typeof LearnMathIndexRoute
+  LearnPythonIndexRoute: typeof LearnPythonIndexRoute
 }
 
 const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnIndexRoute: LearnIndexRoute,
-  LearnPostsAiHelloWorldRoute: LearnPostsAiHelloWorldRoute,
-  LearnPostsDsaHelloWorldRoute: LearnPostsDsaHelloWorldRoute,
-  LearnPostsGitHelloWorldRoute: LearnPostsGitHelloWorldRoute,
-  LearnPostsMathHelloWorldRoute: LearnPostsMathHelloWorldRoute,
-  LearnPostsPythonDataStructuresDeepDiveRoute:
-    LearnPostsPythonDataStructuresDeepDiveRoute,
-  LearnPostsPythonStylingExampleRoute: LearnPostsPythonStylingExampleRoute,
-  LearnPostsPythonWhiteboardingEssentialsRoute:
-    LearnPostsPythonWhiteboardingEssentialsRoute,
-  LearnPostsAiIndexRoute: LearnPostsAiIndexRoute,
-  LearnPostsDsaIndexRoute: LearnPostsDsaIndexRoute,
-  LearnPostsGitIndexRoute: LearnPostsGitIndexRoute,
-  LearnPostsMathIndexRoute: LearnPostsMathIndexRoute,
-  LearnPostsPythonIndexRoute: LearnPostsPythonIndexRoute,
-};
+  LearnMathHelloWorldRouteRoute: LearnMathHelloWorldRouteRouteWithChildren,
+  LearnAiHelloWorldRoute: LearnAiHelloWorldRoute,
+  LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
+  LearnGitHelloWorldRoute: LearnGitHelloWorldRoute,
+  LearnMathHelloWorld01Route: LearnMathHelloWorld01Route,
+  LearnPythonWhiteboardingEssentialsRoute:
+    LearnPythonWhiteboardingEssentialsRoute,
+  LearnAiIndexRoute: LearnAiIndexRoute,
+  LearnDsaIndexRoute: LearnDsaIndexRoute,
+  LearnGitIndexRoute: LearnGitIndexRoute,
+  LearnMathIndexRoute: LearnMathIndexRoute,
+  LearnPythonIndexRoute: LearnPythonIndexRoute,
+}
 
 const LearnRouteRouteWithChildren = LearnRouteRoute._addFileChildren(
-  LearnRouteRouteChildren
-);
+  LearnRouteRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/blog': typeof BlogRouteRouteWithChildren;
-  '/learn': typeof LearnRouteRouteWithChildren;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog/': typeof BlogIndexRoute;
-  '/learn/': typeof LearnIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute;
-  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute;
-  '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute;
-  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute;
-  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute;
-  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute;
-  '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute;
-  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute;
-  '/learn/posts/ai': typeof LearnPostsAiIndexRoute;
-  '/learn/posts/dsa': typeof LearnPostsDsaIndexRoute;
-  '/learn/posts/git': typeof LearnPostsGitIndexRoute;
-  '/learn/posts/math': typeof LearnPostsMathIndexRoute;
-  '/learn/posts/python': typeof LearnPostsPythonIndexRoute;
+  '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
+  '/learn': typeof LearnRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
+  '/learn/math/hello-world': typeof LearnMathHelloWorldRouteRouteWithChildren
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
+  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
+  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
+  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
+  '/blog/react': typeof BlogReactIndexRoute
+  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
+  '/learn/ai': typeof LearnAiIndexRoute
+  '/learn/dsa': typeof LearnDsaIndexRoute
+  '/learn/git': typeof LearnGitIndexRoute
+  '/learn/math': typeof LearnMathIndexRoute
+  '/learn/python': typeof LearnPythonIndexRoute
+  '/learn/math/hello-world/advanced': typeof LearnMathHelloWorldAdvancedLazyRoute
+  '/learn/math/hello-world/examples': typeof LearnMathHelloWorldExamplesLazyRoute
+  '/learn/math/hello-world/': typeof LearnMathHelloWorldIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog': typeof BlogIndexRoute;
-  '/learn': typeof LearnIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute;
-  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute;
-  '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute;
-  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute;
-  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute;
-  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute;
-  '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute;
-  '/blog/posts/frontend-design': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills': typeof BlogPostsSoftSkillsIndexRoute;
-  '/learn/posts/ai': typeof LearnPostsAiIndexRoute;
-  '/learn/posts/dsa': typeof LearnPostsDsaIndexRoute;
-  '/learn/posts/git': typeof LearnPostsGitIndexRoute;
-  '/learn/posts/math': typeof LearnPostsMathIndexRoute;
-  '/learn/posts/python': typeof LearnPostsPythonIndexRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog': typeof BlogIndexRoute
+  '/learn': typeof LearnIndexRoute
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
+  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
+  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
+  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
+  '/blog/react': typeof BlogReactIndexRoute
+  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
+  '/learn/ai': typeof LearnAiIndexRoute
+  '/learn/dsa': typeof LearnDsaIndexRoute
+  '/learn/git': typeof LearnGitIndexRoute
+  '/learn/math': typeof LearnMathIndexRoute
+  '/learn/python': typeof LearnPythonIndexRoute
+  '/learn/math/hello-world/advanced': typeof LearnMathHelloWorldAdvancedLazyRoute
+  '/learn/math/hello-world/examples': typeof LearnMathHelloWorldExamplesLazyRoute
+  '/learn/math/hello-world': typeof LearnMathHelloWorldIndexRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
-  '/blog': typeof BlogRouteRouteWithChildren;
-  '/learn': typeof LearnRouteRouteWithChildren;
-  '/about': typeof AboutRoute;
-  '/game': typeof GameRoute;
-  '/home': typeof HomeRoute;
-  '/blog/': typeof BlogIndexRoute;
-  '/learn/': typeof LearnIndexRoute;
-  '/blog/posts/frontend-design/microfrontends-part1': typeof BlogPostsFrontendDesignMicrofrontendsPart1Route;
-  '/blog/posts/frontend-design/microfrontends-part2': typeof BlogPostsFrontendDesignMicrofrontendsPart2Route;
-  '/blog/posts/frontend-design/microfrontends-part3': typeof BlogPostsFrontendDesignMicrofrontendsPart3Route;
-  '/blog/posts/react/memo-monster': typeof BlogPostsReactMemoMonsterRoute;
-  '/blog/posts/soft-skills/learn-names': typeof BlogPostsSoftSkillsLearnNamesRoute;
-  '/learn/posts/ai/hello-world': typeof LearnPostsAiHelloWorldRoute;
-  '/learn/posts/dsa/hello-world': typeof LearnPostsDsaHelloWorldRoute;
-  '/learn/posts/git/hello-world': typeof LearnPostsGitHelloWorldRoute;
-  '/learn/posts/math/hello-world': typeof LearnPostsMathHelloWorldRoute;
-  '/learn/posts/python/data-structures-deep-dive': typeof LearnPostsPythonDataStructuresDeepDiveRoute;
-  '/learn/posts/python/styling-example': typeof LearnPostsPythonStylingExampleRoute;
-  '/learn/posts/python/whiteboarding-essentials': typeof LearnPostsPythonWhiteboardingEssentialsRoute;
-  '/blog/posts/frontend-design/': typeof BlogPostsFrontendDesignIndexRoute;
-  '/blog/posts/soft-skills/': typeof BlogPostsSoftSkillsIndexRoute;
-  '/learn/posts/ai/': typeof LearnPostsAiIndexRoute;
-  '/learn/posts/dsa/': typeof LearnPostsDsaIndexRoute;
-  '/learn/posts/git/': typeof LearnPostsGitIndexRoute;
-  '/learn/posts/math/': typeof LearnPostsMathIndexRoute;
-  '/learn/posts/python/': typeof LearnPostsPythonIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
+  '/learn': typeof LearnRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/game': typeof GameRoute
+  '/home': typeof HomeRoute
+  '/blog/': typeof BlogIndexRoute
+  '/learn/': typeof LearnIndexRoute
+  '/learn/math/hello-world': typeof LearnMathHelloWorldRouteRouteWithChildren
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
+  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
+  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
+  '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
+  '/blog/react/': typeof BlogReactIndexRoute
+  '/blog/soft-skills/': typeof BlogSoftSkillsIndexRoute
+  '/learn/ai/': typeof LearnAiIndexRoute
+  '/learn/dsa/': typeof LearnDsaIndexRoute
+  '/learn/git/': typeof LearnGitIndexRoute
+  '/learn/math/': typeof LearnMathIndexRoute
+  '/learn/python/': typeof LearnPythonIndexRoute
+  '/learn/math/hello-world/advanced': typeof LearnMathHelloWorldAdvancedLazyRoute
+  '/learn/math/hello-world/examples': typeof LearnMathHelloWorldExamplesLazyRoute
+  '/learn/math/hello-world/': typeof LearnMathHelloWorldIndexRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/blog'
@@ -576,26 +658,29 @@ export interface FileRouteTypes {
     | '/home'
     | '/blog/'
     | '/learn/'
-    | '/blog/posts/frontend-design/microfrontends-part1'
-    | '/blog/posts/frontend-design/microfrontends-part2'
-    | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react/memo-monster'
-    | '/blog/posts/soft-skills/learn-names'
-    | '/learn/posts/ai/hello-world'
-    | '/learn/posts/dsa/hello-world'
-    | '/learn/posts/git/hello-world'
-    | '/learn/posts/math/hello-world'
-    | '/learn/posts/python/data-structures-deep-dive'
-    | '/learn/posts/python/styling-example'
-    | '/learn/posts/python/whiteboarding-essentials'
-    | '/blog/posts/frontend-design'
-    | '/blog/posts/soft-skills'
-    | '/learn/posts/ai'
-    | '/learn/posts/dsa'
-    | '/learn/posts/git'
-    | '/learn/posts/math'
-    | '/learn/posts/python';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/learn/math/hello-world'
+    | '/blog/frontend-design/microfrontends-part1'
+    | '/blog/frontend-design/microfrontends-part2'
+    | '/blog/frontend-design/microfrontends-part3'
+    | '/blog/react/memo-monster'
+    | '/blog/soft-skills/learn-names'
+    | '/learn/ai/hello-world'
+    | '/learn/dsa/hello-world'
+    | '/learn/git/hello-world'
+    | '/learn/math/hello-world-01'
+    | '/learn/python/whiteboarding-essentials'
+    | '/blog/frontend-design'
+    | '/blog/react'
+    | '/blog/soft-skills'
+    | '/learn/ai'
+    | '/learn/dsa'
+    | '/learn/git'
+    | '/learn/math'
+    | '/learn/python'
+    | '/learn/math/hello-world/advanced'
+    | '/learn/math/hello-world/examples'
+    | '/learn/math/hello-world/'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
@@ -603,25 +688,27 @@ export interface FileRouteTypes {
     | '/home'
     | '/blog'
     | '/learn'
-    | '/blog/posts/frontend-design/microfrontends-part1'
-    | '/blog/posts/frontend-design/microfrontends-part2'
-    | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react/memo-monster'
-    | '/blog/posts/soft-skills/learn-names'
-    | '/learn/posts/ai/hello-world'
-    | '/learn/posts/dsa/hello-world'
-    | '/learn/posts/git/hello-world'
-    | '/learn/posts/math/hello-world'
-    | '/learn/posts/python/data-structures-deep-dive'
-    | '/learn/posts/python/styling-example'
-    | '/learn/posts/python/whiteboarding-essentials'
-    | '/blog/posts/frontend-design'
-    | '/blog/posts/soft-skills'
-    | '/learn/posts/ai'
-    | '/learn/posts/dsa'
-    | '/learn/posts/git'
-    | '/learn/posts/math'
-    | '/learn/posts/python';
+    | '/blog/frontend-design/microfrontends-part1'
+    | '/blog/frontend-design/microfrontends-part2'
+    | '/blog/frontend-design/microfrontends-part3'
+    | '/blog/react/memo-monster'
+    | '/blog/soft-skills/learn-names'
+    | '/learn/ai/hello-world'
+    | '/learn/dsa/hello-world'
+    | '/learn/git/hello-world'
+    | '/learn/math/hello-world-01'
+    | '/learn/python/whiteboarding-essentials'
+    | '/blog/frontend-design'
+    | '/blog/react'
+    | '/blog/soft-skills'
+    | '/learn/ai'
+    | '/learn/dsa'
+    | '/learn/git'
+    | '/learn/math'
+    | '/learn/python'
+    | '/learn/math/hello-world/advanced'
+    | '/learn/math/hello-world/examples'
+    | '/learn/math/hello-world'
   id:
     | '__root__'
     | '/'
@@ -632,35 +719,38 @@ export interface FileRouteTypes {
     | '/home'
     | '/blog/'
     | '/learn/'
-    | '/blog/posts/frontend-design/microfrontends-part1'
-    | '/blog/posts/frontend-design/microfrontends-part2'
-    | '/blog/posts/frontend-design/microfrontends-part3'
-    | '/blog/posts/react/memo-monster'
-    | '/blog/posts/soft-skills/learn-names'
-    | '/learn/posts/ai/hello-world'
-    | '/learn/posts/dsa/hello-world'
-    | '/learn/posts/git/hello-world'
-    | '/learn/posts/math/hello-world'
-    | '/learn/posts/python/data-structures-deep-dive'
-    | '/learn/posts/python/styling-example'
-    | '/learn/posts/python/whiteboarding-essentials'
-    | '/blog/posts/frontend-design/'
-    | '/blog/posts/soft-skills/'
-    | '/learn/posts/ai/'
-    | '/learn/posts/dsa/'
-    | '/learn/posts/git/'
-    | '/learn/posts/math/'
-    | '/learn/posts/python/';
-  fileRoutesById: FileRoutesById;
+    | '/learn/math/hello-world'
+    | '/blog/frontend-design/microfrontends-part1'
+    | '/blog/frontend-design/microfrontends-part2'
+    | '/blog/frontend-design/microfrontends-part3'
+    | '/blog/react/memo-monster'
+    | '/blog/soft-skills/learn-names'
+    | '/learn/ai/hello-world'
+    | '/learn/dsa/hello-world'
+    | '/learn/git/hello-world'
+    | '/learn/math/hello-world-01'
+    | '/learn/python/whiteboarding-essentials'
+    | '/blog/frontend-design/'
+    | '/blog/react/'
+    | '/blog/soft-skills/'
+    | '/learn/ai/'
+    | '/learn/dsa/'
+    | '/learn/git/'
+    | '/learn/math/'
+    | '/learn/python/'
+    | '/learn/math/hello-world/advanced'
+    | '/learn/math/hello-world/examples'
+    | '/learn/math/hello-world/'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  BlogRouteRoute: typeof BlogRouteRouteWithChildren;
-  LearnRouteRoute: typeof LearnRouteRouteWithChildren;
-  AboutRoute: typeof AboutRoute;
-  GameRoute: typeof GameRoute;
-  HomeRoute: typeof HomeRoute;
+  IndexRoute: typeof IndexRoute
+  BlogRouteRoute: typeof BlogRouteRouteWithChildren
+  LearnRouteRoute: typeof LearnRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  GameRoute: typeof GameRoute
+  HomeRoute: typeof HomeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -670,11 +760,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   GameRoute: GameRoute,
   HomeRoute: HomeRoute,
-};
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -697,31 +787,31 @@ export const routeTree = rootRoute
       "filePath": "blog/route.tsx",
       "children": [
         "/blog/",
-        "/blog/posts/frontend-design/microfrontends-part1",
-        "/blog/posts/frontend-design/microfrontends-part2",
-        "/blog/posts/frontend-design/microfrontends-part3",
-        "/blog/posts/react/memo-monster",
-        "/blog/posts/soft-skills/learn-names",
-        "/blog/posts/frontend-design/",
-        "/blog/posts/soft-skills/"
+        "/blog/frontend-design/microfrontends-part1",
+        "/blog/frontend-design/microfrontends-part2",
+        "/blog/frontend-design/microfrontends-part3",
+        "/blog/react/memo-monster",
+        "/blog/soft-skills/learn-names",
+        "/blog/frontend-design/",
+        "/blog/react/",
+        "/blog/soft-skills/"
       ]
     },
     "/learn": {
       "filePath": "learn/route.tsx",
       "children": [
         "/learn/",
-        "/learn/posts/ai/hello-world",
-        "/learn/posts/dsa/hello-world",
-        "/learn/posts/git/hello-world",
-        "/learn/posts/math/hello-world",
-        "/learn/posts/python/data-structures-deep-dive",
-        "/learn/posts/python/styling-example",
-        "/learn/posts/python/whiteboarding-essentials",
-        "/learn/posts/ai/",
-        "/learn/posts/dsa/",
-        "/learn/posts/git/",
-        "/learn/posts/math/",
-        "/learn/posts/python/"
+        "/learn/math/hello-world",
+        "/learn/ai/hello-world",
+        "/learn/dsa/hello-world",
+        "/learn/git/hello-world",
+        "/learn/math/hello-world-01",
+        "/learn/python/whiteboarding-essentials",
+        "/learn/ai/",
+        "/learn/dsa/",
+        "/learn/git/",
+        "/learn/math/",
+        "/learn/python/"
       ]
     },
     "/about": {
@@ -741,81 +831,98 @@ export const routeTree = rootRoute
       "filePath": "learn/index.tsx",
       "parent": "/learn"
     },
-    "/blog/posts/frontend-design/microfrontends-part1": {
-      "filePath": "blog/posts/frontend-design/microfrontends-part1.tsx",
+    "/learn/math/hello-world": {
+      "filePath": "learn/math/hello-world/route.tsx",
+      "parent": "/learn",
+      "children": [
+        "/learn/math/hello-world/advanced",
+        "/learn/math/hello-world/examples",
+        "/learn/math/hello-world/"
+      ]
+    },
+    "/blog/frontend-design/microfrontends-part1": {
+      "filePath": "blog/frontend-design/microfrontends-part1.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/frontend-design/microfrontends-part2": {
-      "filePath": "blog/posts/frontend-design/microfrontends-part2.tsx",
+    "/blog/frontend-design/microfrontends-part2": {
+      "filePath": "blog/frontend-design/microfrontends-part2.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/frontend-design/microfrontends-part3": {
-      "filePath": "blog/posts/frontend-design/microfrontends-part3.tsx",
+    "/blog/frontend-design/microfrontends-part3": {
+      "filePath": "blog/frontend-design/microfrontends-part3.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/react/memo-monster": {
-      "filePath": "blog/posts/react/memo-monster.tsx",
+    "/blog/react/memo-monster": {
+      "filePath": "blog/react/memo-monster.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/soft-skills/learn-names": {
-      "filePath": "blog/posts/soft-skills/learn-names.jsx",
+    "/blog/soft-skills/learn-names": {
+      "filePath": "blog/soft-skills/learn-names.jsx",
       "parent": "/blog"
     },
-    "/learn/posts/ai/hello-world": {
-      "filePath": "learn/posts/ai/hello-world.tsx",
+    "/learn/ai/hello-world": {
+      "filePath": "learn/ai/hello-world.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/dsa/hello-world": {
-      "filePath": "learn/posts/dsa/hello-world.tsx",
+    "/learn/dsa/hello-world": {
+      "filePath": "learn/dsa/hello-world.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/git/hello-world": {
-      "filePath": "learn/posts/git/hello-world.tsx",
+    "/learn/git/hello-world": {
+      "filePath": "learn/git/hello-world.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/math/hello-world": {
-      "filePath": "learn/posts/math/hello-world.tsx",
+    "/learn/math/hello-world-01": {
+      "filePath": "learn/math.hello-world-01.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/python/data-structures-deep-dive": {
-      "filePath": "learn/posts/python/data-structures-deep-dive.tsx",
+    "/learn/python/whiteboarding-essentials": {
+      "filePath": "learn/python/whiteboarding-essentials.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/python/styling-example": {
-      "filePath": "learn/posts/python/styling-example.tsx",
-      "parent": "/learn"
-    },
-    "/learn/posts/python/whiteboarding-essentials": {
-      "filePath": "learn/posts/python/whiteboarding-essentials.tsx",
-      "parent": "/learn"
-    },
-    "/blog/posts/frontend-design/": {
-      "filePath": "blog/posts/frontend-design/index.tsx",
+    "/blog/frontend-design/": {
+      "filePath": "blog/frontend-design/index.tsx",
       "parent": "/blog"
     },
-    "/blog/posts/soft-skills/": {
-      "filePath": "blog/posts/soft-skills/index.tsx",
+    "/blog/react/": {
+      "filePath": "blog/react/index.tsx",
       "parent": "/blog"
     },
-    "/learn/posts/ai/": {
-      "filePath": "learn/posts/ai/index.tsx",
+    "/blog/soft-skills/": {
+      "filePath": "blog/soft-skills/index.tsx",
+      "parent": "/blog"
+    },
+    "/learn/ai/": {
+      "filePath": "learn/ai/index.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/dsa/": {
-      "filePath": "learn/posts/dsa/index.tsx",
+    "/learn/dsa/": {
+      "filePath": "learn/dsa/index.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/git/": {
-      "filePath": "learn/posts/git/index.tsx",
+    "/learn/git/": {
+      "filePath": "learn/git/index.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/math/": {
-      "filePath": "learn/posts/math/index.tsx",
+    "/learn/math/": {
+      "filePath": "learn/math/index.tsx",
       "parent": "/learn"
     },
-    "/learn/posts/python/": {
-      "filePath": "learn/posts/python/index.tsx",
+    "/learn/python/": {
+      "filePath": "learn/python/index.tsx",
       "parent": "/learn"
+    },
+    "/learn/math/hello-world/advanced": {
+      "filePath": "learn/math/hello-world/advanced.lazy.tsx",
+      "parent": "/learn/math/hello-world"
+    },
+    "/learn/math/hello-world/examples": {
+      "filePath": "learn/math/hello-world/examples.lazy.tsx",
+      "parent": "/learn/math/hello-world"
+    },
+    "/learn/math/hello-world/": {
+      "filePath": "learn/math/hello-world/index.tsx",
+      "parent": "/learn/math/hello-world"
     }
   }
 }

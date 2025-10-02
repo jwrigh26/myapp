@@ -30,9 +30,9 @@ export function useNavigationItems(): {
         const currentPath = pathname;
 
         // Check if this is a specific post route
-        if (currentPath.startsWith('/learn/posts/')) {
-          // Extract route path (e.g., "/learn/posts/python/whiteboarding-essentials" -> "python/whiteboarding-essentials")
-          const routePath = currentPath.replace('/learn/posts/', '');
+        if (currentPath.startsWith('/learn/') && currentPath !== '/learn') {
+          // Extract route path (e.g., "/learn/python/whiteboarding-essentials" -> "python/whiteboarding-essentials")
+          const routePath = currentPath.replace('/learn/', '');
 
           const navigationItems = getNavigationItems(routePath);
           const contentTitle = getContentTitle(routePath);

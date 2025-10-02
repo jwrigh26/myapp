@@ -27,6 +27,13 @@ export class ContentAnalyzer {
       // TitleBlock components
       titleBlock: /<TitleBlock[^>]*title="([^"]+)"/g,
 
+      // ProseBlock with title and anchor (may also have subtitle)
+      proseBlockTitleAnchor: 
+        /<ProseBlock[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+      // ProseBlock with subtitle and anchor (no title) 
+      proseBlockSubtitleAnchor:
+        /<ProseBlock(?![^>]*\btitle\s*=)[^>]*\bsubtitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+
       // NEW: className="anchor-section" with data-id + className="anchor-title" with data-level
       classNameWithDataAttrs:
         /className="[^"]*anchor-section[^"]*"[^>]*data-id="([^"]+)"[^>]*>[\s\S]*?className="[^"]*anchor-title[^"]*"[^>]*data-level="([1-3])"[^>]*>\s*([^<]+?)\s*</g,
@@ -53,6 +60,7 @@ export class ContentAnalyzer {
       this.extractBoxWithHeadings(content, items);
       this.extractTypographyWithIds(content, items);
       this.extractFromComments(content, items);
+      this.extractProseBlockAnchors(content, items);
 
       // Sort by position in file and build hierarchy
       const sorted = items.sort((a, b) => a.position - b.position);
@@ -167,6 +175,40 @@ export class ContentAnalyzer {
     }
   }
 
+  extractProseBlockAnchors(content, items) {
+    let match;
+    
+    // Extract ProseBlocks with title (level 1)
+    while ((match = this.patterns.proseBlockTitleAnchor.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'proseblock-title-anchor',
+      });
+    }
+    
+    // Extract ProseBlocks with subtitle only (level 2)
+    while ((match = this.patterns.proseBlockSubtitleAnchor.exec(content)) !== null) {
+      const [fullMatch, subtitle, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(subtitle),
+        anchor: id.trim(),
+        level: 2,
+        position,
+        source: 'proseblock-subtitle-anchor',
+      });
+    }
+  }
+
   normalizeLevel(headingLevel) {
     // Convert h1-h6 to 1-3 levels for navigation
     // h1, h2, h3 -> level 1 (main sections)
@@ -260,7 +302,7 @@ export class ContentAnalyzer {
 
       return metadata;
     } catch (error) {
-      return { title: null, description: null, tags: [] };
+      return { title: undefined, description: undefined, tags: [] };
     }
   }
 
@@ -280,7 +322,7 @@ export class ContentAnalyzer {
       }
     }
 
-    return null;
+    return undefined;
   }
 
   extractDescription(content) {
@@ -297,7 +339,7 @@ export class ContentAnalyzer {
       }
     }
 
-    return null;
+    return undefined;
   }
 
   extractTags(content) {
@@ -318,7 +360,7 @@ export function buildAdvancedContentRegistry() {
 
   const analyzer = new ContentAnalyzer();
   const registry = {};
-  const postsDir = path.join(__dirname, '../src/routes/learn/posts');
+  const postsDir = path.join(__dirname, '../src/routes/learn');
 
   function scanDirectory(dir, routePrefix = '') {
     if (!fs.existsSync(dir)) return;
@@ -330,24 +372,30 @@ export function buildAdvancedContentRegistry() {
 
       if (entry.isDirectory()) {
         scanDirectory(fullPath, `${routePrefix}/${entry.name}`);
-      } else if (entry.name.endsWith('.tsx') && entry.name !== 'index.tsx') {
-        const routeName = entry.name.replace('.tsx', '');
-        const routePath = `${routePrefix}/${routeName}`.substring(1);
+      } else if (entry.name.endsWith('.tsx') && 
+                 !entry.name.endsWith('.lazy.tsx') &&
+                 entry.name !== 'route.tsx') {
+        
+        // Handle index.tsx specially - it represents the main lesson
+        const routeName = entry.name === 'index.tsx' ? '' : entry.name.replace('.tsx', '');
+        const routePath = routePrefix.substring(1) + (routeName ? `/${routeName}` : '');
 
         console.log(`   📄 Analyzing: ${routePath}`);
 
         const items = analyzer.parseComponent(fullPath);
         const metadata = analyzer.extractMetadata(fullPath);
 
-        if (items.length > 0) {
-          registry[routePath] = {
-            ...metadata,
-            items,
-            lastUpdated: fs.statSync(fullPath).mtime.toISOString(),
-            filepath: fullPath,
-          };
+        // Always register the route (even with 0 items) but note whether it has content
+        registry[routePath] = {
+          ...metadata,
+          items,
+          lastUpdated: fs.statSync(fullPath).mtime.toISOString(),
+          filepath: fullPath,
+        };
 
-          console.log(`      ✅ Found ${items.length} sections`);
+        console.log(`      ✅ Found ${items.length} sections`);
+        if (metadata.title) {
+          console.log(`      📋 Title: "${metadata.title}"`);
         }
       }
     });

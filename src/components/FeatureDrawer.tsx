@@ -530,9 +530,48 @@ const Header = styled(Box)(({ theme }) => ({
 const filterRoutes = (router: RegisteredRouter, path: string): Route[] => {
   const routes = Object.values(router.routesByPath).filter((route) => {
     const routePath = (route as Route).fullPath;
-    return (
-      routePath.startsWith(path) && !routePath.endsWith('/') // Exclude index pages (they end with /)
-    );
+    const routeId = (route as Route).id;
+
+    // if (routePath.includes('learn')) {
+    //   console.log('!!!!!----!!!!!');
+    //   console.log('Math route', routePath);
+    // }
+
+    // if (!routePath.startsWith(path) || routePath.endsWith('/')) {
+    //   return false; // Must be in our path and not an index route
+    // }
+
+
+    if (routePath === '/learn/math/hello-world/') {
+      console.log('We found one:', routePath, 'for');
+    }
+
+    // If we are in /blog skip /learn
+    if (!routePath.startsWith(path) || routePath.endsWith('/')) {
+      return false; // Must be in our path and not an index route
+    }
+
+    if (routeId.endsWith('/route')) {
+      return false; // Exclude layout routes
+    }
+
+    // if (routePath.toLowerCase().endsWith(`/${lowerLastSegment}`)) {
+    //   console.log('We found one:', routePath, 'for', lowerLastSegment);
+    // }
+
+
+    // Simple approach: count path segments
+    // We want: /learn/math/hello-world (3 segments)
+    // console.log(routePath);
+
+    // Not: /learn/math/hello-world/advanced (4 segments - tab route)
+    const segments = routePath.split('/').filter(Boolean);
+    const baseSegments = path.split('/').filter(Boolean);
+
+    // If we pathis
+
+    // We want exactly one more segment than the base path
+    return segments.length === baseSegments.length + 1;
   });
 
   return routes;

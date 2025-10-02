@@ -9,7 +9,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Divider from '@mui/material/Divider';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PermanentDrawer, Sheet, MobileDrawer } from './Drawer';
 import { useDrawer } from '@/hooks/useContext';
@@ -68,10 +67,13 @@ export function SecondaryDrawer({
     (anchor: string) => {
       const element = document.getElementById(anchor);
       if (element) {
+        element.style.scrollMarginTop = '80px'; // Offset for fixed header
+
         element.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
+        
         setActiveAnchor(anchor);
         // Close mobile drawer after navigation
         if (!desktop) {
@@ -83,35 +85,35 @@ export function SecondaryDrawer({
   );
 
   // Track scroll position to highlight active section
-  useEffect(() => {
-    const handleScroll = () => {
-      const anchorsWithElements = flatItems
-        .filter((item) => item.anchor)
-        .map((item) => ({
-          id: item.anchor!,
-          element: document.getElementById(item.anchor!),
-        }))
-        .filter(({ element }) => element !== null);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const anchorsWithElements = flatItems
+  //       .filter((item) => item.anchor)
+  //       .map((item) => ({
+  //         id: item.anchor!,
+  //         element: document.getElementById(item.anchor!),
+  //       }))
+  //       .filter(({ element }) => element !== null);
 
-      // Find the currently visible section
-      let currentAnchor = '';
-      const scrollTop = window.scrollY;
-      const offset = 100; // Offset for header
+  //     // Find the currently visible section
+  //     let currentAnchor = '';
+  //     const scrollTop = window.scrollY;
+  //     const offset = 0; // Offset for header
 
-      for (const { id, element } of anchorsWithElements) {
-        if (element && element.offsetTop - offset <= scrollTop + 50) {
-          currentAnchor = id;
-        }
-      }
+  //     for (const { id, element } of anchorsWithElements) {
+  //       if (element && element.offsetTop - offset <= scrollTop + 50) {
+  //         currentAnchor = id;
+  //       }
+  //     }
 
-      setActiveAnchor(currentAnchor);
-    };
+  //     setActiveAnchor(currentAnchor);
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+  //   window.addEventListener('scroll', handleScroll);
+  //   handleScroll(); // Initial call
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [flatItems]);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, [flatItems]);
 
   // Toggle expanded state for items with children
   const toggleExpanded = useCallback((itemId: string) => {

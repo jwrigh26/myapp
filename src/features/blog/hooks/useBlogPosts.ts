@@ -47,7 +47,7 @@ function generateBlogPostsFromRoutes(): BlogPostSummary[] {
           blurb,
           date,
           image: getThumbImageSrc(imageKey),
-          route: `/blog/posts${route}`, // Ensure route is prefixed correctly
+          route: `/blog${route}`, // Ensure route is prefixed correctly
         });
       }
     }

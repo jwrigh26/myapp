@@ -9,19 +9,19 @@ const blogCategories: FeatureCategory[] = [
     id: 'frontend-design',
     title: 'Frontend Design',
     icon: mdiPencilRuler,
-    path: '/blog/posts/frontend-design',
+    path: '/blog/frontend-design',
   },
   {
     id: 'react',
     title: 'React',
     icon: mdiReact,
-    path: '/blog/posts/react',
+    path: '/blog/react',
   },
   {
     id: 'soft-skills',
     title: 'Soft Skills',
     icon: mdiAccountGroup,
-    path: '/blog/posts/soft-skills',
+    path: '/blog/soft-skills',
   },
 ];
 

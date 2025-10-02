@@ -64,7 +64,8 @@ function AppBarToolbar() {
 
   // Show secondary drawer icon on learn routes
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/posts/');
+    router.state.location.pathname.startsWith('/learn/') && 
+    router.state.location.pathname !== '/learn';
 
   return (
     <StyledAppBar id="AppBar" elevation={0}>
@@ -89,7 +90,8 @@ function MobileAppToolbar() {
 
   // Show secondary drawer icon on learn routes
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/posts/');
+    router.state.location.pathname.startsWith('/learn/') && 
+    router.state.location.pathname !== '/learn';
 
   return (
     <HideOnScroll>

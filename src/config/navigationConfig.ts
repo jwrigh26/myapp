@@ -63,19 +63,19 @@ const blogCategories: NavCategory[] = [
     id: 'frontend-design',
     title: 'Frontend Design',
     icon: mdiPencilRuler,
-    path: '/blog/posts/frontend-design',
+    path: '/blog/frontend-design',
   },
   {
     id: 'react',
     title: 'React',
     icon: mdiReact,
-    path: '/blog/posts/react',
+    path: '/blog/react',
   },
   {
     id: 'soft-skills',
     title: 'Soft Skills',
     icon: mdiAccountGroup,
-    path: '/blog/posts/soft-skills',
+    path: '/blog/soft-skills',
   },
 ];
 
@@ -85,31 +85,31 @@ const learnCategories: NavCategory[] = [
     id: 'math',
     title: 'Mathematics',
     icon: mdiCalculator,
-    path: '/learn/posts/math',
+    path: '/learn/math',
   },
   {
     id: 'dsa',
     title: 'Data Structures & Algorithms',
     icon: mdiBrain,
-    path: '/learn/posts/dsa',
+    path: '/learn/dsa',
   },
   {
     id: 'python',
     title: 'Python Programming',
     icon: mdiLanguagePython,
-    path: '/learn/posts/python',
+    path: '/learn/python',
   },
   {
     id: 'git',
     title: 'Git & Version Control',
     icon: mdiGit,
-    path: '/learn/posts/git',
+    path: '/learn/git',
   },
   {
     id: 'ai',
     title: 'AI & Machine Learning',
     icon: mdiBookEducationOutline,
-    path: '/learn/posts/ai',
+    path: '/learn/ai',
   },
 ];
 

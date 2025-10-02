@@ -15,31 +15,31 @@ const learnCategories: FeatureCategory[] = [
     id: 'math',
     title: 'Math',
     icon: mdiCalculator,
-    path: '/learn/posts/math',
+    path: '/learn/math',
   },
   {
     id: 'dsa',
     title: 'DSA',
     icon: mdiBrain,
-    path: '/learn/posts/dsa',
+    path: '/learn/dsa',
   },
   {
     id: 'python',
     title: 'Python',
     icon: mdiLanguagePython,
-    path: '/learn/posts/python',
+    path: '/learn/python',
   },
   {
     id: 'git',
     title: 'Git',
     icon: mdiGit,
-    path: '/learn/posts/git',
+    path: '/learn/git',
   },
   {
     id: 'ai',
     title: 'AI',
     icon: mdiBookEducationOutline,
-    path: '/learn/posts/ai',
+    path: '/learn/ai',
   },
 ];
 

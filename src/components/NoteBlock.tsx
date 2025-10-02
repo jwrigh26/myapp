@@ -36,6 +36,7 @@ const StyledNoteBox = styled(Box, {
     border: '2px solid',
     borderRadius: theme.shape.borderRadius,
     ...variantStyles[variant],
+    whiteSpace: 'pre-wrap',
   };
 });
 
