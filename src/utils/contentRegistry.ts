@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-02T02:33:36.495Z
-// Total routes: 12
+// Generated on: 2025-10-02T02:43:49.725Z
+// Total routes: 11
 
 export interface NavigationItem {
   id: string;
@@ -81,7 +81,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "description": "A friendly introduction to mathematical concepts and learning",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-10-01T19:42:04.123Z",
+    "lastUpdated": "2025-10-02T02:43:23.196Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/hello-world/index.tsx"
   },
   "math": {
@@ -91,12 +91,6 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "items": [],
     "lastUpdated": "2025-10-02T02:28:55.371Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/index.tsx"
-  },
-  "/math.hello-world-01": {
-    "tags": [],
-    "items": [],
-    "lastUpdated": "2025-10-01T15:18:14.786Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math.hello-world-01.tsx"
   },
   "python": {
     "title": "Python Programming",

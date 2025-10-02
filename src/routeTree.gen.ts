@@ -30,7 +30,6 @@ import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/in
 import { Route as BlogReactIndexImport } from './routes/blog/react/index'
 import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
 import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
-import { Route as LearnMathHelloWorld01Import } from './routes/learn/math.hello-world-01'
 import { Route as LearnGitHelloWorldImport } from './routes/learn/git/hello-world'
 import { Route as LearnDsaHelloWorldImport } from './routes/learn/dsa/hello-world'
 import { Route as LearnAiHelloWorldImport } from './routes/learn/ai/hello-world'
@@ -155,12 +154,6 @@ const LearnPythonWhiteboardingEssentialsRoute =
     path: '/python/whiteboarding-essentials',
     getParentRoute: () => LearnRouteRoute,
   } as any)
-
-const LearnMathHelloWorld01Route = LearnMathHelloWorld01Import.update({
-  id: '/math/hello-world-01',
-  path: '/math/hello-world-01',
-  getParentRoute: () => LearnRouteRoute,
-} as any)
 
 const LearnGitHelloWorldRoute = LearnGitHelloWorldImport.update({
   id: '/git/hello-world',
@@ -370,13 +363,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnGitHelloWorldImport
       parentRoute: typeof LearnRouteImport
     }
-    '/learn/math/hello-world-01': {
-      id: '/learn/math/hello-world-01'
-      path: '/math/hello-world-01'
-      fullPath: '/learn/math/hello-world-01'
-      preLoaderRoute: typeof LearnMathHelloWorld01Import
-      parentRoute: typeof LearnRouteImport
-    }
     '/learn/python/whiteboarding-essentials': {
       id: '/learn/python/whiteboarding-essentials'
       path: '/python/whiteboarding-essentials'
@@ -521,7 +507,6 @@ interface LearnRouteRouteChildren {
   LearnAiHelloWorldRoute: typeof LearnAiHelloWorldRoute
   LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
   LearnGitHelloWorldRoute: typeof LearnGitHelloWorldRoute
-  LearnMathHelloWorld01Route: typeof LearnMathHelloWorld01Route
   LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
   LearnAiIndexRoute: typeof LearnAiIndexRoute
   LearnDsaIndexRoute: typeof LearnDsaIndexRoute
@@ -536,7 +521,6 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnAiHelloWorldRoute: LearnAiHelloWorldRoute,
   LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
   LearnGitHelloWorldRoute: LearnGitHelloWorldRoute,
-  LearnMathHelloWorld01Route: LearnMathHelloWorld01Route,
   LearnPythonWhiteboardingEssentialsRoute:
     LearnPythonWhiteboardingEssentialsRoute,
   LearnAiIndexRoute: LearnAiIndexRoute,
@@ -568,7 +552,6 @@ export interface FileRoutesByFullPath {
   '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
-  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
@@ -598,7 +581,6 @@ export interface FileRoutesByTo {
   '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
-  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
@@ -632,7 +614,6 @@ export interface FileRoutesById {
   '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
-  '/learn/math/hello-world-01': typeof LearnMathHelloWorld01Route
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
   '/blog/react/': typeof BlogReactIndexRoute
@@ -667,7 +648,6 @@ export interface FileRouteTypes {
     | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
     | '/learn/git/hello-world'
-    | '/learn/math/hello-world-01'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
@@ -696,7 +676,6 @@ export interface FileRouteTypes {
     | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
     | '/learn/git/hello-world'
-    | '/learn/math/hello-world-01'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
@@ -728,7 +707,6 @@ export interface FileRouteTypes {
     | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
     | '/learn/git/hello-world'
-    | '/learn/math/hello-world-01'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design/'
     | '/blog/react/'
@@ -805,7 +783,6 @@ export const routeTree = rootRoute
         "/learn/ai/hello-world",
         "/learn/dsa/hello-world",
         "/learn/git/hello-world",
-        "/learn/math/hello-world-01",
         "/learn/python/whiteboarding-essentials",
         "/learn/ai/",
         "/learn/dsa/",
@@ -870,10 +847,6 @@ export const routeTree = rootRoute
     },
     "/learn/git/hello-world": {
       "filePath": "learn/git/hello-world.tsx",
-      "parent": "/learn"
-    },
-    "/learn/math/hello-world-01": {
-      "filePath": "learn/math.hello-world-01.tsx",
       "parent": "/learn"
     },
     "/learn/python/whiteboarding-essentials": {

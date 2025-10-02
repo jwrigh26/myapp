@@ -21,6 +21,7 @@ export const Route = createFileRoute(
   component: PythonWhiteboardingGuide,
   head: () => ({
     getTitle: () => 'Whiteboarding Essentials',
+    includeInDrawer: true, // Include this route in the drawer navigation
     meta: [
       {
         name: 'description',

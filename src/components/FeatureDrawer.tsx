@@ -15,6 +15,7 @@ import type { RegisteredRouter } from '@tanstack/react-router';
 import { createLink, useMatchRoute, useRouter } from '@tanstack/react-router';
 import { forwardRef } from 'react';
 import CustomLink from './LinkButton';
+import { tr } from 'date-fns/locale';
 
 // ################################################
 // ### Types
@@ -47,6 +48,7 @@ interface Route {
       getTitle?: () => string;
       meta?: any[];
       title?: string;
+      includeInDrawer?: boolean; // New property to control drawer inclusion
     };
   };
 }
@@ -531,44 +533,31 @@ const filterRoutes = (router: RegisteredRouter, path: string): Route[] => {
   const routes = Object.values(router.routesByPath).filter((route) => {
     const routePath = (route as Route).fullPath;
     const routeId = (route as Route).id;
+    const routeOptions = (route as Route).options;
 
-    // if (routePath.includes('learn')) {
-    //   console.log('!!!!!----!!!!!');
-    //   console.log('Math route', routePath);
-    // }
-
-    // if (!routePath.startsWith(path) || routePath.endsWith('/')) {
-    //   return false; // Must be in our path and not an index route
-    // }
-
-
-    if (routePath === '/learn/math/hello-world/') {
-      console.log('We found one:', routePath, 'for');
+    // Must be in our category path
+    if (!routePath.startsWith(path)) {
+      return false;
     }
 
-    // If we are in /blog skip /learn
-    if (!routePath.startsWith(path) || routePath.endsWith('/')) {
-      return false; // Must be in our path and not an index route
-    }
-
+    // Exclude layout routes
     if (routeId.endsWith('/route')) {
-      return false; // Exclude layout routes
+      return false;
     }
 
-    // if (routePath.toLowerCase().endsWith(`/${lowerLastSegment}`)) {
-    //   console.log('We found one:', routePath, 'for', lowerLastSegment);
-    // }
+    // Check for explicit inclusion in drawer
+    const headData = routeOptions.head?.();
+    if (headData?.includeInDrawer === true) {
+      return true;
+    }
 
+    // Default behavior: include non-index routes at exactly one level deeper
+    if (routePath.endsWith('/')) {
+      return false; // Exclude index routes by default
+    }
 
-    // Simple approach: count path segments
-    // We want: /learn/math/hello-world (3 segments)
-    // console.log(routePath);
-
-    // Not: /learn/math/hello-world/advanced (4 segments - tab route)
     const segments = routePath.split('/').filter(Boolean);
     const baseSegments = path.split('/').filter(Boolean);
-
-    // If we pathis
 
     // We want exactly one more segment than the base path
     return segments.length === baseSegments.length + 1;

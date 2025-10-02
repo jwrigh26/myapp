@@ -8,6 +8,7 @@ export const Route = createFileRoute('/learn/math/hello-world/')({
   component: MathHelloWorld,
   head: () => ({
     getTitle: () => 'Hello Math World',
+    includeInDrawer: true, // Include this route in the drawer navigation
     meta: [
       {
         name: 'description',
