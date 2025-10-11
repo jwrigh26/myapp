@@ -25,10 +25,12 @@ export interface ProseBlockProps {
   color?: string; // Override default text.primary color
   options?: {
     titleVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-    subtitleVariant?: 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
+    subtitleVariant?: 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
     textVariant?: 'body1' | 'body2' | 'caption' | 'overline';
     titleComponent?: React.ElementType;
+    titleColor?: string;
     subtitleComponent?: React.ElementType;
+    subtitleColor?: string;
     textComponent?: React.ElementType;
   };
 }
@@ -54,7 +56,9 @@ const ProseBlock = React.memo(
       textVariant = 'body1',
       // Component defaults
       titleComponent = 'h2',
+      titleColor = "primary.main",
       subtitleComponent = 'p',
+      subtitleColor = "text.secondary",
       textComponent = 'div',
     } = options;
 
@@ -73,7 +77,7 @@ const ProseBlock = React.memo(
           <Typography
             variant={titleVariant}
             component={titleComponent}
-            color="primary.main"
+            color={titleColor || "primary.main"}
             gutterBottom={titleGutter}
             className={anchor ? 'anchor-title' : undefined}
           >
@@ -85,7 +89,7 @@ const ProseBlock = React.memo(
             variant={subtitleVariant}
             component={subtitleComponent}
             gutterBottom
-            color="text.secondary"
+            color={subtitleColor || "text.secondary"}
             className={!title && anchor ? 'anchor-title' : undefined}
           >
             {subtitle}

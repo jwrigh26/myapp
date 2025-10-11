@@ -26,7 +26,6 @@ const Content = styled(Box)(({ theme }) => ({
 export const StyledPermanentDrawer = styled(Drawer, {
   shouldForwardProp: (prop: string) => prop !== 'width',
 })<{ width?: number | string }>(({ theme, width }) => ({
-  flexShrink: 1,
   width: width || theme.mixins.drawerWidth,
   display: 'block',
   ['& .MuiDrawer-paper']: {

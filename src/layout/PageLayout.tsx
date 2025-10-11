@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { PropsWithChildren } from 'react';
 
-interface HomeLayoutProps extends PropsWithChildren<{}> {
+interface PageLayoutProps extends PropsWithChildren<{}> {
   id?: string;
   className?: string;
 }
@@ -64,7 +64,7 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
   },
 }));
 
-const HomeLayout = ({ children, id, className }: HomeLayoutProps) => {
+const PageLayout = ({ children, id, className }: PageLayoutProps) => {
   return (
     <StyledContentGrid id={id} className={className}>
       {children}
@@ -72,4 +72,4 @@ const HomeLayout = ({ children, id, className }: HomeLayoutProps) => {
   );
 };
 
-export default HomeLayout;
+export default PageLayout;

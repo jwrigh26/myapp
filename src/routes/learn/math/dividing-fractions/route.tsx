@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { TabsLayout } from '@/components/TabsLayout';
+import { TabsLayout } from '@/layout/TabsLayout';
 
-export const Route = createFileRoute('/learn/math/hello-world')({
+export const Route = createFileRoute('/learn/math/dividing-fractions')({
   component: LayoutComponent,
 });
 

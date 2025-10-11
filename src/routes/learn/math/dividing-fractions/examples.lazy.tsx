@@ -3,7 +3,7 @@ import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import CodeBlock from '@/components/CodeBlock';
 
-export const Route = createLazyFileRoute('/learn/math/hello-world/examples')({
+export const Route = createLazyFileRoute('/learn/math/dividing-fractions/examples')({
   component: MathExamples,
 });
 

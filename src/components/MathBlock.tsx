@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import { resolveThemeColor } from '@/utils/utils';
 
 // KaTeX renderer (fast, great for app UIs)
 import 'katex/dist/katex.min.css';
@@ -15,12 +16,20 @@ import {
   BlockMath as KaTeXBlock,
 } from 'react-katex';
 
+// Utility function to clean up math strings
+function preprocessMath(math: string): string {
+  // Remove \require{cancel} from display as it clutters the output
+  // Note: KaTeX cancel extension is automatically available
+  return math.replace(/\\require\{cancel\}/g, '');
+}
+
 // ---------------------------------------------
 // Public API
 // ---------------------------------------------
 export interface MathInlineProps {
   /** LaTeX string. Use \\frac{a}{b}, \\text{kg}, etc. */
   math: string;
+  bold?: boolean;
   /** Color token or any CSS color (defaults to `inherit`). */
   color?: string;
   /** MUI Typography variant for surrounding text context. */
@@ -35,12 +44,28 @@ export interface MathInlineProps {
   padded?: boolean;
 }
 
-export function MathInline({
+export const MathInline = React.memo(function MathInline({
   math,
   color,
   variant = 'body1',
   padded = false,
+  bold = false,
 }: MathInlineProps) {
+  // Helper to make math bold appropriately
+  const makeBold = (mathStr: string): string => {
+    if (!bold) return mathStr;
+    
+    // If the math contains \text{}, we need special handling for mixed content
+    if (mathStr.includes('\\text{')) {
+      // For mixed content, wrap everything in \boldsymbol{} but also convert \text{} to \textbf{}
+      const processedMath = mathStr.replace(/\\text\{([^}]+)\}/g, '\\textbf{$1}');
+      return `\\boldsymbol{${processedMath}}`;
+    } else {
+      // For pure mathematical content, use \boldsymbol{}
+      return `\\boldsymbol{${mathStr}}`;
+    }
+  };
+
   return (
     <Typography
       component="span"
@@ -49,10 +74,13 @@ export function MathInline({
       sx={{ px: padded ? 0.5 : 0 }}
     >
       {/* KaTeX renders only the math span; Typography keeps font sizing consistent with prose */}
-      <KaTeXInline math={math} />
+      <KaTeXInline
+        math={preprocessMath(makeBold(math))}
+        renderError={(error) => <span>{error.message}</span>}
+      />
     </Typography>
   );
-}
+});
 
 export interface MathBlockProps {
   /** LaTeX string. You may pass a single expression or an aligned environment. */
@@ -64,34 +92,68 @@ export interface MathBlockProps {
   /** Tone helpers */
   color?: string; // text color
   backgroundColor?: string; // subtle background panel
-  dense?: boolean; // tighter padding
+  /** Anchor support for navigation */
+  anchor?: boolean;
+  id?: string;
+  title?: string;
 }
 
-export function MathBlock({
+export const MathBlock = React.memo(function MathBlock({
   math,
   caption,
   align = 'center',
   color,
   backgroundColor,
-  dense = false,
+  anchor = false,
+  id,
+  title,
 }: MathBlockProps) {
   return (
-    <BlockRoot align={align} dense={dense} backgroundColor={backgroundColor}>
-      <Typography component="div" color={color} sx={{ textAlign: align }}>
-        <KaTeXBlock math={math} />
-      </Typography>
-      {caption && (
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{ display: 'block', textAlign: align, mt: 0.5 }}
-        >
-          {caption}
-        </Typography>
+    <BlockRoot
+      align={align}
+      backgroundColor={backgroundColor}
+      id={id}
+      className={anchor && id ? 'anchor-section' : undefined}
+    >
+      {title && (
+        <>
+          <Box sx={{ width: '100%', display: 'flex' }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              color="primary.main"
+              className={anchor ? 'anchor-title' : undefined}
+              sx={{ 
+                fontWeight: 'fontWeightMedium',
+                fontSize: '1.1rem',
+                lineHeight: 1.2,
+                padding: 2,
+                mb: 0,
+              }}
+            >
+              {title}
+            </Typography>
+          </Box>
+          <Divider sx={{ width: '100%', mb: 4 }} />
+        </>
       )}
+      <Box sx={{ width: '100%', padding: 2 }}>
+        <Typography component="div" color={color} sx={{ textAlign: align }}>
+          <KaTeXBlock math={preprocessMath(math)} />
+        </Typography>
+        {caption && (
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ display: 'block', textAlign: align, mt: 4 }}
+          >
+            {caption}
+          </Typography>
+        )}
+      </Box>
     </BlockRoot>
   );
-}
+});
 
 export interface EquationStepsProps {
   /** Array of LaTeX lines; will be joined with \\ to make an aligned block. */
@@ -104,18 +166,26 @@ export interface EquationStepsProps {
   alignEquals?: boolean;
   /** Visual chrome */
   outlined?: boolean;
+  /** Header color (e.g., 'primary.main', 'secondary.main') */
+  headerColor?: string;
+  /** Anchor support for navigation */
+  anchor?: boolean;
+  id?: string;
 }
 
-export function EquationSteps({
+export const EquationSteps = React.memo(function EquationSteps({
   steps,
   title,
   subtitle,
   alignEquals = true,
   outlined = true,
+  headerColor,
+  anchor = false,
+  id,
 }: EquationStepsProps) {
   const joined = steps
     .map((line) => (alignEquals ? toAlignedLine(line) : line))
-    .join(' \\ ');
+    .join(String.raw`\\[16pt]`);
 
   const math = String.raw`\begin{aligned} ${joined} \end{aligned}`;
 
@@ -123,21 +193,24 @@ export function EquationSteps({
     <Card
       variant={outlined ? 'outlined' : undefined}
       sx={{ overflowX: 'auto' }}
+      id={id}
+      className={anchor && id ? 'anchor-section' : undefined}
     >
       {(title || subtitle) && (
-        <CardHeader
+        <DenseCardHeader
           title={title}
           subheader={subtitle}
-          sx={{ '& .MuiCardHeader-title': { fontWeight: 600 } }}
+          titleColor={headerColor}
+          className={anchor && title ? 'anchor-title' : undefined}
         />
       )}
       {(title || subtitle) && <Divider />}
       <CardContent>
-        <KaTeXBlock math={math} />
+        <KaTeXBlock math={preprocessMath(math)} />
       </CardContent>
     </Card>
   );
-}
+});
 
 /**
  * Helper: turn "a = b = c" or "expr" into an amsmath-aligned line like `a &= b = c`.
@@ -155,22 +228,38 @@ export interface EquationCardProps {
   subtitle?: string;
   /** One or more block equations. */
   equations: string[];
+  outlined?: boolean;
   footer?: React.ReactNode; // e.g., explanation text
+  /** Header color (e.g., 'primary.main', 'secondary.main') */
+  headerColor?: string;
+  /** Anchor support for navigation */
+  anchor?: boolean;
+  id?: string;
 }
 
-export function EquationCard({
+export const EquationCard = React.memo(function EquationCard({
   title,
   subtitle,
   equations,
+  outlined = false,
   footer,
+  headerColor,
+  anchor = false,
+  id,
 }: EquationCardProps) {
   return (
-    <Card variant="outlined" sx={{ overflowX: 'auto' }}>
+    <Card
+      variant={outlined ? "outlined" : undefined}
+      sx={{ overflowX: 'auto' }}
+      id={id}
+      className={anchor && id ? 'anchor-section' : undefined}
+    >
       {(title || subtitle) && (
-        <CardHeader
+        <DenseCardHeader
           title={title}
           subheader={subtitle}
-          sx={{ '& .MuiCardHeader-title': { fontWeight: 600 } }}
+          titleColor={headerColor}
+          className={anchor && title ? 'anchor-title' : undefined}
         />
       )}
       {(title || subtitle) && <Divider />}
@@ -178,7 +267,7 @@ export function EquationCard({
         <Stack spacing={2}>
           {equations.map((eq, i) => (
             <Typography component="div" key={i}>
-              <KaTeXBlock math={eq} />
+              <KaTeXBlock math={preprocessMath(eq)} />
             </Typography>
           ))}
           {footer}
@@ -186,7 +275,7 @@ export function EquationCard({
       </CardContent>
     </Card>
   );
-}
+});
 
 export interface ProseMathBlockProps {
   /** Optional heading and subhead, following your ProseBlock style. */
@@ -198,23 +287,34 @@ export interface ProseMathBlockProps {
   equation?: string;
   /** Caption under the featured equation. */
   caption?: string;
+  /** Anchor support for navigation */
+  anchor?: boolean;
+  id?: string;
 }
 
-export function ProseMathBlock({
+export const ProseMathBlock = React.memo(function ProseMathBlock({
   title,
   subtitle,
   children,
   equation,
   caption,
+  anchor = false,
+  id,
 }: ProseMathBlockProps) {
   return (
-    <Box>
+    <Box id={id} className={anchor && id ? 'anchor-section' : undefined}>
       {title && (
         <Typography
-          variant="h4"
+          variant="h6"
           component="h2"
           color="primary.main"
           gutterBottom
+          className={anchor ? 'anchor-title' : undefined}
+          sx={{ 
+            fontWeight: 'fontWeightMedium',
+            fontSize: '1.1rem',
+            lineHeight: 1.2,
+          }}
         >
           {title}
         </Typography>
@@ -237,39 +337,65 @@ export function ProseMathBlock({
       {equation && <MathBlock math={equation} caption={caption} />}
     </Box>
   );
-}
+});
 
 // ---------------------------------------------
 // Styled Components (kept below, per your preference)
 // ---------------------------------------------
 interface BlockRootProps {
   align: 'center' | 'left';
-  dense: boolean;
   backgroundColor?: string;
 }
 
 const BlockRoot = styled(Box, {
   shouldForwardProp: (prop) =>
-    prop !== 'align' && prop !== 'dense' && prop !== 'backgroundColor',
-})<BlockRootProps>(({ theme, align, dense, backgroundColor }) => {
+    prop !== 'align' && prop !== 'backgroundColor',
+})<BlockRootProps>(({ theme, align, backgroundColor }) => {
   const defaultBg =
     backgroundColor ??
     (theme.palette.mode === 'dark'
       ? theme.palette.action.hover
       : theme.palette.action.selected);
   return {
-    display: 'block',
-    textAlign: align,
-    padding: theme.spacing(dense ? 1 : 2, dense ? 1 : 2),
+    display: 'flex',
+    padding: 0,
     borderRadius: theme.shape.borderRadius,
     backgroundColor: defaultBg,
     border: `1px solid ${theme.palette.divider}`,
+    alignItems: align === 'center' ? 'center' : 'flex-start',
+    gap: 0,
+    flexDirection: 'column',
     overflowX: 'auto',
     '& .katex-display': {
       margin: 0, // KaTeX adds margin; we manage spacing via Box
     },
   };
 });
+
+interface DenseCardHeaderProps {
+  titleColor?: string;
+}
+
+const DenseCardHeader = styled(CardHeader, {
+  shouldForwardProp: (prop) => prop !== 'titleColor',
+})<DenseCardHeaderProps>(({ theme, titleColor }) => ({
+  paddingTop: theme.spacing(1.5),
+  paddingBottom: theme.spacing(1),
+  paddingLeft: theme.spacing(2),
+  paddingRight: theme.spacing(2),
+  '& .MuiCardHeader-title': {
+    fontSize: theme.typography.h6.fontSize,
+    fontWeight: theme.typography.fontWeightMedium, // Less bold than 600
+    lineHeight: 1.2,
+    color: resolveThemeColor(titleColor)(theme) || theme.palette.primary.main,
+  },
+  '& .MuiCardHeader-subheader': {
+    fontSize: theme.typography.body2.fontSize,
+    lineHeight: 1.3,
+    marginTop: theme.spacing(0.25),
+    color: theme.palette.text.secondary
+  },
+}));
 
 // ---------------------------------------------
 // Usage examples (delete or keep in your docs playground)
@@ -287,7 +413,12 @@ export function _DemoExamples() {
         sentence. Use
         <MathInline math={String.raw`\,\text{m}^2\,`} padded /> for area and
         <MathInline math={String.raw`\,\text{m}\,`} padded /> for length, then
-        simplify.
+        simplify. Important formulas can be emphasized:
+        <MathInline 
+          bold 
+          math={String.raw`\text{Area} = \text{length} \times \text{width}`} 
+          padded 
+        />.
       </ProseMathBlock>
 
       <EquationCard
@@ -328,9 +459,30 @@ export function _DemoExamples() {
  * \sqrt[n]{x}        % nth root
  * \text{kg}          % text inside math (units, labels)
  * \cdot              % multiplication dot
+ * \times            % multiplication ×
+ * \pm                % plus-minus ±
+ * \times            % multiplication ×
  * \div               % division symbol ÷
  * \leq, \geq         % ≤, ≥
  * \approx, \equiv    % ≈, ≡
  *
+ * BOLD MATH (for MathInline component):
+ * <MathInline bold math="x^2 + y^2" />           % Mathematical symbols bold
+ * <MathInline bold math="\text{Area} = l \times w" />  % Text and symbols bold
+ *
+ * CANCELLATION (for showing fraction simplification):
+ * \cancel{6}                     % diagonal line through 6
+ * \bcancel{6}                    % opposite diagonal
+ * \xcancel{6}                    % X through 6
+ * \cancelto{2}{6}                % shows 6 → 2
+ * Note: \require{cancel} is automatically removed from display
+ *
+ * ANCHOR SUPPORT (for navigation generation):
+ * <MathBlock anchor id="section-id" title="Section Title" math="..." />
+ * <EquationCard anchor id="equation-id" title="Equation Title" equations={[...]} />
+ * <EquationSteps anchor id="steps-id" title="Steps Title" steps={[...]} />
+ * <ProseMathBlock anchor id="prose-id" title="Prose Title" equation="..." />
+ *
  * <MathBlock math={String.raw`\frac{20\,\text{m}^2}{4\,\text{m}} = 5\,\text{m}`} />
+ * <MathBlock math={String.raw`\frac{\cancel{6}}{\cancel{9}} = \frac{2}{3}`} />
  */

@@ -82,7 +82,7 @@ function parseReactFile(filePath) {
  */
 export function generateContentIndex() {
   const contentIndex = {};
-  const learnDir = path.join(__dirname, '../routes/learn/posts');
+  const learnDir = path.join(__dirname, '../routes/learn');
 
   if (!fs.existsSync(learnDir)) {
     console.warn('Learn posts directory not found');

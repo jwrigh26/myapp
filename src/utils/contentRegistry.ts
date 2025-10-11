@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-02T02:43:49.725Z
-// Total routes: 11
+// Generated on: 2025-10-11T21:02:28.111Z
+// Total routes: 13
 
 export interface NavigationItem {
   id: string;
@@ -76,20 +76,104 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "lastUpdated": "2025-09-24T02:46:33.196Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/index.tsx"
   },
-  "math/hello-world": {
-    "title": "Hello Math World",
-    "description": "A friendly introduction to mathematical concepts and learning",
+  "math/dividing-fractions/advanced": {
+    "title": "Deep dive into complex mathematical ideas",
+    "tags": [],
+    "items": [
+      {
+        "id": "overview",
+        "title": "Overview",
+        "anchor": "overview",
+        "level": 1
+      },
+      {
+        "id": "complex-numbers",
+        "title": "Complex Numbers",
+        "anchor": "complex-numbers",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-08T14:37:04.297Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/advanced.lazy.tsx"
+  },
+  "math/dividing-fractions/examples": {
+    "title": "Real-world applications and practice problems",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-10-02T02:43:23.196Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/hello-world/index.tsx"
+    "lastUpdated": "2025-10-08T14:37:04.633Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/examples.lazy.tsx"
+  },
+  "math/dividing-fractions": {
+    "title": "Dividing Fractions",
+    "description": "Learn how to divide fractions step by step with clear explanations and examples",
+    "tags": [],
+    "items": [
+      {
+        "id": "division-example",
+        "title": "Division Example",
+        "anchor": "division-example",
+        "level": 1
+      },
+      {
+        "id": "simplifying-fractions",
+        "title": "Simplifying with Cancellation",
+        "anchor": "simplifying-fractions",
+        "level": 1
+      },
+      {
+        "id": "mixed-numbers",
+        "title": "Mixed Numbers",
+        "anchor": "mixed-numbers",
+        "level": 1
+      },
+      {
+        "id": "interpret-fractions",
+        "title": "Interpret Fraction Division",
+        "anchor": "interpret-fractions",
+        "level": 1,
+        "children": [
+          {
+            "id": "repeated-groups",
+            "title": "Repeated Groups",
+            "anchor": "repeated-groups",
+            "level": 2
+          },
+          {
+            "id": "multiplicative-comparision",
+            "title": "Multiplicative Comparison",
+            "anchor": "multiplicative-comparision",
+            "level": 2
+          },
+          {
+            "id": "rectangular-area",
+            "title": "Rectangular Area (Geometric Model)",
+            "anchor": "rectangular-area",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "id": "how-they-fit-together",
+        "title": "How They Fit Together",
+        "anchor": "how-they-fit-together",
+        "level": 1
+      },
+      {
+        "id": "in-short",
+        "title": "In Short",
+        "anchor": "in-short",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-11T21:02:06.024Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/index.tsx"
   },
   "math": {
     "title": "Mathematics",
     "description": "Mathematical concepts, proofs, and practical applications in computer science and engineering.",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-10-02T02:28:55.371Z",
+    "lastUpdated": "2025-10-08T14:37:04.758Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/index.tsx"
   },
   "python": {
@@ -198,7 +282,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-01T19:42:04.113Z",
+    "lastUpdated": "2025-10-11T16:48:18.584Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/python/whiteboarding-essentials.tsx"
   }
 };

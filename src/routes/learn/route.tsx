@@ -1,6 +1,5 @@
 import { SecondaryDrawer as TableOfContents } from '@/components/SecondaryDrawer';
 import { LearnDrawer } from '@/features/learn';
-import { PageLayout } from '@/layout';
 import { useNavigationItems } from '@/hooks/useNavigationItems';
 import { useIsBreakpointUp } from '@/context/BreakpointContext';
 import Box from '@mui/material/Box';
@@ -22,13 +21,9 @@ function AppLayoutComponent() {
   const isDesktop = useIsBreakpointUp('md');
 
   return (
-    <Box sx={{ display: 'flex', marginBottom: 2, minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', marginBottom: 2 }}>
       <LearnDrawer />
-      <Box sx={{ flex: 1, overflow: 'hidden' }}>
-        <PageLayout>
           <Outlet />
-        </PageLayout>
-      </Box>
 
       {/* Dynamic navigation - desktop permanent drawer or mobile drawer */}
       {navigationItems.length > 0 && (

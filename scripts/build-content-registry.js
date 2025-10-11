@@ -27,12 +27,18 @@ export class ContentAnalyzer {
       // TitleBlock components
       titleBlock: /<TitleBlock[^>]*title="([^"]+)"/g,
 
-      // ProseBlock with title and anchor (may also have subtitle)
+      // ProseBlock with title and anchor (may also have subtitle) - multiline support
       proseBlockTitleAnchor: 
-        /<ProseBlock[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
-      // ProseBlock with subtitle and anchor (no title) 
+        /<ProseBlock(?:[^>]|\n)*?\btitle="([^"]+)"(?:[^>]|\n)*?\banchor\b(?:[^>]|\n)*?\bid="([^"]+)"(?:[^>]|\n)*?>/g,
+      // ProseBlock with anchor and title (anchor comes first) - multiline support
+      proseBlockAnchorTitle:
+        /<ProseBlock(?:[^>]|\n)*?\banchor\b(?:[^>]|\n)*?\btitle="([^"]+)"(?:[^>]|\n)*?\bid="([^"]+)"(?:[^>]|\n)*?>/g,
+      // ProseBlock with subtitle and anchor (no title) - simple multiline
       proseBlockSubtitleAnchor:
-        /<ProseBlock(?![^>]*\btitle\s*=)[^>]*\bsubtitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+        /<ProseBlock[^>]*subtitle="([^"]+)"[^>]*anchor[^>]*id="([^"]+)"/g,
+      // ProseBlock with anchor first, then subtitle (no title) - simple multiline 
+      proseBlockAnchorSubtitle:
+        /<ProseBlock[^>]*anchor[^>]*id="([^"]+)"[^>]*subtitle="([^"]+)"/g,
 
       // NEW: className="anchor-section" with data-id + className="anchor-title" with data-level
       classNameWithDataAttrs:
@@ -45,6 +51,30 @@ export class ContentAnalyzer {
       // NEW: Most flexible - any element with anchor-section class containing anchor-title
       flexibleClassName:
         /<[^>]+className="[^"]*anchor-section[^"]*"[^>]*id="([^"]+)"[^>]*>[\s\S]*?<[^>]+className="[^"]*anchor-title[^"]*"[^>]*>\s*([^<]+?)\s*<\/[^>]+>/g,
+
+      // MathBlock components with anchor
+      mathBlockAnchor:
+        /<MathBlock[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
+      mathBlockAnchorReverse:
+        /<MathBlock[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+      
+      // EquationCard components with anchor
+      equationCardAnchor:
+        /<EquationCard[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
+      equationCardAnchorReverse:
+        /<EquationCard[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+      
+      // EquationSteps components with anchor
+      equationStepsAnchor:
+        /<EquationSteps[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
+      equationStepsAnchorReverse:
+        /<EquationSteps[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
+      
+      // ProseMathBlock components with anchor
+      proseMathBlockAnchor:
+        /<ProseMathBlock[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
+      proseMathBlockAnchorReverse:
+        /<ProseMathBlock[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
     };
   }
 
@@ -60,7 +90,8 @@ export class ContentAnalyzer {
       this.extractBoxWithHeadings(content, items);
       this.extractTypographyWithIds(content, items);
       this.extractFromComments(content, items);
-      this.extractProseBlockAnchors(content, items);
+      this.extractProseBlockAnchors(content, items, filePath);
+      this.extractMathBlockAnchors(content, items);
 
       // Sort by position in file and build hierarchy
       const sorted = items.sort((a, b) => a.position - b.position);
@@ -175,7 +206,7 @@ export class ContentAnalyzer {
     }
   }
 
-  extractProseBlockAnchors(content, items) {
+  extractProseBlockAnchors(content, items, filePath = '') {
     let match;
     
     // Extract ProseBlocks with title (level 1)
@@ -193,18 +224,172 @@ export class ContentAnalyzer {
       });
     }
     
-    // Extract ProseBlocks with subtitle only (level 2)
-    while ((match = this.patterns.proseBlockSubtitleAnchor.exec(content)) !== null) {
-      const [fullMatch, subtitle, id] = match;
+    // Extract ProseBlocks with anchor first, then title (level 1)
+    while ((match = this.patterns.proseBlockAnchorTitle.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
       const position = match.index;
 
       items.push({
         id: id.trim(),
-        title: this.cleanTitle(subtitle),
+        title: this.cleanTitle(title),
         anchor: id.trim(),
-        level: 2,
+        level: 1,
         position,
-        source: 'proseblock-subtitle-anchor',
+        source: 'proseblock-anchor-title',
+      });
+    }
+    
+    // Extract ProseBlocks with anchor+subtitle (exclude those with titles)
+    // First find all ProseBlock opening tags with anchor
+    const proseBlockStart = /<ProseBlock(?:[^>]|\n)*?>/g;
+    let startMatch;
+    
+    while ((startMatch = proseBlockStart.exec(content)) !== null) {
+      const fullProseBlockTag = startMatch[0];
+      
+      // Check if it has anchor, id, subtitle but NOT title
+      const hasAnchor = /\banchor\b/.test(fullProseBlockTag);
+      const hasTitle = /\btitle\s*=/.test(fullProseBlockTag);
+      const idMatch = fullProseBlockTag.match(/\bid="([^"]+)"/);
+      const subtitleMatch = fullProseBlockTag.match(/\bsubtitle="([^"]+)"/);
+      
+      if (hasAnchor && !hasTitle && idMatch && subtitleMatch) {
+        const id = idMatch[1];
+        const subtitle = subtitleMatch[1];
+        const position = startMatch.index;
+        
+        items.push({
+          id: id.trim(),
+          title: this.cleanTitle(subtitle),
+          anchor: id.trim(),
+          level: 2,
+          position,
+          source: 'proseblock-subtitle-only',
+        });
+      }
+    }
+  }
+
+  extractMathBlockAnchors(content, items) {
+    let match;
+    
+    // Extract MathBlock with anchor and title
+    while ((match = this.patterns.mathBlockAnchor.exec(content)) !== null) {
+      const [fullMatch, id, title] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'mathblock-anchor',
+      });
+    }
+    
+    // Extract MathBlock with title first, then anchor
+    while ((match = this.patterns.mathBlockAnchorReverse.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'mathblock-anchor-reverse',
+      });
+    }
+    
+    // Extract EquationCard with anchor and title
+    while ((match = this.patterns.equationCardAnchor.exec(content)) !== null) {
+      const [fullMatch, id, title] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'equationcard-anchor',
+      });
+    }
+    
+    // Extract EquationCard with title first, then anchor
+    while ((match = this.patterns.equationCardAnchorReverse.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'equationcard-anchor-reverse',
+      });
+    }
+    
+    // Extract EquationSteps with anchor and title
+    while ((match = this.patterns.equationStepsAnchor.exec(content)) !== null) {
+      const [fullMatch, id, title] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'equationsteps-anchor',
+      });
+    }
+    
+    // Extract EquationSteps with title first, then anchor
+    while ((match = this.patterns.equationStepsAnchorReverse.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'equationsteps-anchor-reverse',
+      });
+    }
+    
+    // Extract ProseMathBlock with anchor and title
+    while ((match = this.patterns.proseMathBlockAnchor.exec(content)) !== null) {
+      const [fullMatch, id, title] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'prosemathblock-anchor',
+      });
+    }
+    
+    // Extract ProseMathBlock with title first, then anchor
+    while ((match = this.patterns.proseMathBlockAnchorReverse.exec(content)) !== null) {
+      const [fullMatch, title, id] = match;
+      const position = match.index;
+
+      items.push({
+        id: id.trim(),
+        title: this.cleanTitle(title),
+        anchor: id.trim(),
+        level: 1,
+        position,
+        source: 'prosemathblock-anchor-reverse',
       });
     }
   }
@@ -373,11 +558,17 @@ export function buildAdvancedContentRegistry() {
       if (entry.isDirectory()) {
         scanDirectory(fullPath, `${routePrefix}/${entry.name}`);
       } else if (entry.name.endsWith('.tsx') && 
-                 !entry.name.endsWith('.lazy.tsx') &&
                  entry.name !== 'route.tsx') {
         
         // Handle index.tsx specially - it represents the main lesson
-        const routeName = entry.name === 'index.tsx' ? '' : entry.name.replace('.tsx', '');
+        let routeName;
+        if (entry.name === 'index.tsx') {
+          routeName = '';
+        } else if (entry.name.endsWith('.lazy.tsx')) {
+          routeName = entry.name.replace('.lazy.tsx', '');
+        } else {
+          routeName = entry.name.replace('.tsx', '');
+        }
         const routePath = routePrefix.substring(1) + (routeName ? `/${routeName}` : '');
 
         console.log(`   📄 Analyzing: ${routePath}`);

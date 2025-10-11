@@ -8,12 +8,13 @@ import QuoteBlock from '@/components/QuoteBlock';
 import { Spacer, SectionSpacer } from '@/components/Spacer';
 import TitleBlock from '@/components/TitleBlock';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { createFileRoute } from '@tanstack/react-router';
+import PageLayout from '@/layout/PageLayout';
 
-const spaceSize = 8;
+const sectionSpaceSize = 12;
+const blockSpaceSize = 8;
 
 export const Route = createFileRoute(
   '/learn/python/whiteboarding-essentials'
@@ -37,7 +38,7 @@ export const Route = createFileRoute(
 
 function PythonWhiteboardingGuide() {
   return (
-    <>
+    <PageLayout>
       <TitleBlock
         title="Whiteboarding Essentials"
         subtitle="Python fundamentals for whiteboarding"
@@ -59,13 +60,13 @@ function PythonWhiteboardingGuide() {
         linkText="Python for Coding"
       />
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
 
       {/* Variables Section */}
       <ProseBlock
         title="Variables"
         subtitle="Dynamically typed"
-        spacingBottom={false}
+        spacingBottom
         anchor
         id="variables"
       >
@@ -81,7 +82,8 @@ n = 0
 print('n =', n)  # n = 0`}
       />
 
-      <ProseBlock subtitle="Redeclare" spacingBottom={false} spacingTop={true}>
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock subtitle="Redeclare" spacingBottom={false}>
         Because it's dynamic we can redeclare <span className="code">n</span> as
         a <span className="code">string</span>.
       </ProseBlock>
@@ -93,6 +95,7 @@ n = 'abc'
 print('n =', n)  # n = abc`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Multiple Assigments"
         spacingBottom={false}
@@ -108,6 +111,7 @@ n, m = 0, 'abc'
 a, b = b, a  # Classic Python swap`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock subtitle="Increment" spacingBottom={false} spacingTop={true}>
         Increase the value of a variable.
       </ProseBlock>
@@ -119,6 +123,7 @@ n = n + 1  # good
 n += 1     # good
 # n++      # bad - syntax error!`}
       />
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="None is null"
         spacingBottom={false}
@@ -144,7 +149,7 @@ if result is None:
         languages!
       </NoteBlock>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="If Statements & Logic"
         subtitle="Clean syntax without parentheses"
@@ -170,6 +175,7 @@ else:
 print('n =', n)  # n = 3`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Multi-line conditions"
         spacingBottom={false}
@@ -189,6 +195,7 @@ if ((n > 2 and
     n += 1`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Truthy and Falsy values"
         spacingBottom={false}
@@ -240,7 +247,7 @@ if not value:       # Catches None AND empty values
         </Stack>
       </BackdropSection>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Loops & Iteration Patterns"
         subtitle="Essential patterns for algorithmic problems"
@@ -262,6 +269,7 @@ while n < 5:
     n += 1`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Range iterations"
         spacingBottom={false}
@@ -284,6 +292,7 @@ for i in range(5, 1, -1):   # 5 to 2 (descending)
     print(i)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Array iteration patterns"
         spacingBottom={false}
@@ -323,7 +332,7 @@ for n1, n2 in zip(nums1, nums2):
         They often lead to cleaner solutions than manual index management!
       </NoteBlock>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Math Operations & Edge Cases"
         subtitle="Python's unique mathematical behaviors"
@@ -343,6 +352,7 @@ for n1, n2 in zip(nums1, nums2):
 print(5 // 2)   # 2 (floor division)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Negative division trap"
         spacingBottom={false}
@@ -361,6 +371,7 @@ print(5 // 2)   # 2 (floor division)`}
 print(int(-3 / 2))  # -1 (what you probably expected)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Modulo with negatives"
         spacingBottom={false}
@@ -380,6 +391,7 @@ import math
 print(math.fmod(-10, 3))  # -1.0`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Essential math functions"
         spacingBottom={false}
@@ -415,7 +427,7 @@ print(2**200 < pos_inf)   # True - Python handles big numbers!`}
         algorithms if you're not careful!
       </QuoteBlock>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Arrays (Lists) - The Interview Workhorse"
         subtitle="Versatile data structure for most problems"
@@ -438,6 +450,7 @@ last = arr.pop()     # Remove last - O(1)
 arr.pop(0)           # Remove first - O(n)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Negative indexing"
         spacingBottom={false}
@@ -454,6 +467,7 @@ print(arr[-1])      # 5 (last element)
 print(arr[-2])      # 4 (second to last)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Slicing magic"
         spacingBottom={false}
@@ -471,6 +485,7 @@ print(arr[2:])      # [3, 4, 5] (from index 2)
 print(arr[::-1])    # [5, 4, 3, 2, 1] (reverse!)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Array initialization"
         spacingBottom={false}
@@ -496,6 +511,7 @@ matrix = [[0] * 3 for _ in range(3)]
 matrix[0][0] = 1  # Only changes first row`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Essential list methods"
         spacingBottom={false}
@@ -519,6 +535,7 @@ words.sort(key=len)          # Sort by length
 words.sort(key=lambda x: x[0])  # Sort by first character`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="List comprehensions"
         spacingBottom={false}
@@ -543,7 +560,7 @@ matrix = [[i+j for j in range(3)] for i in range(3)]`}
         <span className="code">[[0] * cols for _ in range(rows)]</span>
       </NoteBlock>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Strings - Immutable but Powerful"
         subtitle="Similar to arrays but with key differences"
@@ -568,6 +585,7 @@ print(s[::-1])     # 'olleh' (reverse)
 s += ' world'      # Creates new string object`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="String conversions"
         spacingBottom={false}
@@ -584,6 +602,7 @@ print(int(num_str) * 2)    # 246 (converted to int)
 print(str(456) + '789')    # '456789' (concatenation)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="ASCII values"
         spacingBottom={false}
@@ -600,6 +619,7 @@ print(ord('A'))    # 65
 print(chr(97))     # 'a'`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="String joining and methods"
         spacingBottom={false}
@@ -626,7 +646,7 @@ print(text.count('l'))     # 3
 print(text.replace('l', 'x'))  # 'Hexxo Worxd'`}
       />
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Essential Data Structures"
         subtitle="Core collections for algorithmic problems"
@@ -674,6 +694,7 @@ bfs_queue.append(2)    # Enqueue
 first = bfs_queue.popleft()  # Dequeue (FIFO)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Sets - O(1) Lookups"
         spacingBottom={false}
@@ -715,6 +736,7 @@ nums = [1, 2, 3, 4, 5]
 num_set = set(nums)    # Now O(1) to check if value exists`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Dictionaries (Hash Maps)"
         spacingBottom={false}
@@ -745,6 +767,7 @@ value = my_dict.get('missing', 0)  # Returns 0 if missing
 my_dict.setdefault('new', []).append(1)  # Create if missing`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Counter pattern"
         spacingBottom={false}
@@ -773,6 +796,7 @@ for key, value in my_dict.items():     # Both
     print(f"{key}: {value}")`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Tuples - Immutable Sequences"
         spacingBottom={false}
@@ -811,7 +835,7 @@ print((0, 0) in visited)  # True - O(1) lookup`}
       />
 
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Heaps - Priority Queue Magic"
         subtitle="Essential for top-k and priority problems"
@@ -855,6 +879,7 @@ heapq.heapify(nums)     # Transforms in-place
 print(nums)             # [1, 2, 8, 5, 9] (heap property)`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Max heap workaround"
         spacingBottom={false}
@@ -875,6 +900,7 @@ maximum = -heapq.heappop(max_heap)  # Remove negative
 print(maximum)          # 5`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Classic interview patterns"
         spacingBottom={false}
@@ -925,7 +951,7 @@ def merge_k_lists(lists):
         has min heaps - negate values for max heap behavior!
       </NoteBlock>
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Functions & Scope"
         subtitle="Essential for helper functions and recursion"
@@ -944,6 +970,7 @@ def merge_k_lists(lists):
     return n * m`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Nested helper functions"
         spacingBottom={false}
@@ -977,6 +1004,7 @@ def merge_k_lists(lists):
     return dfs(start, set())`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Scope and nonlocal"
         spacingBottom={false}
@@ -999,6 +1027,7 @@ def merge_k_lists(lists):
     return increment`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Mutable vs immutable parameters"
         spacingBottom={false}
@@ -1031,7 +1060,7 @@ print(nums)         # [1, 2, 3, 5, 999] - original modified!
 print(value)        # 5 - original unchanged`}
       />
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Classes for Data Structure Problems"
         subtitle="Custom objects for trees, graphs, and linked lists"
@@ -1069,6 +1098,7 @@ class GraphNode:
         self.neighbors = neighbors or []`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Custom data structure example"
         spacingBottom={false}
@@ -1101,6 +1131,7 @@ class GraphNode:
         return self.min_stack[-1] if self.min_stack else None`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Helper functions with classes"
         spacingBottom={false}
@@ -1136,7 +1167,7 @@ class GraphNode:
     return root`}
       />
 
-      <SectionSpacer size={spaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Lambda Functions - Concise Power"
         subtitle="Anonymous functions for sorting and filtering"
@@ -1175,6 +1206,7 @@ print(students)  # [('Charlie', 78), ('Alice', 85), ('Bob', 90)]
 students.sort(key=lambda x: (x[1], x[0]))  # Grade first, then name`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Binary search predicates"
         spacingBottom={false}
@@ -1202,6 +1234,7 @@ students.sort(key=lambda x: (x[1], x[0]))  # Grade first, then name`}
     return left`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Filter and map operations"
         spacingBottom={false}
@@ -1218,6 +1251,7 @@ evens = list(filter(lambda x: x % 2 == 0, numbers))
 squares = list(map(lambda x: x ** 2, numbers))`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Closure capture gotcha"
         spacingBottom={false}
@@ -1240,6 +1274,7 @@ for i in range(3):
     funcs_correct.append(lambda x, i=i: x + i)  # Captures current i`}
       />
 
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Factory functions"
         spacingBottom={false}
@@ -1281,6 +1316,6 @@ print(triple(5))  # 15`}
           </Typography>
         </Box>
       </BackdropSection>
-    </>
+    </PageLayout>
   );
 }

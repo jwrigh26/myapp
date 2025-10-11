@@ -44,10 +44,10 @@ const PostMeta = styled(Typography)(({ theme }) => ({
 function MathIndex() {
   const posts = [
     {
-      title: 'Hello Math World',
+      title: 'Dividing Fractions',
       description:
-        "A friendly introduction to the mathematical concepts we'll explore together",
-      path: '/learn/math/hello-world',
+        "Learn how to divide fractions step by step with clear explanations and examples",
+      path: '/learn/math/dividing-fractions',
       date: '2025-01-01',
       readTime: '3 min read',
     },

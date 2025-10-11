@@ -3,7 +3,7 @@ import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import CodeBlock from '@/components/CodeBlock';
 
-export const Route = createLazyFileRoute('/learn/math/hello-world/advanced')({
+export const Route = createLazyFileRoute('/learn/math/dividing-fractions/advanced')({
   component: AdvancedMathConcepts,
 });
 
@@ -15,18 +15,14 @@ function AdvancedMathConcepts() {
         subtitle="Deep dive into complex mathematical ideas"
       />
 
-      <ProseBlock>
+      <ProseBlock anchor title="Overview" id="overview">
         Now that you've mastered the basics, let's explore some advanced 
         mathematical concepts that will expand your understanding of the 
         mathematical universe.
       </ProseBlock>
 
-      <TitleBlock
-        title="Complex Numbers"
-        subtitle="Numbers beyond the real line"
-      />
 
-      <ProseBlock>
+      <ProseBlock anchor title="Complex Numbers" id="complex-numbers">
         Complex numbers extend our number system to include the square root 
         of negative numbers. They're represented as a + bi, where i is the 
         imaginary unit.
