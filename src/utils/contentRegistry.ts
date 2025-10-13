@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-13T15:44:04.539Z
-// Total routes: 16
+// Generated on: 2025-10-13T19:34:59.712Z
+// Total routes: 17
 
 export interface NavigationItem {
   id: string;
@@ -331,7 +331,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T15:37:32.710Z",
+    "lastUpdated": "2025-10-13T15:44:42.405Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/exponents/index.tsx"
   },
   "math": {
@@ -341,6 +341,89 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "items": [],
     "lastUpdated": "2025-10-08T14:37:04.758Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/index.tsx"
+  },
+  "math/sigma-notation": {
+    "title": "Sigma Notation",
+    "description": "Master sigma notation for mathematics and algorithm analysis",
+    "tags": [],
+    "items": [
+      {
+        "id": "what-is-sigma",
+        "title": "What is Sigma Notation?",
+        "anchor": "what-is-sigma",
+        "level": 1
+      },
+      {
+        "id": "how-to-read",
+        "title": "How to Read Sigma Notation",
+        "anchor": "how-to-read",
+        "level": 1
+      },
+      {
+        "id": "basic-examples",
+        "title": "Basic Examples",
+        "anchor": "basic-examples",
+        "level": 1
+      },
+      {
+        "id": "expressions",
+        "title": "Expressions as Terms",
+        "anchor": "expressions",
+        "level": 1
+      },
+      {
+        "id": "constants",
+        "title": "Working with Constants",
+        "anchor": "constants",
+        "level": 1
+      },
+      {
+        "id": "formulas",
+        "title": "Useful Formulas",
+        "anchor": "formulas",
+        "level": 1
+      },
+      {
+        "id": "algorithm-analysis",
+        "title": "Sigma in Algorithm Analysis",
+        "anchor": "algorithm-analysis",
+        "level": 1,
+        "children": [
+          {
+            "id": "loop-analysis",
+            "title": "Counting Loop Operations",
+            "anchor": "loop-analysis",
+            "level": 2
+          },
+          {
+            "id": "insertion-sort",
+            "title": "Real Example: Insertion Sort",
+            "anchor": "insertion-sort",
+            "level": 2
+          },
+          {
+            "id": "nested-loops",
+            "title": "Nested Loops",
+            "anchor": "nested-loops",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "id": "properties",
+        "title": "Sigma Properties",
+        "anchor": "properties",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-13T19:32:58.392Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/sigma-notation/index.tsx"
   },
   "python": {
     "title": "Python Programming",

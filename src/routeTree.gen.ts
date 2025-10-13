@@ -38,9 +38,11 @@ import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-mo
 import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
 import { Route as BlogFrontendDesignMicrofrontendsPart2Import } from './routes/blog/frontend-design/microfrontends-part2'
 import { Route as BlogFrontendDesignMicrofrontendsPart1Import } from './routes/blog/frontend-design/microfrontends-part1'
+import { Route as LearnMathSigmaNotationRouteImport } from './routes/learn/math/sigma-notation/route'
 import { Route as LearnMathExponentsRouteImport } from './routes/learn/math/exponents/route'
 import { Route as LearnMathDivisionRouteImport } from './routes/learn/math/division/route'
 import { Route as LearnMathDividingFractionsRouteImport } from './routes/learn/math/dividing-fractions/route'
+import { Route as LearnMathSigmaNotationIndexImport } from './routes/learn/math/sigma-notation/index'
 import { Route as LearnMathExponentsIndexImport } from './routes/learn/math/exponents/index'
 import { Route as LearnMathDivisionIndexImport } from './routes/learn/math/division/index'
 import { Route as LearnMathDividingFractionsIndexImport } from './routes/learn/math/dividing-fractions/index'
@@ -213,6 +215,13 @@ const BlogFrontendDesignMicrofrontendsPart1Route =
     getParentRoute: () => BlogRouteRoute,
   } as any)
 
+const LearnMathSigmaNotationRouteRoute =
+  LearnMathSigmaNotationRouteImport.update({
+    id: '/math/sigma-notation',
+    path: '/math/sigma-notation',
+    getParentRoute: () => LearnRouteRoute,
+  } as any)
+
 const LearnMathExponentsRouteRoute = LearnMathExponentsRouteImport.update({
   id: '/math/exponents',
   path: '/math/exponents',
@@ -230,6 +239,13 @@ const LearnMathDividingFractionsRouteRoute =
     id: '/math/dividing-fractions',
     path: '/math/dividing-fractions',
     getParentRoute: () => LearnRouteRoute,
+  } as any)
+
+const LearnMathSigmaNotationIndexRoute =
+  LearnMathSigmaNotationIndexImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => LearnMathSigmaNotationRouteRoute,
   } as any)
 
 const LearnMathExponentsIndexRoute = LearnMathExponentsIndexImport.update({
@@ -361,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/math/exponents'
       fullPath: '/learn/math/exponents'
       preLoaderRoute: typeof LearnMathExponentsRouteImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/sigma-notation': {
+      id: '/learn/math/sigma-notation'
+      path: '/math/sigma-notation'
+      fullPath: '/learn/math/sigma-notation'
+      preLoaderRoute: typeof LearnMathSigmaNotationRouteImport
       parentRoute: typeof LearnRouteImport
     }
     '/blog/frontend-design/microfrontends-part1': {
@@ -524,6 +547,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnMathExponentsIndexImport
       parentRoute: typeof LearnMathExponentsRouteImport
     }
+    '/learn/math/sigma-notation/': {
+      id: '/learn/math/sigma-notation/'
+      path: '/'
+      fullPath: '/learn/math/sigma-notation/'
+      preLoaderRoute: typeof LearnMathSigmaNotationIndexImport
+      parentRoute: typeof LearnMathSigmaNotationRouteImport
+    }
   }
 }
 
@@ -610,11 +640,26 @@ const LearnMathExponentsRouteRouteWithChildren =
     LearnMathExponentsRouteRouteChildren,
   )
 
+interface LearnMathSigmaNotationRouteRouteChildren {
+  LearnMathSigmaNotationIndexRoute: typeof LearnMathSigmaNotationIndexRoute
+}
+
+const LearnMathSigmaNotationRouteRouteChildren: LearnMathSigmaNotationRouteRouteChildren =
+  {
+    LearnMathSigmaNotationIndexRoute: LearnMathSigmaNotationIndexRoute,
+  }
+
+const LearnMathSigmaNotationRouteRouteWithChildren =
+  LearnMathSigmaNotationRouteRoute._addFileChildren(
+    LearnMathSigmaNotationRouteRouteChildren,
+  )
+
 interface LearnRouteRouteChildren {
   LearnIndexRoute: typeof LearnIndexRoute
   LearnMathDividingFractionsRouteRoute: typeof LearnMathDividingFractionsRouteRouteWithChildren
   LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren
   LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
+  LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren
   LearnAiHelloWorldRoute: typeof LearnAiHelloWorldRoute
   LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
   LearnGitHelloWorldRoute: typeof LearnGitHelloWorldRoute
@@ -632,6 +677,8 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
     LearnMathDividingFractionsRouteRouteWithChildren,
   LearnMathDivisionRouteRoute: LearnMathDivisionRouteRouteWithChildren,
   LearnMathExponentsRouteRoute: LearnMathExponentsRouteRouteWithChildren,
+  LearnMathSigmaNotationRouteRoute:
+    LearnMathSigmaNotationRouteRouteWithChildren,
   LearnAiHelloWorldRoute: LearnAiHelloWorldRoute,
   LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
   LearnGitHelloWorldRoute: LearnGitHelloWorldRoute,
@@ -660,6 +707,7 @@ export interface FileRoutesByFullPath {
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
   '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
   '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren
   '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
   '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
@@ -683,6 +731,7 @@ export interface FileRoutesByFullPath {
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division/': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
+  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -715,6 +764,7 @@ export interface FileRoutesByTo {
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents': typeof LearnMathExponentsIndexRoute
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationIndexRoute
 }
 
 export interface FileRoutesById {
@@ -730,6 +780,7 @@ export interface FileRoutesById {
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
   '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
   '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren
   '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
   '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
@@ -753,6 +804,7 @@ export interface FileRoutesById {
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division/': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
+  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -769,6 +821,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
+    | '/learn/math/sigma-notation'
     | '/blog/frontend-design/microfrontends-part1'
     | '/blog/frontend-design/microfrontends-part2'
     | '/blog/frontend-design/microfrontends-part3'
@@ -792,6 +845,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
+    | '/learn/math/sigma-notation/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -823,6 +877,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
+    | '/learn/math/sigma-notation'
   id:
     | '__root__'
     | '/'
@@ -836,6 +891,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
+    | '/learn/math/sigma-notation'
     | '/blog/frontend-design/microfrontends-part1'
     | '/blog/frontend-design/microfrontends-part2'
     | '/blog/frontend-design/microfrontends-part3'
@@ -859,6 +915,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
+    | '/learn/math/sigma-notation/'
   fileRoutesById: FileRoutesById
 }
 
@@ -922,6 +979,7 @@ export const routeTree = rootRoute
         "/learn/math/dividing-fractions",
         "/learn/math/division",
         "/learn/math/exponents",
+        "/learn/math/sigma-notation",
         "/learn/ai/hello-world",
         "/learn/dsa/hello-world",
         "/learn/git/hello-world",
@@ -972,6 +1030,13 @@ export const routeTree = rootRoute
       "parent": "/learn",
       "children": [
         "/learn/math/exponents/"
+      ]
+    },
+    "/learn/math/sigma-notation": {
+      "filePath": "learn/math/sigma-notation/route.tsx",
+      "parent": "/learn",
+      "children": [
+        "/learn/math/sigma-notation/"
       ]
     },
     "/blog/frontend-design/microfrontends-part1": {
@@ -1065,6 +1130,10 @@ export const routeTree = rootRoute
     "/learn/math/exponents/": {
       "filePath": "learn/math/exponents/index.tsx",
       "parent": "/learn/math/exponents"
+    },
+    "/learn/math/sigma-notation/": {
+      "filePath": "learn/math/sigma-notation/index.tsx",
+      "parent": "/learn/math/sigma-notation"
     }
   }
 }
