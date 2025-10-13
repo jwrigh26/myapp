@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { TabsLayout } from '@/layout/TabsLayout';
 
-export const Route = createFileRoute('/learn/math/dividing-fractions')({
+export const Route = createFileRoute('/learn/math/exponents')({
   component: LayoutComponent,
 });
 
@@ -9,8 +9,7 @@ function LayoutComponent() {
   // Manually declare tabs with custom labels
   const tabs = [
     { path: '', label: 'Lesson' },              // index.tsx -> main lesson
-    // { path: 'advanced', label: 'Deep Dive' },   // advanced.lazy.tsx
-    // { path: 'examples', label: 'Examples' },    // examples.lazy.tsx  
+    // { path: 'problems', label: 'Problems'},
   ];
 
   return (

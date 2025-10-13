@@ -24,7 +24,6 @@ import NoteBlock from '@/components/NoteBlock';
 // ### Data
 // ##############################################
 
-
 const demoItems: ConceptItem[] = [
   {
     model: 'Groups',
@@ -94,7 +93,7 @@ function MathDividingFractions() {
       <ProseMathBlock
         equation={String.raw`\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \times \frac{d}{c}`}
       />
-      <SectionSpacer size={blockSpaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
 
       <EquationSteps
         anchor
@@ -123,6 +122,12 @@ function MathDividingFractions() {
           String.raw`= \frac{3 \times 1}{4 \times 1}`,
           String.raw`= \frac{3}{4}`,
         ]}
+        footer={
+          <>
+            <Typography variant="body2">A common factor of 4 and 16 is <b>4</b>.</Typography>
+            <Typography variant="body2">And a common factor of 12 and 3 is <b>3</b>.</Typography>
+          </>
+        }
       />
 
       <SectionSpacer size={blockSpaceSize} />
@@ -151,9 +156,9 @@ function MathDividingFractions() {
       <TopicBlock
         title="Three common meanings of Multiplication"
         items={[
-          '(number of groups) x (size of group) = total',
-          '(original value) x (comparision factor) = (new value)',
-          'base x height = (new value)',
+          'Repeated Groups',
+          'Multiplicative Comparison',
+          'Rectangular Area (Geometric Model)',
         ]}
       />
 
@@ -421,28 +426,28 @@ function MathDividingFractions() {
         instead of one.
       </ProseBlock>
 
-       <SectionSpacer size={sectionSpaceSize} />
+      <SectionSpacer size={sectionSpaceSize} />
 
       <ProseBlock
         anchor
         title="How They Fit Together"
         id="how-they-fit-together"
+        subtitle="A quick guide for remembering how fractions are used in word problems."
+      >
+        Each model uses the same multiplication symbol <b>(X)</b>, but in a
+        slightly different way.
+      </ProseBlock>
+
+      <SectionSpacer />
+      <ConceptCardGrid
+        items={demoItems}
+        descriptionLabel="X means..."
+        applicationLabel="Division means..."
+        examplesLabel="Story Types"
       />
-    <ProseBlock
-      spacingTop
-      subtitle="A quick guide for remembering how fractions are used in word problems."
-      options={{ subtitleVariant: 'subtitle2' }}
-    >
-        Each model uses the same multiplication symbol <b>(X)</b>, but in a slightly different way.
-    </ProseBlock>
-      <ConceptCardGrid items={demoItems} descriptionLabel='X means...' applicationLabel='Division means...' examplesLabel='Story Types' />
       <SectionSpacer size={sectionSpaceSize} />
 
-      <ProseBlock
-        anchor
-        title="In Short"
-        id="in-short"
-      />
+      <ProseBlock anchor title="In Short" id="in-short" />
 
       <TopicBlock
         title="Multiplication can mean"
@@ -456,4 +461,3 @@ function MathDividingFractions() {
     </PageLayout>
   );
 }
-

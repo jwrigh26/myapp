@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-11T21:02:28.111Z
-// Total routes: 13
+// Generated on: 2025-10-13T15:44:04.539Z
+// Total routes: 16
 
 export interface NavigationItem {
   id: string;
@@ -165,8 +165,174 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-11T21:02:06.024Z",
+    "lastUpdated": "2025-10-13T14:44:02.202Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/index.tsx"
+  },
+  "math/division": {
+    "title": "Division",
+    "description": "Learn the basics of division, long division, and dividing with decimals",
+    "tags": [],
+    "items": [
+      {
+        "id": "key-vocabulary",
+        "title": "Key Vocabulary",
+        "anchor": "key-vocabulary",
+        "level": 1
+      },
+      {
+        "id": "division-notation",
+        "title": "Ways to Write Division",
+        "anchor": "division-notation",
+        "level": 1
+      },
+      {
+        "id": "basic-division",
+        "title": "Basic Division",
+        "anchor": "basic-division",
+        "level": 1
+      },
+      {
+        "id": "division-remainders",
+        "title": "Division with Remainders",
+        "anchor": "division-remainders",
+        "level": 1
+      },
+      {
+        "id": "long-division",
+        "title": "Long Division",
+        "anchor": "long-division",
+        "level": 1
+      },
+      {
+        "id": "division-decimals",
+        "title": "Division with Decimals",
+        "anchor": "division-decimals",
+        "level": 1
+      },
+      {
+        "id": "common-mistakes",
+        "title": "Common Mistakes to Avoid",
+        "anchor": "common-mistakes",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-13T15:03:37.528Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/division/index.tsx"
+  },
+  "math/division/problems": {
+    "tags": [],
+    "items": [],
+    "lastUpdated": "2025-10-13T14:01:15.604Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/division/problems.lazy.tsx"
+  },
+  "math/exponents": {
+    "title": "Exponents & Roots",
+    "description": "Master exponents, roots, fractional exponents, and logarithmic form",
+    "tags": [],
+    "items": [
+      {
+        "id": "what-are-exponents",
+        "title": "What Are Exponents?",
+        "anchor": "what-are-exponents",
+        "level": 1
+      },
+      {
+        "id": "special-cases",
+        "title": "Special Cases",
+        "anchor": "special-cases",
+        "level": 1
+      },
+      {
+        "id": "exponent-rules",
+        "title": "The 5 Essential Rules",
+        "anchor": "exponent-rules",
+        "level": 1,
+        "children": [
+          {
+            "id": "rule-multiplication",
+            "title": "Rule 1: Multiplying Same Base",
+            "anchor": "rule-multiplication",
+            "level": 2
+          },
+          {
+            "id": "rule-division",
+            "title": "Rule 2: Dividing Same Base",
+            "anchor": "rule-division",
+            "level": 2
+          },
+          {
+            "id": "rule-power-of-power",
+            "title": "Rule 3: Power of a Power",
+            "anchor": "rule-power-of-power",
+            "level": 2
+          },
+          {
+            "id": "rule-power-of-product",
+            "title": "Rule 4: Power of a Product",
+            "anchor": "rule-power-of-product",
+            "level": 2
+          },
+          {
+            "id": "rule-power-of-quotient",
+            "title": "Rule 5: Power of a Quotient",
+            "anchor": "rule-power-of-quotient",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "id": "negative-exponents",
+        "title": "Negative Exponents",
+        "anchor": "negative-exponents",
+        "level": 1
+      },
+      {
+        "id": "fractional-exponents",
+        "title": "Fractional Exponents (Roots)",
+        "anchor": "fractional-exponents",
+        "level": 1,
+        "children": [
+          {
+            "id": "fractional-with-power",
+            "title": "When the Numerator Isn't 1",
+            "anchor": "fractional-with-power",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "id": "negative-fractional",
+        "title": "Negative Fractional Exponents",
+        "anchor": "negative-fractional",
+        "level": 1
+      },
+      {
+        "id": "roots-in-fractions",
+        "title": "Roots in Fractions",
+        "anchor": "roots-in-fractions",
+        "level": 1
+      },
+      {
+        "id": "logarithms",
+        "title": "Introduction to Logarithms",
+        "anchor": "logarithms",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-13T15:37:32.710Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/exponents/index.tsx"
   },
   "math": {
     "title": "Mathematics",

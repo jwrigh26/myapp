@@ -168,6 +168,7 @@ export interface EquationStepsProps {
   outlined?: boolean;
   /** Header color (e.g., 'primary.main', 'secondary.main') */
   headerColor?: string;
+  footer?: React.ReactNode; // e.g., explanation text
   /** Anchor support for navigation */
   anchor?: boolean;
   id?: string;
@@ -180,6 +181,7 @@ export const EquationSteps = React.memo(function EquationSteps({
   alignEquals = true,
   outlined = true,
   headerColor,
+  footer,
   anchor = false,
   id,
 }: EquationStepsProps) {
@@ -206,7 +208,10 @@ export const EquationSteps = React.memo(function EquationSteps({
       )}
       {(title || subtitle) && <Divider />}
       <CardContent>
-        <KaTeXBlock math={preprocessMath(math)} />
+        <Stack spacing={2}>
+          <KaTeXBlock math={preprocessMath(math)} />
+          {footer}
+        </Stack>
       </CardContent>
     </Card>
   );

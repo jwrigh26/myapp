@@ -38,11 +38,18 @@ import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-mo
 import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
 import { Route as BlogFrontendDesignMicrofrontendsPart2Import } from './routes/blog/frontend-design/microfrontends-part2'
 import { Route as BlogFrontendDesignMicrofrontendsPart1Import } from './routes/blog/frontend-design/microfrontends-part1'
+import { Route as LearnMathExponentsRouteImport } from './routes/learn/math/exponents/route'
+import { Route as LearnMathDivisionRouteImport } from './routes/learn/math/division/route'
 import { Route as LearnMathDividingFractionsRouteImport } from './routes/learn/math/dividing-fractions/route'
+import { Route as LearnMathExponentsIndexImport } from './routes/learn/math/exponents/index'
+import { Route as LearnMathDivisionIndexImport } from './routes/learn/math/division/index'
 import { Route as LearnMathDividingFractionsIndexImport } from './routes/learn/math/dividing-fractions/index'
 
 // Create Virtual Routes
 
+const LearnMathDivisionProblemsLazyImport = createFileRoute(
+  '/learn/math/division/problems',
+)()
 const LearnMathDividingFractionsExamplesLazyImport = createFileRoute(
   '/learn/math/dividing-fractions/examples',
 )()
@@ -206,6 +213,18 @@ const BlogFrontendDesignMicrofrontendsPart1Route =
     getParentRoute: () => BlogRouteRoute,
   } as any)
 
+const LearnMathExponentsRouteRoute = LearnMathExponentsRouteImport.update({
+  id: '/math/exponents',
+  path: '/math/exponents',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnMathDivisionRouteRoute = LearnMathDivisionRouteImport.update({
+  id: '/math/division',
+  path: '/math/division',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
 const LearnMathDividingFractionsRouteRoute =
   LearnMathDividingFractionsRouteImport.update({
     id: '/math/dividing-fractions',
@@ -213,12 +232,33 @@ const LearnMathDividingFractionsRouteRoute =
     getParentRoute: () => LearnRouteRoute,
   } as any)
 
+const LearnMathExponentsIndexRoute = LearnMathExponentsIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnMathExponentsRouteRoute,
+} as any)
+
+const LearnMathDivisionIndexRoute = LearnMathDivisionIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnMathDivisionRouteRoute,
+} as any)
+
 const LearnMathDividingFractionsIndexRoute =
   LearnMathDividingFractionsIndexImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => LearnMathDividingFractionsRouteRoute,
   } as any)
+
+const LearnMathDivisionProblemsLazyRoute =
+  LearnMathDivisionProblemsLazyImport.update({
+    id: '/problems',
+    path: '/problems',
+    getParentRoute: () => LearnMathDivisionRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/learn/math/division/problems.lazy').then((d) => d.Route),
+  )
 
 const LearnMathDividingFractionsExamplesLazyRoute =
   LearnMathDividingFractionsExamplesLazyImport.update({
@@ -307,6 +347,20 @@ declare module '@tanstack/react-router' {
       path: '/math/dividing-fractions'
       fullPath: '/learn/math/dividing-fractions'
       preLoaderRoute: typeof LearnMathDividingFractionsRouteImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/division': {
+      id: '/learn/math/division'
+      path: '/math/division'
+      fullPath: '/learn/math/division'
+      preLoaderRoute: typeof LearnMathDivisionRouteImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/math/exponents': {
+      id: '/learn/math/exponents'
+      path: '/math/exponents'
+      fullPath: '/learn/math/exponents'
+      preLoaderRoute: typeof LearnMathExponentsRouteImport
       parentRoute: typeof LearnRouteImport
     }
     '/blog/frontend-design/microfrontends-part1': {
@@ -442,12 +496,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnMathDividingFractionsExamplesLazyImport
       parentRoute: typeof LearnMathDividingFractionsRouteImport
     }
+    '/learn/math/division/problems': {
+      id: '/learn/math/division/problems'
+      path: '/problems'
+      fullPath: '/learn/math/division/problems'
+      preLoaderRoute: typeof LearnMathDivisionProblemsLazyImport
+      parentRoute: typeof LearnMathDivisionRouteImport
+    }
     '/learn/math/dividing-fractions/': {
       id: '/learn/math/dividing-fractions/'
       path: '/'
       fullPath: '/learn/math/dividing-fractions/'
       preLoaderRoute: typeof LearnMathDividingFractionsIndexImport
       parentRoute: typeof LearnMathDividingFractionsRouteImport
+    }
+    '/learn/math/division/': {
+      id: '/learn/math/division/'
+      path: '/'
+      fullPath: '/learn/math/division/'
+      preLoaderRoute: typeof LearnMathDivisionIndexImport
+      parentRoute: typeof LearnMathDivisionRouteImport
+    }
+    '/learn/math/exponents/': {
+      id: '/learn/math/exponents/'
+      path: '/'
+      fullPath: '/learn/math/exponents/'
+      preLoaderRoute: typeof LearnMathExponentsIndexImport
+      parentRoute: typeof LearnMathExponentsRouteImport
     }
   }
 }
@@ -505,9 +580,41 @@ const LearnMathDividingFractionsRouteRouteWithChildren =
     LearnMathDividingFractionsRouteRouteChildren,
   )
 
+interface LearnMathDivisionRouteRouteChildren {
+  LearnMathDivisionProblemsLazyRoute: typeof LearnMathDivisionProblemsLazyRoute
+  LearnMathDivisionIndexRoute: typeof LearnMathDivisionIndexRoute
+}
+
+const LearnMathDivisionRouteRouteChildren: LearnMathDivisionRouteRouteChildren =
+  {
+    LearnMathDivisionProblemsLazyRoute: LearnMathDivisionProblemsLazyRoute,
+    LearnMathDivisionIndexRoute: LearnMathDivisionIndexRoute,
+  }
+
+const LearnMathDivisionRouteRouteWithChildren =
+  LearnMathDivisionRouteRoute._addFileChildren(
+    LearnMathDivisionRouteRouteChildren,
+  )
+
+interface LearnMathExponentsRouteRouteChildren {
+  LearnMathExponentsIndexRoute: typeof LearnMathExponentsIndexRoute
+}
+
+const LearnMathExponentsRouteRouteChildren: LearnMathExponentsRouteRouteChildren =
+  {
+    LearnMathExponentsIndexRoute: LearnMathExponentsIndexRoute,
+  }
+
+const LearnMathExponentsRouteRouteWithChildren =
+  LearnMathExponentsRouteRoute._addFileChildren(
+    LearnMathExponentsRouteRouteChildren,
+  )
+
 interface LearnRouteRouteChildren {
   LearnIndexRoute: typeof LearnIndexRoute
   LearnMathDividingFractionsRouteRoute: typeof LearnMathDividingFractionsRouteRouteWithChildren
+  LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren
+  LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
   LearnAiHelloWorldRoute: typeof LearnAiHelloWorldRoute
   LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
   LearnGitHelloWorldRoute: typeof LearnGitHelloWorldRoute
@@ -523,6 +630,8 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnIndexRoute: LearnIndexRoute,
   LearnMathDividingFractionsRouteRoute:
     LearnMathDividingFractionsRouteRouteWithChildren,
+  LearnMathDivisionRouteRoute: LearnMathDivisionRouteRouteWithChildren,
+  LearnMathExponentsRouteRoute: LearnMathExponentsRouteRouteWithChildren,
   LearnAiHelloWorldRoute: LearnAiHelloWorldRoute,
   LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
   LearnGitHelloWorldRoute: LearnGitHelloWorldRoute,
@@ -549,6 +658,8 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
+  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
+  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
   '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
   '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
@@ -568,7 +679,10 @@ export interface FileRoutesByFullPath {
   '/learn/python': typeof LearnPythonIndexRoute
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
+  '/learn/math/division/': typeof LearnMathDivisionIndexRoute
+  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -597,7 +711,10 @@ export interface FileRoutesByTo {
   '/learn/python': typeof LearnPythonIndexRoute
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsIndexRoute
+  '/learn/math/division': typeof LearnMathDivisionIndexRoute
+  '/learn/math/exponents': typeof LearnMathExponentsIndexRoute
 }
 
 export interface FileRoutesById {
@@ -611,6 +728,8 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
+  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
+  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
   '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
   '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
@@ -630,7 +749,10 @@ export interface FileRoutesById {
   '/learn/python/': typeof LearnPythonIndexRoute
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
+  '/learn/math/division/': typeof LearnMathDivisionIndexRoute
+  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -645,6 +767,8 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/learn/'
     | '/learn/math/dividing-fractions'
+    | '/learn/math/division'
+    | '/learn/math/exponents'
     | '/blog/frontend-design/microfrontends-part1'
     | '/blog/frontend-design/microfrontends-part2'
     | '/blog/frontend-design/microfrontends-part3'
@@ -664,7 +788,10 @@ export interface FileRouteTypes {
     | '/learn/python'
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
+    | '/learn/math/division/problems'
     | '/learn/math/dividing-fractions/'
+    | '/learn/math/division/'
+    | '/learn/math/exponents/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -692,7 +819,10 @@ export interface FileRouteTypes {
     | '/learn/python'
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
+    | '/learn/math/division/problems'
     | '/learn/math/dividing-fractions'
+    | '/learn/math/division'
+    | '/learn/math/exponents'
   id:
     | '__root__'
     | '/'
@@ -704,6 +834,8 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/learn/'
     | '/learn/math/dividing-fractions'
+    | '/learn/math/division'
+    | '/learn/math/exponents'
     | '/blog/frontend-design/microfrontends-part1'
     | '/blog/frontend-design/microfrontends-part2'
     | '/blog/frontend-design/microfrontends-part3'
@@ -723,7 +855,10 @@ export interface FileRouteTypes {
     | '/learn/python/'
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
+    | '/learn/math/division/problems'
     | '/learn/math/dividing-fractions/'
+    | '/learn/math/division/'
+    | '/learn/math/exponents/'
   fileRoutesById: FileRoutesById
 }
 
@@ -785,6 +920,8 @@ export const routeTree = rootRoute
       "children": [
         "/learn/",
         "/learn/math/dividing-fractions",
+        "/learn/math/division",
+        "/learn/math/exponents",
         "/learn/ai/hello-world",
         "/learn/dsa/hello-world",
         "/learn/git/hello-world",
@@ -820,6 +957,21 @@ export const routeTree = rootRoute
         "/learn/math/dividing-fractions/advanced",
         "/learn/math/dividing-fractions/examples",
         "/learn/math/dividing-fractions/"
+      ]
+    },
+    "/learn/math/division": {
+      "filePath": "learn/math/division/route.tsx",
+      "parent": "/learn",
+      "children": [
+        "/learn/math/division/problems",
+        "/learn/math/division/"
+      ]
+    },
+    "/learn/math/exponents": {
+      "filePath": "learn/math/exponents/route.tsx",
+      "parent": "/learn",
+      "children": [
+        "/learn/math/exponents/"
       ]
     },
     "/blog/frontend-design/microfrontends-part1": {
@@ -898,9 +1050,21 @@ export const routeTree = rootRoute
       "filePath": "learn/math/dividing-fractions/examples.lazy.tsx",
       "parent": "/learn/math/dividing-fractions"
     },
+    "/learn/math/division/problems": {
+      "filePath": "learn/math/division/problems.lazy.tsx",
+      "parent": "/learn/math/division"
+    },
     "/learn/math/dividing-fractions/": {
       "filePath": "learn/math/dividing-fractions/index.tsx",
       "parent": "/learn/math/dividing-fractions"
+    },
+    "/learn/math/division/": {
+      "filePath": "learn/math/division/index.tsx",
+      "parent": "/learn/math/division"
+    },
+    "/learn/math/exponents/": {
+      "filePath": "learn/math/exponents/index.tsx",
+      "parent": "/learn/math/exponents"
     }
   }
 }
