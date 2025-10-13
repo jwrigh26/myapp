@@ -35,12 +35,12 @@ const learnCategories: FeatureCategory[] = [
     icon: mdiGit,
     path: '/learn/git',
   },
-  {
-    id: 'ai',
-    title: 'AI',
-    icon: mdiBookEducationOutline,
-    path: '/learn/ai',
-  },
+  // {
+  //   id: 'ai',
+  //   title: 'AI',
+  //   icon: mdiBookEducationOutline,
+  //   path: '/learn/ai',
+  // },
 ];
 
 export function LearnDrawer() {

@@ -15,7 +15,6 @@ import type { RegisteredRouter } from '@tanstack/react-router';
 import { createLink, useMatchRoute, useRouter } from '@tanstack/react-router';
 import { forwardRef } from 'react';
 import CustomLink from './LinkButton';
-import { tr } from 'date-fns/locale';
 
 // ################################################
 // ### Types

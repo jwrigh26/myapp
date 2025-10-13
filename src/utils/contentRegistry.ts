@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-13T19:34:59.712Z
-// Total routes: 17
+// Generated on: 2025-10-13T20:51:53.234Z
+// Total routes: 15
 
 export interface NavigationItem {
   id: string;
@@ -20,22 +20,6 @@ export interface ContentEntry {
 }
 
 export const contentRegistry: Record<string, ContentEntry> = {
-  "ai/hello-world": {
-    "title": "Hello AI World",
-    "description": "Introduction to artificial intelligence and machine learning concepts",
-    "tags": [],
-    "items": [],
-    "lastUpdated": "2025-10-01T19:42:04.107Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/ai/hello-world.tsx"
-  },
-  "ai": {
-    "title": "AI & Machine Learning",
-    "description": "Exploring artificial intelligence, machine learning algorithms, and the future of intelligent systems.",
-    "tags": [],
-    "items": [],
-    "lastUpdated": "2025-10-02T02:28:55.381Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/ai/index.tsx"
-  },
   "dsa/hello-world": {
     "title": "Hello DSA World",
     "description": "Introduction to data structures and algorithms learning journey",
@@ -52,13 +36,74 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "lastUpdated": "2025-10-02T02:28:55.358Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/index.tsx"
   },
-  "git/hello-world": {
-    "title": "Hello Git World",
-    "description": "Introduction to Git version control fundamentals and collaborative development",
+  "git/every-day-git": {
+    "title": "Every Day Git",
+    "description": "Quick reference guide for git commands I use every day",
     "tags": [],
-    "items": [],
-    "lastUpdated": "2025-10-01T19:42:04.110Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/hello-world.tsx"
+    "items": [
+      {
+        "id": "pushing-branch",
+        "title": "Pushing a New Branch",
+        "anchor": "pushing-branch",
+        "level": 1
+      },
+      {
+        "id": "deleting-branches",
+        "title": "Deleting Branches",
+        "anchor": "deleting-branches",
+        "level": 1
+      },
+      {
+        "id": "switching-branches",
+        "title": "Creating & Switching Branches",
+        "anchor": "switching-branches",
+        "level": 1
+      },
+      {
+        "id": "renaming-branches",
+        "title": "Renaming Branches",
+        "anchor": "renaming-branches",
+        "level": 1
+      },
+      {
+        "id": "git-logs",
+        "title": "Viewing Git Logs",
+        "anchor": "git-logs",
+        "level": 1
+      },
+      {
+        "id": "commit-messages",
+        "title": "Better Commit Messages",
+        "anchor": "commit-messages",
+        "level": 1
+      },
+      {
+        "id": "interactive-rebase",
+        "title": "Cleaning Up Commits",
+        "anchor": "interactive-rebase",
+        "level": 1
+      },
+      {
+        "id": "merge-conflicts",
+        "title": "Resolving Merge Conflicts",
+        "anchor": "merge-conflicts",
+        "level": 1
+      },
+      {
+        "id": "cleanup-branches",
+        "title": "Cleaning Up Local Branches",
+        "anchor": "cleanup-branches",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-13T20:51:17.116Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/every-day-git.tsx"
   },
   "git": {
     "title": "Git & Version Control",
@@ -73,7 +118,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "description": "My Learning Journey",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-09-24T02:46:33.196Z",
+    "lastUpdated": "2025-10-13T20:16:56.885Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/index.tsx"
   },
   "math/dividing-fractions/advanced": {

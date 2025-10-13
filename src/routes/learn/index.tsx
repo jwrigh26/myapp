@@ -57,10 +57,10 @@ function LearnHome() {
           📝 <strong>Git & Version Control</strong> - Mastering collaborative
           development workflows
         </Typography>
-        <Typography variant="body1" sx={{ mb: 3 }}>
+        {/* <Typography variant="body1" sx={{ mb: 3 }}>
           🤖 <strong>AI & Machine Learning</strong> - Exploring the frontiers of
           artificial intelligence
-        </Typography>
+        </Typography> */}
         <Typography variant="body2" color="text.secondary">
           This is a living collection that grows as I learn. Each section
           contains my notes, insights, and practical examples. Use the sidebar

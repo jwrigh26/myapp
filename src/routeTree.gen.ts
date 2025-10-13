@@ -25,14 +25,12 @@ import { Route as LearnPythonIndexImport } from './routes/learn/python/index'
 import { Route as LearnMathIndexImport } from './routes/learn/math/index'
 import { Route as LearnGitIndexImport } from './routes/learn/git/index'
 import { Route as LearnDsaIndexImport } from './routes/learn/dsa/index'
-import { Route as LearnAiIndexImport } from './routes/learn/ai/index'
 import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/index'
 import { Route as BlogReactIndexImport } from './routes/blog/react/index'
 import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
 import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
-import { Route as LearnGitHelloWorldImport } from './routes/learn/git/hello-world'
+import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git'
 import { Route as LearnDsaHelloWorldImport } from './routes/learn/dsa/hello-world'
-import { Route as LearnAiHelloWorldImport } from './routes/learn/ai/hello-world'
 import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names'
 import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster'
 import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
@@ -133,12 +131,6 @@ const LearnDsaIndexRoute = LearnDsaIndexImport.update({
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
-const LearnAiIndexRoute = LearnAiIndexImport.update({
-  id: '/ai/',
-  path: '/ai/',
-  getParentRoute: () => LearnRouteRoute,
-} as any)
-
 const BlogSoftSkillsIndexRoute = BlogSoftSkillsIndexImport.update({
   id: '/soft-skills/',
   path: '/soft-skills/',
@@ -164,21 +156,15 @@ const LearnPythonWhiteboardingEssentialsRoute =
     getParentRoute: () => LearnRouteRoute,
   } as any)
 
-const LearnGitHelloWorldRoute = LearnGitHelloWorldImport.update({
-  id: '/git/hello-world',
-  path: '/git/hello-world',
+const LearnGitEveryDayGitRoute = LearnGitEveryDayGitImport.update({
+  id: '/git/every-day-git',
+  path: '/git/every-day-git',
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
 const LearnDsaHelloWorldRoute = LearnDsaHelloWorldImport.update({
   id: '/dsa/hello-world',
   path: '/dsa/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any)
-
-const LearnAiHelloWorldRoute = LearnAiHelloWorldImport.update({
-  id: '/ai/hello-world',
-  path: '/ai/hello-world',
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
@@ -421,13 +407,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSoftSkillsLearnNamesImport
       parentRoute: typeof BlogRouteImport
     }
-    '/learn/ai/hello-world': {
-      id: '/learn/ai/hello-world'
-      path: '/ai/hello-world'
-      fullPath: '/learn/ai/hello-world'
-      preLoaderRoute: typeof LearnAiHelloWorldImport
-      parentRoute: typeof LearnRouteImport
-    }
     '/learn/dsa/hello-world': {
       id: '/learn/dsa/hello-world'
       path: '/dsa/hello-world'
@@ -435,11 +414,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnDsaHelloWorldImport
       parentRoute: typeof LearnRouteImport
     }
-    '/learn/git/hello-world': {
-      id: '/learn/git/hello-world'
-      path: '/git/hello-world'
-      fullPath: '/learn/git/hello-world'
-      preLoaderRoute: typeof LearnGitHelloWorldImport
+    '/learn/git/every-day-git': {
+      id: '/learn/git/every-day-git'
+      path: '/git/every-day-git'
+      fullPath: '/learn/git/every-day-git'
+      preLoaderRoute: typeof LearnGitEveryDayGitImport
       parentRoute: typeof LearnRouteImport
     }
     '/learn/python/whiteboarding-essentials': {
@@ -469,13 +448,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/soft-skills'
       preLoaderRoute: typeof BlogSoftSkillsIndexImport
       parentRoute: typeof BlogRouteImport
-    }
-    '/learn/ai/': {
-      id: '/learn/ai/'
-      path: '/ai'
-      fullPath: '/learn/ai'
-      preLoaderRoute: typeof LearnAiIndexImport
-      parentRoute: typeof LearnRouteImport
     }
     '/learn/dsa/': {
       id: '/learn/dsa/'
@@ -660,11 +632,9 @@ interface LearnRouteRouteChildren {
   LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren
   LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
   LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren
-  LearnAiHelloWorldRoute: typeof LearnAiHelloWorldRoute
   LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
-  LearnGitHelloWorldRoute: typeof LearnGitHelloWorldRoute
+  LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute
   LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
-  LearnAiIndexRoute: typeof LearnAiIndexRoute
   LearnDsaIndexRoute: typeof LearnDsaIndexRoute
   LearnGitIndexRoute: typeof LearnGitIndexRoute
   LearnMathIndexRoute: typeof LearnMathIndexRoute
@@ -679,12 +649,10 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnMathExponentsRouteRoute: LearnMathExponentsRouteRouteWithChildren,
   LearnMathSigmaNotationRouteRoute:
     LearnMathSigmaNotationRouteRouteWithChildren,
-  LearnAiHelloWorldRoute: LearnAiHelloWorldRoute,
   LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
-  LearnGitHelloWorldRoute: LearnGitHelloWorldRoute,
+  LearnGitEveryDayGitRoute: LearnGitEveryDayGitRoute,
   LearnPythonWhiteboardingEssentialsRoute:
     LearnPythonWhiteboardingEssentialsRoute,
-  LearnAiIndexRoute: LearnAiIndexRoute,
   LearnDsaIndexRoute: LearnDsaIndexRoute,
   LearnGitIndexRoute: LearnGitIndexRoute,
   LearnMathIndexRoute: LearnMathIndexRoute,
@@ -713,14 +681,12 @@ export interface FileRoutesByFullPath {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
-  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
   '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
-  '/learn/ai': typeof LearnAiIndexRoute
   '/learn/dsa': typeof LearnDsaIndexRoute
   '/learn/git': typeof LearnGitIndexRoute
   '/learn/math': typeof LearnMathIndexRoute
@@ -746,14 +712,12 @@ export interface FileRoutesByTo {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
-  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
   '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
-  '/learn/ai': typeof LearnAiIndexRoute
   '/learn/dsa': typeof LearnDsaIndexRoute
   '/learn/git': typeof LearnGitIndexRoute
   '/learn/math': typeof LearnMathIndexRoute
@@ -786,14 +750,12 @@ export interface FileRoutesById {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/ai/hello-world': typeof LearnAiHelloWorldRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
-  '/learn/git/hello-world': typeof LearnGitHelloWorldRoute
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
   '/blog/react/': typeof BlogReactIndexRoute
   '/blog/soft-skills/': typeof BlogSoftSkillsIndexRoute
-  '/learn/ai/': typeof LearnAiIndexRoute
   '/learn/dsa/': typeof LearnDsaIndexRoute
   '/learn/git/': typeof LearnGitIndexRoute
   '/learn/math/': typeof LearnMathIndexRoute
@@ -827,14 +789,12 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
-    | '/learn/git/hello-world'
+    | '/learn/git/every-day-git'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
     | '/blog/soft-skills'
-    | '/learn/ai'
     | '/learn/dsa'
     | '/learn/git'
     | '/learn/math'
@@ -859,14 +819,12 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
-    | '/learn/git/hello-world'
+    | '/learn/git/every-day-git'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
     | '/blog/soft-skills'
-    | '/learn/ai'
     | '/learn/dsa'
     | '/learn/git'
     | '/learn/math'
@@ -897,14 +855,12 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/ai/hello-world'
     | '/learn/dsa/hello-world'
-    | '/learn/git/hello-world'
+    | '/learn/git/every-day-git'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design/'
     | '/blog/react/'
     | '/blog/soft-skills/'
-    | '/learn/ai/'
     | '/learn/dsa/'
     | '/learn/git/'
     | '/learn/math/'
@@ -980,11 +936,9 @@ export const routeTree = rootRoute
         "/learn/math/division",
         "/learn/math/exponents",
         "/learn/math/sigma-notation",
-        "/learn/ai/hello-world",
         "/learn/dsa/hello-world",
-        "/learn/git/hello-world",
+        "/learn/git/every-day-git",
         "/learn/python/whiteboarding-essentials",
-        "/learn/ai/",
         "/learn/dsa/",
         "/learn/git/",
         "/learn/math/",
@@ -1059,16 +1013,12 @@ export const routeTree = rootRoute
       "filePath": "blog/soft-skills/learn-names.jsx",
       "parent": "/blog"
     },
-    "/learn/ai/hello-world": {
-      "filePath": "learn/ai/hello-world.tsx",
-      "parent": "/learn"
-    },
     "/learn/dsa/hello-world": {
       "filePath": "learn/dsa/hello-world.tsx",
       "parent": "/learn"
     },
-    "/learn/git/hello-world": {
-      "filePath": "learn/git/hello-world.tsx",
+    "/learn/git/every-day-git": {
+      "filePath": "learn/git/every-day-git.tsx",
       "parent": "/learn"
     },
     "/learn/python/whiteboarding-essentials": {
@@ -1086,10 +1036,6 @@ export const routeTree = rootRoute
     "/blog/soft-skills/": {
       "filePath": "blog/soft-skills/index.tsx",
       "parent": "/blog"
-    },
-    "/learn/ai/": {
-      "filePath": "learn/ai/index.tsx",
-      "parent": "/learn"
     },
     "/learn/dsa/": {
       "filePath": "learn/dsa/index.tsx",

@@ -105,12 +105,12 @@ const learnCategories: NavCategory[] = [
     icon: mdiGit,
     path: '/learn/git',
   },
-  {
-    id: 'ai',
-    title: 'AI & Machine Learning',
-    icon: mdiBookEducationOutline,
-    path: '/learn/ai',
-  },
+  // {
+  //   id: 'ai',
+  //   title: 'AI & Machine Learning',
+  //   icon: mdiBookEducationOutline,
+  //   path: '/learn/ai',
+  // },
 ];
 
 // Complete navigation configuration
