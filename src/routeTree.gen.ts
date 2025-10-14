@@ -29,7 +29,11 @@ import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/in
 import { Route as BlogReactIndexImport } from './routes/blog/react/index'
 import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
 import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
+import { Route as LearnGitTaggingImport } from './routes/learn/git/tagging'
+import { Route as LearnGitResetImport } from './routes/learn/git/reset'
 import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git'
+import { Route as LearnGitCherryPickingImport } from './routes/learn/git/cherry-picking'
+import { Route as LearnGitBranchingImport } from './routes/learn/git/branching'
 import { Route as LearnDsaHelloWorldImport } from './routes/learn/dsa/hello-world'
 import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names'
 import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster'
@@ -156,9 +160,33 @@ const LearnPythonWhiteboardingEssentialsRoute =
     getParentRoute: () => LearnRouteRoute,
   } as any)
 
+const LearnGitTaggingRoute = LearnGitTaggingImport.update({
+  id: '/git/tagging',
+  path: '/git/tagging',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnGitResetRoute = LearnGitResetImport.update({
+  id: '/git/reset',
+  path: '/git/reset',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
 const LearnGitEveryDayGitRoute = LearnGitEveryDayGitImport.update({
   id: '/git/every-day-git',
   path: '/git/every-day-git',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnGitCherryPickingRoute = LearnGitCherryPickingImport.update({
+  id: '/git/cherry-picking',
+  path: '/git/cherry-picking',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnGitBranchingRoute = LearnGitBranchingImport.update({
+  id: '/git/branching',
+  path: '/git/branching',
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
@@ -414,11 +442,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnDsaHelloWorldImport
       parentRoute: typeof LearnRouteImport
     }
+    '/learn/git/branching': {
+      id: '/learn/git/branching'
+      path: '/git/branching'
+      fullPath: '/learn/git/branching'
+      preLoaderRoute: typeof LearnGitBranchingImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/git/cherry-picking': {
+      id: '/learn/git/cherry-picking'
+      path: '/git/cherry-picking'
+      fullPath: '/learn/git/cherry-picking'
+      preLoaderRoute: typeof LearnGitCherryPickingImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/learn/git/every-day-git': {
       id: '/learn/git/every-day-git'
       path: '/git/every-day-git'
       fullPath: '/learn/git/every-day-git'
       preLoaderRoute: typeof LearnGitEveryDayGitImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/git/reset': {
+      id: '/learn/git/reset'
+      path: '/git/reset'
+      fullPath: '/learn/git/reset'
+      preLoaderRoute: typeof LearnGitResetImport
+      parentRoute: typeof LearnRouteImport
+    }
+    '/learn/git/tagging': {
+      id: '/learn/git/tagging'
+      path: '/git/tagging'
+      fullPath: '/learn/git/tagging'
+      preLoaderRoute: typeof LearnGitTaggingImport
       parentRoute: typeof LearnRouteImport
     }
     '/learn/python/whiteboarding-essentials': {
@@ -633,7 +689,11 @@ interface LearnRouteRouteChildren {
   LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
   LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren
   LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
+  LearnGitBranchingRoute: typeof LearnGitBranchingRoute
+  LearnGitCherryPickingRoute: typeof LearnGitCherryPickingRoute
   LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute
+  LearnGitResetRoute: typeof LearnGitResetRoute
+  LearnGitTaggingRoute: typeof LearnGitTaggingRoute
   LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
   LearnDsaIndexRoute: typeof LearnDsaIndexRoute
   LearnGitIndexRoute: typeof LearnGitIndexRoute
@@ -650,7 +710,11 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnMathSigmaNotationRouteRoute:
     LearnMathSigmaNotationRouteRouteWithChildren,
   LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
+  LearnGitBranchingRoute: LearnGitBranchingRoute,
+  LearnGitCherryPickingRoute: LearnGitCherryPickingRoute,
   LearnGitEveryDayGitRoute: LearnGitEveryDayGitRoute,
+  LearnGitResetRoute: LearnGitResetRoute,
+  LearnGitTaggingRoute: LearnGitTaggingRoute,
   LearnPythonWhiteboardingEssentialsRoute:
     LearnPythonWhiteboardingEssentialsRoute,
   LearnDsaIndexRoute: LearnDsaIndexRoute,
@@ -682,7 +746,11 @@ export interface FileRoutesByFullPath {
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/branching': typeof LearnGitBranchingRoute
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
+  '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
@@ -713,7 +781,11 @@ export interface FileRoutesByTo {
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/branching': typeof LearnGitBranchingRoute
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
+  '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
   '/blog/react': typeof BlogReactIndexRoute
@@ -751,7 +823,11 @@ export interface FileRoutesById {
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
   '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
+  '/learn/git/branching': typeof LearnGitBranchingRoute
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
+  '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
   '/blog/react/': typeof BlogReactIndexRoute
@@ -790,7 +866,11 @@ export interface FileRouteTypes {
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
     | '/learn/dsa/hello-world'
+    | '/learn/git/branching'
+    | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
+    | '/learn/git/reset'
+    | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
@@ -820,7 +900,11 @@ export interface FileRouteTypes {
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
     | '/learn/dsa/hello-world'
+    | '/learn/git/branching'
+    | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
+    | '/learn/git/reset'
+    | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
     | '/blog/react'
@@ -856,7 +940,11 @@ export interface FileRouteTypes {
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
     | '/learn/dsa/hello-world'
+    | '/learn/git/branching'
+    | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
+    | '/learn/git/reset'
+    | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design/'
     | '/blog/react/'
@@ -937,7 +1025,11 @@ export const routeTree = rootRoute
         "/learn/math/exponents",
         "/learn/math/sigma-notation",
         "/learn/dsa/hello-world",
+        "/learn/git/branching",
+        "/learn/git/cherry-picking",
         "/learn/git/every-day-git",
+        "/learn/git/reset",
+        "/learn/git/tagging",
         "/learn/python/whiteboarding-essentials",
         "/learn/dsa/",
         "/learn/git/",
@@ -1017,8 +1109,24 @@ export const routeTree = rootRoute
       "filePath": "learn/dsa/hello-world.tsx",
       "parent": "/learn"
     },
+    "/learn/git/branching": {
+      "filePath": "learn/git/branching.tsx",
+      "parent": "/learn"
+    },
+    "/learn/git/cherry-picking": {
+      "filePath": "learn/git/cherry-picking.tsx",
+      "parent": "/learn"
+    },
     "/learn/git/every-day-git": {
       "filePath": "learn/git/every-day-git.tsx",
+      "parent": "/learn"
+    },
+    "/learn/git/reset": {
+      "filePath": "learn/git/reset.tsx",
+      "parent": "/learn"
+    },
+    "/learn/git/tagging": {
+      "filePath": "learn/git/tagging.tsx",
       "parent": "/learn"
     },
     "/learn/python/whiteboarding-essentials": {

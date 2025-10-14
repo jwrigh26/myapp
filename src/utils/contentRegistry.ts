@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-13T20:51:53.234Z
-// Total routes: 15
+// Generated on: 2025-10-14T15:48:22.075Z
+// Total routes: 19
 
 export interface NavigationItem {
   id: string;
@@ -35,6 +35,120 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "items": [],
     "lastUpdated": "2025-10-02T02:28:55.358Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/index.tsx"
+  },
+  "git/branching": {
+    "title": "Git Branching",
+    "description": "Understanding the evolution from git checkout to git switch for modern branching workflows",
+    "tags": [],
+    "items": [
+      {
+        "id": "why-switch",
+        "title": "Why Git Switch Exists",
+        "anchor": "why-switch",
+        "level": 1
+      },
+      {
+        "id": "switching-existing",
+        "title": "Switching to an Existing Branch",
+        "anchor": "switching-existing",
+        "level": 1
+      },
+      {
+        "id": "create-and-switch",
+        "title": "Create and Switch to a New Branch",
+        "anchor": "create-and-switch",
+        "level": 1
+      },
+      {
+        "id": "force-create",
+        "title": "Force Create a Branch",
+        "anchor": "force-create",
+        "level": 1
+      },
+      {
+        "id": "renaming",
+        "title": "Renaming Branches",
+        "anchor": "renaming",
+        "level": 1
+      },
+      {
+        "id": "comparison",
+        "title": "Side-by-Side Comparison",
+        "anchor": "comparison",
+        "level": 1
+      },
+      {
+        "id": "migration-tips",
+        "title": "Making the Switch",
+        "anchor": "migration-tips",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-14T15:24:15.354Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/branching.tsx"
+  },
+  "git/cherry-picking": {
+    "title": "Git Cherry-Picking",
+    "description": "Learn how to cherry-pick specific commits from one branch to another without merging everything",
+    "tags": [],
+    "items": [
+      {
+        "id": "what-is-cherry-picking",
+        "title": "What Is Cherry-Picking?",
+        "anchor": "what-is-cherry-picking",
+        "level": 1
+      },
+      {
+        "id": "basic-cherry-pick",
+        "title": "Basic Cherry-Picking",
+        "anchor": "basic-cherry-pick",
+        "level": 1
+      },
+      {
+        "id": "multiple-commits",
+        "title": "Cherry-Picking Multiple Commits",
+        "anchor": "multiple-commits",
+        "level": 1
+      },
+      {
+        "id": "temp-branches",
+        "title": "Working with Temp Branches",
+        "anchor": "temp-branches",
+        "level": 1
+      },
+      {
+        "id": "conflicts",
+        "title": "Handling Cherry-Pick Conflicts",
+        "anchor": "conflicts",
+        "level": 1
+      },
+      {
+        "id": "workflows",
+        "title": "Common Cherry-Pick Workflows",
+        "anchor": "workflows",
+        "level": 1
+      },
+      {
+        "id": "best-practices",
+        "title": "Best Practices & Warnings",
+        "anchor": "best-practices",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-14T15:42:41.420Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/cherry-picking.tsx"
   },
   "git/every-day-git": {
     "title": "Every Day Git",
@@ -102,7 +216,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T20:51:17.116Z",
+    "lastUpdated": "2025-10-14T14:51:15.904Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/every-day-git.tsx"
   },
   "git": {
@@ -112,6 +226,150 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "items": [],
     "lastUpdated": "2025-10-02T02:28:55.380Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/index.tsx"
+  },
+  "git/reset": {
+    "title": "Git Reset",
+    "description": "Understanding git reset modes and git stash for safely managing uncommitted changes",
+    "tags": [],
+    "items": [
+      {
+        "id": "git-reset",
+        "title": "Understanding Git Reset",
+        "anchor": "git-reset",
+        "level": 1
+      },
+      {
+        "id": "reset-soft",
+        "title": "Reset --soft",
+        "anchor": "reset-soft",
+        "level": 1
+      },
+      {
+        "id": "reset-mixed",
+        "title": "Reset --mixed (default)",
+        "anchor": "reset-mixed",
+        "level": 1
+      },
+      {
+        "id": "reset-hard",
+        "title": "Reset --hard",
+        "anchor": "reset-hard",
+        "level": 1
+      },
+      {
+        "id": "git-stash",
+        "title": "Git Stash Basics",
+        "anchor": "git-stash",
+        "level": 1
+      },
+      {
+        "id": "applying-stashes",
+        "title": "Applying and Popping Stashes",
+        "anchor": "applying-stashes",
+        "level": 1
+      },
+      {
+        "id": "stash-conflicts",
+        "title": "Handling Stash Conflicts",
+        "anchor": "stash-conflicts",
+        "level": 1
+      },
+      {
+        "id": "stash-branch",
+        "title": "Stash Branch",
+        "anchor": "stash-branch",
+        "level": 1
+      },
+      {
+        "id": "recovering-stashes",
+        "title": "Recovering Lost Stashes",
+        "anchor": "recovering-stashes",
+        "level": 1
+      },
+      {
+        "id": "managing-stashes",
+        "title": "Managing Stashes",
+        "anchor": "managing-stashes",
+        "level": 1
+      },
+      {
+        "id": "best-practices",
+        "title": "Best Practices",
+        "anchor": "best-practices",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-14T15:48:06.466Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/reset.tsx"
+  },
+  "git/tagging": {
+    "title": "Git Tagging",
+    "description": "Learn how to use Git tags to mark releases, versions, and important points in your repository history",
+    "tags": [],
+    "items": [
+      {
+        "id": "what-are-tags",
+        "title": "What Are Tags?",
+        "anchor": "what-are-tags",
+        "level": 1
+      },
+      {
+        "id": "lightweight-tags",
+        "title": "Creating Lightweight Tags",
+        "anchor": "lightweight-tags",
+        "level": 1
+      },
+      {
+        "id": "annotated-tags",
+        "title": "Creating Annotated Tags",
+        "anchor": "annotated-tags",
+        "level": 1
+      },
+      {
+        "id": "listing-tags",
+        "title": "Listing and Viewing Tags",
+        "anchor": "listing-tags",
+        "level": 1
+      },
+      {
+        "id": "pushing-tags",
+        "title": "Pushing Tags to Remote",
+        "anchor": "pushing-tags",
+        "level": 1
+      },
+      {
+        "id": "deleting-tags",
+        "title": "Deleting Tags",
+        "anchor": "deleting-tags",
+        "level": 1
+      },
+      {
+        "id": "workflows",
+        "title": "Common Tagging Workflows",
+        "anchor": "workflows",
+        "level": 1
+      },
+      {
+        "id": "semver",
+        "title": "Semantic Versioning",
+        "anchor": "semver",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-14T15:23:44.066Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/tagging.tsx"
   },
   "": {
     "title": "Learn",

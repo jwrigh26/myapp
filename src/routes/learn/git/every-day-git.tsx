@@ -525,7 +525,7 @@ git push --force-with-lease`}
 
       <Spacer size={4} />
       <Alert severity="error">
-        <AlertTitle>⚠️ Force push warning!</AlertTitle>
+        <AlertTitle>Force push warning!</AlertTitle>
         Only force push to branches where you're the only one working! Force
         pushing to shared branches (like main/develop) or branches with
         collaborators will cause major problems.
