@@ -51,6 +51,22 @@ const StyledContentGrid = styled(Box)(({ theme }) => ({
     gridColumn: 'full-width',
   },
 
+  // Inline code styling
+  '& code': {
+    backgroundColor:
+      theme.palette.mode === 'light'
+        ? theme.palette.grey[200]
+        : theme.palette.grey[800],
+    color:
+      theme.palette.mode === 'light'
+        ? theme.palette.text.primary
+        : theme.palette.text.secondary,
+    padding: theme.spacing(0.5, 1),
+    borderRadius: theme.shape.borderRadius,
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.caption.fontSize,
+  },
+
   // Responsive behavior
   [theme.breakpoints.down('md')]: {
     '--padding-inline': theme.spacing(2),

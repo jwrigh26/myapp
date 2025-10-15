@@ -15,41 +15,41 @@ import Arrow from '@/components/Arrow';
 export const Route = createFileRoute('/learn/git/branching')({
   component: Branching,
   head: () => ({
-    getTitle: () => 'Git Branching',
+    getTitle: () => 'Branching',
     includeInDrawer: true,
     meta: [
       {
         name: 'description',
         content:
-          'Understanding the evolution from git checkout to git switch for modern branching workflows',
+          'Understanding the evolution from git checkout to git switch for branching workflows',
       },
       {
-        title: 'Git Branching: Old vs New',
+        title: 'Branching',
       },
     ],
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function Branching() {
   return (
     <PageLayout>
       <TitleBlock
-        title="Git Branching: Old vs New"
-        subtitle="From git checkout to git switch"
+        title="Branching"
+        subtitle="Old vs New: From checkout to switch"
       />
 
-      <IntroBlock>
-        Git branching has gotten simpler! In 2019, Git introduced{' '}
+      <IntroBlock hook="From git checkout to git switch">
+        Git branching is simpler (yeah). In 2019, Git introduced{' '}
         <code>git switch</code> and <code>git restore</code> to split the
-        overloaded <code>git checkout</code> command into clearer, more intuitive
-        commands. Let's explore both approaches.
+        overloaded <code>git checkout</code> into more intuitive commands.
       </IntroBlock>
 
       {/* WHY THE CHANGE */}
       <SectionSpacer size={sectionSpaceSize} />
+
       <ProseBlock
         anchor
         title="Why Git Switch Exists"

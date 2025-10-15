@@ -30,6 +30,7 @@ import { Route as BlogReactIndexImport } from './routes/blog/react/index'
 import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
 import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
 import { Route as LearnGitTaggingImport } from './routes/learn/git/tagging'
+import { Route as LearnGitStashingImport } from './routes/learn/git/stashing'
 import { Route as LearnGitResetImport } from './routes/learn/git/reset'
 import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git'
 import { Route as LearnGitCherryPickingImport } from './routes/learn/git/cherry-picking'
@@ -163,6 +164,12 @@ const LearnPythonWhiteboardingEssentialsRoute =
 const LearnGitTaggingRoute = LearnGitTaggingImport.update({
   id: '/git/tagging',
   path: '/git/tagging',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
+const LearnGitStashingRoute = LearnGitStashingImport.update({
+  id: '/git/stashing',
+  path: '/git/stashing',
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
@@ -470,6 +477,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnGitResetImport
       parentRoute: typeof LearnRouteImport
     }
+    '/learn/git/stashing': {
+      id: '/learn/git/stashing'
+      path: '/git/stashing'
+      fullPath: '/learn/git/stashing'
+      preLoaderRoute: typeof LearnGitStashingImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/learn/git/tagging': {
       id: '/learn/git/tagging'
       path: '/git/tagging'
@@ -693,6 +707,7 @@ interface LearnRouteRouteChildren {
   LearnGitCherryPickingRoute: typeof LearnGitCherryPickingRoute
   LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute
   LearnGitResetRoute: typeof LearnGitResetRoute
+  LearnGitStashingRoute: typeof LearnGitStashingRoute
   LearnGitTaggingRoute: typeof LearnGitTaggingRoute
   LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
   LearnDsaIndexRoute: typeof LearnDsaIndexRoute
@@ -714,6 +729,7 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnGitCherryPickingRoute: LearnGitCherryPickingRoute,
   LearnGitEveryDayGitRoute: LearnGitEveryDayGitRoute,
   LearnGitResetRoute: LearnGitResetRoute,
+  LearnGitStashingRoute: LearnGitStashingRoute,
   LearnGitTaggingRoute: LearnGitTaggingRoute,
   LearnPythonWhiteboardingEssentialsRoute:
     LearnPythonWhiteboardingEssentialsRoute,
@@ -750,6 +766,7 @@ export interface FileRoutesByFullPath {
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/stashing': typeof LearnGitStashingRoute
   '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
@@ -785,6 +802,7 @@ export interface FileRoutesByTo {
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/stashing': typeof LearnGitStashingRoute
   '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
@@ -827,6 +845,7 @@ export interface FileRoutesById {
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
   '/learn/git/reset': typeof LearnGitResetRoute
+  '/learn/git/stashing': typeof LearnGitStashingRoute
   '/learn/git/tagging': typeof LearnGitTaggingRoute
   '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
   '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
@@ -870,6 +889,7 @@ export interface FileRouteTypes {
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
     | '/learn/git/reset'
+    | '/learn/git/stashing'
     | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
@@ -904,6 +924,7 @@ export interface FileRouteTypes {
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
     | '/learn/git/reset'
+    | '/learn/git/stashing'
     | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design'
@@ -944,6 +965,7 @@ export interface FileRouteTypes {
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
     | '/learn/git/reset'
+    | '/learn/git/stashing'
     | '/learn/git/tagging'
     | '/learn/python/whiteboarding-essentials'
     | '/blog/frontend-design/'
@@ -1029,6 +1051,7 @@ export const routeTree = rootRoute
         "/learn/git/cherry-picking",
         "/learn/git/every-day-git",
         "/learn/git/reset",
+        "/learn/git/stashing",
         "/learn/git/tagging",
         "/learn/python/whiteboarding-essentials",
         "/learn/dsa/",
@@ -1123,6 +1146,10 @@ export const routeTree = rootRoute
     },
     "/learn/git/reset": {
       "filePath": "learn/git/reset.tsx",
+      "parent": "/learn"
+    },
+    "/learn/git/stashing": {
+      "filePath": "learn/git/stashing.tsx",
       "parent": "/learn"
     },
     "/learn/git/tagging": {

@@ -1,6 +1,6 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-14T15:48:22.075Z
-// Total routes: 19
+// Generated on: 2025-10-15T15:12:04.447Z
+// Total routes: 20
 
 export interface NavigationItem {
   id: string;
@@ -37,8 +37,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/index.tsx"
   },
   "git/branching": {
-    "title": "Git Branching",
-    "description": "Understanding the evolution from git checkout to git switch for modern branching workflows",
+    "title": "Branching",
+    "description": "Understanding the evolution from git checkout to git switch for branching workflows",
     "tags": [],
     "items": [
       {
@@ -90,11 +90,11 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-14T15:24:15.354Z",
+    "lastUpdated": "2025-10-15T15:09:02.273Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/branching.tsx"
   },
   "git/cherry-picking": {
-    "title": "Git Cherry-Picking",
+    "title": "Cherry-Picking",
     "description": "Learn how to cherry-pick specific commits from one branch to another without merging everything",
     "tags": [],
     "items": [
@@ -147,7 +147,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-14T15:42:41.420Z",
+    "lastUpdated": "2025-10-15T14:33:29.621Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/cherry-picking.tsx"
   },
   "git/every-day-git": {
@@ -216,7 +216,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-14T14:51:15.904Z",
+    "lastUpdated": "2025-10-15T00:52:31.191Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/every-day-git.tsx"
   },
   "git": {
@@ -228,7 +228,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/index.tsx"
   },
   "git/reset": {
-    "title": "Git Reset",
+    "title": "Reset",
     "description": "Understanding git reset modes and git stash for safely managing uncommitted changes",
     "tags": [],
     "items": [
@@ -305,11 +305,80 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-14T15:48:06.466Z",
+    "lastUpdated": "2025-10-15T14:27:18.264Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/reset.tsx"
   },
+  "git/stashing": {
+    "title": "Stashing",
+    "description": "Learn how to stash uncommitted changes safely and apply them later",
+    "tags": [],
+    "items": [
+      {
+        "id": "core-commands",
+        "title": "Core Stash Commands",
+        "anchor": "core-commands",
+        "level": 1
+      },
+      {
+        "id": "stash-options",
+        "title": "Stash Options",
+        "anchor": "stash-options",
+        "level": 1
+      },
+      {
+        "id": "apply-vs-pop",
+        "title": "Apply vs Pop",
+        "anchor": "apply-vs-pop",
+        "level": 1
+      },
+      {
+        "id": "stash-branch",
+        "title": "Creating a Branch from Stash",
+        "anchor": "stash-branch",
+        "level": 1
+      },
+      {
+        "id": "workflows",
+        "title": "Real-World Workflows",
+        "anchor": "workflows",
+        "level": 1
+      },
+      {
+        "id": "git-add",
+        "title": "Git Add: -A vs . (dot)",
+        "anchor": "git-add",
+        "level": 1
+      },
+      {
+        "id": "conflicts-recovery",
+        "title": "Conflicts and Recovery",
+        "anchor": "conflicts-recovery",
+        "level": 1
+      },
+      {
+        "id": "cleanup",
+        "title": "Cleaning Up Stashes",
+        "anchor": "cleanup",
+        "level": 1
+      },
+      {
+        "id": "safety-notes",
+        "title": "Safety Notes & Best Practices",
+        "anchor": "safety-notes",
+        "level": 1
+      },
+      {
+        "id": "quick-reference",
+        "title": "Quick Reference",
+        "anchor": "quick-reference",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-15T15:11:41.276Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/stashing.tsx"
+  },
   "git/tagging": {
-    "title": "Git Tagging",
+    "title": "Tagging",
     "description": "Learn how to use Git tags to mark releases, versions, and important points in your repository history",
     "tags": [],
     "items": [
@@ -368,7 +437,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-14T15:23:44.066Z",
+    "lastUpdated": "2025-10-15T14:27:56.936Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/tagging.tsx"
   },
   "": {
@@ -834,7 +903,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-11T16:48:18.584Z",
+    "lastUpdated": "2025-10-15T00:50:38.293Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/python/whiteboarding-essentials.tsx"
   }
 };

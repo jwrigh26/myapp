@@ -15,7 +15,7 @@ import Arrow from '@/components/Arrow';
 export const Route = createFileRoute('/learn/git/reset')({
   component: ResetComponent,
   head: () => ({
-    getTitle: () => 'Git Reset',
+    getTitle: () => 'Reset',
     includeInDrawer: true,
     meta: [
       {
@@ -24,20 +24,20 @@ export const Route = createFileRoute('/learn/git/reset')({
           'Understanding git reset modes and git stash for safely managing uncommitted changes',
       },
       {
-        title: 'Git Reset',
+        title: 'Reset',
       },
     ],
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 122;
 const blockSpaceSize = 8;
 
 function ResetComponent() {
   return (
     <PageLayout>
       <TitleBlock
-        title="Git Reset & Stash"
+        title="Reset & Stash"
         subtitle="Managing uncommitted changes safely"
       />
 

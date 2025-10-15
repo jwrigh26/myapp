@@ -15,7 +15,7 @@ import Arrow from '@/components/Arrow';
 export const Route = createFileRoute('/learn/git/tagging')({
   component: Tagging,
   head: () => ({
-    getTitle: () => 'Git Tagging',
+    getTitle: () => 'Tagging',
     includeInDrawer: true,
     meta: [
       {
@@ -24,21 +24,21 @@ export const Route = createFileRoute('/learn/git/tagging')({
           'Learn how to use Git tags to mark releases, versions, and important points in your repository history',
       },
       {
-        title: 'Git Tagging: Releases & Versions',
+        title: 'Tagging',
       },
     ],
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function Tagging() {
   return (
     <PageLayout>
       <TitleBlock
-        title="Git Tagging: Releases & Versions"
-        subtitle="Marking important milestones in your code"
+        title="Tagging"
+        subtitle="Releases & Versions: Marking important milestones in your code"
       />
 
       <IntroBlock>

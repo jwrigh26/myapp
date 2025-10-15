@@ -15,7 +15,7 @@ import Arrow from '@/components/Arrow';
 export const Route = createFileRoute('/learn/git/cherry-picking')({
   component: CherryPickingComponent,
   head: () => ({
-    getTitle: () => 'Git Cherry-Picking',
+    getTitle: () => 'Cherry-Picking',
     includeInDrawer: true,
     meta: [
       {
@@ -24,21 +24,21 @@ export const Route = createFileRoute('/learn/git/cherry-picking')({
           'Learn how to cherry-pick specific commits from one branch to another without merging everything',
       },
       {
-        title: 'Git Cherry-Picking: Selective Commits',
+        title: 'Cherry-Picking',
       },
     ],
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function CherryPickingComponent() {
   return (
     <PageLayout>
       <TitleBlock
-        title="Git Cherry-Picking: Selective Commits"
-        subtitle="Apply specific commits from one branch to another"
+        title="Cherry-Picking"
+        subtitle="Selective Commits: Apply specific commits from one branch to another"
       />
 
       <IntroBlock>

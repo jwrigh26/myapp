@@ -29,7 +29,7 @@ export const Route = createFileRoute('/learn/git/every-day-git')({
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function EveryDayGit() {
