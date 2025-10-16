@@ -30,7 +30,7 @@ export const Route = createFileRoute('/learn/git/reset')({
   }),
 });
 
-const sectionSpaceSize = 122;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function ResetComponent() {

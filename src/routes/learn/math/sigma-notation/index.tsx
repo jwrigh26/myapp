@@ -32,7 +32,7 @@ export const Route = createFileRoute('/learn/math/sigma-notation/')({
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function SigmaNotation() {

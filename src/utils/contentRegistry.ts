@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-15T15:12:04.447Z
+// Generated on: 2025-10-16T16:53:51.933Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -20,13 +20,26 @@ export interface ContentEntry {
 }
 
 export const contentRegistry: Record<string, ContentEntry> = {
-  "dsa/hello-world": {
-    "title": "Hello DSA World",
-    "description": "Introduction to data structures and algorithms learning journey",
+  "dsa/binary-search": {
+    "title": "Binary Search",
+    "description": "plaeholder for binary search",
     "tags": [],
-    "items": [],
-    "lastUpdated": "2025-10-01T19:42:04.108Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/hello-world.tsx"
+    "items": [
+      {
+        "id": "the-old-way",
+        "title": "The Old Way",
+        "anchor": "the-old-way",
+        "level": 1
+      },
+      {
+        "id": "the-new-way",
+        "title": "The New Way",
+        "anchor": "the-new-way",
+        "level": 1
+      }
+    ],
+    "lastUpdated": "2025-10-16T16:53:40.187Z",
+    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {
     "title": "Data Structures & Algorithms",
@@ -305,7 +318,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-15T14:27:18.264Z",
+    "lastUpdated": "2025-10-15T15:18:20.708Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/reset.tsx"
   },
   "git/stashing": {
@@ -374,7 +387,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-15T15:11:41.276Z",
+    "lastUpdated": "2025-10-15T15:15:56.852Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/stashing.tsx"
   },
   "git/tagging": {
@@ -537,7 +550,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T14:44:02.202Z",
+    "lastUpdated": "2025-10-16T15:56:26.740Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/index.tsx"
   },
   "math/division": {
@@ -594,7 +607,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T15:03:37.528Z",
+    "lastUpdated": "2025-10-16T15:56:17.782Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/division/index.tsx"
   },
   "math/division/problems": {
@@ -703,7 +716,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T15:44:42.405Z",
+    "lastUpdated": "2025-10-16T15:56:10.034Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/exponents/index.tsx"
   },
   "math": {
@@ -794,7 +807,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-13T19:32:58.392Z",
+    "lastUpdated": "2025-10-16T15:56:33.647Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/sigma-notation/index.tsx"
   },
   "python": {

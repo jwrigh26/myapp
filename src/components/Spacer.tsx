@@ -9,11 +9,14 @@ interface SpacerProps extends BoxProps {
   flexSpace?: boolean;
   mobile?: boolean; // Show only on mobile
   desktop?: boolean; // Show only on desktop
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Spacer = styled(Box, {
   shouldForwardProp: (prop) =>
-    !['size', 'axis', 'flexSpace', 'mobile', 'desktop'].includes(
+    !['size', 'axis', 'flexSpace', 'mobile', 'desktop', 'style'].includes(
       prop as string
     ),
 })<SpacerProps>(({

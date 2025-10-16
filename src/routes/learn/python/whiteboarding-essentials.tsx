@@ -1208,6 +1208,57 @@ students.sort(key=lambda x: (x[1], x[0]))  # Grade first, then name`}
 
       <Spacer size={blockSpaceSize} />
       <ProseBlock
+        subtitle="Callable type hints"
+        spacingBottom={false}
+        spacingTop={true}
+      >
+        Type hint functions and lambdas with <span className="code">Callable</span> for better code clarity.
+      </ProseBlock>
+
+      <CodeBlock
+        border
+        language="python"
+        code={`from typing import Callable
+
+# All of these match Callable[[int], bool]
+
+# 1. Lambda function
+lambda_func: Callable[[int], bool] = lambda x: x < 10
+print(f"Lambda: {lambda_func(5)}")  # True
+
+# 2. Regular function
+def regular_func(x: int) -> bool:
+    return x < 10
+
+my_func: Callable[[int], bool] = regular_func
+print(f"Regular function: {my_func(5)}")  # True
+
+# 3. Even works with closures
+def make_checker(threshold: int) -> Callable[[int], bool]:
+    return lambda x: x < threshold
+
+closure_func: Callable[[int], bool] = make_checker(10)
+print(f"Closure: {closure_func(5)}")  # True`}
+      />
+
+      <Spacer size={4} />
+      <NoteBlock>
+        <strong>Callable Syntax:</strong> <span className="code">Callable[[arg_types...], return_type]</span>
+        <br />
+        <br />
+        Examples:
+        <br />
+        • <span className="code">Callable[[int], bool]</span> - takes int, returns bool
+        <br />
+        • <span className="code">Callable[[int, str], float]</span> - takes int and str, returns float
+        <br />
+        • <span className="code">Callable[[], None]</span> - takes no args, returns None
+        <br />
+        • <span className="code">Callable[..., Any]</span> - takes any args, returns any type
+      </NoteBlock>
+
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock
         subtitle="Binary search predicates"
         spacingBottom={false}
         spacingTop={true}
@@ -1218,20 +1269,25 @@ students.sort(key=lambda x: (x[1], x[0]))  # Grade first, then name`}
       <CodeBlock
         border
         language="python"
-        code={`def binary_search_left(arr, target):
+        code={`from typing import Callable
+
+def binary_search_left(arr, predicate: Callable[[int], bool]):
     left, right = 0, len(arr)
-    
-    # Lambda defines "condition for going left"
-    is_target_or_right = lambda x: x >= target
     
     while left < right:
         mid = (left + right) // 2
-        if is_target_or_right(arr[mid]):
+        if predicate(arr[mid]):
             right = mid
         else:
             left = mid + 1
     
-    return left`}
+    return left
+
+# Use with lambda
+arr = [1, 2, 4, 6, 8, 9]
+target = 6
+result = binary_search_left(arr, lambda x: x >= target)
+print(result)  # 3 (first index where x >= 6)`}
       />
 
       <Spacer size={blockSpaceSize} />

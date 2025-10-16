@@ -33,7 +33,7 @@ export const Route = createFileRoute('/learn/math/division/')({
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function MathDivision() {

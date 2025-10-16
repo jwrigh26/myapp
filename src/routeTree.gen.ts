@@ -35,7 +35,6 @@ import { Route as LearnGitResetImport } from './routes/learn/git/reset'
 import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git'
 import { Route as LearnGitCherryPickingImport } from './routes/learn/git/cherry-picking'
 import { Route as LearnGitBranchingImport } from './routes/learn/git/branching'
-import { Route as LearnDsaHelloWorldImport } from './routes/learn/dsa/hello-world'
 import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names'
 import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster'
 import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
@@ -45,10 +44,12 @@ import { Route as LearnMathSigmaNotationRouteImport } from './routes/learn/math/
 import { Route as LearnMathExponentsRouteImport } from './routes/learn/math/exponents/route'
 import { Route as LearnMathDivisionRouteImport } from './routes/learn/math/division/route'
 import { Route as LearnMathDividingFractionsRouteImport } from './routes/learn/math/dividing-fractions/route'
+import { Route as LearnDsaBinarySearchRouteImport } from './routes/learn/dsa/binary-search/route'
 import { Route as LearnMathSigmaNotationIndexImport } from './routes/learn/math/sigma-notation/index'
 import { Route as LearnMathExponentsIndexImport } from './routes/learn/math/exponents/index'
 import { Route as LearnMathDivisionIndexImport } from './routes/learn/math/division/index'
 import { Route as LearnMathDividingFractionsIndexImport } from './routes/learn/math/dividing-fractions/index'
+import { Route as LearnDsaBinarySearchIndexImport } from './routes/learn/dsa/binary-search/index'
 
 // Create Virtual Routes
 
@@ -197,12 +198,6 @@ const LearnGitBranchingRoute = LearnGitBranchingImport.update({
   getParentRoute: () => LearnRouteRoute,
 } as any)
 
-const LearnDsaHelloWorldRoute = LearnDsaHelloWorldImport.update({
-  id: '/dsa/hello-world',
-  path: '/dsa/hello-world',
-  getParentRoute: () => LearnRouteRoute,
-} as any)
-
 const BlogSoftSkillsLearnNamesRoute = BlogSoftSkillsLearnNamesImport.update({
   id: '/soft-skills/learn-names',
   path: '/soft-skills/learn-names',
@@ -262,6 +257,12 @@ const LearnMathDividingFractionsRouteRoute =
     getParentRoute: () => LearnRouteRoute,
   } as any)
 
+const LearnDsaBinarySearchRouteRoute = LearnDsaBinarySearchRouteImport.update({
+  id: '/dsa/binary-search',
+  path: '/dsa/binary-search',
+  getParentRoute: () => LearnRouteRoute,
+} as any)
+
 const LearnMathSigmaNotationIndexRoute =
   LearnMathSigmaNotationIndexImport.update({
     id: '/',
@@ -287,6 +288,12 @@ const LearnMathDividingFractionsIndexRoute =
     path: '/',
     getParentRoute: () => LearnMathDividingFractionsRouteRoute,
   } as any)
+
+const LearnDsaBinarySearchIndexRoute = LearnDsaBinarySearchIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnDsaBinarySearchRouteRoute,
+} as any)
 
 const LearnMathDivisionProblemsLazyRoute =
   LearnMathDivisionProblemsLazyImport.update({
@@ -379,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnIndexImport
       parentRoute: typeof LearnRouteImport
     }
+    '/learn/dsa/binary-search': {
+      id: '/learn/dsa/binary-search'
+      path: '/dsa/binary-search'
+      fullPath: '/learn/dsa/binary-search'
+      preLoaderRoute: typeof LearnDsaBinarySearchRouteImport
+      parentRoute: typeof LearnRouteImport
+    }
     '/learn/math/dividing-fractions': {
       id: '/learn/math/dividing-fractions'
       path: '/math/dividing-fractions'
@@ -441,13 +455,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/soft-skills/learn-names'
       preLoaderRoute: typeof BlogSoftSkillsLearnNamesImport
       parentRoute: typeof BlogRouteImport
-    }
-    '/learn/dsa/hello-world': {
-      id: '/learn/dsa/hello-world'
-      path: '/dsa/hello-world'
-      fullPath: '/learn/dsa/hello-world'
-      preLoaderRoute: typeof LearnDsaHelloWorldImport
-      parentRoute: typeof LearnRouteImport
     }
     '/learn/git/branching': {
       id: '/learn/git/branching'
@@ -568,6 +575,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnMathDivisionProblemsLazyImport
       parentRoute: typeof LearnMathDivisionRouteImport
     }
+    '/learn/dsa/binary-search/': {
+      id: '/learn/dsa/binary-search/'
+      path: '/'
+      fullPath: '/learn/dsa/binary-search/'
+      preLoaderRoute: typeof LearnDsaBinarySearchIndexImport
+      parentRoute: typeof LearnDsaBinarySearchRouteImport
+    }
     '/learn/math/dividing-fractions/': {
       id: '/learn/math/dividing-fractions/'
       path: '/'
@@ -631,6 +645,20 @@ const BlogRouteRouteChildren: BlogRouteRouteChildren = {
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
   BlogRouteRouteChildren,
 )
+
+interface LearnDsaBinarySearchRouteRouteChildren {
+  LearnDsaBinarySearchIndexRoute: typeof LearnDsaBinarySearchIndexRoute
+}
+
+const LearnDsaBinarySearchRouteRouteChildren: LearnDsaBinarySearchRouteRouteChildren =
+  {
+    LearnDsaBinarySearchIndexRoute: LearnDsaBinarySearchIndexRoute,
+  }
+
+const LearnDsaBinarySearchRouteRouteWithChildren =
+  LearnDsaBinarySearchRouteRoute._addFileChildren(
+    LearnDsaBinarySearchRouteRouteChildren,
+  )
 
 interface LearnMathDividingFractionsRouteRouteChildren {
   LearnMathDividingFractionsAdvancedLazyRoute: typeof LearnMathDividingFractionsAdvancedLazyRoute
@@ -698,11 +726,11 @@ const LearnMathSigmaNotationRouteRouteWithChildren =
 
 interface LearnRouteRouteChildren {
   LearnIndexRoute: typeof LearnIndexRoute
+  LearnDsaBinarySearchRouteRoute: typeof LearnDsaBinarySearchRouteRouteWithChildren
   LearnMathDividingFractionsRouteRoute: typeof LearnMathDividingFractionsRouteRouteWithChildren
   LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren
   LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
   LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren
-  LearnDsaHelloWorldRoute: typeof LearnDsaHelloWorldRoute
   LearnGitBranchingRoute: typeof LearnGitBranchingRoute
   LearnGitCherryPickingRoute: typeof LearnGitCherryPickingRoute
   LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute
@@ -718,13 +746,13 @@ interface LearnRouteRouteChildren {
 
 const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnIndexRoute: LearnIndexRoute,
+  LearnDsaBinarySearchRouteRoute: LearnDsaBinarySearchRouteRouteWithChildren,
   LearnMathDividingFractionsRouteRoute:
     LearnMathDividingFractionsRouteRouteWithChildren,
   LearnMathDivisionRouteRoute: LearnMathDivisionRouteRouteWithChildren,
   LearnMathExponentsRouteRoute: LearnMathExponentsRouteRouteWithChildren,
   LearnMathSigmaNotationRouteRoute:
     LearnMathSigmaNotationRouteRouteWithChildren,
-  LearnDsaHelloWorldRoute: LearnDsaHelloWorldRoute,
   LearnGitBranchingRoute: LearnGitBranchingRoute,
   LearnGitCherryPickingRoute: LearnGitCherryPickingRoute,
   LearnGitEveryDayGitRoute: LearnGitEveryDayGitRoute,
@@ -752,6 +780,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
   '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
   '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
@@ -761,7 +790,6 @@ export interface FileRoutesByFullPath {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/branching': typeof LearnGitBranchingRoute
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
@@ -779,6 +807,7 @@ export interface FileRoutesByFullPath {
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
   '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
+  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division/': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
@@ -797,7 +826,6 @@ export interface FileRoutesByTo {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/branching': typeof LearnGitBranchingRoute
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
@@ -815,6 +843,7 @@ export interface FileRoutesByTo {
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
   '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchIndexRoute
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents': typeof LearnMathExponentsIndexRoute
@@ -831,6 +860,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/blog/': typeof BlogIndexRoute
   '/learn/': typeof LearnIndexRoute
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren
   '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
   '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
   '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
@@ -840,7 +870,6 @@ export interface FileRoutesById {
   '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
   '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
   '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/dsa/hello-world': typeof LearnDsaHelloWorldRoute
   '/learn/git/branching': typeof LearnGitBranchingRoute
   '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
   '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
@@ -858,6 +887,7 @@ export interface FileRoutesById {
   '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
   '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
   '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
+  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute
   '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
   '/learn/math/division/': typeof LearnMathDivisionIndexRoute
   '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
@@ -875,6 +905,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/blog/'
     | '/learn/'
+    | '/learn/dsa/binary-search'
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
@@ -884,7 +915,6 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/dsa/hello-world'
     | '/learn/git/branching'
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
@@ -902,6 +932,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
     | '/learn/math/division/problems'
+    | '/learn/dsa/binary-search/'
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
@@ -919,7 +950,6 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/dsa/hello-world'
     | '/learn/git/branching'
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
@@ -937,6 +967,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
     | '/learn/math/division/problems'
+    | '/learn/dsa/binary-search'
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
@@ -951,6 +982,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/blog/'
     | '/learn/'
+    | '/learn/dsa/binary-search'
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
@@ -960,7 +992,6 @@ export interface FileRouteTypes {
     | '/blog/frontend-design/microfrontends-part3'
     | '/blog/react/memo-monster'
     | '/blog/soft-skills/learn-names'
-    | '/learn/dsa/hello-world'
     | '/learn/git/branching'
     | '/learn/git/cherry-picking'
     | '/learn/git/every-day-git'
@@ -978,6 +1009,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/advanced'
     | '/learn/math/dividing-fractions/examples'
     | '/learn/math/division/problems'
+    | '/learn/dsa/binary-search/'
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
@@ -1042,11 +1074,11 @@ export const routeTree = rootRoute
       "filePath": "learn/route.tsx",
       "children": [
         "/learn/",
+        "/learn/dsa/binary-search",
         "/learn/math/dividing-fractions",
         "/learn/math/division",
         "/learn/math/exponents",
         "/learn/math/sigma-notation",
-        "/learn/dsa/hello-world",
         "/learn/git/branching",
         "/learn/git/cherry-picking",
         "/learn/git/every-day-git",
@@ -1076,6 +1108,13 @@ export const routeTree = rootRoute
     "/learn/": {
       "filePath": "learn/index.tsx",
       "parent": "/learn"
+    },
+    "/learn/dsa/binary-search": {
+      "filePath": "learn/dsa/binary-search/route.tsx",
+      "parent": "/learn",
+      "children": [
+        "/learn/dsa/binary-search/"
+      ]
     },
     "/learn/math/dividing-fractions": {
       "filePath": "learn/math/dividing-fractions/route.tsx",
@@ -1127,10 +1166,6 @@ export const routeTree = rootRoute
     "/blog/soft-skills/learn-names": {
       "filePath": "blog/soft-skills/learn-names.jsx",
       "parent": "/blog"
-    },
-    "/learn/dsa/hello-world": {
-      "filePath": "learn/dsa/hello-world.tsx",
-      "parent": "/learn"
     },
     "/learn/git/branching": {
       "filePath": "learn/git/branching.tsx",
@@ -1199,6 +1234,10 @@ export const routeTree = rootRoute
     "/learn/math/division/problems": {
       "filePath": "learn/math/division/problems.lazy.tsx",
       "parent": "/learn/math/division"
+    },
+    "/learn/dsa/binary-search/": {
+      "filePath": "learn/dsa/binary-search/index.tsx",
+      "parent": "/learn/dsa/binary-search"
     },
     "/learn/math/dividing-fractions/": {
       "filePath": "learn/math/dividing-fractions/index.tsx",

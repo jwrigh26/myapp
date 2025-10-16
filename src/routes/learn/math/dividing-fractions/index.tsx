@@ -70,7 +70,7 @@ export const Route = createFileRoute('/learn/math/dividing-fractions/')({
   }),
 });
 
-const sectionSpaceSize = 16;
+const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
 function MathDividingFractions() {
