@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-16T16:53:51.933Z
+// Generated on: 2025-10-17T14:30:28.406Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -38,7 +38,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-16T16:53:40.187Z",
+    "lastUpdated": "2025-10-17T14:30:11.664Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {
@@ -916,7 +916,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-10-15T00:50:38.293Z",
+    "lastUpdated": "2025-10-16T18:06:35.218Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/python/whiteboarding-essentials.tsx"
   }
 };

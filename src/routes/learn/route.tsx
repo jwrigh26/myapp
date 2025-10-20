@@ -1,11 +1,12 @@
 import { SecondaryDrawer as TableOfContents } from '@/components/SecondaryDrawer';
-import { LearnDrawer } from '@/features/learn';
+import { LearnDrawer, CompendiumDrawer } from '@/features/learn';
 import { useNavigationItems } from '@/hooks/useNavigationItems';
 import { useIsBreakpointUp } from '@/context/BreakpointContext';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import { Outlet, createFileRoute } from '@tanstack/react-router';
+import { useFocused } from '@/hooks/useContext';
 
 export const Route = createFileRoute('/learn')({
   component: AppLayoutComponent,
@@ -22,6 +23,7 @@ function AppLayoutComponent() {
 
   return (
     <Box sx={{ display: 'flex', marginBottom: 2 }}>
+      <CompendiumDrawer />
       <LearnDrawer />
           <Outlet />
 

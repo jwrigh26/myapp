@@ -94,9 +94,9 @@ function ReferenceLink({
 
   // If linkText is provided, only link that portion
   const parts = text.split(linkText);
-  console.log('text', text);
-  console.log("Link", linkText);
-  console.log('parts', parts);
+  // console.log('text', text);
+  // console.log("Link", linkText);
+  // console.log('parts', parts);
 
   // If the linkText isn't found in the text, fall back to making the entire text a link
   if (parts.length === 1) {

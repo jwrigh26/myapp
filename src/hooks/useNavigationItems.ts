@@ -54,8 +54,6 @@ export function useNavigationItems(): {
       }
     }
 
-    console.log('Loading navigation for path:', pathname);
-
     loadNavigation();
   }, [pathname]);
 

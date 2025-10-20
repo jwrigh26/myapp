@@ -160,8 +160,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     whiteSpace: 'pre-wrap',
     // Better touch scrolling on mobile
     WebkitOverflowScrolling: 'touch',
-    // Scroll indicators
-    background: `
+    // Scroll indicators - use individual properties instead of shorthand
+    backgroundImage: `
       linear-gradient(90deg, ${isDarkMode ? '#1e1e1e' : '#fff'} 30%, transparent),
       linear-gradient(270deg, ${isDarkMode ? '#1e1e1e' : '#fff'} 30%, transparent),
       linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 20%),

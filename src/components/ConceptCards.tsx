@@ -11,10 +11,8 @@ import { styled, alpha, useTheme } from '@mui/material/styles';
 import Icon from '@/components/Icon';
 import { mdiAccountGroup, mdiCompare, mdiGridLarge } from '@mdi/js';
 
-export type ConceptModel = 'Groups' | 'Comparison' | 'Rectangular';
-
 export interface ConceptItem {
-  model: ConceptModel;
+  model: string; // Changed from ConceptModel - now accepts any string title
   /** Primary description or meaning (string or array of strings) */
   description?: string | string[];
   /** Secondary description or application (string or array of strings) */
@@ -53,7 +51,7 @@ export function ConceptCardGrid({
         <StyledCard key={item.model} role="region" aria-labelledby={`hdr-${item.model}`}>
           <StyledCardHeader
             id={`hdr-${item.model}`}
-            titleTypographyProps={{ variant: 'h5', fontWeight: 600 }}
+            slotProps={{title: { variant: 'h5', fontWeight: 600}}}
             title={item.model}
             avatar={
               <StyledAvatar>
@@ -146,7 +144,7 @@ const GridContainer = styled(Box, {
 const StyledCard = styled(Card)(({ theme }) => {
   const isDark = theme.palette.mode === 'dark';
   const border = alpha(theme.palette.divider, isDark ? 0.25 : 0.5);
-  const hoverBg = alpha(theme.palette.primary.light, isDark ? 0.06 : 0.08);
+  const hoverBg = alpha(theme.palette.primary.main, isDark ? 0.09 : 0.08);
 
   return {
     backgroundColor: theme.palette.background.paper,
@@ -169,7 +167,11 @@ const StyledCard = styled(Card)(({ theme }) => {
 function cssFromMixin(mixinString: string): React.CSSProperties {
   const [prop, value] = mixinString.split(':').map((s) => s.trim());
   if (!prop || !value) return {};
-  return { [prop]: value.replace(/;$/, '') };
+  
+  // Convert kebab-case to camelCase for CSS properties
+  const camelCaseProp = prop.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+  
+  return { [camelCaseProp]: value.replace(/;$/, '') };
 }
 
 /**

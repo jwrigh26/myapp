@@ -11,13 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useMatchRoute } from '@tanstack/react-router';
 import Icon from './Icon';
-import CustomLink from './LinkButton';
 
-const Content = styled(Box)(({ theme }) => ({
-  height: '100%',
-  width: '100%',
-  position: 'relative',
-}));
 
 // ################################################
 // ### Drawer
@@ -49,6 +43,10 @@ interface PermanentDrawerProps extends DrawerProps {
   anchor?: 'left' | 'right';
 }
 
+// ################################################
+// ### Permanent Drawer
+// ################################################
+
 export function PermanentDrawer({
   anchor = 'left',
   children,
@@ -63,39 +61,77 @@ export function PermanentDrawer({
   );
 }
 
-export const StyledTemporaryDrawer = styled(Drawer)(({ theme }) => ({
-  flexShrink: 0,
-  boxSizing: 'border-box',
-  zIndex: theme.zIndex.drawer + 1,
-  ['& .MuiDrawer-paper']: {
-    overFlowX: 'hidden',
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      width: theme.mixins.drawerWidth,
-    },
-  },
-}));
+// ################################################
+// ### Temporary Drawer
+
+// Next step make drawer to show vocabulary meanings
+// ################################################
+
+export const StyledTemporaryDrawer = styled(Drawer, {
+  shouldForwardProp: (prop: string) => prop !== 'customWidth',
+})<{ customWidth?: string | number | [string | number, string | number] }>(
+  ({ theme, customWidth }) => {
+    // Determine mobile and desktop widths
+    let mobileWidth: string | number = '100%';
+    let desktopWidth: string | number = theme.mixins.drawerWidth;
+
+    if (customWidth) {
+      if (Array.isArray(customWidth)) {
+        // Tuple: [mobile, desktop]
+        mobileWidth = customWidth[0];
+        desktopWidth = customWidth[1];
+      } else {
+        // Single value: applies to both
+        mobileWidth = customWidth;
+        desktopWidth = customWidth;
+      }
+    }
+
+    return {
+      flexShrink: 0,
+      boxSizing: 'border-box',
+      zIndex: theme.zIndex.drawer + 1,
+      ['& .MuiDrawer-paper']: {
+        overFlowX: 'hidden',
+        height: '100%',
+        width: mobileWidth,
+        display: 'flex',
+        flexDirection: 'column',
+        [theme.breakpoints.up('sm')]: {
+          width: desktopWidth,
+        },
+      },
+    };
+  }
+);
+
+interface TemporaryDrawerProps extends DrawerProps {
+  width?: string | number | [string | number, string | number];
+}
 
 export function TemporaryDrawer({
   anchor = 'left',
   children,
   onClose: handleClose,
   open,
-}: DrawerProps) {
+  width,
+}: TemporaryDrawerProps) {
   return (
     <StyledTemporaryDrawer
       anchor={anchor}
       variant="temporary"
       open={open}
       onClose={handleClose}
+      customWidth={width}
     >
       {children}
     </StyledTemporaryDrawer>
   );
 }
+
+// ################################################
+// ### Mobile Drawer
+// ################################################
 
 export const StyledMobileDrawer = styled(Drawer)(({ theme }) => ({
   flexShrink: 0,
@@ -233,16 +269,6 @@ export function MiniVariantDrawer({
     }
   };
 
-  const headerColor = theme.mixins.decomposeColor(
-    theme.palette.primary.contrastText,
-    0.5
-  );
-
-  // Check if we're on the exact /blog route
-  const isOnBlogOverview = !!matchRoute({
-    to: '/blog',
-    fuzzy: false, // Exact match only
-  });
 
   // const StyledDrawer = secondary ? StyledMiniSecondaryDrawer : StyledMiniPrimaryDrawer;
   const StyledDrawer = StyledMiniPrimaryDrawer;
@@ -332,9 +358,9 @@ interface SheetProps {
   gap?: number;
 }
 const SheetPaper = styled(Paper)(({ theme }) => ({
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
+  boxShadow: 'none',
 }));
 
 const SheetContent = styled(Stack)(({ theme }) => ({

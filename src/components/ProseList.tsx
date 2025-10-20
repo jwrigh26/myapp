@@ -10,6 +10,8 @@ interface ProseListProps {
   ordered?: boolean;
   /** If true, applies a more compact padding. */
   dense?: boolean;
+  /** Adds extra spacing at the top if true. */
+  spacingTop?: boolean;
   /** Adds extra spacing at the bottom if true. */
   spacingBottom?: boolean;
   /**
@@ -30,6 +32,7 @@ function ProseList({
   items,
   ordered = false,
   dense = false,
+  spacingTop = false,
   spacingBottom = false,
   indentLevel = 1,
   options = {},
@@ -57,6 +60,7 @@ function ProseList({
       )}
       <StyledList
         dense={dense}
+        spacingTop={spacingTop}
         spacingBottom={spacingBottom}
         ordered={ordered}
         component={listComponent}
@@ -82,6 +86,7 @@ export default ProseList;
 
 interface StyledListProps extends BoxProps {
   dense: boolean;
+  spacingTop?: boolean;
   spacingBottom?: boolean;
   ordered: boolean;
   indentLevel?: number;
@@ -106,6 +111,7 @@ const getPaletteColor = (theme: any, color: string) => {
 const StyledList = styled(Box, {
   shouldForwardProp: (prop) =>
     prop !== 'dense' &&
+    prop !== 'spacingTop' &&
     prop !== 'spacingBottom' &&
     prop !== 'ordered' &&
     prop !== 'indentLevel' &&
@@ -113,15 +119,21 @@ const StyledList = styled(Box, {
 })<StyledListProps>(({
   theme,
   dense = false,
-  spacingBottom,
+  spacingTop = false,
+  spacingBottom = false,
   ordered,
   indentLevel = 1,
   color = 'primary.main',
 }) => {
+  const paddingTopStyle = spacingTop ? { paddingTop: theme.spacing(2) } : {};
+  const paddingBottomStyle = spacingBottom ? { paddingBottom: theme.spacing(2) } : {};
+
   return {
     margin: 0,
     paddingLeft: theme.spacing(1 + indentLevel * 2),
     listStyleType: ordered ? 'decimal' : 'disc',
+    ...paddingTopStyle,
+    ...paddingBottomStyle,
     '& li': {
       marginBottom: theme.spacing(1),
       '&: :marker': {

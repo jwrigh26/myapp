@@ -2,6 +2,18 @@ import React, { createContext, useContext, useMemo } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // Define breakpoint keys that match MUI
+/** 
+values: {
+        xs: 0,
+        mobile: 375,
+        mobileLg: 414,
+        sm: 600,
+        tablet: 720,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+      },
+*/
 export type BreakpointKey =
   | 'xs'
   | 'mobile'

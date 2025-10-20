@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { createFileRoute } from '@tanstack/react-router';
 import { Spacer } from '@/components/Spacer';
-import Stack from '@mui/material/Stack';
+import { CompendiumButton } from '@/features/learn';
+import { Invariant } from '@/features/learn/notes';
 import PageLayout from '@/layout/PageLayout';
 import IntroBlock from '@/components/IntroBlock';
 import NoteBlock from '@/components/NoteBlock';
@@ -11,6 +13,8 @@ import CodeBlock from '@/components/CodeBlock';
 import CodeAnswer from '@/components/CodeAnswer';
 import Typography from '@mui/material/Typography';
 import Arrow from '@/components/Arrow';
+import ReferenceLink from '@/components/ReferenceLink';
+import ProseList from '@/components/ProseList';
 
 export const Route = createFileRoute('/learn/dsa/binary-search/')({
   component: DsaHelloWorld,
@@ -32,7 +36,16 @@ export const Route = createFileRoute('/learn/dsa/binary-search/')({
 const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
+// Curried function to create a setter for a ref
+const createCompendiumTitleRefSetter =
+  (ref: React.MutableRefObject<string>) => (title: string) => {
+    ref.current = title;
+  };
+
 function DsaHelloWorld() {
+  const compendiumTitleRef = useRef<string>('');
+  const setCompendiumTitle = createCompendiumTitleRefSetter(compendiumTitleRef);
+
   return (
     <PageLayout>
       <TitleBlock
@@ -109,7 +122,10 @@ print(solution.binary_search(arr, target)) #3`}
         Given a sorted array, find the index of a target value,{' '}
         <i>uisng the new binary search</i>.
       </ProseBlock>
-      <CodeBlock border language="python" code={`from typing import List, Tuple, Callable
+      <CodeBlock
+        border
+        language="python"
+        code={`from typing import List, Tuple, Callable
 
 # Binary Search: New Way
 class Solution:
@@ -140,7 +156,8 @@ def is_before(x):
 
 solution = Solution()
 print(solution.binary_search(arr, is_before))
-        `} />
+        `}
+      />
       <Spacer size={4} />
       <CodeAnswer subtitle="Answer">
         <Typography variant="body1" gutterBottom>
@@ -148,12 +165,50 @@ print(solution.binary_search(arr, is_before))
         </Typography>
         <Spacer size={2} />
         <Typography variant="body2" gutterBottom>
-          • <code>left index = 2</code><Arrow/>Last <code>True</code> index (value <code>4</code> is less than <code>6</code>)
+          • <code>left index = 2</code>
+          <Arrow />
+          Last <code>True</code> index (value <code>4</code> is less than{' '}
+          <code>6</code>)
         </Typography>
         <Typography variant="body2">
-          • <code>right index = 3</code><Arrow />First <code>False</code> index (value <code>6</code> is not less than <code>6</code>)
+          • <code>right index = 3</code>
+          <Arrow />
+          First <code>False</code> index (value <code>6</code> is not less than{' '}
+          <code>6</code>)
         </Typography>
       </CodeAnswer>
+
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock subtitle="Binary Search Transition">
+        Every binary search problem can be thought of as: "Where does the array
+        transition from one condition being true to being false?"
+      </ProseBlock>
+      <ReferenceLink
+        text="Inspired and Learned from Nil Mamano's blog post: Get Binary Search Right Every Time,"
+        url="https://nilmamano.com/blog/binary-search"
+        linkText="Get Binary Search Right Every Time"
+      />
+      <Spacer size={blockSpaceSize} />
+      <ProseList
+        spacingTop
+        subTitle="Example with 1s and 2s"
+        items={[
+          <>
+            <code>Left</code> = last spot that satisfies: <b>"is a 1"</b>.
+          </>,
+          <>
+            <code>Right</code> = first spot that satisfies: <b>"is a 2"</b>.
+          </>,
+          <>
+            <CompendiumButton title="Invariant" content={Invariant}>
+              Invariant
+            </CompendiumButton>
+            : left pointer is always in the "before" region (true side), right
+            pointer is always in the "after" region (false side).
+          </>,
+        ]}
+      />
+      <ProseBlock></ProseBlock>
     </PageLayout>
   );
 }
