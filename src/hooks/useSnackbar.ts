@@ -1,6 +1,5 @@
 import { useSetSnackbarContext } from '@/context/SnackbarContext';
 import { SnackbarOrigin } from '@mui/material/Snackbar';
-import { useCallback } from 'react';
 
 export interface SnackbarOptions {
   anchor?: SnackbarOrigin;
@@ -32,25 +31,22 @@ const defaultDuration = 6000;
 export function useInfoSnackbar() {
   const setSnackbar = useSetSnackbarContext();
 
-  return useCallback(
-    (message: string, options: SnackbarOptions = {}) => {
-      const {
-        anchor = defaultAnchor,
-        duration = defaultDuration,
-        title = 'Info',
-      } = options;
+  return (message: string, options: SnackbarOptions = {}) => {
+    const {
+      anchor = defaultAnchor,
+      duration = defaultDuration,
+      title = 'Info',
+    } = options;
 
-      setSnackbar({
-        id: `info-${message}-${Date.now()}`,
-        anchor,
-        title,
-        duration,
-        message,
-        severity: 'info',
-      });
-    },
-    [setSnackbar]
-  );
+    setSnackbar({
+      id: `info-${message}-${Date.now()}`,
+      anchor,
+      title,
+      duration,
+      message,
+      severity: 'info',
+    });
+  };
 }
 
 /**
@@ -71,25 +67,22 @@ export function useInfoSnackbar() {
 export function useSuccessSnackbar() {
   const setSnackbar = useSetSnackbarContext();
 
-  return useCallback(
-    (message: string, options: SnackbarOptions = {}) => {
-      const {
-        anchor = defaultAnchor,
-        duration = defaultDuration,
-        title = 'Success',
-      } = options;
+  return (message: string, options: SnackbarOptions = {}) => {
+    const {
+      anchor = defaultAnchor,
+      duration = defaultDuration,
+      title = 'Success',
+    } = options;
 
-      setSnackbar({
-        id: `success-${message}-${Date.now()}`,
-        anchor,
-        title,
-        duration,
-        message,
-        severity: 'success',
-      });
-    },
-    [setSnackbar]
-  );
+    setSnackbar({
+      id: `success-${message}-${Date.now()}`,
+      anchor,
+      title,
+      duration,
+      message,
+      severity: 'success',
+    });
+  };
 }
 
 /**
@@ -110,25 +103,22 @@ export function useSuccessSnackbar() {
 export function useErrorSnackbar() {
   const setSnackbar = useSetSnackbarContext();
 
-  return useCallback(
-    (message: string, options: SnackbarOptions = {}) => {
-      const {
-        anchor = defaultAnchor,
-        duration = defaultDuration,
-        title = 'Error',
-      } = options;
+  return (message: string, options: SnackbarOptions = {}) => {
+    const {
+      anchor = defaultAnchor,
+      duration = defaultDuration,
+      title = 'Error',
+    } = options;
 
-      setSnackbar({
-        id: `error-${message}-${Date.now()}`,
-        anchor,
-        title,
-        duration,
-        message,
-        severity: 'error',
-      });
-    },
-    [setSnackbar]
-  );
+    setSnackbar({
+      id: `error-${message}-${Date.now()}`,
+      anchor,
+      title,
+      duration,
+      message,
+      severity: 'error',
+    });
+  };
 }
 
 /**
@@ -149,23 +139,20 @@ export function useErrorSnackbar() {
 export function useWarningSnackbar() {
   const setSnackbar = useSetSnackbarContext();
 
-  return useCallback(
-    (message: string, options: SnackbarOptions = {}) => {
-      const {
-        anchor = defaultAnchor,
-        duration = defaultDuration,
-        title = 'Warning',
-      } = options;
+  return (message: string, options: SnackbarOptions = {}) => {
+    const {
+      anchor = defaultAnchor,
+      duration = defaultDuration,
+      title = 'Warning',
+    } = options;
 
-      setSnackbar({
-        id: `warning-${message}-${Date.now()}`,
-        anchor,
-        title,
-        duration,
-        message,
-        severity: 'warning',
-      });
-    },
-    [setSnackbar]
-  );
+    setSnackbar({
+      id: `warning-${message}-${Date.now()}`,
+      anchor,
+      title,
+      duration,
+      message,
+      severity: 'warning',
+    });
+  };
 }

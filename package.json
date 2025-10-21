@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "start": "vite --port=3001",
-    "build": "vite build",
-    "build:prod": "vite build --mode production",
+    "start": "npm run build && vite --port=3001",
+    "build": "npm run images:generate && npm run content:generate && vite build",
+    "build:prod": "npm run images:generate && npm run content:generate && vite build --mode production",
     "serve": "vite preview",
     "test": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "images:generate": "node scripts/generate-image-registry.js",
+    "content:generate": "node scripts/build-content-registry.js",
     "firebase:emulate": "firebase emulators:start --only hosting",
     "firebase:emulate:prod": "npm run build:prod && firebase emulators:start --only hosting",
     "firebase:deploy": "npm run build && firebase deploy --only hosting",
@@ -21,10 +23,12 @@
   "devDependencies": {
     "@tanstack/router-devtools": "^1.111.7",
     "@tanstack/router-plugin": "^1.111.7",
+    "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.13.5",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@types/react-katex": "^3.0.4",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
     "@vitejs/plugin-react": "^4.3.2",
@@ -52,6 +56,7 @@
     "react-dnd-preview": "^9.0.0",
     "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "^18.3.1",
+    "react-katex": "^3.1.0",
     "react-transition-group": "^4.4.5"
   }
 }

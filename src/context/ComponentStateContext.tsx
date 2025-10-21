@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useMemo,
-  useReducer,
-} from 'react';
+import { createContext, ReactNode, useContext, useReducer } from 'react';
 
 export interface ComponentState {
   open: Record<string, boolean>;
@@ -69,7 +63,7 @@ export function useComponentStateContext() {
 }
 
 const initialState: ComponentState = {
-  open: {},
+  open: {}, // used for useDrawer, useToggle
   loading: {},
   disabled: {},
   focused: {},
@@ -273,26 +267,23 @@ export function ComponentStateProvider({
     dispatch({ type: 'SET_ITEMS', payload: { id, item } });
   };
 
-  const value = useMemo(
-    () => ({
-      reset,
-      setClose,
-      setOpen,
-      setLoading,
-      setDisabled,
-      setTransitioning,
-      setZIndex,
-      setFocused,
-      toggleOpen,
-      addToTemp,
-      setTemp,
-      addToBag,
-      setBag,
-      setItem,
-      ...state,
-    }),
-    [state]
-  );
+  const value = {
+    reset,
+    setClose,
+    setOpen,
+    setLoading,
+    setDisabled,
+    setTransitioning,
+    setZIndex,
+    setFocused,
+    toggleOpen,
+    addToTemp,
+    setTemp,
+    addToBag,
+    setBag,
+    setItem,
+    ...state,
+  };
 
   return (
     <ComponentStateContext.Provider value={value}>

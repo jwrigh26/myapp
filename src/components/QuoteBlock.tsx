@@ -4,39 +4,57 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
-interface IntroBlockProps {
+interface QuoteBlockProps {
   /** A hook paragraph to engage the reader. */
   hook?: string;
-  /** Custom content can be passed as children instead of hook text. */
-  children?: React.ReactNode;
+  /** Custom content can be passed as children. If string, will be wrapped in Typography. If ReactNode, renders as-is. */
+  children?: React.ReactNode | string;
+  /** Use secondary color instead of primary for the border. */
+  secondary?: boolean;
 }
 
-const IntroBlock: React.FC<IntroBlockProps> = ({ hook, children }) => {
-  return (
-    <StyledIntroBlock>
-      {children ? (
-        <Typography variant="body1" component="p" gutterBottom>
-          {children}
-        </Typography>
-      ) : (
-        hook && (
+const QuoteBlock: React.FC<QuoteBlockProps> = ({ hook, children, secondary = false }) => {
+  const renderContent = () => {
+    if (children) {
+      // If children is a string, wrap it in Typography
+      if (typeof children === 'string') {
+        return (
           <Typography variant="body1" component="p" gutterBottom>
-            {hook}
+            {children}
           </Typography>
-        )
-      )}
-    </StyledIntroBlock>
-  );
+        );
+      }
+      // If children is ReactNode, render as-is
+      return children;
+    }
+
+    // Fallback to hook if no children
+    if (hook) {
+      return (
+        <Typography variant="body1" component="p" gutterBottom>
+          {hook}
+        </Typography>
+      );
+    }
+
+    return null;
+  };
+
+  return <StyledIntroBlock secondary={secondary}>{renderContent()}</StyledIntroBlock>;
 };
 
-export default IntroBlock;
+export default QuoteBlock;
 
-const StyledIntroBlock = styled(Box)<BoxProps>(({ theme }) => ({
+interface StyledIntroBlockProps extends BoxProps {
+  secondary?: boolean;
+}
+
+const StyledIntroBlock = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'secondary',
+})<StyledIntroBlockProps>(({ theme, secondary }) => ({
   padding: theme.spacing(2),
   backgroundColor: theme.palette.background.paper,
-  borderLeft: `4px solid ${theme.palette.primary.main}`,
-  marginLeft: theme.spacing(2),
-  marginRight: theme.spacing(2),
+  borderLeft: `4px solid ${secondary ? theme.palette.secondary.main : theme.palette.primary.main}`,
   marginBottom: theme.spacing(2),
   '& p': {
     fontSize: theme.typography.body1.fontSize,
