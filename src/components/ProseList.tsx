@@ -52,7 +52,7 @@ function ProseList({
           variant="h6"
           component="h6"
           color={color}
-          gutterBottom={false}
+          gutterBottom={true}
           sx={{ ml: 0 }}
         >
           {subTitle}

@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-17T14:30:28.406Z
+// Generated on: 2025-10-21T17:09:23.118Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -26,19 +26,39 @@ export const contentRegistry: Record<string, ContentEntry> = {
     "tags": [],
     "items": [
       {
-        "id": "the-old-way",
-        "title": "The Old Way",
-        "anchor": "the-old-way",
+        "id": "classic-binary-search",
+        "title": "Classic Binary Search",
+        "anchor": "classic-binary-search",
         "level": 1
       },
       {
-        "id": "the-new-way",
-        "title": "The New Way",
-        "anchor": "the-new-way",
+        "id": "the-transition-point",
+        "title": "The Transition Point",
+        "anchor": "the-transition-point",
         "level": 1
+      },
+      {
+        "id": "before-vs-after",
+        "title": "A Recipe for Binary Search",
+        "anchor": "before-vs-after",
+        "level": 1,
+        "children": [
+          {
+            "id": "ingredients",
+            "title": "Ingredients",
+            "anchor": "ingredients",
+            "level": 2
+          },
+          {
+            "id": "instructions",
+            "title": "Instructions",
+            "anchor": "instructions",
+            "level": 2
+          }
+        ]
       }
     ],
-    "lastUpdated": "2025-10-17T14:30:11.664Z",
+    "lastUpdated": "2025-10-21T17:09:08.069Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {

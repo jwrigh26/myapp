@@ -15,6 +15,15 @@ import Typography from '@mui/material/Typography';
 import Arrow from '@/components/Arrow';
 import ReferenceLink from '@/components/ReferenceLink';
 import ProseList from '@/components/ProseList';
+import { styled } from '@mui/material';
+
+const InstructionText = styled(Typography)(({ theme }) => ({
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(2),
+  backgroundColor: theme.palette.background.default,
+  padding: theme.spacing(1),
+  color: theme.palette.text.secondary,
+}));
 
 export const Route = createFileRoute('/learn/dsa/binary-search/')({
   component: DsaHelloWorld,
@@ -50,26 +59,24 @@ function DsaHelloWorld() {
     <PageLayout>
       <TitleBlock
         title="Binary Search"
-        subtitle="A great intro to learning DSA stuff!"
+        subtitle="It's dangerous to go alone. Learn this!"
       />
-
       <IntroBlock>
         Get ready, we're going to learn Binary Search right now.
       </IntroBlock>
-
       {/* The Basics: The Classic Way */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
-        title="The Old Way"
-        subtitle="The classic binary search algorithm"
+        title="Classic Binary Search"
+        subtitle="The binary search algorithm everyone learns."
         anchor
-        id="the-old-way"
+        id="classic-binary-search"
+      />
+      <ProseBlock
+        spacingTop
+        subtitle="Problem"
+        options={{ subtitleColor: 'primary.main' }}
       >
-        Whether you're a true beginner or a vetran of computer science. Becoming
-        a master of binary search is a great thing to learn.
-      </ProseBlock>
-
-      <ProseBlock spacingTop subtitle="Problem">
         Given a sorted array, find the index of a target value.
       </ProseBlock>
       <CodeBlock
@@ -97,37 +104,40 @@ solution = Solution()
 print(solution.binary_search(arr, target)) #3`}
       />
       <Spacer size={4} />
-
       <CodeAnswer subtitle="Answer">
         <Typography variant="body1">
-          The algorithm found target 6 at index <code>3</code>.
+          The function found target 6 at index <code>3</code>.
         </Typography>
       </CodeAnswer>
-
       {/* The New way of Solving Binary Search */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
-        title="The New Way"
-        subtitle="You've learned the classic way, now learn the better way!"
+        title="The Transition Point"
+        subtitle="Nil Mamao's recipe for cracking binary search."
         anchor
-        id="the-new-way"
+        id="the-transition-point"
+      />
+      <ReferenceLink
+        text="Nil Mamano's blog post: Get Binary Search Right Every Time,"
+        url="https://nilmamano.com/blog/binary-search"
+        linkText="Get Binary Search Right Every Time"
+      />
+      <ProseBlock
+        spacingTop
+        // title="Problem"
+        // options={{ titleVariant: "h6" }}
+        subtitle="Problem"
+        options={{ subtitleColor: 'primary.main' }}
       >
-        Every binary search problem can be though of as:
-      </ProseBlock>
-      <QuoteBlock>
-        "Where does the array transition from one condition being{' '}
-        <code>true</code> to being <code>false</code>?"
-      </QuoteBlock>
-      <ProseBlock spacingTop subtitle="Problem">
-        Given a sorted array, find the index of a target value,{' '}
-        <i>uisng the new binary search</i>.
+        Given a sorted array, find the index of a target value, using the
+        transition point recipe.
       </ProseBlock>
       <CodeBlock
         border
         language="python"
         code={`from typing import List, Tuple, Callable
 
-# Binary Search: New Way
+# Binary Search: The Transition Point Recipe
 class Solution:
     def binary_search(self, arr: List[int], is_before: Callable[[int], bool]) -> Tuple[int, int]:
         # Edge case: if the array is empty, return None
@@ -147,7 +157,6 @@ class Solution:
         # At this point: left is the last True, right is the first False
         return left, right
 
-# New Binary Search
 target = 6
 arr = [1, 2, 4, 6, 8, 9]
 
@@ -155,7 +164,7 @@ def is_before(x):
     return x < target
 
 solution = Solution()
-print(solution.binary_search(arr, is_before))
+print(solution.binary_search(arr, is_before)) # (2,3)
         `}
       />
       <Spacer size={4} />
@@ -177,38 +186,153 @@ print(solution.binary_search(arr, is_before))
           <code>6</code>)
         </Typography>
       </CodeAnswer>
-
-      <Spacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Binary Search Transition">
-        Every binary search problem can be thought of as: "Where does the array
-        transition from one condition being true to being false?"
+      <Spacer size={sectionSpaceSize} />
+      <ProseBlock
+        title="A Recipe for Binary Search"
+        subtitle="Where does the array transition from being true to being false?"
+        anchor
+        id="before-vs-after"
+      >
+        By asking ourselves where an array goes from being{' '}
+        <strong>truthy</strong> to <strong>falsey</strong>, we can form a{' '}
+        <CompendiumButton title="Predicate" content={Invariant}>
+          predicate
+        </CompendiumButton>
+        .
       </ProseBlock>
-      <ReferenceLink
-        text="Inspired and Learned from Nil Mamano's blog post: Get Binary Search Right Every Time,"
-        url="https://nilmamano.com/blog/binary-search"
-        linkText="Get Binary Search Right Every Time"
-      />
-      <Spacer size={blockSpaceSize} />
-      <ProseList
+      <ProseBlock>
+        The transition point recipe's predicate can be defined as the function:{' '}
+        <code>is_before(x)</code>. By using this function, we can split our
+        search range into two subarrays: The "before" and "after" regions.
+      </ProseBlock>
+      <ProseBlock>
+        This is done by having <code>is_before(x)</code> take an element from
+        our main array and return a <code>boolean</code> value indicating
+        whether the element comes before the <code>target</code> value.
+      </ProseBlock>
+      <ProseBlock>
+        Based on the <code>boolean</code> value being either{' '}
+        <strong>True</strong> or <strong>False</strong>, we update our{' '}
+        <span className="name">left</span> and{' '}
+        <span className="name-alt">right</span> pointers.
+      </ProseBlock>
+      <ProseBlock
         spacingTop
-        subTitle="Example with 1s and 2s"
+        subtitle="Ingredients"
+        anchor
+        id="ingredients"
+        options={{ subtitleColor: 'primary.main' }}
+      >
+        A list of key items to remember for binary search:
+      </ProseBlock>
+      <ProseList
         items={[
           <>
-            <code>Left</code> = last spot that satisfies: <b>"is a 1"</b>.
+            The input: <code>array</code>{' '}
+            <InstructionText>
+              The sorted list that the entire binary search depends on.
+            </InstructionText>
           </>,
           <>
-            <code>Right</code> = first spot that satisfies: <b>"is a 2"</b>.
+            The predicate: <code>is_before(x)</code>{' '}
+            <InstructionText variant="body2">
+              Defines the rule that splits the array into the "before" and
+              "after" regions.
+            </InstructionText>
+          </>,
+          <>
+            Left pointer: <code>-1</code>{' '}
+            <InstructionText variant="body2">
+              Starts before the array, always in the "before" region.
+            </InstructionText>
+          </>,
+          <>
+            Right pointer: <code>len(arr)</code>{' '}
+            <InstructionText variant="body2">
+              Starts just past the end of the array, always in the "after"
+              region.
+            </InstructionText>
           </>,
           <>
             <CompendiumButton title="Invariant" content={Invariant}>
               Invariant
-            </CompendiumButton>
-            : left pointer is always in the "before" region (true side), right
-            pointer is always in the "after" region (false side).
+            </CompendiumButton>{' '}
+            <InstructionText variant="body2">
+              The rule that ensures our binary search remains correct at every
+              iteration.
+            </InstructionText>
+          </>,
+          <>
+            The loop condition: <code>while left + 1 &lt; right</code>{' '}
+            <InstructionText variant="body2">
+              The main binary search loop that moves the pointers according to
+              the invariant. The loop stops when <code>left + 1 == right</code>.
+            </InstructionText>
+          </>,
+          <>
+            The output: <code>(left, right)</code>{' '}
+            <InstructionText variant="body2">
+              <code>left</code> will be the last <strong>True</strong> value,
+              and <code>right</code> will be the first <strong>False</strong>{' '}
+              value.
+            </InstructionText>
           </>,
         ]}
       />
-      <ProseBlock></ProseBlock>
+      <ProseBlock
+        spacingTop
+        subtitle="Instructions"
+        anchor
+        id="instructions"
+        options={{ subtitleColor: 'primary.main' }}
+      >
+        The goal is to perform a reduction with code, just like you would in
+        cooking:
+      </ProseBlock>
+      <ProseList
+        ordered
+        items={[
+          <>
+            Start by guarding against edge cases.
+            <ProseList
+              spacingTop
+              items={[
+                <>Empty Array</>,
+                <>Target not defined</>,
+                <>Every value is the same</>,
+              ]}
+            />
+          </>,
+          <>
+            Set both pointers: <code>left = -1, right = len(arr)</code>.
+          </>,
+          <>
+            Define the main loop's condition: <code>left + 1 &lt; right</code>.
+          </>,
+          <>
+            Make sure the <strong>invariant</strong> keeps the left side{' '}
+            <strong>True</strong> and the right side <strong>False</strong>.
+          </>,
+        ]}
+      />
+      <ProseBlock spacingTop>
+        The transition point recipe doesn't require an extensive amount of
+        memorization.
+      </ProseBlock>{' '}
+      <ProseBlock>
+        By following it we can be confident that at the end, <code>left</code>{' '}
+        will be the last <strong>Truthy</strong> and <code>right</code> will be
+        the first <strong>Falsey</strong> value.
+      </ProseBlock>
+      <Spacer size={2} />
+      <ProseBlock
+        subtitle="Bonus"
+        options={{ subtitleColor: 'secondary.main' }}
+      >
+        The recipe also comes pre-baked to prevent "off-by-one" errors. This
+        means we never have to worry about out-of-bounds issues.{' '}
+        <span className="bold-alt">Nice!</span>
+      </ProseBlock>
     </PageLayout>
   );
 }
