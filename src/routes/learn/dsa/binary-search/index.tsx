@@ -2,9 +2,11 @@ import { useRef } from 'react';
 import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { createFileRoute } from '@tanstack/react-router';
+import Icon from '@/components/Icon';
 import { Spacer } from '@/components/Spacer';
 import { CompendiumButton } from '@/features/learn';
-import { Invariant } from '@/features/learn/notes';
+import { Invariant, Predicate, Sentinel } from '@/features/learn/notes';
+import { MathInline } from '@/components/MathBlock';
 import PageLayout from '@/layout/PageLayout';
 import IntroBlock from '@/components/IntroBlock';
 import NoteBlock from '@/components/NoteBlock';
@@ -16,6 +18,7 @@ import Arrow from '@/components/Arrow';
 import ReferenceLink from '@/components/ReferenceLink';
 import ProseList from '@/components/ProseList';
 import { styled } from '@mui/material';
+import { mdiRabbit } from '@mdi/js';
 
 const InstructionText = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(1),
@@ -62,7 +65,11 @@ function DsaHelloWorld() {
         subtitle="It's dangerous to go alone. Learn this!"
       />
       <IntroBlock>
-        Get ready, we're going to learn Binary Search right now.
+        Binary search is a great starting point for learning about data
+        structures and algorithms. It helps you start thinking about reasoning
+        and correctness, and it introduces strategies like{' '}
+        <strong>divide and conquer</strong> and <strong>reduction</strong> to
+        solve problems in <MathInline math="O(\log n)" padded /> time.
       </IntroBlock>
       {/* The Basics: The Classic Way */}
       <Spacer size={sectionSpaceSize} />
@@ -103,7 +110,7 @@ target = 6
 solution = Solution()
 print(solution.binary_search(arr, target)) #3`}
       />
-      <Spacer size={4} />
+      <Spacer size={2} />
       <CodeAnswer subtitle="Answer">
         <Typography variant="body1">
           The function found target 6 at index <code>3</code>.
@@ -122,8 +129,9 @@ print(solution.binary_search(arr, target)) #3`}
         url="https://nilmamano.com/blog/binary-search"
         linkText="Get Binary Search Right Every Time"
       />
+
+      <Spacer size={6} />
       <ProseBlock
-        spacingTop
         // title="Problem"
         // options={{ titleVariant: "h6" }}
         subtitle="Problem"
@@ -167,7 +175,7 @@ solution = Solution()
 print(solution.binary_search(arr, is_before)) # (2,3)
         `}
       />
-      <Spacer size={4} />
+      <Spacer size={2} />
       <CodeAnswer subtitle="Answer">
         <Typography variant="body1" gutterBottom>
           The function returns a tuple: <code>(2, 3)</code>
@@ -186,16 +194,18 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           <code>6</code>)
         </Typography>
       </CodeAnswer>
+      {/* RECIPE FOR BINARY SEARCH */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
         title="A Recipe for Binary Search"
         subtitle="Where does the array transition from being true to being false?"
         anchor
         id="before-vs-after"
-      >
+      />
+      <ProseBlock spacingTop>
         By asking ourselves where an array goes from being{' '}
         <strong>truthy</strong> to <strong>falsey</strong>, we can form a{' '}
-        <CompendiumButton title="Predicate" content={Invariant}>
+        <CompendiumButton title="Predicate" content={Predicate}>
           predicate
         </CompendiumButton>
         .
@@ -216,8 +226,10 @@ print(solution.binary_search(arr, is_before)) # (2,3)
         <span className="name">left</span> and{' '}
         <span className="name-alt">right</span> pointers.
       </ProseBlock>
+
+      {/* INGREDIENTS */}
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
-        spacingTop
         subtitle="Ingredients"
         anchor
         id="ingredients"
@@ -234,7 +246,10 @@ print(solution.binary_search(arr, is_before)) # (2,3)
             </InstructionText>
           </>,
           <>
-            The predicate: <code>is_before(x)</code>{' '}
+            <CompendiumButton title="Predicate" content={Predicate}>
+              The Predicate
+            </CompendiumButton>
+            : <code>is_before(x)</code>{' '}
             <InstructionText variant="body2">
               Defines the rule that splits the array into the "before" and
               "after" regions.
@@ -255,7 +270,7 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           </>,
           <>
             <CompendiumButton title="Invariant" content={Invariant}>
-              Invariant
+              The Invariant
             </CompendiumButton>{' '}
             <InstructionText variant="body2">
               The rule that ensures our binary search remains correct at every
@@ -279,15 +294,29 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           </>,
         ]}
       />
+      <Spacer size={2} />
+      <NoteBlock title="Note">
+        The recipe also comes pre-baked to prevent "off-by-one" errors. This
+        means we never have to worry about out-of-bounds issues.{' '}
+        <span className="bold-alt">Nice!</span>
+        <Spacer size={1} />
+        This is possible because we define the left and right pointer to use{' '}
+        <CompendiumButton title="Sentinels" content={Sentinel}>
+          sentinels
+        </CompendiumButton>
+        .
+      </NoteBlock>
+
+      {/* INSTRUCTIONS */}
+      <Spacer size={blockSpaceSize} />
       <ProseBlock
-        spacingTop
         subtitle="Instructions"
         anchor
         id="instructions"
         options={{ subtitleColor: 'primary.main' }}
       >
         The goal is to perform a reduction with code, just like you would in
-        cooking:
+        cooking when making a reduction sauce:
       </ProseBlock>
       <ProseList
         ordered
@@ -315,24 +344,68 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           </>,
         ]}
       />
+
+      {/* Not sure we're keeping this stuff */}
       <ProseBlock spacingTop>
         The transition point recipe doesn't require an extensive amount of
-        memorization.
-      </ProseBlock>{' '}
-      <ProseBlock>
-        By following it we can be confident that at the end, <code>left</code>{' '}
-        will be the last <strong>Truthy</strong> and <code>right</code> will be
-        the first <strong>Falsey</strong> value.
+        memorization. By following it we can be confident that at the end:
       </ProseBlock>
-      <Spacer size={2} />
+      <ProseList
+        items={[
+          <>
+            <code>left</code> will be the last <strong>Truthy</strong>
+          </>,
+          <>
+            <code>right</code> will be the first <strong>Falsey</strong> value.
+          </>,
+        ]}
+      />
+      <Spacer size={sectionSpaceSize} />
       <ProseBlock
-        subtitle="Bonus"
-        options={{ subtitleColor: 'secondary.main' }}
+        title="The Walkthrough"
+        subtitle="Solving binary search using the transition point recipe"
+        anchor
+        id="walkthrough"
+      />
+
+      <ProseBlock spacingTop>
+        Ok, we now can solve the transition problem by ensuring that{' '}
+        <code>left</code> is <strong>True</strong> and <code>right</code> is{' '}
+        <strong>False</strong>, but just in Nil Mamano's article, how does this
+        help us solve other binary search problems?
+      </ProseBlock>
+      <ProseBlock subtitle="Nil Mamano states:" spacingTop />
+      <QuoteBlock>
+        The idea is to come up with a (problem-specific) predicate, like{' '}
+        <code>&lt; target</code>, <code>&lt;= target</code>, or{' '}
+        <code>x % 2 == 0</code>, which splits the search range into two regions,
+        the "before" region and the "after" region.
+      </QuoteBlock>
+      <ProseBlock spacingTop>
+        By defining a prediate that correctly splits our search range, we can
+        rely on checking the result of the predicate instead of doing things
+        "old school" and checking boolean values directly.
+      </ProseBlock>
+      <ProseBlock>
+        This means the only real challenge then is choosing the right transition
+        point.
+      </ProseBlock>
+
+      {/* The Walk through begins here */}
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock
+        subtitle="Find the Honey Bunny"
+        anchor
+        id="honey-bunny"
+        options={{ subtitleColor: 'primary.main' }}
       >
-        The recipe also comes pre-baked to prevent "off-by-one" errors. This
-        means we never have to worry about out-of-bounds issues.{' '}
-        <span className="bold-alt">Nice!</span>
+        Let's explore how we can apply this knowledge with a basic version of binary search using <Icon path={mdiRabbit} sx={{ display: 'inline-block', position: 'relative', top: 4 }} /> bunnies instead of numbers.
       </ProseBlock>
     </PageLayout>
   );
 }
+
+/**
+ * Make predicate and sentinent vocab pages
+ * Make a Points to remember the Reduce the sauce! aka Reduction
+ */

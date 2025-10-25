@@ -88,9 +88,9 @@ const ProseBlock = React.memo(
           <Typography
             variant={subtitleVariant}
             component={subtitleComponent}
-            gutterBottom
             color={subtitleColor || "text.secondary"}
             className={!title && anchor ? 'anchor-title' : undefined}
+            gutterBottom
           >
             {subtitle}
           </Typography>
