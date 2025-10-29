@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-21T17:09:23.118Z
+// Generated on: 2025-10-29T05:32:52.734Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -56,9 +56,29 @@ export const contentRegistry: Record<string, ContentEntry> = {
             "level": 2
           }
         ]
+      },
+      {
+        "id": "walkthrough",
+        "title": "The Walkthrough",
+        "anchor": "walkthrough",
+        "level": 1,
+        "children": [
+          {
+            "id": "honey-bunny",
+            "title": "Find the Honey Bunny",
+            "anchor": "honey-bunny",
+            "level": 2
+          },
+          {
+            "id": "honey-bunny-predicate",
+            "title": "The Predicate",
+            "anchor": "honey-bunny-predicate",
+            "level": 2
+          }
+        ]
       }
     ],
-    "lastUpdated": "2025-10-21T17:09:08.069Z",
+    "lastUpdated": "2025-10-29T05:32:42.021Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {
