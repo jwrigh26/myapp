@@ -7,6 +7,7 @@ import { Spacer } from '@/components/Spacer';
 import { CompendiumButton } from '@/features/learn';
 import { Invariant, Predicate, Sentinel } from '@/features/learn/notes';
 import { MathInline } from '@/components/MathBlock';
+import AnchorLink from '@/components/AnchorLink';
 import PageLayout from '@/layout/PageLayout';
 import IntroBlock from '@/components/IntroBlock';
 import NoteBlock from '@/components/NoteBlock';
@@ -45,6 +46,7 @@ export const Route = createFileRoute('/learn/dsa/binary-search/')({
   }),
 });
 
+const introSpaceSize = 8;
 const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 const chunkSpaceSize = 4;
@@ -72,8 +74,11 @@ function DsaHelloWorld() {
         <strong>divide and conquer</strong> and <strong>reduction</strong> to
         solve problems in <MathInline math="O(\log n)" padded /> time.
       </IntroBlock>
-      {/* The Basics: The Classic Way */}
-      <Spacer size={sectionSpaceSize} />
+
+      {/* ============================================
+          CLASSIC BINARY SEARCH
+          ============================================ */}
+      <Spacer size={introSpaceSize} />
       <ProseBlock
         title="Classic Binary Search"
         subtitle="The binary search algorithm everyone learns."
@@ -117,7 +122,10 @@ print(solution.binary_search(arr, target)) #3`}
           The function found target 6 at index <code>3</code>.
         </Typography>
       </CodeAnswer>
-      {/* The New way of Solving Binary Search */}
+
+      {/* ============================================
+          THE TRANSITION POINT
+          ============================================ */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
         title="The Transition Point"
@@ -195,7 +203,10 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           <code>6</code>)
         </Typography>
       </CodeAnswer>
-      {/* RECIPE FOR BINARY SEARCH */}
+
+      {/* ============================================
+          A RECIPE FOR BINARY SEARCH
+          ============================================ */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
         title="A Recipe for Binary Search"
@@ -228,7 +239,9 @@ print(solution.binary_search(arr, is_before)) # (2,3)
         <span className="name-alt">right</span> pointers.
       </ProseBlock>
 
-      {/* INGREDIENTS */}
+      {/* ============================================
+          INGREDIENTS
+          ============================================ */}
       <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Ingredients"
@@ -308,7 +321,9 @@ print(solution.binary_search(arr, is_before)) # (2,3)
         This means we never have to worry about out-of-bounds issues.{' '}
       </NoteBlock>
 
-      {/* INSTRUCTIONS */}
+      {/* ============================================
+          INSTRUCTIONS
+          ============================================ */}
       <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Instructions"
@@ -361,6 +376,10 @@ print(solution.binary_search(arr, is_before)) # (2,3)
           </>,
         ]}
       />
+
+      {/* ============================================
+          THE WALKTHROUGH
+          ============================================ */}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
         title="The Walkthrough"
@@ -392,7 +411,9 @@ print(solution.binary_search(arr, is_before)) # (2,3)
         point.
       </ProseBlock>
 
-      {/* The Walk through begins here */}
+      {/* ============================================
+          FIND THE HONEY BUNNY
+          ============================================ */}
       <Spacer size={blockSpaceSize} />
       <ProseBlock
         subtitle="Find the Honey Bunny"
@@ -455,9 +476,13 @@ print(solution.binary_search(arr, is_before)) # (2,3)
 # BunnyType represents whether a bunny is a normal fluffy bunny or a honey bunny.
 class BunnyType(IntEnum):
     NORMAL = 0
-    HONEY = 1
-
-# Next, we'll create a simple struct-like Bunny class.
+    HONEY = 1`}
+      />
+      <Spacer size={chunkSpaceSize} />
+      <CodeBlock
+        border
+        language="python"
+        code={`# Next, we'll create a simple struct-like Bunny class.
 # We'll include a name variable just for fun visual flavor.
 # The main variable we'll use is 'type'.
 class Bunny:
@@ -465,12 +490,40 @@ class Bunny:
         self.name = "bunny"
         self.type = bunny_type`}
       />
-
       <Spacer size={chunkSpaceSize} />
 
+      <CodeBlock
+        border
+        language="python"
+        code={`# Bunny.__init__ accepts a type. 
+# This allows us to populate an array of bunnies as follows:
+bunnies = [Bunny(BunnyType.NORMAL) for _ in range(4)] + \
+          [Bunny(BunnyType.HONEY) for _ in range(3)]`}
+      />
+      <Spacer size={chunkSpaceSize} />
+      <ProseList
+        subTitle="Setup Review"
+        items={[
+          <>
+            <code>BunnyType</code>: allows us to search based on a bunny type
+            instead of by number.
+          </>,
+          <>
+            <code>Bunny</code>: A convenient class to organize all bunny logic.
+          </>,
+          <>
+            <code>bunnies</code>: An array of bunnies sorted from{' '}
+            <code>BunnyType.NORMAL</code> to <code>BunnyType.HONEY</code>.
+          </>,
+        ]}
+      />
+      {/* ============================================
+          THE PREDICATE (Honey Bunny)
+          ============================================ */}
+      <Spacer size={blockSpaceSize} />
+
       <ProseBlock
-        spacingTop
-        subtitle="The Predicate"
+        subtitle="Predicate"
         anchor
         id="honey-bunny-predicate"
         options={{ subtitleColor: 'primary.main', subtitleVariant: 'h5' }}
@@ -492,8 +545,11 @@ def is_before(x: BunnyType):
       />
 
       <Spacer size={chunkSpaceSize} />
-
-      <ProseBlock subtitle="Are We Before Any Honey Bunnies?" spacingTop>
+      <ProseBlock
+        subtitle="Are We Before Any Honey Bunnies?"
+        options={{ subtitleColor: 'primary.main' }}
+        spacingTop
+      >
         The predicate defined as <code>x &lt; BunnyType.HONEY</code> will let
         our binary search find the <strong>transition point</strong>: the index
         where the first honey bunny appears. At the end, our search will return
@@ -512,6 +568,143 @@ def is_before(x: BunnyType):
           </>,
         ]}
       />
+      {/* ============================================
+          The Invariant 
+          ============================================ */}
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock
+        subtitle="Invariant"
+        anchor
+        id="honey-bunny-invariant"
+        options={{ subtitleColor: 'primary.main', subtitleVariant: 'h5' }}
+      >
+        The <strong>invariant</strong> is the same as defined{' '}
+        <AnchorLink
+          to="/learn/dsa/binary-search"
+          anchorId="the-transition-point"
+        >
+          above in the transition point recipe
+        </AnchorLink>
+        :
+      </ProseBlock>
+
+      <CodeBlock
+        border
+        language="python"
+        code={`# Define the invariant
+while left + 1 < right:`}
+      />
+
+      <Spacer size={chunkSpaceSize} />
+      <ProseBlock
+        subtitle="Memorize it!"
+        options={{ subtitleColor: 'primary.main' }}
+      >
+        Commit this invariant to memory.
+      </ProseBlock>
+      <ProseList
+        items={[
+          <>
+            The statement <code>left + 1</code> makes sense because the{' '}
+            <code>left</code> sentinel starts right before the first{' '}
+            <strong>array index</strong> at <code>-1</code>.
+          </>,
+          <>
+            The <code>right</code> sentinel, in contrast, is positioned right
+            after the last <strong>array index</strong> by assigning it to{' '}
+            <code>len(arr)</code>.
+          </>,
+          <>
+            By setting <code>right</code> equal the length of the array, we
+            avoid having to remember whether to add or subtract{' '}
+            <code>
+              <MathInline math="\pm 1" padded />
+            </code>{' '}
+            to prevent out-of-bounds errors.
+          </>,
+        ]}
+      />
+      {/* ============================================
+    The Midpoint
+    ============================================ */}
+      <Spacer size={blockSpaceSize} />
+      <ProseBlock
+        subtitle="Midpoint"
+        anchor
+        id="honey-bunny-midpoint"
+        options={{ subtitleColor: 'primary.main', subtitleVariant: 'h5' }}
+      >
+        The <strong>midpoint</strong> between two indices is key to any binary
+        search recipe.
+      </ProseBlock>
+      <ProseBlock>
+        To find the midpoint, we take the <code>left</code> and{' '}
+        <code>right</code> indices and divide them using integer division.
+      </ProseBlock>
+      <Spacer size={2} />
+      <NoteBlock title="Note:">
+        Integer division means dividing and discarding the decimal part.
+      </NoteBlock>
+      <Spacer size={chunkSpaceSize} />
+      <ProseBlock>
+        Usually, in code this means using something like <code>Math.floor</code>
+        . However, in <span className="bold">Python</span> we use{' '}
+        <code>//</code>.
+      </ProseBlock>
+      <CodeBlock
+        border
+        language="python"
+        code={`# Integer Division:
+mid = (left + right) // 2
+
+# Note: Not required in Python.
+# This version is mathematically equivalent to the above.
+# It prevents integer overflow in languages like C or C++
+# by subtracting instead of adding two very large numbers.
+mid = left + (right - left) // 2
+`}
+      />
+      <Spacer size={chunkSpaceSize} />
+      <ProseBlock
+        subtitle="It's the Average!"
+        options={{ subtitleColor: 'primary.main' }}
+      >
+        When we find the <code>mid</code> by integer division, we're just
+        finding the <strong>average</strong>. This makes sense because the{' '}
+        <strong>average</strong> of two numbers is the halfway point between
+        them.
+      </ProseBlock>
+      <ProseBlock>
+        This works perfectly for binary search because we're literally dividing
+        our search space in half. To do that, we need to know what the middle{' '}
+        <code>target</code> is so we can make decisions.
+      </ProseBlock>
+      <Spacer size={2} />
+      <NoteBlock title="Fun Fact:">
+        If you're wondering, like I was, where this midpoint formula actually
+        comes from, look no further than good old <strong>geometry</strong> and{' '}
+        <strong>number lines</strong> from math class.
+        <Spacer size={2} />
+        In geometry, the midpoint between two points{' '}
+        <MathInline math="(x_{1}, x_{2})" padded /> on a line is{' '}
+        <MathInline math="(x_{1} + x_{2}) \div 2" padded />.
+        <Spacer size={2} />
+        Binary search works the same way, except instead of applying physical
+        coordinates, we use <strong>array indices</strong>.
+      </NoteBlock>
+      {/* ============================================
+          THE Loop (Honey Bunny)
+          ============================================ */}
+      <Spacer size={blockSpaceSize} />
+
+      <ProseBlock
+        subtitle="Loop"
+        anchor
+        id="honey-bunny-loop"
+        options={{ subtitleColor: 'primary.main', subtitleVariant: 'h5' }}
+      >
+        Let's return to the part of the walkthrough where everything gets <strong>looped</strong> in. 
+      </ProseBlock>
     </PageLayout>
   );
 }

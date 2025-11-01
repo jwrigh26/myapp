@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-10-29T05:32:52.734Z
+// Generated on: 2025-11-01T19:57:41.590Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -71,14 +71,32 @@ export const contentRegistry: Record<string, ContentEntry> = {
           },
           {
             "id": "honey-bunny-predicate",
-            "title": "The Predicate",
+            "title": "Predicate",
             "anchor": "honey-bunny-predicate",
+            "level": 2
+          },
+          {
+            "id": "honey-bunny-invariant",
+            "title": "Invariant",
+            "anchor": "honey-bunny-invariant",
+            "level": 2
+          },
+          {
+            "id": "honey-bunny-midpoint",
+            "title": "Midpoint",
+            "anchor": "honey-bunny-midpoint",
+            "level": 2
+          },
+          {
+            "id": "honey-bunny-loop",
+            "title": "Loop",
+            "anchor": "honey-bunny-loop",
             "level": 2
           }
         ]
       }
     ],
-    "lastUpdated": "2025-10-29T05:32:42.021Z",
+    "lastUpdated": "2025-11-01T19:57:39.258Z",
     "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {
