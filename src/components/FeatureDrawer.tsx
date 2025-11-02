@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { MiniVariantDrawer, MiniDrawerHeader } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer, useToggle } from '@/hooks/useContext';
@@ -117,10 +118,23 @@ function DrawerHeader({
   featureName: 'blog' | 'learn';
 }) {
   const theme = useTheme();
-  const router = useRouter();
   const matchRoute = useMatchRoute();
 
-  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
+   const localOpen = useMemo(() => {
+    const storageKey = `mini-variant-${drawerKey}`;
+    try {
+      const stored = localStorage.getItem(storageKey);
+      // Default to true (open) if nothing is stored
+      if (stored === null) {
+        return true;
+      }
+      return JSON.parse(stored) as boolean;
+    } catch {
+      return true;
+    }
+  }, []);
+
+  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, localOpen);
 
   const handleDrawerToggle = () => {
     if (open) {

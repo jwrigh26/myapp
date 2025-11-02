@@ -9,9 +9,8 @@ import Stack from '@mui/material/Stack';
 import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useMatchRoute } from '@tanstack/react-router';
+import { useState, useEffect } from 'react';
 import Icon from './Icon';
-
 
 // ################################################
 // ### Drawer
@@ -69,41 +68,42 @@ export function PermanentDrawer({
 
 export const StyledTemporaryDrawer = styled(Drawer, {
   shouldForwardProp: (prop: string) => prop !== 'customWidth',
-})<{ customWidth?: string | number | [string | number, string | number] }>(
-  ({ theme, customWidth }) => {
-    // Determine mobile and desktop widths
-    let mobileWidth: string | number = '100%';
-    let desktopWidth: string | number = theme.mixins.drawerWidth;
+})<{ customWidth?: string | number | [string | number, string | number] }>(({
+  theme,
+  customWidth,
+}) => {
+  // Determine mobile and desktop widths
+  let mobileWidth: string | number = '100%';
+  let desktopWidth: string | number = theme.mixins.drawerWidth;
 
-    if (customWidth) {
-      if (Array.isArray(customWidth)) {
-        // Tuple: [mobile, desktop]
-        mobileWidth = customWidth[0];
-        desktopWidth = customWidth[1];
-      } else {
-        // Single value: applies to both
-        mobileWidth = customWidth;
-        desktopWidth = customWidth;
-      }
+  if (customWidth) {
+    if (Array.isArray(customWidth)) {
+      // Tuple: [mobile, desktop]
+      mobileWidth = customWidth[0];
+      desktopWidth = customWidth[1];
+    } else {
+      // Single value: applies to both
+      mobileWidth = customWidth;
+      desktopWidth = customWidth;
     }
-
-    return {
-      flexShrink: 0,
-      boxSizing: 'border-box',
-      zIndex: theme.zIndex.drawer + 1,
-      ['& .MuiDrawer-paper']: {
-        overFlowX: 'hidden',
-        height: '100%',
-        width: mobileWidth,
-        display: 'flex',
-        flexDirection: 'column',
-        [theme.breakpoints.up('sm')]: {
-          width: desktopWidth,
-        },
-      },
-    };
   }
-);
+
+  return {
+    flexShrink: 0,
+    boxSizing: 'border-box',
+    zIndex: theme.zIndex.drawer + 1,
+    ['& .MuiDrawer-paper']: {
+      overFlowX: 'hidden',
+      height: '100%',
+      width: mobileWidth,
+      display: 'flex',
+      flexDirection: 'column',
+      [theme.breakpoints.up('sm')]: {
+        width: desktopWidth,
+      },
+    },
+  };
+});
 
 interface TemporaryDrawerProps extends DrawerProps {
   width?: string | number | [string | number, string | number];
@@ -257,18 +257,33 @@ export function MiniVariantDrawer({
   anchor = 'left',
   secondary = false,
 }: MiniVariantDrawerProps) {
-  const theme = useTheme();
-  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, true);
-  const matchRoute = useMatchRoute();
-
-  const handleDrawerToggle = () => {
-    if (open) {
-      closeDrawer();
-    } else {
-      openDrawer();
+  const [localOpen, setLocalOpen] = useState(() => {
+    const storageKey = `mini-variant-${drawerKey}`;
+    try {
+      const stored = localStorage.getItem(storageKey);
+      // Default to true (open) if nothing is stored
+      if (stored === null) {
+        return true;
+      }
+      return JSON.parse(stored) as boolean;
+    } catch {
+      return true;
     }
-  };
+  });
+  const { isOpen: open } = useDrawer(drawerKey, localOpen);
 
+  // Initialize open state from localStorage with lazy initialization
+
+  // Persist open state to localStorage whenever it changes
+  useEffect(() => {
+    const storageKey = `mini-variant-${drawerKey}`;
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(open));
+      setLocalOpen(open);
+    } catch {
+      // Silently fail if localStorage is not available
+    }
+  }, [open, drawerKey]);
 
   // const StyledDrawer = secondary ? StyledMiniSecondaryDrawer : StyledMiniPrimaryDrawer;
   const StyledDrawer = StyledMiniPrimaryDrawer;

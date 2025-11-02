@@ -741,8 +741,8 @@ mid = left + (right - left) // 2
         Let's return to the part of the walkthrough where everything gets{' '}
         <strong>looped</strong> in.
       </ProseBlock>
+      <Spacer size={2} />
 
-      <Spacer size={chunkSpaceSize} />
       <BinarySearchStep0 />
       <BinarySearchStep1 />
       <BinarySearchStep2 />

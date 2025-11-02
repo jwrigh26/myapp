@@ -1,4 +1,5 @@
 import { useComponentStateContext } from '@/context/ComponentStateContext';
+import { set } from 'date-fns';
 import { useLayoutEffect } from 'react';
 
 /**
@@ -25,6 +26,8 @@ export function useDrawer(key: string, defaultOpen: boolean = false) {
   useLayoutEffect(() => {
     if (!(key in open) && defaultOpen) {
       setOpen(key)();
+    } else {
+      setClose(key)();
     }
   }, []); // no dependencies to run only once on mount
 
