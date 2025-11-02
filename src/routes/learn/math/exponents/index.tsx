@@ -23,7 +23,8 @@ export const Route = createFileRoute('/learn/math/exponents/')({
     meta: [
       {
         name: 'description',
-        content: 'Master exponents, roots, fractional exponents, and logarithmic form',
+        content:
+          'Master exponents, roots, fractional exponents, and logarithmic form',
       },
       {
         title: 'Exponents & Roots',
@@ -42,11 +43,11 @@ function MathExponents() {
         title="Exponents & Roots"
         subtitle="Master repeated multiplication, roots, and their relationship"
       />
-      
+
       <IntroBlock>
-        Exponents represent repeated multiplication. Understanding them unlocks algebra, 
-        calculus, and science. This guide will help you master exponents, roots, and their 
-        tricky cousin: fractional exponents.
+        Exponents represent repeated multiplication. Understanding them unlocks
+        algebra, calculus, and science. This guide will help you master
+        exponents, roots, and their tricky cousin: fractional exponents.
       </IntroBlock>
 
       {/* WHAT ARE EXPONENTS SECTION */}
@@ -76,16 +77,16 @@ function MathExponents() {
       <EquationCard
         title="Basic Example"
         subtitle="2 multiplied by itself 3 times"
-        equations={[
-          String.raw`2^3 = 2 \times 2 \times 2 = 8`,
-        ]}
+        equations={[String.raw`2^3 = 2 \times 2 \times 2 = 8`]}
         footer={
           <>
             <Typography variant="body2" gutterBottom>
-              <MathInline math={String.raw`2`} /> is the <strong>base</strong> (the number being multiplied)
+              <MathInline math={String.raw`2`} /> is the <strong>base</strong>{' '}
+              (the number being multiplied)
             </Typography>
             <Typography variant="body2">
-              <MathInline math={String.raw`3`} /> is the <strong>exponent</strong> (how many times to multiply)
+              <MathInline math={String.raw`3`} /> is the{' '}
+              <strong>exponent</strong> (how many times to multiply)
             </Typography>
           </>
         }
@@ -96,13 +97,16 @@ function MathExponents() {
         title="Reading exponents"
         items={[
           <>
-            <MathInline math={String.raw`2^3`} /> <Arrow /> "2 to the 3rd power" or "2 cubed"
+            <MathInline math={String.raw`2^3`} /> <Arrow /> "2 to the 3rd power"
+            or "2 cubed"
           </>,
           <>
-            <MathInline math={String.raw`5^2`} /> <Arrow /> "5 to the 2nd power" or "5 squared"
+            <MathInline math={String.raw`5^2`} /> <Arrow /> "5 to the 2nd power"
+            or "5 squared"
           </>,
           <>
-            <MathInline math={String.raw`10^6`} /> <Arrow /> "10 to the 6th power"
+            <MathInline math={String.raw`10^6`} /> <Arrow /> "10 to the 6th
+            power"
           </>,
         ]}
       />
@@ -132,7 +136,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            <strong>Exception:</strong> <MathInline math={String.raw`0^0`} /> is undefined (mathematicians debate this one!)
+            <strong>Exception:</strong> <MathInline math={String.raw`0^0`} /> is
+            undefined (mathematicians debate this one!)
           </Typography>
         }
       />
@@ -176,7 +181,9 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        These rules work for any base <MathInline math={String.raw`x`} /> (as long as <MathInline math={String.raw`x \neq 0`} />).
+        These rules work for any base <MathInline math={String.raw`x`} /> (as
+        long as <MathInline math={String.raw`x \neq 0`} />
+        ).
       </ProseBlock>
 
       {/* Rule 1: Multiplication */}
@@ -187,7 +194,7 @@ function MathExponents() {
         subtitle="Rule 1: Multiplying Same Base"
         options={{ subtitleVariant: 'h5' }}
       />
-      
+
       <Spacer />
       <QuoteBlock>
         <>
@@ -214,7 +221,10 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Think: <MathInline math={String.raw`(2 \cdot 2 \cdot 2) \times (2 \cdot 2 \cdot 2 \cdot 2) = 2^7`} />
+            Think:{' '}
+            <MathInline
+              math={String.raw`(2 \cdot 2 \cdot 2) \times (2 \cdot 2 \cdot 2 \cdot 2) = 2^7`}
+            />
           </Typography>
         }
       />
@@ -222,7 +232,8 @@ function MathExponents() {
       <Spacer />
       <NoteBlock>
         <Typography variant="body2">
-          <strong>Common Mistake:</strong> Don't multiply the bases! <MathInline math={String.raw`2^3 \cdot 2^4 \neq 4^7`} />
+          <strong>Common Mistake:</strong> Don't multiply the bases!{' '}
+          <MathInline math={String.raw`2^3 \cdot 2^4 \neq 4^7`} />
         </Typography>
       </NoteBlock>
 
@@ -234,7 +245,7 @@ function MathExponents() {
         subtitle="Rule 2: Dividing Same Base"
         options={{ subtitleVariant: 'h5' }}
       />
-      
+
       <Spacer />
       <QuoteBlock>
         <>
@@ -268,7 +279,9 @@ function MathExponents() {
             <strong>Why does this work?</strong>
           </Typography>
           <Typography variant="body2">
-            <MathInline math={String.raw`\frac{5^7}{5^3} = \frac{5 \cdot 5 \cdot 5 \cdot 5 \cdot 5 \cdot 5 \cdot 5}{5 \cdot 5 \cdot 5}`} />
+            <MathInline
+              math={String.raw`\frac{5^7}{5^3} = \frac{5 \cdot 5 \cdot 5 \cdot 5 \cdot 5 \cdot 5 \cdot 5}{5 \cdot 5 \cdot 5}`}
+            />
           </Typography>
           <Typography variant="body2" sx={{ pt: 1 }}>
             Three 5's cancel out, leaving <MathInline math={String.raw`5^4`} />
@@ -284,7 +297,7 @@ function MathExponents() {
         subtitle="Rule 3: Power of a Power"
         options={{ subtitleVariant: 'h5' }}
       />
-      
+
       <Spacer />
       <QuoteBlock>
         <>
@@ -311,7 +324,10 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Think: <MathInline math={String.raw`(3^2)^4 = 3^2 \cdot 3^2 \cdot 3^2 \cdot 3^2 = 3^{2+2+2+2} = 3^8`} />
+            Think:{' '}
+            <MathInline
+              math={String.raw`(3^2)^4 = 3^2 \cdot 3^2 \cdot 3^2 \cdot 3^2 = 3^{2+2+2+2} = 3^8`}
+            />
           </Typography>
         }
       />
@@ -324,7 +340,7 @@ function MathExponents() {
         subtitle="Rule 4: Power of a Product"
         options={{ subtitleVariant: 'h5' }}
       />
-      
+
       <Spacer />
       <QuoteBlock>
         <>
@@ -359,7 +375,7 @@ function MathExponents() {
         subtitle="Rule 5: Power of a Quotient"
         options={{ subtitleVariant: 'h5' }}
       />
-      
+
       <Spacer />
       <QuoteBlock>
         <>
@@ -395,7 +411,8 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        A negative exponent means "reciprocal" (flip the fraction). This is where many people get stuck!
+        A negative exponent means "reciprocal" (flip the fraction). This is
+        where many people get stuck!
       </ProseBlock>
 
       <Spacer />
@@ -423,7 +440,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            <strong>Memory anchor:</strong> Negative exponent = "send to the basement" (denominator)
+            <strong>Memory anchor:</strong> Negative exponent = "send to the
+            basement" (denominator)
           </Typography>
         }
       />
@@ -439,7 +457,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            If it's already in the denominator with negative exponent, flipping moves it up!
+            If it's already in the denominator with negative exponent, flipping
+            moves it up!
           </Typography>
         }
       />
@@ -455,7 +474,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Only the <MathInline math={String.raw`x`} /> moves! The 3 stays where it is.
+            Only the <MathInline math={String.raw`x`} /> moves! The 3 stays
+            where it is.
           </Typography>
         }
       />
@@ -467,7 +487,8 @@ function MathExponents() {
             <strong>Common Mistake:</strong>
           </Typography>
           <Typography variant="body2">
-            <MathInline math={String.raw`2^{-3} \neq -2^3`} /> and <MathInline math={String.raw`2^{-3} \neq -8`} />
+            <MathInline math={String.raw`2^{-3} \neq -2^3`} /> and{' '}
+            <MathInline math={String.raw`2^{-3} \neq -8`} />
           </Typography>
           <Typography variant="body2" sx={{ pt: 1 }}>
             The negative is on the exponent, not the answer!
@@ -485,7 +506,8 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        This is the most confusing topic for most people, but once you get it, everything clicks!
+        This is the most confusing topic for most people, but once you get it,
+        everything clicks!
       </ProseBlock>
 
       <Spacer />
@@ -507,7 +529,8 @@ function MathExponents() {
         title="Understanding the fraction"
         items={[
           <>
-            <strong>Denominator</strong> <Arrow /> which root (square root, cube root, etc.)
+            <strong>Denominator</strong> <Arrow /> which root (square root, cube
+            root, etc.)
           </>,
           <>
             <strong>Numerator</strong> <Arrow /> power to raise the result to
@@ -526,7 +549,9 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            <MathInline math={String.raw`\frac{1}{2}`} /> <Arrow /> square root, <MathInline math={String.raw`\frac{1}{3}`} /> <Arrow /> cube root, <MathInline math={String.raw`\frac{1}{4}`} /> <Arrow /> fourth root
+            <MathInline math={String.raw`\frac{1}{2}`} /> <Arrow /> square root,{' '}
+            <MathInline math={String.raw`\frac{1}{3}`} /> <Arrow /> cube root,{' '}
+            <MathInline math={String.raw`\frac{1}{4}`} /> <Arrow /> fourth root
           </Typography>
         }
       />
@@ -562,7 +587,8 @@ function MathExponents() {
       </QuoteBlock>
 
       <ProseBlock spacingTop>
-        You can do it either way (power then root, or root then power), but <strong>root first</strong> keeps numbers smaller!
+        You can do it either way (power then root, or root then power), but{' '}
+        <strong>root first</strong> keeps numbers smaller!
       </ProseBlock>
 
       <Spacer />
@@ -594,7 +620,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Square first (27 → 729), then take cube root (729 → 9). Same answer, bigger numbers!
+            Square first (27 → 729), then take cube root (729 → 9). Same answer,
+            bigger numbers!
           </Typography>
         }
       />
@@ -603,10 +630,12 @@ function MathExponents() {
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Pro Tip:</strong> Always do root first! Smaller numbers = less chance of error.
+            <strong>Pro Tip:</strong> Always do root first! Smaller numbers =
+            less chance of error.
           </Typography>
           <Typography variant="body2" sx={{ color: 'secondary.main', pt: 1 }}>
-            <MathInline bold math={String.raw`x^{\frac{m}{n}}`} /> <Arrow /> "Root (denominator) first, power (numerator) second"
+            <MathInline bold math={String.raw`x^{\frac{m}{n}}`} /> <Arrow />{' '}
+            "Root (denominator) first, power (numerator) second"
           </Typography>
         </>
       </NoteBlock>
@@ -632,7 +661,8 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        This combines everything: negative exponent + fractional exponent. Handle the fraction first, then flip!
+        This combines everything: negative exponent + fractional exponent.
+        Handle the fraction first, then flip!
       </ProseBlock>
 
       <Spacer />
@@ -662,7 +692,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Handle the fraction first: cube root of 8 = 2, then square = 4, then flip = 1/4
+            Handle the fraction first: cube root of 8 = 2, then square = 4, then
+            flip = 1/4
           </Typography>
         }
       />
@@ -686,7 +717,8 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        When you have a root in the denominator, you usually want to "rationalize" it (get rid of the root).
+        When you have a root in the denominator, you usually want to
+        "rationalize" it (get rid of the root).
       </ProseBlock>
 
       <Spacer />
@@ -700,7 +732,9 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Multiply by <MathInline math={String.raw`\frac{\sqrt{2}}{\sqrt{2}} = 1`} />, which doesn't change the value!
+            Multiply by{' '}
+            <MathInline math={String.raw`\frac{\sqrt{2}}{\sqrt{2}} = 1`} />,
+            which doesn't change the value!
           </Typography>
         }
       />
@@ -728,7 +762,9 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            For cube roots, multiply by <MathInline math={String.raw`\sqrt[3]{4}`} /> to make the denominator <MathInline math={String.raw`\sqrt[3]{8} = 2`} />
+            For cube roots, multiply by{' '}
+            <MathInline math={String.raw`\sqrt[3]{4}`} /> to make the
+            denominator <MathInline math={String.raw`\sqrt[3]{8} = 2`} />
           </Typography>
         }
       />
@@ -743,7 +779,8 @@ function MathExponents() {
       />
 
       <ProseBlock spacingTop>
-        A logarithm answers the question: "What power do I raise the base to, to get this number?"
+        A logarithm answers the question: "What power do I raise the base to, to
+        get this number?"
       </ProseBlock>
 
       <Spacer />
@@ -765,13 +802,16 @@ function MathExponents() {
         title="Parts of a logarithm"
         items={[
           <>
-            <MathInline bold math={String.raw`b`} /> <Arrow /> Base (the number being raised to a power)
+            <MathInline bold math={String.raw`b`} /> <Arrow /> Base (the number
+            being raised to a power)
           </>,
           <>
-            <MathInline bold math={String.raw`a`} /> <Arrow /> Argument (the result we're trying to reach)
+            <MathInline bold math={String.raw`a`} /> <Arrow /> Argument (the
+            result we're trying to reach)
           </>,
           <>
-            <MathInline bold math={String.raw`c`} /> <Arrow /> The answer (the exponent/power)
+            <MathInline bold math={String.raw`c`} /> <Arrow /> The answer (the
+            exponent/power)
           </>,
         ]}
       />
@@ -790,7 +830,8 @@ function MathExponents() {
               Both say: "2 raised to the 4th power equals 16"
             </Typography>
             <Typography variant="body2">
-              Log form isolates the exponent: "2 to <strong>what power</strong> equals 16? Answer: 4"
+              Log form isolates the exponent: "2 to <strong>what power</strong>{' '}
+              equals 16? Answer: 4"
             </Typography>
           </>
         }
@@ -819,7 +860,8 @@ function MathExponents() {
         ]}
         footer={
           <Typography variant="body2">
-            Ask yourself: "4 to what power gives 64?" Answer: 3, because <MathInline math={String.raw`4^3 = 64`} />
+            Ask yourself: "4 to what power gives 64?" Answer: 3, because{' '}
+            <MathInline math={String.raw`4^3 = 64`} />
           </Typography>
         }
       />
@@ -831,34 +873,46 @@ function MathExponents() {
             <strong>Common Logarithms:</strong>
           </Typography>
           <Typography variant="body2">
-            • <MathInline math={String.raw`\log_{10}`} /> (base 10) <Arrow /> Called "common log," written as just <MathInline math={String.raw`\log`} />
+            • <MathInline math={String.raw`\log_{10}`} /> (base 10) <Arrow />{' '}
+            Called "common log," written as just{' '}
+            <MathInline math={String.raw`\log`} />
           </Typography>
           <Typography variant="body2">
-            • <MathInline math={String.raw`\log_e`} /> (base <em>e</em> ≈ 2.718) <Arrow /> Called "natural log," written as <MathInline math={String.raw`\ln`} />
+            • <MathInline math={String.raw`\log_e`} /> (base <em>e</em> ≈ 2.718){' '}
+            <Arrow /> Called "natural log," written as{' '}
+            <MathInline math={String.raw`\ln`} />
           </Typography>
           <Typography variant="body2">
-            • <MathInline math={String.raw`\log_2`} /> (base 2) <Arrow /> Common in computer science
+            • <MathInline math={String.raw`\log_2`} /> (base 2) <Arrow /> Common
+            in computer science
           </Typography>
         </>
       </NoteBlock>
 
       {/* QUICK REFERENCE */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Quick Reference"
-        id="quick-reference"
-      />
+      <ProseBlock anchor title="Quick Reference" id="quick-reference" />
 
       <Spacer />
       <TopicBlock
         title="Exponent Rules Cheat Sheet"
         items={[
-          <>Multiply: <MathInline math={String.raw`x^a \cdot x^b = x^{a+b}`} /></>,
-          <>Divide: <MathInline math={String.raw`\frac{x^a}{x^b} = x^{a-b}`} /></>,
-          <>Power of power: <MathInline math={String.raw`(x^a)^b = x^{ab}`} /></>,
-          <>Negative: <MathInline math={String.raw`x^{-n} = \frac{1}{x^n}`} /></>,
-          <>Fraction: <MathInline math={String.raw`x^{\frac{m}{n}} = (\sqrt[n]{x})^m`} /></>,
+          <>
+            Multiply: <MathInline math={String.raw`x^a \cdot x^b = x^{a+b}`} />
+          </>,
+          <>
+            Divide: <MathInline math={String.raw`\frac{x^a}{x^b} = x^{a-b}`} />
+          </>,
+          <>
+            Power of power: <MathInline math={String.raw`(x^a)^b = x^{ab}`} />
+          </>,
+          <>
+            Negative: <MathInline math={String.raw`x^{-n} = \frac{1}{x^n}`} />
+          </>,
+          <>
+            Fraction:{' '}
+            <MathInline math={String.raw`x^{\frac{m}{n}} = (\sqrt[n]{x})^m`} />
+          </>,
         ]}
       />
 
@@ -866,10 +920,23 @@ function MathExponents() {
       <TopicBlock
         title="Common Mistakes to Avoid"
         items={[
-          <>❌ <MathInline math={String.raw`x^a \cdot x^b \neq x^{ab}`} /> (Don't multiply exponents when multiplying same base)</>,
-          <>❌ <MathInline math={String.raw`(x+y)^2 \neq x^2 + y^2`} /> (Must use FOIL: <MathInline math={String.raw`(x+y)^2 = x^2 + 2xy + y^2`} />)</>,
-          <>❌ <MathInline math={String.raw`x^{-2} \neq -x^2`} /> (Negative exponent ≠ negative answer)</>,
-          <>❌ <MathInline math={String.raw`\sqrt{x^2 + y^2} \neq x + y`} /> (Can't split the root across addition)</>,
+          <>
+            ❌ <MathInline math={String.raw`x^a \cdot x^b \neq x^{ab}`} />{' '}
+            (Don't multiply exponents when multiplying same base)
+          </>,
+          <>
+            ❌ <MathInline math={String.raw`(x+y)^2 \neq x^2 + y^2`} /> (Must
+            use FOIL:{' '}
+            <MathInline math={String.raw`(x+y)^2 = x^2 + 2xy + y^2`} />)
+          </>,
+          <>
+            ❌ <MathInline math={String.raw`x^{-2} \neq -x^2`} /> (Negative
+            exponent ≠ negative answer)
+          </>,
+          <>
+            ❌ <MathInline math={String.raw`\sqrt{x^2 + y^2} \neq x + y`} />{' '}
+            (Can't split the root across addition)
+          </>,
         ]}
       />
 

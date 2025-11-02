@@ -8,7 +8,7 @@ export const Route = createFileRoute('/learn/dsa/binary-search')({
 function LayoutComponent() {
   // Manually declare tabs with custom labels
   const tabs = [
-    { path: '', label: 'Lesson' },              // index.tsx -> main lesson
+    { path: '', label: 'Lesson' }, // index.tsx -> main lesson
     // { path: 'problems', label: 'Problems'},
   ];
 

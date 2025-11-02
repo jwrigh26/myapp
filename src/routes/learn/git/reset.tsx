@@ -42,10 +42,10 @@ function ResetComponent() {
       />
 
       <IntroBlock>
-        Git reset and git stash are powerful tools for managing uncommitted work.
-        Reset moves your branch pointer and optionally changes your working
-        directory. Stash temporarily saves uncommitted changes so you can work on
-        something else and restore them later.
+        Git reset and git stash are powerful tools for managing uncommitted
+        work. Reset moves your branch pointer and optionally changes your
+        working directory. Stash temporarily saves uncommitted changes so you
+        can work on something else and restore them later.
       </IntroBlock>
 
       {/* GIT RESET MODES */}
@@ -58,9 +58,9 @@ function ResetComponent() {
       />
 
       <ProseBlock spacingTop>
-        Git reset has three modes that control what happens to your staged changes
-        and working directory. Understanding the difference is crucial to avoid
-        losing work.
+        Git reset has three modes that control what happens to your staged
+        changes and working directory. Understanding the difference is crucial
+        to avoid losing work.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -68,16 +68,16 @@ function ResetComponent() {
         title="The three modes"
         items={[
           <>
-            <strong>--soft</strong> <Arrow /> Moves HEAD, keeps staged changes and
-            working directory
+            <strong>--soft</strong> <Arrow /> Moves HEAD, keeps staged changes
+            and working directory
           </>,
           <>
             <strong>--mixed</strong> (default) <Arrow /> Moves HEAD, unstages
             changes, keeps working directory
           </>,
           <>
-            <strong>--hard</strong> <Arrow /> Moves HEAD, discards staged changes
-            AND working directory
+            <strong>--hard</strong> <Arrow /> Moves HEAD, discards staged
+            changes AND working directory
           </>,
         ]}
       />
@@ -100,7 +100,8 @@ function ResetComponent() {
 
       <ProseBlock spacingTop>
         Soft reset moves your branch pointer back but keeps all your changes
-        staged. Perfect for combining recent commits or changing commit messages.
+        staged. Perfect for combining recent commits or changing commit
+        messages.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -132,7 +133,10 @@ git reset --soft abc1234`}
       </NoteBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Common use case" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Common use case"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -155,9 +159,9 @@ git commit -m "Combined commit with better message"`}
       />
 
       <ProseBlock spacingTop>
-        Mixed reset (the default) moves your branch pointer and unstages changes,
-        but keeps them in your working directory. This is what happens when you
-        use <code>git reset</code> without a flag.
+        Mixed reset (the default) moves your branch pointer and unstages
+        changes, but keeps them in your working directory. This is what happens
+        when you use <code>git reset</code> without a flag.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -179,9 +183,9 @@ git reset abc1234`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>What happens:</strong> Your branch pointer moves back and your
-            staging area is cleared, but your working directory keeps all the
-            changes as unstaged modifications.
+            <strong>What happens:</strong> Your branch pointer moves back and
+            your staging area is cleared, but your working directory keeps all
+            the changes as unstaged modifications.
           </Typography>
           <Typography variant="body2">
             Perfect when you want to reorganize commits or unstage files without
@@ -226,12 +230,15 @@ git reset --hard origin/main`}
       <Alert severity="error">
         <AlertTitle>⚠️ No undo!</AlertTitle>
         <code>git reset --hard</code> permanently deletes uncommitted changes.
-        They cannot be recovered. Only use when you're absolutely certain you want
-        to throw away your work!
+        They cannot be recovered. Only use when you're absolutely certain you
+        want to throw away your work!
       </Alert>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="When to use --hard" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="When to use --hard"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <TopicBlock
@@ -248,8 +255,8 @@ git reset --hard origin/main`}
       <NoteBlock>
         <Typography variant="body2">
           Before using <code>--hard</code>, consider using{' '}
-          <code>git stash</code> instead! It saves your changes temporarily so you
-          can restore them later if needed.
+          <code>git stash</code> instead! It saves your changes temporarily so
+          you can restore them later if needed.
         </Typography>
       </NoteBlock>
 
@@ -264,8 +271,8 @@ git reset --hard origin/main`}
 
       <ProseBlock spacingTop>
         Stash is like putting your current work in a drawer. It saves your
-        uncommitted changes (both staged and unstaged) so you can switch branches
-        or work on something else, then restore them later.
+        uncommitted changes (both staged and unstaged) so you can switch
+        branches or work on something else, then restore them later.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -289,13 +296,20 @@ git stash list`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>What happens:</strong> Git saves your uncommitted changes and
-            reverts your working directory to a clean state (matching HEAD). Your
-            changes are stored in a stash stack.
+            <strong>What happens:</strong> Git saves your uncommitted changes
+            and reverts your working directory to a clean state (matching HEAD).
+            Your changes are stored in a stash stack.
           </Typography>
           <Typography variant="body2">
-            You can have multiple stashes, each identified by <code>stash@{'{'}0{'}'}</code>,{' '}
-            <code>stash@{'{'}1{'}'}</code>, etc.
+            You can have multiple stashes, each identified by{' '}
+            <code>
+              stash@{'{'}0{'}'}
+            </code>
+            ,{' '}
+            <code>
+              stash@{'{'}1{'}'}
+            </code>
+            , etc.
           </Typography>
         </>
       </NoteBlock>
@@ -310,8 +324,8 @@ git stash list`}
       />
 
       <ProseBlock spacingTop>
-        You can restore stashed changes with <code>apply</code> (keeps the stash)
-        or <code>pop</code> (applies and removes the stash).
+        You can restore stashed changes with <code>apply</code> (keeps the
+        stash) or <code>pop</code> (applies and removes the stash).
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
@@ -338,9 +352,9 @@ git stash pop stash@{1}`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>apply vs pop:</strong> <code>apply</code> restores the changes
-            but keeps the stash in the list. <code>pop</code> restores and removes
-            it.
+            <strong>apply vs pop:</strong> <code>apply</code> restores the
+            changes but keeps the stash in the list. <code>pop</code> restores
+            and removes it.
           </Typography>
           <Typography variant="body2">
             Use <code>apply</code> if you want to test the stash on multiple
@@ -387,13 +401,13 @@ git stash drop stash@{0}`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Best practice:</strong> Use <code>git stash show -p</code> to
-            preview what changes will be applied before actually applying the
+            <strong>Best practice:</strong> Use <code>git stash show -p</code>{' '}
+            to preview what changes will be applied before actually applying the
             stash.
           </Typography>
           <Typography variant="body2">
-            If pop conflicts, the stash stays in the list so you can retry or drop
-            it manually.
+            If pop conflicts, the stash stays in the list so you can retry or
+            drop it manually.
           </Typography>
         </>
       </NoteBlock>
@@ -408,8 +422,9 @@ git stash drop stash@{0}`}
       />
 
       <ProseBlock spacingTop>
-        When applying a stash might conflict, creating a branch from the original
-        commit reduces conflicts and gives you a clean workspace to test.
+        When applying a stash might conflict, creating a branch from the
+        original commit reduces conflicts and gives you a clean workspace to
+        test.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -428,9 +443,9 @@ git stash branch feature-recovery stash@{2}`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>What happens:</strong> Git creates a new branch at the commit
-            where the stash was made, checks it out, applies the stash, and drops
-            the stash if successful.
+            <strong>What happens:</strong> Git creates a new branch at the
+            commit where the stash was made, checks it out, applies the stash,
+            and drops the stash if successful.
           </Typography>
           <Typography variant="body2">
             This is the safest way to apply old stashes that might conflict with
@@ -449,8 +464,8 @@ git stash branch feature-recovery stash@{2}`}
       />
 
       <ProseBlock spacingTop>
-        Accidentally popped or dropped a stash? You can often recover it using the
-        reflog!
+        Accidentally popped or dropped a stash? You can often recover it using
+        the reflog!
       </ProseBlock>
 
       <Spacer size={4} />
@@ -519,11 +534,7 @@ git stash clear`}
 
       {/* BEST PRACTICES */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Best Practices"
-        id="best-practices"
-      />
+      <ProseBlock anchor title="Best Practices" id="best-practices" />
 
       <Spacer size={4} />
       <TopicBlock

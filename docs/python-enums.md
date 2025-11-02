@@ -90,12 +90,12 @@ BunnyType.NORMAL == BunnyType.NORMAL       # True ✅
 
 **When to use each:**
 
-| Use `IntEnum` when... | Use `Enum` when... |
-|----------------------|-------------------|
-| You need to compare values (`<`, `>`) | You want type safety |
-| Values represent numeric states/levels | Values are just labels |
+| Use `IntEnum` when...                        | Use `Enum` when...                         |
+| -------------------------------------------- | ------------------------------------------ |
+| You need to compare values (`<`, `>`)        | You want type safety                       |
+| Values represent numeric states/levels       | Values are just labels                     |
 | Working with algorithms (like binary search) | You want to prevent accidental comparisons |
-| Need backward compatibility with integers | Values might change later |
+| Need backward compatibility with integers    | Values might change later                  |
 
 ---
 
@@ -109,7 +109,7 @@ class BunnyType(IntEnum):
     HONEY = 1
 
 # This predicate works because IntEnum allows < comparison
-def is_before(x: BunnyType): 
+def is_before(x: BunnyType):
     return x < BunnyType.HONEY
 
 # Test it
@@ -132,6 +132,7 @@ class BunnyType(IntEnum):
 ```
 
 **Pros:**
+
 - ✅ Clear and explicit
 - ✅ You control the exact values
 - ✅ Easy to understand
@@ -250,14 +251,14 @@ def is_before(bunny: Bunny) -> bool:
 # Binary search
 def find_first_honey_bunny(bunnies: List[Bunny]) -> int:
     left, right = -1, len(bunnies)
-    
+
     while left + 1 < right:
         mid = (left + right) // 2
         if is_before(bunnies[mid]):
             left = mid
         else:
             right = mid
-    
+
     return right  # Index of first honey bunny
 
 # Test it
@@ -328,6 +329,7 @@ class BunnyType(IntEnum):
 ```
 
 **Why it works well:**
+
 1. ✅ Values are explicit and clear (0 and 1)
 2. ✅ `IntEnum` allows comparisons (`<`, `>`, etc.)
 3. ✅ Works great for binary search predicates

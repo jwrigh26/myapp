@@ -44,8 +44,8 @@ function Tagging() {
       <IntroBlock>
         Git tags are like bookmarks for specific points in your repository's
         history. They're typically used to mark release versions (v1.0, v2.0) or
-        important milestones. Unlike branches, tags don't move - they permanently
-        point to a specific commit.
+        important milestones. Unlike branches, tags don't move - they
+        permanently point to a specific commit.
       </IntroBlock>
 
       {/* WHAT ARE TAGS */}
@@ -58,9 +58,9 @@ function Tagging() {
       />
 
       <ProseBlock spacingTop>
-        Tags are references to specific commits in your Git history. Think of them
-        as permanent labels that never change, unlike branch names which move as
-        you make new commits.
+        Tags are references to specific commits in your Git history. Think of
+        them as permanent labels that never change, unlike branch names which
+        move as you make new commits.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -79,9 +79,9 @@ function Tagging() {
       <NoteBlock>
         <Typography variant="body2">
           There are two types of tags: <strong>lightweight</strong> (just a name
-          pointing to a commit) and <strong>annotated</strong> (includes metadata
-          like author, date, and message). For releases, annotated tags are
-          recommended.
+          pointing to a commit) and <strong>annotated</strong> (includes
+          metadata like author, date, and message). For releases, annotated tags
+          are recommended.
         </Typography>
       </NoteBlock>
 
@@ -95,8 +95,9 @@ function Tagging() {
       />
 
       <ProseBlock spacingTop>
-        Lightweight tags are the simplest form - just a name pointing to a commit.
-        They're quick to create and perfect for temporary or personal markers.
+        Lightweight tags are the simplest form - just a name pointing to a
+        commit. They're quick to create and perfect for temporary or personal
+        markers.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -122,8 +123,8 @@ git tag v1.0.0 3d8f5a2b1c9e7f4a6b8d1e2f3a4b5c6d7e8f9a0b`}
             are stored separately from branch names.
           </Typography>
           <Typography variant="body2">
-            If you don't specify a commit hash, the tag is created at your current
-            HEAD position.
+            If you don't specify a commit hash, the tag is created at your
+            current HEAD position.
           </Typography>
         </>
       </NoteBlock>
@@ -138,9 +139,9 @@ git tag v1.0.0 3d8f5a2b1c9e7f4a6b8d1e2f3a4b5c6d7e8f9a0b`}
       />
 
       <ProseBlock spacingTop>
-        Annotated tags include extra information: who created the tag, when it was
-        created, and a message describing the release. This is the recommended
-        approach for production releases.
+        Annotated tags include extra information: who created the tag, when it
+        was created, and a message describing the release. This is the
+        recommended approach for production releases.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -166,8 +167,8 @@ git tag -a v1.5.0 abc1234 -m "Patch release for bug fixes"`}
             commit messages).
           </Typography>
           <Typography variant="body2">
-            Without <code>-m</code>, Git will open your default editor to write a
-            tag message.
+            Without <code>-m</code>, Git will open your default editor to write
+            a tag message.
           </Typography>
         </>
       </NoteBlock>
@@ -176,8 +177,8 @@ git tag -a v1.5.0 abc1234 -m "Patch release for bug fixes"`}
       <Alert severity="info">
         <AlertTitle>Best practice for releases</AlertTitle>
         Always use annotated tags (<code>-a</code>) for official releases. They
-        include metadata that's valuable for tracking who released what and when.
-        Lightweight tags are fine for temporary or personal use.
+        include metadata that's valuable for tracking who released what and
+        when. Lightweight tags are fine for temporary or personal use.
       </Alert>
 
       {/* LISTING TAGS */}
@@ -214,9 +215,9 @@ git show v1.0.0`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>What show-ref --tags does:</strong> It verifies and lists all
-            tags with their full commit hashes. The name "show-ref" means "show
-            references" - tags are a type of Git reference.
+            <strong>What show-ref --tags does:</strong> It verifies and lists
+            all tags with their full commit hashes. The name "show-ref" means
+            "show references" - tags are a type of Git reference.
           </Typography>
           <Typography variant="body2">
             For annotated tags, <code>git show</code> displays the tag metadata
@@ -262,8 +263,8 @@ git push --tags`}
             branch or a tag and pushes accordingly.
           </Typography>
           <Typography variant="body2">
-            Use <code>--tags</code> to push all local tags that don't exist on the
-            remote yet.
+            Use <code>--tags</code> to push all local tags that don't exist on
+            the remote yet.
           </Typography>
         </>
       </NoteBlock>
@@ -271,8 +272,8 @@ git push --tags`}
       <SectionSpacer size={blockSpaceSize} />
       <Alert severity="info">
         <AlertTitle>CI/CD tip</AlertTitle>
-        Many CI/CD systems (GitHub Actions, GitLab CI, etc.) watch for tag pushes
-        to trigger release deployments. Pushing <code>v1.0.0</code> might
+        Many CI/CD systems (GitHub Actions, GitLab CI, etc.) watch for tag
+        pushes to trigger release deployments. Pushing <code>v1.0.0</code> might
         automatically deploy to production!
       </Alert>
 
@@ -286,12 +287,15 @@ git push --tags`}
       />
 
       <ProseBlock spacingTop>
-        Made a mistake? Tagged the wrong commit? You can delete tags both locally
-        and remotely.
+        Made a mistake? Tagged the wrong commit? You can delete tags both
+        locally and remotely.
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Delete local tag" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Delete local tag"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -307,13 +311,16 @@ git tag -d v0.0.9`}
       <Spacer size={4} />
       <NoteBlock>
         <Typography variant="body2">
-          <strong>What -d does:</strong> The <code>-d</code> flag means "delete".
-          This only removes the tag from your local repository.
+          <strong>What -d does:</strong> The <code>-d</code> flag means
+          "delete". This only removes the tag from your local repository.
         </Typography>
       </NoteBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Delete remote tag" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Delete remote tag"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -338,18 +345,17 @@ git push origin :refs/tags/v1.0.0`}
 
       {/* COMMON WORKFLOWS */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Common Tagging Workflows"
-        id="workflows"
-      />
+      <ProseBlock anchor title="Common Tagging Workflows" id="workflows" />
 
       <ProseBlock spacingTop>
         Here are typical workflows for using tags in real projects.
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Release workflow" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Release workflow"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -371,7 +377,10 @@ git push origin v1.2.0
       />
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Fix incorrect tag" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Fix incorrect tag"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -391,7 +400,10 @@ git push origin v1.0.0`}
       />
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Checkout a specific version" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Checkout a specific version"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock

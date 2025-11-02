@@ -22,22 +22,22 @@ export interface AnchorLinkProps extends Omit<LinkProps, 'hash'> {
 /**
  * A styled link component that smoothly scrolls to an anchor on the same page.
  * Uses MUI theme styling and TanStack Router's Link component.
- * 
+ *
  * @example
  * <AnchorLink to="/learn/dsa/binary-search" anchorId="the-transition-point">
  *   See above
  * </AnchorLink>
  */
-export function AnchorLink({ 
-  anchorId, 
-  offset = 0, 
-  children, 
+export function AnchorLink({
+  anchorId,
+  offset = 0,
+  children,
   onClick,
-  ...props 
+  ...props
 }: AnchorLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    
+
     const element = document.getElementById(anchorId);
     if (element) {
       const elementPosition = element.getBoundingClientRect().top;
@@ -45,20 +45,16 @@ export function AnchorLink({
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
-    
+
     // Call the original onClick if provided
     onClick?.(e);
   };
 
   return (
-    <StyledLink 
-      {...props}
-      hash={anchorId}
-      onClick={handleClick}
-    >
+    <StyledLink {...props} hash={anchorId} onClick={handleClick}>
       {children}
     </StyledLink>
   );

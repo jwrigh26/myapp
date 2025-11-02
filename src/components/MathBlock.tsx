@@ -54,11 +54,14 @@ export const MathInline = React.memo(function MathInline({
   // Helper to make math bold appropriately
   const makeBold = (mathStr: string): string => {
     if (!bold) return mathStr;
-    
+
     // If the math contains \text{}, we need special handling for mixed content
     if (mathStr.includes('\\text{')) {
       // For mixed content, wrap everything in \boldsymbol{} but also convert \text{} to \textbf{}
-      const processedMath = mathStr.replace(/\\text\{([^}]+)\}/g, '\\textbf{$1}');
+      const processedMath = mathStr.replace(
+        /\\text\{([^}]+)\}/g,
+        '\\textbf{$1}'
+      );
       return `\\boldsymbol{${processedMath}}`;
     } else {
       // For pure mathematical content, use \boldsymbol{}
@@ -123,7 +126,7 @@ export const MathBlock = React.memo(function MathBlock({
               component="h2"
               color="primary.main"
               className={anchor ? 'anchor-title' : undefined}
-              sx={{ 
+              sx={{
                 fontWeight: 'fontWeightMedium',
                 fontSize: '1.1rem',
                 lineHeight: 1.2,
@@ -254,7 +257,7 @@ export const EquationCard = React.memo(function EquationCard({
 }: EquationCardProps) {
   return (
     <Card
-      variant={outlined ? "outlined" : undefined}
+      variant={outlined ? 'outlined' : undefined}
       sx={{ overflowX: 'auto' }}
       id={id}
       className={anchor && id ? 'anchor-section' : undefined}
@@ -315,7 +318,7 @@ export const ProseMathBlock = React.memo(function ProseMathBlock({
           color="primary.main"
           gutterBottom
           className={anchor ? 'anchor-title' : undefined}
-          sx={{ 
+          sx={{
             fontWeight: 'fontWeightMedium',
             fontSize: '1.1rem',
             lineHeight: 1.2,
@@ -353,8 +356,7 @@ interface BlockRootProps {
 }
 
 const BlockRoot = styled(Box, {
-  shouldForwardProp: (prop) =>
-    prop !== 'align' && prop !== 'backgroundColor',
+  shouldForwardProp: (prop) => prop !== 'align' && prop !== 'backgroundColor',
 })<BlockRootProps>(({ theme, align, backgroundColor }) => {
   const defaultBg =
     backgroundColor ??
@@ -398,7 +400,7 @@ const DenseCardHeader = styled(CardHeader, {
     fontSize: theme.typography.body2.fontSize,
     lineHeight: 1.3,
     marginTop: theme.spacing(0.25),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -419,11 +421,12 @@ export function _DemoExamples() {
         <MathInline math={String.raw`\,\text{m}^2\,`} padded /> for area and
         <MathInline math={String.raw`\,\text{m}\,`} padded /> for length, then
         simplify. Important formulas can be emphasized:
-        <MathInline 
-          bold 
-          math={String.raw`\text{Area} = \text{length} \times \text{width}`} 
-          padded 
-        />.
+        <MathInline
+          bold
+          math={String.raw`\text{Area} = \text{length} \times \text{width}`}
+          padded
+        />
+        .
       </ProseMathBlock>
 
       <EquationCard

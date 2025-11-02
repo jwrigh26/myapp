@@ -16,9 +16,7 @@ import PageLayout from '@/layout/PageLayout';
 const sectionSpaceSize = 12;
 const blockSpaceSize = 8;
 
-export const Route = createFileRoute(
-  '/learn/python/whiteboarding-essentials'
-)({
+export const Route = createFileRoute('/learn/python/whiteboarding-essentials')({
   component: PythonWhiteboardingGuide,
   head: () => ({
     getTitle: () => 'Whiteboarding Essentials',
@@ -834,7 +832,6 @@ visited.add((1, 2))
 print((0, 0) in visited)  # True - O(1) lookup`}
       />
 
-
       <SectionSpacer size={sectionSpaceSize} />
       <ProseBlock
         title="Heaps - Priority Queue Magic"
@@ -1212,7 +1209,8 @@ students.sort(key=lambda x: (x[1], x[0]))  # Grade first, then name`}
         spacingBottom={false}
         spacingTop={true}
       >
-        Type hint functions and lambdas with <span className="code">Callable</span> for better code clarity.
+        Type hint functions and lambdas with{' '}
+        <span className="code">Callable</span> for better code clarity.
       </ProseBlock>
 
       <CodeBlock
@@ -1243,18 +1241,19 @@ print(f"Closure: {closure_func(5)}")  # True`}
 
       <Spacer size={4} />
       <NoteBlock>
-        <strong>Callable Syntax:</strong> <span className="code">Callable[[arg_types...], return_type]</span>
+        <strong>Callable Syntax:</strong>{' '}
+        <span className="code">Callable[[arg_types...], return_type]</span>
         <br />
         <br />
         Examples:
-        <br />
-        • <span className="code">Callable[[int], bool]</span> - takes int, returns bool
-        <br />
-        • <span className="code">Callable[[int, str], float]</span> - takes int and str, returns float
-        <br />
-        • <span className="code">Callable[[], None]</span> - takes no args, returns None
-        <br />
-        • <span className="code">Callable[..., Any]</span> - takes any args, returns any type
+        <br />• <span className="code">Callable[[int], bool]</span> - takes int,
+        returns bool
+        <br />• <span className="code">Callable[[int, str], float]</span> -
+        takes int and str, returns float
+        <br />• <span className="code">Callable[[], None]</span> - takes no
+        args, returns None
+        <br />• <span className="code">Callable[..., Any]</span> - takes any
+        args, returns any type
       </NoteBlock>
 
       <Spacer size={blockSpaceSize} />
@@ -1356,11 +1355,11 @@ print(triple(5))  # 15`}
       <NoteBlock>
         <strong>Lambda Gotcha:</strong> In loops, lambdas capture variables by
         reference, not value. Use default arguments to capture the current
-        value:{' '}<span className="code">lambda x, i=i: x + i</span>
+        value: <span className="code">lambda x, i=i: x + i</span>
       </NoteBlock>
 
       {/* Conclusion Section */}
-        <SectionSpacer />
+      <SectionSpacer />
       <BackdropSection backdrop="primary">
         <Box sx={{ textAlign: 'center', py: 3 }}>
           <Typography variant="h5" component="p" sx={{ fontStyle: 'italic' }}>

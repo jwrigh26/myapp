@@ -3,7 +3,9 @@ import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import CodeBlock from '@/components/CodeBlock';
 
-export const Route = createLazyFileRoute('/learn/math/dividing-fractions/examples')({
+export const Route = createLazyFileRoute(
+  '/learn/math/dividing-fractions/examples'
+)({
   component: MathExamples,
 });
 
@@ -16,8 +18,8 @@ function MathExamples() {
       />
 
       <ProseBlock>
-        Let's explore some practical examples that demonstrate mathematical 
-        concepts in action. These examples will help solidify your understanding 
+        Let's explore some practical examples that demonstrate mathematical
+        concepts in action. These examples will help solidify your understanding
         through hands-on experience.
       </ProseBlock>
 
@@ -27,8 +29,8 @@ function MathExamples() {
       />
 
       <ProseBlock>
-        Compound interest is a perfect example of exponential functions in 
-        real life. Here's how your money can grow over time:
+        Compound interest is a perfect example of exponential functions in real
+        life. Here's how your money can grow over time:
       </ProseBlock>
 
       <CodeBlock
@@ -59,7 +61,7 @@ console.log(\`Interest Earned: $\${result.interestEarned}\`);`}
       />
 
       <ProseBlock>
-        The Fibonacci sequence appears everywhere in nature - from flower petals 
+        The Fibonacci sequence appears everywhere in nature - from flower petals
         to spiral galaxies. Let's implement it recursively and iteratively:
       </ProseBlock>
 
@@ -89,8 +91,8 @@ console.log('First 10 Fibonacci numbers:', fibSequence);
       />
 
       <ProseBlock>
-        Try calculating larger Fibonacci numbers and notice how much faster 
-        the iterative approach becomes compared to the recursive one!
+        Try calculating larger Fibonacci numbers and notice how much faster the
+        iterative approach becomes compared to the recursive one!
       </ProseBlock>
     </>
   );

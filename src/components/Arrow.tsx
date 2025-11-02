@@ -5,7 +5,7 @@ import Icon from './Icon';
 /**
  * Arrow component - displays a styled arrow icon inline with text
  * Uses primary.main color from theme with MDI arrow-right icon
- * 
+ *
  * @example
  * <Typography>
  *   Dividend <Arrow /> the number being divided

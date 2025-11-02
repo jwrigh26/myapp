@@ -42,10 +42,11 @@ function SigmaNotation() {
         title="Sigma Notation (Σ)"
         subtitle="Compact way to write long sums"
       />
-      
+
       <IntroBlock>
-        Sigma notation (also called summation notation) is a shorthand way to write long 
-        addition problems. It's essential for mathematics, statistics, and analyzing algorithms.
+        Sigma notation (also called summation notation) is a shorthand way to
+        write long addition problems. It's essential for mathematics,
+        statistics, and analyzing algorithms.
       </IntroBlock>
 
       {/* WHAT IS SIGMA NOTATION */}
@@ -58,7 +59,8 @@ function SigmaNotation() {
       />
 
       <ProseBlock spacingTop>
-        Instead of writing <MathInline math={String.raw`1 + 2 + 3 + 4 + 5`} />, we can use sigma notation.
+        Instead of writing <MathInline math={String.raw`1 + 2 + 3 + 4 + 5`} />,
+        we can use sigma notation.
       </ProseBlock>
 
       <Spacer />
@@ -80,16 +82,20 @@ function SigmaNotation() {
         title="Parts of sigma notation"
         items={[
           <>
-            <MathInline bold math={String.raw`\sum`} /> <Arrow /> The sigma symbol (Greek letter for "S" = Sum)
+            <MathInline bold math={String.raw`\sum`} /> <Arrow /> The sigma
+            symbol (Greek letter for "S" = Sum)
           </>,
           <>
-            <MathInline bold math={String.raw`i=1`} /> <Arrow /> Starting value (where the index begins)
+            <MathInline bold math={String.raw`i=1`} /> <Arrow /> Starting value
+            (where the index begins)
           </>,
           <>
-            <MathInline bold math={String.raw`5`} /> <Arrow /> Upper limit (where the index stops)
+            <MathInline bold math={String.raw`5`} /> <Arrow /> Upper limit
+            (where the index stops)
           </>,
           <>
-            <MathInline bold math={String.raw`i`} /> <Arrow /> The term (what to add each time)
+            <MathInline bold math={String.raw`i`} /> <Arrow /> The term (what to
+            add each time)
           </>,
         ]}
       />
@@ -97,7 +103,8 @@ function SigmaNotation() {
       <Spacer />
       <NoteBlock>
         <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-          Memory anchor: "Sum from i=1 to 5 of i" = "Add up all values of i from 1 to 5"
+          Memory anchor: "Sum from i=1 to 5 of i" = "Add up all values of i from
+          1 to 5"
         </Typography>
       </NoteBlock>
 
@@ -239,18 +246,10 @@ function SigmaNotation() {
             <Typography variant="body2" gutterBottom>
               <strong>Step by step:</strong>
             </Typography>
-            <Typography variant="body2">
-              • When n=1: 3(1)-1 = 2
-            </Typography>
-            <Typography variant="body2">
-              • When n=2: 3(2)-1 = 5
-            </Typography>
-            <Typography variant="body2">
-              • When n=3: 3(3)-1 = 8
-            </Typography>
-            <Typography variant="body2">
-              • When n=4: 3(4)-1 = 11
-            </Typography>
+            <Typography variant="body2">• When n=1: 3(1)-1 = 2</Typography>
+            <Typography variant="body2">• When n=2: 3(2)-1 = 5</Typography>
+            <Typography variant="body2">• When n=3: 3(3)-1 = 8</Typography>
+            <Typography variant="body2">• When n=4: 3(4)-1 = 11</Typography>
           </>
         }
       />
@@ -267,7 +266,8 @@ function SigmaNotation() {
         ]}
         footer={
           <Typography variant="body2">
-            <strong>k</strong> stays constant; only <strong>n</strong> changes with each term.
+            <strong>k</strong> stays constant; only <strong>n</strong> changes
+            with each term.
           </Typography>
         }
       />
@@ -276,10 +276,12 @@ function SigmaNotation() {
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Pro Tip:</strong> Always substitute the index value into the entire expression.
+            <strong>Pro Tip:</strong> Always substitute the index value into the
+            entire expression.
           </Typography>
           <Typography variant="body2">
-            If the term is <MathInline math={String.raw`3n-1`} />, and n=2, the whole term is 3(2)-1 = 5, not 3n-2.
+            If the term is <MathInline math={String.raw`3n-1`} />, and n=2, the
+            whole term is 3(2)-1 = 5, not 3n-2.
           </Typography>
         </>
       </NoteBlock>
@@ -325,7 +327,8 @@ function SigmaNotation() {
         ]}
         footer={
           <Typography variant="body2">
-            π doesn't change with i, so we can pull it outside and multiply the sum by π at the end.
+            π doesn't change with i, so we can pull it outside and multiply the
+            sum by π at the end.
           </Typography>
         }
       />
@@ -339,7 +342,8 @@ function SigmaNotation() {
         ]}
         footer={
           <Typography variant="body2">
-            When the term is a <strong>pure constant</strong> (no i at all), you just multiply the constant by the number of terms!
+            When the term is a <strong>pure constant</strong> (no i at all), you
+            just multiply the constant by the number of terms!
           </Typography>
         }
       />
@@ -370,7 +374,9 @@ function SigmaNotation() {
               <strong>Example:</strong> Sum from 1 to 100
             </Typography>
             <Typography variant="body2">
-              <MathInline math={String.raw`\sum_{i=1}^{100} i = \frac{100(101)}{2} = \frac{10100}{2} = 5050`} />
+              <MathInline
+                math={String.raw`\sum_{i=1}^{100} i = \frac{100(101)}{2} = \frac{10100}{2} = 5050`}
+              />
             </Typography>
           </>
         }
@@ -392,7 +398,8 @@ function SigmaNotation() {
         ]}
         footer={
           <Typography variant="body2">
-            Fun fact: The sum of the first n cubes equals the square of the sum of the first n numbers!
+            Fun fact: The sum of the first n cubes equals the square of the sum
+            of the first n numbers!
           </Typography>
         }
       />
@@ -400,7 +407,8 @@ function SigmaNotation() {
       <Spacer />
       <NoteBlock>
         <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
-          You don't need to memorize these formulas initially. Understanding how to expand sigma notation is more important!
+          You don't need to memorize these formulas initially. Understanding how
+          to expand sigma notation is more important!
         </Typography>
       </NoteBlock>
 
@@ -414,8 +422,9 @@ function SigmaNotation() {
       />
 
       <ProseBlock spacingTop>
-        When analyzing algorithms, we use sigma notation to count operations. This helps us 
-        understand how long an algorithm takes as input size grows.
+        When analyzing algorithms, we use sigma notation to count operations.
+        This helps us understand how long an algorithm takes as input size
+        grows.
       </ProseBlock>
 
       <Spacer />
@@ -425,7 +434,8 @@ function SigmaNotation() {
             Cost × Count:
           </Typography>
           <Typography variant="body2">
-            Each operation has a <strong>cost</strong> (time it takes), and we count 
+            Each operation has a <strong>cost</strong> (time it takes), and we
+            count
             <strong> how many times</strong> it happens.
           </Typography>
         </>
@@ -436,13 +446,16 @@ function SigmaNotation() {
         title="Common notation in algorithm analysis"
         items={[
           <>
-            <MathInline bold math={String.raw`n`} /> <Arrow /> Size of input (e.g., array length)
+            <MathInline bold math={String.raw`n`} /> <Arrow /> Size of input
+            (e.g., array length)
           </>,
           <>
-            <MathInline bold math={String.raw`c_i`} /> <Arrow /> Cost of operation i (a constant)
+            <MathInline bold math={String.raw`c_i`} /> <Arrow /> Cost of
+            operation i (a constant)
           </>,
           <>
-            <MathInline bold math={String.raw`t_j`} /> <Arrow /> Number of times operation j executes
+            <MathInline bold math={String.raw`t_j`} /> <Arrow /> Number of times
+            operation j executes
           </>,
         ]}
       />
@@ -457,7 +470,8 @@ function SigmaNotation() {
       />
 
       <ProseBlock spacingTop>
-        A simple loop that runs from 1 to n has a pattern we can express with sigma notation.
+        A simple loop that runs from 1 to n has a pattern we can express with
+        sigma notation.
       </ProseBlock>
 
       <Spacer />
@@ -493,7 +507,8 @@ function SigmaNotation() {
         ]}
         footer={
           <Typography variant="body2">
-            If the amount of work depends on i, the sum adds up all values of i from 1 to n.
+            If the amount of work depends on i, the sum adds up all values of i
+            from 1 to n.
           </Typography>
         }
       />
@@ -508,14 +523,16 @@ function SigmaNotation() {
       />
 
       <ProseBlock spacingTop>
-        In insertion sort, we have nested loops. The inner loop's execution count depends on the outer loop index.
+        In insertion sort, we have nested loops. The inner loop's execution
+        count depends on the outer loop index.
       </ProseBlock>
 
       <Spacer />
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Key insight:</strong> When a loop exits normally, the test executes one more time than the body.
+            <strong>Key insight:</strong> When a loop exits normally, the test
+            executes one more time than the body.
           </Typography>
           <Typography variant="body2">
             If the body runs j-1 times, the test runs j times.
@@ -556,8 +573,8 @@ function SigmaNotation() {
             <strong>Why j=2 to n?</strong>
           </Typography>
           <Typography variant="body2">
-            The outer loop typically starts at index 2 (second element) because we consider 
-            the first element already "sorted."
+            The outer loop typically starts at index 2 (second element) because
+            we consider the first element already "sorted."
           </Typography>
         </>
       </NoteBlock>
@@ -584,7 +601,8 @@ function SigmaNotation() {
         footer={
           <>
             <Typography variant="body2" gutterBottom>
-              The inner sum <MathInline math={String.raw`\sum_{j=1}^{i} 1`} /> counts how many times the inner loop runs.
+              The inner sum <MathInline math={String.raw`\sum_{j=1}^{i} 1`} />{' '}
+              counts how many times the inner loop runs.
             </Typography>
             <Typography variant="body2">
               This equals i (the inner loop runs i times for each outer i).
@@ -631,23 +649,18 @@ function SigmaNotation() {
       <SectionSpacer size={blockSpaceSize} />
       <EquationCard
         title="Telescoping (Advanced)"
-        equations={[
-          String.raw`\sum_{i=1}^{n} (a_i - a_{i-1}) = a_n - a_0`,
-        ]}
+        equations={[String.raw`\sum_{i=1}^{n} (a_i - a_{i-1}) = a_n - a_0`]}
         footer={
           <Typography variant="body2">
-            Consecutive differences cancel out, leaving only the first and last terms.
+            Consecutive differences cancel out, leaving only the first and last
+            terms.
           </Typography>
         }
       />
 
       {/* QUICK REFERENCE */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Quick Reference"
-        id="quick-reference"
-      />
+      <ProseBlock anchor title="Quick Reference" id="quick-reference" />
 
       <Spacer />
       <TopicBlock
@@ -667,7 +680,9 @@ function SigmaNotation() {
         title="Common mistakes"
         items={[
           <>❌ Forgetting to check the starting index (might be 0, not 1!)</>,
-          <>❌ Not plugging the index into the <em>entire</em> expression</>,
+          <>
+            ❌ Not plugging the index into the <em>entire</em> expression
+          </>,
           <>❌ Confusing the index variable (i vs. j vs. n)</>,
           <>❌ Forgetting that constants stay constant</>,
         ]}

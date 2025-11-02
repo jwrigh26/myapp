@@ -1,6 +1,6 @@
 /**
  * DsaArray Component - Usage Examples
- * 
+ *
  * This file demonstrates the various ways to use the DsaArray component
  * for visualizing data structures in DSA tutorials.
  */
@@ -10,9 +10,7 @@ import { mdiRabbitVariant } from '@mdi/js';
 import { useTheme } from '@mui/material/styles';
 
 // Example 1: Simple number array
-export const SimpleNumberArray = () => (
-  <DsaArray values={[1, 2, 4, 6, 8, 9]} />
-);
+export const SimpleNumberArray = () => <DsaArray values={[1, 2, 4, 6, 8, 9]} />;
 
 // Example 2: Array with highlighted indices
 export const HighlightedArray = () => (
@@ -46,7 +44,11 @@ export const BunnyArray = () => {
         { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
         { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
         { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
-        { icon: mdiRabbitVariant, iconColor: honeyBunnyColor, highlighted: true },
+        {
+          icon: mdiRabbitVariant,
+          iconColor: honeyBunnyColor,
+          highlighted: true,
+        },
         { icon: mdiRabbitVariant, iconColor: honeyBunnyColor },
         { icon: mdiRabbitVariant, iconColor: honeyBunnyColor },
       ]}
@@ -62,19 +64,11 @@ export const SegmentedArray = () => (
     segments={[
       {
         label: 'Left Half',
-        items: [
-          { value: 1 },
-          { value: 2 },
-          { value: 4 },
-        ],
+        items: [{ value: 1 }, { value: 2 }, { value: 4 }],
       },
       {
         label: 'Right Half',
-        items: [
-          { value: 6 },
-          { value: 8 },
-          { value: 9 },
-        ],
+        items: [{ value: 6 }, { value: 8 }, { value: 9 }],
       },
     ]}
   />
@@ -123,7 +117,12 @@ export const BunnyBinarySearchWalkthrough = () => {
           items: [
             { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
             { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
-            { icon: mdiRabbitVariant, iconColor: normalBunnyColor, highlighted: true, highlightColor: '#2196f3' }, // left pointer
+            {
+              icon: mdiRabbitVariant,
+              iconColor: normalBunnyColor,
+              highlighted: true,
+              highlightColor: '#2196f3',
+            }, // left pointer
             { icon: mdiRabbitVariant, iconColor: normalBunnyColor },
           ],
         },
@@ -131,7 +130,12 @@ export const BunnyBinarySearchWalkthrough = () => {
           label: 'After (Honey Bunnies)',
           // No gap needed here - it inherits from the first segment
           items: [
-            { icon: mdiRabbitVariant, iconColor: honeyBunnyColor, highlighted: true, highlightColor: '#f44336' }, // right pointer
+            {
+              icon: mdiRabbitVariant,
+              iconColor: honeyBunnyColor,
+              highlighted: true,
+              highlightColor: '#f44336',
+            }, // right pointer
             { icon: mdiRabbitVariant, iconColor: honeyBunnyColor },
             { icon: mdiRabbitVariant, iconColor: honeyBunnyColor },
           ],

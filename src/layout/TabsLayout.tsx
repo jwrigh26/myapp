@@ -76,9 +76,10 @@ const StyledTabs = styled(Tabs)(({ theme }) => {
         border: `1px solid ${glowColor}`,
         opacity: 0,
         transform: 'scale(0.8)',
-        transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
+        transition:
+          'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
         pointerEvents: 'none',
-        
+
         // Glow effect that animates in
         ...(theme.palette.mode === 'dark' && {
           boxShadow: `
@@ -103,10 +104,10 @@ const StyledTabs = styled(Tabs)(({ theme }) => {
       '&.Mui-selected': {
         color: theme.palette.primary.main,
         fontWeight: theme.typography.fontWeightSemiBold,
-        backgroundColor: isLight 
+        backgroundColor: isLight
           ? `${theme.palette.primary.main}08`
           : 'transparent',
-        
+
         // Animate the border in
         '&::before': {
           opacity: 1,

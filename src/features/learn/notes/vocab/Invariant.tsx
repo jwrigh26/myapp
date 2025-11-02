@@ -6,9 +6,12 @@ import { mdiShieldCheck, mdiSync, mdiCheckDecagram } from '@mdi/js';
 const invariantConcepts: ConceptItem[] = [
   {
     model: 'Definition',
-    description: 'Something that remains true no matter how many times the loop runs.',
-    application: ["Gives you confidence in the algorithm's behavior.",
-        "It's the thing you check in your head at each iteration"],
+    description:
+      'Something that remains true no matter how many times the loop runs.',
+    application: [
+      "Gives you confidence in the algorithm's behavior.",
+      "It's the thing you check in your head at each iteration",
+    ],
     examples: 'loop conditions, array bounds, sorted regions.',
     icon: mdiShieldCheck,
   },

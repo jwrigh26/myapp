@@ -28,7 +28,7 @@ export class ContentAnalyzer {
       titleBlock: /<TitleBlock[^>]*title="([^"]+)"/g,
 
       // ProseBlock with title and anchor (may also have subtitle) - multiline support
-      proseBlockTitleAnchor: 
+      proseBlockTitleAnchor:
         /<ProseBlock(?:[^>]|\n)*?\btitle="([^"]+)"(?:[^>]|\n)*?\banchor\b(?:[^>]|\n)*?\bid="([^"]+)"(?:[^>]|\n)*?>/g,
       // ProseBlock with anchor and title (anchor comes first) - multiline support
       proseBlockAnchorTitle:
@@ -36,7 +36,7 @@ export class ContentAnalyzer {
       // ProseBlock with subtitle and anchor (no title) - simple multiline
       proseBlockSubtitleAnchor:
         /<ProseBlock[^>]*subtitle="([^"]+)"[^>]*anchor[^>]*id="([^"]+)"/g,
-      // ProseBlock with anchor first, then subtitle (no title) - simple multiline 
+      // ProseBlock with anchor first, then subtitle (no title) - simple multiline
       proseBlockAnchorSubtitle:
         /<ProseBlock[^>]*anchor[^>]*id="([^"]+)"[^>]*subtitle="([^"]+)"/g,
 
@@ -57,19 +57,19 @@ export class ContentAnalyzer {
         /<MathBlock[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
       mathBlockAnchorReverse:
         /<MathBlock[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
-      
+
       // EquationCard components with anchor
       equationCardAnchor:
         /<EquationCard[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
       equationCardAnchorReverse:
         /<EquationCard[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
-      
+
       // EquationSteps components with anchor
       equationStepsAnchor:
         /<EquationSteps[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
       equationStepsAnchorReverse:
         /<EquationSteps[^>]*\btitle="([^"]+)"[^>]*\banchor\b[^>]*\bid="([^"]+)"/g,
-      
+
       // ProseMathBlock components with anchor
       proseMathBlockAnchor:
         /<ProseMathBlock[^>]*\banchor\b[^>]*\bid="([^"]+)"[^>]*\btitle="([^"]+)"/g,
@@ -208,9 +208,11 @@ export class ContentAnalyzer {
 
   extractProseBlockAnchors(content, items, filePath = '') {
     let match;
-    
+
     // Extract ProseBlocks with title (level 1)
-    while ((match = this.patterns.proseBlockTitleAnchor.exec(content)) !== null) {
+    while (
+      (match = this.patterns.proseBlockTitleAnchor.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -223,9 +225,11 @@ export class ContentAnalyzer {
         source: 'proseblock-title-anchor',
       });
     }
-    
+
     // Extract ProseBlocks with anchor first, then title (level 1)
-    while ((match = this.patterns.proseBlockAnchorTitle.exec(content)) !== null) {
+    while (
+      (match = this.patterns.proseBlockAnchorTitle.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -238,26 +242,26 @@ export class ContentAnalyzer {
         source: 'proseblock-anchor-title',
       });
     }
-    
+
     // Extract ProseBlocks with anchor+subtitle (exclude those with titles)
     // First find all ProseBlock opening tags with anchor
     const proseBlockStart = /<ProseBlock(?:[^>]|\n)*?>/g;
     let startMatch;
-    
+
     while ((startMatch = proseBlockStart.exec(content)) !== null) {
       const fullProseBlockTag = startMatch[0];
-      
+
       // Check if it has anchor, id, subtitle but NOT title
       const hasAnchor = /\banchor\b/.test(fullProseBlockTag);
       const hasTitle = /\btitle\s*=/.test(fullProseBlockTag);
       const idMatch = fullProseBlockTag.match(/\bid="([^"]+)"/);
       const subtitleMatch = fullProseBlockTag.match(/\bsubtitle="([^"]+)"/);
-      
+
       if (hasAnchor && !hasTitle && idMatch && subtitleMatch) {
         const id = idMatch[1];
         const subtitle = subtitleMatch[1];
         const position = startMatch.index;
-        
+
         items.push({
           id: id.trim(),
           title: this.cleanTitle(subtitle),
@@ -272,7 +276,7 @@ export class ContentAnalyzer {
 
   extractMathBlockAnchors(content, items) {
     let match;
-    
+
     // Extract MathBlock with anchor and title
     while ((match = this.patterns.mathBlockAnchor.exec(content)) !== null) {
       const [fullMatch, id, title] = match;
@@ -287,9 +291,11 @@ export class ContentAnalyzer {
         source: 'mathblock-anchor',
       });
     }
-    
+
     // Extract MathBlock with title first, then anchor
-    while ((match = this.patterns.mathBlockAnchorReverse.exec(content)) !== null) {
+    while (
+      (match = this.patterns.mathBlockAnchorReverse.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -302,7 +308,7 @@ export class ContentAnalyzer {
         source: 'mathblock-anchor-reverse',
       });
     }
-    
+
     // Extract EquationCard with anchor and title
     while ((match = this.patterns.equationCardAnchor.exec(content)) !== null) {
       const [fullMatch, id, title] = match;
@@ -317,9 +323,11 @@ export class ContentAnalyzer {
         source: 'equationcard-anchor',
       });
     }
-    
+
     // Extract EquationCard with title first, then anchor
-    while ((match = this.patterns.equationCardAnchorReverse.exec(content)) !== null) {
+    while (
+      (match = this.patterns.equationCardAnchorReverse.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -332,7 +340,7 @@ export class ContentAnalyzer {
         source: 'equationcard-anchor-reverse',
       });
     }
-    
+
     // Extract EquationSteps with anchor and title
     while ((match = this.patterns.equationStepsAnchor.exec(content)) !== null) {
       const [fullMatch, id, title] = match;
@@ -347,9 +355,11 @@ export class ContentAnalyzer {
         source: 'equationsteps-anchor',
       });
     }
-    
+
     // Extract EquationSteps with title first, then anchor
-    while ((match = this.patterns.equationStepsAnchorReverse.exec(content)) !== null) {
+    while (
+      (match = this.patterns.equationStepsAnchorReverse.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -362,9 +372,11 @@ export class ContentAnalyzer {
         source: 'equationsteps-anchor-reverse',
       });
     }
-    
+
     // Extract ProseMathBlock with anchor and title
-    while ((match = this.patterns.proseMathBlockAnchor.exec(content)) !== null) {
+    while (
+      (match = this.patterns.proseMathBlockAnchor.exec(content)) !== null
+    ) {
       const [fullMatch, id, title] = match;
       const position = match.index;
 
@@ -377,9 +389,11 @@ export class ContentAnalyzer {
         source: 'prosemathblock-anchor',
       });
     }
-    
+
     // Extract ProseMathBlock with title first, then anchor
-    while ((match = this.patterns.proseMathBlockAnchorReverse.exec(content)) !== null) {
+    while (
+      (match = this.patterns.proseMathBlockAnchorReverse.exec(content)) !== null
+    ) {
       const [fullMatch, title, id] = match;
       const position = match.index;
 
@@ -557,9 +571,7 @@ export function buildAdvancedContentRegistry() {
 
       if (entry.isDirectory()) {
         scanDirectory(fullPath, `${routePrefix}/${entry.name}`);
-      } else if (entry.name.endsWith('.tsx') && 
-                 entry.name !== 'route.tsx') {
-        
+      } else if (entry.name.endsWith('.tsx') && entry.name !== 'route.tsx') {
         // Handle index.tsx specially - it represents the main lesson
         let routeName;
         if (entry.name === 'index.tsx') {
@@ -569,7 +581,8 @@ export function buildAdvancedContentRegistry() {
         } else {
           routeName = entry.name.replace('.tsx', '');
         }
-        const routePath = routePrefix.substring(1) + (routeName ? `/${routeName}` : '');
+        const routePath =
+          routePrefix.substring(1) + (routeName ? `/${routeName}` : '');
 
         console.log(`   📄 Analyzing: ${routePath}`);
 

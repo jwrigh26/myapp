@@ -25,7 +25,13 @@ export interface ProseBlockProps {
   color?: string; // Override default text.primary color
   options?: {
     titleVariant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-    subtitleVariant?: 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
+    subtitleVariant?:
+      | 'h5'
+      | 'h6'
+      | 'subtitle1'
+      | 'subtitle2'
+      | 'body1'
+      | 'body2';
     textVariant?: 'body1' | 'body2' | 'caption' | 'overline';
     titleComponent?: React.ElementType;
     titleColor?: string;
@@ -56,9 +62,9 @@ const ProseBlock = React.memo(
       textVariant = 'body1',
       // Component defaults
       titleComponent = 'h2',
-      titleColor = "primary.main",
+      titleColor = 'primary.main',
       subtitleComponent = 'p',
-      subtitleColor = "text.secondary",
+      subtitleColor = 'text.secondary',
       textComponent = 'div',
     } = options;
 
@@ -77,7 +83,7 @@ const ProseBlock = React.memo(
           <Typography
             variant={titleVariant}
             component={titleComponent}
-            color={titleColor || "primary.main"}
+            color={titleColor || 'primary.main'}
             gutterBottom={titleGutter}
             className={anchor ? 'anchor-title' : undefined}
           >
@@ -88,7 +94,7 @@ const ProseBlock = React.memo(
           <Typography
             variant={subtitleVariant}
             component={subtitleComponent}
-            color={subtitleColor || "text.secondary"}
+            color={subtitleColor || 'text.secondary'}
             className={!title && anchor ? 'anchor-title' : undefined}
             gutterBottom
           >
@@ -135,7 +141,7 @@ interface StyledBlockProps extends BoxProps {
   dense: boolean;
   gutterBottom?: boolean;
   spacingBottom?: boolean;
-  spacingTop?:boolean;
+  spacingTop?: boolean;
   backgroundColor?: string;
 }
 
@@ -158,7 +164,9 @@ const getPaddingStyles = (
     ? { paddingBottom: theme.spacing(2) }
     : { paddingBottom: theme.spacing(0) };
 
-  const spacingTopStyles = spacingTop ? { paddingTop: theme.spacing(2) } : { paddingTop: theme.spacing(0) };
+  const spacingTopStyles = spacingTop
+    ? { paddingTop: theme.spacing(2) }
+    : { paddingTop: theme.spacing(0) };
 
   return {
     ...paddingStyles,
@@ -182,12 +190,16 @@ const StyledBlock = styled(Box, {
   spacingBottom,
   backgroundColor = theme.palette.background.paper,
 }) => {
-  const paddingStyles = getPaddingStyles(theme, dense, spacingBottom, spacingTop);
+  const paddingStyles = getPaddingStyles(
+    theme,
+    dense,
+    spacingBottom,
+    spacingTop
+  );
 
   const gutterBottomStyles = gutterBottom
     ? { marginBottom: theme.spacing(1) }
     : {};
-
 
   return {
     marginBottom: theme.spacing(0), // Add spacing between blocks

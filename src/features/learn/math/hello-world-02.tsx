@@ -36,11 +36,11 @@ export default function MathHelloWorld02() {
       <StyledCard>
         <CardContent>
           <CategoryChip label="Mathematics" size="small" />
-          
+
           <Typography variant="h4" component="h1" gutterBottom>
             Hello World - Math Intermediate 02
           </Typography>
-          
+
           <Typography variant="subtitle1" color="text.secondary" paragraph>
             Building upon basic math concepts with intermediate topics
           </Typography>
@@ -65,8 +65,8 @@ export default function MathHelloWorld02() {
               Content Overview
             </Typography>
             <Typography variant="body1">
-              This page builds on the foundation established in Math Basics 01, 
-              introducing more complex mathematical concepts including algebra, 
+              This page builds on the foundation established in Math Basics 01,
+              introducing more complex mathematical concepts including algebra,
               geometry, and advanced problem-solving techniques.
             </Typography>
           </ContentSection>

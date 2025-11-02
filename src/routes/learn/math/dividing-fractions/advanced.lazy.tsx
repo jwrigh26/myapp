@@ -3,7 +3,9 @@ import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import CodeBlock from '@/components/CodeBlock';
 
-export const Route = createLazyFileRoute('/learn/math/dividing-fractions/advanced')({
+export const Route = createLazyFileRoute(
+  '/learn/math/dividing-fractions/advanced'
+)({
   component: AdvancedMathConcepts,
 });
 
@@ -16,15 +18,14 @@ function AdvancedMathConcepts() {
       />
 
       <ProseBlock anchor title="Overview" id="overview">
-        Now that you've mastered the basics, let's explore some advanced 
-        mathematical concepts that will expand your understanding of the 
+        Now that you've mastered the basics, let's explore some advanced
+        mathematical concepts that will expand your understanding of the
         mathematical universe.
       </ProseBlock>
 
-
       <ProseBlock anchor title="Complex Numbers" id="complex-numbers">
-        Complex numbers extend our number system to include the square root 
-        of negative numbers. They're represented as a + bi, where i is the 
+        Complex numbers extend our number system to include the square root of
+        negative numbers. They're represented as a + bi, where i is the
         imaginary unit.
       </ProseBlock>
 
@@ -43,7 +44,7 @@ z = a + bi
       />
 
       <ProseBlock>
-        Calculus gives us the tools to understand rates of change and 
+        Calculus gives us the tools to understand rates of change and
         accumulation. Here are some fundamental concepts:
       </ProseBlock>
 

@@ -73,7 +73,7 @@ export function SecondaryDrawer({
           behavior: 'smooth',
           block: 'start',
         });
-        
+
         setActiveAnchor(anchor);
         // Close mobile drawer after navigation
         if (!desktop) {

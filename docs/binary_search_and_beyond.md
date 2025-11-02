@@ -12,7 +12,8 @@ Binary search (including the transition-point recipe) applies whenever you can d
 > As you move along the search space, the answer switches **once** from True → False (or vice versa).
 
 ✅ **Requirements**
-- The data or predicate output is *monotonic* — no back-and-forth flipping.
+
+- The data or predicate output is _monotonic_ — no back-and-forth flipping.
 - You can efficiently test whether an element belongs to the “before” or “after” region.
 - The space can be ordered or implicitly indexed (e.g., integer range, time, answer value).
 
@@ -26,16 +27,18 @@ Binary search (including the transition-point recipe) applies whenever you can d
 
 ---
 
-## 2️⃣ When Binary Search *Doesn’t* Work
+## 2️⃣ When Binary Search _Doesn’t_ Work
 
 Binary search breaks down when:
-- The relation is **non-monotonic** (predicate flips multiple times).  
-- You can’t define a total order (e.g., unordered graph traversal).  
-- Evaluating midpoints has side effects or randomness (e.g., hash collisions).  
+
+- The relation is **non-monotonic** (predicate flips multiple times).
+- You can’t define a total order (e.g., unordered graph traversal).
+- Evaluating midpoints has side effects or randomness (e.g., hash collisions).
 - The function has **plateaus or oscillations** that violate single transition behavior.
 
 🚫 Examples
-- Searching for a *local maximum* in noisy data without ordering.
+
+- Searching for a _local maximum_ in noisy data without ordering.
 - Detecting patterns in cyclic sequences (no linear order).
 - Problems requiring enumeration, not decision.
 
@@ -43,13 +46,13 @@ Binary search breaks down when:
 
 ## 3️⃣ Monotonic vs Non-Monotonic
 
-| Property | Monotonic | Non-Monotonic |
-|-----------|------------|---------------|
-| **Behavior** | Only one direction of change (↑ or ↓, or True→False once) | May rise, fall, rise again |
-| **Binary Search?** | ✅ Yes | ❌ No |
-| **Examples** | Sorted arrays, cumulative sums, feasibility tests | Wave patterns, cyclical data |
+| Property           | Monotonic                                                 | Non-Monotonic                |
+| ------------------ | --------------------------------------------------------- | ---------------------------- |
+| **Behavior**       | Only one direction of change (↑ or ↓, or True→False once) | May rise, fall, rise again   |
+| **Binary Search?** | ✅ Yes                                                    | ❌ No                        |
+| **Examples**       | Sorted arrays, cumulative sums, feasibility tests         | Wave patterns, cyclical data |
 
-🧩 *Think of binary search as a tool for any “threshold” problem*  
+🧩 _Think of binary search as a tool for any “threshold” problem_  
 — find where a condition first changes.
 
 ---
@@ -58,16 +61,17 @@ Binary search breaks down when:
 
 Binary search belongs to the broader **Divide and Conquer** paradigm:
 
-| Step | Description |
-|------|--------------|
-| Divide | Split the problem into smaller subproblems (often halves). |
-| Conquer | Solve each recursively (or pick the correct half). |
-| Combine | Merge or interpret the results. |
+| Step    | Description                                                |
+| ------- | ---------------------------------------------------------- |
+| Divide  | Split the problem into smaller subproblems (often halves). |
+| Conquer | Solve each recursively (or pick the correct half).         |
+| Combine | Merge or interpret the results.                            |
 
 🔗 Related algorithms:
-- Merge Sort  
-- Quick Sort  
-- Binary Search Tree operations  
+
+- Merge Sort
+- Quick Sort
+- Binary Search Tree operations
 - FFT (Fast Fourier Transform)
 
 All share one thing: **logarithmic depth** due to repeated halving.
@@ -76,9 +80,10 @@ All share one thing: **logarithmic depth** due to repeated halving.
 
 ## 5️⃣ Recursive Selection Problems
 
-Another sibling of binary search is **selection** — finding the *k-th smallest element*.
+Another sibling of binary search is **selection** — finding the _k-th smallest element_.
 
 ### Example: Quickselect
+
 ```python
 def quickselect(nums, k):
     pivot = random.choice(nums)
@@ -91,19 +96,21 @@ def quickselect(nums, k):
     else:
         return quickselect(highs, k - (len(nums) - len(highs)))
 ```
+
 - Same “divide and conquer” intuition, but **no monotone predicate**.
 - Average complexity: **O(n)**.
 
-When to use: You can’t order by index but can *partition* by a pivot condition.
+When to use: You can’t order by index but can _partition_ by a pivot condition.
 
 ---
 
 ## 6️⃣ Peak Finding (a Close Cousin)
 
 **Peak finding** looks for an element greater than or equal to its neighbors.  
-It’s *not* classic binary search, but still *logarithmic* by halving the search range.
+It’s _not_ classic binary search, but still _logarithmic_ by halving the search range.
 
 ### 1D Example
+
 ```python
 def find_peak(nums):
     left, right = 0, len(nums) - 1
@@ -115,7 +122,8 @@ def find_peak(nums):
             right = mid
     return left
 ```
-- Works because **the slope direction is monotone** (one consistent rise/fall).  
+
+- Works because **the slope direction is monotone** (one consistent rise/fall).
 - Related to **bitonic arrays** (increase → decrease).
 
 ---
@@ -124,9 +132,9 @@ def find_peak(nums):
 
 Binary search has two modes:
 
-| Mode | Goal | Output |
-|------|------|---------|
-| **Value Search** | Find element equal to target | Index or -1 |
+| Mode                | Goal                         | Output                        |
+| ------------------- | ---------------------------- | ----------------------------- |
+| **Value Search**    | Find element equal to target | Index or -1                   |
 | **Boundary Search** | Find where condition changes | Left/right transition indices |
 
 You’ve already mastered the boundary flavor via the transition-point recipe — that’s the form used in rotated arrays, insert positions, and “minimum feasible X” problems.
@@ -135,28 +143,28 @@ You’ve already mastered the boundary flavor via the transition-point recipe �
 
 ## 8️⃣ Next Topics to Explore
 
-| Area | Why It Matters |
-|------|----------------|
-| **Binary Search on Answers** | Learn to apply binary search to *numeric ranges* instead of arrays (e.g., “minimum time to finish X”). |
-| **Bitonic Arrays** | Practice problems where arrays rise then fall — good mental exercise on monotonic reasoning. |
-| **Binary Search Trees** | Apply the same divide logic in data structures. |
-| **Ternary Search** | Similar reasoning on unimodal functions (one minimum). |
-| **Parametric Search** | Generalized framework for decision problems. |
-| **Dynamic Programming** | Builds on invariants, loop correctness, and divide-and-conquer structure. |
+| Area                         | Why It Matters                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Binary Search on Answers** | Learn to apply binary search to _numeric ranges_ instead of arrays (e.g., “minimum time to finish X”). |
+| **Bitonic Arrays**           | Practice problems where arrays rise then fall — good mental exercise on monotonic reasoning.           |
+| **Binary Search Trees**      | Apply the same divide logic in data structures.                                                        |
+| **Ternary Search**           | Similar reasoning on unimodal functions (one minimum).                                                 |
+| **Parametric Search**        | Generalized framework for decision problems.                                                           |
+| **Dynamic Programming**      | Builds on invariants, loop correctness, and divide-and-conquer structure.                              |
 
 ---
 
 ## 9️⃣ Big Picture Takeaways
 
-- Binary search is a **pattern of reasoning**, not just an array trick.  
-- Always ask: “Can I define a monotone predicate?”  
-- Invariants and boundaries keep your logic bulletproof.  
+- Binary search is a **pattern of reasoning**, not just an array trick.
+- Always ask: “Can I define a monotone predicate?”
+- Invariants and boundaries keep your logic bulletproof.
 - Most advanced algorithms are just smarter or multidimensional versions of this same reasoning pattern.
 
 ---
 
-🧩 *Binary search is your first taste of algorithmic thinking —  
-master its invariants, and the rest of DSA becomes far less mysterious.*
+🧩 _Binary search is your first taste of algorithmic thinking —  
+master its invariants, and the rest of DSA becomes far less mysterious._
 
 ---
 

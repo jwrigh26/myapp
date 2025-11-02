@@ -36,11 +36,11 @@ export default function MathHelloWorld01() {
       <StyledCard>
         <CardContent>
           <CategoryChip label="Mathematics" size="small" />
-          
+
           <Typography variant="h4" component="h1" gutterBottom>
             Hello World - Math Basics 01
           </Typography>
-          
+
           <Typography variant="subtitle1" color="text.secondary" paragraph>
             Introduction to fundamental mathematical concepts and operations
           </Typography>
@@ -65,9 +65,9 @@ export default function MathHelloWorld01() {
               Content Overview
             </Typography>
             <Typography variant="body1">
-              This page will cover fundamental mathematical concepts that form the 
-              foundation for more advanced topics. We'll explore basic operations, 
-              mathematical notation, and problem-solving strategies.
+              This page will cover fundamental mathematical concepts that form
+              the foundation for more advanced topics. We'll explore basic
+              operations, mathematical notation, and problem-solving strategies.
             </Typography>
           </ContentSection>
         </CardContent>

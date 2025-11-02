@@ -46,7 +46,7 @@ function MathIndex() {
     {
       title: 'Dividing Fractions',
       description:
-        "Learn how to divide fractions step by step with clear explanations and examples",
+        'Learn how to divide fractions step by step with clear explanations and examples',
       path: '/learn/math/dividing-fractions',
       date: '2025-01-01',
       readTime: '3 min read',

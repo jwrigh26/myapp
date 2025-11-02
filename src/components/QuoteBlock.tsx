@@ -13,7 +13,11 @@ interface QuoteBlockProps {
   secondary?: boolean;
 }
 
-const QuoteBlock: React.FC<QuoteBlockProps> = ({ hook, children, secondary = false }) => {
+const QuoteBlock: React.FC<QuoteBlockProps> = ({
+  hook,
+  children,
+  secondary = false,
+}) => {
   const renderContent = () => {
     if (children) {
       // If children is a string, wrap it in Typography
@@ -40,7 +44,9 @@ const QuoteBlock: React.FC<QuoteBlockProps> = ({ hook, children, secondary = fal
     return null;
   };
 
-  return <StyledIntroBlock secondary={secondary}>{renderContent()}</StyledIntroBlock>;
+  return (
+    <StyledIntroBlock secondary={secondary}>{renderContent()}</StyledIntroBlock>
+  );
 };
 
 export default QuoteBlock;

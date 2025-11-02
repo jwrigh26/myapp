@@ -22,6 +22,7 @@ def binary_search(nums: List[int], target: int) -> int:
             right = mid - 1
     return -1
 ```
+
 ✅ **Key idea:** Maintain a search range `[left, right]` and halve it each iteration.
 
 ---
@@ -45,8 +46,10 @@ def binary_search_transition(arr, is_before):
     # (left, right): left is last True, right is first False
     return left, right
 ```
-✅ **Invariant:**  
-- `left` always points to a True region element (before the transition).  
+
+✅ **Invariant:**
+
+- `left` always points to a True region element (before the transition).
 - `right` always points to a False region element (after the transition).
 
 ---
@@ -70,6 +73,7 @@ def first_occurrence(nums, target):
         return right
     return -1
 ```
+
 ✅ **Key:** Predicate = `x < target` → all Trues before the first occurrence.
 
 ---
@@ -93,6 +97,7 @@ def last_occurrence(nums, target):
         return left
     return -1
 ```
+
 ✅ **Key:** Predicate = `x <= target` → all Trues through the last occurrence.
 
 ---
@@ -120,6 +125,7 @@ def find_min_rotated(nums: List[int]) -> int:
 
     return right  # first False → index of minimum
 ```
+
 ✅ **Predicate:** `nums[i] >= nums[0]`  
 ✅ **Transition:** True → False  
 ✅ **Answer:** `right` (first False)
@@ -143,6 +149,7 @@ def find_min_rotated_with_dups(nums):
             right -= 1  # can't decide → shrink right
     return left
 ```
+
 ✅ **Key idea:** Compare mid vs right to keep a monotone boundary.  
 Worst-case (many duplicates) → O(n).
 
@@ -165,35 +172,37 @@ class Bunny:
         self.type = bunny_type
 
 # Predicate
-def is_before(x: BunnyType): 
+def is_before(x: BunnyType):
     return x < BunnyType.HONEY
 ```
+
 ✅ **Story concept:** “Are we before any honey bunnies?”  
 The predicate splits our array into “before” (normal) and “after” (honey).
 
 At the end of the binary search:
-- `left` → last `NORMAL` bunny  
+
+- `left` → last `NORMAL` bunny
 - `right` → first `HONEY` bunny
 
 ---
 
 ## 💡 Concept Recap
 
-| Concept | Description |
-|---------|--------------|
-| **Predicate** | Boolean test that splits the data into True/False regions |
-| **Invariant** | A rule that stays true every loop iteration |
-| **Sentinels** | Start pointers outside valid indices to avoid off-by-one errors |
-| **Transition Point** | Boundary between True and False regions |
-| **Monotone Predicate** | Predicate result changes once (all True → all False) |
+| Concept                | Description                                                     |
+| ---------------------- | --------------------------------------------------------------- |
+| **Predicate**          | Boolean test that splits the data into True/False regions       |
+| **Invariant**          | A rule that stays true every loop iteration                     |
+| **Sentinels**          | Start pointers outside valid indices to avoid off-by-one errors |
+| **Transition Point**   | Boundary between True and False regions                         |
+| **Monotone Predicate** | Predicate result changes once (all True → all False)            |
 
 ---
 
 ## 🧠 Common Binary Search Pitfalls
 
-- Forgetting to update one side → infinite loop.  
-- Using `while left < right` incorrectly with sentinels.  
-- Mixing up `<` vs `<=` in predicates (changes meaning!).  
+- Forgetting to update one side → infinite loop.
+- Using `while left < right` incorrectly with sentinels.
+- Mixing up `<` vs `<=` in predicates (changes meaning!).
 - Not checking edge cases (empty, all True, all False).
 
 ---

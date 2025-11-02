@@ -8,60 +8,60 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as HomeImport } from './routes/home'
-import { Route as GameImport } from './routes/game'
-import { Route as AboutImport } from './routes/about'
-import { Route as LearnRouteImport } from './routes/learn/route'
-import { Route as BlogRouteImport } from './routes/blog/route'
-import { Route as IndexImport } from './routes/index'
-import { Route as LearnIndexImport } from './routes/learn/index'
-import { Route as BlogIndexImport } from './routes/blog/index'
-import { Route as LearnPythonIndexImport } from './routes/learn/python/index'
-import { Route as LearnMathIndexImport } from './routes/learn/math/index'
-import { Route as LearnGitIndexImport } from './routes/learn/git/index'
-import { Route as LearnDsaIndexImport } from './routes/learn/dsa/index'
-import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/index'
-import { Route as BlogReactIndexImport } from './routes/blog/react/index'
-import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index'
-import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials'
-import { Route as LearnGitTaggingImport } from './routes/learn/git/tagging'
-import { Route as LearnGitStashingImport } from './routes/learn/git/stashing'
-import { Route as LearnGitResetImport } from './routes/learn/git/reset'
-import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git'
-import { Route as LearnGitCherryPickingImport } from './routes/learn/git/cherry-picking'
-import { Route as LearnGitBranchingImport } from './routes/learn/git/branching'
-import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names'
-import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster'
-import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3'
-import { Route as BlogFrontendDesignMicrofrontendsPart2Import } from './routes/blog/frontend-design/microfrontends-part2'
-import { Route as BlogFrontendDesignMicrofrontendsPart1Import } from './routes/blog/frontend-design/microfrontends-part1'
-import { Route as LearnMathSigmaNotationRouteImport } from './routes/learn/math/sigma-notation/route'
-import { Route as LearnMathExponentsRouteImport } from './routes/learn/math/exponents/route'
-import { Route as LearnMathDivisionRouteImport } from './routes/learn/math/division/route'
-import { Route as LearnMathDividingFractionsRouteImport } from './routes/learn/math/dividing-fractions/route'
-import { Route as LearnDsaBinarySearchRouteImport } from './routes/learn/dsa/binary-search/route'
-import { Route as LearnMathSigmaNotationIndexImport } from './routes/learn/math/sigma-notation/index'
-import { Route as LearnMathExponentsIndexImport } from './routes/learn/math/exponents/index'
-import { Route as LearnMathDivisionIndexImport } from './routes/learn/math/division/index'
-import { Route as LearnMathDividingFractionsIndexImport } from './routes/learn/math/dividing-fractions/index'
-import { Route as LearnDsaBinarySearchIndexImport } from './routes/learn/dsa/binary-search/index'
+import { Route as rootRoute } from './routes/__root';
+import { Route as HomeImport } from './routes/home';
+import { Route as GameImport } from './routes/game';
+import { Route as AboutImport } from './routes/about';
+import { Route as LearnRouteImport } from './routes/learn/route';
+import { Route as BlogRouteImport } from './routes/blog/route';
+import { Route as IndexImport } from './routes/index';
+import { Route as LearnIndexImport } from './routes/learn/index';
+import { Route as BlogIndexImport } from './routes/blog/index';
+import { Route as LearnPythonIndexImport } from './routes/learn/python/index';
+import { Route as LearnMathIndexImport } from './routes/learn/math/index';
+import { Route as LearnGitIndexImport } from './routes/learn/git/index';
+import { Route as LearnDsaIndexImport } from './routes/learn/dsa/index';
+import { Route as BlogSoftSkillsIndexImport } from './routes/blog/soft-skills/index';
+import { Route as BlogReactIndexImport } from './routes/blog/react/index';
+import { Route as BlogFrontendDesignIndexImport } from './routes/blog/frontend-design/index';
+import { Route as LearnPythonWhiteboardingEssentialsImport } from './routes/learn/python/whiteboarding-essentials';
+import { Route as LearnGitTaggingImport } from './routes/learn/git/tagging';
+import { Route as LearnGitStashingImport } from './routes/learn/git/stashing';
+import { Route as LearnGitResetImport } from './routes/learn/git/reset';
+import { Route as LearnGitEveryDayGitImport } from './routes/learn/git/every-day-git';
+import { Route as LearnGitCherryPickingImport } from './routes/learn/git/cherry-picking';
+import { Route as LearnGitBranchingImport } from './routes/learn/git/branching';
+import { Route as BlogSoftSkillsLearnNamesImport } from './routes/blog/soft-skills/learn-names';
+import { Route as BlogReactMemoMonsterImport } from './routes/blog/react/memo-monster';
+import { Route as BlogFrontendDesignMicrofrontendsPart3Import } from './routes/blog/frontend-design/microfrontends-part3';
+import { Route as BlogFrontendDesignMicrofrontendsPart2Import } from './routes/blog/frontend-design/microfrontends-part2';
+import { Route as BlogFrontendDesignMicrofrontendsPart1Import } from './routes/blog/frontend-design/microfrontends-part1';
+import { Route as LearnMathSigmaNotationRouteImport } from './routes/learn/math/sigma-notation/route';
+import { Route as LearnMathExponentsRouteImport } from './routes/learn/math/exponents/route';
+import { Route as LearnMathDivisionRouteImport } from './routes/learn/math/division/route';
+import { Route as LearnMathDividingFractionsRouteImport } from './routes/learn/math/dividing-fractions/route';
+import { Route as LearnDsaBinarySearchRouteImport } from './routes/learn/dsa/binary-search/route';
+import { Route as LearnMathSigmaNotationIndexImport } from './routes/learn/math/sigma-notation/index';
+import { Route as LearnMathExponentsIndexImport } from './routes/learn/math/exponents/index';
+import { Route as LearnMathDivisionIndexImport } from './routes/learn/math/division/index';
+import { Route as LearnMathDividingFractionsIndexImport } from './routes/learn/math/dividing-fractions/index';
+import { Route as LearnDsaBinarySearchIndexImport } from './routes/learn/dsa/binary-search/index';
 
 // Create Virtual Routes
 
 const LearnMathDivisionProblemsLazyImport = createFileRoute(
-  '/learn/math/division/problems',
-)()
+  '/learn/math/division/problems'
+)();
 const LearnMathDividingFractionsExamplesLazyImport = createFileRoute(
-  '/learn/math/dividing-fractions/examples',
-)()
+  '/learn/math/dividing-fractions/examples'
+)();
 const LearnMathDividingFractionsAdvancedLazyImport = createFileRoute(
-  '/learn/math/dividing-fractions/advanced',
-)()
+  '/learn/math/dividing-fractions/advanced'
+)();
 
 // Create/Update Routes
 
@@ -69,231 +69,231 @@ const HomeRoute = HomeImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const GameRoute = GameImport.update({
   id: '/game',
   path: '/game',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AboutRoute = AboutImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LearnRouteRoute = LearnRouteImport.update({
   id: '/learn',
   path: '/learn',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const BlogRouteRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const LearnIndexRoute = LearnIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const BlogIndexRoute = BlogIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const LearnPythonIndexRoute = LearnPythonIndexImport.update({
   id: '/python/',
   path: '/python/',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnMathIndexRoute = LearnMathIndexImport.update({
   id: '/math/',
   path: '/math/',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitIndexRoute = LearnGitIndexImport.update({
   id: '/git/',
   path: '/git/',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnDsaIndexRoute = LearnDsaIndexImport.update({
   id: '/dsa/',
   path: '/dsa/',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const BlogSoftSkillsIndexRoute = BlogSoftSkillsIndexImport.update({
   id: '/soft-skills/',
   path: '/soft-skills/',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const BlogReactIndexRoute = BlogReactIndexImport.update({
   id: '/react/',
   path: '/react/',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const BlogFrontendDesignIndexRoute = BlogFrontendDesignIndexImport.update({
   id: '/frontend-design/',
   path: '/frontend-design/',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const LearnPythonWhiteboardingEssentialsRoute =
   LearnPythonWhiteboardingEssentialsImport.update({
     id: '/python/whiteboarding-essentials',
     path: '/python/whiteboarding-essentials',
     getParentRoute: () => LearnRouteRoute,
-  } as any)
+  } as any);
 
 const LearnGitTaggingRoute = LearnGitTaggingImport.update({
   id: '/git/tagging',
   path: '/git/tagging',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitStashingRoute = LearnGitStashingImport.update({
   id: '/git/stashing',
   path: '/git/stashing',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitResetRoute = LearnGitResetImport.update({
   id: '/git/reset',
   path: '/git/reset',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitEveryDayGitRoute = LearnGitEveryDayGitImport.update({
   id: '/git/every-day-git',
   path: '/git/every-day-git',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitCherryPickingRoute = LearnGitCherryPickingImport.update({
   id: '/git/cherry-picking',
   path: '/git/cherry-picking',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnGitBranchingRoute = LearnGitBranchingImport.update({
   id: '/git/branching',
   path: '/git/branching',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const BlogSoftSkillsLearnNamesRoute = BlogSoftSkillsLearnNamesImport.update({
   id: '/soft-skills/learn-names',
   path: '/soft-skills/learn-names',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const BlogReactMemoMonsterRoute = BlogReactMemoMonsterImport.update({
   id: '/react/memo-monster',
   path: '/react/memo-monster',
   getParentRoute: () => BlogRouteRoute,
-} as any)
+} as any);
 
 const BlogFrontendDesignMicrofrontendsPart3Route =
   BlogFrontendDesignMicrofrontendsPart3Import.update({
     id: '/frontend-design/microfrontends-part3',
     path: '/frontend-design/microfrontends-part3',
     getParentRoute: () => BlogRouteRoute,
-  } as any)
+  } as any);
 
 const BlogFrontendDesignMicrofrontendsPart2Route =
   BlogFrontendDesignMicrofrontendsPart2Import.update({
     id: '/frontend-design/microfrontends-part2',
     path: '/frontend-design/microfrontends-part2',
     getParentRoute: () => BlogRouteRoute,
-  } as any)
+  } as any);
 
 const BlogFrontendDesignMicrofrontendsPart1Route =
   BlogFrontendDesignMicrofrontendsPart1Import.update({
     id: '/frontend-design/microfrontends-part1',
     path: '/frontend-design/microfrontends-part1',
     getParentRoute: () => BlogRouteRoute,
-  } as any)
+  } as any);
 
 const LearnMathSigmaNotationRouteRoute =
   LearnMathSigmaNotationRouteImport.update({
     id: '/math/sigma-notation',
     path: '/math/sigma-notation',
     getParentRoute: () => LearnRouteRoute,
-  } as any)
+  } as any);
 
 const LearnMathExponentsRouteRoute = LearnMathExponentsRouteImport.update({
   id: '/math/exponents',
   path: '/math/exponents',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnMathDivisionRouteRoute = LearnMathDivisionRouteImport.update({
   id: '/math/division',
   path: '/math/division',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnMathDividingFractionsRouteRoute =
   LearnMathDividingFractionsRouteImport.update({
     id: '/math/dividing-fractions',
     path: '/math/dividing-fractions',
     getParentRoute: () => LearnRouteRoute,
-  } as any)
+  } as any);
 
 const LearnDsaBinarySearchRouteRoute = LearnDsaBinarySearchRouteImport.update({
   id: '/dsa/binary-search',
   path: '/dsa/binary-search',
   getParentRoute: () => LearnRouteRoute,
-} as any)
+} as any);
 
 const LearnMathSigmaNotationIndexRoute =
   LearnMathSigmaNotationIndexImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => LearnMathSigmaNotationRouteRoute,
-  } as any)
+  } as any);
 
 const LearnMathExponentsIndexRoute = LearnMathExponentsIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LearnMathExponentsRouteRoute,
-} as any)
+} as any);
 
 const LearnMathDivisionIndexRoute = LearnMathDivisionIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LearnMathDivisionRouteRoute,
-} as any)
+} as any);
 
 const LearnMathDividingFractionsIndexRoute =
   LearnMathDividingFractionsIndexImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => LearnMathDividingFractionsRouteRoute,
-  } as any)
+  } as any);
 
 const LearnDsaBinarySearchIndexRoute = LearnDsaBinarySearchIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LearnDsaBinarySearchRouteRoute,
-} as any)
+} as any);
 
 const LearnMathDivisionProblemsLazyRoute =
   LearnMathDivisionProblemsLazyImport.update({
@@ -301,8 +301,8 @@ const LearnMathDivisionProblemsLazyRoute =
     path: '/problems',
     getParentRoute: () => LearnMathDivisionRouteRoute,
   } as any).lazy(() =>
-    import('./routes/learn/math/division/problems.lazy').then((d) => d.Route),
-  )
+    import('./routes/learn/math/division/problems.lazy').then((d) => d.Route)
+  );
 
 const LearnMathDividingFractionsExamplesLazyRoute =
   LearnMathDividingFractionsExamplesLazyImport.update({
@@ -311,9 +311,9 @@ const LearnMathDividingFractionsExamplesLazyRoute =
     getParentRoute: () => LearnMathDividingFractionsRouteRoute,
   } as any).lazy(() =>
     import('./routes/learn/math/dividing-fractions/examples.lazy').then(
-      (d) => d.Route,
-    ),
-  )
+      (d) => d.Route
+    )
+  );
 
 const LearnMathDividingFractionsAdvancedLazyRoute =
   LearnMathDividingFractionsAdvancedLazyImport.update({
@@ -322,309 +322,309 @@ const LearnMathDividingFractionsAdvancedLazyRoute =
     getParentRoute: () => LearnMathDividingFractionsRouteRoute,
   } as any).lazy(() =>
     import('./routes/learn/math/dividing-fractions/advanced.lazy').then(
-      (d) => d.Route,
-    ),
-  )
+      (d) => d.Route
+    )
+  );
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/blog';
+      path: '/blog';
+      fullPath: '/blog';
+      preLoaderRoute: typeof BlogRouteImport;
+      parentRoute: typeof rootRoute;
+    };
     '/learn': {
-      id: '/learn'
-      path: '/learn'
-      fullPath: '/learn'
-      preLoaderRoute: typeof LearnRouteImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/learn';
+      path: '/learn';
+      fullPath: '/learn';
+      preLoaderRoute: typeof LearnRouteImport;
+      parentRoute: typeof rootRoute;
+    };
     '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/about';
+      path: '/about';
+      fullPath: '/about';
+      preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
     '/game': {
-      id: '/game'
-      path: '/game'
-      fullPath: '/game'
-      preLoaderRoute: typeof GameImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/game';
+      path: '/game';
+      fullPath: '/game';
+      preLoaderRoute: typeof GameImport;
+      parentRoute: typeof rootRoute;
+    };
     '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/home';
+      path: '/home';
+      fullPath: '/home';
+      preLoaderRoute: typeof HomeImport;
+      parentRoute: typeof rootRoute;
+    };
     '/blog/': {
-      id: '/blog/'
-      path: '/'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/';
+      path: '/';
+      fullPath: '/blog/';
+      preLoaderRoute: typeof BlogIndexImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/learn/': {
-      id: '/learn/'
-      path: '/'
-      fullPath: '/learn/'
-      preLoaderRoute: typeof LearnIndexImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/';
+      path: '/';
+      fullPath: '/learn/';
+      preLoaderRoute: typeof LearnIndexImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/dsa/binary-search': {
-      id: '/learn/dsa/binary-search'
-      path: '/dsa/binary-search'
-      fullPath: '/learn/dsa/binary-search'
-      preLoaderRoute: typeof LearnDsaBinarySearchRouteImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/dsa/binary-search';
+      path: '/dsa/binary-search';
+      fullPath: '/learn/dsa/binary-search';
+      preLoaderRoute: typeof LearnDsaBinarySearchRouteImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/dividing-fractions': {
-      id: '/learn/math/dividing-fractions'
-      path: '/math/dividing-fractions'
-      fullPath: '/learn/math/dividing-fractions'
-      preLoaderRoute: typeof LearnMathDividingFractionsRouteImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/math/dividing-fractions';
+      path: '/math/dividing-fractions';
+      fullPath: '/learn/math/dividing-fractions';
+      preLoaderRoute: typeof LearnMathDividingFractionsRouteImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/division': {
-      id: '/learn/math/division'
-      path: '/math/division'
-      fullPath: '/learn/math/division'
-      preLoaderRoute: typeof LearnMathDivisionRouteImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/math/division';
+      path: '/math/division';
+      fullPath: '/learn/math/division';
+      preLoaderRoute: typeof LearnMathDivisionRouteImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/exponents': {
-      id: '/learn/math/exponents'
-      path: '/math/exponents'
-      fullPath: '/learn/math/exponents'
-      preLoaderRoute: typeof LearnMathExponentsRouteImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/math/exponents';
+      path: '/math/exponents';
+      fullPath: '/learn/math/exponents';
+      preLoaderRoute: typeof LearnMathExponentsRouteImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/sigma-notation': {
-      id: '/learn/math/sigma-notation'
-      path: '/math/sigma-notation'
-      fullPath: '/learn/math/sigma-notation'
-      preLoaderRoute: typeof LearnMathSigmaNotationRouteImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/math/sigma-notation';
+      path: '/math/sigma-notation';
+      fullPath: '/learn/math/sigma-notation';
+      preLoaderRoute: typeof LearnMathSigmaNotationRouteImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/blog/frontend-design/microfrontends-part1': {
-      id: '/blog/frontend-design/microfrontends-part1'
-      path: '/frontend-design/microfrontends-part1'
-      fullPath: '/blog/frontend-design/microfrontends-part1'
-      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart1Import
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/frontend-design/microfrontends-part1';
+      path: '/frontend-design/microfrontends-part1';
+      fullPath: '/blog/frontend-design/microfrontends-part1';
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart1Import;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/frontend-design/microfrontends-part2': {
-      id: '/blog/frontend-design/microfrontends-part2'
-      path: '/frontend-design/microfrontends-part2'
-      fullPath: '/blog/frontend-design/microfrontends-part2'
-      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart2Import
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/frontend-design/microfrontends-part2';
+      path: '/frontend-design/microfrontends-part2';
+      fullPath: '/blog/frontend-design/microfrontends-part2';
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart2Import;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/frontend-design/microfrontends-part3': {
-      id: '/blog/frontend-design/microfrontends-part3'
-      path: '/frontend-design/microfrontends-part3'
-      fullPath: '/blog/frontend-design/microfrontends-part3'
-      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart3Import
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/frontend-design/microfrontends-part3';
+      path: '/frontend-design/microfrontends-part3';
+      fullPath: '/blog/frontend-design/microfrontends-part3';
+      preLoaderRoute: typeof BlogFrontendDesignMicrofrontendsPart3Import;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/react/memo-monster': {
-      id: '/blog/react/memo-monster'
-      path: '/react/memo-monster'
-      fullPath: '/blog/react/memo-monster'
-      preLoaderRoute: typeof BlogReactMemoMonsterImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/react/memo-monster';
+      path: '/react/memo-monster';
+      fullPath: '/blog/react/memo-monster';
+      preLoaderRoute: typeof BlogReactMemoMonsterImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/soft-skills/learn-names': {
-      id: '/blog/soft-skills/learn-names'
-      path: '/soft-skills/learn-names'
-      fullPath: '/blog/soft-skills/learn-names'
-      preLoaderRoute: typeof BlogSoftSkillsLearnNamesImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/soft-skills/learn-names';
+      path: '/soft-skills/learn-names';
+      fullPath: '/blog/soft-skills/learn-names';
+      preLoaderRoute: typeof BlogSoftSkillsLearnNamesImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/learn/git/branching': {
-      id: '/learn/git/branching'
-      path: '/git/branching'
-      fullPath: '/learn/git/branching'
-      preLoaderRoute: typeof LearnGitBranchingImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/branching';
+      path: '/git/branching';
+      fullPath: '/learn/git/branching';
+      preLoaderRoute: typeof LearnGitBranchingImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/cherry-picking': {
-      id: '/learn/git/cherry-picking'
-      path: '/git/cherry-picking'
-      fullPath: '/learn/git/cherry-picking'
-      preLoaderRoute: typeof LearnGitCherryPickingImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/cherry-picking';
+      path: '/git/cherry-picking';
+      fullPath: '/learn/git/cherry-picking';
+      preLoaderRoute: typeof LearnGitCherryPickingImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/every-day-git': {
-      id: '/learn/git/every-day-git'
-      path: '/git/every-day-git'
-      fullPath: '/learn/git/every-day-git'
-      preLoaderRoute: typeof LearnGitEveryDayGitImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/every-day-git';
+      path: '/git/every-day-git';
+      fullPath: '/learn/git/every-day-git';
+      preLoaderRoute: typeof LearnGitEveryDayGitImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/reset': {
-      id: '/learn/git/reset'
-      path: '/git/reset'
-      fullPath: '/learn/git/reset'
-      preLoaderRoute: typeof LearnGitResetImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/reset';
+      path: '/git/reset';
+      fullPath: '/learn/git/reset';
+      preLoaderRoute: typeof LearnGitResetImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/stashing': {
-      id: '/learn/git/stashing'
-      path: '/git/stashing'
-      fullPath: '/learn/git/stashing'
-      preLoaderRoute: typeof LearnGitStashingImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/stashing';
+      path: '/git/stashing';
+      fullPath: '/learn/git/stashing';
+      preLoaderRoute: typeof LearnGitStashingImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/tagging': {
-      id: '/learn/git/tagging'
-      path: '/git/tagging'
-      fullPath: '/learn/git/tagging'
-      preLoaderRoute: typeof LearnGitTaggingImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/tagging';
+      path: '/git/tagging';
+      fullPath: '/learn/git/tagging';
+      preLoaderRoute: typeof LearnGitTaggingImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/python/whiteboarding-essentials': {
-      id: '/learn/python/whiteboarding-essentials'
-      path: '/python/whiteboarding-essentials'
-      fullPath: '/learn/python/whiteboarding-essentials'
-      preLoaderRoute: typeof LearnPythonWhiteboardingEssentialsImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/python/whiteboarding-essentials';
+      path: '/python/whiteboarding-essentials';
+      fullPath: '/learn/python/whiteboarding-essentials';
+      preLoaderRoute: typeof LearnPythonWhiteboardingEssentialsImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/blog/frontend-design/': {
-      id: '/blog/frontend-design/'
-      path: '/frontend-design'
-      fullPath: '/blog/frontend-design'
-      preLoaderRoute: typeof BlogFrontendDesignIndexImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/frontend-design/';
+      path: '/frontend-design';
+      fullPath: '/blog/frontend-design';
+      preLoaderRoute: typeof BlogFrontendDesignIndexImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/react/': {
-      id: '/blog/react/'
-      path: '/react'
-      fullPath: '/blog/react'
-      preLoaderRoute: typeof BlogReactIndexImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/react/';
+      path: '/react';
+      fullPath: '/blog/react';
+      preLoaderRoute: typeof BlogReactIndexImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/blog/soft-skills/': {
-      id: '/blog/soft-skills/'
-      path: '/soft-skills'
-      fullPath: '/blog/soft-skills'
-      preLoaderRoute: typeof BlogSoftSkillsIndexImport
-      parentRoute: typeof BlogRouteImport
-    }
+      id: '/blog/soft-skills/';
+      path: '/soft-skills';
+      fullPath: '/blog/soft-skills';
+      preLoaderRoute: typeof BlogSoftSkillsIndexImport;
+      parentRoute: typeof BlogRouteImport;
+    };
     '/learn/dsa/': {
-      id: '/learn/dsa/'
-      path: '/dsa'
-      fullPath: '/learn/dsa'
-      preLoaderRoute: typeof LearnDsaIndexImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/dsa/';
+      path: '/dsa';
+      fullPath: '/learn/dsa';
+      preLoaderRoute: typeof LearnDsaIndexImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/git/': {
-      id: '/learn/git/'
-      path: '/git'
-      fullPath: '/learn/git'
-      preLoaderRoute: typeof LearnGitIndexImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/git/';
+      path: '/git';
+      fullPath: '/learn/git';
+      preLoaderRoute: typeof LearnGitIndexImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/': {
-      id: '/learn/math/'
-      path: '/math'
-      fullPath: '/learn/math'
-      preLoaderRoute: typeof LearnMathIndexImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/math/';
+      path: '/math';
+      fullPath: '/learn/math';
+      preLoaderRoute: typeof LearnMathIndexImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/python/': {
-      id: '/learn/python/'
-      path: '/python'
-      fullPath: '/learn/python'
-      preLoaderRoute: typeof LearnPythonIndexImport
-      parentRoute: typeof LearnRouteImport
-    }
+      id: '/learn/python/';
+      path: '/python';
+      fullPath: '/learn/python';
+      preLoaderRoute: typeof LearnPythonIndexImport;
+      parentRoute: typeof LearnRouteImport;
+    };
     '/learn/math/dividing-fractions/advanced': {
-      id: '/learn/math/dividing-fractions/advanced'
-      path: '/advanced'
-      fullPath: '/learn/math/dividing-fractions/advanced'
-      preLoaderRoute: typeof LearnMathDividingFractionsAdvancedLazyImport
-      parentRoute: typeof LearnMathDividingFractionsRouteImport
-    }
+      id: '/learn/math/dividing-fractions/advanced';
+      path: '/advanced';
+      fullPath: '/learn/math/dividing-fractions/advanced';
+      preLoaderRoute: typeof LearnMathDividingFractionsAdvancedLazyImport;
+      parentRoute: typeof LearnMathDividingFractionsRouteImport;
+    };
     '/learn/math/dividing-fractions/examples': {
-      id: '/learn/math/dividing-fractions/examples'
-      path: '/examples'
-      fullPath: '/learn/math/dividing-fractions/examples'
-      preLoaderRoute: typeof LearnMathDividingFractionsExamplesLazyImport
-      parentRoute: typeof LearnMathDividingFractionsRouteImport
-    }
+      id: '/learn/math/dividing-fractions/examples';
+      path: '/examples';
+      fullPath: '/learn/math/dividing-fractions/examples';
+      preLoaderRoute: typeof LearnMathDividingFractionsExamplesLazyImport;
+      parentRoute: typeof LearnMathDividingFractionsRouteImport;
+    };
     '/learn/math/division/problems': {
-      id: '/learn/math/division/problems'
-      path: '/problems'
-      fullPath: '/learn/math/division/problems'
-      preLoaderRoute: typeof LearnMathDivisionProblemsLazyImport
-      parentRoute: typeof LearnMathDivisionRouteImport
-    }
+      id: '/learn/math/division/problems';
+      path: '/problems';
+      fullPath: '/learn/math/division/problems';
+      preLoaderRoute: typeof LearnMathDivisionProblemsLazyImport;
+      parentRoute: typeof LearnMathDivisionRouteImport;
+    };
     '/learn/dsa/binary-search/': {
-      id: '/learn/dsa/binary-search/'
-      path: '/'
-      fullPath: '/learn/dsa/binary-search/'
-      preLoaderRoute: typeof LearnDsaBinarySearchIndexImport
-      parentRoute: typeof LearnDsaBinarySearchRouteImport
-    }
+      id: '/learn/dsa/binary-search/';
+      path: '/';
+      fullPath: '/learn/dsa/binary-search/';
+      preLoaderRoute: typeof LearnDsaBinarySearchIndexImport;
+      parentRoute: typeof LearnDsaBinarySearchRouteImport;
+    };
     '/learn/math/dividing-fractions/': {
-      id: '/learn/math/dividing-fractions/'
-      path: '/'
-      fullPath: '/learn/math/dividing-fractions/'
-      preLoaderRoute: typeof LearnMathDividingFractionsIndexImport
-      parentRoute: typeof LearnMathDividingFractionsRouteImport
-    }
+      id: '/learn/math/dividing-fractions/';
+      path: '/';
+      fullPath: '/learn/math/dividing-fractions/';
+      preLoaderRoute: typeof LearnMathDividingFractionsIndexImport;
+      parentRoute: typeof LearnMathDividingFractionsRouteImport;
+    };
     '/learn/math/division/': {
-      id: '/learn/math/division/'
-      path: '/'
-      fullPath: '/learn/math/division/'
-      preLoaderRoute: typeof LearnMathDivisionIndexImport
-      parentRoute: typeof LearnMathDivisionRouteImport
-    }
+      id: '/learn/math/division/';
+      path: '/';
+      fullPath: '/learn/math/division/';
+      preLoaderRoute: typeof LearnMathDivisionIndexImport;
+      parentRoute: typeof LearnMathDivisionRouteImport;
+    };
     '/learn/math/exponents/': {
-      id: '/learn/math/exponents/'
-      path: '/'
-      fullPath: '/learn/math/exponents/'
-      preLoaderRoute: typeof LearnMathExponentsIndexImport
-      parentRoute: typeof LearnMathExponentsRouteImport
-    }
+      id: '/learn/math/exponents/';
+      path: '/';
+      fullPath: '/learn/math/exponents/';
+      preLoaderRoute: typeof LearnMathExponentsIndexImport;
+      parentRoute: typeof LearnMathExponentsRouteImport;
+    };
     '/learn/math/sigma-notation/': {
-      id: '/learn/math/sigma-notation/'
-      path: '/'
-      fullPath: '/learn/math/sigma-notation/'
-      preLoaderRoute: typeof LearnMathSigmaNotationIndexImport
-      parentRoute: typeof LearnMathSigmaNotationRouteImport
-    }
+      id: '/learn/math/sigma-notation/';
+      path: '/';
+      fullPath: '/learn/math/sigma-notation/';
+      preLoaderRoute: typeof LearnMathSigmaNotationIndexImport;
+      parentRoute: typeof LearnMathSigmaNotationRouteImport;
+    };
   }
 }
 
 // Create and export the route tree
 
 interface BlogRouteRouteChildren {
-  BlogIndexRoute: typeof BlogIndexRoute
-  BlogFrontendDesignMicrofrontendsPart1Route: typeof BlogFrontendDesignMicrofrontendsPart1Route
-  BlogFrontendDesignMicrofrontendsPart2Route: typeof BlogFrontendDesignMicrofrontendsPart2Route
-  BlogFrontendDesignMicrofrontendsPart3Route: typeof BlogFrontendDesignMicrofrontendsPart3Route
-  BlogReactMemoMonsterRoute: typeof BlogReactMemoMonsterRoute
-  BlogSoftSkillsLearnNamesRoute: typeof BlogSoftSkillsLearnNamesRoute
-  BlogFrontendDesignIndexRoute: typeof BlogFrontendDesignIndexRoute
-  BlogReactIndexRoute: typeof BlogReactIndexRoute
-  BlogSoftSkillsIndexRoute: typeof BlogSoftSkillsIndexRoute
+  BlogIndexRoute: typeof BlogIndexRoute;
+  BlogFrontendDesignMicrofrontendsPart1Route: typeof BlogFrontendDesignMicrofrontendsPart1Route;
+  BlogFrontendDesignMicrofrontendsPart2Route: typeof BlogFrontendDesignMicrofrontendsPart2Route;
+  BlogFrontendDesignMicrofrontendsPart3Route: typeof BlogFrontendDesignMicrofrontendsPart3Route;
+  BlogReactMemoMonsterRoute: typeof BlogReactMemoMonsterRoute;
+  BlogSoftSkillsLearnNamesRoute: typeof BlogSoftSkillsLearnNamesRoute;
+  BlogFrontendDesignIndexRoute: typeof BlogFrontendDesignIndexRoute;
+  BlogReactIndexRoute: typeof BlogReactIndexRoute;
+  BlogSoftSkillsIndexRoute: typeof BlogSoftSkillsIndexRoute;
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
@@ -640,30 +640,30 @@ const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogFrontendDesignIndexRoute: BlogFrontendDesignIndexRoute,
   BlogReactIndexRoute: BlogReactIndexRoute,
   BlogSoftSkillsIndexRoute: BlogSoftSkillsIndexRoute,
-}
+};
 
 const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
-  BlogRouteRouteChildren,
-)
+  BlogRouteRouteChildren
+);
 
 interface LearnDsaBinarySearchRouteRouteChildren {
-  LearnDsaBinarySearchIndexRoute: typeof LearnDsaBinarySearchIndexRoute
+  LearnDsaBinarySearchIndexRoute: typeof LearnDsaBinarySearchIndexRoute;
 }
 
 const LearnDsaBinarySearchRouteRouteChildren: LearnDsaBinarySearchRouteRouteChildren =
   {
     LearnDsaBinarySearchIndexRoute: LearnDsaBinarySearchIndexRoute,
-  }
+  };
 
 const LearnDsaBinarySearchRouteRouteWithChildren =
   LearnDsaBinarySearchRouteRoute._addFileChildren(
-    LearnDsaBinarySearchRouteRouteChildren,
-  )
+    LearnDsaBinarySearchRouteRouteChildren
+  );
 
 interface LearnMathDividingFractionsRouteRouteChildren {
-  LearnMathDividingFractionsAdvancedLazyRoute: typeof LearnMathDividingFractionsAdvancedLazyRoute
-  LearnMathDividingFractionsExamplesLazyRoute: typeof LearnMathDividingFractionsExamplesLazyRoute
-  LearnMathDividingFractionsIndexRoute: typeof LearnMathDividingFractionsIndexRoute
+  LearnMathDividingFractionsAdvancedLazyRoute: typeof LearnMathDividingFractionsAdvancedLazyRoute;
+  LearnMathDividingFractionsExamplesLazyRoute: typeof LearnMathDividingFractionsExamplesLazyRoute;
+  LearnMathDividingFractionsIndexRoute: typeof LearnMathDividingFractionsIndexRoute;
 }
 
 const LearnMathDividingFractionsRouteRouteChildren: LearnMathDividingFractionsRouteRouteChildren =
@@ -673,75 +673,75 @@ const LearnMathDividingFractionsRouteRouteChildren: LearnMathDividingFractionsRo
     LearnMathDividingFractionsExamplesLazyRoute:
       LearnMathDividingFractionsExamplesLazyRoute,
     LearnMathDividingFractionsIndexRoute: LearnMathDividingFractionsIndexRoute,
-  }
+  };
 
 const LearnMathDividingFractionsRouteRouteWithChildren =
   LearnMathDividingFractionsRouteRoute._addFileChildren(
-    LearnMathDividingFractionsRouteRouteChildren,
-  )
+    LearnMathDividingFractionsRouteRouteChildren
+  );
 
 interface LearnMathDivisionRouteRouteChildren {
-  LearnMathDivisionProblemsLazyRoute: typeof LearnMathDivisionProblemsLazyRoute
-  LearnMathDivisionIndexRoute: typeof LearnMathDivisionIndexRoute
+  LearnMathDivisionProblemsLazyRoute: typeof LearnMathDivisionProblemsLazyRoute;
+  LearnMathDivisionIndexRoute: typeof LearnMathDivisionIndexRoute;
 }
 
 const LearnMathDivisionRouteRouteChildren: LearnMathDivisionRouteRouteChildren =
   {
     LearnMathDivisionProblemsLazyRoute: LearnMathDivisionProblemsLazyRoute,
     LearnMathDivisionIndexRoute: LearnMathDivisionIndexRoute,
-  }
+  };
 
 const LearnMathDivisionRouteRouteWithChildren =
   LearnMathDivisionRouteRoute._addFileChildren(
-    LearnMathDivisionRouteRouteChildren,
-  )
+    LearnMathDivisionRouteRouteChildren
+  );
 
 interface LearnMathExponentsRouteRouteChildren {
-  LearnMathExponentsIndexRoute: typeof LearnMathExponentsIndexRoute
+  LearnMathExponentsIndexRoute: typeof LearnMathExponentsIndexRoute;
 }
 
 const LearnMathExponentsRouteRouteChildren: LearnMathExponentsRouteRouteChildren =
   {
     LearnMathExponentsIndexRoute: LearnMathExponentsIndexRoute,
-  }
+  };
 
 const LearnMathExponentsRouteRouteWithChildren =
   LearnMathExponentsRouteRoute._addFileChildren(
-    LearnMathExponentsRouteRouteChildren,
-  )
+    LearnMathExponentsRouteRouteChildren
+  );
 
 interface LearnMathSigmaNotationRouteRouteChildren {
-  LearnMathSigmaNotationIndexRoute: typeof LearnMathSigmaNotationIndexRoute
+  LearnMathSigmaNotationIndexRoute: typeof LearnMathSigmaNotationIndexRoute;
 }
 
 const LearnMathSigmaNotationRouteRouteChildren: LearnMathSigmaNotationRouteRouteChildren =
   {
     LearnMathSigmaNotationIndexRoute: LearnMathSigmaNotationIndexRoute,
-  }
+  };
 
 const LearnMathSigmaNotationRouteRouteWithChildren =
   LearnMathSigmaNotationRouteRoute._addFileChildren(
-    LearnMathSigmaNotationRouteRouteChildren,
-  )
+    LearnMathSigmaNotationRouteRouteChildren
+  );
 
 interface LearnRouteRouteChildren {
-  LearnIndexRoute: typeof LearnIndexRoute
-  LearnDsaBinarySearchRouteRoute: typeof LearnDsaBinarySearchRouteRouteWithChildren
-  LearnMathDividingFractionsRouteRoute: typeof LearnMathDividingFractionsRouteRouteWithChildren
-  LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren
-  LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren
-  LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren
-  LearnGitBranchingRoute: typeof LearnGitBranchingRoute
-  LearnGitCherryPickingRoute: typeof LearnGitCherryPickingRoute
-  LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute
-  LearnGitResetRoute: typeof LearnGitResetRoute
-  LearnGitStashingRoute: typeof LearnGitStashingRoute
-  LearnGitTaggingRoute: typeof LearnGitTaggingRoute
-  LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute
-  LearnDsaIndexRoute: typeof LearnDsaIndexRoute
-  LearnGitIndexRoute: typeof LearnGitIndexRoute
-  LearnMathIndexRoute: typeof LearnMathIndexRoute
-  LearnPythonIndexRoute: typeof LearnPythonIndexRoute
+  LearnIndexRoute: typeof LearnIndexRoute;
+  LearnDsaBinarySearchRouteRoute: typeof LearnDsaBinarySearchRouteRouteWithChildren;
+  LearnMathDividingFractionsRouteRoute: typeof LearnMathDividingFractionsRouteRouteWithChildren;
+  LearnMathDivisionRouteRoute: typeof LearnMathDivisionRouteRouteWithChildren;
+  LearnMathExponentsRouteRoute: typeof LearnMathExponentsRouteRouteWithChildren;
+  LearnMathSigmaNotationRouteRoute: typeof LearnMathSigmaNotationRouteRouteWithChildren;
+  LearnGitBranchingRoute: typeof LearnGitBranchingRoute;
+  LearnGitCherryPickingRoute: typeof LearnGitCherryPickingRoute;
+  LearnGitEveryDayGitRoute: typeof LearnGitEveryDayGitRoute;
+  LearnGitResetRoute: typeof LearnGitResetRoute;
+  LearnGitStashingRoute: typeof LearnGitStashingRoute;
+  LearnGitTaggingRoute: typeof LearnGitTaggingRoute;
+  LearnPythonWhiteboardingEssentialsRoute: typeof LearnPythonWhiteboardingEssentialsRoute;
+  LearnDsaIndexRoute: typeof LearnDsaIndexRoute;
+  LearnGitIndexRoute: typeof LearnGitIndexRoute;
+  LearnMathIndexRoute: typeof LearnMathIndexRoute;
+  LearnPythonIndexRoute: typeof LearnPythonIndexRoute;
 }
 
 const LearnRouteRouteChildren: LearnRouteRouteChildren = {
@@ -765,137 +765,137 @@ const LearnRouteRouteChildren: LearnRouteRouteChildren = {
   LearnGitIndexRoute: LearnGitIndexRoute,
   LearnMathIndexRoute: LearnMathIndexRoute,
   LearnPythonIndexRoute: LearnPythonIndexRoute,
-}
+};
 
 const LearnRouteRouteWithChildren = LearnRouteRoute._addFileChildren(
-  LearnRouteRouteChildren,
-)
+  LearnRouteRouteChildren
+);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/blog': typeof BlogRouteRouteWithChildren
-  '/learn': typeof LearnRouteRouteWithChildren
-  '/about': typeof AboutRoute
-  '/game': typeof GameRoute
-  '/home': typeof HomeRoute
-  '/blog/': typeof BlogIndexRoute
-  '/learn/': typeof LearnIndexRoute
-  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren
-  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
-  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
-  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
-  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren
-  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
-  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
-  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
-  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
-  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/git/branching': typeof LearnGitBranchingRoute
-  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
-  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
-  '/learn/git/reset': typeof LearnGitResetRoute
-  '/learn/git/stashing': typeof LearnGitStashingRoute
-  '/learn/git/tagging': typeof LearnGitTaggingRoute
-  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
-  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
-  '/blog/react': typeof BlogReactIndexRoute
-  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
-  '/learn/dsa': typeof LearnDsaIndexRoute
-  '/learn/git': typeof LearnGitIndexRoute
-  '/learn/math': typeof LearnMathIndexRoute
-  '/learn/python': typeof LearnPythonIndexRoute
-  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
-  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
-  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
-  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute
-  '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
-  '/learn/math/division/': typeof LearnMathDivisionIndexRoute
-  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
-  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute
+  '/': typeof IndexRoute;
+  '/blog': typeof BlogRouteRouteWithChildren;
+  '/learn': typeof LearnRouteRouteWithChildren;
+  '/about': typeof AboutRoute;
+  '/game': typeof GameRoute;
+  '/home': typeof HomeRoute;
+  '/blog/': typeof BlogIndexRoute;
+  '/learn/': typeof LearnIndexRoute;
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren;
+  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren;
+  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren;
+  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren;
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren;
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route;
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route;
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route;
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute;
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute;
+  '/learn/git/branching': typeof LearnGitBranchingRoute;
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute;
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute;
+  '/learn/git/reset': typeof LearnGitResetRoute;
+  '/learn/git/stashing': typeof LearnGitStashingRoute;
+  '/learn/git/tagging': typeof LearnGitTaggingRoute;
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute;
+  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute;
+  '/blog/react': typeof BlogReactIndexRoute;
+  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute;
+  '/learn/dsa': typeof LearnDsaIndexRoute;
+  '/learn/git': typeof LearnGitIndexRoute;
+  '/learn/math': typeof LearnMathIndexRoute;
+  '/learn/python': typeof LearnPythonIndexRoute;
+  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute;
+  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute;
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute;
+  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute;
+  '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute;
+  '/learn/math/division/': typeof LearnMathDivisionIndexRoute;
+  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute;
+  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/game': typeof GameRoute
-  '/home': typeof HomeRoute
-  '/blog': typeof BlogIndexRoute
-  '/learn': typeof LearnIndexRoute
-  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
-  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
-  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
-  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
-  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/git/branching': typeof LearnGitBranchingRoute
-  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
-  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
-  '/learn/git/reset': typeof LearnGitResetRoute
-  '/learn/git/stashing': typeof LearnGitStashingRoute
-  '/learn/git/tagging': typeof LearnGitTaggingRoute
-  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
-  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute
-  '/blog/react': typeof BlogReactIndexRoute
-  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute
-  '/learn/dsa': typeof LearnDsaIndexRoute
-  '/learn/git': typeof LearnGitIndexRoute
-  '/learn/math': typeof LearnMathIndexRoute
-  '/learn/python': typeof LearnPythonIndexRoute
-  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
-  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
-  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
-  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchIndexRoute
-  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsIndexRoute
-  '/learn/math/division': typeof LearnMathDivisionIndexRoute
-  '/learn/math/exponents': typeof LearnMathExponentsIndexRoute
-  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationIndexRoute
+  '/': typeof IndexRoute;
+  '/about': typeof AboutRoute;
+  '/game': typeof GameRoute;
+  '/home': typeof HomeRoute;
+  '/blog': typeof BlogIndexRoute;
+  '/learn': typeof LearnIndexRoute;
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route;
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route;
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route;
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute;
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute;
+  '/learn/git/branching': typeof LearnGitBranchingRoute;
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute;
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute;
+  '/learn/git/reset': typeof LearnGitResetRoute;
+  '/learn/git/stashing': typeof LearnGitStashingRoute;
+  '/learn/git/tagging': typeof LearnGitTaggingRoute;
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute;
+  '/blog/frontend-design': typeof BlogFrontendDesignIndexRoute;
+  '/blog/react': typeof BlogReactIndexRoute;
+  '/blog/soft-skills': typeof BlogSoftSkillsIndexRoute;
+  '/learn/dsa': typeof LearnDsaIndexRoute;
+  '/learn/git': typeof LearnGitIndexRoute;
+  '/learn/math': typeof LearnMathIndexRoute;
+  '/learn/python': typeof LearnPythonIndexRoute;
+  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute;
+  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute;
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute;
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchIndexRoute;
+  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsIndexRoute;
+  '/learn/math/division': typeof LearnMathDivisionIndexRoute;
+  '/learn/math/exponents': typeof LearnMathExponentsIndexRoute;
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/blog': typeof BlogRouteRouteWithChildren
-  '/learn': typeof LearnRouteRouteWithChildren
-  '/about': typeof AboutRoute
-  '/game': typeof GameRoute
-  '/home': typeof HomeRoute
-  '/blog/': typeof BlogIndexRoute
-  '/learn/': typeof LearnIndexRoute
-  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren
-  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren
-  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren
-  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren
-  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren
-  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route
-  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route
-  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route
-  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute
-  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute
-  '/learn/git/branching': typeof LearnGitBranchingRoute
-  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute
-  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute
-  '/learn/git/reset': typeof LearnGitResetRoute
-  '/learn/git/stashing': typeof LearnGitStashingRoute
-  '/learn/git/tagging': typeof LearnGitTaggingRoute
-  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute
-  '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute
-  '/blog/react/': typeof BlogReactIndexRoute
-  '/blog/soft-skills/': typeof BlogSoftSkillsIndexRoute
-  '/learn/dsa/': typeof LearnDsaIndexRoute
-  '/learn/git/': typeof LearnGitIndexRoute
-  '/learn/math/': typeof LearnMathIndexRoute
-  '/learn/python/': typeof LearnPythonIndexRoute
-  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute
-  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute
-  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute
-  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute
-  '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute
-  '/learn/math/division/': typeof LearnMathDivisionIndexRoute
-  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute
-  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexRoute;
+  '/blog': typeof BlogRouteRouteWithChildren;
+  '/learn': typeof LearnRouteRouteWithChildren;
+  '/about': typeof AboutRoute;
+  '/game': typeof GameRoute;
+  '/home': typeof HomeRoute;
+  '/blog/': typeof BlogIndexRoute;
+  '/learn/': typeof LearnIndexRoute;
+  '/learn/dsa/binary-search': typeof LearnDsaBinarySearchRouteRouteWithChildren;
+  '/learn/math/dividing-fractions': typeof LearnMathDividingFractionsRouteRouteWithChildren;
+  '/learn/math/division': typeof LearnMathDivisionRouteRouteWithChildren;
+  '/learn/math/exponents': typeof LearnMathExponentsRouteRouteWithChildren;
+  '/learn/math/sigma-notation': typeof LearnMathSigmaNotationRouteRouteWithChildren;
+  '/blog/frontend-design/microfrontends-part1': typeof BlogFrontendDesignMicrofrontendsPart1Route;
+  '/blog/frontend-design/microfrontends-part2': typeof BlogFrontendDesignMicrofrontendsPart2Route;
+  '/blog/frontend-design/microfrontends-part3': typeof BlogFrontendDesignMicrofrontendsPart3Route;
+  '/blog/react/memo-monster': typeof BlogReactMemoMonsterRoute;
+  '/blog/soft-skills/learn-names': typeof BlogSoftSkillsLearnNamesRoute;
+  '/learn/git/branching': typeof LearnGitBranchingRoute;
+  '/learn/git/cherry-picking': typeof LearnGitCherryPickingRoute;
+  '/learn/git/every-day-git': typeof LearnGitEveryDayGitRoute;
+  '/learn/git/reset': typeof LearnGitResetRoute;
+  '/learn/git/stashing': typeof LearnGitStashingRoute;
+  '/learn/git/tagging': typeof LearnGitTaggingRoute;
+  '/learn/python/whiteboarding-essentials': typeof LearnPythonWhiteboardingEssentialsRoute;
+  '/blog/frontend-design/': typeof BlogFrontendDesignIndexRoute;
+  '/blog/react/': typeof BlogReactIndexRoute;
+  '/blog/soft-skills/': typeof BlogSoftSkillsIndexRoute;
+  '/learn/dsa/': typeof LearnDsaIndexRoute;
+  '/learn/git/': typeof LearnGitIndexRoute;
+  '/learn/math/': typeof LearnMathIndexRoute;
+  '/learn/python/': typeof LearnPythonIndexRoute;
+  '/learn/math/dividing-fractions/advanced': typeof LearnMathDividingFractionsAdvancedLazyRoute;
+  '/learn/math/dividing-fractions/examples': typeof LearnMathDividingFractionsExamplesLazyRoute;
+  '/learn/math/division/problems': typeof LearnMathDivisionProblemsLazyRoute;
+  '/learn/dsa/binary-search/': typeof LearnDsaBinarySearchIndexRoute;
+  '/learn/math/dividing-fractions/': typeof LearnMathDividingFractionsIndexRoute;
+  '/learn/math/division/': typeof LearnMathDivisionIndexRoute;
+  '/learn/math/exponents/': typeof LearnMathExponentsIndexRoute;
+  '/learn/math/sigma-notation/': typeof LearnMathSigmaNotationIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/blog'
@@ -936,8 +936,8 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
-    | '/learn/math/sigma-notation/'
-  fileRoutesByTo: FileRoutesByTo
+    | '/learn/math/sigma-notation/';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/about'
@@ -971,7 +971,7 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions'
     | '/learn/math/division'
     | '/learn/math/exponents'
-    | '/learn/math/sigma-notation'
+    | '/learn/math/sigma-notation';
   id:
     | '__root__'
     | '/'
@@ -1013,17 +1013,17 @@ export interface FileRouteTypes {
     | '/learn/math/dividing-fractions/'
     | '/learn/math/division/'
     | '/learn/math/exponents/'
-    | '/learn/math/sigma-notation/'
-  fileRoutesById: FileRoutesById
+    | '/learn/math/sigma-notation/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BlogRouteRoute: typeof BlogRouteRouteWithChildren
-  LearnRouteRoute: typeof LearnRouteRouteWithChildren
-  AboutRoute: typeof AboutRoute
-  GameRoute: typeof GameRoute
-  HomeRoute: typeof HomeRoute
+  IndexRoute: typeof IndexRoute;
+  BlogRouteRoute: typeof BlogRouteRouteWithChildren;
+  LearnRouteRoute: typeof LearnRouteRouteWithChildren;
+  AboutRoute: typeof AboutRoute;
+  GameRoute: typeof GameRoute;
+  HomeRoute: typeof HomeRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -1033,11 +1033,11 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   GameRoute: GameRoute,
   HomeRoute: HomeRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {

@@ -2,7 +2,7 @@ import {
   FeatureDrawer,
   type FeatureCategory,
 } from '@/components/FeatureDrawer';
-import { mdiAccountGroup, mdiReact, mdiPencilRuler } from '@mdi/js';
+import { mdiAccountGroup, mdiReact, mdiPencilRuler, mdiPost } from '@mdi/js';
 
 const blogCategories: FeatureCategory[] = [
   {
@@ -31,6 +31,7 @@ export function BlogDrawer() {
       categories={blogCategories}
       drawerKey="blog-drawer"
       featureName="blog"
+      headerIcon={mdiPost}
     />
   );
 }

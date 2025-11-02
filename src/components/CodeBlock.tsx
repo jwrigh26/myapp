@@ -192,15 +192,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     fontSize: '0.75rem',
     '&:hover': {
       backgroundColor: isDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)',
-      opacity: '1'
+      opacity: '1',
     },
   };
 
   return (
-    <CodeBlockContainer
-      codeBorder={border}
-      className={`code-block-container`}
-    >
+    <CodeBlockContainer codeBorder={border} className={`code-block-container`}>
       <Highlight theme={prismTheme} code={displayCode} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={{ ...style, ...overrideStyles }}>

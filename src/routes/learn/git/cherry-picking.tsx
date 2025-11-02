@@ -43,9 +43,9 @@ function CherryPickingComponent() {
 
       <IntroBlock>
         Cherry-picking lets you copy specific commits from one branch to another
-        without merging the entire branch. It's like saying "I want that specific
-        change, but not everything else." Perfect for pulling bug fixes to release
-        branches or grabbing features selectively.
+        without merging the entire branch. It's like saying "I want that
+        specific change, but not everything else." Perfect for pulling bug fixes
+        to release branches or grabbing features selectively.
       </IntroBlock>
 
       {/* WHAT IS CHERRY-PICKING */}
@@ -120,8 +120,8 @@ git cherry-pick 7f8e9a2`}
         <>
           <Typography variant="body2" gutterBottom>
             <strong>What happens:</strong> Git creates a new commit on your
-            current branch with the same changes as <code>abc1234</code>. The new
-            commit gets a different hash but identical code changes.
+            current branch with the same changes as <code>abc1234</code>. The
+            new commit gets a different hash but identical code changes.
           </Typography>
           <Typography variant="body2">
             The original commit on the source branch is unchanged.
@@ -140,8 +140,8 @@ git cherry-pick 7f8e9a2`}
 
       <ProseBlock spacingTop>
         You can cherry-pick multiple commits one by one, or use a range of
-        commits. This is useful for building a custom release branch from specific
-        features.
+        commits. This is useful for building a custom release branch from
+        specific features.
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
@@ -160,7 +160,10 @@ git cherry-pick 9a0b1c2
       />
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Range of commits" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Range of commits"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -177,9 +180,9 @@ git cherry-pick abc1234^..def5678`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Range syntax:</strong> <code>abc1234..def5678</code> picks all
-            commits between those two, but <strong>excludes</strong> the first
-            one.
+            <strong>Range syntax:</strong> <code>abc1234..def5678</code> picks
+            all commits between those two, but <strong>excludes</strong> the
+            first one.
           </Typography>
           <Typography variant="body2">
             Use <code>abc1234^..def5678</code> (with caret) to include the first
@@ -230,12 +233,12 @@ git branch -d temp-branch`}
         <>
           <Typography variant="body2" gutterBottom>
             <strong>Why use a temp branch?</strong> It gives you a safe place to
-            cherry-pick and test without affecting your main branch. If something
-            goes wrong, just delete the temp branch.
+            cherry-pick and test without affecting your main branch. If
+            something goes wrong, just delete the temp branch.
           </Typography>
           <Typography variant="body2">
-            <code>git switch -C temp-branch</code> (capital C) will reset the temp
-            branch to your current HEAD if it already exists.
+            <code>git switch -C temp-branch</code> (capital C) will reset the
+            temp branch to your current HEAD if it already exists.
           </Typography>
         </>
       </NoteBlock>
@@ -243,11 +246,11 @@ git branch -d temp-branch`}
       <SectionSpacer size={blockSpaceSize} />
       <Alert severity="info">
         <AlertTitle>Comparing -c vs -C</AlertTitle>
-        <code>git switch -c temp-branch</code> <Arrow /> Creates new branch, fails
-        if it exists
+        <code>git switch -c temp-branch</code> <Arrow /> Creates new branch,
+        fails if it exists
         <br />
-        <code>git switch -C temp-branch</code> <Arrow /> Creates or resets branch
-        to current HEAD
+        <code>git switch -C temp-branch</code> <Arrow /> Creates or resets
+        branch to current HEAD
       </Alert>
 
       {/* HANDLING CONFLICTS */}
@@ -288,13 +291,17 @@ git cherry-pick --continue`}
       <Spacer size={4} />
       <NoteBlock>
         <Typography variant="body2">
-          During conflicts, you can also use <code>git cherry-pick --abort</code>{' '}
-          to cancel the cherry-pick and return to the previous state.
+          During conflicts, you can also use{' '}
+          <code>git cherry-pick --abort</code> to cancel the cherry-pick and
+          return to the previous state.
         </Typography>
       </NoteBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Cherry-pick options" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Cherry-pick options"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <TopicBlock
@@ -307,7 +314,8 @@ git cherry-pick --continue`}
             <code>--abort</code> <Arrow /> Cancel the cherry-pick
           </>,
           <>
-            <code>--skip</code> <Arrow /> Skip this commit and continue with next
+            <code>--skip</code> <Arrow /> Skip this commit and continue with
+            next
           </>,
           <>
             <code>-n</code> or <code>--no-commit</code> <Arrow /> Apply changes
@@ -322,11 +330,7 @@ git cherry-pick --continue`}
 
       {/* COMMON WORKFLOWS */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Common Cherry-Pick Workflows"
-        id="workflows"
-      />
+      <ProseBlock anchor title="Common Cherry-Pick Workflows" id="workflows" />
 
       <ProseBlock spacingTop>
         Here are real-world scenarios where cherry-picking shines.

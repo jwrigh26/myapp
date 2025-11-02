@@ -1,6 +1,6 @@
 /**
  * VariableValue Component
- * 
+ *
  * Displays a variable name (in a chip) positioned above its value.
  * Useful for showing code variables and their current values inline.
  */
@@ -35,21 +35,29 @@ const ValueText = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: theme.spacing(0.5, 0.75),
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.mode === 'dark' 
-    ? theme.palette.grey[800] 
-    : theme.palette.grey[100],
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? theme.palette.grey[800]
+      : theme.palette.grey[100],
 }));
 
 interface VariableValueProps {
   variable: string;
   value?: string | number;
-  color?: 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  color?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'error'
+    | 'info'
+    | 'success'
+    | 'warning';
 }
 
-export const VariableValue: React.FC<VariableValueProps> = ({ 
-  variable, 
+export const VariableValue: React.FC<VariableValueProps> = ({
+  variable,
   value,
-  color = 'primary'
+  color = 'primary',
 }) => {
   // If no value provided, just show the variable chip
   if (value === undefined) {

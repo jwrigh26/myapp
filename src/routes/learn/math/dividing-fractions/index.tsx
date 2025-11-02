@@ -124,8 +124,12 @@ function MathDividingFractions() {
         ]}
         footer={
           <>
-            <Typography variant="body2">A common factor of 4 and 16 is <b>4</b>.</Typography>
-            <Typography variant="body2">And a common factor of 12 and 3 is <b>3</b>.</Typography>
+            <Typography variant="body2">
+              A common factor of 4 and 16 is <b>4</b>.
+            </Typography>
+            <Typography variant="body2">
+              And a common factor of 12 and 3 is <b>3</b>.
+            </Typography>
           </>
         }
       />

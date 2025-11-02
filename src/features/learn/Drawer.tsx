@@ -8,7 +8,8 @@ import {
 } from '@/components/FeatureDrawer';
 import {
   mdiBookOpenBlankVariant,
-  mdiBrain,
+  mdiSchool,
+  mdiDesktopClassic,
   mdiCalculator,
   mdiLanguagePython,
   mdiGit,
@@ -27,7 +28,7 @@ const learnCategories: FeatureCategory[] = [
   {
     id: 'dsa',
     title: 'DSA',
-    icon: mdiBrain,
+    icon: mdiDesktopClassic,
     path: '/learn/dsa',
   },
   {
@@ -56,6 +57,7 @@ export function LearnDrawer() {
       categories={learnCategories}
       drawerKey="learn-drawer"
       featureName="learn"
+      headerIcon={mdiSchool}
     />
   );
 }
@@ -85,9 +87,7 @@ export function CompendiumDrawer() {
         title={title}
         onClose={closeDrawer}
       />
-      <Sheet>
-        {Content ? <Content /> : null}
-      </Sheet>
+      <Sheet>{Content ? <Content /> : null}</Sheet>
     </TemporaryDrawer>
   );
 }
@@ -113,7 +113,12 @@ interface CompendiumButtonProps {
   onClick?: () => void;
 }
 
-export function CompendiumButton({ children, title, content, onClick }: CompendiumButtonProps) {
+export function CompendiumButton({
+  children,
+  title,
+  content,
+  onClick,
+}: CompendiumButtonProps) {
   const { openDrawer } = useDrawer('compendium-drawer');
   const { setTemp } = useTemp('compendium-temp');
 

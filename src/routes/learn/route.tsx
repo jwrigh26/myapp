@@ -25,7 +25,7 @@ function AppLayoutComponent() {
     <Box sx={{ display: 'flex', marginBottom: 2 }}>
       <CompendiumDrawer />
       <LearnDrawer />
-          <Outlet />
+      <Outlet />
 
       {/* Dynamic navigation - desktop permanent drawer or mobile drawer */}
       {navigationItems.length > 0 && (

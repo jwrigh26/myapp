@@ -126,7 +126,9 @@ const StyledList = styled(Box, {
   color = 'primary.main',
 }) => {
   const paddingTopStyle = spacingTop ? { paddingTop: theme.spacing(2) } : {};
-  const paddingBottomStyle = spacingBottom ? { paddingBottom: theme.spacing(2) } : {};
+  const paddingBottomStyle = spacingBottom
+    ? { paddingBottom: theme.spacing(2) }
+    : {};
 
   return {
     margin: 0,

@@ -64,7 +64,7 @@ function AppBarToolbar() {
 
   // Show secondary drawer icon on learn routes
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/') && 
+    router.state.location.pathname.startsWith('/learn/') &&
     router.state.location.pathname !== '/learn';
 
   return (
@@ -90,7 +90,7 @@ function MobileAppToolbar() {
 
   // Show secondary drawer icon on learn routes
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/') && 
+    router.state.location.pathname.startsWith('/learn/') &&
     router.state.location.pathname !== '/learn';
 
   return (

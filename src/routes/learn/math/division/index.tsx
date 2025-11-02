@@ -24,7 +24,8 @@ export const Route = createFileRoute('/learn/math/division/')({
     meta: [
       {
         name: 'description',
-        content: 'Learn the basics of division, long division, and dividing with decimals',
+        content:
+          'Learn the basics of division, long division, and dividing with decimals',
       },
       {
         title: 'Division',
@@ -43,10 +44,10 @@ function MathDivision() {
         title="Division"
         subtitle="Understanding division from basics to long division"
       />
-      
+
       <IntroBlock>
-        Division is one of the four basic operations in arithmetic. It answers the question: 
-        "How many times does one number fit into another?"
+        Division is one of the four basic operations in arithmetic. It answers
+        the question: "How many times does one number fit into another?"
       </IntroBlock>
 
       {/* KEY VOCABULARY SECTION */}
@@ -76,10 +77,19 @@ function MathDivision() {
       <TopicBlock
         title="The four key terms"
         items={[
-          <>Dividend <Arrow /> the number being divided (the "big number" you start with)</>,
-          <>Divisor <Arrow /> the number you're dividing by</>,
-          <>Quotient <Arrow /> the result (how many times the divisor fits)</>,
-          <>Remainder <Arrow /> what's left over after division</>,
+          <>
+            Dividend <Arrow /> the number being divided (the "big number" you
+            start with)
+          </>,
+          <>
+            Divisor <Arrow /> the number you're dividing by
+          </>,
+          <>
+            Quotient <Arrow /> the result (how many times the divisor fits)
+          </>,
+          <>
+            Remainder <Arrow /> what's left over after division
+          </>,
         ]}
       />
 
@@ -92,7 +102,8 @@ function MathDivision() {
         ]}
         footer={
           <Typography variant="body2">
-            "36 divided by 4 equals 9" means that 4 fits into 36 exactly 9 times.
+            "36 divided by 4 equals 9" means that 4 fits into 36 exactly 9
+            times.
           </Typography>
         }
       />
@@ -132,10 +143,12 @@ function MathDivision() {
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Remember:</strong> In fraction notation, the top number is always the dividend.
+            <strong>Remember:</strong> In fraction notation, the top number is
+            always the dividend.
           </Typography>
           <Typography variant="body2">
-            Memory anchor: "Top dog (dividend) goes inside the house 🏠. Bottom dog (divisor) stays outside. 🐶"
+            Memory anchor: "Top dog (dividend) goes inside the house 🏠. Bottom
+            dog (divisor) stays outside. 🐶"
           </Typography>
         </>
       </NoteBlock>
@@ -150,17 +163,15 @@ function MathDivision() {
       />
 
       <ProseBlock spacingTop>
-        Let's start with division where the numbers divide evenly (no remainder).
+        Let's start with division where the numbers divide evenly (no
+        remainder).
       </ProseBlock>
 
       <Spacer />
       <EquationSteps
         title="Simple Division Example"
         subtitle="How many 5's go into 25?"
-        steps={[
-          String.raw`25 \div 5 = ?`,
-          String.raw`25 \div 5 = 5`,
-        ]}
+        steps={[String.raw`25 \div 5 = ?`, String.raw`25 \div 5 = 5`]}
         footer={
           <Typography variant="body2">
             This means that 5 fits into 25 exactly <strong>5 times</strong>.
@@ -189,7 +200,8 @@ function MathDivision() {
       />
 
       <ProseBlock spacingTop>
-        Sometimes division doesn't work out evenly. The amount left over is called the <strong>remainder</strong>.
+        Sometimes division doesn't work out evenly. The amount left over is
+        called the <strong>remainder</strong>.
       </ProseBlock>
 
       <Spacer />
@@ -246,8 +258,8 @@ function MathDivision() {
       />
 
       <ProseBlock spacingTop>
-        Long division is a method for dividing larger numbers. It uses a systematic approach
-        with steps you repeat until you're done.
+        Long division is a method for dividing larger numbers. It uses a
+        systematic approach with steps you repeat until you're done.
       </ProseBlock>
 
       <Spacer />
@@ -257,7 +269,8 @@ function MathDivision() {
             The Long Division Chant:
           </Typography>
           <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
-            Divide <Arrow /> Multiply <Arrow /> Subtract <Arrow /> Bring Down <Arrow /> Repeat
+            Divide <Arrow /> Multiply <Arrow /> Subtract <Arrow /> Bring Down{' '}
+            <Arrow /> Repeat
           </Typography>
         </>
       </QuoteBlock>
@@ -269,9 +282,9 @@ function MathDivision() {
             <strong>Long Division Setup:</strong>
           </Typography>
           <Typography variant="body2" component="div" sx={{ pl: 2 }}>
-            • Divisor goes <strong>outside</strong> the division bracket<br />
-            • Dividend goes <strong>inside</strong> the division bracket<br />
-            • Quotient goes <strong>on top</strong> of the bracket
+            • Divisor goes <strong>outside</strong> the division bracket
+            <br />• Dividend goes <strong>inside</strong> the division bracket
+            <br />• Quotient goes <strong>on top</strong> of the bracket
           </Typography>
         </>
       </NoteBlock>
@@ -290,7 +303,8 @@ function MathDivision() {
         ]}
         footer={
           <Typography variant="body2">
-            The quotient is <strong>13</strong> because 12 fits into 156 exactly 13 times.
+            The quotient is <strong>13</strong> because 12 fits into 156 exactly
+            13 times.
           </Typography>
         }
       />
@@ -322,7 +336,8 @@ function MathDivision() {
       />
 
       <ProseBlock spacingTop>
-        Instead of leaving a remainder, we can continue dividing and express the answer as a decimal.
+        Instead of leaving a remainder, we can continue dividing and express the
+        answer as a decimal.
       </ProseBlock>
 
       <Spacer />
@@ -340,8 +355,9 @@ function MathDivision() {
               After getting quotient 3, add a decimal point and a zero: 13.0
             </Typography>
             <Typography variant="body2">
-              Bring down the 0, making 10. Then 4 goes into 10 two times (8), with 2 left.
-              Continue the process: 4 goes into 20 five times exactly.
+              Bring down the 0, making 10. Then 4 goes into 10 two times (8),
+              with 2 left. Continue the process: 4 goes into 20 five times
+              exactly.
             </Typography>
           </>
         }
@@ -360,8 +376,9 @@ function MathDivision() {
       <Spacer />
       <NoteBlock>
         <Typography variant="body2">
-          <strong>Pro Tip:</strong> You can keep adding zeros and dividing until you get an exact answer,
-          or round to a certain number of decimal places (like 2 decimal places for money).
+          <strong>Pro Tip:</strong> You can keep adding zeros and dividing until
+          you get an exact answer, or round to a certain number of decimal
+          places (like 2 decimal places for money).
         </Typography>
       </NoteBlock>
 
@@ -400,18 +417,15 @@ function MathDivision() {
             <MathInline math={String.raw`\frac{12}{3}`} />
           </Typography>
           <Typography variant="body2" sx={{ pt: 1 }}>
-            The first number (12) goes on top, the second number (3) goes on bottom.
+            The first number (12) goes on top, the second number (3) goes on
+            bottom.
           </Typography>
         </>
       </NoteBlock>
 
       {/* QUICK REFERENCE */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Quick Reference"
-        id="quick-reference"
-      />
+      <ProseBlock anchor title="Quick Reference" id="quick-reference" />
 
       <Spacer />
       <TopicBlock
@@ -434,7 +448,8 @@ function MathDivision() {
         ]}
         footer={
           <Typography variant="body2">
-            You can always check division by multiplying your answer by the divisor!
+            You can always check division by multiplying your answer by the
+            divisor!
           </Typography>
         }
       />

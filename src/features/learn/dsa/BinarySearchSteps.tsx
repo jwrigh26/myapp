@@ -25,27 +25,35 @@ const StepContainer = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
 }));
 
-const StepTitle = styled(Typography)(({ theme }) => ({
+const StepTitle = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'noMarginBottom',
+})<{ noMarginBottom?: boolean }>(({ theme, noMarginBottom = false }) => ({
   ...theme.typography.h6,
-  marginBottom: theme.spacing(2),
+  ...(!noMarginBottom && { marginBottom: theme.spacing(2) }),
 }));
 
-const StepSubTitle = styled(Typography)(({ theme }) => ({
+const StepSubTitle = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'noMarginBottom',
+})<{ noMarginBottom?: boolean }>(({ theme, noMarginBottom = false }) => ({
   ...theme.typography.subtitle2,
   color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(2),
+  ...(!noMarginBottom && { marginBottom: theme.spacing(2) }),
 }));
 
-const StepText = styled(Typography)(({ theme }) => ({
+const StepText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'noMarginBottom',
+})<{ noMarginBottom?: boolean }>(({ theme, noMarginBottom = false }) => ({
   ...theme.typography.body2,
   color: theme.palette.text.primary,
-  marginBottom: theme.spacing(2),
+  ...(!noMarginBottom && { marginBottom: theme.spacing(2) }),
 }));
 
-const StepDescription = styled(Typography)(({ theme }) => ({
+const StepDescription = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'noMarginBottom',
+})<{ noMarginBottom?: boolean }>(({ theme, noMarginBottom = false }) => ({
   ...theme.typography.caption,
   color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(2),
+  ...(!noMarginBottom && { marginBottom: theme.spacing(2) }),
 }));
 
 const InvarianBox = styled(Box)(({ theme }) => ({
@@ -158,7 +166,9 @@ export const BinarySearchStep0 = () => {
   return (
     <StepContainer>
       <StepTitle>Step 0: Initial Setup</StepTitle>
-      <StepSubTitle>Set the Initial Values</StepSubTitle>
+      <StepSubTitle gutterBottom noMarginBottom>
+        Set the Initial Values
+      </StepSubTitle>
       <StepText>
         The <code>left</code> and <code>right</code> variables are set to
         predefined sentinels to avoid <strong>out-of-bound</strong> errors.
@@ -179,14 +189,18 @@ export const BinarySearchStep0 = () => {
       </InvarianBox>
 
       <Spacer size={nodeSpaceSize} />
-      <StepSubTitle>Loop Invariant</StepSubTitle>
+      <StepSubTitle gutterBottom noMarginBottom>
+        Loop Invariant
+      </StepSubTitle>
       <StepText>
         The Loop starts out using the <code>left</code> and <code>right</code>{' '}
         values.
       </StepText>
       <LoopInvariant left={-1} right={7} />
       <Spacer size={nodeSpaceSize} />
-      <StepSubTitle>The Array</StepSubTitle>
+      <StepSubTitle gutterBottom noMarginBottom>
+        The Array
+      </StepSubTitle>
       <StepText>
         This is the same array we defined earlier in the{' '}
         <AnchorLink to="/learn/dsa/binary-search" anchorId="honey-bunny">

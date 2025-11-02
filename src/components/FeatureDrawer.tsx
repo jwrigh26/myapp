@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { MiniVariantDrawer, MiniDrawerHeader } from '@/components/Drawer';
 import Icon from '@/components/Icon';
 import { useDrawer, useToggle } from '@/hooks/useContext';
-import { mdiBookOpen, mdiChevronRight, mdiChevronLeft } from '@mdi/js';
+import { mdiChevronRight, mdiChevronLeft } from '@mdi/js';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import Divider from '@mui/material/Divider';
@@ -32,6 +32,7 @@ export interface FeatureDrawerConfig {
   categories: FeatureCategory[];
   drawerKey: string;
   featureName: 'blog' | 'learn';
+  headerIcon?: string; // Optional icon for the drawer header
 }
 
 interface MUILinkProps {
@@ -61,6 +62,7 @@ export function FeatureDrawer({
   categories,
   drawerKey,
   featureName,
+  headerIcon,
 }: FeatureDrawerConfig) {
   const router = useRouter();
   const matchRoute = useMatchRoute();
@@ -78,7 +80,13 @@ export function FeatureDrawer({
     <MiniVariantDrawer
       width={256}
       drawerKey={drawerKey}
-      header={<DrawerHeader drawerKey={drawerKey} featureName={featureName} />}
+      header={
+        <DrawerHeader
+          drawerKey={drawerKey}
+          featureName={featureName}
+          headerIcon={headerIcon}
+        />
+      }
       anchor="left"
     >
       {categories.map((category) => {
@@ -113,14 +121,16 @@ export function FeatureDrawer({
 function DrawerHeader({
   drawerKey,
   featureName: type,
+  headerIcon,
 }: {
   drawerKey: string;
   featureName: 'blog' | 'learn';
+  headerIcon?: string;
 }) {
   const theme = useTheme();
   const matchRoute = useMatchRoute();
 
-   const localOpen = useMemo(() => {
+  const localOpen = useMemo(() => {
     const storageKey = `mini-variant-${drawerKey}`;
     try {
       const stored = localStorage.getItem(storageKey);
@@ -134,7 +144,11 @@ function DrawerHeader({
     }
   }, []);
 
-  const { isOpen: open, openDrawer, closeDrawer } = useDrawer(drawerKey, localOpen);
+  const {
+    isOpen: open,
+    openDrawer,
+    closeDrawer,
+  } = useDrawer(drawerKey, localOpen);
 
   const handleDrawerToggle = () => {
     if (open) {
@@ -164,15 +178,17 @@ function DrawerHeader({
             variant="text"
             size="small"
             startIcon={
-              <Icon
-                path={mdiBookOpen}
-                fontSize="small"
-                sx={{
-                  color: isOnBlogOverview
-                    ? theme.palette.primary.contrastText
-                    : headerColor,
-                }}
-              />
+              headerIcon ? (
+                <Icon
+                  path={headerIcon}
+                  fontSize="small"
+                  sx={{
+                    color: isOnBlogOverview
+                      ? theme.palette.primary.contrastText
+                      : headerColor,
+                  }}
+                />
+              ) : undefined
             }
             sx={{
               color: isOnBlogOverview

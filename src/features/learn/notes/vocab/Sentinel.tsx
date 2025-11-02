@@ -1,12 +1,17 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { ConceptCardGrid, ConceptItem } from '@/components/ConceptCards';
-import { mdiShieldAlert, mdiArrowExpandHorizontal, mdiMapMarker } from '@mdi/js';
+import {
+  mdiShieldAlert,
+  mdiArrowExpandHorizontal,
+  mdiMapMarker,
+} from '@mdi/js';
 
 const sentinelConcepts: ConceptItem[] = [
   {
     model: 'Definition',
-    description: 'A special marker value placed at the boundaries of a data structure to simplify edge case handling.',
+    description:
+      'A special marker value placed at the boundaries of a data structure to simplify edge case handling.',
     application: [
       'Eliminates the need for separate boundary checks in loops.',
       'Prevents off-by-one errors by providing "safe" starting positions.',
@@ -25,9 +30,9 @@ export default function Sentinel() {
       </Typography>
 
       <Typography variant="body1">
-        A <strong>sentinel</strong> is a special boundary value that acts as a guard
-        or placeholder. In algorithms, sentinels are used to avoid checking for
-        boundary conditions explicitly.
+        A <strong>sentinel</strong> is a special boundary value that acts as a
+        guard or placeholder. In algorithms, sentinels are used to avoid
+        checking for boundary conditions explicitly.
       </Typography>
 
       <Typography
@@ -35,9 +40,10 @@ export default function Sentinel() {
         color="text.secondary"
         sx={{ fontStyle: 'italic' }}
       >
-        In binary search, we use <code>left = -1</code> and <code>right = len(arr)</code>
-        as sentinels. These values are outside the array bounds, guaranteeing that
-        the invariant holds even before the first iteration.
+        In binary search, we use <code>left = -1</code> and{' '}
+        <code>right = len(arr)</code>
+        as sentinels. These values are outside the array bounds, guaranteeing
+        that the invariant holds even before the first iteration.
       </Typography>
 
       <ConceptCardGrid

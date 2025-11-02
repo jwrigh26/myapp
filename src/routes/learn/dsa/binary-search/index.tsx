@@ -21,13 +21,13 @@ import ProseList from '@/components/ProseList';
 import ComplexityList from '@/components/ComplexityList';
 import { styled } from '@mui/material';
 import { mdiRabbit } from '@mdi/js';
-import { 
+import {
   BinarySearchStep0,
   BinarySearchStep1,
   BinarySearchStep2,
   BinarySearchStep3,
   BinarySearchStepResult,
-  BunnyArraySegmented
+  BunnyArraySegmented,
 } from '@/features/learn/dsa';
 import { BunnyArray } from '@/components/DsaArray.examples';
 
@@ -526,11 +526,11 @@ bunnies = [Bunny(BunnyType.NORMAL) for _ in range(4)] + \
         items={[
           <>
             <strong>Indices (0-3):</strong> bunnies of type{' '}
-            <span className='bold'>BunnyType.NORMAL</span>.
+            <span className="bold">BunnyType.NORMAL</span>.
           </>,
           <>
             <strong>Indices (4-6):</strong> bunnies of type{' '}
-            <span className='bold-alt'>BunnyType.HONEY</span>.
+            <span className="bold-alt">BunnyType.HONEY</span>.
           </>,
         ]}
       />

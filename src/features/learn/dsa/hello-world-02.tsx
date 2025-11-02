@@ -36,11 +36,11 @@ export default function DSAHelloWorld02() {
       <StyledCard>
         <CardContent>
           <CategoryChip label="Data Structures & Algorithms" size="small" />
-          
+
           <Typography variant="h4" component="h1" gutterBottom>
             Hello World - DSA Advanced 02
           </Typography>
-          
+
           <Typography variant="subtitle1" color="text.secondary" paragraph>
             Advanced Data Structures and Algorithm techniques
           </Typography>
@@ -53,7 +53,8 @@ export default function DSAHelloWorld02() {
               • Master advanced data structures (trees, graphs, heaps)
             </Typography>
             <Typography variant="body1" paragraph>
-              • Implement complex algorithms (sorting, searching, dynamic programming)
+              • Implement complex algorithms (sorting, searching, dynamic
+              programming)
             </Typography>
             <Typography variant="body1" paragraph>
               • Optimize algorithm performance and efficiency
@@ -65,9 +66,10 @@ export default function DSAHelloWorld02() {
               Content Overview
             </Typography>
             <Typography variant="body1">
-              Building on DSA fundamentals, this page covers advanced topics including 
-              complex data structures, sophisticated algorithms, and optimization 
-              techniques used in competitive programming and software engineering.
+              Building on DSA fundamentals, this page covers advanced topics
+              including complex data structures, sophisticated algorithms, and
+              optimization techniques used in competitive programming and
+              software engineering.
             </Typography>
           </ContentSection>
         </CardContent>

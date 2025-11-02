@@ -43,8 +43,8 @@ function StashingComponent() {
 
       <IntroBlock>
         Stash is like putting your current work in a drawer. It saves your
-        uncommitted changes so you can switch branches or work on something else,
-        then restore them later. A stash is basically a couple of commits
+        uncommitted changes so you can switch branches or work on something
+        else, then restore them later. A stash is basically a couple of commits
         (worktree + index) stored in <code>refs/stash</code>.
       </IntroBlock>
 
@@ -133,8 +133,8 @@ git stash push -k -m "WIP: unstaged only"
             adds a message.
           </Typography>
           <Typography variant="body2">
-            The <code>-a</code> flag is useful when you need to stash environment
-            files like <code>.env</code> that are normally ignored.
+            The <code>-a</code> flag is useful when you need to stash
+            environment files like <code>.env</code> that are normally ignored.
           </Typography>
         </>
       </NoteBlock>
@@ -154,7 +154,10 @@ git stash push -k -m "WIP: unstaged only"
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Apply (keeps stash)" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Apply (keeps stash)"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -170,7 +173,10 @@ git stash apply stash@{2}
       />
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Pop (removes on success)" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Pop (removes on success)"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -215,7 +221,10 @@ git stash pop stash@{2}
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="A) Manual, explicit approach" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="A) Manual, explicit approach"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -242,7 +251,10 @@ git commit -m "Applied stash changes"`}
       </NoteBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="B) One-step helper" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="B) One-step helper"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -262,17 +274,13 @@ git stash branch apply-stash-5 stash@{5}
       <Alert severity="info">
         <AlertTitle>Why stash branch is groovy</AlertTitle>
         <code>git stash branch</code> reduces conflicts because it starts from
-        the exact commit the stash was made on. The original context is restored,
-        making conflicts much less likely!
+        the exact commit the stash was made on. The original context is
+        restored, making conflicts much less likely!
       </Alert>
 
       {/* WORKFLOWS */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Real-World Workflows"
-        id="workflows"
-      />
+      <ProseBlock anchor title="Real-World Workflows" id="workflows" />
 
       <ProseBlock spacingTop>
         Here's how to use stash in common scenarios.
@@ -375,9 +383,9 @@ git branch -d apply-stash-5`}
       <NoteBlock>
         <>
           <Typography variant="body2" gutterBottom>
-            <strong>Important:</strong> <code>git stash branch</code> behaves like{' '}
-            <code>pop</code> - it removes the stash if successful! The stash is
-            gone after this command.
+            <strong>Important:</strong> <code>git stash branch</code> behaves
+            like <code>pop</code> - it removes the stash if successful! The
+            stash is gone after this command.
           </Typography>
           <Typography variant="body2">
             The merge steps afterward are separate - you're merging your new
@@ -397,8 +405,8 @@ git branch -d apply-stash-5`}
       />
 
       <ProseBlock spacingTop>
-        You asked about <code>git add -A</code> vs <code>git add .</code> - here's
-        the breakdown:
+        You asked about <code>git add -A</code> vs <code>git add .</code> -
+        here's the breakdown:
       </ProseBlock>
 
       <Spacer size={4} />
@@ -410,8 +418,8 @@ git branch -d apply-stash-5`}
             (new, modified, deleted)
           </>,
           <>
-            <code>git add .</code> <Arrow /> Adds all changes in current directory
-            and subdirectories
+            <code>git add .</code> <Arrow /> Adds all changes in current
+            directory and subdirectories
           </>,
           <>
             <code>git add -u</code> <Arrow /> Updates tracked files only (no new
@@ -462,7 +470,10 @@ git add src/utils.ts`}
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="Resolving apply/pop conflicts" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="Resolving apply/pop conflicts"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock

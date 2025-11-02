@@ -36,8 +36,8 @@ export interface ConceptCardGridProps {
 /**
  * Displays a responsive CSS Grid of Concept Cards.
  */
-export function ConceptCardGrid({ 
-  items, 
+export function ConceptCardGrid({
+  items,
   dense = false,
   descriptionLabel = 'Description',
   applicationLabel = 'Application',
@@ -48,10 +48,14 @@ export function ConceptCardGrid({
   return (
     <GridContainer dense={dense}>
       {items.map((item) => (
-        <StyledCard key={item.model} role="region" aria-labelledby={`hdr-${item.model}`}>
+        <StyledCard
+          key={item.model}
+          role="region"
+          aria-labelledby={`hdr-${item.model}`}
+        >
           <StyledCardHeader
             id={`hdr-${item.model}`}
-            slotProps={{title: { variant: 'h5', fontWeight: 600}}}
+            slotProps={{ title: { variant: 'h5', fontWeight: 600 } }}
             title={item.model}
             avatar={
               <StyledAvatar>
@@ -59,15 +63,24 @@ export function ConceptCardGrid({
               </StyledAvatar>
             }
           />
-                    <CardContent>
+          <CardContent>
             <Stack spacing={dense ? 1.25 : 1.75}>
               {item.description && (
                 <Section>
                   <Label variant="overline">{descriptionLabel}</Label>
                   {Array.isArray(item.description) ? (
-                    <Stack spacing={0.5} component="ul" sx={{ margin: 0, paddingLeft: 2 }}>
+                    <Stack
+                      spacing={0.5}
+                      component="ul"
+                      sx={{ margin: 0, paddingLeft: 2 }}
+                    >
                       {item.description.map((desc, idx) => (
-                        <Typography key={idx} variant="body1" component="li" sx={{ lineHeight: 1.55 }}>
+                        <Typography
+                          key={idx}
+                          variant="body1"
+                          component="li"
+                          sx={{ lineHeight: 1.55 }}
+                        >
                           {desc}
                         </Typography>
                       ))}
@@ -84,9 +97,18 @@ export function ConceptCardGrid({
                 <Section>
                   <Label variant="overline">{applicationLabel}</Label>
                   {Array.isArray(item.application) ? (
-                    <Stack spacing={0.5} component="ul" sx={{ margin: 0, paddingLeft: 2 }}>
+                    <Stack
+                      spacing={0.5}
+                      component="ul"
+                      sx={{ margin: 0, paddingLeft: 2 }}
+                    >
                       {item.application.map((app, idx) => (
-                        <Typography key={idx} variant="body1" component="li" sx={{ lineHeight: 1.55 }}>
+                        <Typography
+                          key={idx}
+                          variant="body1"
+                          component="li"
+                          sx={{ lineHeight: 1.55 }}
+                        >
                           {app}
                         </Typography>
                       ))}
@@ -167,10 +189,12 @@ const StyledCard = styled(Card)(({ theme }) => {
 function cssFromMixin(mixinString: string): React.CSSProperties {
   const [prop, value] = mixinString.split(':').map((s) => s.trim());
   if (!prop || !value) return {};
-  
+
   // Convert kebab-case to camelCase for CSS properties
-  const camelCaseProp = prop.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-  
+  const camelCaseProp = prop.replace(/-([a-z])/g, (_, letter) =>
+    letter.toUpperCase()
+  );
+
   return { [camelCaseProp]: value.replace(/;$/, '') };
 }
 

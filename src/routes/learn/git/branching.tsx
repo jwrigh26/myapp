@@ -99,7 +99,10 @@ function Branching() {
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The old way: git checkout" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The old way: git checkout"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -112,7 +115,10 @@ git checkout feature/user-auth`}
       />
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The new way: git switch" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The new way: git switch"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -148,7 +154,10 @@ git switch feature/user-auth`}
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The old way: git checkout -b" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The old way: git checkout -b"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -176,7 +185,10 @@ git checkout -b feature/from-develop`}
       </NoteBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The new way: git switch -c" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The new way: git switch -c"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -218,7 +230,10 @@ git switch -c feature/from-develop`}
       </ProseBlock>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The old way: git checkout -B" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The old way: git checkout -B"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -235,12 +250,15 @@ git checkout -B feature/my-feature`}
       <Spacer size={4} />
       <Alert severity="info">
         <AlertTitle>Capital B for force</AlertTitle>
-        <code>-B</code> (capital B) will replace the branch if it already exists.{' '}
-        <code>-b</code> (lowercase) will error if the branch exists.
+        <code>-B</code> (capital B) will replace the branch if it already
+        exists. <code>-b</code> (lowercase) will error if the branch exists.
       </Alert>
 
       <SectionSpacer size={blockSpaceSize} />
-      <ProseBlock subtitle="The new way: git switch -C" options={{ subtitleVariant: 'h6' }} />
+      <ProseBlock
+        subtitle="The new way: git switch -C"
+        options={{ subtitleVariant: 'h6' }}
+      />
 
       <Spacer size={4} />
       <CodeBlock
@@ -257,8 +275,9 @@ git switch -C feature/my-feature`}
       <Spacer size={4} />
       <Alert severity="warning">
         <AlertTitle>Destructive operation!</AlertTitle>
-        Both <code>-B</code> and <code>-C</code> will replace an existing branch.
-        Any commits on the old branch that aren't saved elsewhere will be lost!
+        Both <code>-B</code> and <code>-C</code> will replace an existing
+        branch. Any commits on the old branch that aren't saved elsewhere will
+        be lost!
       </Alert>
 
       {/* RENAMING BRANCHES */}
@@ -271,9 +290,9 @@ git switch -C feature/my-feature`}
       />
 
       <ProseBlock spacingTop>
-        Good news: renaming branches works the same regardless of whether you use{' '}
-        <code>git checkout</code> or <code>git switch</code>. It's always been a
-        separate command.
+        Good news: renaming branches works the same regardless of whether you
+        use <code>git checkout</code> or <code>git switch</code>. It's always
+        been a separate command.
       </ProseBlock>
 
       <Spacer size={4} />
@@ -305,11 +324,7 @@ git branch -m feature/usre-auth feature/user-auth`}
 
       {/* SIDE BY SIDE COMPARISON */}
       <SectionSpacer size={sectionSpaceSize} />
-      <ProseBlock
-        anchor
-        title="Side-by-Side Comparison"
-        id="comparison"
-      />
+      <ProseBlock anchor title="Side-by-Side Comparison" id="comparison" />
 
       <Spacer size={4} />
       <TopicBlock
