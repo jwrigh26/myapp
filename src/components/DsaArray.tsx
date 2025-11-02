@@ -74,23 +74,27 @@ const ArrayCell = styled(Box, {
     prop !== 'cellWidth' &&
     prop !== 'cellHeight' &&
     prop !== 'highlighted' &&
+    prop !== 'highlightedAlt' &&
     prop !== 'highlightColor' &&
     prop !== 'orientation',
 })<{
   cellWidth?: string | number;
   cellHeight?: string | number;
   highlighted?: boolean;
+  highlightedAlt?: boolean;
   highlightColor?: string;
   orientation?: 'horizontal' | 'vertical';
-}>(({ theme, cellWidth, cellHeight, highlighted, highlightColor, orientation }) => ({
+}>(({ theme, cellWidth, cellHeight, highlighted, highlightedAlt, highlightColor, orientation }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   border: highlighted
-    ? `1px solid ${highlightColor || theme.palette.primary.main}`
-    : `1px solid ${theme.palette.divider}`,
+    ? `1px solid ${highlightedAlt ? theme.palette.secondary.main : (highlightColor || theme.palette.primary.main)}`
+    : `1px solid ${theme.palette.grey[500]}`,
   backgroundColor: highlighted
-    ? highlightColor || theme.palette.primary.main + '22'
+    ? highlightedAlt 
+      ? theme.palette.secondary.main + '11'
+      : (highlightColor || theme.palette.primary.main + '22')
     : theme.palette.background.paper,
   width: cellWidth || 'auto',
   height: cellHeight || 'auto',
@@ -99,13 +103,18 @@ const ArrayCell = styled(Box, {
   transition: 'all 0.3s ease',
   position: 'relative',
   ...(highlighted && {
-    boxShadow: `0 0 8px ${highlightColor || theme.palette.primary.main}44`,
+    boxShadow: `0 0 8px ${highlightedAlt ? theme.palette.secondary.main : (highlightColor || theme.palette.primary.main)}44`,
     zIndex: 1, // Ensure highlighted cells appear above adjacent cells
   }),
   ...(!highlighted && {
     '&:not(:last-child)': {
       [orientation === 'vertical' ? 'borderBottom' : 'borderRight']: 'none',
     },
+  }),
+  // Ensure highlighted cells always show all borders
+  ...(highlighted && {
+    borderRight: `1px solid ${highlightedAlt ? theme.palette.secondary.main : (highlightColor || theme.palette.primary.main)} !important`,
+    borderBottom: `1px solid ${highlightedAlt ? theme.palette.secondary.main : (highlightColor || theme.palette.primary.main)} !important`,
   }),
 }));
 
@@ -175,6 +184,7 @@ interface ArrayItemData {
   iconSize?: number;
   content?: ReactNode; // Custom content
   highlighted?: boolean;
+  highlightedAlt?: boolean; // Alternative highlight using secondary color
   highlightColor?: string;
 }
 
@@ -203,6 +213,7 @@ interface DsaArrayProps {
   // Highlighting
   highlightIndices?: number[];
   highlightColor?: string;
+  glowBorder?: boolean; // Use glowing border effect for highlights
 }
 
 const DsaArray: React.FC<DsaArrayProps> = React.memo(({
@@ -241,8 +252,9 @@ const DsaArray: React.FC<DsaArrayProps> = React.memo(({
     globalIndex: number
   ) => {
     const isHighlighted =
-      item.highlighted || highlightIndices.includes(globalIndex);
-    const cellHighlightColor = item.highlightColor || highlightColor;
+      item.highlighted || item.highlightedAlt || highlightIndices.includes(globalIndex);
+    const cellHighlightColor = item.highlightColor || 
+      (item.highlightedAlt ? undefined : highlightColor);
 
     return (
       <ArrayCell
@@ -252,6 +264,7 @@ const DsaArray: React.FC<DsaArrayProps> = React.memo(({
         highlighted={isHighlighted}
         highlightColor={cellHighlightColor}
         orientation={orientation}
+        highlightedAlt={item.highlightedAlt}
       >
         {item.content ? (
           item.content

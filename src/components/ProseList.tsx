@@ -140,5 +140,37 @@ const StyledList = styled(Box, {
         color: getPaletteColor(theme, color),
       },
     },
+    '& span.code': {
+      backgroundColor:
+        theme.palette.mode === 'light'
+          ? theme.palette.grey[200]
+          : theme.palette.grey[800],
+      color:
+        theme.palette.mode === 'light'
+          ? theme.palette.text.primary
+          : theme.palette.text.secondary,
+      padding: theme.spacing(0.5, 1),
+      borderRadius: theme.shape.borderRadius,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.caption.fontSize,
+    },
+    '& span.name, & span.bold': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
+      fontWeight: 'bold',
+      padding: theme.spacing(0.25, 0.75),
+      marginRight: theme.spacing(0.25),
+      marginLeft: theme.spacing(0.25),
+      borderRadius: theme.shape.borderRadius,
+    },
+    '& span.name-alt, & span.bold-alt': {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.primary.contrastText,
+      fontWeight: 'bold',
+      padding: theme.spacing(0.25, 0.75),
+      marginRight: theme.spacing(0.25),
+      marginLeft: theme.spacing(0.25),
+      borderRadius: theme.shape.borderRadius,
+    },
   };
 });

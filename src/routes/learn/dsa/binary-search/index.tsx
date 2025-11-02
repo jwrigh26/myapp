@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
-import Box from '@mui/material/Box';
 import { createFileRoute } from '@tanstack/react-router';
 import Icon from '@/components/Icon';
 import { Spacer } from '@/components/Spacer';
@@ -20,19 +19,17 @@ import Arrow from '@/components/Arrow';
 import ReferenceLink from '@/components/ReferenceLink';
 import ProseList from '@/components/ProseList';
 import ComplexityList from '@/components/ComplexityList';
-import DsaArray from '@/components/DsaArray';
-import {
-  SimpleNumberArray,
-  HighlightedArray,
-  VerticalArray,
-  BunnyArray,
-  SegmentedArray,
-  BinarySearchVisualization,
-  CustomSizedArray,
-  BunnyBinarySearchWalkthrough,
-} from '@/components/DsaArray.examples';
 import { styled } from '@mui/material';
-import { mdiRabbit, mdiRabbitVariant } from '@mdi/js';
+import { mdiRabbit } from '@mdi/js';
+import { 
+  BinarySearchStep0,
+  BinarySearchStep1,
+  BinarySearchStep2,
+  BinarySearchStep3,
+  BinarySearchStepResult,
+  BunnyArraySegmented
+} from '@/features/learn/dsa';
+import { BunnyArray } from '@/components/DsaArray.examples';
 
 const InstructionText = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(1),
@@ -521,6 +518,24 @@ bunnies = [Bunny(BunnyType.NORMAL) for _ in range(4)] + \
           [Bunny(BunnyType.HONEY) for _ in range(3)]`}
       />
       <Spacer size={chunkSpaceSize} />
+      <ProseBlock subtitle="The Bunny Array">
+        After populating the array with bunnies, we'll have a total of seven
+        bunnies.
+      </ProseBlock>
+      <ProseList
+        items={[
+          <>
+            <strong>Indices (0-3):</strong> bunnies of type{' '}
+            <span className='bold'>BunnyType.NORMAL</span>.
+          </>,
+          <>
+            <strong>Indices (4-6):</strong> bunnies of type{' '}
+            <span className='bold-alt'>BunnyType.HONEY</span>.
+          </>,
+        ]}
+      />
+      <BunnyArraySegmented />
+      <Spacer size={chunkSpaceSize} />
       <ProseList
         subTitle="Setup Review"
         items={[
@@ -728,145 +743,19 @@ mid = left + (right - left) // 2
       </ProseBlock>
 
       <Spacer size={chunkSpaceSize} />
-
-      {/* Simple number array example */}
-      <ProseBlock subtitle="Example 1: Simple Number Array">
-        A basic array of numbers with indices displayed above:
-      </ProseBlock>
-      <SimpleNumberArray />
-
-      <Spacer size={chunkSpaceSize} />
-
-      {/* Bunny array example */}
-      <ProseBlock subtitle="Example 2: Bunny Array">
-        An array of bunnies showing normal bunnies and honey bunnies:
-      </ProseBlock>
+      <BinarySearchStep0 />
+      <BinarySearchStep1 />
+      <BinarySearchStep2 />
+      <BinarySearchStep3 />
+      <BinarySearchStepResult />
       <BunnyArray />
-
-      <Spacer size={chunkSpaceSize} />
-
-      {/* Segmented array example */}
-      <ProseBlock subtitle="Example 3: Segmented Array (Divide & Conquer)">
-        Showing how an array can be split into segments:
-      </ProseBlock>
-      <BunnyBinarySearchWalkthrough />
-
-      <Spacer size={chunkSpaceSize} />
-
-      {/* Highlighted indices example */}
-      <ProseBlock subtitle="Example 4: Binary Search Step">
-        Highlighting the mid pointer during binary search:
-      </ProseBlock>
-      <BinarySearchVisualization />
-
-      <Spacer size={chunkSpaceSize} />
-
-      {/* Additional examples */}
-      <ProseBlock subtitle="Example 5: Highlighted Array">
-        Array with specific indices highlighted:
-      </ProseBlock>
-      <HighlightedArray />
-
-      <Spacer size={chunkSpaceSize} />
-
-      <ProseBlock subtitle="Example 6: Vertical Array">
-        Arrays can also be displayed vertically:
-      </ProseBlock>
-      <Box sx={{ width: 80 }}>
-        <VerticalArray />
-      </Box>
-
-      <Spacer size={chunkSpaceSize} />
-
-      <ProseBlock subtitle="Example 7: Custom Sized Array">
-        Custom cell sizes without borders:
-      </ProseBlock>
-      <CustomSizedArray />
-
-      <Spacer size={chunkSpaceSize} />
-
-      <ProseBlock subtitle="Example 8: Simple Segmented Array">
-        Basic segmentation showing left and right halves:
-      </ProseBlock>
-      <SegmentedArray />
     </PageLayout>
   );
 }
 
 /**
  *
- * What a walkthrough should have:
- * 
- * <Overview>
- * DSA Visual Array Component:
- * When a loop or some other section of a DSA problem requires a list, array, stack, queue, etc, it 
- * would be awesome to show a visual representation. A visual representation could show indices, the value whether it's a number of an image. 
- * We can divide it up into sections to represent "splitting" an array or showing a step in "divide and conquer". We should also be able to higlight different items in the "array" to highlight changes in value etc. 
- * 
- * For more context in the blinary search I'm wanting to have this list take an src/components/Icon using maybe import { mdiRabbitVariant } from '@mdi/js'; with some other styles to represent normal and honey bunnies.
- * </Overview>
- * 
- * <Guidelines>
- * We should use MUI components when possible like Typography, Styles, theme spacing etc.
- * But for the main wrapper we could use a MUI stack but I'm thinking it might be easier just to roll our own using flexbox.
- * 
- * The styling could be modeled after the way we have CodeBlock border and background setup so it ties in nicely with our pages styling overall.
- * 
- * const CodeBlockContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'codeBorder',
-})<{ codeBorder?: boolean }>(({ theme, codeBorder }) => ({
-  position: 'relative',
-  width: '100%',
-  maxWidth: '100%',
-  display: 'block',
-  '&:hover .copy-button': {
-    // opacity: 1,
-  },
-  ...(codeBorder &&
-    theme.palette.mode === 'light' && {
-      margin: theme.spacing(1, 0),
-      padding: theme.spacing(1, 0),
-      border: `1px solid ${theme.palette.divider}`,
-    }),
-  ...(codeBorder &&
-    theme.palette.mode !== 'light' && {
-      // Apply the glowing-border class when glow is true
-      margin: theme.spacing(1, 0),
-      padding: theme.spacing(1, 0),
-      border: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: `
-          0 0 0 1px ${theme.palette.primary.main}22,
-          0 2px 8px ${theme.palette.primary.main}44,
-          0 3px 12px ${theme.palette.primary.main}11
-        `,
-      transition:
-        'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease',
-      '&:hover, &:focus-within': {
-        transform: 'translateY(-1px)',
-        boxShadow: `
-              0 0 0 1px ${theme.palette.primary.light}22,
-              0 3px 12px ${theme.palette.primary.light}44,
-              0 4px 16px ${theme.palette.primary.light}11
-            `,
-        borderColor: theme.palette.primary.main,
-      },
-    }),
-}));
- * 
- * 
- * 
- * </Guidelines>
- * 
- * <Requirements>
- * - The wrapper or main component should take up 100% of it's parent width. 
- * - We should be able to define a set width/height for each item
- * - Or have option to just inherit width of child.
- * - We should have a default that takes a number/letter so we can make quick easy lists like | 0 | 1| 2 | 3 |...|
- * - We should have option to pass a child so we can make custom items that show images etc.
- * - Lists should beable to be displayed verticall or horizontally
- * - We should have option to show indicies above or below when displayed horizontal and left or right when vertical.
- * - We should be able to slice or split array and set a gap but have default be set too using theme.spacing of MUI
- * </Requirements>
+
  *
  *
  */
