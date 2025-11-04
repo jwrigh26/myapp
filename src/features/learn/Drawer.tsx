@@ -1,4 +1,5 @@
 import { DrawerHeader, Sheet, TemporaryDrawer } from '@/components/Drawer';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Icon from '@/components/Icon';
@@ -87,10 +88,22 @@ export function CompendiumDrawer() {
         title={title}
         onClose={closeDrawer}
       />
-      <Sheet>{Content ? <Content /> : null}</Sheet>
+      <Sheet>
+        {Content ? (
+          <>
+            <Content />
+          </>
+        ) : null}
+      </Sheet>
     </TemporaryDrawer>
   );
 }
+
+const Footer = styled(Box)(({ theme }) => ({
+  height: 80,
+  width: '100%',
+  backgroundColor: 'pink',
+}));
 
 const StyledCompendiumButton = styled(Button)(({ theme }) => ({
   textTransform: 'none',

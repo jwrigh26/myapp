@@ -151,6 +151,11 @@ npm run firebase:deploy:prod   # Deploy to production
 5. **Anchor sections need consistent IDs**: Format as `kebab-case`, unique per route
 6. **Image assets must follow structure**: Blog images in `YYYY/MM/`, others flat in category folder
 7. **TypeScript strict mode**: All files must pass `tsc --noEmit`
+8. **Modular folder structure**: When files grow beyond ~500 lines, refactor into modular folders (see `binarySearch/` example)
+9. **Folder naming**: Use camelCase for feature folders (e.g., `binarySearch/` not `binary-search/`)
+10. **Hook naming**: Use specific names for hooks (e.g., `useBunnyArrays.ts` not `hooks.ts`)
+11. **Example components**: Separate production components from examples (use `examples.tsx` file)
+
 
 ## Common Gotchas
 
@@ -168,6 +173,36 @@ npm run firebase:deploy:prod   # Deploy to production
 - **Reusable components**: `src/components/` (see README.md for ComicStrip, Image docs)
 - **Feature modules**: `src/features/{about|blog|game|learn|settings}/`
 - **Generated files**: `src/utils/imageRegistry.ts`, `src/utils/contentRegistry.ts`, `src/routeTree.gen.ts`
+
+### Modular Pattern Example: `binarySearch/`
+
+When a component file grows large (~500+ lines), refactor into a modular folder structure:
+
+```
+src/features/learn/dsa/binarySearch/
+├── index.tsx             # Main exports and combined component
+├── styles.ts             # Shared styled components
+├── useBunnyArrays.ts     # Specific hook (not generic "hooks.ts")
+├── LoopInvariant.tsx     # Shared component
+├── Step0.tsx             # Individual step components
+├── Step1.tsx
+├── Step2.tsx
+├── Step3.tsx
+├── examples.tsx          # Example components (not used in production)
+└── README.md             # Usage documentation
+```
+
+**Key principles:**
+- **Backward compatibility**: Old import paths continue to work via re-export file (`BinarySearchSteps.tsx`)
+- **Specific naming**: `useBunnyArrays.ts` instead of generic `hooks.ts`
+- **CamelCase folders**: `binarySearch/` not `binary-search/`
+- **Shared resources**: `styles.ts` exports styled components, spacing constants
+- **Examples separation**: `examples.tsx` for documentation/testing, not production use
+- **Clear exports**: `index.tsx` exports all components for easy import
+- **Documentation**: README.md with usage examples and API reference
+
+This pattern keeps related code organized while maintaining a clean import API for consumers.
+
 
 ## Design Principles
 

@@ -38,7 +38,7 @@ const ArrayContainer = styled(Box, {
   const borderColor = theme.palette.divider;
 
   const borderStyles = {
-    margin: theme.spacing(1, 0),
+    margin: theme.spacing(0, 0),
     padding: theme.spacing(2),
     border: `1px solid ${borderColor}`,
   };
@@ -171,14 +171,25 @@ const ArrayCell = styled(Box, {
 
 const IndexLabel = styled(Typography, {
   shouldForwardProp: (prop) =>
-    prop !== 'cellWidth' && prop !== 'cellHeight' && prop !== 'orientation',
+    prop !== 'cellWidth' &&
+    prop !== 'cellHeight' &&
+    prop !== 'orientation' &&
+    prop !== 'highlighted' &&
+    prop !== 'highlightedAlt',
 })<{
   cellWidth?: string | number;
   cellHeight?: string | number;
   orientation?: 'horizontal' | 'vertical';
-}>(({ theme, cellWidth, cellHeight, orientation }) => ({
+  highlighted?: boolean;
+  highlightedAlt?: boolean;
+}>(({ theme, cellWidth, cellHeight, orientation, highlighted, highlightedAlt }) => ({
   fontSize: '0.75rem',
-  color: theme.palette.text.secondary,
+  color: highlighted
+    ? highlightedAlt
+      ? theme.palette.secondary.main
+      : theme.palette.primary.main
+    : theme.palette.text.secondary,
+  fontWeight: highlighted ? 600 : 400,
   userSelect: 'none',
   padding: theme.spacing(0.5),
   textAlign: 'center',
@@ -274,6 +285,7 @@ interface DsaArrayProps {
   cellHeight?: string | number;
   // Highlighting
   highlightIndices?: number[];
+  highlightIndicesAlt?: number[]; // Alternative highlight using secondary color
   highlightColor?: string;
   glowBorder?: boolean; // Use glowing border effect for highlights
 }
@@ -291,6 +303,7 @@ const DsaArray: React.FC<DsaArrayProps> = React.memo(
     cellWidth,
     cellHeight,
     highlightIndices = [],
+    highlightIndicesAlt = [],
     highlightColor,
     glowBorder = false,
   }) => {
@@ -354,16 +367,22 @@ const DsaArray: React.FC<DsaArrayProps> = React.memo(
       const indices = Array.from({ length: count }, (_, i) => i + offset);
       return (
         <IndicesContainer orientation={orientation}>
-          {indices.map((idx) => (
-            <IndexLabel
-              key={idx}
-              cellWidth={cellWidth}
-              cellHeight={cellHeight}
-              orientation={orientation}
-            >
-              {idx}
-            </IndexLabel>
-          ))}
+          {indices.map((idx) => {
+            const isHighlighted = highlightIndices.includes(idx);
+            const isHighlightedAlt = highlightIndicesAlt.includes(idx);
+            return (
+              <IndexLabel
+                key={idx}
+                cellWidth={cellWidth}
+                cellHeight={cellHeight}
+                orientation={orientation}
+                highlighted={isHighlighted || isHighlightedAlt}
+                highlightedAlt={isHighlightedAlt}
+              >
+                {idx}
+              </IndexLabel>
+            );
+          })}
         </IndicesContainer>
       );
     };

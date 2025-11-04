@@ -12,7 +12,6 @@ export function useNavigationItems(): {
   loading: boolean;
   error: string | null;
 } {
-  const router = useRouter();
   const location = useLocation();
   const [items, setItems] = useState<InlineDrawerItem[]>([]);
   const [title, setTitle] = useState('Learn');
@@ -28,6 +27,7 @@ export function useNavigationItems(): {
         setError(null);
 
         const currentPath = pathname;
+        console.log('Current path for navigation:', currentPath);
 
         // Check if this is a specific post route
         if (currentPath.startsWith('/learn/') && currentPath !== '/learn') {

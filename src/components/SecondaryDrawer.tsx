@@ -143,9 +143,9 @@ export function SecondaryDrawer({
                 itemLevel={item.level}
                 active={isActive}
                 onClick={() => {
-                  if (hasChildren) {
-                    toggleExpanded(item.id);
-                  }
+                  // if (hasChildren) {
+                  //   toggleExpanded(item.id);
+                  // }
                   if (item.anchor) {
                     scrollToAnchor(item.anchor);
                   }
@@ -153,10 +153,12 @@ export function SecondaryDrawer({
               >
                 <Typography className="list-item-text">{item.title}</Typography>
                 {hasChildren && (
-                  <Icon
-                    path={isExpanded ? mdiChevronDown : mdiChevronRight}
-                    fontSize="small"
-                  />
+                  <IconButton onClick={() => toggleExpanded(item.id)}>
+                    <Icon
+                      path={isExpanded ? mdiChevronDown : mdiChevronRight}
+                      fontSize="small"
+                    />
+                  </IconButton>
                 )}
               </StyledListItemButton>
             </ListItem>
