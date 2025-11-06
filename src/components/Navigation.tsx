@@ -1,20 +1,24 @@
+import Icon from '@/components/Icon';
 import LinkButton from '@/components/LinkButton';
-import ToggleButton from '@/components/ToggleButton';
+import LinkIconButton from '@/components/LinkIconButton';
 import { useDrawer } from '@/hooks/useContext';
-import { mdiCog, mdiLink } from '@mdi/js';
+import { mdiCog, mdiGithub, mdiLinkedin, mdiFormatListBulleted } from '@mdi/js';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import Icon from '@/components/Icon';
-import IconButton from '@mui/material/IconButton';
-import LinkIconButton from '@/components/LinkIconButton';
-import { mdiLinkedin } from '@mdi/js';
-import { mdiGithub } from '@mdi/js';
-import MuiLink from '@mui/material/Link';
 
-export default function Navigation({ isMobile = false }: { isMobile?: boolean }) {
-  const { isOpen, openDrawer } = useDrawer('settings-drawer');
-
+export default function Navigation({
+  isMobile = false,
+  isTablet = false,
+  showSecondaryDrawer = false,
+}: {
+  isMobile?: boolean;
+  isTablet?: boolean;
+  showSecondaryDrawer?: boolean;
+}) {
+  const { openDrawer } = useDrawer('settings-drawer');
+  const { openDrawer: openSecondaryDrawer } = useDrawer('secondary-drawer');
   return (
     <NavStack direction="row" component="nav" gap={1}>
       {!isMobile && (
@@ -23,9 +27,10 @@ export default function Navigation({ isMobile = false }: { isMobile?: boolean })
           <NavButton to="/home">Home</NavButton>
           <NavButton to="/about">About</NavButton>
           <NavButton to="/blog">Blog</NavButton>
-          <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
           <NavButton to="/learn">Learn</NavButton>
-          <NavButton to="/game">Game</NavButton>
+          {/* <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
+          <NavButton to="/learn">Learn</NavButton>
+          <NavButton to="/game">Game</NavButton> */}
         </>
       )}
       <Stack direction="row" gap={0} sx={{ ml: 'auto' }}>
@@ -44,8 +49,14 @@ export default function Navigation({ isMobile = false }: { isMobile?: boolean })
           <Icon path={mdiLinkedin} />
         </NavLinkIconButton>
         <NavDivider orientation="vertical" flexItem sx={{ ml: 2 }} />
-        <NavIconButton edge="end" onClick={openDrawer}>
-          <Icon path={mdiCog} />
+        {/* Secondary drawer icon for tablet/mobile */}
+        {(isTablet || isMobile) && showSecondaryDrawer && (
+          <NavIconButton size="medium" onClick={openSecondaryDrawer}>
+            <Icon fontSize="inherit" path={mdiFormatListBulleted} />
+          </NavIconButton>
+        )}
+        <NavIconButton size="medium" edge="end" onClick={openDrawer}>
+          <Icon fontSize="inherit" path={mdiCog} />
         </NavIconButton>
       </Stack>
     </NavStack>
@@ -64,7 +75,6 @@ const NavButton = styled(LinkButton)(({ theme }) => ({
   opacity: 0.8,
   borderRadius: 2,
   '&:hover': {
-    // opacity: 0.6,
     backgroundColor: theme.mixins.decomposeColor(
       theme.palette.primary.light,
       0.5

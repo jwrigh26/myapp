@@ -32,13 +32,14 @@ const IntroBlock: React.FC<IntroBlockProps> = ({ hook, children }) => {
 export default IntroBlock;
 
 const StyledIntroBlock = styled(Box)<BoxProps>(({ theme }) => ({
-  padding: theme.spacing(2),
+  padding: theme.spacing(1, 0),
   backgroundColor: theme.palette.background.paper,
-  marginLeft: theme.spacing(2),
-  marginRight: theme.spacing(2),
+  margin: theme.spacing(2, 0),
+  marginBottom: 0,
   borderTop: `3px solid ${theme.palette.primary.main}`,
   '& p': {
     fontSize: theme.typography.body1.fontSize,
-    color: theme.palette.text.primary,
+    // color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
   },
 }));

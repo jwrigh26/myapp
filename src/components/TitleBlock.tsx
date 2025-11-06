@@ -42,12 +42,12 @@ export default TitleBlock;
 //#######################################
 
 const StyledTitleBlock = styled(Box)<BoxProps>(({ theme }) => ({
-  padding: theme.spacing(2),
   backgroundColor: theme.palette.background.paper,
   '& h1': {
     color: theme.palette.primary.dark,
     fontSize: theme.typography.h3.fontSize,
     fontWeight: theme.typography.fontWeightBold,
+    marginTop: theme.spacing(4),
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.h2.fontSize,
     },
@@ -58,5 +58,8 @@ const StyledTitleBlock = styled(Box)<BoxProps>(({ theme }) => ({
   '& p': {
     fontSize: theme.typography.subtitle1.fontSize,
     color: theme.palette.text.secondary,
+  },
+  [theme.breakpoints.up('sm')]: {
+    // padding: theme.spacing(2, 0),
   },
 }));

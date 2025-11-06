@@ -1,3 +1,5 @@
+import type { Theme } from '@mui/material/styles';
+
 export function getValueByName<T>(
   args: Array<{ name: string; value: T }>,
   name: string
@@ -55,3 +57,24 @@ export function capitalizeFirstLetter(string: string): string {
 
 export const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+// utils/themeColor.ts
+
+/** Accepts tokens like "primary.main", "secondary.dark", "text.secondary",
+ *  or a raw CSS color ("#123", "rgb(...)", "hsl(...)", "rebeccapurple"). */
+export const resolveThemeColor =
+  (value?: string) =>
+  (theme: Theme): string | undefined => {
+    if (!value) return undefined;
+
+    // If it's already a CSS color, just return it.
+    if (/^#|^rgb|^hsl|^var\(|^[a-z]+$/i.test(value)) return value;
+
+    // Generic dot-path resolver: "palette.primary.main" or "primary.main"
+    const path = value.startsWith('palette.') ? value : `palette.${value}`;
+    const resolved = path
+      .split('.')
+      .reduce<any>((obj, key) => (obj ? obj[key] : undefined), theme);
+
+    return typeof resolved === 'string' ? resolved : undefined;
+  };

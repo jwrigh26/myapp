@@ -1,0 +1,161 @@
+/* Content Grid Layout System for Blog Posts */
+
+/* Root CSS Custom Properties */
+:root {
+  --content-grid-padding-inline: 16px;
+  --content-grid-content-max-width: 1000px;
+  --content-grid-breakout-max-width: 1200px;
+  --content-grid-full-width-max-width: 1536px;
+  --content-grid-breakout-size: calc(
+    (
+        var(--content-grid-breakout-max-width) -
+          var(--content-grid-content-max-width)
+      ) /
+      2
+  );
+}
+
+/* Content Grid Container */
+.content-grid {
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--content-grid-padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--content-grid-breakout-size))
+    [content-start] min(
+      calc(100% - (var(--content-grid-padding-inline) * 2)),
+      var(--content-grid-content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--content-grid-breakout-size)) [breakout-end]
+    minmax(var(--content-grid-padding-inline), 1fr) [full-width-end];
+}
+
+/* Default all children to content zone */
+.content-grid > * {
+  grid-column: content;
+}
+
+/* Content Zone Utility Classes */
+.content {
+  grid-column: content;
+}
+
+.breakout {
+  grid-column: breakout;
+}
+
+.full-width {
+  grid-column: full-width;
+}
+
+/* Content Zone Helpers for Specific Elements */
+.content-zone {
+  grid-column: content;
+}
+
+.breakout-zone {
+  grid-column: breakout;
+}
+
+.full-width-zone {
+  grid-column: full-width;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  :root {
+    --content-grid-padding-inline: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --content-grid-padding-inline: 8px;
+    --content-grid-content-max-width: 100%;
+    --content-grid-breakout-max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --content-grid-padding-inline: 0.75rem;
+  }
+}
+
+/* Content Grid Spacing Utilities */
+.content-grid-section {
+  grid-column: content;
+  margin-block: 2rem;
+}
+
+.content-grid-section.breakout {
+  grid-column: breakout;
+}
+
+.content-grid-section.full-width {
+  grid-column: full-width;
+}
+
+/* Content Grid Image Utilities */
+.content-grid-image {
+  grid-column: content;
+  width: 100%;
+  height: auto;
+}
+
+.content-grid-image.breakout {
+  grid-column: breakout;
+}
+
+.content-grid-image.full-width {
+  grid-column: full-width;
+}
+
+/* Content Grid Code Block Utilities */
+.content-grid-code {
+  grid-column: breakout;
+  overflow-x: auto;
+}
+
+.content-grid-code.content {
+  grid-column: content;
+}
+
+/* Content Grid Quote Utilities */
+.content-grid-quote {
+  grid-column: content;
+}
+
+.content-grid-quote.breakout {
+  grid-column: breakout;
+}
+
+/* Content Grid Hero Section */
+.content-grid-hero {
+  grid-column: full-width;
+  padding-block: 4rem;
+  text-align: center;
+}
+
+/* Content Grid Article Header */
+.content-grid-header {
+  grid-column: content;
+  margin-bottom: 3rem;
+}
+
+/* Content Grid Article Body */
+.content-grid-body {
+  grid-column: content;
+}
+
+.content-grid-body > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Content Grid Navigation */
+.content-grid-nav {
+  grid-column: full-width;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  padding-top: 2rem;
+  margin-top: 4rem;
+}

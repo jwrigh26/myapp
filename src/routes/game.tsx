@@ -7,7 +7,7 @@ import {
   Workspace,
 } from '@/features/game';
 import { BlockItem } from '@/features/game/types';
-import { PageLayout } from '@/layout';
+import { LegacyPageLayout as PageLayout } from '@/layout';
 import Box from '@mui/material/Box';
 import { styled, useTheme } from '@mui/material/styles';
 import { createFileRoute } from '@tanstack/react-router';

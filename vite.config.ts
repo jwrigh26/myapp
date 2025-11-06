@@ -23,6 +23,11 @@ export default defineConfig(({ mode }) => {
     server: {
       hmr: true,
     },
+    test: {
+      environment: 'jsdom', // This uses the jsdom you already have
+      setupFiles: ['./src/test/setup.ts'],
+      globals: true, // Use global variables like `describe`, `it`, etc.
+    },
     define: getDefineObject(env),
     resolve: {
       alias: {
@@ -74,7 +79,7 @@ function getDefineObject(env: EnvObject): Record<string, string> {
   const prefix = 'VITE_REACT_APP_';
 
   // Source of environment variables (from .env or `process.env` depending on the environment)
-  const source =  env;
+  const source = env;
 
   const define: Record<string, string | undefined> = {};
 

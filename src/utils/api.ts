@@ -10,7 +10,7 @@ export async function api<T>(
   const response = await fetch(url, {
     ...options,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       ...(options.headers || {}),
     },
   });
@@ -37,30 +37,28 @@ export async function api<T>(
   return response.json();
 }
 
-
 export async function get<T>(url: string): Promise<T> {
-    return api<T>(url, {
-      method: 'GET',
-    });
-  }
-  
-  export async function post<T, U>(url: string, body: U): Promise<T> {
-    return api<T>(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-    });
-  }
-  
-  export async function put<T, U>(url: string, body: U): Promise<T> {
-    return api<T>(url, {
-      method: 'PUT',
-      body: JSON.stringify(body),
-    });
-  }
-  
-  export async function del<T>(url: string): Promise<T> {
-    return api<T>(url, {
-      method: 'DELETE',
-    });
-  }
-  
+  return api<T>(url, {
+    method: 'GET',
+  });
+}
+
+export async function post<T, U>(url: string, body: U): Promise<T> {
+  return api<T>(url, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+export async function put<T, U>(url: string, body: U): Promise<T> {
+  return api<T>(url, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+  });
+}
+
+export async function del<T>(url: string): Promise<T> {
+  return api<T>(url, {
+    method: 'DELETE',
+  });
+}

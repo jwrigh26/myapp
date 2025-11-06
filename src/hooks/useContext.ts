@@ -1,13 +1,16 @@
 import { useComponentStateContext } from '@/context/ComponentStateContext';
+import { set } from 'date-fns';
+import { useLayoutEffect } from 'react';
 
 /**
  * Custom hook to manage the state of a drawer component.
  *
  * @param {string} key - The unique key identifying the drawer.
+ * @param {boolean} defaultOpen - The default open state for the drawer (default: false).
  * @returns {object} An object containing the drawer's state and control functions.
  * @throws {Error} If the hook is used outside of a ComponentStateProvider.
  */
-export function useDrawer(key: string) {
+export function useDrawer(key: string, defaultOpen: boolean = false) {
   const context = useComponentStateContext();
   if (!context) {
     throw new Error('useDrawer must be used within a ComponentStateProvider');
@@ -15,7 +18,18 @@ export function useDrawer(key: string) {
 
   const { open, setOpen, setClose } = context;
 
-  const isOpen = !!open[key];
+  // Initialize with default if key doesn't exist yet
+  const isOpen = key in open ? !!open[key] : defaultOpen;
+
+  // Set the initial state if this is the first time this key is used
+  // Use useLayoutEffect to avoid setState during render
+  useLayoutEffect(() => {
+    if (!(key in open) && defaultOpen) {
+      setOpen(key)();
+    } else {
+      setClose(key)();
+    }
+  }, []); // no dependencies to run only once on mount
 
   return { isOpen, openDrawer: setOpen(key), closeDrawer: setClose(key) };
 }
@@ -95,18 +109,28 @@ export function useLoading(key: string) {
  * Custom hook to toggle the open state of a component.
  *
  * @param {string} key - The unique key identifying the component.
+ * @param {boolean} defaultOpen - The default open state for the component (default: false).
  * @returns {object} An object containing the toggle state and control functions.
  * @throws {Error} If the hook is used outside of a ComponentStateProvider.
  */
-export function useToggle(key: string) {
+export function useToggle(key: string, defaultOpen: boolean = false) {
   const context = useComponentStateContext();
   if (!context) {
     throw new Error('useToggle must be used within a ComponentStateProvider');
   }
 
-  const { open, toggleOpen } = context;
+  const { open, toggleOpen, setOpen } = context;
 
-  const isOpen = !!open[key];
+  // Initialize with default if key doesn't exist yet
+  const isOpen = key in open ? !!open[key] : defaultOpen;
+
+  // Set the initial state if this is the first time this key is used
+  // Use useLayoutEffect to avoid setState during render
+  useLayoutEffect(() => {
+    if (!(key in open) && defaultOpen) {
+      setOpen(key)();
+    }
+  }, []); // no dependencies to run only once on mount
 
   return { isOpen, toggleOpen: toggleOpen(key) };
 }

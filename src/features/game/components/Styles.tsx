@@ -1,1 +1,1 @@
-export const CODE_BLOCK_HEIGHT =  48;
+export const CODE_BLOCK_HEIGHT = 48;
