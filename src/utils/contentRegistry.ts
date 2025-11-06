@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-11-03T01:46:29.696Z
+// Generated on: 2025-11-06T15:47:25.582Z
 // Total routes: 20
 
 export interface NavigationItem {

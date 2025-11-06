@@ -1,7 +1,6 @@
 import Icon from '@/components/Icon';
-import { mdiChevronDown, mdiChevronRight, mdiClose, mdiMenu } from '@mdi/js';
+import { mdiClose } from '@mdi/js';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -9,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Divider from '@mui/material/Divider';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { PermanentDrawer, Sheet, MobileDrawer } from './Drawer';
 import { useDrawer } from '@/hooks/useContext';
 
@@ -31,6 +30,8 @@ export interface InlineDrawerProps {
   open?: boolean;
   onToggle?: () => void;
   desktop?: boolean;
+  header?: React.ComponentType | null;
+  footer?: React.ComponentType | null;
 }
 
 // ################################################
@@ -41,12 +42,13 @@ export function SecondaryDrawer({
   items,
   title,
   desktop = true,
+  header: Header,
+  footer: Footer,
 }: InlineDrawerProps) {
   const { isOpen: drawerIsOpen, closeDrawer } = useDrawer('secondary-drawer');
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [activeAnchor, setActiveAnchor] = useState<string>('');
-
-  // Use controlled open state if provided, otherwise use internal state
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Flatten items for easier anchor tracking
   const flatItems = useMemo(() => {
@@ -67,6 +69,17 @@ export function SecondaryDrawer({
     (anchor: string) => {
       const element = document.getElementById(anchor);
       if (element) {
+        // Clear any existing timeout
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+
+        // Immediately set the target as active
+        setActiveAnchor(anchor);
+
+        // Disable observer updates during scroll
+        isScrollingRef.current = true;
+
         element.style.scrollMarginTop = '80px'; // Offset for fixed header
 
         element.scrollIntoView({
@@ -74,7 +87,12 @@ export function SecondaryDrawer({
           block: 'start',
         });
 
-        setActiveAnchor(anchor);
+        // Re-enable observer updates after scroll completes
+        // Smooth scroll typically takes 500-1000ms, we'll wait 1000ms to be safe
+        scrollTimeoutRef.current = setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 1000);
+
         // Close mobile drawer after navigation
         if (!desktop) {
           closeDrawer();
@@ -84,56 +102,79 @@ export function SecondaryDrawer({
     [desktop, closeDrawer]
   );
 
-  // Track scroll position to highlight active section
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const anchorsWithElements = flatItems
-  //       .filter((item) => item.anchor)
-  //       .map((item) => ({
-  //         id: item.anchor!,
-  //         element: document.getElementById(item.anchor!),
-  //       }))
-  //       .filter(({ element }) => element !== null);
-
-  //     // Find the currently visible section
-  //     let currentAnchor = '';
-  //     const scrollTop = window.scrollY;
-  //     const offset = 0; // Offset for header
-
-  //     for (const { id, element } of anchorsWithElements) {
-  //       if (element && element.offsetTop - offset <= scrollTop + 50) {
-  //         currentAnchor = id;
-  //       }
-  //     }
-
-  //     setActiveAnchor(currentAnchor);
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll);
-  //   handleScroll(); // Initial call
-
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, [flatItems]);
-
-  // Toggle expanded state for items with children
-  const toggleExpanded = useCallback((itemId: string) => {
-    setExpandedItems((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(itemId)) {
-        newSet.delete(itemId);
-      } else {
-        newSet.add(itemId);
+  // Cleanup scroll timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
-      return newSet;
-    });
+    };
   }, []);
 
-  // Render navigation items recursively
+  // Track scroll position to highlight active section using Intersection Observer
+  useEffect(() => {
+    // Get all anchor elements
+    const anchorElements = flatItems
+      .filter((item) => item.anchor)
+      .map((item) => ({
+        id: item.anchor!,
+        element: document.getElementById(item.anchor!),
+      }))
+      .filter(({ element }) => element !== null) as Array<{
+      id: string;
+      element: HTMLElement;
+    }>;
+
+    if (anchorElements.length === 0) return;
+
+    // Create intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Skip updates if user is manually scrolling via click
+        if (isScrollingRef.current) {
+          return;
+        }
+
+        // Find the first intersecting entry (topmost visible section)
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => {
+            // Sort by position in viewport (top to bottom)
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+
+        if (visibleEntries.length > 0) {
+          const topEntry = visibleEntries[0];
+          const anchorId = topEntry.target.id;
+          setActiveAnchor(anchorId);
+        }
+      },
+      {
+        // Trigger when section enters top 20% of viewport
+        rootMargin: '-80px 0px -80% 0px',
+        threshold: 0,
+      }
+    );
+
+    // Observe all anchor elements
+    anchorElements.forEach(({ element }) => {
+      observer.observe(element);
+    });
+
+    // Cleanup
+    return () => {
+      anchorElements.forEach(({ element }) => {
+        observer.unobserve(element);
+      });
+      observer.disconnect();
+    };
+  }, []);
+
+  // Render navigation items recursively (all expanded)
   const renderItems = useCallback(
     (items: InlineDrawerItem[]) => {
       return items.map((item) => {
         const hasChildren = item.children && item.children.length > 0;
-        const isExpanded = expandedItems.has(item.id);
         const isActive = item.anchor === activeAnchor;
 
         return (
@@ -143,41 +184,29 @@ export function SecondaryDrawer({
                 itemLevel={item.level}
                 active={isActive}
                 onClick={() => {
-                  // if (hasChildren) {
-                  //   toggleExpanded(item.id);
-                  // }
                   if (item.anchor) {
                     scrollToAnchor(item.anchor);
                   }
                 }}
               >
                 <Typography className="list-item-text">{item.title}</Typography>
-                {hasChildren && (
-                  <IconButton onClick={() => toggleExpanded(item.id)}>
-                    <Icon
-                      path={isExpanded ? mdiChevronDown : mdiChevronRight}
-                      fontSize="small"
-                    />
-                  </IconButton>
-                )}
               </StyledListItemButton>
             </ListItem>
             {hasChildren && (
-              <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                <List disablePadding>{renderItems(item.children!)}</List>
-              </Collapse>
+              <List disablePadding>{renderItems(item.children!)}</List>
             )}
           </Box>
         );
       });
     },
-    [expandedItems, activeAnchor, toggleExpanded, scrollToAnchor]
+    [activeAnchor, scrollToAnchor]
   );
 
   // Render navigation content
   const navigationContent = (
     <>
-      {title && (
+      {/* Only show title if no custom header is provided */}
+      {title && !Header && (
         <>
           <Typography variant="subtitle2" sx={{ pt: 2, pb: 1, pl: 1 }}>
             {title}
@@ -195,7 +224,9 @@ export function SecondaryDrawer({
   if (desktop) {
     return (
       <PermanentDrawer width={228} key="inline-drawer" anchor="right" secondary>
+        {Header && <Header />}
         {navigationContent}
+        {Footer && <Footer />}
       </PermanentDrawer>
     );
   }

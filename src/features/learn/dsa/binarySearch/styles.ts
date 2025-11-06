@@ -67,7 +67,7 @@ export const InvariantGrid = styled(Box)(({ theme }) => ({
   '& > *': {
     borderRight: `1px solid ${theme.palette.divider}`,
   },
-  '& > *:nth-child(2n)': {
+  '& > *:nth-of-type(2n)': {
     borderRight: 'none', // Remove right border from every 2nd child (last column)
   },
 }));
@@ -82,9 +82,9 @@ export const InvariantRow = styled(Box)(({ theme }) => ({
   '&:last-child > *': {
     borderBottom: 'none', // Remove bottom border from last row
   },
-  '&:hover > *': {
-    backgroundColor: theme.palette.action.hover,
-  },
+  // '&:hover > *': {
+  //   backgroundColor: theme.palette.action.hover,
+  // },
 }));
 
 export const InvariantHeader = styled(Typography)(({ theme }) => ({

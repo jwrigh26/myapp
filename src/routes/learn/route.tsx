@@ -16,6 +16,8 @@ function AppLayoutComponent() {
   const {
     items: navigationItems,
     title: navigationTitle,
+    header: navigationHeader,
+    footer: navigationFooter,
     loading,
     error,
   } = useNavigationItems();
@@ -32,6 +34,8 @@ function AppLayoutComponent() {
         <TableOfContents
           items={navigationItems}
           title={navigationTitle}
+          header={navigationHeader}
+          footer={navigationFooter}
           desktop={isDesktop}
         />
       )}

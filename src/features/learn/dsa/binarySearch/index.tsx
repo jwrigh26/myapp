@@ -25,6 +25,10 @@ export {
 export { LoopInvariant } from './LoopInvariant';
 export type { LoopInvariantProps } from './LoopInvariant';
 
+// Drawer components
+export { BinarySearchDrawerHeader } from './DrawerHeader';
+export { BinarySearchDrawerFooter } from './DrawerFooter';
+
 // Hooks
 export { useBunnyArrays } from './useBunnyArrays';
 
