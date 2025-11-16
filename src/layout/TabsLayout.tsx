@@ -157,7 +157,7 @@ export function TabsLayout({ tabs, children, id, className }: TabsLayoutProps) {
 
   return (
     <PageLayout id="tabs-layout">
-      <StyledTabs
+      {/* <StyledTabs
         id={id}
         className={className}
         value={currentTab}
@@ -168,7 +168,7 @@ export function TabsLayout({ tabs, children, id, className }: TabsLayoutProps) {
         {tabs.map((tab) => (
           <Tab key={tab.path} label={tab.label} value={tab.path} />
         ))}
-      </StyledTabs>
+      </StyledTabs> */}
       {children}
     </PageLayout>
   );
