@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, lazy } from 'react';
 import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { createFileRoute } from '@tanstack/react-router';
@@ -22,14 +22,18 @@ import ComplexityList from '@/components/ComplexityList';
 import { styled } from '@mui/material';
 import { mdiRabbit } from '@mdi/js';
 import {
-  BinarySearchStep0,
-  BinarySearchStep1,
-  BinarySearchStep2,
-  BinarySearchStep3,
-  BinarySearchStepResult,
   BunnyArraySegmented,
 } from '@/features/learn/dsa';
 import { BunnyArray } from '@/components/DsaArray.examples';
+import StepperContainer from '@/features/learn/components/StepperContainer';
+
+// Lazy load step components
+const binarySearchSteps = [
+  lazy(() => import('@/features/learn/dsa/binarySearch/Step0')),
+  lazy(() => import('@/features/learn/dsa/binarySearch/Step1')),
+  lazy(() => import('@/features/learn/dsa/binarySearch/Step2')),
+  lazy(() => import('@/features/learn/dsa/binarySearch/Step3')),
+];
 
 const InstructionText = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(1),
@@ -500,7 +504,7 @@ class BunnyType(IntEnum):
         border
         language="python"
         code={`# Next, we'll create a simple struct-like Bunny class.
-# We'll include a name variable just for fun visual flavor.
+# We'll include a name variable just for fun.
 # The main variable we'll use is 'type'.
 class Bunny:
     def __init__(self, bunny_type: BunnyType = BunnyType.NORMAL):
@@ -627,6 +631,8 @@ def is_before(x: BunnyType):
         border
         language="python"
         code={`# Define the invariant
+left < right always:
+# The invariant is tested in the loop condition:
 while left + 1 < right:`}
       />
 
@@ -741,14 +747,21 @@ mid = left + (right - left) // 2
         Let's return to the part of the walkthrough where everything gets{' '}
         <strong>looped</strong> in.
       </ProseBlock>
+      <CodeBlock
+        border
+        language="python"
+        code={`# The Loop keeps searching while there is one more element between left and right.
+while left + 1 < right:`}
+      />
       <Spacer size={2} />
 
-      <BinarySearchStep0 />
-      <BinarySearchStep1 />
-      <BinarySearchStep2 />
-      <BinarySearchStep3 />
-      <BinarySearchStepResult />
-      <BunnyArray />
+      <StepperContainer
+        steps={binarySearchSteps}
+        title="Binary Search Step-by-Step"
+        subtitle="Follow along as we find the first honey bunny using the transition point recipe."
+      />
+      
+      <Spacer size={sectionSpaceSize} />
     </PageLayout>
   );
 }

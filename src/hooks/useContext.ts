@@ -19,12 +19,16 @@ export function useDrawer(key: string, defaultOpen: boolean = false) {
   const { open, setOpen, setClose } = context;
 
   // Initialize with default if key doesn't exist yet
+  // const isOpen = key in open ? !!open[key] : defaultOpen;
+  // const isOpen = defaultOpen || !!open[key];
   const isOpen = key in open ? !!open[key] : defaultOpen;
 
   // Set the initial state if this is the first time this key is used
   // Use useLayoutEffect to avoid setState during render
   useLayoutEffect(() => {
     if (!(key in open) && defaultOpen) {
+      setOpen(key)();
+    } else if (key in open && !!open[key]) {
       setOpen(key)();
     } else {
       setClose(key)();

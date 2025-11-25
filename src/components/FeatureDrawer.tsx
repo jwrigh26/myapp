@@ -33,6 +33,7 @@ export interface FeatureDrawerConfig {
   drawerKey: string;
   featureName: 'blog' | 'learn';
   headerIcon?: string; // Optional icon for the drawer header
+  isLastDrawer?: boolean; // Indicates if this is the last drawer in the navigation
 }
 
 interface MUILinkProps {
@@ -63,6 +64,7 @@ export function FeatureDrawer({
   drawerKey,
   featureName,
   headerIcon,
+  isLastDrawer = false,
 }: FeatureDrawerConfig) {
   const router = useRouter();
   const matchRoute = useMatchRoute();
@@ -89,7 +91,7 @@ export function FeatureDrawer({
       }
       anchor="left"
     >
-      {categories.map((category) => {
+      {categories.map((category, index) => {
         const isActiveRoute = !!matchRoute({
           to: category.path,
           fuzzy: true,
@@ -107,6 +109,7 @@ export function FeatureDrawer({
             categoryPath={category.path + '/'}
             drawerKey={drawerKey}
             paths={paths}
+            isLast={isLastDrawer && index === categories.length - 1}
           />
         );
       })}
@@ -257,6 +260,7 @@ interface PostCategoryProps {
   categoryPath: string;
   drawerKey: string;
   paths: Record<string, string>;
+  isLast?: boolean;
 }
 
 function PostHeader({ title, icon, isActive = false }: PostHeaderProps) {
@@ -332,11 +336,12 @@ export function PostCategory({
   categoryPath,
   drawerKey,
   paths,
+  isLast = false,
 }: PostCategoryProps) {
   return (
     <>
       {/* Icon-only version for collapsed drawer */}
-      <div className="collapsed-icon">
+      <div id={`${title}-post-category`} className="collapsed-icon">
         <CollapsedCategoryIcon
           title={title}
           icon={icon}
@@ -355,7 +360,7 @@ export function PostCategory({
           categoryPath={categoryPath}
           isActive={isActive}
         >
-          <StyledList>
+          <StyledList isLast={isLast}>
             {routes.map((route) => {
               const routeTitle =
                 route.options.head?.()?.getTitle?.() || route.id;
@@ -441,10 +446,15 @@ function CollapsedCategoryIcon({
 // ### Styles
 // ################################################
 
-const StyledList = styled(List)(({ theme }) => ({
+const StyledList = styled(List, {
+  shouldForwardProp: (prop) => prop !== 'isLast',
+})<{ isLast?: boolean }>(({ theme, isLast }) => ({
   width: '100%',
   backgroundColor: theme.palette.primary.dark,
   paddingTop: 0,
+  ...(isLast && {
+    paddingBottom: theme.spacing(8), // 64px (8 * 8px)
+  }),
 }));
 
 const CollapsedIconButton = styled(ListItemButton, {

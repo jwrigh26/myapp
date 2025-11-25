@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 // Define the structure for each image source
 export interface SourceProps {
-  media: string; // e.g., "(min-width: 768px)"
+  media?: string; // e.g., "(min-width: 768px)" - optional for single variant
   srcSet: string; // e.g., "image-large.jpg 2x, image-large@1x.jpg 1x"
   sizes?: string; // e.g., "100vw"
 }

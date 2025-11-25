@@ -303,7 +303,6 @@ const MiniContent = styled(Box)<{ open?: boolean }>(({ theme, open }) => ({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-
   // Collapsed icons - show when closed, hide when open
   '& .collapsed-icon': {
     display: open ? 'none' : 'block',

@@ -3,8 +3,10 @@
 This document provides guidelines and examples for naming image files using the standardized format:
 
 ```
-[YYYYMMDD]-[category]-[slug]-[size].jpg
+[YYYYMMDD]-[category]-[slug]-large.webp
 ```
+
+**Note:** As of November 2025, we use a single `large` variant for all devices. This simplifies asset management while providing high-quality images for modern high-DPI displays and fast internet connections.
 
 ---
 
@@ -43,13 +45,8 @@ Example:
 
 4. **size**:
 
-   - Indicates the image variant:
-
-     - `hero` — large, featured image
-     - `thumb` — small thumbnail
-     - `small`, `medium`, `large` — generic size labels
-
-   - Consistent naming helps batch processing scripts.
+   - Always use `large` for the single high-quality variant.
+   - Legacy references to `small`, `medium`, `hero`, or `thumb` are deprecated.
 
 5. **Extension**:
 
@@ -76,12 +73,11 @@ Example with version:
 
 ## 4. Examples
 
-| Filename                                        | Meaning                                   |
-| ----------------------------------------------- | ----------------------------------------- |
-| `20250712-recipes-apple-pie-top-view-hero.jpg`  | Hero image for a top-down apple pie shot. |
-| `20250712-recipes-apple-pie-top-view-thumb.jpg` | Thumbnail variant of the same image.      |
-| `20250712-blog-hero-sunset-over-city-small.jpg` | Small version of a blog post hero image.  |
-| `20250712-gardening-rosemary-plants-medium.jpg` | Medium-size image of rosemary plants.     |
+| Filename                                         | Meaning                                    |
+| ------------------------------------------------ | ------------------------------------------ |
+| `20250712-recipes-apple-pie-top-view-large.webp` | High-quality image for a top-down pie shot |
+| `20250712-blog-sunset-over-city-large.webp`      | Blog post hero image of city sunset        |
+| `20250712-gardening-rosemary-plants-large.webp`  | High-quality image of rosemary plants      |
 
 ---
 
@@ -92,12 +88,11 @@ In your batch-renaming terminal application, parse the format string and replace
 ```bash
 # Example CLI usage:
 rename-images \
-  --format "[YYYYMMDD]-[category]-[slug]-[size].jpg" \
+  --format "[YYYYMMDD]-[category]-[slug]-large.webp" \
   --date 20250712 \
   --category recipes \
   --slug apple-pie-top-view \
-  --size thumb \
-  *.jpg
+  *.webp
 ```
 
 Ensure your app:

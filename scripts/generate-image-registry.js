@@ -127,26 +127,22 @@ function scanFlatAssets(categoryPath, category, registry) {
 }
 
 function processImageFiles(files, basePath, registry) {
-  // Group files by base name (everything before -large/-medium/-small)
+  // Group files by base name (everything before -large)
   const imageGroups = {};
 
   files.forEach((file) => {
     const match = file.match(
-      /^(.+?)-(large|medium|small)\.(webp|jpg|jpeg|png)$/i
+      /^(.+?)-large\.(webp|jpg|jpeg|png)$/i
     );
     if (match) {
-      const [, baseName, size, ext] = match;
-      if (!imageGroups[baseName]) imageGroups[baseName] = {};
-      imageGroups[baseName][size.toLowerCase()] = `${basePath}/${file}`;
+      const [, baseName] = match;
+      imageGroups[baseName] = `${basePath}/${file}`;
     }
   });
 
-  // Add to registry
-  Object.entries(imageGroups).forEach(([baseName, sizes]) => {
-    // Only include if we have at least large and medium sizes
-    if (sizes.large && sizes.medium) {
-      registry[baseName] = sizes;
-    }
+  // Add to registry - only include large variants
+  Object.entries(imageGroups).forEach(([baseName, largePath]) => {
+    registry[baseName] = { large: largePath };
   });
 }
 
@@ -173,14 +169,13 @@ function generateRegistry() {
   const output = `// Auto-generated image registry - DO NOT EDIT MANUALLY
 // Generated on: ${new Date().toISOString()}
 // Images found: ${registryKeys.length}
+// Strategy: Single large variant for all devices (high-DPI optimized)
 
 ${registryKeys
   .map((key) => {
     const sizes = registry[key];
     const varName = 'img_' + key.replace(/[-]/g, '_');
-    return `import ${varName}_large from '${sizes.large}';
-import ${varName}_medium from '${sizes.medium}';
-import ${varName}_small from '${sizes.small}';`;
+    return `import ${varName}_large from '${sizes.large}';`;
   })
   .join('\n')}
 
@@ -189,9 +184,7 @@ ${registryKeys
   .map((key) => {
     const varName = 'img_' + key.replace(/[-]/g, '_');
     return `  "${key}": {
-    "large": ${varName}_large,
-    "medium": ${varName}_medium,
-    "small": ${varName}_small
+    "large": ${varName}_large
   }`;
   })
   .join(',\n')}
@@ -201,8 +194,6 @@ export type ImageKey = keyof typeof imageRegistry;
 
 export type ImageSizes = {
   large?: string;
-  medium?: string;
-  small?: string;
 };
 
 export type ImageAssetCategory = 'blog' | 'home' | 'game' | 'learn' | 'default';

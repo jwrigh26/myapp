@@ -59,6 +59,7 @@ export function LearnDrawer() {
       drawerKey="learn-drawer"
       featureName="learn"
       headerIcon={mdiSchool}
+      isLastDrawer={true}
     />
   );
 }

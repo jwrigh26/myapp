@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-11-06T17:16:33.066Z
+// Generated on: 2025-11-25T02:35:46.010Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -96,16 +96,16 @@ export const contentRegistry: Record<string, ContentEntry> = {
         ]
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.347Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/binary-search/index.tsx"
+    "lastUpdated": "2025-11-22T17:01:58.275Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {
     "title": "Data Structures & Algorithms",
     "description": "Exploring data structures, algorithms, and problem-solving techniques for efficient computing.",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.347Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/dsa/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/dsa/index.tsx"
   },
   "git/branching": {
     "title": "Branching",
@@ -161,8 +161,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.348Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/branching.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/branching.tsx"
   },
   "git/cherry-picking": {
     "title": "Cherry-Picking",
@@ -218,8 +218,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.348Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/cherry-picking.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/cherry-picking.tsx"
   },
   "git/every-day-git": {
     "title": "Every Day Git",
@@ -287,16 +287,16 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.349Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/every-day-git.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/every-day-git.tsx"
   },
   "git": {
     "title": "Git & Version Control",
     "description": "Mastering Git version control from basic commands to advanced workflows and collaboration.",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.349Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/index.tsx"
   },
   "git/reset": {
     "title": "Reset",
@@ -376,8 +376,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.349Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/reset.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/reset.tsx"
   },
   "git/stashing": {
     "title": "Stashing",
@@ -445,8 +445,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.349Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/stashing.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/stashing.tsx"
   },
   "git/tagging": {
     "title": "Tagging",
@@ -508,16 +508,16 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.350Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/git/tagging.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/git/tagging.tsx"
   },
   "": {
     "title": "Learn",
     "description": "My Learning Journey",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.350Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.503Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/index.tsx"
   },
   "math/dividing-fractions/advanced": {
     "title": "Deep dive into complex mathematical ideas",
@@ -536,15 +536,15 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.351Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/advanced.lazy.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.504Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/dividing-fractions/advanced.lazy.tsx"
   },
   "math/dividing-fractions/examples": {
     "title": "Real-world applications and practice problems",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.351Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/examples.lazy.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.505Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/dividing-fractions/examples.lazy.tsx"
   },
   "math/dividing-fractions": {
     "title": "Dividing Fractions",
@@ -608,8 +608,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.352Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/dividing-fractions/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.505Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/dividing-fractions/index.tsx"
   },
   "math/division": {
     "title": "Division",
@@ -665,14 +665,14 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.353Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/division/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.505Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/division/index.tsx"
   },
   "math/division/problems": {
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.354Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/division/problems.lazy.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.505Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/division/problems.lazy.tsx"
   },
   "math/exponents": {
     "title": "Exponents & Roots",
@@ -774,16 +774,16 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.354Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/exponents/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.505Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/exponents/index.tsx"
   },
   "math": {
     "title": "Mathematics",
     "description": "Mathematical concepts, proofs, and practical applications in computer science and engineering.",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.355Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.506Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/index.tsx"
   },
   "math/sigma-notation": {
     "title": "Sigma Notation",
@@ -865,16 +865,16 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.356Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/math/sigma-notation/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.506Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/math/sigma-notation/index.tsx"
   },
   "python": {
     "title": "Python Programming",
     "description": "Mastering Python programming from fundamentals to advanced concepts and real-world applications.",
     "tags": [],
     "items": [],
-    "lastUpdated": "2025-11-06T16:10:26.357Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/python/index.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.507Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/python/index.tsx"
   },
   "python/whiteboarding-essentials": {
     "title": "Whiteboarding Essentials",
@@ -974,8 +974,8 @@ export const contentRegistry: Record<string, ContentEntry> = {
         "level": 1
       }
     ],
-    "lastUpdated": "2025-11-06T16:10:26.358Z",
-    "filepath": "/Users/maneki-neko/myapp/src/routes/learn/python/whiteboarding-essentials.tsx"
+    "lastUpdated": "2025-11-15T16:46:39.507Z",
+    "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/python/whiteboarding-essentials.tsx"
   }
 };
 
