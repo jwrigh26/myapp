@@ -1,5 +1,5 @@
 // Auto-generated image registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-11-25T02:35:45.765Z
+// Generated on: 2025-11-28T16:08:11.274Z
 // Images found: 46
 // Strategy: Single large variant for all devices (high-DPI optimized)
 

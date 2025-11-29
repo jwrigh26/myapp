@@ -1,5 +1,5 @@
 // Auto-generated content registry - DO NOT EDIT MANUALLY
-// Generated on: 2025-11-25T02:35:46.010Z
+// Generated on: 2025-11-28T16:08:11.611Z
 // Total routes: 20
 
 export interface NavigationItem {
@@ -96,7 +96,7 @@ export const contentRegistry: Record<string, ContentEntry> = {
         ]
       }
     ],
-    "lastUpdated": "2025-11-22T17:01:58.275Z",
+    "lastUpdated": "2025-11-25T02:46:14.692Z",
     "filepath": "/home/fish/workspace/personal/myapp/src/routes/learn/dsa/binary-search/index.tsx"
   },
   "dsa": {

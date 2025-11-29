@@ -21,10 +21,11 @@ import ProseList from '@/components/ProseList';
 import ComplexityList from '@/components/ComplexityList';
 import { styled } from '@mui/material';
 import { mdiRabbit } from '@mdi/js';
+
 import {
   BunnyArraySegmented,
 } from '@/features/learn/dsa';
-import { BunnyArray } from '@/components/DsaArray.examples';
+
 import StepperContainer from '@/features/learn/components/StepperContainer';
 
 // Lazy load step components

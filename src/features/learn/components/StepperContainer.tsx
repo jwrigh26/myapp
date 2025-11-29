@@ -332,7 +332,7 @@ const StyledStepButton = styled(StepButton)(({ theme }) => ({
     ...(theme.palette.mode === 'dark' && {
       filter: `drop-shadow(0 0 8px $<span class="MuiStepLabel-label css-1srlnzz-MuiStepLabel-label">1</span>{theme.palette.primary.main}66)`,
     }),
-    transform: 'scale(1.1)',
+    transform: 'scale(1.05)',
   },
   '& .MuiStepIcon-root.Mui-completed': {
     color: theme.palette.primary.main,
@@ -340,8 +340,8 @@ const StyledStepButton = styled(StepButton)(({ theme }) => ({
   // Style the number inside the icon
   '& .MuiStepIcon-text': {
     fill: theme.palette.primary.contrastText,
-    fontSize: '0.875rem',
-    fontWeight: 600,
+    fontSize: '0.75rem',
+    fontWeight: 500,
   },
   '&:hover .MuiStepIcon-root': {
     color: theme.palette.primary.light,
@@ -498,7 +498,7 @@ const CenterControls = styled(Box)(({ theme }) => ({
 
 const StepIndicator = styled(Box)(({ theme }) => ({
   ...theme.typography.body2,
-  fontWeight: 600,
+  fontWeight: 500,
   color: theme.palette.text.secondary,
   textAlign: 'center',
   [theme.breakpoints.down('sm')]: {

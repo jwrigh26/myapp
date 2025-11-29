@@ -174,34 +174,83 @@ npm run firebase:deploy:prod   # Deploy to production
 - **Feature modules**: `src/features/{about|blog|game|learn|settings}/`
 - **Generated files**: `src/utils/imageRegistry.ts`, `src/utils/contentRegistry.ts`, `src/routeTree.gen.ts`
 
-### Modular Pattern Example: `binarySearch/`
+### Feature Export Pattern
 
-When a component file grows large (~500+ lines), refactor into a modular folder structure:
+**Critical**: Features use category-level export files instead of folder-level index files for better maintainability and to avoid module resolution conflicts.
+
+#### Structure Example: `features/learn/`
+
+```
+src/features/learn/
+├── index.ts              # Top-level exports (LearnDrawer, CompendiumDrawer, etc.)
+├── dsa.ts                # All DSA-related exports
+├── math.ts               # All Math-related exports
+├── notes.ts              # All Notes-related exports
+├── dsa/
+│   ├── binarySearch/     # NO index file
+│   │   ├── Step0.tsx
+│   │   ├── Step1.tsx
+│   │   ├── LoopInvariant.tsx
+│   │   ├── useBunnyArrays.ts
+│   │   ├── styles.ts
+│   │   └── examples.tsx
+│   └── AnotherFileNotRelatedTobinarySearch.tsx
+├── math/
+│   └── hello-world-01.tsx
+└── notes/
+    └── ...
+```
+
+#### Export File Pattern (`dsa.ts` example):
+
+```typescript
+// Export components
+export { BinarySearchStep0 } from './dsa/binarySearch/Step0';
+export { BinarySearchStep1 } from './dsa/binarySearch/Step1';
+export { LoopInvariant } from './dsa/binarySearch/LoopInvariant';
+
+// Export types
+export type { LoopInvariantProps } from './dsa/binarySearch/LoopInvariant';
+
+// Export hooks
+export { useBunnyArrays } from './dsa/binarySearch/useBunnyArrays';
+
+// Export examples
+export { BunnyArrayBasic, BunnyArraySegmented } from './dsa/binarySearch/examples';
+
+// Re-export all styles
+export * from './dsa/binarySearch/styles';
+```
+
+**Key principles:**
+- **No index files in feature subfolders**: Avoids TypeScript module resolution conflicts (.ts vs .tsx)
+- **Category-level exports**: Create `{category}.ts` files at the feature level (e.g., `dsa.ts`, `math.ts`)
+- **Explicit exports**: Each export is individually named for clarity and tree-shaking
+- **CamelCase folders**: `binarySearch/` not `binary-search/`
+- **Specific naming**: `useBunnyArrays.ts` not generic `hooks.ts`
+- **Examples separation**: `examples.tsx` for documentation/testing, not production use
+- **Styles re-export**: Use `export *` for styled components to keep category file clean
+
+#### Modular Component Structure
+
+When a component file grows large (~500+ lines), refactor into a modular folder:
 
 ```
 src/features/learn/dsa/binarySearch/
-├── index.tsx             # Main exports and combined component
-├── styles.ts             # Shared styled components
-├── useBunnyArrays.ts     # Specific hook (not generic "hooks.ts")
-├── LoopInvariant.tsx     # Shared component
 ├── Step0.tsx             # Individual step components
 ├── Step1.tsx
 ├── Step2.tsx
 ├── Step3.tsx
+├── styles.ts             # Shared styled components
+├── useBunnyArrays.ts     # Specific hook
+├── LoopInvariant.tsx     # Shared component
+├── DrawerHeader.tsx      # UI components
+├── DrawerFooter.tsx
 ├── examples.tsx          # Example components (not used in production)
 └── README.md             # Usage documentation
 ```
 
-**Key principles:**
-- **Backward compatibility**: Old import paths continue to work via re-export file (`BinarySearchSteps.tsx`)
-- **Specific naming**: `useBunnyArrays.ts` instead of generic `hooks.ts`
-- **CamelCase folders**: `binarySearch/` not `binary-search/`
-- **Shared resources**: `styles.ts` exports styled components, spacing constants
-- **Examples separation**: `examples.tsx` for documentation/testing, not production use
-- **Clear exports**: `index.tsx` exports all components for easy import
-- **Documentation**: README.md with usage examples and API reference
-
-This pattern keeps related code organized while maintaining a clean import API for consumers.
+All exports are managed in the parent `dsa.ts` file, not in the folder itself.
 
 
 ## Design Principles

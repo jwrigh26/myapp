@@ -65,7 +65,7 @@ export function LearnDrawer() {
 }
 
 /**
- * Used for showing or needing to describea collection of notes, summaries, and vocabulary.
+ * Used for showing or needing to describe a collection of notes, summaries, and vocabulary.
  */
 export function CompendiumDrawer() {
   const isDesktop = useIsBreakpointUp('sm');

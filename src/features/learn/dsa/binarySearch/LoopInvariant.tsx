@@ -8,84 +8,132 @@
 import React from 'react';
 import VariableValue from '@/components/VariableValue';
 import {
-  InvariantGrid,
-  InvariantRow,
-  InvariantHeader,
-  InvariantExpression,
-  InvariantResult,
-  InvariantText,
-} from './styles';
+  StepGrid,
+  StepRow,
+  StepHeader,
+  StepExpression,
+  StepResult,
+  StepMonoText,
+  StepCaptionWrapper,
+  StepCaptionContainer,
+} from '@/components/loop';
 
 export interface LoopInvariantProps {
   left: number;
   right: number;
   mid?: number;
+  /** Optional callout shown after the while condition row */
+  whileCallout?: React.ReactNode;
+  /** Optional callout shown after the mid formula row */
+  midFormulaCallout?: React.ReactNode;
+  /** Optional callout shown after the mid result row */
+  midResultCallout?: React.ReactNode;
 }
 
 export const LoopInvariant: React.FC<LoopInvariantProps> = ({
   left,
   right,
   mid,
+  whileCallout,
+  midFormulaCallout,
+  midResultCallout,
 }) => {
   // Calculate results
   const whileCondition = left + 1 < right;
-  const midCalculation = mid !== undefined ? Math.floor((left + right) / 2) : undefined;
+  const midCalculation =
+    mid !== undefined ? Math.floor((left + right) / 2) : undefined;
 
   return (
-    <InvariantGrid>
+    <StepGrid>
       {/* Header row */}
-      <InvariantHeader>Expression</InvariantHeader>
-      <InvariantHeader>Result</InvariantHeader>
+      <StepHeader align="left" showBorderRight>
+        Expression
+      </StepHeader>
+      <StepHeader align="right">Result</StepHeader>
 
       {/* While loop condition row */}
-      <InvariantRow>
-        <InvariantExpression>
-          <InvariantText>while</InvariantText>
+      <StepRow noBorderBottom={!!whileCallout}>
+        <StepExpression>
+          <StepMonoText>while</StepMonoText>
           <VariableValue variable="left" value={left} color="primary" />
-          <InvariantText>+</InvariantText>
+          <StepMonoText>+</StepMonoText>
           <VariableValue variable="" value={1} color="default" />
-          <InvariantText>&lt;</InvariantText>
+          <StepMonoText>&lt;</StepMonoText>
           <VariableValue variable="right" value={right} color="secondary" />
-        </InvariantExpression>
-        <InvariantResult>
-          <InvariantText>{whileCondition ? 'true' : 'false'}</InvariantText>
-        </InvariantResult>
-      </InvariantRow>
+        </StepExpression>
+        <StepResult>
+          <StepMonoText>{whileCondition ? 'true' : 'false'}</StepMonoText>
+        </StepResult>
+      </StepRow>
+
+      {/* While callout (shown after while condition if provided) */}
+      {whileCallout && (
+        <StepRow>
+          <StepCaptionWrapper showBorderRight>
+            {whileCallout}
+          </StepCaptionWrapper>
+          <StepCaptionWrapper>
+            <StepCaptionContainer />
+          </StepCaptionWrapper>
+        </StepRow>
+      )}
 
       {/* Mid calculation rows (only shown if mid is provided) */}
       {mid !== undefined && (
         <>
           {/* Mid formula row */}
-          <InvariantRow>
-            <InvariantExpression>
-              <InvariantText>mid =</InvariantText>
-              <InvariantText>(</InvariantText>
+          <StepRow noBorderBottom={!!midFormulaCallout}>
+            <StepExpression>
+              <StepMonoText>mid =</StepMonoText>
+              <StepMonoText>(</StepMonoText>
               <VariableValue variable="left" value={left} color="primary" />
-              <InvariantText>+</InvariantText>
+              <StepMonoText>+</StepMonoText>
               <VariableValue variable="right" value={right} color="secondary" />
-              <InvariantText>)</InvariantText>
-              <InvariantText>//</InvariantText>
+              <StepMonoText>)</StepMonoText>
+              <StepMonoText>//</StepMonoText>
               <VariableValue variable="" value={2} color="default" />
-            </InvariantExpression>
-            <InvariantResult>
-              <InvariantText>{left + right} // 2</InvariantText>
-            </InvariantResult>
-          </InvariantRow>
+            </StepExpression>
+            <StepResult>
+              <StepMonoText>{left + right} // 2</StepMonoText>
+            </StepResult>
+          </StepRow>
+
+          {/* Mid formula callout (shown after mid formula if provided) */}
+          {midFormulaCallout && (
+            <StepRow>
+              <StepCaptionWrapper showBorderRight>
+                {midFormulaCallout}
+              </StepCaptionWrapper>
+              <StepCaptionWrapper>
+                <StepCaptionContainer />
+              </StepCaptionWrapper>
+            </StepRow>
+          )}
 
           {/* Mid result row */}
-          <InvariantRow>
-            <InvariantExpression>
+          <StepRow noBorderBottom={!!midResultCallout}>
+            <StepExpression>
               <VariableValue variable="mid" color="info" />
-              <InvariantText>=</InvariantText>
+              <StepMonoText>=</StepMonoText>
               <VariableValue variable="" value={mid} color="default" />
-            </InvariantExpression>
-            <InvariantResult>
-              <InvariantText>{mid}</InvariantText>
-            </InvariantResult>
-          </InvariantRow>
+            </StepExpression>
+            <StepResult>
+              <StepMonoText>{mid}</StepMonoText>
+            </StepResult>
+          </StepRow>
+
+          {/* Mid result callout (shown after mid result if provided) */}
+          {midResultCallout && (
+            <StepRow>
+              <StepCaptionWrapper showBorderRight>{midResultCallout}</StepCaptionWrapper>
+              <StepCaptionWrapper>
+                <StepCaptionContainer />
+              </StepCaptionWrapper>
+            </StepRow>
+          )}
         </>
       )}
-    </InvariantGrid>
+    </StepGrid>
   );
 };
 

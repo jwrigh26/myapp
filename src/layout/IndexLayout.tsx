@@ -62,10 +62,12 @@ function AppBarToolbar() {
   const router = useRouter();
   const isTablet = useIsBreakpointDown('sm');
 
-  // Show secondary drawer icon on learn routes
+  // Show secondary drawer icon on nested learn routes (/learn/**/*)
+  // Exclude main category pages (/learn/math, /learn/dsa, etc)
+  const pathname = router.state.location.pathname;
+  const pathParts = pathname.split('/').filter(Boolean);
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/') &&
-    router.state.location.pathname !== '/learn';
+    pathParts[0] === 'learn' && pathParts.length > 2;
 
   return (
     <StyledAppBar id="AppBar" elevation={0}>
@@ -88,10 +90,12 @@ function MobileAppToolbar() {
   const { toggleOpen } = useToggle('navigation-drawer');
   const router = useRouter();
 
-  // Show secondary drawer icon on learn routes
+  // Show secondary drawer icon on nested learn routes (/learn/**/*)
+  // Exclude main category pages (/learn/math, /learn/dsa, etc)
+  const pathname = router.state.location.pathname;
+  const pathParts = pathname.split('/').filter(Boolean);
   const showSecondaryDrawer =
-    router.state.location.pathname.startsWith('/learn/') &&
-    router.state.location.pathname !== '/learn';
+    pathParts[0] === 'learn' && pathParts.length > 2;
 
   return (
     <HideOnScroll>
