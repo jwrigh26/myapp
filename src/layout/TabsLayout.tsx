@@ -155,21 +155,22 @@ export function TabsLayout({ tabs, children, id, className }: TabsLayoutProps) {
     router.navigate({ to: targetPath });
   };
 
-  return (
-    <PageLayout id="tabs-layout">
-      {/* <StyledTabs
-        id={id}
-        className={className}
-        value={currentTab}
-        onChange={handleTabChange}
-        variant="scrollable"
-        scrollButtons={false}
-      >
-        {tabs.map((tab) => (
-          <Tab key={tab.path} label={tab.label} value={tab.path} />
-        ))}
-      </StyledTabs> */}
-      {children}
-    </PageLayout>
-  );
+  // return (
+  //   <PageLayout id="tabs-layout">
+  //     <StyledTabs
+  //       id={id}
+  //       className={className}
+  //       value={currentTab}
+  //       onChange={handleTabChange}
+  //       variant="scrollable"
+  //       scrollButtons={false}
+  //     >
+  //       {tabs.map((tab) => (
+  //         <Tab key={tab.path} label={tab.label} value={tab.path} />
+  //       ))}
+  //     </StyledTabs>
+  //     {children}
+  //   </PageLayout>
+  // );
+  return children;
 }

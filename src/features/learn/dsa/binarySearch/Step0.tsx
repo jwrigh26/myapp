@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import Stack from '@mui/material/Stack';
 import DsaArray from '@/components/DsaArray';
 import VariableValue from '@/components/VariableValue';
 import { Spacer } from '@/components/Spacer';
@@ -25,7 +24,6 @@ import {
   StepTitle,
   StepBodyText,
 } from './styles';
-import { Typography } from '@mui/material';
 
 export const BinarySearchStep0: React.FC = () => {
   const { normalBunnies, honeyBunnies } = useBunnyArrays();
@@ -65,13 +63,13 @@ export const BinarySearchStep0: React.FC = () => {
           mid={3}
           whileCallout={
             <StepCallout>
-              The condition checks if there's a gap between <code>left</code> and <code>right</code>.
-              If <strong>true</strong>, we continue searching.
+              Zero is less than seven. We continue searching.
             </StepCallout>
           }
           midFormulaCallout={
+              
             <StepCallout>
-              The <code>mid</code> calculation uses <strong>floor division</strong> (//) to ensure an integer result.
+              The <code>mid</code> calculation uses <strong>floor division</strong> (//).<br/> Round down to the nearest whole number.
             </StepCallout>
           }
           midResultCallout={
@@ -111,7 +109,7 @@ export const BinarySearchStep0: React.FC = () => {
         }
       />
 
-      <h1>test</h1>
+      <Spacer size={SPACING.chunk} />
       <DsaArray
         highlightIndices={[3]}
         segments={[

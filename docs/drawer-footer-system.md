@@ -4,7 +4,8 @@ Custom footer components for the SecondaryDrawer (Table of Contents) on desktop 
 
 ## Overview
 
-The drawer footer system allows you to add custom footer content to the bottom of the desktop navigation drawer for specific learn routes. Footers are only displayed on desktop (tablet and larger) and stick to the bottom of the drawer.
+The drawer footer system allows you to add custom footer content to the bottom of the desktop navigation drawer for specific learn routes. 
+Footers are only displayed on desktop (tablet and larger) and stick to the bottom of the drawer.
 
 ## How It Works
 
@@ -150,6 +151,53 @@ export interface DrawerFooterRegistry {
   [routePath: string]: ComponentType;
 }
 ```
+
+## Implementation workflow (define → declare → consume)
+
+To make it easy to understand how a footer ends up rendered in the UI, the system follows a simple 3-step flow:
+
+1. Define the mapping in a central utils file (the "registry").
+2. Declare / implement a footer component in a feature folder (this is the place you *create* footer UI).
+3. The app *consumes* the registry via a hook and passes the component down to the drawer that actually renders it.
+
+Here's a concrete mapping to the files in this repo you can use as a reference:
+
+- Define (registry)
+
+```ts
+// src/utils/drawerFooterRegistry.ts
+// maps route keys (relative to /learn/) → footer component
+export const drawerFooters: DrawerFooterRegistry = {
+  'dsa/binary-search': BinarySearchDrawerFooter,
+};
+```
+
+- Declare (feature) — create a footer component and export it
+
+```tsx
+// src/features/learn/dsa/binarySearch/DrawerFooter.tsx
+export function BinarySearchDrawerFooter() { /* render footer UI */ }
+export default BinarySearchDrawerFooter;
+
+// exported from: src/features/learn/dsa.ts so consumers can import from '@/features/learn/dsa'
+```
+
+- Consume (hook → drawer)
+
+```ts
+// src/hooks/useNavigationItems.ts
+const footerComponent = getDrawerFooter(routePath);
+setFooter(() => footerComponent);
+
+// src/routes/learn/route.tsx -> receives footer from hook and passes it to the SecondaryDrawer
+<TableOfContents footer={navigationFooter} />
+
+// src/components/SecondaryDrawer.tsx -> renders it inside the drawer
+{Footer && <Footer />}
+```
+
+This walkthrough should make it easy to see how adding a footer for a route works end-to-end — create the component in your feature, register it in the registry, and the UI picks it up automatically.
+
 
 ## Best Practices
 

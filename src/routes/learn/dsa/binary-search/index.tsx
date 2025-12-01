@@ -1,4 +1,5 @@
-import { useRef, lazy } from 'react';
+import { useRef, lazy, useEffect } from 'react';
+import { useToggle } from '@/hooks/useContext';
 import TitleBlock from '@/components/TitleBlock';
 import ProseBlock from '@/components/ProseBlock';
 import { createFileRoute } from '@tanstack/react-router';
@@ -76,8 +77,16 @@ function DsaHelloWorld() {
   const compendiumTitleRef = useRef<string>('');
   const setCompendiumTitle = createCompendiumTitleRefSetter(compendiumTitleRef);
 
+  // React to the global toggle state created by the footer button for demos
+  const { isOpen: showCode } = useToggle('binary-search.showCode');
+
+  useEffect(() => {
+    console.log('binary-search.showCode changed ->', showCode);
+  }, [showCode]);
+
   return (
-    <PageLayout>
+    <PageLayout id="page-layout-binarysearch">
+      <div className="sidepanel">hi</div>
       <TitleBlock
         title="Binary Search"
         subtitle="It's dangerous to go alone. Learn this!"
@@ -754,7 +763,7 @@ mid = left + (right - left) // 2
         code={`# The Loop keeps searching while there is one more element between left and right.
 while left + 1 < right:`}
       />
-      <Spacer size={2} />
+      <Spacer size={chunkSpaceSize} />
 
       <StepperContainer
         steps={binarySearchSteps}
@@ -768,8 +777,6 @@ while left + 1 < right:`}
 }
 
 /**
- *
-
  *
  *
  */

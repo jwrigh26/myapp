@@ -13,15 +13,11 @@ import {
   PredicateTest,
   ResultAssignment,
   Section,
+  StepCallout,
   StepMonoText,
   SPACING,
 } from '@/components/loop';
-import {
-  StepContainer,
-  StepTitle,
-  StepBodyText,
-} from './styles';
-
+import { StepContainer, StepTitle, StepBodyText } from './styles';
 
 export const BinarySearchStep1: React.FC = () => {
   const { normalBunnies, honeyBunnies } = useBunnyArrays();
@@ -45,7 +41,7 @@ export const BinarySearchStep1: React.FC = () => {
 
       <Spacer size={SPACING.node} />
 
-      <Section 
+      <Section
         title="Loop Invariant"
         subtitle={
           <>
@@ -53,7 +49,29 @@ export const BinarySearchStep1: React.FC = () => {
           </>
         }
       >
-        <LoopInvariant left={3} right={7} mid={5} />
+        <LoopInvariant
+          left={3}
+          right={7}
+          mid={5}
+          whileCallout={
+            <StepCallout>
+              Zero is less than seven. We continue searching.
+            </StepCallout>
+          }
+          midFormulaCallout={
+            <StepCallout>
+              The <code>mid</code> calculation uses{' '}
+              <strong>floor division</strong> (//).
+              <br /> Round down to the nearest whole number.
+            </StepCallout>
+          }
+          midResultCallout={
+            <StepCallout>
+              The calculated <code>mid</code> value of <strong>3</strong> is the
+              index we'll test next.
+            </StepCallout>
+          }
+        />
       </Section>
 
       <Spacer size={SPACING.node} />

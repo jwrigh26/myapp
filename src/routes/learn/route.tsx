@@ -24,7 +24,7 @@ function AppLayoutComponent() {
   const isDesktop = useIsBreakpointUp('md');
 
   return (
-    <Box sx={{ display: 'flex', marginBottom: 2 }}>
+    <Box id="learn-route" sx={{ display: 'flex', marginBottom: 2 }}>
       <CompendiumDrawer />
       <LearnDrawer />
       <Outlet />
