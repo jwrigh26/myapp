@@ -9,7 +9,8 @@ import { CompendiumButton } from '@/features/learn';
 import { Invariant, Predicate, Sentinel } from '@/features/learn/notes';
 import { MathInline } from '@/components/MathBlock';
 import AnchorLink from '@/components/AnchorLink';
-import PageLayout from '@/layout/PageLayout';
+import { PageWithSidePanel } from '@/layout';
+import SidePanelSheet from '@/features/learn/components/SidePanel';
 import IntroBlock from '@/components/IntroBlock';
 import NoteBlock from '@/components/NoteBlock';
 import QuoteBlock from '@/components/QuoteBlock';
@@ -85,8 +86,11 @@ function DsaHelloWorld() {
   }, [showCode]);
 
   return (
-    <PageLayout id="page-layout-binarysearch">
-      <div className="sidepanel">hi</div>
+    <PageWithSidePanel
+      id="page-layout-binarysearch"
+      sidePanelOpen={showCode}
+      sidePanelContent={<SidePanelSheet titleRef={compendiumTitleRef} onClose={() => {}} />}
+    >
       <TitleBlock
         title="Binary Search"
         subtitle="It's dangerous to go alone. Learn this!"
@@ -772,11 +776,6 @@ while left + 1 < right:`}
       />
       
       <Spacer size={sectionSpaceSize} />
-    </PageLayout>
+    </PageWithSidePanel>
   );
 }
-
-/**
- *
- *
- */
