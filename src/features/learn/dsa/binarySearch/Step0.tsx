@@ -37,7 +37,7 @@ export const BinarySearchStep0: React.FC = () => {
         description={
           <>
             The <code>left</code> and <code>right</code> variables are set to
-            predefined sentinels to avoid <strong>out-of-bound</strong> errors.
+            predefined sentinels to avoid <strong>out-of-bounds</strong> errors.
           </>
         }
         variables={[
@@ -109,7 +109,7 @@ export const BinarySearchStep0: React.FC = () => {
         }
       />
 
-      <Spacer size={SPACING.chunk} />
+      <Spacer size={SPACING.node} />
       <DsaArray
         highlightIndices={[3]}
         segments={[

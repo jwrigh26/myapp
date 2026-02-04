@@ -24,13 +24,13 @@ export const BinarySearchStep1: React.FC = () => {
 
   return (
     <StepContainer>
-      <StepTitle variant="h6">Step 1: mid = 3</StepTitle>
+      <StepTitle variant="h6">Step 1</StepTitle>
 
       <VariableState
         title="Updated values"
         description={
           <>
-            <code>left</code> was updated to <code>3</code>.
+            In the last step, <code>left</code> was updated to <code>3</code>.
           </>
         }
         variables={[
@@ -96,6 +96,7 @@ export const BinarySearchStep1: React.FC = () => {
         result={<StepMonoText>false</StepMonoText>}
         resultColor="text"
       />
+      <Spacer size={SPACING.node} />
       <DsaArray
         segments={[
           {

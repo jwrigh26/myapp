@@ -146,11 +146,13 @@ export const StepResult = styled(Box, {
 });
 
 // General box components for variable state and results
-export const StepBox = styled(Box)(({ theme }) => ({
+export const StepBox = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'noMarginBottom',
+})<{ noMarginBottom?: boolean }>(({ theme, noMarginBottom = false }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(0),
-  marginBottom: theme.spacing(2),
+  ...(!noMarginBottom && { marginBottom: theme.spacing(2) }),
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.divider}`,
   backgroundColor:

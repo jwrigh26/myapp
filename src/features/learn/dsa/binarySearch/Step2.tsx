@@ -24,13 +24,13 @@ export const BinarySearchStep2: React.FC = () => {
 
   return (
     <StepContainer>
-      <StepTitle variant="h6">Step 2: mid = 5</StepTitle>
+      <StepTitle variant="h6">Step 2</StepTitle>
 
       <VariableState
         title="Updated values"
         description={
           <>
-            <code>right</code> was updated to <code>5</code>.
+            In the last step, <code>right</code> was updated to <code>5</code>.
           </>
         }
         variables={[
@@ -73,6 +73,7 @@ export const BinarySearchStep2: React.FC = () => {
       
       <Spacer size={SPACING.node} />
       <PredicateTest
+        title="Test the Predicate"
         description={
           <>
             Is the bunny at <code>index 4</code> a honey bunny?
@@ -91,6 +92,7 @@ export const BinarySearchStep2: React.FC = () => {
         resultColor="text"
       />
 
+      <Spacer size={SPACING.node} />
       <DsaArray
         segments={[
           {
@@ -108,7 +110,7 @@ export const BinarySearchStep2: React.FC = () => {
         cellWidth="60px"
         cellHeight="60px"
       />
-      <ResultAssignment variable="right" value="5" color="secondary" />
+      <ResultAssignment variable="right" value="4" color="secondary" />
 
       <StepBodyText>
         The bunny at <code>index 4</code> is a honey bunny!

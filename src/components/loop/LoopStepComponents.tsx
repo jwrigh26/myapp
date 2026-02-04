@@ -132,15 +132,17 @@ interface ResultAssignmentProps {
   variable: string;
   value: number | string;
   color?: 'primary' | 'secondary' | 'info' | 'default';
+  noMarginBottom?: boolean;
 }
 
 export const ResultAssignment: React.FC<ResultAssignmentProps> = ({
   variable,
   value,
   color = 'primary',
+  noMarginBottom = false,
 }) => {
   return (
-    <StepBox sx={{ borderTop: 'none' }}>
+    <StepBox sx={{ borderTop: 'none' }} noMarginBottom={noMarginBottom}>
       <StepContainer>
         <VariableValue variable={variable} color={color} />
         <StepMonoText>=</StepMonoText>

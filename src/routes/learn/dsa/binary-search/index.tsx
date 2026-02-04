@@ -54,7 +54,7 @@ export const Route = createFileRoute('/learn/dsa/binary-search/')({
     meta: [
       {
         name: 'description',
-        content: 'plaeholder for binary search',
+        content: 'placeholder for binary search',
       },
       {
         title: 'Binary Search',
@@ -164,7 +164,7 @@ print(solution.binary_search(arr, target)) #3`}
       <Spacer size={sectionSpaceSize} />
       <ProseBlock
         title="The Transition Point"
-        subtitle="Nil Mamao's recipe for cracking binary search."
+        subtitle="Nil Mamano's recipe for cracking binary search."
         anchor
         id="the-transition-point"
       />
@@ -251,7 +251,7 @@ print(solution.binary_search(arr, is_before)) # (2,3)
       />
       <ProseBlock spacingTop>
         By asking ourselves where an array goes from being{' '}
-        <strong>truthy</strong> to <strong>falsey</strong>, we can form a{' '}
+        <strong>truthy</strong> to <strong>falsy</strong>, we can form a{' '}
         <CompendiumButton title="Predicate" content={Predicate}>
           predicate
         </CompendiumButton>
@@ -345,7 +345,7 @@ print(solution.binary_search(arr, is_before)) # (2,3)
       />
       <Spacer size={2} />
       <NoteBlock title="Note:">
-        The transition recipe elminates the need for "edge-case" checks.
+        The transition recipe eliminates the need for "edge-case" checks.
         <Spacer size={1} />
         It's pre-baked to prevent "off-by-one" errors by assigning the left and
         right pointers to use
@@ -407,7 +407,7 @@ print(solution.binary_search(arr, is_before)) # (2,3)
             <code>left</code> will be the last <strong>Truthy</strong>
           </>,
           <>
-            <code>right</code> will be the first <strong>Falsey</strong> value.
+            <code>right</code> will be the first <strong>Falsy</strong> value.
           </>,
         ]}
       />
@@ -437,7 +437,7 @@ print(solution.binary_search(arr, is_before)) # (2,3)
         the "before" region and the "after" region.
       </QuoteBlock>
       <ProseBlock spacingTop>
-        By defining a prediate that correctly splits our search range, we can
+        By defining a predicate that correctly splits our search range, we can
         rely on checking the result of the predicate instead of doing things
         "old school" and checking boolean values directly.
       </ProseBlock>
