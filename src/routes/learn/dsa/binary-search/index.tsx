@@ -79,7 +79,7 @@ function DsaHelloWorld() {
   const setCompendiumTitle = createCompendiumTitleRefSetter(compendiumTitleRef);
 
   // React to the global toggle state created by the footer button for demos
-  const { isOpen: showCode } = useToggle('binary-search.showCode');
+  const { isOpen: showCode, toggleOpen } = useToggle('binary-search.showCode');
 
   useEffect(() => {
     console.log('binary-search.showCode changed ->', showCode);
@@ -89,7 +89,7 @@ function DsaHelloWorld() {
     <PageWithSidePanel
       id="page-layout-binarysearch"
       sidePanelOpen={showCode}
-      sidePanelContent={<SidePanelSheet titleRef={compendiumTitleRef} onClose={() => {}} />}
+      sidePanelContent={<SidePanelSheet titleRef={compendiumTitleRef} onClose={toggleOpen} />}
     >
       <TitleBlock
         title="Binary Search"
@@ -533,7 +533,7 @@ class Bunny:
         code={`# Bunny.__init__ accepts a type. 
 # This allows us to populate an array of bunnies as follows:
 bunnies = [Bunny(BunnyType.NORMAL) for _ in range(4)] + \
-          [Bunny(BunnyType.HONEY) for _ in range(3)]`}
+[Bunny(BunnyType.HONEY) for _ in range(3)]`}
       />
       <Spacer size={chunkSpaceSize} />
       <ProseBlock subtitle="The Bunny Array">

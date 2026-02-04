@@ -51,7 +51,6 @@ export function PermanentDrawer({
   children,
   width,
 }: PermanentDrawerProps) {
-  const StyledDrawer = StyledPermanentDrawer;
   return (
     <StyledPermanentDrawer anchor={anchor} variant="permanent" width={width}>
       <ToolbarSpacer />

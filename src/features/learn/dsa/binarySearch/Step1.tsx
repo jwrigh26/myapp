@@ -55,7 +55,7 @@ export const BinarySearchStep1: React.FC = () => {
           mid={5}
           whileCallout={
             <StepCallout>
-              Zero is less than seven. We continue searching.
+              Four is less than seven. We continue searching.
             </StepCallout>
           }
           midFormulaCallout={
@@ -67,7 +67,7 @@ export const BinarySearchStep1: React.FC = () => {
           }
           midResultCallout={
             <StepCallout>
-              The calculated <code>mid</code> value of <strong>3</strong> is the
+              The calculated <code>mid</code> value of <strong>5</strong> is the
               index we'll test next.
             </StepCallout>
           }
@@ -120,7 +120,8 @@ export const BinarySearchStep1: React.FC = () => {
         The bunny at <code>index 5</code> is a honey bunny!
       </StepBodyText>
       <StepBodyText>
-        <code>right</code> is assigned the value <code>mid = 5</code>.
+        This time <code>right</code> is assigned the value of <code>mid</code>{' '}
+        which is <strong>5</strong>.
       </StepBodyText>
     </StepContainer>
   );

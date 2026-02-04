@@ -175,7 +175,7 @@ const Footer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   height: 48,
-  zIndex: theme.zIndex.drawer + 1,
+  zIndex: theme.zIndex.drawer -1,
   [theme.breakpoints.down('sm')]: {
     height: 56,
     display: 'hidden',
@@ -200,7 +200,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundImage: `linear-gradient(45deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
   color: theme.palette.primary.contrastText,
   [theme.breakpoints.up('sm')]: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 2,
   },
 }));
 
